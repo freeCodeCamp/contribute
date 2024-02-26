@@ -1,0 +1,15 @@
+{
+  "name": "contribute",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:serve": "docsify serve ./docs -o --port 3400"
+  },
+  "keywords": [],
+  "author": "Mrugesh Mohapatra <noreply@mrugesh.dev> (https://mrugesh.dev/)",
+  "license": "ISC",
+  "devDependencies": {
+    "docsify-cli": "^4.4.4"
+  }
+}
