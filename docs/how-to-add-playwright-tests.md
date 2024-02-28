@@ -177,13 +177,7 @@ describe('The campers landing page', () => {
 
 ### 2. Run the Playwright Tests
 
-To run tests with Playwright check the following below
-
-- Make sure you navigate to the e2e repo first
-
-  ```bash
-  cd e2e
-  ```
+To run tests with Playwright, check the following commands:
 
 - To run tests in UI helper mode:
 
@@ -332,6 +326,5 @@ pnpm run playwright:install-build-tools
 To run all Playwright tests, run the following command:
 
 ```bash
-cd e2e
 npx playwright test
 ```
