@@ -147,6 +147,19 @@ One-off script to parse the step names from the project and update the meta.json
 ```bash
 pnpm run repair-meta
 ```
+
+### rename-challenges
+The script is to be used if the step-based project has files that have challenges ids and filenames that do not match.
+
+#### How to Run the Script
+
+1. Be in the root directory
+2. Run the following command:
+
+```bash
+pnpm run rename-challenges
+```
+
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request.md).
