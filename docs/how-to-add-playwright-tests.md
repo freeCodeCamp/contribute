@@ -24,7 +24,7 @@ To learn how to write Playwright tests, or 'specs', please see Playwright's offi
 
  This section will explain in detail about best practices for writing and documenting E2E tests based on Playwright documentation and our community code-style.
 
-### - Imports
+### Imports
   
 Always start with necessary imports at the beginning of the file.
   
@@ -34,7 +34,7 @@ For example:
 import { test, expect, type Page } from '@playwright/test';
 ```
 
-### - Identifying a DOM element
+### Identifying a DOM element
 
 Playwright comes with [multiple built-in locators](https://playwright.dev/docs/locators#quick-guide), but we recommend prioritizing the following locators:
   - `getByRole` for querying semantic elements, whose role is important and allows assistive technology to perceive the page correctly. 
@@ -64,7 +64,7 @@ For example:
 await expect(page.getByTestId('landing-page-figure')).toBeVisible();
 ```
 
-### - Constants
+### Constants
 
 Define any constant elements, data sets, or configurations used throughout your tests for easy reference.
   
@@ -75,25 +75,7 @@ const landingPageElements = { ... };
 const superBlocks = [ ... ];
 ```
 
-### - Shared Context
-
-If tests depend on a shared context (like a loaded web page), use beforeAll and afterAll hooks to set up and tear down that context.
-
-For example:
-  
-```ts
-let page: Page;
-
-beforeAll(async ({ browser }) => {
-  page = await browser.newPage();
-});
-
-afterAll(async () => {
-  await page.close();
-});
-```
-
-### - Descriptive test names
+### Descriptive test names
 
 Each test block should have a clear and concise name describing exactly what it's testing.
 
@@ -105,7 +87,7 @@ test('The component landing-top renders correctly', async ({ page }) => {
 });
 ```
 
-### - Human readable assertions
+### Human readable assertions
   
 Each assertion should be as human readable as possible. This makes it easier to understand what the test is doing and what it's expecting.
 
@@ -115,7 +97,7 @@ For example:
 await expect(landingHeading1).toHaveText('Learn to code — for free.');
 ```
 
-### - Keep it DRY
+### Keep it DRY
 
 Make sure that the tests are not repeating the same code over and over again. If you find yourself repeating the same code, consider refactoring it as a loop or a function.
 
@@ -127,7 +109,7 @@ for (const logo of await logos.all()) {
 }
 ```
 
-### - Tests for mobile screens
+### Tests for mobile screens
 
 Use the `isMobile` argument to run tests that include logic that varies for mobile screens.
 
@@ -147,7 +129,7 @@ test('The campers landing page figure is visible on desktop and hidden on mobile
 });
 ```
 
-### - Group related tests
+### Group related tests
 
 Group related tests together using describe blocks. This makes it easier to understand what the tests are doing and what they're testing.
 
@@ -169,13 +151,13 @@ describe('The campers landing page', () => {
 
 ## How to Run Tests
 
-### 1. Ensure that MongoDB and Client Applications are Running
+### Ensure that MongoDB and Client Applications are Running
 
 - [Start MongoDB and seed the database](how-to-setup-freecodecamp-locally.md#step-3-start-mongodb-and-seed-the-database). In order for Playwright tests to work, be sure that you use the `pnpm run seed:certified-user` command.
 
 - [Start the freeCodeCamp client application and API server](how-to-setup-freecodecamp-locally.md#step-4-start-the-freecodecamp-client-application-and-api-server)
 
-### 2. Run the Playwright Tests
+### Run the Playwright Tests
 
 To run tests with Playwright, check the following commands:
 
@@ -221,7 +203,7 @@ To run tests with Playwright, check the following commands:
   npx playwright test -g "add a todo item"
   ```
 
-### 3. Debugging Tests
+### Debugging Tests
 
 Since Playwright runs in Node.js, you can debug it with your debugger of choice e.g. using console.log or inside your IDE
 
@@ -237,7 +219,7 @@ Since Playwright runs in Node.js, you can debug it with your debugger of choice 
   npx playwright test example.spec.ts --debug
   ```
 
-### 4. Generate Test Reports
+### Generate Test Reports
 
 The HTML Reporter shows you a full report of your tests allowing you to filter the report by browsers, passed tests, failed tests, skipped tests and flaky tests.
 
@@ -245,7 +227,7 @@ The HTML Reporter shows you a full report of your tests allowing you to filter t
 npx playwright show-report 
 ```
 
-### 5. Troubleshooting
+### Troubleshooting
 
 - A common error seen in playwright is as follows:
 
@@ -283,7 +265,7 @@ npx playwright show-report
 
 ## Playwright-Gitpod Setup
 
-### 1. Ensure Development Environment is Running
+### Ensure Development Environment is Running
 
 If starting the Gitpod environment did not automatically develop the environment:
 
@@ -313,7 +295,7 @@ If starting the Gitpod environment did not automatically develop the environment
   pnpm run develop
   ```
 
-### 2. Install Playwright Build Tools
+### Install Playwright Build Tools
 
 To install necessary dependencies for running Playwright run the following command:
 
@@ -321,7 +303,7 @@ To install necessary dependencies for running Playwright run the following comma
 pnpm run playwright:install-build-tools
 ```
 
-### 3. Run the Playwright Tests on Gitpod
+### Run the Playwright Tests on Gitpod
 
 To run all Playwright tests, run the following command:
 
