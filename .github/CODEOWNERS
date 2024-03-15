@@ -8,10 +8,10 @@
 # -------------------------------------------------
 
 # -------------------------------------------------
-# All files are owned by dev team
+# All files are owned by moderators
 # -------------------------------------------------
 
-* @freecodecamp/dev-team
+* @freecodecamp/moderators
 
 # --- Owned by none (negate rule above) ---
 
@@ -19,10 +19,10 @@ package.json
 package-lock.json
 
 # -------------------------------------------------
-# All files in the root are owned by dev team
+# All files in the root are owned by moderators
 # -------------------------------------------------
 
-/* @freecodecamp/dev-team
+/* @freecodecamp/moderators
 
 # --- Owned by none (negate rule above) ---
 
