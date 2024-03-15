@@ -358,7 +358,7 @@ Sentences should be clear and concise with minimal jargon. If used, jargon shoul
 
 Keep paragraphs short (around 1-4 sentences). People are more likely to read several short paragraphs than a wall of text.
 
-Use american english, e.g., use `labeled` instead of `labelled`.
+Use American English, e.g., use `labeled` instead of `labelled`.
 
 Challenge text should use the second person ("you") to help to give it a conversational tone. This way the text and instructions seem to speak directly to the camper working through the challenge. Try to avoid using the first person ("I", "we", "let's", and "us").
 
@@ -376,7 +376,7 @@ Proper nouns should use correct capitalization when possible. Below is a list of
 
 ### The 2-minute rule
 
-Each challenge should be solvable within 120 seconds by a native English speaker who has completed the challenges leading up to it. This includes the amount of time it takes to read the directions/instructions understand the seeded code, write their code and get all the tests to pass.
+Each challenge should be solvable within 120 seconds by a native English speaker who has completed the challenges leading up to it. This includes the amount of time it takes to read the directions/instructions, understand the seeded code, write their code and get all the tests to pass.
 
 If it takes longer than two minutes to complete the challenge, you have two options:
 
