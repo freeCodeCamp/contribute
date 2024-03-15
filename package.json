@@ -1,15 +1,19 @@
 {
-  "name": "contribute",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@freecodecamp/contribute",
+  "type": "module",
+  "version": "1.0.0",
   "scripts": {
-    "docs:serve": "docsify serve ./docs -o --port 3400"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "keywords": [],
-  "author": "Mrugesh Mohapatra <noreply@mrugesh.dev> (https://mrugesh.dev/)",
-  "license": "ISC",
-  "devDependencies": {
-    "docsify-cli": "^4.4.4"
+  "dependencies": {
+    "@astrojs/starlight": "^0.21.1",
+    "astro": "^4.3.5",
+    "sharp": "^0.32.5",
+    "@astrojs/check": "^0.5.6",
+    "typescript": "^5.4.2"
   }
 }
