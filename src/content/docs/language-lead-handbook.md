@@ -32,7 +32,7 @@ The original author and the original article are linked automatically adding thi
 
 ```html
 <script>
-  const fccOriginalPost = 'link';
+  const fccOriginalPost = "link";
 </script>
 ```
 
@@ -40,26 +40,27 @@ With `link` being the link of the original article.
 
 ## How to Update Trending Articles
 
-> [!TIP]
-> Changing the articles in the footer at least once a month means giving a boost to the linked articles on Google results.
+:::tip
+Changing the articles in the footer at least once a month means giving a boost to the linked articles on Google results.
+:::
 
 To update the trending articles in the footer, you need to update the [yaml file in the CDN repository](https://github.com/freeCodeCamp/cdn/tree/main/build/universal/trending) for your language. Both the curriculum and the publication reference this file.
 
 For example, here is the file content for the first 6 articles:
 
 ```yaml
-article0title: 'Unire CSV con Python'
-article0link: 'https://www.freecodecamp.org/italian/news/come-combinare-file-multipli-in-formato-csv-con-8-righe-di-codice/'
-article1title: 'Il comando Git push'
-article1link: 'https://www.freecodecamp.org/italian/news/il-comando-git-push-spiegato/'
-article2title: 'Centrare immagini in CSS'
-article2link: 'https://www.freecodecamp.org/italian/news/come-centrare-un-immagine-usando/'
-article3title: 'I codici Alt'
-article3link: 'https://www.freecodecamp.org/italian/news/codici-alt/'
-article4title: 'Tenere a bada il footer'
-article4link: 'https://www.freecodecamp.org/italian/news/come-mantenere-il-footer-al-suo-posto/'
-article5title: 'Cosa è API?'
-article5link: 'https://www.freecodecamp.org/italian/news/cose-un-api-in-italiano-per-favore/'
+article0title: "Unire CSV con Python"
+article0link: "https://www.freecodecamp.org/italian/news/come-combinare-file-multipli-in-formato-csv-con-8-righe-di-codice/"
+article1title: "Il comando Git push"
+article1link: "https://www.freecodecamp.org/italian/news/il-comando-git-push-spiegato/"
+article2title: "Centrare immagini in CSS"
+article2link: "https://www.freecodecamp.org/italian/news/come-centrare-un-immagine-usando/"
+article3title: "I codici Alt"
+article3link: "https://www.freecodecamp.org/italian/news/codici-alt/"
+article4title: "Tenere a bada il footer"
+article4link: "https://www.freecodecamp.org/italian/news/come-mantenere-il-footer-al-suo-posto/"
+article5title: "Cosa è API?"
+article5link: "https://www.freecodecamp.org/italian/news/cose-un-api-in-italiano-per-favore/"
 ```
 
 Each number represents one of the 30 articles in the footer. Make sure to match the title and the link correctly.
@@ -106,8 +107,9 @@ The following links are pointing to external sites and cannot be translated:
 
 Once you have translated and published the articles listed as "can be translated" above, you can update the links in the footer for `/news` by editing the file at `news/config/i18n/locales/<your language>/links.json` in the [freeCodeCamp/news](https://github.com/freeCodeCamp/news) repository.
 
-> [!NOTE]
-> Pull requests to this repository are currently limited to staff only. If you want to update this file, ask someone on the staff team for help.
+:::note
+Pull requests to this repository are currently limited to staff only. If you want to update this file, ask someone on the staff team for help.
+:::
 
 Update the following part in the file:
 
@@ -127,8 +129,9 @@ Update the following part in the file:
 
 When you have translated and published the articles listed as "can be translated" above, as well as when the curriculum in your language is ready for launch, you can update the links in the footer for `/learn` by editing the file at `client/i18n/locales/<your language>/links.json` in the [freeCodeCamp/freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) repository.
 
-> [!WARNING]
-> Only "About", "Support", "Academic Honesty", and "Code of Conduct" can be translated. Leave other URLs unchanged.
+:::caution
+Only "About", "Support", "Academic Honesty", and "Code of Conduct" can be translated. Leave other URLs unchanged.
+:::
 
 Update the following part in the file:
 
@@ -154,17 +157,21 @@ Update the following part in the file:
 
 You can find these boxes all around the documentation:
 
-> [!NOTE]
-> I am a note box
+:::note
+I am a note box
+:::
 
-> [!TIP]
-> I am a tip box
+:::tip
+I am a tip box
+:::
 
-> [!WARNING]
-> I am a warning box
+:::caution
+I am a warning box
+:::
 
-> [!ATTENTION]
-> I am an attention box
+:::danger
+I am an attention box
+:::
 
 By default, their headers appear in English even in the translated docs.
 
@@ -256,8 +263,9 @@ The `compliments` array is an array of strings. So, for example, you would write
 }
 ```
 
-> [!TIP]
-> You should start with at least a dozen compliments to have some variety when users complete challenges.
+:::tip
+You should start with at least a dozen compliments to have some variety when users complete challenges.
+:::
 
 The motivational quotes are the quotes that appear at https://freecodecamp.org/learn.
 
@@ -279,8 +287,9 @@ The `motivationalQuotes` array is an array of objects, these objects should incl
 }
 ```
 
-> [!TIP]
-> You should start with at least a dozen quotes, to have some variety. A new quote is shown every time the user reloads the page.
+:::tip
+You should start with at least a dozen quotes, to have some variety. A new quote is shown every time the user reloads the page.
+:::
 
 ## How to Update the Common Links
 
@@ -302,8 +311,9 @@ If you need help with this, reach out to us in the [contributor chat](https://di
 
 The Pre-Translate workflow can be used to apply translations from the Translation Memory to strings.
 
-> [!TIP]
-> Really useful to restore a lot of translations from the Translation Memory in bulk when a lot of files have been updated.
+:::tip
+Really useful to restore a lot of translations from the Translation Memory in bulk when a lot of files have been updated.
+:::
 
 You can find the Pre-Translation workflow at the top of the page in the console of a project.
 If you see "Go to console" in the upper right corner, click there first.
@@ -326,8 +336,9 @@ When you have finished setting this, press the Pre-Translate button and wait. It
 
 ## How to Update Crowdin Glossary
 
-> [!TIP]
-> An updated glossary helps in having a homogeneous translation of technical terms.
+:::tip
+An updated glossary helps in having a homogeneous translation of technical terms.
+:::
 
 The Crowdin Glossary is kept in the [crowdin-glossaries](https://github.com/freeCodeCamp/crowdin-glossaries) repository.
 
@@ -341,8 +352,9 @@ In the `.csv` file you will find that the English language occupies the first th
 
 Then, each target language has two columns. If you translate to Dothraki, you will be interested in the columns `Term:Dothraki` and `Description:Dothraki`. The column `Term:Dothraki` is for the translation of the term in Dothraki, and the column `Description:Dothraki` is for a description of the term in Dothraki.
 
-> [!TIP]
-> In programs like Microsoft Excel, you can hide the columns of the other languages to free up screen real-estate and see the English columns and the target language columns near each other.
+:::tip
+In programs like Microsoft Excel, you can hide the columns of the other languages to free up screen real-estate and see the English columns and the target language columns near each other.
+:::
 
 After you have made the changes and saved the file, you will need to make a PR with the proposed changes. After the PR is accepted, you will need to run the GitHub Action workflow to update the Crowdin Glossary. Your glossary changes will not have immediate effects, but they will come.
 
@@ -358,8 +370,9 @@ Search for the user who will become a proofreader. Use the three dots menu on th
 
 The user is now a proofreader.
 
-> [!TIP]
-> The newly promoted proofreader could benefit from reading the [How to Proofread Files](how-to-proofread-files.md) documentation.
+:::tip
+The newly promoted proofreader could benefit from reading the [How to Proofread Files](how-to-proofread-files.md) documentation.
+:::
 
 ## How to Add or Update a Language
 

@@ -29,10 +29,12 @@ When you work on translating docs on Crowdin, make sure to replace the `#target-
 
 ## Work on the Docs Theme
 
-> [!NOTE]
-> A quick reminder that you do not need to set up anything for working on the content for the documentation site.
->
-> To work on the contributing guidelines, see [work on the docs content](#work-on-the-docs-content) section.
+:::note
+A quick reminder that you do not need to set up anything for working on the content for the documentation site.
+
+To work on the contributing guidelines, see [work on the docs content](#work-on-the-docs-content) section.
+
+:::
 
 ### Structure of the Docs Website
 

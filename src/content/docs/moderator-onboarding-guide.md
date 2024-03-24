@@ -4,8 +4,9 @@ title: The Official freeCodeCamp Moderator Onboarding Guide
 
 This guide will help new moderators get up and running with the processes and procedures followed by experienced moderators on the freeCodeCamp community forum and other official communities we foster.
 
-> [!NOTE]
-> If you haven't read [The Moderator Handbook](https://contribute.freecodecamp.org/#/moderator-handbook) yet, you should start there first.
+:::note
+If you haven't read [The Moderator Handbook](https://contribute.freecodecamp.org/#/moderator-handbook) yet, you should start there first.
+:::
 
 ## The Forum
 
@@ -17,8 +18,9 @@ Some of the new tools will appear inside a new menu item that looks like a wrenc
 
 To get familiar with the new tools and powers, you can combine one or more of the following methods during your first week with this elevated role:
 
-> [!TIP]
-> The first two are the most important.
+:::tip
+The first two are the most important.
+:::
 
 ### Become Familiar with the Discourse Admin Tools
 

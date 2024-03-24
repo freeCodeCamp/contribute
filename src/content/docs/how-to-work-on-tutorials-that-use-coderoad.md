@@ -1,5 +1,5 @@
 ---
-title: How to work on CodeRoad 
+title: How to work on CodeRoad
 ---
 
 This page describes how to contribute to the freeCodeCamp tutorials and projects that are completed using the CodeRoad VS Code extension.
@@ -18,9 +18,9 @@ Subsequent commit messages have to match the step number in `TUTORIAL.md` from t
 
 In order to make changes to commits on a version branch, you would need to rebase and edit the commits you want to change. This will rewrite the Git history, so we cannot accept PRs to these types of branches. Once a version branch is on the freeCodeCamp repo, it should never change.
 
-> [!WARNING]
->
-> Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
+:::warning
+Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
+:::
 
 ## How to Contribute
 
@@ -36,9 +36,9 @@ This set of instructions is for PRs that only make minor changes on `main` to **
 
 For everything else, including adding or deleting lessons, follow the [working on a version branch instructions](#working-on-version-branch). You will not need to create a new version branch for this - you can create a PR following the instructions below.
 
-> [!NOTE]
->
-> These changes will use the existing version branch. If they are substantial, feel free to add them to `CHANGELOG.md`. Most of the time, a good commit message should work
+:::note
+These changes will use the existing version branch. If they are substantial, feel free to add them to `CHANGELOG.md`. Most of the time, a good commit message should work
+:::
 
 You never need to modify the `tutorial.json` file directly. That will be created with the CLI tools.
 
@@ -70,9 +70,9 @@ Also, keep in mind that instructions usually use the lessons around them for con
 
 ### Working on Version Branch
 
-> [!WARNING]
->
-> Reminder: Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
+:::warning
+Reminder: Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
+:::
 
 There's no easy way to see exactly what changed between version branches since the Git history will be rewritten. Accepting new version branches to use will need to be done with careful consideration and testing.
 
@@ -106,9 +106,9 @@ Before pushing a new version, view the new `feat/version-vX.X.Y` (will be merged
 
 If you have write access to the freeCodeCamp repo, have verified the `CHANGELOG` and `coderoad.yaml` files, have tested the changes using the instructions above, and want to push a new version of a tutorial:
 
-> [!WARNING]
->
-> Reminder: Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
+:::warning
+Reminder: Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
+:::
 
 - If you don't have a remote to where the new changes exist, create a remote to the user's fork with `git remote add <users_fork>`
 - Delete any **local** branches that share a name with the new branches. Likely named either `vX.X.Y` or `feat/version-X.X.Y`

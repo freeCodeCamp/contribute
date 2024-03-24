@@ -16,8 +16,9 @@ You should see the list of projects you have been granted access to. Select the 
 
 You should now see the list of available files. Choose your file by selecting the `Proofread` button on the right of that file, then choosing `Proofreading` from the drop-down menu that appears.
 
-> [!NOTE]
-> If you are in this workspace view, but want to work on [translating a file](how-to-translate-files.md) instead of proofreading, you may select `Crowdsourcing` from the dropdown menu instead.
+:::note
+If you are in this workspace view, but want to work on [translating a file](how-to-translate-files.md) instead of proofreading, you may select `Crowdsourcing` from the dropdown menu instead.
+:::
 
 ## Proofread Translations
 
@@ -40,8 +41,9 @@ While you can view _all_ proposed translations for a given string, the community
 
 No additional actions are required once a file has been proofread.
 
-> [!NOTE]
-> Approving a string in the proofreading view will mark it as complete and it will be downloaded in our next pull from Crowdin to GitHub.
+:::note
+Approving a string in the proofreading view will mark it as complete and it will be downloaded in our next pull from Crowdin to GitHub.
+:::
 
 ## Becoming a Proofreader
 
@@ -49,8 +51,9 @@ If you have any questions, or are interested in becoming a proofreader, feel fre
 
 Our staff team and community moderators teams are always looking for kind volunteers like you who help us make high quality translations available to the world.
 
-> [!NOTE]
-> Crowdin will allow you to approve your translations. In general, it is best to allow another proofreader to review your proposed translations as extra safety to ensure there are no errors.
+:::note
+Crowdin will allow you to approve your translations. In general, it is best to allow another proofreader to review your proposed translations as extra safety to ensure there are no errors.
+:::
 
 ## Creating a Channel on Chat for a World Language
 

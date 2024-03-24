@@ -18,8 +18,9 @@ Some examples of this are:
 
 6. Do not work directly off your `main` branch - create a new branch for the changes you are working on.
 
-> [!NOTE]
-> Your PR should be targeting changes to the English curriculum only. Read [this guide](index.md#translations) instead for contributing to translations.
+:::note
+Your PR should be targeting changes to the English curriculum only. Read [this guide](index.md#translations) instead for contributing to translations.
+:::
 
 ## Prepare a Good PR Title
 
@@ -36,7 +37,7 @@ Whenever you open a Pull Request (PR), you can use the below to determine the ty
 **Type:**
 
 | Type  | When to select                                                                  |
-|:------|:--------------------------------------------------------------------------------|
+| :---- | :------------------------------------------------------------------------------ |
 | fix   | Changed or updated/improved functionality, tests, the wording of a lesson, etc. |
 | feat  | Only if you are adding new functionality, tests, etc.                           |
 | chore | Changes that are not related to code, tests, or verbiage of a lesson.           |
@@ -106,14 +107,15 @@ Our moderators will now take a look and leave you feedback. Please be patient wi
 
 And as always, feel free to ask questions on the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
 
-> [!TIP]
-> If you are to be contributing more pull requests, we recommend you read the [making changes and syncing](how-to-setup-freecodecamp-locally.md#making-changes-locally) guidelines to avoid having to delete your fork.
+:::tip
+If you are to be contributing more pull requests, we recommend you read the [making changes and syncing](how-to-setup-freecodecamp-locally.md#making-changes-locally) guidelines to avoid having to delete your fork.
+:::
 
 ## Conflicts on a Pull Request
 
 Conflicts can arise because many contributors work on the repository, and changes can break your PR which is pending a review and merge.
 
-Since we squash all commits, you may not need to do a rebase.  However, if a rebase is requested, check our [For Usual Bug Fixes and Features](#for-usual-bug-fixes-and-features) or [For Upcoming Curriculum and Features](#for-upcoming-curriculum-and-features) guides to learn how to do this process for your corresponding PR.
+Since we squash all commits, you may not need to do a rebase. However, if a rebase is requested, check our [For Usual Bug Fixes and Features](#for-usual-bug-fixes-and-features) or [For Upcoming Curriculum and Features](#for-upcoming-curriculum-and-features) guides to learn how to do this process for your corresponding PR.
 
 ### For Usual Bug Fixes and Features
 
@@ -197,7 +199,7 @@ When you are working on features for our upcoming curriculum `next-*` branches, 
    pnpm run clean
 
    pnpm install
-   FCC_SUPERBLOCK='<superblock-name>' pnpm run test:curriculum 
+   FCC_SUPERBLOCK='<superblock-name>' pnpm run test:curriculum
 
    # example:
 

@@ -10,8 +10,9 @@ Once you have set up the project locally you should be able to follow this docum
 
 This could be helpful when you are working on a feature that specifically targets something that involves localization, and requires you to validate for instance a button's label in a different language.
 
-> [!TIP]
-> You do not need to follow this document to translate freeCodeCamp's curriculum or contributing documentation. Read [this guide here](how-to-translate-files.md) instead.
+:::tip
+You do not need to follow this document to translate freeCodeCamp's curriculum or contributing documentation. Read [this guide here](how-to-translate-files.md) instead.
+:::
 
 Let's understand how the i18n frameworks and tooling work.
 
@@ -113,13 +114,13 @@ If you are working on a feature or a bug for the client web app, say for example
 ### Functional Component
 
 ```js
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 // in the render method:
 const { t } = useTranslation();
 
 // call the "t" function with a key from the JSON file:
-<p>{t('key')}</p>; // more details below
+<p>{t("key")}</p>; // more details below
 ```
 
 ### Class Component
@@ -265,13 +266,15 @@ If the text you want to add to the client exists in the relevant `.json` file, u
 
 The English file is the "source of truth" for all of the `.json` files sharing the same name. If you need to add a new key, add it there. Then, add the key to **all** of the `translations.json` files.
 
-> [!NOTE]
-> Use English text for all languages if the file is translated through Crowdin. The tests will fail if you don't.
+:::note
+Use English text for all languages if the file is translated through Crowdin. The tests will fail if you don't.
+:::
 
 It would be nice to keep the keys in the same order across all the files as well. Also, try to put all punctuation, spacing, quotes, etc. in the JSON files and not in the components or server files.
 
-> [!NOTE]
-> The underscore (`_`) is a reserved character for keys in the client-side files. See [the documentation](https://www.i18next.com/translation-function/plurals) for how they are used.
+:::note
+The underscore (`_`) is a reserved character for keys in the client-side files. See [the documentation](https://www.i18next.com/translation-function/plurals) for how they are used.
+:::
 
 Run `pnpm run clean-and-develop` to apply the change.
 

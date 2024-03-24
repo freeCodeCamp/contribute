@@ -58,7 +58,7 @@ You will need to add a step to the [`crowdin-download.client-ui.yml`](https://gi
     create_pull_request: false
 
     # global options
-    config: './crowdin-config.yml'
+    config: "./crowdin-config.yml"
     base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
 
     # Uncomment below to debug
@@ -69,8 +69,9 @@ Note that the `download_language` key needs to be set to the language code displ
 
 ## Enabling a Language
 
-> [!NOTE]
-> The above section with updating the workflows should be completed before proceeding - these need to be done in separate steps or the builds will fail.
+:::note
+The above section with updating the workflows should be completed before proceeding - these need to be done in separate steps or the builds will fail.
+:::
 
 There are a few steps to take in order to allow the codebase to build in your desired language.
 
@@ -141,8 +142,9 @@ export const hiddenLangs = ['dothraki'];
 export const rtlLangs = [''];
 ```
 
-> [!NOTE]
-> When a language has been set up in the deployment pipeline AND has a public `/learn` instance live, it can be removed from the `hiddenLangs` array and be made available to the public.
+:::note
+When a language has been set up in the deployment pipeline AND has a public `/learn` instance live, it can be removed from the `hiddenLangs` array and be made available to the public.
+:::
 
 ### Set Translated SuperBlocks
 
@@ -180,33 +182,34 @@ Next, open the [`client/src/utils/algolia-locale-setup.ts`](https://github.com/f
 
 Add an object for your language to the `algoliaIndices` object. You should use the same values as the `english` object for local testing, replacing the `english` key with your language's `availableLangs` value.
 
-> [!NOTE]
-> If we have already deployed an instance of news in your target language, you can update the values to reflect the live instance. Otherwise, use the English values.
+:::note
+If we have already deployed an instance of news in your target language, you can update the values to reflect the live instance. Otherwise, use the English values.
+:::
 
 If you were to add Dothraki:
 
 ```js
 const algoliaIndices = {
   english: {
-    name: 'news',
-    searchPage: 'https://www.freecodecamp.org/news/search/'
+    name: "news",
+    searchPage: "https://www.freecodecamp.org/news/search/",
   },
   espanol: {
-    name: 'news-es',
-    searchPage: 'https://www.freecodecamp.org/espanol/news/search/'
+    name: "news-es",
+    searchPage: "https://www.freecodecamp.org/espanol/news/search/",
   },
   chinese: {
-    name: 'news-zh',
-    searchPage: 'https://chinese.freecodecamp.org/news/search/'
+    name: "news-zh",
+    searchPage: "https://chinese.freecodecamp.org/news/search/",
   },
-  'chinese-traditional': {
-    name: 'news-zh',
-    searchPage: 'https://chinese.freecodecamp.org/news/search'
+  "chinese-traditional": {
+    name: "news-zh",
+    searchPage: "https://chinese.freecodecamp.org/news/search",
   },
   dothraki: {
-    name: 'news',
-    searchPage: 'https://www.freecodecamp.org/news/search/'
-  }
+    name: "news",
+    searchPage: "https://www.freecodecamp.org/news/search/",
+  },
 
   // If we already have /news in the target language up and running, you can update the values like this:
   // dothraki: {
@@ -316,11 +319,13 @@ Update your `.env` file to use your new language for `CLIENT_LOCALE` and `CURRIC
 
 Once these are in place, you should be able to run `pnpm run develop` to view your translated version of freeCodeCamp.
 
-> [!TIP]
-> If you build the client in one language and then want to build it in a different language, you will need to use the command `pnpm run clean-and-develop` after changing the `.env` file, as Gatsby will cache the first language.
+:::tip
+If you build the client in one language and then want to build it in a different language, you will need to use the command `pnpm run clean-and-develop` after changing the `.env` file, as Gatsby will cache the first language.
+:::
 
-> [!ATTENTION]
-> While you may perform translations locally for the purpose of testing, we remind everyone that translations should _not_ be submitted through GitHub and should only be done through Crowdin. Be sure to reset your local codebase after you are done testing.
+:::danger
+While you may perform translations locally for the purpose of testing, we remind everyone that translations should _not_ be submitted through GitHub and should only be done through Crowdin. Be sure to reset your local codebase after you are done testing.
+:::
 
 ## Show the language in the navigation menu
 
@@ -353,12 +358,12 @@ Then copy the contents of the [`english.yaml`](https://github.com/freeCodeCamp/c
 The contents will look something like this:
 
 ```yaml
-article0title: 'Learn JavaScript'
-article0link: 'https://www.freecodecamp.org/news/learn-javascript-free-js-courses-for-beginners/'
-article1title: 'Linux ln Example'
-article1link: 'https://www.freecodecamp.org/news/linux-ln-how-to-create-a-symbolic-link-in-linux-example-bash-command'
-article2title: 'JS document.ready()'
-article2link: 'https://www.freecodecamp.org/news/javascript-document-ready-jquery-example/'
+article0title: "Learn JavaScript"
+article0link: "https://www.freecodecamp.org/news/learn-javascript-free-js-courses-for-beginners/"
+article1title: "Linux ln Example"
+article1link: "https://www.freecodecamp.org/news/linux-ln-how-to-create-a-symbolic-link-in-linux-example-bash-command"
+article2title: "JS document.ready()"
+article2link: "https://www.freecodecamp.org/news/javascript-document-ready-jquery-example/"
 article3title: ...
 article3link: ...
   ...
@@ -370,34 +375,36 @@ By default, Day.js only includes English as a locale. To enable it to work with 
 
 In the [`build/news-assets/dayjs/<version>/locale`](https://github.com/freeCodeCamp/cdn/tree/main/build/news-assets/dayjs/1.10.4/locale) directory, create a new file and name it `isocode.min.js`. For example, if you are launching Dothraki News, name the file `mis.min.js`.
 
-> [!NOTE]
-> The version number will change as the dependencies are updated.
+:::note
+The version number will change as the dependencies are updated.
+:::
 
 Then, visit [this page on cdnjs](https://cdnjs.com/libraries/dayjs/1.10.4) with all available Day.js files for the version we're using, find the `https://cdnjs.cloudflare.com/ajax/libs/dayjs/<version>/locale/isocode.min.js` link for the new language, and open it in a new tab.
 
-> [!NOTE]
-> You only need to add the .../dayjs/\<version\>/_locale_/isocode.min.js locale file. You do not need to add any other Day.js files.
+:::note
+You only need to add the .../dayjs/\<version\>/_locale_/isocode.min.js locale file. You do not need to add any other Day.js files.
+:::
 
 Copy the Day.js locale code from the new tab into the new file you created. For example, here is an un-minified version of the English locale code for Day.js:
 
 ```js
 !(function (e, n) {
-  'object' == typeof exports && 'undefined' != typeof module
+  "object" == typeof exports && "undefined" != typeof module
     ? (module.exports = n())
-    : 'function' == typeof define && define.amd
+    : "function" == typeof define && define.amd
     ? define(n)
     : (e.dayjs_locale_en = n());
 })(this, function () {
-  'use strict';
+  "use strict";
   return {
-    name: 'en',
-    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
-      '_'
+    name: "en",
+    weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split(
+      "_"
     ),
     months:
-      'January_February_March_April_May_June_July_August_September_October_November_December'.split(
-        '_'
-      )
+      "January_February_March_April_May_June_July_August_September_October_November_December".split(
+        "_"
+      ),
   };
 });
 ```
@@ -421,28 +428,29 @@ Open the `config/index.js` file to add the new language and configure the necess
 - `localeCodes`: This object is a map of ISO codes for each language, and is used to configure i18next before building the UI. To add a new language, use the lowercase language name as the _key_ and the ISO 639-1 language code as the _value_.
 - `algoliaIndices`: This object is a map of Algolia indices for each language. To add a new language, use the lowercase language name as the _key_, and `news-` followed by the lowercase ISO 639-1 language code as the _value_.
 
-> [!NOTE]
-> If you are unsure about the string to use while setting `algoliaIndices`, send a message to Kris (@scissorsneedfoodtoo), or someone else with access to Algolia, and ask them to check.
+:::note
+If you are unsure about the string to use while setting `algoliaIndices`, send a message to Kris (@scissorsneedfoodtoo), or someone else with access to Algolia, and ask them to check.
+:::
 
 For example, if you are launching Dothraki News, here are what the objects / arrays above should look like:
 
 ```js
-const locales = ['arabic', 'bengali', 'chinese', 'english', 'dothraki'];
+const locales = ["arabic", "bengali", "chinese", "english", "dothraki"];
 
 const localeCodes = {
-  arabic: 'ar',
-  bengali: 'bn',
-  chinese: 'zh',
-  english: 'en',
-  dothraki: 'mis'
+  arabic: "ar",
+  bengali: "bn",
+  chinese: "zh",
+  english: "en",
+  dothraki: "mis",
 };
 
 const algoliaIndices = {
-  arabic: 'news-ar',
-  bengali: 'news-bn',
-  chinese: 'news-zh',
-  english: 'news',
-  dothraki: 'news-mis'
+  arabic: "news-ar",
+  bengali: "news-bn",
+  chinese: "news-zh",
+  english: "news",
+  dothraki: "news-mis",
 };
 ```
 
@@ -460,12 +468,14 @@ In your new folder, open the `redirects.json` file and replace its contents with
 
 Then commit and push your branch directly to the News repo.
 
-> [!NOTE]
-> You need to be on one of the teams with access to the News repo to push branches directly to News. Currently, only the dev, i18n, and staff teams are allowed to do this.
+:::note
+You need to be on one of the teams with access to the News repo to push branches directly to News. Currently, only the dev, i18n, and staff teams are allowed to do this.
+:::
 
 Finally, open a PR for review.
 
 Once both your PRs to the CDN and News repo have been approved, they can be merged.
 
-> [!NOTE]
-> Deployment will be handled subsequently by the staff. Here is a sample PR: [freeCodeCamp/news#485](https://github.com/freeCodeCamp/news/pull/485) of how they do it and more details are available in the [staff-wiki](https://staff-wiki.freecodecamp.org/docs/flight-manuals/news-instances#jamstack---news--assets).
+:::note
+Deployment will be handled subsequently by the staff. Here is a sample PR: [freeCodeCamp/news#485](https://github.com/freeCodeCamp/news/pull/485) of how they do it and more details are available in the [staff-wiki](https://staff-wiki.freecodecamp.org/docs/flight-manuals/news-instances#jamstack---news--assets).
+:::

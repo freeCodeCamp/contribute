@@ -38,9 +38,9 @@ The practice projects have some additional tooling to help create new projects a
 ````md
 ---
 id: Unique identifier (alphanumerical, MongoDB_id)
-title: 'Challenge Title'
+title: "Challenge Title"
 challengeType: Integer, defined in `client/utils/challenge-types.js`
-videoUrl: 'url of video explanation'
+videoUrl: "url of video explanation"
 forumTopicId: 12345
 ---
 
@@ -68,8 +68,8 @@ If you want dynamic output based on the user's code, --fcc-expected-- and --fcc-
 
 ```js
 assert.equal(
-  'this will replace --fcc-actual--',
-  'this will replace --fcc-expected--'
+  "this will replace --fcc-actual--",
+  "this will replace --fcc-expected--"
 );
 ```
 
@@ -113,7 +113,7 @@ body {
 ```
 
 ```js
-console.log('freeCodeCamp is awesome!');
+console.log("freeCodeCamp is awesome!");
 ```
 
 # --solutions--
@@ -238,7 +238,7 @@ If no feedback is here, a generic "wrong answer" message will be shown.
       "finishTimestamp": 8.4
     },
     // Optional, defaults to false. Use this for the long dialogues. It stops the accessibility icon from showing which gives campers the option to show or hide the dialogue text
-    "alwaysShowDialogue": true 
+    "alwaysShowDialogue": true
   },
   // Array of commands that make up the scene
   "commands": [
@@ -253,7 +253,7 @@ If no feedback is here, a generic "wrong answer" message will be shown.
     {
       "character": "Tom",
       // Optional, defaults to previous value. Tom will fade into view. The transition take 0.5 seconds. Movement and Opacity transitions take 0.5 seconds
-      "opacity": 1, 
+      "opacity": 1,
       // Tom will fade into view 0.5 seconds into the scene (immediately after Maria finishes moving on screen)
       "startTime": 0.5
     },
@@ -301,13 +301,15 @@ If no feedback is here, a generic "wrong answer" message will be shown.
 ```
 ````
 
-> [!NOTE]
->
-> 1. In the above sections, examples of `lang` are:
->
-> - `html` - HTML/CSS
-> - `js` - JavaScript
-> - `jsx` - JSX
+:::note
+
+1. In the above sections, examples of `lang` are:
+
+- `html` - HTML/CSS
+- `js` - JavaScript
+- `jsx` - JSX
+
+:::
 
 ## Numbering Challenges
 
@@ -484,7 +486,7 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Hello'
+      text: "Hello",
     };
     // Change code below this line
 
@@ -492,7 +494,7 @@ class MyComponent extends React.Component {
   }
   handleClick() {
     this.setState({
-      text: 'You clicked!'
+      text: "You clicked!",
     });
   }
   render() {
@@ -518,9 +520,9 @@ Some comments may contain a word/phrase that should not be translated. For examp
 Declare the myGlobal variable below this line
 ```
 
-> [!NOTE]
->
-> We are working on an integration to make it possible to work on i18n for the comment dictionary.
+:::note
+We are working on an integration to make it possible to work on i18n for the comment dictionary.
+:::
 
 ## Hints and Solutions
 
@@ -575,7 +577,7 @@ Hint goes here
 
 ```js
 function myFunc() {
-  console.log('Hello World!');
+  console.log("Hello World!");
 }
 ```
 
@@ -632,10 +634,11 @@ You are also able to test challenges by title by performing the following steps:
    pnpm run test -- -g challenge-title-goes-here
    ```
 
-> [!TIP]
-> You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test.
->
-> The currently accepted values are `english` and `chinese`, with `english` being set by default.
+:::tip
+You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test.
+
+The currently accepted values are `english` and `chinese`, with `english` being set by default.
+:::
 
 ## Proposing a Pull Request (PR)
 
@@ -651,8 +654,9 @@ Creating and Editing Challenges:
 
 ## Helper Scripts
 
-> [!NOTE]
-> If you are working with the step-based challenges, refer to the [Work on Practice Projects](how-to-work-on-practice-projects.md) section.
+:::note
+If you are working with the step-based challenges, refer to the [Work on Practice Projects](how-to-work-on-practice-projects.md) section.
+:::
 
 There are a few helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:
 

@@ -4,7 +4,7 @@ title: Codebase Best Practices
 
 ## Styling a component
 
-We recommend styling components using our [design style guide](https://design-style-guide.freecodecamp.org/). 
+We recommend styling components using our [design style guide](https://design-style-guide.freecodecamp.org/).
 
 The colors are defined in [`variable.css`](/client/src/components/layouts/variables.css), and the fonts are in [`fonts.css`](/client/src/components/layouts/fonts.css).
 
@@ -42,8 +42,9 @@ The best bet at achieving this is to:
 2. Commit with the flag `--no-verify` to prevent Husky from complaining about the lint errors
 3. Refactor to TypeScript for migration, in a separate commit
 
-> [!NOTE]
-> Editors like VSCode are still likely to show you the file has been deleted and a new one created. If you use the CLI to `git add .`, then VSCode will show the file as renamed in stage
+:::note
+Editors like VSCode are still likely to show you the file has been deleted and a new one created. If you use the CLI to `git add .`, then VSCode will show the file as renamed in stage
+:::
 
 ### Naming Conventions
 
@@ -105,7 +106,7 @@ type ReducerBase<T> = { type: T };
 type ReducerPayload<T extends AppActionTypes> =
   T extends AppActionTypes.actionFunction
     ? ReducerBase<T> & {
-        payload: AppState['property'];
+        payload: AppState["property"];
       }
     : ReducerBase<T>;
 
@@ -134,7 +135,7 @@ interface MyComponentProps {
 }
 // Connect to Redux store
 const mapDispatchToProps = {
-  actionFunction
+  actionFunction,
 };
 // Example React Component connected to store
 const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {

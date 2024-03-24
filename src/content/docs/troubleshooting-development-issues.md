@@ -12,9 +12,9 @@ It is recommended to research your specific issue on resources such as Google, S
 
 If you are on a different OS or are still facing issues, see [getting help](#getting-help).
 
-> [!WARNING]
->
-> Please avoid creating GitHub issues for problems with the prerequisite technologies. They are out of the scope of this project.
+:::warning
+Please avoid creating GitHub issues for problems with the prerequisite technologies. They are out of the scope of this project.
+:::
 
 ## Issues with Missing UI, Fonts, Language Strings, or Build Errors
 
@@ -56,12 +56,12 @@ git clean -ifdX
 If you can't sign in, and instead you see a banner with an error message saying that the error will be reported to freeCodeCamp, please double-check that your local port `3000` is not in use by a different program.
 
 #### **From Terminal:**
+
 ```bash
 netstat -a | grep "3000"
 
 tcp4    0   0    0.0.0.0:3000           DESKTOP      LISTEN
 ```
-
 
 ## Issues Signing Out while Navigating
 
@@ -81,8 +81,9 @@ If you get errors while installing the dependencies, please make sure that you a
 
 The first time setup can take a while depending on your network bandwidth. Be patient, and if you are still stuck we recommend using Gitpod instead of an offline setup.
 
-> [!NOTE]
-> If you are using Apple Devices with M1 Chip to run the application locally, it is suggested to use Node v14.7 or above. You might run into issues with dependencies like Sharp otherwise.
+:::note
+If you are using Apple Devices with M1 Chip to run the application locally, it is suggested to use Node v14.7 or above. You might run into issues with dependencies like Sharp otherwise.
+:::
 
 ## Working With Other Languages
 

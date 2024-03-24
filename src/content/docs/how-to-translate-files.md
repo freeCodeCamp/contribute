@@ -6,8 +6,9 @@ title: How to Translate freeCodeCamp's resources
 
 > The freeCodeCamp Localization Roadmap – There Are No Speed Limits
 
-> [!TIP]
-> You can start by reading [this announcement](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/). We recommend joining [our community forum](https://forum.freecodecamp.org/c/contributors/3) and [Discord chat server](https://discord.gg/PRyKn3Vbay).
+:::tip
+You can start by reading [this announcement](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/). We recommend joining [our community forum](https://forum.freecodecamp.org/c/contributors/3) and [Discord chat server](https://discord.gg/PRyKn3Vbay).
+:::
 
 You can translate as much as you want, when you want. It's only a matter of how much time and energy you are willing to invest as a volunteer translator.
 
@@ -49,8 +50,9 @@ We just ask that you understand the following:
 
 It's our dream to provide you with the resources to learn, no matter the world language you speak. To help us with this massive effort, we have integrated our open-source codebase & curriculum with [Crowdin](https://crowdin.com/) - A tool to help us localize our code-base.
 
-> [!NOTE]
-> We use a different tool and workflow for translating [news articles](https://www.freecodecamp.org/news). If you are interested in translating articles, read [this announcement](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/) and reach out to your Language Lead.
+:::note
+We use a different tool and workflow for translating [news articles](https://www.freecodecamp.org/news). If you are interested in translating articles, read [this announcement](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/) and reach out to your Language Lead.
+:::
 
 The translation workflow is split into two main activities:
 
@@ -62,8 +64,9 @@ The translation workflow is split into two main activities:
 
   Proofreaders verify that the community contributed translations are uniform in tone and free of common issues like typos, etc. In short, they ensure that the quality of translations is high. Note that we do not use machine translations for a reason.
 
-> [!WARNING]
-> We are no longer using GitHub to translate files directly, if you are a returning contributor head to our [translation platform](https://translate.freecodecamp.org/) instead.
+:::caution
+We are no longer using GitHub to translate files directly, if you are a returning contributor head to our [translation platform](https://translate.freecodecamp.org/) instead.
+:::
 
 ## Getting Started
 
@@ -95,8 +98,9 @@ Each file and folder will show a progress bar. The **blue** portion of the progr
 
 Select a file to work on and Crowdin will open the editor view.
 
-> [!NOTE]
-> When the editor view opens, you will need to click the settings icon (shown as a gear) and switch the 'HTML tags displaying' setting to 'SHOW'. This will ensure you can see tags such as `<code></code>` instead of `<0></0>`.
+:::note
+When the editor view opens, you will need to click the settings icon (shown as a gear) and switch the 'HTML tags displaying' setting to 'SHOW'. This will ensure you can see tags such as `<code></code>` instead of `<0></0>`.
+:::
 
 ## Translate Curriculum
 
@@ -115,15 +119,17 @@ Crowdin separates a document into translatable "strings", usually sentences. Eac
 9. Here you can see the comments window. If you have questions or concerns about a particular string, you can leave a comment on the string here for other translators to see.
 10. These two "pane" buttons will hide the left (document) and right (comments) views.
 
-> [!NOTE]
-> If you see a hidden string that includes translations, please notify us in the [Discord](https://discord.gg/PRyKn3Vbay) so we can remove the translation from memory.
+:::note
+If you see a hidden string that includes translations, please notify us in the [Discord](https://discord.gg/PRyKn3Vbay) so we can remove the translation from memory.
+:::
 
 When you have completed a translation for a string, select the `Save` button to store your translation on Crowdin. Other contributors will then be able to vote on your translation and proofreaders will be able to approve it.
 
 You are welcome to translate as many strings as you like - there are no additional steps required when you complete a full file or propose a new translation. Clicking the `Save` button is all that is needed to store a translation.
 
-> [!NOTE]
-> If you see something in the English source file that is inaccurate or incorrect, please do not fix it through the translation flow. Instead, leave a comment on the string to notify us that there is a discrepancy, or create a GitHub issue.
+:::note
+If you see something in the English source file that is inaccurate or incorrect, please do not fix it through the translation flow. Instead, leave a comment on the string to notify us that there is a discrepancy, or create a GitHub issue.
+:::
 
 ## Translate the Learn Interface
 
@@ -137,8 +143,9 @@ These files will most likely be maintained by your language lead but you are wel
 
 ### On Crowdin
 
-> [!ATTENTION]
-> Do not edit the following files through a GitHub PR.
+:::danger
+Do not edit the following files through a GitHub PR.
+:::
 
 The `intro.json` and `translations.json` files are both translated on Crowdin, in the Learn User Interface project. Translating these can be a bit tricky, as each individual JSON value appears as its own string and sometimes the context is missing.
 
@@ -152,8 +159,9 @@ If you have any questions about where a string fits in to the prose, reach out t
 
 Translating our contributing documentation is a similar flow to translating our curriculum files.
 
-> [!NOTE]
-> Our contributing documentation is powered by `docsify`, and we have special parsing for message boxes like this one. If you see strings that start with `[!NOTE]`, `[!WARNING]`, or `[!TIP]`, these words should NOT be translated.
+:::note
+Our contributing documentation is powered by `docsify`, and we have special parsing for message boxes like this one. If you see strings that start with `[!NOTE]`, `[!WARNING]`, or `[!TIP]`, these words should NOT be translated.
+:::
 
 ### How to Translate Documentation with Internal Links
 
@@ -334,8 +342,9 @@ When you attempt to save a translation, you may see a warning message appear wit
 
 This message appears when Crowdin's QA system has identified a potential error in the proposed translation. In this example, we have modified the text of a `<code>` tag and Crowdin has caught that.
 
-> [!WARNING]
-> You have the option to save a translation in spite of errors. If you do, by clicking "Save Anyway", you should also tag a proofreader or project manager and explain why the QA message needs to be ignored in this case.
+:::caution
+You have the option to save a translation in spite of errors. If you do, by clicking "Save Anyway", you should also tag a proofreader or project manager and explain why the QA message needs to be ignored in this case.
+:::
 
 ## Translation Best Practices
 
