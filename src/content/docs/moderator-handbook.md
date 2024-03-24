@@ -4,8 +4,9 @@ title: The Official freeCodeCamp Moderator Handbook
 
 This handbook will help you moderate different places in our community. This covers conversations and interactions in issues and pull request threads on GitHub, the community forum, the chat rooms, and other official communities that we foster.
 
-> [!NOTE]
-> All freeCodeCamp moderators are community-wide moderators. That means we trust you to oversee any of these places.
+:::note
+All freeCodeCamp moderators are community-wide moderators. That means we trust you to oversee any of these places.
+:::
 
 You can serve as a moderator on any of the platforms that are of the most interest to you. Some moderators just help out on GitHub, while others just help out on the forum. Some moderators are active everywhere.
 
@@ -21,8 +22,9 @@ freeCodeCamp is an inclusive community, and we need to keep it that way.
 
 We have a single [Code of Conduct](https://code-of-conduct.freecodecamp.org) that governs our entire community. The fewer the rules, the easier they are to remember. You can read those rules and commit them to memory [here](https://code-of-conduct.freecodecamp.org).
 
-> [!NOTE]
-> As a moderator, we would add you to one or more teams on GitHub, our community forums & chat servers. If you are missing access to a platform that you would like to moderate, please [reach out to a staff member](FAQ.md#additional-assistance).
+:::note
+As a moderator, we would add you to one or more teams on GitHub, our community forums & chat servers. If you are missing access to a platform that you would like to moderate, please [reach out to a staff member](FAQ.md#additional-assistance).
+:::
 
 ## Moderating GitHub
 
@@ -53,8 +55,9 @@ For triaging a trivial issue such as a typo fix, it is recommended to apply a "f
 
 - If the contributor asks for additional assistance or even time, the above can be relaxed and revisited after a response is given. In any case, the mods should use their best judgment to resolve the outstanding PR's status.
 
-> [!TIP]
-> We recommend you use this list of standard [reply templates](reply-templates.md) while triaging issues.
+:::tip
+We recommend you use this list of standard [reply templates](reply-templates.md) while triaging issues.
+:::
 
 ### Moderating Pull Requests
 
@@ -108,8 +111,9 @@ Depending on the type of pull request it is, follow the corresponding rules list
 
 Before merging any pull request, make sure that GitHub is reporting all checks to be passing (green check marks) on the pull requests. If you see any of the checks failing, please investigate and clarify the root cause. Is the change being made breaking our tests? Will the site build correctly if the PR is merged? These checks are critical for the stability of the platform.
 
-> [!WARNING]
-> Merging a PR that fails CI/CD checks can cause difficulties for all stakeholders, including the dev-team and contributors.
+:::caution
+Merging a PR that fails CI/CD checks can cause difficulties for all stakeholders, including the dev-team and contributors.
+:::
 
 ##### Handling Merge Conflicts:
 
@@ -252,8 +256,9 @@ But if it is an egregious offense that can't reasonably be attributed to a cultu
 
 Here's how moderators deal with violations of our [Code of Conduct](https://code-of-conduct.freecodecamp.org/) on our chat server:
 
-> [!NOTE]
-> Camperbot serves as our moderation bot, and all of the commands use Discord's native slash command interface. You can see a list of all of the commands by typing `/` in any channel.
+:::note
+Camperbot serves as our moderation bot, and all of the commands use Discord's native slash command interface. You can see a list of all of the commands by typing `/` in any channel.
+:::
 
 1. **Make sure the user intended to violate the [Code of Conduct](https://code-of-conduct.freecodecamp.org).**
 
@@ -265,8 +270,9 @@ Here's how moderators deal with violations of our [Code of Conduct](https://code
 
    All moderation commands will take a `reason` parameter, which should be a short explanation of why the action was taken. Moderation actions done with the bot will be logged in `#mod-actions`, which allows us all to stay on the same page. As such, we should avoid using Discord's built-in moderation tools, as they will not be logged.
 
-   > [!WARNING]
-   > The reason provided to a moderation command will also be included in the DM notification to the camper. Please remember to be professional here.
+:::warning
+The reason provided to a moderation command will also be included in the DM notification to the camper. Please remember to be professional here.
+:::
 
 3. **Creating a private discussion**
 
@@ -328,10 +334,11 @@ Suppose you are helping people in the community consistently over time. In that 
 
 If you are approved, we will add you to our moderator teams on [GitHub](https://github.com/orgs/freeCodeCamp/teams/moderators), [forum](https://forum.freecodecamp.org/g/moderators), chat, etc.
 
-> [!NOTE]
-> For GitHub: After you've been accepted as a moderator, you will receive a Github repository invitation. You'll need to head over towards [freeCodeCamp GitHub Organization Invitation](https://github.com/orgs/freeCodeCamp/invitation) to be able to accept the invitation.
->
-> This is required for us to be able to give you write access to some of our repositories.
+:::note
+For GitHub: After you've been accepted as a moderator, you will receive a Github repository invitation. You'll need to head over towards [freeCodeCamp GitHub Organization Invitation](https://github.com/orgs/freeCodeCamp/invitation) to be able to accept the invitation.
+
+This is required for us to be able to give you write access to some of our repositories.
+:::
 
 ## How Our Contributors Room Works
 

@@ -34,38 +34,40 @@ Follow these steps:
 
 2. Sync the latest changes from the freeCodeCamp upstream `main` branch to your `main` fork branch:
 
-   > [!WARNING]
-   > If you have any outstanding pull requests that you made from the `main` branch of your fork, you will lose them at the end of this step.
-   >
-   > You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
+:::warning
+If you have any outstanding pull requests that you made from the `main` branch of your fork, you will lose them at the end of this step.
 
-   This step **will sync the latest changes** from the main repository of freeCodeCamp.
+You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
 
-   Update your copy of the freeCodeCamp upstream repository:
+:::
 
-   ```bash
-   git fetch upstream
-   ```
+This step **will sync the latest changes** from the main repository of freeCodeCamp.
 
-   Hard reset your main branch with the freeCodeCamp main:
+Update your copy of the freeCodeCamp upstream repository:
 
-   ```bash
-   git reset --hard upstream/main
-   ```
+```bash
+git fetch upstream
+```
 
-   Push your main branch to your origin to have a clean history on your fork on GitHub:
+Hard reset your main branch with the freeCodeCamp main:
 
-   ```bash
-   git push origin main --force
-   ```
+```bash
+git reset --hard upstream/main
+```
 
-   You can validate that your current main matches the upstream/main by performing a diff:
+Push your main branch to your origin to have a clean history on your fork on GitHub:
 
-   ```bash
-   git diff upstream/main
-   ```
+```bash
+git push origin main --force
+```
 
-   The resulting output should be empty. This process is important, because you will be rebasing your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
+You can validate that your current main matches the upstream/main by performing a diff:
+
+```bash
+git diff upstream/main
+```
+
+The resulting output should be empty. This process is important, because you will be rebasing your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
 
 3. Create a fresh new branch:
 

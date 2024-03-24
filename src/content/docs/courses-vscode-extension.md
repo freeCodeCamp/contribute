@@ -31,8 +31,9 @@ Optionally, you can push directly to `upstream/main`, but opening a new PR is re
 - Upload the `.vsix` file with the release.
 - Publish the release, and confirm the action succeeded.
 
-> [!NOTE]
-> Creating a release requires write access to the `freeCodeCamp/courses-vscode-extension` repository.
+:::note
+Creating a release requires write access to the `freeCodeCamp/courses-vscode-extension` repository.
+:::
 
 ## Manually Publishing the Extension
 

@@ -1,5 +1,5 @@
 ---
-title: Setup freeCodeCamp Mobile App locally 
+title: Setup freeCodeCamp Mobile App locally
 ---
 
 Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
@@ -17,8 +17,9 @@ Start by installing the prerequisite software for your operating system.
 | [Flutter](https://flutter.dev/)   | `3.x`   | -                                        |
 | Dart (comes bundled with Flutter) | `3.x`   | We use the version bundled with Flutter. |
 
-> [!ATTENTION]
-> If you have a different version, please install the recommended version. We can only support installation issues for recommended versions.
+:::danger
+If you have a different version, please install the recommended version. We can only support installation issues for recommended versions.
+:::
 
 If Flutter is already installed on your machine, run the following commands to validate the versions:
 
@@ -27,8 +28,9 @@ flutter --version
 dart --version
 ```
 
-> [!TIP]
-> We highly recommend updating to the latest stable releases of the software listed above.
+:::tip
+We highly recommend updating to the latest stable releases of the software listed above.
+:::
 
 Once you have the prerequisites installed, you need to prepare your development environment. This is common for many development workflows, and you will only need to do this once.
 
@@ -52,10 +54,11 @@ Once you have the prerequisites installed, you need to prepare your development 
 
 This is essential, as it allows you to work on your own copy of the freeCodeCamp mobile app on GitHub, or to download (clone) your repository to work on locally. Later, you will be able to request changes to be pulled into the main repository from your fork via a pull request (PR).
 
-> [!TIP]
-> The main repository at `https://github.com/freeCodeCamp/mobile` is often referred to as the `upstream` repository.
->
-> Your fork at `https://github.com/YOUR_USER_NAME/mobile` is often referred to as the `origin` repository. `YOUR_USER_NAME` would be replaced with your GitHub username.
+:::tip
+The main repository at `https://github.com/freeCodeCamp/mobile` is often referred to as the `upstream` repository.
+
+Your fork at `https://github.com/YOUR_USER_NAME/mobile` is often referred to as the `origin` repository. `YOUR_USER_NAME` would be replaced with your GitHub username.
+:::
 
 **Follow these steps to fork the `https://github.com/freeCodeCamp/mobile` repository:**
 
@@ -128,8 +131,9 @@ If you do run into issues, first perform a web search for your issue and see if 
 
 And as always, feel free to ask questions on the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [our chat server](https://discord.gg/PRyKn3Vbay).
 
-> [!NOTE]
-> The `mobile` directory contains two folders ie. `mobile-api` and `mobile-app`. `mobile-api` contains the API code used for serving the podcasts. `mobile-app` contains the Flutter app which is where you should be when you follow the below steps.
+:::note
+The `mobile` directory contains two folders ie. `mobile-api` and `mobile-app`. `mobile-api` contains the API code used for serving the podcasts. `mobile-app` contains the Flutter app which is where you should be when you follow the below steps.
+:::
 
 ### Configuring Dependencies
 
@@ -174,8 +178,9 @@ You can now start the app by running the following command:
 flutter run
 ```
 
-> [!TIP]
-> If you're using VSCode or Android Studio then you can easily start the app without having to execute any terminal commands. More information [here](https://docs.flutter.dev/get-started/test-drive).
+:::tip
+If you're using VSCode or Android Studio then you can easily start the app without having to execute any terminal commands. More information [here](https://docs.flutter.dev/get-started/test-drive).
+:::
 
 ## Making Changes Locally
 
@@ -206,38 +211,38 @@ Follow these steps:
 
 2. Sync the latest changes from the upstream `main` branch to your local main branch:
 
-   > [!WARNING]
-   > If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
-   >
-   > You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
+:::warning
+If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
+You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
+:::
 
-   This step **will sync the latest changes** from the main repository of freeCodeCamp mobile. It is important that you rebase your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
+This step **will sync the latest changes** from the main repository of freeCodeCamp mobile. It is important that you rebase your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
 
-   Update your local copy of the freeCodeCamp mobile upstream repository:
+Update your local copy of the freeCodeCamp mobile upstream repository:
 
-   ```bash
-   git fetch upstream
-   ```
+```bash
+git fetch upstream
+```
 
-   Hard reset your main branch with the freeCodeCamp mobile main:
+Hard reset your main branch with the freeCodeCamp mobile main:
 
-   ```bash
-   git reset --hard upstream/main
-   ```
+```bash
+git reset --hard upstream/main
+```
 
-   Push your main branch to your origin to have a clean history on your fork on GitHub:
+Push your main branch to your origin to have a clean history on your fork on GitHub:
 
-   ```bash
-   git push origin main --force
-   ```
+```bash
+git push origin main --force
+```
 
-   You can validate that your current main matches the upstream/main by performing a diff:
+You can validate that your current main matches the upstream/main by performing a diff:
 
-   ```bash
-   git diff upstream/main
-   ```
+```bash
+git diff upstream/main
+```
 
-   The resulting output should be empty.
+The resulting output should be empty.
 
 3. Create a fresh new branch:
 
@@ -369,78 +374,80 @@ Follow these steps:
 
 ## Running mobile curriculum tests
 
-> [!NOTE]
-> You only need to follow this section if you're modifying the challenge test runner in the mobile app. Otherwise, you can go to the next section on [how to open a pull request](#proposing-a-pull-request-pr).
+:::note
+You only need to follow this section if you're modifying the challenge test runner in the mobile app. Otherwise, you can go to the next section on [how to open a pull request](#proposing-a-pull-request-pr).
+:::
 
 1. Clone a copy of the [freeCodeCamp repo](https://github.com/freeCodeCamp/freeCodeCamp) locally outside of your local copy of the freeCodeCamp mobile repo. Your folder structure should look like this:
 
-    ```bash
-    ├── freeCodeCamp
-    ├── mobile
-    ```
+   ```bash
+   ├── freeCodeCamp
+   ├── mobile
+   ```
 
 2. Change the directory to the freeCodeCamp repo:
 
-    ```bash
-    cd freeCodeCamp
-    ```
+   ```bash
+   cd freeCodeCamp
+   ```
 
 3. Make a copy of the `.env` file:
 
-    #### **macOS/Linux**
+   #### **macOS/Linux**
 
-    ```bash
-    cp sample.env .env
-    ```
+   ```bash
+   cp sample.env .env
+   ```
 
-    #### **Windows**
+   #### **Windows**
 
-    ```bash
-    copy sample.env .env
-    ```
+   ```bash
+   copy sample.env .env
+   ```
 
 4. Install the dependencies for the freeCodeCamp repo:
 
-    ```bash
-    pnpm install && pnpm run create:shared
-    ```
+   ```bash
+   pnpm install && pnpm run create:shared
+   ```
 
 5. Generate the challenge data JSON file:
 
-    ```bash
-    pnpm run build:curriculum
-    ```
+   ```bash
+   pnpm run build:curriculum
+   ```
 
 6. Copy the generated JSON file to the mobile app:
 
-    #### **macOS/Linux**
+   #### **macOS/Linux**
 
-    ```bash
-    cp ./shared/config/curriculum.json ../mobile/mobile-app/curriculum.json
-    ```
+   ```bash
+   cp ./shared/config/curriculum.json ../mobile/mobile-app/curriculum.json
+   ```
 
-    #### **Windows**
-    ```bash
-    copy .\shared\config\curriculum.json ..\mobile\mobile-app\curriculum.json
-    ```
+   #### **Windows**
+
+   ```bash
+   copy .\shared\config\curriculum.json ..\mobile\mobile-app\curriculum.json
+   ```
 
 7. Change directory to the mobile app:
 
-    ```bash
-    cd ../mobile/mobile-app
-    ```
+   ```bash
+   cd ../mobile/mobile-app
+   ```
 
 8. Install the dependencies for the mobile app:
 
-    ```bash
-    flutter pub get
-    ```
+   ```bash
+   flutter pub get
+   ```
 
 9. Update the test file to use the challenge data JSON file:
 
-    ```bash
-    sed -i '' 's/..\/..\/shared\/config\/curriculum.json/.\/curriculum.json/g' test/widget_test.dart
-    ```
+   ```bash
+   sed -i '' 's/..\/..\/shared\/config\/curriculum.json/.\/curriculum.json/g' test/widget_test.dart
+   ```
 
 10. Generate the challenge files:
 

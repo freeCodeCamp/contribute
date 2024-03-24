@@ -1,15 +1,17 @@
 ---
-title: Setup freeCodeCamp locally 
+title: Setup freeCodeCamp locally
 ---
 
 Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
 
 ## Choose between Gitpod or your Own Machine (local setup)
 
-> [!ATTENTION] 
-> - freeCodeCamp does not build and run natively on Windows, you will [need to use WSL2](how-to-setup-wsl.md) for a Linux-like setup on Windows. 
-> - You can't use Windows Command Prompt, Git Bash or PowerShell to build and run the codebase.
-> - Note that if using Windows, the hardware requirements need to be more than [what we mention](how-to-setup-freecodecamp-locally?id=how-to-prepare-your-local-machine) to accommodate for WSL-based setup.
+:::danger
+
+- freeCodeCamp does not build and run natively on Windows, you will [need to use WSL2](how-to-setup-wsl.md) for a Linux-like setup on Windows.
+- You can't use Windows Command Prompt, Git Bash or PowerShell to build and run the codebase.
+- Note that if using Windows, the hardware requirements need to be more than [what we mention](how-to-setup-freecodecamp-locally?id=how-to-prepare-your-local-machine) to accommodate for WSL-based setup.
+  :::
 
 If you are looking to make a one-off contribution, you should use Gitpod to make changes. The Gitpod setup launches a ready-to-code environment in a few minutes in your web browser. To contribute long-term, we recommend you set up freeCodeCamp on your local machine.
 
@@ -69,17 +71,17 @@ Start by installing the prerequisite software for your operating system.
 
 We primarily support development on Linux and Unix-based systems like Ubuntu and macOS. You can develop on Windows 10 or 11 with WSL2 only. You can follow [this guide](how-to-setup-wsl.md) to set up WSL2. You can't use Command Prompt, Git Bash or PowerShell to run freeCodeCamp natively within windows.
 
-
 #### Prerequisites:
 
 | Prerequisite                                                                                  | Version | Notes                                                                                       |
 | --------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
 | [Node.js](http://nodejs.org)                                                                  | `20.x`  | We use the "Active LTS" version, See [LTS Schedule](https://nodejs.org/en/about/releases/). |
-| [pnpm](https://pnpm.io/installation)                                                          | `8.x`   | -                                                                                            |
+| [pnpm](https://pnpm.io/installation)                                                          | `8.x`   | -                                                                                           |
 | [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/) | `5.0.x` | -                                                                                           |
 
-> [!ATTENTION]
-> If you have a different version, please install the recommended version. We can only support installation issues for recommended versions. See [troubleshooting section](troubleshooting-development-issues.md) for details.
+:::danger
+If you have a different version, please install the recommended version. We can only support installation issues for recommended versions. See [troubleshooting section](troubleshooting-development-issues.md) for details.
+:::
 
 If Node.js is already installed on your machine, run the following commands to validate the versions:
 
@@ -88,8 +90,9 @@ node -v
 pnpm -v
 ```
 
-> [!TIP]
-> We highly recommend updating to the latest stable releases of the software listed above, also known as Long Term Support (LTS) releases.
+:::tip
+We highly recommend updating to the latest stable releases of the software listed above, also known as Long Term Support (LTS) releases.
+:::
 
 Once you have the prerequisites installed, you need to prepare your development environment. This is common for many development workflows, and you will only need to do this once.
 
@@ -99,15 +102,15 @@ Once you have the prerequisites installed, you need to prepare your development 
 
 2. (Optional but recommended) [Set up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
 
-
 3. Install a code editor of your choice. If you aren't sure which one to use, we recommend [Visual Studio Code](https://code.visualstudio.com/) — it's free and open source.
 
 4. Set up linting for your code editor.
 
    You should have [ESLint running in your editor](http://eslint.org/docs/user-guide/integrations.html), and it will highlight anything that doesn't conform to [freeCodeCamp's JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
 
-   > [!TIP]
-   > Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
+:::tip
+Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
+:::
 
 ## Fork the Repository on GitHub
 
@@ -115,9 +118,11 @@ Once you have the prerequisites installed, you need to prepare your development 
 
 This is essential, as it allows you to work on your own copy of freeCodeCamp on GitHub, or to download (clone) your repository to work on locally. Later, you will be able to request changes to be pulled into the main repository from your fork via a pull request (PR).
 
-> [!TIP]
-> The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often referred to as the `upstream` repository.
->
+:::tip
+The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often referred to as the `upstream` repository.
+
+:::
+
 > Your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp` is often referred to as the `origin` repository. `YOUR_USER_NAME` would be replaced with your GitHub username.
 
 **Follow these steps to fork the `https://github.com/freeCodeCamp/freeCodeCamp` repository:**
@@ -140,11 +145,13 @@ This is essential, as it allows you to work on your own copy of freeCodeCamp on 
 
 [Cloning](https://help.github.com/articles/cloning-a-repository/) is where you **download** a copy of a repository from a `remote` location that is either owned by you or by someone else. In your case, this remote location is your `fork` of freeCodeCamp's repository that should be available at `https://github.com/YOUR_USER_NAME/freeCodeCamp`. (`YOUR_USER_NAME` would be replaced with your GitHub user name.)
 
-> [!WARNING]
-> If you are working on a WSL2 Linux Distro, you might get performance and stability issues by running this project in a folder which is shared between Windows and WSL2 (e.g. `/mnt/c/Users/`).
-> Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
->
-> See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
+:::caution
+If you are working on a WSL2 Linux Distro, you might get performance and stability issues by running this project in a folder which is shared between Windows and WSL2 (e.g. `/mnt/c/Users/`).
+
+Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
+
+See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
+:::
 
 Run these commands on your local machine:
 
@@ -226,8 +233,9 @@ cp sample.env .env
 
 The keys in the `.env` file are _not_ required to be changed to run the app locally. You can leave the default values copied over from `sample.env` as-is.
 
-> [!TIP]
-> Keep in mind if you want to use services like Auth0 or Algolia, you'll have to acquire your own API keys for those services and edit the entries accordingly in the `.env` file.
+:::tip
+Keep in mind if you want to use services like Auth0 or Algolia, you'll have to acquire your own API keys for those services and edit the entries accordingly in the `.env` file.
+:::
 
 #### Step 2: Install Dependencies
 
@@ -241,19 +249,20 @@ pnpm install && pnpm run create:shared
 
 Before you can run the application locally, you will need to start the MongoDB service.
 
-> [!NOTE]
-> Unless you have MongoDB running in a setup different than the default, the URL stored as the `MONGOHQ_URL` value in the `.env` file should work fine. If you are using a custom configuration, modify this value as needed.
->
-> If you followed along with the [Windows 10 via WSL2 Setup Guide](how-to-setup-wsl.md), then you should be able to skip this step if the MongoDB server from that guide is already running. You can confirm this by checking that you can reach `http://localhost:27017` on your local machine.
+:::note
+Unless you have MongoDB running in a setup different than the default, the URL stored as the `MONGOHQ_URL` value in the `.env` file should work fine. If you are using a custom configuration, modify this value as needed.
 
+If you followed along with the [Windows 10 via WSL2 Setup Guide](how-to-setup-wsl.md), then you should be able to skip this step if the MongoDB server from that guide is already running. You can confirm this by checking that you can reach `http://localhost:27017` on your local machine.
+:::
 Start the MongoDB server in a separate terminal:
 
 ```bash
 mongod
 ```
 
-> [!TIP]
-> You can avoid having to start MongoDB every time by installing it as a background service. You can [learn more about it in their documentation for your OS](https://docs.mongodb.com/manual/administration/install-community/)
+:::tip
+You can avoid having to start MongoDB every time by installing it as a background service. You can [learn more about it in their documentation for your OS](https://docs.mongodb.com/manual/administration/install-community/)
+:::
 
 Next, let's seed the database. In this step, we run the below command that fills the MongoDB server with some initial data sets that are required by services. These include a few schemas, among other things.
 
@@ -267,8 +276,9 @@ By default, you will be signed in as a new user without any completed certificat
 pnpm run seed:certified-user
 ```
 
-> [!WARNING]
-> Running `pnpm run seed:certified-user` will log you out. You will have to clear your browser cookies and sign in again.
+:::caution
+Running `pnpm run seed:certified-user` will log you out. You will have to clear your browser cookies and sign in again.
+:::
 
 #### Step 4: Start the freeCodeCamp Client Application and API Server
 
@@ -286,8 +296,9 @@ The API server serves endpoints at `http://localhost:3000`. The Gatsby app serve
 
 While you are logged in, if you visit <http://localhost:3000/explorer> you should see the available APIs.
 
-> [!WARNING]
-> Clearing your cookies or running `pnpm run seed:certified-user` will log you out, and you will have to sign in again.
+:::caution
+Clearing your cookies or running `pnpm run seed:certified-user` will log you out, and you will have to sign in again.
+:::
 
 If you have issues while installing it, check out the [troubleshooting section](troubleshooting-development-issues.md).
 
@@ -295,12 +306,12 @@ If you have issues while installing it, check out the [troubleshooting section](
 
 A quick reference to the commands that you will need when working locally.
 
-| command           | description                                                                   |
-| ----------------- | ----------------------------------------------------------------------------- |
-| `pnpm install`          | Installs / re-installs all dependencies and bootstraps the different services. |
-| `pnpm run seed`    | Creates authorized test users and inserts them into MongoDB. Also runs `seed:exams` and `seed:surveys` below. |
-| `pnpm run seed:certified-user`    | Creates authorized test users with certifications fully completed, and inserts them into MongoDB.        |
-| `pnpm run seed:exams`    | Creates exams and inserts them into MongoDB.        |
-| `pnpm run seed:surveys`  | Creates surveys for defaults users and inserts them into MongoDB.       |
-| `pnpm run develop` | Starts the freeCodeCamp API Server and Client Applications.                   |
-| `pnpm run clean`   | Uninstalls all dependencies and cleans up caches.                             |
+| command                        | description                                                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `pnpm install`                 | Installs / re-installs all dependencies and bootstraps the different services.                                |
+| `pnpm run seed`                | Creates authorized test users and inserts them into MongoDB. Also runs `seed:exams` and `seed:surveys` below. |
+| `pnpm run seed:certified-user` | Creates authorized test users with certifications fully completed, and inserts them into MongoDB.             |
+| `pnpm run seed:exams`          | Creates exams and inserts them into MongoDB.                                                                  |
+| `pnpm run seed:surveys`        | Creates surveys for defaults users and inserts them into MongoDB.                                             |
+| `pnpm run develop`             | Starts the freeCodeCamp API Server and Client Applications.                                                   |
+| `pnpm run clean`               | Uninstalls all dependencies and cleans up caches.                                                             |

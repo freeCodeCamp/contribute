@@ -34,8 +34,9 @@ We employ various levels of integration and acceptance testing to check on the q
 
 We have unit tests for testing our challenge solutions, Server APIs, and Client User interfaces. These help us test the integration between different components.
 
-> [!NOTE]
-> We are also in the process of writing end user tests which will help in replicating real-world scenarios like updating an email or making a call to the API or third-party services.
+:::note
+We are also in the process of writing end user tests which will help in replicating real-world scenarios like updating an email or making a call to the API or third-party services.
+:::
 
 Together these tests help in preventing issues from repeating themselves and ensure we do not introduce a bug while working on another bug or a feature.
 
@@ -53,8 +54,9 @@ The statuses of builds and releases are [available here](#build-test-and-deploym
 
 Currently, only members of the developer team can push to the production branches. The changes to the `production-*` branches can land only via fast-forward merge to the [`upstream`](https://github.com/freeCodeCamp/freeCodeCamp).
 
-> [!NOTE]
-> In the upcoming days, we would improve this flow to be done via pull requests, for better access management and transparency.
+:::note
+In the upcoming days, we would improve this flow to be done via pull requests, for better access management and transparency.
+:::
 
 ### Pushing changes to Staging Applications
 
@@ -109,10 +111,10 @@ Currently, only members of the developer team can push to the production branche
    git push upstream
    ```
 
-   > [!NOTE]
-   > You will not be able to force push and if you have re-written the history in any way, these commands will error out.
-   >
-   > If they do, you may have done something incorrectly and you should just start over.
+:::note
+You will not be able to force push and if you have re-written the history in any way, these commands will error out.
+If they do, you may have done something incorrectly and you should just start over.
+:::
 
 The above steps will automatically trigger a run on the build pipeline for the `prod-staging` branch. Once the build is complete, the artifacts are saved as `.zip` files in a cold storage to be retrieved and used later.
 
@@ -141,10 +143,10 @@ The process is mostly the same as the staging platforms, with a few extra checks
    git push upstream
    ```
 
-   > [!NOTE]
-   > You will not be able to force push and if you have re-written the history in any way, these commands will error out.
-   >
-   > If they do, you may have done something incorrectly and you should just start over.
+:::note
+You will not be able to force push and if you have re-written the history in any way, these commands will error out.
+If they do, you may have done something incorrectly and you should just start over.
+:::
 
 The above steps will automatically trigger a run on the build pipeline for the `prod-current` branch. Once a build artifact is ready, it will trigger a run on the release pipeline.
 
@@ -194,10 +196,10 @@ Currently, a public beta testing version is available at:
 |             | Chinese  | <https://freecodecamp.dev/chinese/forum> |
 | API         | -        | `https://api.freecodecamp.dev`           |
 
-> [!NOTE]
-> The domain name is different than **`freeCodeCamp.org`**. This is intentional to prevent search engine indexing and avoid confusion for regular users of the platform.
->
-> The above list is not exhaustive of all the applications that we provision. Also, not all language variants are deployed in staging to conserve resources.
+:::note
+The domain name is different than **`freeCodeCamp.org`**. This is intentional to prevent search engine indexing and avoid confusion for regular users of the platform.
+The above list is not exhaustive of all the applications that we provision. Also, not all language variants are deployed in staging to conserve resources.
+:::
 
 ### Identifying the Current Version of the Platforms
 
@@ -235,10 +237,12 @@ You may send an email to `dev[at]freecodecamp.org` if you have any queries. As a
 
 ## Flight Manual - Server Maintenance
 
-> [!WARNING]
->
-> 1. The guide applies to the **freeCodeCamp Staff members only**.
-> 2. These instructions should not be considered exhaustive, please use caution.
+:::warning
+
+1.  The guide applies to the **freeCodeCamp Staff members only**.
+2.  These instructions should not be considered exhaustive, please use caution.
+
+:::
 
 As a member of the staff, you may have been given access to our cloud service providers like Azure, Digital Ocean, etc.
 
@@ -246,8 +250,10 @@ Here are some handy commands that you can use to work on the Virtual Machines (V
 
 ## Get a list of the VMs
 
-> [!NOTE] While you may already have SSH access to the VMs, that alone will not
-> let you list VMs unless you have been granted access to the cloud portals as well.
+:::note
+While you may already have SSH access to the VMs, that alone will not
+let you list VMs unless you have been granted access to the cloud portals as well.
+:::
 
 ### Azure
 
@@ -301,22 +307,26 @@ doctl compute droplet list --format "ID,Name,PublicIPv4"
 
 We are working on creating our IaC setup, and while that is in works you can use the Azure portal or the Azure CLI to spin new virtual machines and other resources.
 
-> [!TIP]
-> No matter your choice of spinning resources, we have a few [handy cloud-init config files](https://github.com/freeCodeCamp/infra/tree/main/cloud-init) to help you do some of the basic provisioning like installing docker or adding SSH keys, etc.
+:::tip
+No matter your choice of spinning resources, we have a few [handy cloud-init config files](https://github.com/freeCodeCamp/infra/tree/main/cloud-init) to help you do some of the basic provisioning like installing docker or adding SSH keys, etc.
+:::
 
 ## Keep VMs Updated
 
 You should keep the VMs up to date by performing updates and upgrades. This will
 ensure that the virtual machine is patched with the latest security fixes.
 
-> [!WARNING] Before you run these commands:
->
-> - Make sure that the VM has been provisioned completely and that there are no
->   post-install steps running.
-> - If you are updating packages on a VM that is already serving an application,
->   make sure the app has been stopped / saved. Package updates will cause
->   network bandwidth, memory and/or CPU usage spikes leading to outages on
->   running applications.
+:::warning
+Before you run these commands:
+
+- Make sure that the VM has been provisioned completely and that there are no
+  post-install steps running.
+- If you are updating packages on a VM that is already serving an application,
+  make sure the app has been stopped / saved. Package updates will cause
+  network bandwidth, memory and/or CPU usage spikes leading to outages on
+  running applications.
+
+:::warning
 
 Update package information
 
@@ -483,7 +493,7 @@ pnpm install
 ```
 
 7. Setup pm2 `logrotate` and startup on boot
-  
+
 ```bash
 pm2 install pm2-logrotate
 pm2 startup
@@ -517,8 +527,10 @@ Code changes need to be deployed to the API instances from time to time. It can
 be a rolling update or a manual update. The latter is essential when changing
 dependencies or adding environment variables.
 
-> [!ATTENTION] The automated pipelines are not handling dependencies updates at the
-> minute. We need to do a manual update before any deployment pipeline runs.
+:::danger
+The automated pipelines are not handling dependencies updates at the
+minute. We need to do a manual update before any deployment pipeline runs.
+:::
 
 #### 1. Manual Updates - Used for updating dependencies, env variables.
 
@@ -552,8 +564,10 @@ pnpm start:server && pm2 logs
 pnpm reload:server && pm2 logs
 ```
 
-> [!NOTE] We are handling rolling updates to code and logic via pipelines. You
-> should not need to run these commands. These are here for documentation.
+:::note
+We are handling rolling updates to code and logic via pipelines. You
+should not need to run these commands. These are here for documentation.
+:::
 
 #### 3. Updating Node
 
@@ -628,8 +642,10 @@ Code changes need to be deployed to the API instances from time to time. It can
 be a rolling update or a manual update. The later is essential when changing
 dependencies or adding environment variables.
 
-> [!ATTENTION] The automated pipelines are not handling dependencies updates at the
-> minute. We need to do a manual update before any deployment pipeline runs.
+:::danger
+The automated pipelines are not handling dependencies updates at the
+minute. We need to do a manual update before any deployment pipeline runs.
+:::
 
 #### 1. Manual Updates - Used for updating dependencies, env variables.
 
@@ -653,8 +669,10 @@ dependencies or adding environment variables.
 pm2 reload all --update-env && pm2 logs
 ```
 
-> [!NOTE] We are handling rolling updates to code, logic, via pipelines. You
-> should not need to run these commands. These are here for documentation.
+:::note
+We are handling rolling updates to code, logic, via pipelines. You
+should not need to run these commands. These are here for documentation.
+:::
 
 ## Work on Chat Servers
 
@@ -884,9 +902,11 @@ nvm alias default 16
 nvm uninstall <version>
 ```
 
-> [!ATTENTION]
-> For client applications, the shell script can't be resurrected between Node.js versions with `pm2 resurrect`. Deploy processes from scratch instead. This should become nicer when we move to a docker-based setup.
->
+:::danger
+For client applications, the shell script can't be resurrected between Node.js versions with `pm2 resurrect`. Deploy processes from scratch instead. This should become nicer when we move to a docker-based setup.
+
+:::
+
 > If using PM2 for processes you would also need to bring up the applications and save the process list for automatic recovery on restarts.
 
 Get the uninstall instructions/commands with the `unstartup` command and use the output to remove the systemctl services
@@ -929,8 +949,9 @@ You would need a PAT, that you can grab from here: https://dev.azure.com/freeCod
 
 Navigate to [Azure Devops](https://dev.azure.com/freeCodeCamp-org) and register the agent from scratch in the requisite [deployment groups](https://dev.azure.com/freeCodeCamp-org/freeCodeCamp/_machinegroup).
 
-> [!NOTE]
-> You should run the scripts in the home directory, and make sure no other `azagent` directory exists.
+:::note
+You should run the scripts in the home directory, and make sure no other `azagent` directory exists.
+:::
 
 ### Updating Agents
 

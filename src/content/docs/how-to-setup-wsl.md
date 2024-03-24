@@ -2,12 +2,13 @@
 title: Set up freeCodeCamp on Windows Subsystem for Linux (WSL)
 ---
 
-> [!NOTE]
-> Before you follow these instructions make sure your system meets the requirements.
->
-> **WSL 2**: Windows 10 64-bit (Version 2004, Build 19041 or higher) - available for all distributions including Windows 10 Home.
->
-> **Docker Desktop for Windows**: See respective requirements for [Windows 10 Pro](https://docs.docker.com/docker-for-windows/install/#system-requirements) and [Windows 10 Home](https://docs.docker.com/docker-for-windows/install-windows-home/#system-requirements)
+:::note
+Before you follow these instructions make sure your system meets the requirements.
+
+**WSL 2**: Windows 10 64-bit (Version 2004, Build 19041 or higher) - available for all distributions including Windows 10 Home.
+
+**Docker Desktop for Windows**: See respective requirements for [Windows 10 Pro](https://docs.docker.com/docker-for-windows/install/#system-requirements) and [Windows 10 Home](https://docs.docker.com/docker-for-windows/install-windows-home/#system-requirements)
+:::
 
 This guide covers some common steps with the setup of WSL2. Once some of the common issues with WSL2 are addressed, you should be able to follow [this local setup guide](how-to-setup-freecodecamp-locally.md) to work with freeCodeCamp on Windows running a WSL distro like Ubuntu.
 
@@ -19,11 +20,11 @@ Follow the instructions on the [official documentation](https://docs.microsoft.c
 
 1. We recommended using Ubuntu-18.04 or above with WSL2.
 
-   > [!NOTE]
-   >
-   > While you may use other non-Debian-based distributions, they all come with their own 'gotchas' that are beyond the scope of this guide.
+:::note
+While you may use other non-Debian-based distributions, they all come with their own 'gotchas' that are beyond the scope of this guide.
+:::
 
-   As of November 2023, Ubuntu and Debian are the only Linux distributions [officially supported by Playwright](https://playwright.dev/docs/intro#system-requirements), the end-to-end testing library used by freeCodeCamp.
+As of November 2023, Ubuntu and Debian are the only Linux distributions [officially supported by Playwright](https://playwright.dev/docs/intro#system-requirements), the end-to-end testing library used by freeCodeCamp.
 
 2. Update the dependencies for the OS
 
@@ -118,15 +119,15 @@ npm install -g pnpm
 
 Now that you have installed the pre-requisites, follow [our local setup guide](how-to-setup-freecodecamp-locally.md) to clone, install and set up freeCodeCamp locally on your machine.
 
-> [!WARNING]
->
-> Please note, at this time the setup for Cypress tests (and related GUI needs) is a work in progress. You should still be able to work on most of the codebase.
+:::warning
+Please note, at this time the setup for Cypress tests (and related GUI needs) is a work in progress. You should still be able to work on most of the codebase.
+:::
 
 ## Optimize Windows and WSL
 
-   > [!NOTE]
-   >
-   > The following tips were collected from across the web and have not gone through vigorous testing. Your mileage may vary.
+:::note
+The following tips were collected from across the web and have not gone through vigorous testing. Your mileage may vary.
+:::
 
 ### Adjust processor scheduling for background services
 

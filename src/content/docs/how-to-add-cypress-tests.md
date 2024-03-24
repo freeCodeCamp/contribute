@@ -14,8 +14,9 @@ To learn how to write Cypress tests, or 'specs', please see Cypress' official [d
 
 ## How to Run Tests
 
-> [!NOTE]
-> If using Gitpod, please see [Cypress-Gitpod Setup](how-to-add-cypress-tests.md#cypress-gitpod-setup)
+:::note
+If using Gitpod, please see [Cypress-Gitpod Setup](how-to-add-cypress-tests.md#cypress-gitpod-setup)
+:::
 
 ### 1. Ensure that MongoDB and Client Applications are Running
 
@@ -38,9 +39,9 @@ To run tests against production builds, replace `dev` with `prd` below.
   ```bash
   pnpm run cypress run --spec=cypress/<path_to_test_file>
   ```
-  
+
   For example:
- 
+
   ```bash
   pnpm run cypress run --spec=cypress/e2e/default/landing.ts
   ```
@@ -113,10 +114,11 @@ This error occurred while creating the session. Because the session setup failed
 ```
 
 You can resolve the issue by:
+
 - Going to the root `package.json` file and adding `--host 0.0.0.0` to the `develop:client` command:
-    ```json
-    "scripts": {
-      "develop:client": "cd ./client && pnpm run develop --host 0.0.0.0"
-    }
-    ```
+  ```json
+  "scripts": {
+    "develop:client": "cd ./client && pnpm run develop --host 0.0.0.0"
+  }
+  ```
 - Then, re-running `pnpm run develop`

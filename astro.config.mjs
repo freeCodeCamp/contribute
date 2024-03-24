@@ -27,10 +27,10 @@ export default defineConfig({
           items: [
             {
               label: 'Introduction',
-              link: 'index',
+              link: '/intro',
               description: 'Contribute to the freeCodeCamp.org Community'
             },
-            { label: 'Frequently Asked Questions', link: 'FAQ' },
+            { label: 'Frequently Asked Questions', link: '/faq' },
             { label: 'Reporting a Vulnerability', link: 'security' }
           ]
         },

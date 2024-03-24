@@ -6,8 +6,9 @@ This document outlines our security policy for the codebases, platforms that we 
 
 ## Reporting a Vulnerability
 
-> [!NOTE]
-> If you think you have found a vulnerability, **please report it responsibly**. Do not create GitHub issues for security issues. Instead, follow this guide.
+:::note
+If you think you have found a vulnerability, **please report it responsibly**. Do not create GitHub issues for security issues. Instead, follow this guide.
+:::
 
 ### Guidelines
 
