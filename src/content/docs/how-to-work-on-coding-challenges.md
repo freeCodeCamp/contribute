@@ -24,14 +24,14 @@ You can find all of freeCodeCamp.org's curricular content in the [`/curriculum/c
 
 Before you work on the curriculum, you would need to set up some tooling to help you test your changes. You can use any option from the below:
 
-- You can [set up freeCodeCamp locally](how-to-setup-freecodecamp-locally.md). This is **highly recommended** for regular/repeat contributions. This setup allows you to work and test your changes.
+- You can [set up freeCodeCamp locally](how-to-setup-freecodecamp-locally). This is **highly recommended** for regular/repeat contributions. This setup allows you to work and test your changes.
 - Use Gitpod, a free online dev environment. Clicking the button below will start a ready-to-code dev environment for freeCodeCamp in your browser. It only takes a few minutes.
 
   [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/freeCodeCamp/freeCodeCamp)
 
 ### How to work on practice projects
 
-The practice projects have some additional tooling to help create new projects and steps. To read more, see [these docs](how-to-work-on-practice-projects.md)
+The practice projects have some additional tooling to help create new projects and steps. To read more, see [these docs](how-to-work-on-practice-projects)
 
 ## Challenge Template
 
@@ -596,7 +596,7 @@ function myFunc() {
 
 ## Testing Challenges
 
-Before you [create a pull request](how-to-open-a-pull-request.md) for your changes, you need to validate that the changes you have made do not inadvertently cause problems with the challenge.
+Before you [create a pull request](how-to-open-a-pull-request) for your changes, you need to validate that the changes you have made do not inadvertently cause problems with the challenge.
 
 1. To test all challenges run the below command from the root directory
 
@@ -642,7 +642,7 @@ The currently accepted values are `english` and `chinese`, with `english` being 
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request.md).
+After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request).
 
 ## Useful Links
 
@@ -655,7 +655,7 @@ Creating and Editing Challenges:
 ## Helper Scripts
 
 :::note
-If you are working with the step-based challenges, refer to the [Work on Practice Projects](how-to-work-on-practice-projects.md) section.
+If you are working with the step-based challenges, refer to the [Work on Practice Projects](how-to-work-on-practice-projects) section.
 :::
 
 There are a few helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:

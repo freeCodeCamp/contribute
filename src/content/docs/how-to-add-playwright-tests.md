@@ -24,30 +24,32 @@ To learn how to write Playwright tests, or 'specs', please see Playwright's offi
 
 ## Best Practices for writing E2E tests
 
- This section will explain in detail about best practices for writing and documenting E2E tests based on Playwright documentation and our community code-style.
+This section will explain in detail about best practices for writing and documenting E2E tests based on Playwright documentation and our community code-style.
 
 ### Imports
-  
+
 Always start with necessary imports at the beginning of the file.
-  
+
 For example:
-  
+
 ```ts
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page } from "@playwright/test";
 ```
 
 ### Identifying a DOM element
 
 Playwright comes with [multiple built-in locators](https://playwright.dev/docs/locators#quick-guide), but we recommend prioritizing the following locators:
-  - `getByRole` for querying semantic elements, whose role is important and allows assistive technology to perceive the page correctly. 
-  - `getByText` for querying non-semantic elements such as `div`, `span`, or `p`.
+
+- `getByRole` for querying semantic elements, whose role is important and allows assistive technology to perceive the page correctly.
+- `getByText` for querying non-semantic elements such as `div`, `span`, or `p`.
 
 For example:
+
 ```ts
-await expect(page.getByRole('heading', { name: 'Sign up' })).toBeVisible();
-await expect(page.getByText('Hello World')).toBeVisible();
+await expect(page.getByRole("heading", { name: "Sign up" })).toBeVisible();
+await expect(page.getByText("Hello World")).toBeVisible();
 ```
-  
+
 In cases where the elements cannot be queried using the above-mentioned locators, you can use the `data-playwright-test-label` attribute as the last resort. This attribute is used to identify elements in the DOM for testing with playwright only. It is not used for styling or any other purpose.
 
 For example:
@@ -63,15 +65,15 @@ In the test file, you can use the `getByTestId` method to identify the element.
 For example:
 
 ```ts
-await expect(page.getByTestId('landing-page-figure')).toBeVisible();
+await expect(page.getByTestId("landing-page-figure")).toBeVisible();
 ```
 
 ### Constants
 
 Define any constant elements, data sets, or configurations used throughout your tests for easy reference.
-  
+
 For example:
-  
+
 ```ts
 const landingPageElements = { ... };
 const superBlocks = [ ... ];
@@ -82,21 +84,21 @@ const superBlocks = [ ... ];
 Each test block should have a clear and concise name describing exactly what it's testing.
 
 For example:
-  
+
 ```ts
-test('The component landing-top renders correctly', async ({ page }) => {
- // ...
+test("The component landing-top renders correctly", async ({ page }) => {
+  // ...
 });
 ```
 
 ### Human readable assertions
-  
+
 Each assertion should be as human readable as possible. This makes it easier to understand what the test is doing and what it's expecting.
 
 For example:
 
 ```ts
-await expect(landingHeading1).toHaveText('Learn to code — for free.');
+await expect(landingHeading1).toHaveText("Learn to code — for free.");
 ```
 
 ### Keep it DRY
@@ -104,7 +106,7 @@ await expect(landingHeading1).toHaveText('Learn to code — for free.');
 Make sure that the tests are not repeating the same code over and over again. If you find yourself repeating the same code, consider refactoring it as a loop or a function.
 
 For example:
-  
+
 ```ts
 for (const logo of await logos.all()) {
   await expect(logo).toBeVisible();
@@ -118,10 +120,10 @@ Use the `isMobile` argument to run tests that include logic that varies for mobi
 For example:
 
 ```ts
-test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
-    isMobile
+test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
+  isMobile,
 }) => {
-  const landingPageImage = page.getByTestId('landing-page-figure');
+  const landingPageImage = page.getByTestId("landing-page-figure");
 
   if (isMobile) {
     await expect(landingPageImage).toBeHidden();
@@ -138,15 +140,15 @@ Group related tests together using describe blocks. This makes it easier to unde
 For example:
 
 ```ts
-describe('The campers landing page', () => {
-  test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
-    isMobile
+describe("The campers landing page", () => {
+  test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
+    isMobile,
   }) => {
     // ...
   });
 
-  test('The campers landing page figure has the correct image', async () => {
-      // ...
+  test("The campers landing page figure has the correct image", async () => {
+    // ...
   });
 });
 ```
@@ -155,9 +157,9 @@ describe('The campers landing page', () => {
 
 ### Ensure that MongoDB and Client Applications are Running
 
-- [Start MongoDB and seed the database](how-to-setup-freecodecamp-locally.md#step-3-start-mongodb-and-seed-the-database). In order for Playwright tests to work, be sure that you use the `pnpm run seed:certified-user` command.
+- [Start MongoDB and seed the database](how-to-setup-freecodecamp-locally#step-3-start-mongodb-and-seed-the-database). In order for Playwright tests to work, be sure that you use the `pnpm run seed:certified-user` command.
 
-- [Start the freeCodeCamp client application and API server](how-to-setup-freecodecamp-locally.md#step-4-start-the-freecodecamp-client-application-and-api-server)
+- [Start the freeCodeCamp client application and API server](how-to-setup-freecodecamp-locally#step-4-start-the-freecodecamp-client-application-and-api-server)
 
 ### Run the Playwright Tests
 
@@ -174,7 +176,7 @@ To run tests with Playwright, check the following commands:
   ```bash
   npx playwright test <filename>
   ```
-  
+
   For example:
 
   ```bash
@@ -226,7 +228,7 @@ Since Playwright runs in Node.js, you can debug it with your debugger of choice 
 The HTML Reporter shows you a full report of your tests allowing you to filter the report by browsers, passed tests, failed tests, skipped tests and flaky tests.
 
 ```bash
-npx playwright show-report 
+npx playwright show-report
 ```
 
 ### Troubleshooting
@@ -237,9 +239,9 @@ npx playwright show-report
     Error: page.goto: Could not connect: Connection refused
     =========================== logs ===========================
     navigating to "https://127.0.0.1:8000/", waiting until "load"
-    ============================================================  
+    ============================================================
   ```
-  
+
   You can fix the above error with the following steps:
 
   1. **Check the URL:** Ensure that the URL you're trying to navigate to is correct and properly formatted. Make sure there are no typos in the URL.

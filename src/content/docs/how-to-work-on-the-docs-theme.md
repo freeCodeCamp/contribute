@@ -6,14 +6,14 @@ title: How to Work on Documentation
 
 To work on the contributing guidelines, you can edit or add files in the `docs` directory [available here](https://github.com/freeCodeCamp/freeCodeCamp/tree/main/docs). When your changes are merged, they will be made available automatically at the documentation site.
 
-When adding a new file to the `docs` directory, you should evaluate if the file should also be added to the sidebar navigation. We typically create a link in the [`_sidebar.md`](_sidebar.md) file for new and independent guides. Alternatively, You may follow the instructions below on creating an internal link for supporting guides.
+When adding a new file to the `docs` directory, you should evaluate if the file should also be added to the sidebar navigation. We typically create a link in the [`_sidebar.md`](_sidebar) file for new and independent guides. Alternatively, You may follow the instructions below on creating an internal link for supporting guides.
 
 ### How to Create an Internal Link
 
 If you want to create a link targeting a different section of the contributing guidelines, follow this format:
 
 ```md
-[Link text](target-file-name.md#target-section-heading-id)
+[Link text](target-file-name#target-section-heading-id)
 
 // If the target section is within the same page, you can omit the file name
 [Link text](#target-section-heading-id)
@@ -25,7 +25,7 @@ This is necessary to make these links work for the translated version of the doc
 
 #### Translating docs with internal links
 
-When you work on translating docs on Crowdin, make sure to replace the `#target-section-heading-id` with the id on the translated document. [Learn more about translating docs here](how-to-translate-files.md#translate-documentation).
+When you work on translating docs on Crowdin, make sure to replace the `#target-section-heading-id` with the id on the translated document. [Learn more about translating docs here](how-to-translate-files#translate-documentation).
 
 ## Work on the Docs Theme
 
@@ -45,8 +45,8 @@ Typically you would not need to change any configuration or build the site local
 - The homepage's source for this site is available in [`docs/index.html`](index.html).
 - We serve this file as a SPA using `docsify` and GitHub Pages.
 - The `docsify` script generates the content of `markdown` files in the `docs` directory on demand.
-- The homepage is generated from the [`_coverpage.md`](_coverpage.md).
-- The sidebar navigation is generated from [`_sidebar.md`](_sidebar.md).
+- The homepage is generated from the [`_coverpage.md`](_coverpage).
+- The sidebar navigation is generated from [`_sidebar.md`](_sidebar).
 
 ### Serving the Documentation Site Locally
 
@@ -60,4 +60,4 @@ pnpm run docs:serve
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request.md).
+After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request).

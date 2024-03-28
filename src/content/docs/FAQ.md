@@ -18,7 +18,7 @@ Yes - You can contribute to any of the 30+ languages we have enabled on our tran
 
 We have user-contributed translations live in some languages. We intend to localize freeCodeCamp into several major world languages. You can read all about this in our [announcement here](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/).
 
-If you are interested in contributing to translations please make sure you [read this guide](how-to-translate-files.md) first.
+If you are interested in contributing to translations please make sure you [read this guide](how-to-translate-files) first.
 
 ## Can I contribute articles to freeCodeCamp News or videos to freeCodeCamp's YouTube channel?
 
@@ -93,7 +93,7 @@ Altogether, be respectful to others. We are humans from all around the world. Wi
 
 If you practice the above **consistently for a while** and our fellow moderator members recommend you, a staff member will reach out and onboard you to the moderators' team. Open source work is voluntary work and our time is limited. We acknowledge that this is probably true in your case as well. So we emphasize being **consistent** rather than engaging in the community 24/7.
 
-Take a look at our [Moderator Handbook](moderator-handbook.md) for a more exhaustive list of other responsibilities and expectations we have of our moderators.
+Take a look at our [Moderator Handbook](moderator-handbook) for a more exhaustive list of other responsibilities and expectations we have of our moderators.
 
 ## I am stuck on something that is not included in this documentation.
 

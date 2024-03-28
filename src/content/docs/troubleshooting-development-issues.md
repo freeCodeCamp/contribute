@@ -87,7 +87,7 @@ If you are using Apple Devices with M1 Chip to run the application locally, it i
 
 ## Working With Other Languages
 
-To see how the client renders in another language go to [testing the client app in a world language.](how-to-work-on-localized-client-webapp.md#Testing-the-Client-App-in-a-World-Language)
+To see how the client renders in another language go to [testing the client app in a world language.](how-to-work-on-localized-client-webapp#Testing-the-Client-App-in-a-World-Language)
 
 ## Getting Help
 

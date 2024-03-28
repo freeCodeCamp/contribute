@@ -67,7 +67,7 @@ Each number represents one of the 30 articles in the footer. Make sure to match 
 
 For each article, you will need to create a shorter title to use in the footer. Each title must stay on a single line and not go to a new line.
 
-You will want to [build the translated client locally](how-to-enable-new-languages.md) to see if the titles have the right length. You can preview the changes by editing the `trending.json` file in your local environment:
+You will want to [build the translated client locally](how-to-enable-new-languages) to see if the titles have the right length. You can preview the changes by editing the `trending.json` file in your local environment:
 
 1. Update your `.env` file to use your language for `CLIENT_LOCALE` and `CURRICULUM_LOCALE`.
 
@@ -371,9 +371,9 @@ Search for the user who will become a proofreader. Use the three dots menu on th
 The user is now a proofreader.
 
 :::tip
-The newly promoted proofreader could benefit from reading the [How to Proofread Files](how-to-proofread-files.md) documentation.
+The newly promoted proofreader could benefit from reading the [How to Proofread Files](how-to-proofread-files) documentation.
 :::
 
 ## How to Add or Update a Language
 
-Check out the [how to enable new language](how-to-enable-new-languages.md) docs. If you are updating a language the section on [set translated superblocks](how-to-enable-new-languages.md#set-translated-superblocks) should be helpful.
+Check out the [how to enable new language](how-to-enable-new-languages) docs. If you are updating a language the section on [set translated superblocks](how-to-enable-new-languages#set-translated-superblocks) should be helpful.
