@@ -17,6 +17,7 @@
 
 package.json
 package-lock.json
+pnpm-lock.yaml
 
 # -------------------------------------------------
 # All files in the root are owned by moderators
@@ -28,4 +29,5 @@ package-lock.json
 
 /package.json
 /package-lock.json
+/pnpm-lock.yaml
 
