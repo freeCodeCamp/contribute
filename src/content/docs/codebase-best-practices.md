@@ -106,7 +106,7 @@ type ReducerBase<T> = { type: T };
 type ReducerPayload<T extends AppActionTypes> =
   T extends AppActionTypes.actionFunction
     ? ReducerBase<T> & {
-        payload: AppState["property"];
+        payload: AppState['property'];
       }
     : ReducerBase<T>;
 

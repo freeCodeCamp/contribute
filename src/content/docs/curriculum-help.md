@@ -118,7 +118,9 @@ Then the returned value of `helper.getCSSRules('media')` would be this array:
 You can then test that the camper has written the correct media query:
 
 ```js
-const hasCorrectHeight = helper.getCSSRules('media').some(x => x.style.height === '3px');;
+const hasCorrectHeight = helper
+  .getCSSRules('media')
+  .some((x) => x.style.height === '3px');
 assert.isTrue(hasCorrectHeight);
 ```
 

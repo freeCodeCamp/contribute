@@ -7,7 +7,12 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "wrangler pages dev ./dist",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier -w --cache --plugin prettier-plugin-astro .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*": "prettier -w --cache --plugin prettier-plugin-astro ."
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -17,6 +22,10 @@
     "typescript": "^5.4.3"
   },
   "devDependencies": {
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
     "wrangler": "^3.39.0"
   }
 }

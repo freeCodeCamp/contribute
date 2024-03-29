@@ -1,47 +1,44 @@
 ---
 //import config from '@astrojs/starlight/user-config';
 
-
 import type { Props } from '@astrojs/starlight/props';
-
 
 import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 import Search from '@astrojs/starlight/components/Search.astro';
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
 import FCCThemeSelect from './FCCThemeSelect.astro';
 
-
 /**
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
  */
 const shouldRenderSearch = true;
-	//config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+//config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
 <div class="header sl-flex">
+	<div class="sl-flex">
+		{shouldRenderSearch && <Search {...Astro.props} />}
+	</div>
 
-    <div class="sl-flex">
-        {shouldRenderSearch && <Search {...Astro.props} />}
-    </div>
+	<a class="title-wrapper sl-flex" data-nosearch="" href="/" style="justify-content:center">
+		<img
+			alt="freeCodeCamp.org"
+			src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
+			style="max-width: 30%;"
+		/>
+	</a>
 
-    <a class="title-wrapper sl-flex" data-nosearch="" href="/" style="justify-content:center">
-        <img alt="freeCodeCamp.org" src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg" style="max-width: 30%;" />
-    </a>
-
-    <div class="sl-hidden md:sl-flex right-group">
-        <div class="sl-flex social-icons">
-            <SocialIcons {...Astro.props} />
-        </div>
-        <FCCThemeSelect {...Astro.props} />
-        <LanguageSelect {...Astro.props} />
-    </div>
+	<div class="sl-hidden md:sl-flex right-group">
+		<div class="sl-flex social-icons">
+			<SocialIcons {...Astro.props} />
+		</div>
+		<FCCThemeSelect {...Astro.props} />
+		<LanguageSelect {...Astro.props} />
+	</div>
 </div>
 
 <style>
-
-
-
-	.header{
+	.header {
 		gap: var(--sl-nav-gap);
 		justify-content: space-between;
 		align-items: center;
@@ -51,7 +48,6 @@ const shouldRenderSearch = true;
 	.title-wrapper {
 		/* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
 		overflow: hidden;
-
 	}
 
 	.right-group,

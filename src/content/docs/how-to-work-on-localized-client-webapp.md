@@ -114,13 +114,13 @@ If you are working on a feature or a bug for the client web app, say for example
 ### Functional Component
 
 ```js
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 // in the render method:
 const { t } = useTranslation();
 
 // call the "t" function with a key from the JSON file:
-<p>{t("key")}</p>; // more details below
+<p>{t('key')}</p>; // more details below
 ```
 
 ### Class Component

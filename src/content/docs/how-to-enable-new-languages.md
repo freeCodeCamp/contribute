@@ -58,7 +58,7 @@ You will need to add a step to the [`crowdin-download.client-ui.yml`](https://gi
     create_pull_request: false
 
     # global options
-    config: "./crowdin-config.yml"
+    config: './crowdin-config.yml'
     base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
 
     # Uncomment below to debug
@@ -191,24 +191,24 @@ If you were to add Dothraki:
 ```js
 const algoliaIndices = {
   english: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/',
   },
   espanol: {
-    name: "news-es",
-    searchPage: "https://www.freecodecamp.org/espanol/news/search/",
+    name: 'news-es',
+    searchPage: 'https://www.freecodecamp.org/espanol/news/search/',
   },
   chinese: {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search/",
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search/',
   },
-  "chinese-traditional": {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search",
+  'chinese-traditional': {
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search',
   },
   dothraki: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/',
   },
 
   // If we already have /news in the target language up and running, you can update the values like this:
@@ -358,12 +358,12 @@ Then copy the contents of the [`english.yaml`](https://github.com/freeCodeCamp/c
 The contents will look something like this:
 
 ```yaml
-article0title: "Learn JavaScript"
-article0link: "https://www.freecodecamp.org/news/learn-javascript-free-js-courses-for-beginners/"
-article1title: "Linux ln Example"
-article1link: "https://www.freecodecamp.org/news/linux-ln-how-to-create-a-symbolic-link-in-linux-example-bash-command"
-article2title: "JS document.ready()"
-article2link: "https://www.freecodecamp.org/news/javascript-document-ready-jquery-example/"
+article0title: 'Learn JavaScript'
+article0link: 'https://www.freecodecamp.org/news/learn-javascript-free-js-courses-for-beginners/'
+article1title: 'Linux ln Example'
+article1link: 'https://www.freecodecamp.org/news/linux-ln-how-to-create-a-symbolic-link-in-linux-example-bash-command'
+article2title: 'JS document.ready()'
+article2link: 'https://www.freecodecamp.org/news/javascript-document-ready-jquery-example/'
 article3title: ...
 article3link: ...
   ...
@@ -389,21 +389,21 @@ Copy the Day.js locale code from the new tab into the new file you created. For 
 
 ```js
 !(function (e, n) {
-  "object" == typeof exports && "undefined" != typeof module
+  'object' == typeof exports && 'undefined' != typeof module
     ? (module.exports = n())
-    : "function" == typeof define && define.amd
-    ? define(n)
-    : (e.dayjs_locale_en = n());
+    : 'function' == typeof define && define.amd
+      ? define(n)
+      : (e.dayjs_locale_en = n());
 })(this, function () {
-  "use strict";
+  'use strict';
   return {
-    name: "en",
-    weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split(
-      "_"
+    name: 'en',
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+      '_'
     ),
     months:
-      "January_February_March_April_May_June_July_August_September_October_November_December".split(
-        "_"
+      'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+        '_'
       ),
   };
 });
@@ -435,22 +435,22 @@ If you are unsure about the string to use while setting `algoliaIndices`, send a
 For example, if you are launching Dothraki News, here are what the objects / arrays above should look like:
 
 ```js
-const locales = ["arabic", "bengali", "chinese", "english", "dothraki"];
+const locales = ['arabic', 'bengali', 'chinese', 'english', 'dothraki'];
 
 const localeCodes = {
-  arabic: "ar",
-  bengali: "bn",
-  chinese: "zh",
-  english: "en",
-  dothraki: "mis",
+  arabic: 'ar',
+  bengali: 'bn',
+  chinese: 'zh',
+  english: 'en',
+  dothraki: 'mis',
 };
 
 const algoliaIndices = {
-  arabic: "news-ar",
-  bengali: "news-bn",
-  chinese: "news-zh",
-  english: "news",
-  dothraki: "news-mis",
+  arabic: 'news-ar',
+  bengali: 'news-bn',
+  chinese: 'news-zh',
+  english: 'news',
+  dothraki: 'news-mis',
 };
 ```
 

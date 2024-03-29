@@ -4,8 +4,9 @@ import type { Props } from '@astrojs/starlight/props';
 
 const { labels } = Astro.props;
 ---
+
 <starlight-theme-button>
-<button class="theme-toggle">💡</button>
+	<button class="theme-toggle">💡</button>
 </starlight-theme-button>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
@@ -24,10 +25,10 @@ const { labels } = Astro.props;
 			super();
 			this.#onThemeChange(this.#loadTheme());
 			const button = this.querySelector('.theme-toggle');
-      if (button) {
+			if (button) {
 				button.addEventListener('click', (e) => {
-          const theme = localStorage.getItem(this.#key);
-          const newTheme =  theme === 'dark' ? 'light' : 'dark';
+					const theme = localStorage.getItem(this.#key);
+					const newTheme = theme === 'dark' ? 'light' : 'dark';
 					if (e.currentTarget instanceof HTMLButtonElement) {
 						this.#onThemeChange(this.#parseTheme(newTheme));
 					}
@@ -74,5 +75,5 @@ const { labels } = Astro.props;
 			return this.#parseTheme(theme);
 		}
 	}
-  	customElements.define('starlight-theme-button', StarlightThemeButton);
+	customElements.define('starlight-theme-button', StarlightThemeButton);
 </script>
