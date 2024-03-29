@@ -10,10 +10,6 @@ To install Playwright run:
 pnpm run playwright:install-build-tools
 ```
 
-Alternatively you can follow official documentation referenced below:
-
-To install and configure Playwright on your machine check out this [documentation](https://playwright.dev/docs/intro#installing-playwright).
-
 To learn how to write Playwright tests, or 'specs', please see Playwright's official [documentation](https://playwright.dev/docs/writing-tests).
 
 ## Where to Add a Test
@@ -50,7 +46,7 @@ await expect(page.getByRole("heading", { name: "Sign up" })).toBeVisible();
 await expect(page.getByText("Hello World")).toBeVisible();
 ```
 
-In cases where the elements cannot be queried using the above-mentioned locators, you can use the `data-playwright-test-label` attribute as the last resort. This attribute is used to identify elements in the DOM for testing with playwright only. It is not used for styling or any other purpose.
+In cases where the elements cannot be queried using the above-mentioned locators, you can use the `data-playwright-test-label` attribute as the last resort. This attribute should be used only in Playwright tests, and not for styling or any other purposes.
 
 For example:
 
@@ -98,7 +94,9 @@ Each assertion should be as human readable as possible. This makes it easier to 
 For example:
 
 ```ts
-await expect(landingHeading1).toHaveText("Learn to code — for free.");
+await expect(
+  page.getByRole('heading', { level: 1, name: 'Learn to code — for free.' })
+).toBeVisible();
 ```
 
 ### Keep it DRY
@@ -115,7 +113,7 @@ for (const logo of await logos.all()) {
 
 ### Tests for mobile screens
 
-Use the `isMobile` argument to run tests that include logic that varies for mobile screens.
+Use the `isMobile` argument to test logic that is specific to mobile devices.
 
 For example:
 
@@ -123,7 +121,7 @@ For example:
 test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
   isMobile,
 }) => {
-  const landingPageImage = page.getByTestId("landing-page-figure");
+  const landingPageImage = page.getByRole('img', { name: 'landing-page-figure' });
 
   if (isMobile) {
     await expect(landingPageImage).toBeHidden();
