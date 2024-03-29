@@ -1,0 +1,9 @@
+:root,
+::backdrop {
+  --sl-color-bg-nav: #0a0a23;
+}
+
+:root[data-theme="light"],
+[data-theme="light"] ::backdrop {
+  --sl-color-bg-nav: #0a0a23;
+}

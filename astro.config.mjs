@@ -15,6 +15,7 @@ export default defineConfig({
         replacesTitle: true
       },
       tableOfContents: true,
+      defaultLocale: 'en',
       editLink: {
         baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
       },
@@ -28,7 +29,12 @@ export default defineConfig({
       components: {
         // Override the default `SocialIcons` component.
         Header: './src/components/FCCHeader.astro',
+        ThemeProvider: './src/components/FCCThemeProvider.astro',
       },
+      customCss: [
+        // Relative path to your custom CSS file
+        './src/styles/theme.css',
+      ],
     })
   ],
   output: 'hybrid',
