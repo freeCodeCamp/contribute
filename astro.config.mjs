@@ -15,6 +15,7 @@ export default defineConfig({
         replacesTitle: true
       },
       tableOfContents: true,
+      defaultLocale: 'en',
       editLink: {
         baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
       },
@@ -24,7 +25,16 @@ export default defineConfig({
         discord:
           'https://discord.com/invite/freecodecamp-org-official-fi-fo-692816967895220344'
       },
-      sidebar: sidebar
+      sidebar: sidebar,
+      components: {
+        // Override the default `SocialIcons` component.
+        Header: './src/components/FCCHeader.astro',
+        ThemeProvider: './src/components/FCCThemeProvider.astro',
+      },
+      customCss: [
+        // Relative path to your custom CSS file
+        './src/styles/theme.css',
+      ],
     })
   ],
   output: 'hybrid',
