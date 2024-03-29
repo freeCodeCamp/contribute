@@ -27,6 +27,8 @@ export default defineConfig({
       sidebar: sidebar
     })
   ],
-  output: 'server',
-  adapter: cloudflare()
+  output: 'hybrid',
+  adapter: cloudflare({
+    imageService: 'passthrough'
+  })
 });
