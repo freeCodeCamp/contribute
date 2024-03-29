@@ -14,7 +14,6 @@
     "@astrojs/cloudflare": "^9.2.0",
     "@astrojs/starlight": "^0.21.2",
     "astro": "^4.5.12",
-    "sharp": "^0.33.3",
     "typescript": "^5.4.3"
   },
   "devDependencies": {
