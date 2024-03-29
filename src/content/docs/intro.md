@@ -10,7 +10,7 @@ Before you proceed, please take a quick 2 minutes to read our [Code of Conduct](
 
 You are welcome to create, update and fix bugs in our [curriculum](#curriculum), help us fix bugs in freeCodeCamp.org's [learning platform](#learning-platform), or [help us translate](#translations) freeCodeCamp.org to world languages.
 
-We answer the most common questions about contributing [in our contributor FAQ](FAQ.md).
+We answer the most common questions about contributing [in our contributor FAQ](faq).
 
 Happy contributing.
 
@@ -22,7 +22,7 @@ Our curriculum is curated by the global freeCodeCamp community. This way, we are
 
 You can help expand and improve the curriculum. You can also update project user stories to better-explain concepts. And you can improve our automated tests so that we can more accurately test people's code.
 
-**If you're interested in improving our curriculum, here's [how to contribute to the curriculum](how-to-work-on-coding-challenges.md).**
+**If you're interested in improving our curriculum, here's [how to contribute to the curriculum](how-to-work-on-coding-challenges).**
 
 ## Translations
 
@@ -40,7 +40,7 @@ Certifications are already live in some major world languages like below:
 
 We encourage you to read the [announcement here](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/) and share it with your friends to get them excited about this.
 
-**If you're interested in translating, here's [how to translate freeCodeCamp's resources](how-to-translate-files.md).**
+**If you're interested in translating, here's [how to translate freeCodeCamp's resources](how-to-translate-files).**
 
 ## Learning Platform
 
@@ -48,4 +48,4 @@ Our learning platform runs on a modern JavaScript stack. It has various componen
 
 Broadly, we have a Node.js based API server, a set of React-based client applications, testing scripts to evaluate camper-submitted curriculum projects, and more. If you want to productively contribute to the learning platform, we recommend some familiarity with these tools.
 
-\*\*If you want to help us improve our codebase here's [how to set up freeCod
+**If you want to help us improve our codebase here's [how to set up freeCodeCamp](how-to-setup-freecodecamp-locally).**

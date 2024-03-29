@@ -151,6 +151,7 @@ pnpm run repair-meta
 ```
 
 ### rename-challenges
+
 The script is to be used if the step-based project has files that have challenges ids and filenames that do not match.
 
 #### How to Run the Script
@@ -164,4 +165,4 @@ pnpm run rename-challenges
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request.md).
+After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request).

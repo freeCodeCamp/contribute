@@ -19,7 +19,7 @@ Below is a template of what the challenge markdown files look like.
 id: Unique identifier (alphanumerical, MongoDB_id)
 title: Challenge Title
 challengeType: 11
-videoId: 'YouTube videoId for video challenge'
+videoId: "YouTube videoId for video challenge"
 forumTopicId: 12345
 ---
 
@@ -93,7 +93,7 @@ Skim the YouTube video with that `videoId` and think of a multiple-choice questi
 
 ### Add the Question to the Markdown File
 
-You can add the question locally or using the GitHub interface. To add the question locally, you need to [set up freeCodeCamp locally](how-to-setup-freecodecamp-locally.md). You can also find the file on GitHub and click the edit button to add the question right in your browser.
+You can add the question locally or using the GitHub interface. To add the question locally, you need to [set up freeCodeCamp locally](how-to-setup-freecodecamp-locally). You can also find the file on GitHub and click the edit button to add the question right in your browser.
 
 If a question has not yet been added to a particular video challenge, it will have the following default question:
 
@@ -141,7 +141,7 @@ Add/Update answers (`Answer 1`, `Answer 2`, and so on) under `## --answers--`. M
 What does this JavaScript code log to the console?
 
 ```js
-console.log('hello world');
+console.log("hello world");
 ```
 
 ## --answers--
@@ -205,4 +205,4 @@ For more examples, you can look at the markdown files for the following video co
 
 ## Open a Pull Request
 
-After creating one or more questions, you can commit the changes to a new branch and [open a pull request](how-to-open-a-pull-request.md).
+After creating one or more questions, you can commit the changes to a new branch and [open a pull request](how-to-open-a-pull-request).
