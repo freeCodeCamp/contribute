@@ -10,7 +10,7 @@ dependencies:
     version: 0.5.10(typescript@5.4.3)
   '@astrojs/cloudflare':
     specifier: ^9.2.0
-    version: 9.2.0(astro@4.5.12)
+    version: 9.2.1(astro@4.5.12)
   '@astrojs/starlight':
     specifier: ^0.21.2
     version: 0.21.2(astro@4.5.12)
@@ -56,8 +56,8 @@ packages:
       - prettier-plugin-astro
     dev: false
 
-  /@astrojs/cloudflare@9.2.0(astro@4.5.12):
-    resolution: {integrity: sha512-mh18aYIgC4ZPHVwRGNUWAEEYpYE1odlY4kd9sGDhZ0+2eZ6uKSJuo19zD0z52t6LEzEve4C5dSNGK2YXmz5MyQ==}
+  /@astrojs/cloudflare@9.2.1(astro@4.5.12):
+    resolution: {integrity: sha512-IPsfuqy3r0OR0CvCdQw72J0iC4dhOW4WXByi2s3vAE3py8RQQtiyJXY8a4rAT/LRUz7WVlpzkm7FxORtmIeKVw==}
     peerDependencies:
       astro: ^4.2.0
     dependencies:
@@ -1959,8 +1959,8 @@ packages:
     dev: false
     optional: true
 
-  /bare-fs@2.2.1:
-    resolution: {integrity: sha512-+CjmZANQDFZWy4PGbVdmALIwmt33aJg8qTkVjClU6X4WmZkTPBDxRHiBn7fpqEWEfF3AC2io++erpViAIQbSjg==}
+  /bare-fs@2.2.2:
+    resolution: {integrity: sha512-X9IqgvyB0/VA5OZJyb5ZstoN62AzD7YxVGog13kkfYWYqJYcK0kcqLZ6TrmH5qr4/8//ejVcX4x/a0UvaogXmA==}
     requiresBuild: true
     dependencies:
       bare-events: 2.2.1
@@ -4949,7 +4949,7 @@ packages:
       pump: 3.0.0
       tar-stream: 3.1.7
     optionalDependencies:
-      bare-fs: 2.2.1
+      bare-fs: 2.2.2
       bare-path: 2.1.0
     dev: false
     optional: true
