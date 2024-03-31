@@ -38,9 +38,9 @@ The practice projects have some additional tooling to help create new projects a
 ````md
 ---
 id: Unique identifier (alphanumerical, MongoDB_id)
-title: "Challenge Title"
+title: 'Challenge Title'
 challengeType: Integer, defined in `client/utils/challenge-types.js`
-videoUrl: "url of video explanation"
+videoUrl: 'url of video explanation'
 forumTopicId: 12345
 ---
 
@@ -68,8 +68,8 @@ If you want dynamic output based on the user's code, --fcc-expected-- and --fcc-
 
 ```js
 assert.equal(
-  "this will replace --fcc-actual--",
-  "this will replace --fcc-expected--"
+  'this will replace --fcc-actual--',
+  'this will replace --fcc-expected--'
 );
 ```
 
@@ -113,7 +113,7 @@ body {
 ```
 
 ```js
-console.log("freeCodeCamp is awesome!");
+console.log('freeCodeCamp is awesome!');
 ```
 
 # --solutions--
@@ -486,7 +486,7 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "Hello",
+      text: 'Hello',
     };
     // Change code below this line
 
@@ -494,7 +494,7 @@ class MyComponent extends React.Component {
   }
   handleClick() {
     this.setState({
-      text: "You clicked!",
+      text: 'You clicked!',
     });
   }
   render() {
@@ -577,7 +577,7 @@ Hint goes here
 
 ```js
 function myFunc() {
-  console.log("Hello World!");
+  console.log('Hello World!');
 }
 ```
 

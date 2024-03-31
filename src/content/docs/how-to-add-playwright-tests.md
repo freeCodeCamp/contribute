@@ -29,7 +29,7 @@ Always start with necessary imports at the beginning of the file.
 For example:
 
 ```ts
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page } from '@playwright/test';
 ```
 
 ### Identifying a DOM element
@@ -42,8 +42,8 @@ Playwright comes with [multiple built-in locators](https://playwright.dev/docs/l
 For example:
 
 ```ts
-await expect(page.getByRole("heading", { name: "Sign up" })).toBeVisible();
-await expect(page.getByText("Hello World")).toBeVisible();
+await expect(page.getByRole('heading', { name: 'Sign up' })).toBeVisible();
+await expect(page.getByText('Hello World')).toBeVisible();
 ```
 
 In cases where the elements cannot be queried using the above-mentioned locators, you can use the `data-playwright-test-label` attribute as the last resort. This attribute should be used only in Playwright tests, and not for styling or any other purposes.
@@ -61,7 +61,7 @@ In the test file, you can use the `getByTestId` method to identify the element.
 For example:
 
 ```ts
-await expect(page.getByTestId("landing-page-figure")).toBeVisible();
+await expect(page.getByTestId('landing-page-figure')).toBeVisible();
 ```
 
 ### Constants
@@ -82,7 +82,7 @@ Each test block should have a clear and concise name describing exactly what it'
 For example:
 
 ```ts
-test("The component landing-top renders correctly", async ({ page }) => {
+test('The component landing-top renders correctly', async ({ page }) => {
   // ...
 });
 ```
@@ -118,10 +118,12 @@ Use the `isMobile` argument to test logic that is specific to mobile devices.
 For example:
 
 ```ts
-test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
+test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
   isMobile,
 }) => {
-  const landingPageImage = page.getByRole('img', { name: 'landing-page-figure' });
+  const landingPageImage = page.getByRole('img', {
+    name: 'landing-page-figure',
+  });
 
   if (isMobile) {
     await expect(landingPageImage).toBeHidden();
@@ -138,14 +140,14 @@ Group related tests together using describe blocks. This makes it easier to unde
 For example:
 
 ```ts
-describe("The campers landing page", () => {
-  test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
+describe('The campers landing page', () => {
+  test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
     isMobile,
   }) => {
     // ...
   });
 
-  test("The campers landing page figure has the correct image", async () => {
+  test('The campers landing page figure has the correct image', async () => {
     // ...
   });
 });

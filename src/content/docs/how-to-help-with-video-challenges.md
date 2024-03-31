@@ -19,7 +19,7 @@ Below is a template of what the challenge markdown files look like.
 id: Unique identifier (alphanumerical, MongoDB_id)
 title: Challenge Title
 challengeType: 11
-videoId: "YouTube videoId for video challenge"
+videoId: 'YouTube videoId for video challenge'
 forumTopicId: 12345
 ---
 
@@ -141,7 +141,7 @@ Add/Update answers (`Answer 1`, `Answer 2`, and so on) under `## --answers--`. M
 What does this JavaScript code log to the console?
 
 ```js
-console.log("hello world");
+console.log('hello world');
 ```
 
 ## --answers--

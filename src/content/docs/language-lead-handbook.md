@@ -32,7 +32,7 @@ The original author and the original article are linked automatically adding thi
 
 ```html
 <script>
-  const fccOriginalPost = "link";
+  const fccOriginalPost = 'link';
 </script>
 ```
 
@@ -49,18 +49,18 @@ To update the trending articles in the footer, you need to update the [yaml file
 For example, here is the file content for the first 6 articles:
 
 ```yaml
-article0title: "Unire CSV con Python"
-article0link: "https://www.freecodecamp.org/italian/news/come-combinare-file-multipli-in-formato-csv-con-8-righe-di-codice/"
-article1title: "Il comando Git push"
-article1link: "https://www.freecodecamp.org/italian/news/il-comando-git-push-spiegato/"
-article2title: "Centrare immagini in CSS"
-article2link: "https://www.freecodecamp.org/italian/news/come-centrare-un-immagine-usando/"
-article3title: "I codici Alt"
-article3link: "https://www.freecodecamp.org/italian/news/codici-alt/"
-article4title: "Tenere a bada il footer"
-article4link: "https://www.freecodecamp.org/italian/news/come-mantenere-il-footer-al-suo-posto/"
-article5title: "Cosa è API?"
-article5link: "https://www.freecodecamp.org/italian/news/cose-un-api-in-italiano-per-favore/"
+article0title: 'Unire CSV con Python'
+article0link: 'https://www.freecodecamp.org/italian/news/come-combinare-file-multipli-in-formato-csv-con-8-righe-di-codice/'
+article1title: 'Il comando Git push'
+article1link: 'https://www.freecodecamp.org/italian/news/il-comando-git-push-spiegato/'
+article2title: 'Centrare immagini in CSS'
+article2link: 'https://www.freecodecamp.org/italian/news/come-centrare-un-immagine-usando/'
+article3title: 'I codici Alt'
+article3link: 'https://www.freecodecamp.org/italian/news/codici-alt/'
+article4title: 'Tenere a bada il footer'
+article4link: 'https://www.freecodecamp.org/italian/news/come-mantenere-il-footer-al-suo-posto/'
+article5title: 'Cosa è API?'
+article5link: 'https://www.freecodecamp.org/italian/news/cose-un-api-in-italiano-per-favore/'
 ```
 
 Each number represents one of the 30 articles in the footer. Make sure to match the title and the link correctly.
