@@ -1,8 +1,5 @@
 ---
-import Select from '@astrojs/starlight/components/Select.astro';
 import type { Props } from '@astrojs/starlight/props';
-
-const { labels } = Astro.props;
 ---
 
 <starlight-theme-button>
@@ -15,7 +12,7 @@ const { labels } = Astro.props;
 </script>
 
 <script>
-  type Theme = 'auto' | 'dark' | 'light';
+  type CustomTheme = 'auto' | 'dark' | 'light';
 
   class StarlightThemeButton extends HTMLElement {
     /** Key in `localStorage` to store color theme preference at. */
@@ -37,7 +34,7 @@ const { labels } = Astro.props;
     }
 
     /** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
-    #parseTheme(theme: unknown): Theme {
+    #parseTheme(theme: unknown): CustomTheme {
       if (theme === 'auto' || theme === 'dark' || theme === 'light') {
         return theme;
       } else {
@@ -46,12 +43,12 @@ const { labels } = Astro.props;
     }
 
     /** Get the preferred system color scheme. */
-    #getPreferredColorScheme(): Theme {
+    #getPreferredColorScheme(): CustomTheme {
       return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
 
     /** Update select menu UI, document theme, and local storage state. */
-    #onThemeChange(theme: Theme): void {
+    #onThemeChange(theme: CustomTheme): void {
       //StarlightThemeProvider.updatePickers(theme);
       document.documentElement.dataset.theme =
         theme === 'auto' ? this.#getPreferredColorScheme() : theme;
@@ -59,7 +56,7 @@ const { labels } = Astro.props;
     }
 
     /** Store the user’s preference in `localStorage`. */
-    #storeTheme(theme: Theme): void {
+    #storeTheme(theme: CustomTheme): void {
       if (typeof localStorage !== 'undefined') {
         if (theme === 'light' || theme === 'dark') {
           localStorage.setItem(this.#key, theme);
@@ -70,7 +67,7 @@ const { labels } = Astro.props;
     }
 
     /** Load the user’s preference from `localStorage`. */
-    #loadTheme(): Theme {
+    #loadTheme(): CustomTheme {
       const theme = typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
       return this.#parseTheme(theme);
     }
