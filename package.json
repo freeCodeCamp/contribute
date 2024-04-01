@@ -9,7 +9,8 @@
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
     "format": "prettier -w --cache --plugin prettier-plugin-astro .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint --cache --max-warnings 0 ."
   },
   "lint-staged": {
     "*": "prettier -w --cache --plugin prettier-plugin-astro ."
@@ -22,6 +23,9 @@
     "typescript": "^5.4.3"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.33.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
