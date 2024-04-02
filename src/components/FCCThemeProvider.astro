@@ -1,7 +1,3 @@
----
-import type { Props } from '@astrojs/starlight/props';
----
-
 {/* This is intentionally inlined to avoid FOUC. */}
 <script is:inline>
   window.StarlightThemeProvider = (() => {
@@ -13,7 +9,7 @@ import type { Props } from '@astrojs/starlight/props';
     document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
     return {
       updatePickers(theme = storedTheme || 'auto') {
-        var button = document.querySelector('.theme-toggle');
+        const button = document.querySelector('.theme-toggle');
         button.value = theme;
       },
     };

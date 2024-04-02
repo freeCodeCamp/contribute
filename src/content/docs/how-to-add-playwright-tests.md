@@ -119,10 +119,10 @@ For example:
 
 ```ts
 test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
-  isMobile,
+  isMobile
 }) => {
   const landingPageImage = page.getByRole('img', {
-    name: 'landing-page-figure',
+    name: 'landing-page-figure'
   });
 
   if (isMobile) {
@@ -142,7 +142,7 @@ For example:
 ```ts
 describe('The campers landing page', () => {
   test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
-    isMobile,
+    isMobile
   }) => {
     // ...
   });

@@ -135,7 +135,7 @@ interface MyComponentProps {
 }
 // Connect to Redux store
 const mapDispatchToProps = {
-  actionFunction,
+  actionFunction
 };
 // Example React Component connected to store
 const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {

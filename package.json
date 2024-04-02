@@ -3,17 +3,21 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "is-ci || husky",
+    "dev": "pnpm run develop",
+    "develop": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
-    "format": "prettier -w --cache --plugin prettier-plugin-astro .",
-    "prepare": "husky",
-    "lint": "eslint --cache --max-warnings 0 ."
+    "format": "prettier . --write --cache && eslint . --cache --fix",
+    "lint": "prettier . --check --cache && eslint . --cache"
   },
   "lint-staged": {
-    "*": "prettier -w --cache --plugin prettier-plugin-astro ."
+    "**/*.{astro, mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
+      "pnpm format"
+    ]
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -23,10 +27,14 @@
     "typescript": "^5.4.3"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^7.4.0",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^0.33.1",
+    "eslint-plugin-prettier": "^5.1.3",
     "husky": "^9.0.11",
+    "is-ci": "^3.0.1",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",

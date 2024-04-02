@@ -486,7 +486,7 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'Hello',
+      text: 'Hello'
     };
     // Change code below this line
 
@@ -494,7 +494,7 @@ class MyComponent extends React.Component {
   }
   handleClick() {
     this.setState({
-      text: 'You clicked!',
+      text: 'You clicked!'
     });
   }
   render() {
