@@ -12,32 +12,33 @@ export default defineConfig({
       description: 'Contribute to freeCodeCamp.org',
       logo: {
         src: './public/icons/icon-96x96.png',
-        replacesTitle: true,
+        replacesTitle: true
       },
       tableOfContents: true,
       defaultLocale: 'en',
       editLink: {
-        baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/',
+        baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
       },
       social: {
         github: 'https://github.com/freeCodeCamp',
         twitter: 'https://twitter.com/freeCodeCamp',
-        discord: 'https://discord.com/invite/freecodecamp-org-official-fi-fo-692816967895220344',
+        discord:
+          'https://discord.com/invite/freecodecamp-org-official-fi-fo-692816967895220344'
       },
       sidebar: sidebar,
       components: {
         // Override the default `SocialIcons` component.
         Header: './src/components/FCCHeader.astro',
-        ThemeProvider: './src/components/FCCThemeProvider.astro',
+        ThemeProvider: './src/components/FCCThemeProvider.astro'
       },
       customCss: [
         // Relative path to your custom CSS file
-        './src/styles/theme.css',
-      ],
-    }),
+        './src/styles/theme.css'
+      ]
+    })
   ],
   output: 'hybrid',
   adapter: cloudflare({
-    imageService: 'passthrough',
-  }),
+    imageService: 'passthrough'
+  })
 });

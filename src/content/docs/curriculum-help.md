@@ -120,7 +120,7 @@ You can then test that the camper has written the correct media query:
 ```js
 const hasCorrectHeight = helper
   .getCSSRules('media')
-  .some((x) => x.style.height === '3px');
+  .some(x => x.style.height === '3px');
 assert.isTrue(hasCorrectHeight);
 ```
 

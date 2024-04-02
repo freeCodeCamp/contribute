@@ -1,23 +1,9 @@
 {
-  "printWidth": 100,
+  "endOfLine": "lf",
   "semi": true,
   "singleQuote": true,
+  "jsxSingleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "es5",
-  "useTabs": false,
-  "plugins": ["prettier-plugin-astro"],
-  "overrides": [
-    {
-      "files": [".*", "*.json", "*.md"],
-      "options": {
-        "useTabs": false
-      }
-    },
-    {
-      "files": ["*.md", "*.mdx"],
-      "options": {
-        "printWidth": 80
-      }
-    }
-  ]
+  "trailingComma": "none",
+  "arrowParens": "avoid"
 }

@@ -192,24 +192,24 @@ If you were to add Dothraki:
 const algoliaIndices = {
   english: {
     name: 'news',
-    searchPage: 'https://www.freecodecamp.org/news/search/',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
   },
   espanol: {
     name: 'news-es',
-    searchPage: 'https://www.freecodecamp.org/espanol/news/search/',
+    searchPage: 'https://www.freecodecamp.org/espanol/news/search/'
   },
   chinese: {
     name: 'news-zh',
-    searchPage: 'https://chinese.freecodecamp.org/news/search/',
+    searchPage: 'https://chinese.freecodecamp.org/news/search/'
   },
   'chinese-traditional': {
     name: 'news-zh',
-    searchPage: 'https://chinese.freecodecamp.org/news/search',
+    searchPage: 'https://chinese.freecodecamp.org/news/search'
   },
   dothraki: {
     name: 'news',
-    searchPage: 'https://www.freecodecamp.org/news/search/',
-  },
+    searchPage: 'https://www.freecodecamp.org/news/search/'
+  }
 
   // If we already have /news in the target language up and running, you can update the values like this:
   // dothraki: {
@@ -404,7 +404,7 @@ Copy the Day.js locale code from the new tab into the new file you created. For 
     months:
       'January_February_March_April_May_June_July_August_September_October_November_December'.split(
         '_'
-      ),
+      )
   };
 });
 ```
@@ -442,7 +442,7 @@ const localeCodes = {
   bengali: 'bn',
   chinese: 'zh',
   english: 'en',
-  dothraki: 'mis',
+  dothraki: 'mis'
 };
 
 const algoliaIndices = {
@@ -450,7 +450,7 @@ const algoliaIndices = {
   bengali: 'news-bn',
   chinese: 'news-zh',
   english: 'news',
-  dothraki: 'news-mis',
+  dothraki: 'news-mis'
 };
 ```
 
