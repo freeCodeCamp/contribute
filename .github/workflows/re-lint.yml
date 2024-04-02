@@ -1,25 +1,13 @@
-name: Build Check
+# This is a reusable workflow that can be called from other workflows
+name: Lint
 
-on:
-  push:
-    branches:
-      - main
-      - live
-  pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
+on: [workflow_call]
 
 jobs:
   lint:
     name: Lint
-    uses: ./.github/workflows/re-lint.yml
-
-  # test:
-
-  build:
-    name: Build
     runs-on: ubuntu-latest
-    needs: lint
+
     env:
       CI: true
 
@@ -62,6 +50,9 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
 
-      - name: Build
+      - name: Install dependencies and lint
         run: |
-          pnpm build
+          pnpm install
+          pnpm lint
+        env:
+          CI: true
