@@ -10,6 +10,7 @@ import FCCThemeSelect from './FCCThemeSelect.astro';
  * Render the `Search` component if Pagefind is enabled or the default search component has been overridden.
  */
 const shouldRenderSearch = true;
+
 //config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
@@ -32,6 +33,7 @@ const shouldRenderSearch = true;
     </div>
     <FCCThemeSelect {...Astro.props} />
     <LanguageSelect {...Astro.props} />
+
   </div>
 </div>
 

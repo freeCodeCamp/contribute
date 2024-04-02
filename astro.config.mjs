@@ -10,12 +10,21 @@ export default defineConfig({
     starlight({
       title: 'Contribute | freeCodeCamp.org',
       description: 'Contribute to freeCodeCamp.org',
+      locales: {
+        root: {
+          label: 'English',
+          lang: 'en'
+        },
+        es: {
+          label: 'Español',
+          lang: 'es'
+        }
+      },
       logo: {
         src: './public/icons/icon-96x96.png',
         replacesTitle: true
       },
       tableOfContents: true,
-      defaultLocale: 'en',
       editLink: {
         baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
       },
@@ -37,6 +46,7 @@ export default defineConfig({
       ]
     })
   ],
+
   output: 'hybrid',
   adapter: cloudflare({
     imageService: 'passthrough'
