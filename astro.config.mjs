@@ -19,6 +19,11 @@ export default defineConfig({
           label: 'Español',
           lang: 'es'
         }
+        ,
+        de: {
+          label: 'German',
+          lang: 'de'
+        }
       },
       logo: {
         src: './public/icons/icon-96x96.png',
