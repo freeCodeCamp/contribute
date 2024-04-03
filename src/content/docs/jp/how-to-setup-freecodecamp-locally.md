@@ -2,15 +2,13 @@
 title: Setup freeCodeCamp locally
 ---
 
-Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
+Follow these guidelines for setting up a development environment for freeCodeCamp. 定期的に貢献したい場合に、強くお勧めします。
 
 ## Choose between Gitpod or your Own Machine (local setup)
 
 :::danger
 
-- freeCodeCamp does not build and run natively on Windows, you will [need to use WSL2](how-to-setup-wsl) for a Linux-like setup on Windows.
-- You can't use Windows Command Prompt, Git Bash or PowerShell to build and run the codebase.
-- Note that if using Windows, the hardware requirements need to be more than [what we mention](how-to-setup-freecodecamp-locally?id=how-to-prepare-your-local-machine) to accommodate for WSL-based setup.
+- freeCodeCamp does not build and run natively on Windows, you will [need to use WSL2](how-to-setup-wsl) for a Linux-like setup on Windows. - You can't use Windows Command Prompt, Git Bash or PowerShell to build and run the codebase. - Note that if using Windows, the hardware requirements need to be more than [what we mention](how-to-setup-freecodecamp-locally?id=how-to-prepare-your-local-machine) to accommodate for WSL-based setup.
 
 :::
 
@@ -72,7 +70,7 @@ Start by installing the prerequisite software for your operating system.
 
 We primarily support development on Linux and Unix-based systems like Ubuntu and macOS. You can develop on Windows 10 or 11 with WSL2 only. You can follow [this guide](how-to-setup-wsl) to set up WSL2. You can't use Command Prompt, Git Bash or PowerShell to run freeCodeCamp natively within windows.
 
-#### Prerequisites:
+#### 必要条件:
 
 | Prerequisite                                                                                  | Version | Notes                                                                                       |
 | --------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
@@ -97,7 +95,7 @@ We highly recommend updating to the latest stable releases of the software liste
 
 Once you have the prerequisites installed, you need to prepare your development environment. This is common for many development workflows, and you will only need to do this once.
 
-##### Follow these steps to get your development environment ready:
+##### 以下の手順に従って、開発環境を準備してください。
 
 1. Install [Git](https://git-scm.com/) or your favorite Git client, if you haven't already. Update to the latest version; the version that came bundled with your OS may be outdated.
 
@@ -109,9 +107,9 @@ Once you have the prerequisites installed, you need to prepare your development 
 
    You should have [ESLint running in your editor](http://eslint.org/docs/user-guide/integrations.html), and it will highlight anything that doesn't conform to [freeCodeCamp's JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
 
-:::tip
-Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
-:::
+   :::tip
+   Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
+   :::
 
 ## Fork the Repository on GitHub
 
@@ -121,10 +119,8 @@ This is essential, as it allows you to work on your own copy of freeCodeCamp on 
 
 :::tip
 The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often referred to as the `upstream` repository.
-
+Your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp` is often referred to as the `origin` repository. `YOUR_USER_NAME` would be replaced with your GitHub username.
 :::
-
-> Your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp` is often referred to as the `origin` repository. `YOUR_USER_NAME` would be replaced with your GitHub username.
 
 **Follow these steps to fork the `https://github.com/freeCodeCamp/freeCodeCamp` repository:**
 
@@ -138,21 +134,18 @@ The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often r
    <summary>
       How to fork freeCodeCamp on GitHub (screenshot)
    </summary>
+
    <br>
-   <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/github/how-to-fork-freeCodeCamp.gif" alt="How to fork freeCodeCamp on GitHub">
+   <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/github/how-to-fork-freeCodeCamp.gif" alt="How to fork freeCodeCamp on GitHub" />
 </details>
 
 ## Clone your Fork from GitHub
 
 [Cloning](https://help.github.com/articles/cloning-a-repository/) is where you **download** a copy of a repository from a `remote` location that is either owned by you or by someone else. In your case, this remote location is your `fork` of freeCodeCamp's repository that should be available at `https://github.com/YOUR_USER_NAME/freeCodeCamp`. (`YOUR_USER_NAME` would be replaced with your GitHub user name.)
 
-:::caution
-If you are working on a WSL2 Linux Distro, you might get performance and stability issues by running this project in a folder which is shared between Windows and WSL2 (e.g. `/mnt/c/Users/`).
-
-Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
-
-See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
-:::
+> [!WARNING] If you are working on a WSL2 Linux Distro, you might get performance and stability issues by running this project in a folder which is shared between Windows and WSL2 (e.g. `/mnt/c/Users/`). Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
+>
+> See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
 
 Run these commands on your local machine:
 
@@ -224,7 +217,7 @@ And as always, feel free to ask questions on the ['Contributors' category on our
 The default API keys and environment variables are stored in the file `sample.env`. This file needs to be copied to a new file named `.env` that is accessed dynamically during the installation step.
 
 ```bash
-# Create a copy of the "sample.env" and name it ".env".
+# "sample.env" のコピーを作成し、".env" という名前を付けます。
 # Populate it with the necessary API keys and secrets
 ```
 
@@ -250,11 +243,10 @@ pnpm install && pnpm run create:shared
 
 Before you can run the application locally, you will need to start the MongoDB service.
 
-:::note
-Unless you have MongoDB running in a setup different than the default, the URL stored as the `MONGOHQ_URL` value in the `.env` file should work fine. If you are using a custom configuration, modify this value as needed.
+> [!NOTE] Unless you have MongoDB running in a setup different than the default, the URL stored as the `MONGOHQ_URL` value in the `.env` file should work fine. If you are using a custom configuration, modify this value as needed.
+>
+> If you followed along with the [Windows 10 via WSL2 Setup Guide](how-to-setup-wsl), then you should be able to skip this step if the MongoDB server from that guide is already running. You can confirm this by checking that you can reach `http://localhost:27017` on your local machine.
 
-If you followed along with the [Windows 10 via WSL2 Setup Guide](how-to-setup-wsl), then you should be able to skip this step if the MongoDB server from that guide is already running. You can confirm this by checking that you can reach `http://localhost:27017` on your local machine.
-:::
 Start the MongoDB server in a separate terminal:
 
 ```bash
@@ -277,9 +269,7 @@ By default, you will be signed in as a new user without any completed certificat
 pnpm run seed:certified-user
 ```
 
-:::caution
-Running `pnpm run seed:certified-user` will log you out. You will have to clear your browser cookies and sign in again.
-:::
+> [!WARNING] Running `pnpm run seed:certified-user` will log you out. You will have to clear your browser cookies and sign in again.
 
 #### Step 4: Start the freeCodeCamp Client Application and API Server
 
@@ -297,9 +287,7 @@ The API server serves endpoints at `http://localhost:3000`. The Gatsby app serve
 
 While you are logged in, if you visit <http://localhost:3000/explorer> you should see the available APIs.
 
-:::caution
-Clearing your cookies or running `pnpm run seed:certified-user` will log you out, and you will have to sign in again.
-:::
+> [!WARNING] Clearing your cookies or running `pnpm run seed:certified-user` will log you out, and you will have to sign in again.
 
 If you have issues while installing it, check out the [troubleshooting section](troubleshooting-development-issues).
 

@@ -23,6 +23,30 @@ export default defineConfig({
         de: {
           label: 'German',
           lang: 'de'
+        },
+        it: {
+          label: 'Italian',
+          lang: 'it'
+        },
+        jp: {
+          label: 'Japanese',
+          lang: 'jp'
+        },
+        pt: {
+          label: 'Portuguese',
+          lang: 'pt'
+        },
+        uk: {
+          label: 'Ukrainian',
+          lang: 'uk'
+        },
+        zh: {
+          label: 'Chinese',
+          lang: 'zh'
+        },
+        "zh-Tw": {
+          label: 'Chinese Traditional',
+          lang: 'zh-TW'
         }
       },
       logo: {

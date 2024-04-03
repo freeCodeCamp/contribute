@@ -2,7 +2,9 @@
 title: Catching emails locally
 ---
 
-> **Nota:** Este es un **paso opcional** y es necesario solo cuando se trabaja con flujos de trabajo de correo electrónico
+:::note
+Este es un **paso opcional** y es necesario solo cuando se trabaja con flujos de trabajo de correo electrónico
+:::
 
 - [Introducción](#introduction)
 - [Instalando MailHog](#installing-mailhog)
