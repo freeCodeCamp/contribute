@@ -57,7 +57,7 @@ devDependencies:
     version: 0.13.0
   wrangler:
     specifier: ^3.39.0
-    version: 3.43.0
+    version: 3.44.0
 
 packages:
 
@@ -1723,15 +1723,15 @@ packages:
   /@types/node-forge@1.3.11:
     resolution: {integrity: sha512-FQx220y22OKNTqaByeBGqHWYz4cl94tpcxeFdvBo3wjG6XPBuZ0BNgNZRV5J5TFmmcsJ4IzsLkmGRiQbnYsBEQ==}
     dependencies:
-      '@types/node': 20.12.2
+      '@types/node': 20.12.3
     dev: true
 
   /@types/node@17.0.45:
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
     dev: false
 
-  /@types/node@20.12.2:
-    resolution: {integrity: sha512-zQ0NYO87hyN6Xrclcqp7f8ZbXNbRfoGWNcMvHTPQp9UUrwI0mI7XBz+cu7/W6/VClYo2g63B0cjull/srU7LgQ==}
+  /@types/node@20.12.3:
+    resolution: {integrity: sha512-sD+ia2ubTeWrOu+YMF+MTAB7E+O7qsMqAbMfW7DG3K1URwhZ5hN1pLlRVGbf4wDFzSfikL05M17EyorS86jShw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -4675,7 +4675,7 @@ packages:
       exit-hook: 2.2.1
       glob-to-regexp: 0.4.1
       stoppable: 1.1.0
-      undici: 5.28.3
+      undici: 5.28.4
       workerd: 1.20240329.0
       ws: 8.16.0
       youch: 3.3.3
@@ -5930,6 +5930,14 @@ packages:
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.1.1
+    dev: false
+
+  /undici@5.28.4:
+    resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
+    engines: {node: '>=14.0'}
+    dependencies:
+      '@fastify/busboy': 2.1.1
+    dev: true
 
   /unherit@3.0.1:
     resolution: {integrity: sha512-akOOQ/Yln8a2sgcLj4U0Jmx0R5jpIg2IUyRrWOzmEbjBtGzBdHtSeFKgoEcoH4KYIG/Pb8GQ/BwtYm0GCq1Sqg==}
@@ -6383,8 +6391,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20240329.0
     dev: true
 
-  /wrangler@3.43.0:
-    resolution: {integrity: sha512-v+uJmSVmxdv3aVRQsJLPHXgI5nhOBvJaZ5yUcSO8rJ+m5X2l9HzFQzFlUi1GtYIOejFSr8kcCuLm3YY6JbQruQ==}
+  /wrangler@3.44.0:
+    resolution: {integrity: sha512-7tMJslGQX3f2zD18k7oPY1YcE+mYe93DSX9XXuusf/lxOPgaaSaS01qXL3zYlOIn+3wG1LkxPH/0CqUk4jZarQ==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
