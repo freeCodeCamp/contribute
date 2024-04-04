@@ -315,9 +315,9 @@ O fluxo de trabalho de pré-tradução pode ser usado para aplicar traduções d
 
 Você pode encontrar o fluxo de trabalho de pré-tradução no topo da página no console de um projeto. Se você ver "Go to console", no canto superior direito, clique lá primeiro.
 
-![botão go to console](./images/crowdin/pre-translate2.png)
+![botão go to console](../images/crowdin/pre-translate2.png)
 
-![fluxo de trabalho de pré-tradução](./images/crowdin/pre-translate1.png)
+![fluxo de trabalho de pré-tradução](../images/crowdin/pre-translate1.png)
 
 Você pode escolher "From Machine Translation" (da tradução de máquina) ou "From Translation Memory" (da memória de tradução). Selecione "Translation Memory" para recuperar as traduções da memória.
 
@@ -327,7 +327,7 @@ Depois, há três etapas a concluir:
 2. Idiomas. Defina o seu idioma aqui.
 3. Traduções existentes. A melhor combinação aqui é "100% match" (100% correspondente) e "Apply to untranslated strings only" (aplicar apenas a frases não traduzidas). Não aprove automaticamente, já que é sempre melhor que um olho humano revise tudo.
 
-![pré-traduzir as traduções existentes](./images/crowdin/pre-translate3.png)
+![pré-traduzir as traduções existentes](../images/crowdin/pre-translate3.png)
 
 Quando você tiver terminado de fazer essa configuração, pressione o botão Pre-Translate e aguarde. Ele alertará você quando terminar. O tempo que leva depende de quantas frases não traduzidas existem nos arquivos escolhidos.
 

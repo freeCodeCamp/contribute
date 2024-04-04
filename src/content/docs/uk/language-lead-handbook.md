@@ -315,9 +315,9 @@ flexibleAlerts: {
 
 Ви можете знайти попередній переклад у верхній частині сторінки на консолі проєкту. Якщо ви бачите кнопку «Go to console» у верхньому правому куті, натисніть на неї.
 
-![кнопка переходу до консолі](./images/crowdin/pre-translate2.png)
+![кнопка переходу до консолі](../images/crowdin/pre-translate2.png)
 
-![попередній переклад](./images/crowdin/pre-translate1.png)
+![попередній переклад](../images/crowdin/pre-translate1.png)
 
 Ви можете обрати «From Machine Translation» або «From Translation Memory». Оберіть «Translation Memory», щоб відновити переклади з пам’яті.
 
@@ -327,7 +327,7 @@ flexibleAlerts: {
 2. Languages. Вкажіть свою мову.
 3. Existing Translations. Найкращою комбінацією є «100% match» та «Apply to untranslated strings only». Не затверджуйте їх автоматично, оскільки завжди краще перевіряти вручну.
 
-![попередній переклад наявних перекладів](./images/crowdin/pre-translate3.png)
+![попередній переклад наявних перекладів](../images/crowdin/pre-translate3.png)
 
 Коли ви закінчите, натисніть кнопку «Pre-Translate» та зачекайте. Вас попередять, коли робота закінчиться. Час залежить від кількості неперекладених рядків у вибраних файлах.
 

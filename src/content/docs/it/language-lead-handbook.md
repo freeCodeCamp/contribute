@@ -315,9 +315,9 @@ La funzionalità Pre-Translate può essere usata per applicare le traduzioni da 
 
 Puoi trovare il Pre-Translate nella parte superiore della pagina nella console di un progetto. Se vedi "Go to console" nell'angolo in alto a destra, clicca prima lì.
 
-![pulsante go to console](./images/crowdin/pre-translate2.png)
+![pulsante go to console](../images/crowdin/pre-translate2.png)
 
-![procedura pre-translate](./images/crowdin/pre-translate1.png)
+![procedura pre-translate](../images/crowdin/pre-translate1.png)
 
 Puoi scegliere "From Machine Translation" o "From Translation Memory". Scegli "Translation Memory" per recuperare le traduzioni dalla memoria.
 
@@ -327,7 +327,7 @@ Poi ci sono tre passaggi da completare:
 2. Languages. Imposta qui la tua lingua.
 3. Existing Translations. La migliore combinazione è "100% match" e "Apply to untranslated strings only". Non approvare automaticamente, in quanto è sempre meglio che ci sia una persona a effettuare la revisione.
 
-![pre-translate traduzioni esistenti](./images/crowdin/pre-translate3.png)
+![pre-translate traduzioni esistenti](../images/crowdin/pre-translate3.png)
 
 Quando hai finito con le impostazioni, premi il pulsante Pre-Translate e attendi. Ti avviserà al termine. Può richiedere più o meno tempo a seconda di quante stringhe non tradotte sono presenti nei file scelti.
 

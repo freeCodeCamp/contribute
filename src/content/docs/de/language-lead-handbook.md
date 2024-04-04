@@ -315,9 +315,9 @@ Diese Funktion ist sehr nützlich, um viele Übersetzungen aus dem Translation M
 
 Du findest den Vorübersetzungs-Workflow oben auf der Seite in der Konsole eines Projekts. Wenn du in der oberen rechten Ecke "Go to console" siehst, klicke zuerst darauf.
 
-![Gehe zur Konsole-Schaltfläche](./images/crowdin/pre-translate2.png)
+![Gehe zur Konsole-Schaltfläche](../images/crowdin/pre-translate2.png)
 
-![Vorübersetzungs-Workflow](./images/crowdin/pre-translate1.png)
+![Vorübersetzungs-Workflow](../images/crowdin/pre-translate1.png)
 
 Du kannst "From Machine Translation" oder "From Translation Memory" wählen. Wähle "Translation Memory", um Übersetzungen aus dem Speicher wiederherzustellen.
 
@@ -327,7 +327,7 @@ Dann sind drei Schritte zu absolvieren:
 2. Sprachen. Stelle hier deine Sprache ein.
 3. Vorhandene Übersetzungen. Die beste Kombination ist hier "100% match" und "Apply to untranslated strings only". Genehmige nicht automatisch, denn es ist immer besser, ein menschliches Auge auf die Dinge zu werfen.
 
-![Vorübersetzung bestehender Übersetzungen](./images/crowdin/pre-translate3.png)
+![Vorübersetzung bestehender Übersetzungen](../images/crowdin/pre-translate3.png)
 
 Wenn du diese Einstellung abgeschlossen hast, drücke den Button Pre-Translate und warte. Sobald der Vorgang abgeschlossen ist, wirst du benachrichtigt. Wie lange das dauert, hängt davon ab, wie viele unübersetzte Strings in den ausgewählten Dateien enthalten sind.
 
