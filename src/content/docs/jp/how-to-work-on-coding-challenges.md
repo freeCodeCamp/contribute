@@ -69,8 +69,8 @@ Code for test one
 
 ```js
 assert.equal(
-  "this will replace --fcc-actual--",
-  "this will replace --fcc-expected--"
+  'this will replace --fcc-actual--',
+  'this will replace --fcc-expected--'
 );
 ```
 
@@ -114,7 +114,7 @@ body {
 ```
 
 ```js
-console.log("freeCodeCamp is awesome!");
+console.log('freeCodeCamp is awesome!');
 ```
 
 # --solutions--
@@ -487,7 +487,7 @@ class MyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "Hello",
+      text: 'Hello'
     };
     // この行より下にあるコードを変更してください。
 
@@ -495,7 +495,7 @@ class MyComponent extends React.Component {
   }
   handleClick() {
     this.setState({
-      text: "You clicked!",
+      text: 'You clicked!'
     });
   }
   render() {
@@ -578,7 +578,7 @@ When proposing a solution for a curriculum challenge-related Guide topic, the fu
 
 ```js
 function myFunc() {
-  console.log("Hello World!");
+  console.log('Hello World!');
 }
 ```
 ````

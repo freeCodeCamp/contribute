@@ -1,7 +1,5 @@
 ---
-
 title: Curriculum File Structure
-
 ---
 
 Our core instructional content is located within the conveniently named `curriculum` directory. This page will break down how these files are organized.

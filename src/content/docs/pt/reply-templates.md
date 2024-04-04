@@ -1,7 +1,5 @@
 ---
-
 title: Modelos de resposta
-
 ---
 
 Esses são alguns dos modelos de resposta que você talvez use enquanto estiver revisando issues/pull requests.

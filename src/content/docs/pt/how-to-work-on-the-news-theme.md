@@ -1,7 +1,5 @@
 ---
-
 title: Como trabalhar no tema de notícias de desenvolvedor do freeCodeCamp.org
-
 ---
 
 As notícias de desenvolvimento, também conhecidas como o site de [`/news`](https://www.freecodecamp.org/news), são fornecidas por [Ghost](https://ghost.org/). Usamos um tema personalizado para a aparência do site. O código fonte do tema está disponível aqui: <https://github.com/freeCodeCamp/news-theme>.

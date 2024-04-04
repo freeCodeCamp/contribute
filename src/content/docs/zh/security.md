@@ -1,7 +1,5 @@
 ---
-
 title: freeCodeCamp.org's Security Policy
-
 ---
 
 This document outlines our security policy for the codebases, platforms that we operate, and how to report vulnerabilities.

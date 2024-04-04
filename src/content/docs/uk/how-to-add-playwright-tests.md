@@ -33,7 +33,7 @@ pnpm run playwright:install-build-tools
 Наприклад:
 
 ```ts
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page } from '@playwright/test';
 ```
 
 ### - Визначення елемента DOM
@@ -46,8 +46,8 @@ Playwright поставляється з [декількома вбудован�
 Наприклад:
 
 ```ts
-await expect(page.getByRole("heading", { name: "Sign up" })).toBeVisible();
-await expect(page.getByText("Hello World")).toBeVisible();
+await expect(page.getByRole('heading', { name: 'Sign up' })).toBeVisible();
+await expect(page.getByText('Hello World')).toBeVisible();
 ```
 
 У крайніх випадках, коли запит елементів не можна здійснити за допомогою локаторів вище, використайте атрибут `data-playwright-test-label`. Цей атрибут використовують, щоб ідентифікувати елементи в DOM лише для тестування Playwright. Його не використовують для стилізації або будь-чого іншого.
@@ -65,7 +65,7 @@ await expect(page.getByText("Hello World")).toBeVisible();
 Наприклад:
 
 ```ts
-await expect(page.getByTestId("landing-page-figure")).toBeVisible();
+await expect(page.getByTestId('landing-page-figure')).toBeVisible();
 ```
 
 ### - Константи
@@ -104,7 +104,7 @@ afterAll(async () => {
 Наприклад:
 
 ```ts
-test("The component landing-top renders correctly", async ({ page }) => {
+test('The component landing-top renders correctly', async ({ page }) => {
   // ...
 });
 ```
@@ -116,7 +116,7 @@ test("The component landing-top renders correctly", async ({ page }) => {
 Наприклад:
 
 ```ts
-await expect(landingHeading1).toHaveText("Learn to code — for free.");
+await expect(landingHeading1).toHaveText('Learn to code — for free.');
 ```
 
 ### - Дотримуйтесь принципу DRY
@@ -138,10 +138,10 @@ for (const logo of await logos.all()) {
 Наприклад:
 
 ```ts
-test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
-  isMobile,
+test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
+  isMobile
 }) => {
-  const landingPageImage = page.getByTestId("landing-page-figure");
+  const landingPageImage = page.getByTestId('landing-page-figure');
 
   if (isMobile) {
     await expect(landingPageImage).toBeHidden();
@@ -158,14 +158,14 @@ test("The campers landing page figure is visible on desktop and hidden on mobile
 Наприклад:
 
 ```ts
-describe("The campers landing page", () => {
-  test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
-    isMobile,
+describe('The campers landing page', () => {
+  test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
+    isMobile
   }) => {
     // ...
   });
 
-  test("The campers landing page figure has the correct image", async () => {
+  test('The campers landing page figure has the correct image', async () => {
     // ...
   });
 });

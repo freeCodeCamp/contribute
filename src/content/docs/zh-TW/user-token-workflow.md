@@ -1,7 +1,5 @@
 ---
-
 title: How the User Token Workflow Works
-
 ---
 
 User tokens are used to identify users to third parties so challenges completed using those services can be saved to a user's account.

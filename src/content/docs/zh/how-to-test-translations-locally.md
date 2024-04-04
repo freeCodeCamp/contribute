@@ -107,25 +107,25 @@ If you were to add Dothraki:
 ```js
 const algoliaIndices = {
   english: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
   },
   espanol: {
-    name: "news-es",
-    searchPage: "https://www.freecodecamp.org/espanol/news/search/",
+    name: 'news-es',
+    searchPage: 'https://www.freecodecamp.org/espanol/news/search/'
   },
   chinese: {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search/",
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search/'
   },
-  "chinese-traditional": {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search",
+  'chinese-traditional': {
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search'
   },
   dothraki: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
-  },
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
+  }
 };
 ```
 
@@ -154,7 +154,7 @@ export const auditedCerts = {
 Finally, the `languagesWithAuditedBetaReleases` array should be updated to include the new language like this:
 
 ```ts
-export const languagesWithAuditedBetaReleases: ["english", "dothraki"];
+export const languagesWithAuditedBetaReleases: ['english', 'dothraki'];
 ```
 
 This will move the new superblock to the correct place in the curriculum map on `/learn`.

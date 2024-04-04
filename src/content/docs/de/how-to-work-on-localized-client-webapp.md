@@ -114,13 +114,13 @@ Wenn du an einer Funktion oder einem Fehler für die Client-Webanwendung arbeite
 ### Funktionelle Komponente
 
 ```js
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 // in der Rendermethode:
 const { t } = useTranslation();
 
 // Aufruf der Funktion "t" mit einem Key aus der JSON-Datei:
-<p>{t("key")}</p>; // weitere Details unten
+<p>{t('key')}</p>; // weitere Details unten
 ```
 
 ### Klassenkomponente

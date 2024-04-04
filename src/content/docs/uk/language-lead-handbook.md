@@ -32,7 +32,7 @@ Ghost дозволяє налаштувати декілька рівнів ко
 
 ```html
 <script>
-  const fccOriginalPost = "link";
+  const fccOriginalPost = 'link';
 </script>
 ```
 

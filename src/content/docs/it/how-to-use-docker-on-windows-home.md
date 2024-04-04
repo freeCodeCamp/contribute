@@ -1,7 +1,5 @@
 ---
-
 title: Come usare Docker su Windows Home
-
 ---
 
 Ci sono alcuni pericoli da evitare quando si setta Docker su Windows Home. Per prima cosa devi usare [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) come amministratore. Purtroppo Windows Home non supporta Docker per Windows Desktop, quindi deve essere usata la Toolbox. Essa deve essere eseguita come Amministratore in quanto l'installazione utilizza collegamenti simbolici che non possono essere creati altrimenti.

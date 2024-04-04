@@ -58,7 +58,7 @@ title: Додавання нових мов для `/learn`
     create_pull_request: false
 
     # global options
-    config: "./crowdin-config.yml"
+    config: './crowdin-config.yml'
     base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
 
     # Uncomment below to debug
@@ -185,25 +185,25 @@ export const notAuditedSuperBlocks: NotAuditedSuperBlocks = {
 ```js
 const algoliaIndices = {
   english: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
   },
   espanol: {
-    name: "news-es",
-    searchPage: "https://www.freecodecamp.org/espanol/news/search/",
+    name: 'news-es',
+    searchPage: 'https://www.freecodecamp.org/espanol/news/search/'
   },
   chinese: {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search/",
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search/'
   },
-  "chinese-traditional": {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search",
+  'chinese-traditional': {
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search'
   },
   dothraki: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
-  },
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
+  }
 
   // If we already have /news in the target language up and running, you can update the values like this:
   // dothraki: {
@@ -383,22 +383,22 @@ Day.js містить лише англійську локаль за замов
 
 ```js
 !(function (e, n) {
-  "object" == typeof exports && "undefined" != typeof module
+  'object' == typeof exports && 'undefined' != typeof module
     ? (module.exports = n())
-    : "function" == typeof define && define.amd
-    ? define(n)
-    : (e.dayjs_locale_en = n());
+    : 'function' == typeof define && define.amd
+      ? define(n)
+      : (e.dayjs_locale_en = n());
 })(this, function () {
-  "use strict";
+  'use strict';
   return {
-    name: "en",
-    weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split(
-      "_"
+    name: 'en',
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+      '_'
     ),
     months:
-      "January_February_March_April_May_June_July_August_September_October_November_December".split(
-        "_"
-      ),
+      'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+        '_'
+      )
   };
 });
 ```
@@ -426,22 +426,22 @@ Day.js містить лише англійську локаль за замов
 Наприклад, якщо ви запускаєте новини дотракійською мовою, об’єкти/масиви повинні виглядати ось так:
 
 ```js
-const locales = ["arabic", "bengali", "chinese", "english", "dothraki"];
+const locales = ['arabic', 'bengali', 'chinese', 'english', 'dothraki'];
 
 const localeCodes = {
-  arabic: "ar",
-  bengali: "bn",
-  chinese: "zh",
-  english: "en",
-  dothraki: "mis",
+  arabic: 'ar',
+  bengali: 'bn',
+  chinese: 'zh',
+  english: 'en',
+  dothraki: 'mis'
 };
 
 const algoliaIndices = {
-  arabic: "news-ar",
-  bengali: "news-bn",
-  chinese: "news-zh",
-  english: "news",
-  dothraki: "news-mis",
+  arabic: 'news-ar',
+  bengali: 'news-bn',
+  chinese: 'news-zh',
+  english: 'news',
+  dothraki: 'news-mis'
 };
 ```
 

@@ -33,7 +33,7 @@ Sempre comece com as importações necessárias no início do arquivo.
 Por exemplo:
 
 ```ts
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page } from '@playwright/test';
 ```
 
 ### - Identificando um elemento do DOM
@@ -46,8 +46,8 @@ O Playwright vem com [vários localizadores integrados](https://playwright.dev/d
 Por exemplo:
 
 ```ts
-await expect(page.getByRole("heading", { name: "Sign up" })).toBeVisible();
-await expect(page.getByText("Hello World")).toBeVisible();
+await expect(page.getByRole('heading', { name: 'Sign up' })).toBeVisible();
+await expect(page.getByText('Hello World')).toBeVisible();
 ```
 
 Nos casos em que os elementos não podem ser consultados usando os localizadores mencionados acima, você pode usar o atributo `data-playwright-test-label` como último recurso. Esse atributo é usado para identificar elementos no DOM para testes somente com o playwright. Ele não é usado para estilização ou para qualquer outra finalidade.
@@ -65,7 +65,7 @@ No arquivo de teste, você pode usar o método `getByTestId` para identificar o 
 Por exemplo:
 
 ```ts
-await expect(page.getByTestId("landing-page-figure")).toBeVisible();
+await expect(page.getByTestId('landing-page-figure')).toBeVisible();
 ```
 
 ### - Constantes
@@ -104,7 +104,7 @@ Cada bloco de teste deve ter um nome claro e conciso descrevendo exatamente o qu
 Por exemplo:
 
 ```ts
-test("The component landing-top renders correctly", async ({ page }) => {
+test('The component landing-top renders correctly', async ({ page }) => {
   // ...
 });
 ```
@@ -116,7 +116,7 @@ Cada declaração deve ser o mais legível possível. Isso torna mais fácil ent
 Por exemplo:
 
 ```ts
-await expect(landingHeading1).toHaveText("Learn to code — for free.");
+await expect(landingHeading1).toHaveText('Learn to code — for free.');
 ```
 
 ### - Evite repetições
@@ -138,10 +138,10 @@ Use o argumento `'isMobile'` para executar testes que incluam lógica que varia 
 Por exemplo:
 
 ```ts
-test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
-  isMobile,
+test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
+  isMobile
 }) => {
-  const landingPageImage = page.getByTestId("landing-page-figure");
+  const landingPageImage = page.getByTestId('landing-page-figure');
 
   if (isMobile) {
     await expect(landingPageImage).toBeHidden();
@@ -158,14 +158,14 @@ Agrupe testes relacionados em conjunto usando blocos "descrite". Isso torna mais
 Por exemplo:
 
 ```ts
-describe("The campers landing page", () => {
-  test("The campers landing page figure is visible on desktop and hidden on mobile view", async ({
-    isMobile,
+describe('The campers landing page', () => {
+  test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
+    isMobile
   }) => {
     // ...
   });
 
-  test("The campers landing page figure has the correct image", async () => {
+  test('The campers landing page figure has the correct image', async () => {
     // ...
   });
 });

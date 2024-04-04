@@ -1,7 +1,5 @@
 ---
-
 title: Розширення VSCode Courses
-
 ---
 
 Тут детально описано інструкції з обслуговування репозиторію [freeCodeCamp/courses-vscode-extension](https://github.com/freeCodeCamp/courses-vscode-extension), який містить вихідний код для розширення [freeCodeCamp - Courses](https://marketplace.visualstudio.com/items?itemName=freeCodeCamp.freecodecamp-courses).

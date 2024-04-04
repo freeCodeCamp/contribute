@@ -1,7 +1,5 @@
 ---
-
 title: freeCodeCamp.org の開発者ニュースのテーマに貢献する方法
-
 ---
 
 開発者ニュースは [`/news`](https://www.freecodecamp.org/news) サイトとも呼ばれ、[Ghost](https://ghost.org/) によって提供されます。 サイトのルックアンドフィールにカスタムテーマを使用しています。 テーマのソースコードは <https://github.com/freeCodeCamp/news-theme> です。

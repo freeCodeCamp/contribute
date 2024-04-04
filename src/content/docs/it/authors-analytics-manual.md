@@ -1,7 +1,5 @@
 ---
-
 title: Manuale Analytics per gli autori
-
 ---
 
 If you are an author with access to the publication's Google Analytics Property (News), you can use this guide to view your article engagement and search for articles by publication language.

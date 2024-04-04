@@ -1,7 +1,5 @@
 ---
-
 title: Manual de análise dos autores
-
 ---
 
 Se você é um autor com acesso à Propriedade do Google Analytics da publicação (editorial), pode usar este guia para visualizar o engajamento do seu artigo e pesquisar artigos no idioma da publicação.

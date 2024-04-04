@@ -18,8 +18,7 @@ export default defineConfig({
         es: {
           label: 'Español',
           lang: 'es'
-        }
-        ,
+        },
         de: {
           label: 'German',
           lang: 'de'
@@ -44,7 +43,7 @@ export default defineConfig({
           label: 'Chinese',
           lang: 'zh'
         },
-        "zh-Tw": {
+        'zh-Tw': {
           label: 'Chinese Traditional',
           lang: 'zh-TW'
         }

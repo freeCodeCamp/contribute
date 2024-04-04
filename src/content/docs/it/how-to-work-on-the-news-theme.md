@@ -1,7 +1,5 @@
 ---
-
 title: Come lavorare sul tema delle news degli sviluppatori di freeCodeCamp.org
-
 ---
 
 Le notizie degli sviluppatori conosciute anche come il sito [`/news`](https://www.freecodecamp.org/news) è alimentato da [Ghost](https://ghost.org/). Usiamo un tema personalizzato per l'aspetto del sito. Il codice sorgente del tema è disponibile qui: <https://github.com/freeCodeCamp/news-theme>.

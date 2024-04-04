@@ -1,7 +1,5 @@
 ---
-
 title: Como funciona o fluxo de trabalho do token do usuário
-
 ---
 
 Os tokens de usuário são usados para identificar os usuários para terceiros. Assim, os desafios concluídos usando esses serviços podem ser salvos na conta de um usuário.

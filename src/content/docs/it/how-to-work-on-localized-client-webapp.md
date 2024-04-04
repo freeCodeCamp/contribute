@@ -114,13 +114,13 @@ Se stai lavorando su una caratteristica o un bug per la client web app, ad esemp
 ### Componenti funzionali
 
 ```js
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 // nel metodo render:
 const { t } = useTranslation();
 
 // chiama la funzione "t" con una chiave dal file JSON:
-<p>{t("key")}</p>; // altri dettagli sotto
+<p>{t('key')}</p>; // altri dettagli sotto
 ```
 
 ### Componenti classe

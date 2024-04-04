@@ -1,7 +1,5 @@
 ---
-
 title: Using the Curriculum Helpers
-
 ---
 
 The test runner has access to a few helpers that can assist with testing campers' code.
@@ -74,13 +72,13 @@ You would get an object that looks like this:
 This method allows you to test that specific properties have been set:
 
 ```js
-assert.strictEqual(helper.getStyle("body")?.width, "100%");
+assert.strictEqual(helper.getStyle('body')?.width, '100%');
 ```
 
 The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
 
 ```js
-assert.strictEqual(helper.getStyle("body").getPropVal("width"), "100%");
+assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
 ```
 
 #### `.getCSSRules()`
@@ -121,8 +119,8 @@ You can then test that the camper has written the correct media query:
 
 ```js
 const hasCorrectHeight = helper
-  .getCSSRules("media")
-  .some((x) => x.style.height === "3px");
+  .getCSSRules('media')
+  .some(x => x.style.height === '3px');
 assert.isTrue(hasCorrectHeight);
 ```
 

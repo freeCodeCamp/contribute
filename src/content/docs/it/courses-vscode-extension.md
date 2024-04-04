@@ -1,7 +1,5 @@
 ---
-
 title: Estensione di VSCode per i corsi
-
 ---
 
 Questo dettaglia le linee guida della manutenzione del repo [freeCodeCamp/courses-vscode-extension](https://github.com/freeCodeCamp/courses-vscode-extension) che contiene il codice sorgente per l'estensione [freeCodeCamp - Courses](https://marketplace.visualstudio.com/items?itemName=freeCodeCamp.freecodecamp-courses).

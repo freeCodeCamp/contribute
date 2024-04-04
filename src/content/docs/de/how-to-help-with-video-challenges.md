@@ -19,7 +19,7 @@ Unten siehst du eine Vorlage, wie die Markdown-Dateien für die Aufgaben aussehe
 id: Unique identifier (alphanumerical, MongoDB_id)
 title: Challenge Title
 challengeType: 11
-videoId: "YouTube videoId for video challenge"
+videoId: 'YouTube videoId for video challenge'
 forumTopicId: 12345
 ---
 
@@ -140,7 +140,7 @@ Füge Antworten (`Answer 1`, `Answer 2`, und so weiter) unter `## --answers--` h
 Was wird mit diesem JavaScript-Code auf der Konsole ausgegeben?
 
 ```js
-console.log("hello world");
+console.log('hello world');
 ```
 ````
 

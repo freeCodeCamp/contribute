@@ -5,8 +5,8 @@ title: Contribute to the freeCodeCamp.org Community
 因为有成千上万像你这样善良的志愿者，[freeCodeCamp.org](https://freecodecamp.org) 才成为了可能。 如果你想利用业余时间贡献你的专业知识，我们将很高兴地欢迎你加入社区。
 
 :::note
- 在你继续之前，请花 2 分钟时间快速地阅读我们的[行为守则](https://chinese.freecodecamp.org/news/code-of-conduct/)。 我们在社区中严格执行行为规范，为 freeCodeCamp.org 的所有贡献者营造安全、包容的氛围。
-::: 
+在你继续之前，请花 2 分钟时间快速地阅读我们的[行为守则](https://chinese.freecodecamp.org/news/code-of-conduct/)。 我们在社区中严格执行行为规范，为 freeCodeCamp.org 的所有贡献者营造安全、包容的氛围。
+:::
 
 You are welcome to create, update and fix bugs in our [curriculum](#curriculum), help us fix bugs in freeCodeCamp.org's [learning platform](#learning-platform), or [help us translate](#translations) freeCodeCamp.org to world languages.
 

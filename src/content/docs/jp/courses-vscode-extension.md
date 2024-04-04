@@ -1,7 +1,5 @@
 ---
-
 title: VSCode 拡張機能「Courses」について
-
 ---
 
 ここでは、[freeCodeCamp/courses-vscode-extension](https://github.com/freeCodeCamp/courses-vscode-extension) リポジトリのメンテナンス方針について説明します。このリポジトリには、[freeCodeCamp - Courses](https://marketplace.visualstudio.com/items?itemName=freeCodeCamp.freecodecamp-courses) 拡張機能のソースコードが含まれています。

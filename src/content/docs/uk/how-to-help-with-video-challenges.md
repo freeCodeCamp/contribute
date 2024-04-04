@@ -19,7 +19,7 @@ title: Як допомогти з відеозавданнями
 id: Unique identifier (alphanumerical, MongoDB_id)
 title: Challenge Title
 challengeType: 11
-videoId: "YouTube videoId for video challenge"
+videoId: 'YouTube videoId for video challenge'
 forumTopicId: 12345
 ---
 
@@ -146,7 +146,7 @@ https://www.youtube.com/watch?v=[videoId] (замініть `videoId` у пос�
 Що виведе на консоль даний код JavaScript?
 
 ```js
-console.log("hello world");
+console.log('hello world');
 ```
 ````
 

@@ -1,7 +1,5 @@
 ---
-
 title: Помічники з навчальної програми
-
 ---
 
 Тестувальник має доступ до декількох помічників, які можуть допомогти з тестуванням коду кемпера.
@@ -74,13 +72,13 @@ body {
 Цей метод дозволяє перевірити, що були встановлені конкретні властивості:
 
 ```js
-assert.strictEqual(helper.getStyle("body")?.width, "100%");
+assert.strictEqual(helper.getStyle('body')?.width, '100%');
 ```
 
 Помічник прикріплює метод `.getPropVal()` до об’єкта оголошення стилю, що дозволяє отримати значення конкретної властивості:
 
 ```js
-assert.strictEqual(helper.getStyle("body").getPropVal("width"), "100%");
+assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
 ```
 
 #### `.getCSSRules()`
@@ -121,8 +119,8 @@ assert.strictEqual(helper.getStyle("body").getPropVal("width"), "100%");
 
 ```js
 const hasCorrectHeight = helper
-  .getCSSRules("media")
-  .some((x) => x.style.height === "3px");
+  .getCSSRules('media')
+  .some(x => x.style.height === '3px');
 assert.isTrue(hasCorrectHeight);
 ```
 

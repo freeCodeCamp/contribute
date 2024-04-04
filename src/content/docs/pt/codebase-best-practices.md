@@ -104,7 +104,7 @@ type ReducerBase<T> = { type: T };
 type ReducerPayload<T extends AppActionTypes> =
   T extends AppActionTypes.actionFunction
     ? ReducerBase<T> & {
-        payload: AppState["property"];
+        payload: AppState['property'];
       }
     : ReducerBase<T>;
 
@@ -133,7 +133,7 @@ interface MyComponentProps {
 }
 // Conecte à store do Redux
 const mapDispatchToProps = {
-  actionFunction,
+  actionFunction
 };
 // Exemplo de componente do React conectado à store
 const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {

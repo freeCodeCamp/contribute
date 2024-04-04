@@ -1,7 +1,5 @@
 ---
-
 title: Wie man am FreeCodeCamp.orgs Entwickler-News-Theme arbeitet
-
 ---
 
 Die Entwicklernews, auch bekannt als [`/news`](https://www.freecodecamp.org/news) Seite, wird mit [Ghost](https://ghost.org/) betrieben. Wir verwenden ein individuelles Theme für das Erscheinungsbild der Website. Der Quellcode des Themes ist hier verfügbar: <https://github.com/freeCodeCamp/news-theme>.

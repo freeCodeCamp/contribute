@@ -114,13 +114,13 @@ Finally, set the `CLIENT_LOCALE` variable in your `.env` file to the string of t
 ### 関数コンポーネント
 
 ```js
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 // in the render method:
 const { t } = useTranslation();
 
 // call the "t" function with a key from the JSON file:
-<p>{t("key")}</p>; // more details below
+<p>{t('key')}</p>; // more details below
 ```
 
 ### クラスコンポーネント

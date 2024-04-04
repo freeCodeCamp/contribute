@@ -114,13 +114,13 @@ export const availableLangs = {
 ### Функціональний компонент
 
 ```js
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 // у методі render:
 const { t } = useTranslation();
 
 // виклик функції «t» з ключем із файлу JSON:
-<p>{t("key")}</p>; // детальніше нижче
+<p>{t('key')}</p>; // детальніше нижче
 ```
 
 ### Класовий компонент

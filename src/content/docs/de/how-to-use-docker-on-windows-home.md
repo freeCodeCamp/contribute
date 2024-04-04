@@ -1,7 +1,5 @@
 ---
-
 title: So verwendest du Docker unter Windows Home
-
 ---
 
 Bei der Einrichtung von Docker unter Windows Home gibt es einige Fallstricke, die du vermeiden solltest. Als erstes musst du die [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) als Administrator verwenden. Leider unterstützt Windows Home kein Docker für Windows Desktop, sodass stattdessen Toolbox verwendet werden muss. Es muss als Administrator ausgeführt werden, da die Installation Symlinks verwendet, die sonst nicht erstellt werden können.

@@ -1,7 +1,5 @@
 ---
-
 title: Come funziona il flusso di lavoro con i token utente
-
 ---
 
 I token utente sono utilizzati per identificare gli utenti con terze parti in modo tale che le sfide completate usando tali servizi possano essere salvate nell'account dell'utente.

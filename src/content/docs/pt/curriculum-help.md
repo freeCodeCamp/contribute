@@ -1,7 +1,5 @@
 ---
-
 title: Usar os auxiliares do currículo
-
 ---
 
 O executor dos testes tem acesso a alguns auxiliares que podem ajudar com o código dos campers.
@@ -74,13 +72,13 @@ Você receberá um objeto que se parece com isto:
 Esse método permite testar se as propriedades específicas foram definidas:
 
 ```js
-assert.strictEqual(helper.getStyle("body")?.width, "100%");
+assert.strictEqual(helper.getStyle('body')?.width, '100%');
 ```
 
 O auxiliar atribui um método `.getPropVal()` ao objeto de declaração de estilo que permite que você obtenha o valor de uma propriedade específica:
 
 ```js
-assert.strictEqual(helper.getStyle("body").getPropVal("width"), "100%");
+assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
 ```
 
 #### `.getCSSRules()`
@@ -121,8 +119,8 @@ Você, então, pode testar se o camper escreveu a media query correta:
 
 ```js
 const hasCorrectHeight = helper
-  .getCSSRules("media")
-  .some((x) => x.style.height === "3px");
+  .getCSSRules('media')
+  .some(x => x.style.height === '3px');
 assert.isTrue(hasCorrectHeight);
 ```
 

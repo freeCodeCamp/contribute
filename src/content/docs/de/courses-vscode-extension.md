@@ -1,7 +1,5 @@
 ---
-
 title: Kurse VSCode Erweiterung
-
 ---
 
 Dies beschreibt die Wartungsrichtlinien für das [freeCodeCamp/courses-vscode-extension](https://github.com/freeCodeCamp/courses-vscode-extension) Repository, das den Quellcode für die [freeCodeCamp - Courses](https://marketplace.visualstudio.com/items?itemName=freeCodeCamp.freecodecamp-courses) Erweiterung enthält.

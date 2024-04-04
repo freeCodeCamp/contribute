@@ -1,7 +1,5 @@
 ---
-
 title: Reply Templates
-
 ---
 
 These are some of the standard reply templates that you may use while reviewing pull requests and triaging issues/pull requests.

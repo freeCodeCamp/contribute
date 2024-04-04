@@ -32,7 +32,7 @@ The original author and the original article are linked automatically adding thi
 
 ```html
 <script>
-  const fccOriginalPost = "link";
+  const fccOriginalPost = 'link';
 </script>
 ```
 

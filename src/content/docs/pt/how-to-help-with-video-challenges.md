@@ -19,7 +19,7 @@ Abaixo está um modelo de arquivo markdown do desafio.
 id: Identificador exclusivo (alfanumérico, MongoDB_id)
 title: Título do desafio
 challengeType: 11
-videoId: "videoId do desafio por vídeo no YouTube"
+videoId: 'videoId do desafio por vídeo no YouTube'
 forumTopicId: 12345
 ---
 
@@ -146,7 +146,7 @@ Adicione/Atualize (`Answer 1`, `Answer 2`, e assim por diante) sob `## --answers
 O que esse código JavaScript mostra no console?
 
 ```js
-console.log("hello world");
+console.log('hello world');
 ```
 ````
 

@@ -19,7 +19,7 @@ title: How to Help with Video Challenges
 id: Unique identifier (alphanumerical, MongoDB_id)
 title: Challenge Title
 challengeType: 11
-videoId: "YouTube videoId for video challenge"
+videoId: 'YouTube videoId for video challenge'
 forumTopicId: 12345
 ---
 
@@ -146,7 +146,7 @@ Answer 2
 この JavaScript コードは、コンソールに何を記録しますか？
 
 ```js
-console.log("hello world");
+console.log('hello world');
 ```
 ````
 

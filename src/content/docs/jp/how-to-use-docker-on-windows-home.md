@@ -1,7 +1,5 @@
 ---
-
 title: Windows Home で Docker を使用する方法
-
 ---
 
 Windows Home で Docker を設定する際に避けるべき落とし穴がいくつかあります。 まず、[Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/) を管理者として使用する必要があります。 残念ながら、Windows Home は Docker for Windows Desktop をサポートしていないため、代わりに Toolbox を使用する必要があります。 インストールでシンボリックリンクを使用するため、管理者として実行する必要があります。

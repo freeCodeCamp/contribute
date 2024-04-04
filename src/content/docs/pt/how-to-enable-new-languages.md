@@ -58,7 +58,7 @@ Você precisará adicionar um passo para o [`crowdin-download.client-ui.yml`](ht
     create_pull_request: false
 
     # global options
-    config: "./crowdin-config.yml"
+    config: './crowdin-config.yml'
     base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
 
     # Uncomment below to debug
@@ -185,25 +185,25 @@ Se você fosse adicionar Dothraki:
 ```js
 const algoliaIndices = {
   english: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
   },
   espanol: {
-    name: "news-es",
-    searchPage: "https://www.freecodecamp.org/espanol/news/search/",
+    name: 'news-es',
+    searchPage: 'https://www.freecodecamp.org/espanol/news/search/'
   },
   chinese: {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search/",
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search/'
   },
-  "chinese-traditional": {
-    name: "news-zh",
-    searchPage: "https://chinese.freecodecamp.org/news/search",
+  'chinese-traditional': {
+    name: 'news-zh',
+    searchPage: 'https://chinese.freecodecamp.org/news/search'
   },
   dothraki: {
-    name: "news",
-    searchPage: "https://www.freecodecamp.org/news/search/",
-  },
+    name: 'news',
+    searchPage: 'https://www.freecodecamp.org/news/search/'
+  }
 
   // Se já tivermos /news no idioma de destino, é possível atualizar os valores assim:
   // dothraki: {
@@ -383,22 +383,22 @@ Copie o código de local de Day.js da nova aba para o novo arquivo que você cri
 
 ```js
 !(function (e, n) {
-  "object" == typeof exports && "undefined" != typeof module
+  'object' == typeof exports && 'undefined' != typeof module
     ? (module.exports = n())
-    : "function" == typeof define && define.amd
-    ? define(n)
-    : (e.dayjs_locale_en = n());
+    : 'function' == typeof define && define.amd
+      ? define(n)
+      : (e.dayjs_locale_en = n());
 })(this, function () {
-  "use strict";
+  'use strict';
   return {
-    name: "en",
-    weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split(
-      "_"
+    name: 'en',
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+      '_'
     ),
     months:
-      "January_February_March_April_May_June_July_August_September_October_November_December".split(
-        "_"
-      ),
+      'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+        '_'
+      )
   };
 });
 ```
@@ -426,22 +426,22 @@ Abra o arquivo `config/index.js` para adicionar o novo idioma e configurar os va
 Por exemplo, se você estiver lançando News em dothraki, aqui está o modo como os objetos/arrays acima devem parecer:
 
 ```js
-const locales = ["arabic", "bengali", "chinese", "english", "dothraki"];
+const locales = ['arabic', 'bengali', 'chinese', 'english', 'dothraki'];
 
 const localeCodes = {
-  arabic: "ar",
-  bengali: "bn",
-  chinese: "zh",
-  english: "en",
-  dothraki: "mis",
+  arabic: 'ar',
+  bengali: 'bn',
+  chinese: 'zh',
+  english: 'en',
+  dothraki: 'mis'
 };
 
 const algoliaIndices = {
-  arabic: "news-ar",
-  bengali: "news-bn",
-  chinese: "news-zh",
-  english: "news",
-  dothraki: "news-mis",
+  arabic: 'news-ar',
+  bengali: 'news-bn',
+  chinese: 'news-zh',
+  english: 'news',
+  dothraki: 'news-mis'
 };
 ```
 
