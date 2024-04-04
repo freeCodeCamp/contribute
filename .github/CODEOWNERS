@@ -8,10 +8,10 @@
 # -------------------------------------------------
 
 # -------------------------------------------------
-# All files are owned by moderators
+# All files are owned by ops
 # -------------------------------------------------
 
-* @freecodecamp/moderators
+* @freecodecamp/ops
 
 # --- Owned by none (negate rule above) ---
 
@@ -20,10 +20,10 @@ package-lock.json
 pnpm-lock.yaml
 
 # -------------------------------------------------
-# All files in the root are owned by moderators
+# All files in the root are owned by ops
 # -------------------------------------------------
 
-/* @freecodecamp/moderators
+/* @freecodecamp/ops
 
 # --- Owned by none (negate rule above) ---
 
