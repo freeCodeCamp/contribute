@@ -2,7 +2,9 @@
 title: Catching emails locally
 ---
 
-**Note:** This is an **optional** step and is required only when working with email workflows
+:::note
+This is an **optional** step and is required only when working with email workflows
+:::
 
 - [Introduction](#introduction)
 - [Installing MailHog](#installing-mailhog)
