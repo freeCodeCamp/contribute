@@ -1,6 +1,7 @@
 export const translations = {
   'Getting Started': 'Primeiros passos',
   Introduction: 'Introdução',
+  'All the things': 'All the things',
   'Frequently Asked Questions': 'Perguntas frequentes',
   'Reporting a Vulnerability': 'Relatando uma vulnerabilidade',
   'Translation Contribution': 'Contribuição de tradução',

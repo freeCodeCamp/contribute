@@ -1,6 +1,7 @@
 export const translations = {
   'Getting Started': 'はじめに',
   Introduction: 'イントロダクション',
+  'All the things': 'All the things',
   'Frequently Asked Questions': 'よくある質問',
   'Reporting a Vulnerability': '脆弱性の報告',
   'Translation Contribution': '翻訳のコントリビューション',

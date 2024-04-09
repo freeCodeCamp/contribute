@@ -1,6 +1,7 @@
 export const translations = {
   'Getting Started': '准备开始',
   Introduction: '介绍',
+  'All the things': 'All the things',
   'Frequently Asked Questions': '常见问题',
   'Reporting a Vulnerability': 'Reporting a Vulnerability',
   'Translation Contribution': 'Translation Contribution',

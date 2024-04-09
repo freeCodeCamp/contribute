@@ -1,6 +1,7 @@
 export const translations = {
   'Getting Started': 'Початок роботи',
   Introduction: 'Вступ',
+  'All the things': 'All the things',
   'Frequently Asked Questions': 'Поширені питання',
   'Reporting a Vulnerability': 'Повідомлення про вразливість',
   'Translation Contribution': 'Внесок до перекладу',

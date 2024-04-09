@@ -51,6 +51,20 @@ export const sidebar = [
         link: '/faq'
       },
       {
+        label: 'All the things',
+        translations: {
+          de: german.translations['All the things'],
+          es: spanish.translations['All the things'],
+          it: italian.translations['All the things'],
+          jp: japanese.translations['All the things'],
+          pt: portuguese.translations['All the things'],
+          uk: ukrainian.translations['All the things'],
+          zh: chinese.translations['All the things'],
+          'zh-Tw': chineseTraditional.translations['All the things']
+        },
+        link: '/all-the-things'
+      },
+      {
         label: 'Reporting a Vulnerability',
         translations: {
           de: german.translations['Reporting a Vulnerability'],
