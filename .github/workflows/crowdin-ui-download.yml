@@ -62,7 +62,14 @@ jobs:
         uses: freecodecamp/crowdin-action@main
         env:
           PLUGIN: 'convert-chinese'
-          FILE_PATHS: '["src/i18n/chinese.json","src/content/i18n/chinese"]'
+          FILE_PATHS: '["src/i18n/chinese.json"]'
+
+      - name: Convert Chinese with Lang Code
+        uses: freecodecamp/crowdin-action@main
+        env:
+          PLUGIN: 'convert-chinese'
+          FILE_PATHS: '[src/content/docs/zh]'
+          USE_LANG_CODE: true
 
       ##### Download Espanol #####
       - name: Crowdin Download Espanol Translations
