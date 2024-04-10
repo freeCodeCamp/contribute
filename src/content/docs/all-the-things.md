@@ -33,7 +33,7 @@ Thanks to sponsorships, freeCodeCamp offers specialized content that discusses b
 
 ### [Our forums](https://forum.freecodecamp.org/)
 
-Our forums where campers can discuss troubles with the challenges and various other topics related to development. The Discourse platform hosts all of the content and makes this experience possible.
+Our forums where campers can discuss troubles with the challenges and various other topics related to development. The Discourse platform hosts all of the content and makes this experience possible. Our Discourse theme can be found [here](https://github.com/freeCodeCamp/forum-theme).
 
 ### [Our news bulletin](https://www.freecodecamp.org/news)
 
@@ -60,7 +60,7 @@ This is powered by the [Ruby](https://www.ruby-lang.org/en/) programming languag
 
 Here we host various tutorials generously brought in by our contributors. This is also home of the FreeCodeCamp podcast where Quincy interviews notable people in the programming industry and also discusses upcoming trends in the development world.
 
-[CamperChan](https://github.com/freeCodeCamp/camperchan)
+### [CamperChan](https://github.com/freeCodeCamp/camperchan)
 
 The moderation bot for the FreeCodeCamp Community Discord server.
 
@@ -77,13 +77,13 @@ The bot is powered by the following stack:
 
 A Renpy game that provides an introduction to various programming related concepts. The source code can be found on [GitHub](https://github.com/freeCodeCamp/LearnToCodeRPG/).
 
-### [Learn to Code RPG](https://freecodecamp.itch.io/learn-to-code-rpg)
-
-A Renpy game that provides an introduction to various programming related concepts. The source code can be found on [GitHub](https://github.com/freeCodeCamp/LearnToCodeRPG/).
-
 ### [Developer Quiz Site](https://developerquiz.org)
 
 A ReactJS website with over one thousand two hundred programming questions provided by contributors. The source code can be found on [GitHub](https://github.com/freeCodeCamp/Developer_Quiz_Site/).
+
+### [Our Component Library](https://opensource.freecodecamp.org/ui/)
+
+We have a large set of reusable React components that are extremely easy to use and customizable. The source code can be found on [GitHub](https://github.com/freeCodeCamp/ui/).
 
 ## Archived projects
 
