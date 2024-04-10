@@ -1,3 +1,4 @@
+import english from './i18n/english.json';
 import chinese from './i18n/chinese.json';
 import chineseTraditional from './i18n/chinese-traditional.json';
 import spanish from './i18n/spanish.json';
@@ -9,7 +10,7 @@ import ukrainian from './i18n/ukrainian.json';
 
 export const sidebar = [
   {
-    label: 'Getting Started',
+    label: english['Getting Started'],
     translations: {
       de: german['Getting Started'],
       es: spanish['Getting Started'],
@@ -22,7 +23,7 @@ export const sidebar = [
     },
     items: [
       {
-        label: 'Introduction',
+        label: english['Introduction'],
         translations: {
           de: german['Introduction'],
           es: spanish['Introduction'],
@@ -37,7 +38,7 @@ export const sidebar = [
         description: 'Contribute to the freeCodeCamp.org Community'
       },
       {
-        label: 'Frequently Asked Questions',
+        label: english['Frequently Asked Questions'],
         translations: {
           de: german['Frequently Asked Questions'],
           es: spanish['Frequently Asked Questions'],
@@ -51,7 +52,7 @@ export const sidebar = [
         link: '/faq'
       },
       {
-        label: 'Reporting a Vulnerability',
+        label: english['Reporting a Vulnerability'],
         translations: {
           de: german['Reporting a Vulnerability'],
           es: spanish['Reporting a Vulnerability'],
@@ -67,7 +68,7 @@ export const sidebar = [
     ]
   },
   {
-    label: 'Translation Contribution',
+    label: english['Translation Contribution'],
     translations: {
       de: german['Translation Contribution'],
       es: spanish['Translation Contribution'],
@@ -80,7 +81,7 @@ export const sidebar = [
     },
     items: [
       {
-        label: 'Work on translating resources',
+        label: english['Work on translating resources'],
         translations: {
           de: german['Work on translating resources'],
           es: spanish['Work on translating resources'],
@@ -94,7 +95,7 @@ export const sidebar = [
         link: 'how-to-translate-files'
       },
       {
-        label: 'Work on proofreading translations',
+        label: english['Work on proofreading translations'],
         translations: {
           de: german['Work on proofreading translations'],
           es: spanish['Work on proofreading translations'],
@@ -110,7 +111,7 @@ export const sidebar = [
     ]
   },
   {
-    label: 'Code Contribution',
+    label: english['Code Contribution'],
     translations: {
       de: german['Code Contribution'],
       es: spanish['Code Contribution'],
@@ -123,7 +124,7 @@ export const sidebar = [
     },
     items: [
       {
-        label: 'Set up freeCodeCamp',
+        label: english['Set up freeCodeCamp'],
         translations: {
           de: german['Set up freeCodeCamp'],
           es: spanish['Set up freeCodeCamp'],
@@ -137,7 +138,7 @@ export const sidebar = [
         link: 'how-to-setup-freecodecamp-locally'
       },
       {
-        label: 'Follow best-practices',
+        label: english['Follow best-practices'],
         translations: {
           de: german['Follow best-practices'],
           es: spanish['Follow best-practices'],
@@ -151,7 +152,7 @@ export const sidebar = [
         link: 'codebase-best-practices'
       },
       {
-        label: 'Work on Codebase',
+        label: english['Work on Codebase'],
         translations: {
           de: german['Work on Codebase'],
           es: spanish['Work on Codebase'],
@@ -165,7 +166,7 @@ export const sidebar = [
         link: 'how-to-contribute-to-the-codebase'
       },
       {
-        label: 'Work on Coding Challenges',
+        label: english['Work on Coding Challenges'],
         translations: {
           de: german['Work on Coding Challenges'],
           es: spanish['Work on Coding Challenges'],
@@ -179,7 +180,7 @@ export const sidebar = [
         link: 'how-to-work-on-coding-challenges'
       },
       {
-        label: 'Use the Curriculum Helpers',
+        label: english['Use the Curriculum Helpers'],
         translations: {
           de: german['Use the Curriculum Helpers'],
           es: spanish['Use the Curriculum Helpers'],
@@ -193,7 +194,7 @@ export const sidebar = [
         link: 'curriculum-help'
       },
       {
-        label: 'Work on Component Library',
+        label: english['Work on Component Library'],
         translations: {
           de: german['Work on Component Library'],
           es: spanish['Work on Component Library'],
@@ -207,7 +208,7 @@ export const sidebar = [
         link: 'how-to-work-on-the-component-library'
       },
       {
-        label: 'Work on Practice Projects',
+        label: english['Work on Practice Projects'],
         translations: {
           de: german['Work on Practice Projects'],
           es: spanish['Work on Practice Projects'],
@@ -221,7 +222,7 @@ export const sidebar = [
         link: 'how-to-work-on-practice-projects'
       },
       {
-        label: 'Work on Mobile app',
+        label: english['Work on Mobile app'],
         translations: {
           de: german['Work on Mobile app'],
           es: spanish['Work on Mobile app'],
@@ -235,7 +236,7 @@ export const sidebar = [
         link: 'how-to-setup-freecodecamp-mobile-app-locally'
       },
       {
-        label: 'Work on tutorials with CodeRoad',
+        label: english['Work on tutorials with CodeRoad'],
         translations: {
           de: german['Work on tutorials with CodeRoad'],
           es: spanish['Work on tutorials with CodeRoad'],
@@ -249,7 +250,7 @@ export const sidebar = [
         link: 'how-to-work-on-tutorials-that-use-coderoad'
       },
       {
-        label: 'Work on Localized Web App',
+        label: english['Work on Localized Web App'],
         translations: {
           de: german['Work on Localized Web App'],
           es: spanish['Work on Localized Web App'],
@@ -263,7 +264,7 @@ export const sidebar = [
         link: 'how-to-work-on-localized-client-webapp'
       },
       {
-        label: 'Work on Playwright Tests',
+        label: english['Work on Playwright Tests'],
         translations: {
           de: german['Work on Playwright Tests'],
           es: spanish['Work on Playwright Tests'],
@@ -277,7 +278,7 @@ export const sidebar = [
         link: 'how-to-add-playwright-tests'
       },
       {
-        label: 'Work on Video Challenges',
+        label: english['Work on Video Challenges'],
         translations: {
           de: german['Work on Video Challenges'],
           es: spanish['Work on Video Challenges'],
@@ -291,7 +292,7 @@ export const sidebar = [
         link: 'how-to-help-with-video-challenges'
       },
       {
-        label: 'Work on Documentation',
+        label: english['Work on Documentation'],
         translations: {
           de: german['Work on Documentation'],
           es: spanish['Work on Documentation'],
@@ -305,7 +306,7 @@ export const sidebar = [
         link: 'how-to-work-on-the-docs-theme'
       },
       {
-        label: 'Open a pull request',
+        label: english['Open a pull request'],
         translations: {
           de: german['Open a pull request'],
           es: spanish['Open a pull request'],
@@ -321,7 +322,7 @@ export const sidebar = [
     ]
   },
   {
-    label: 'Additional Guides',
+    label: english['Additional Guides'],
     translations: {
       de: german['Additional Guides'],
       es: spanish['Additional Guides'],
@@ -334,7 +335,7 @@ export const sidebar = [
     },
     items: [
       {
-        label: 'Understand the curriculum file structure',
+        label: english['Understand the curriculum file structure'],
         translations: {
           de: german['Understand the curriculum file structure'],
           es: spanish['Understand the curriculum file structure'],
@@ -349,7 +350,7 @@ export const sidebar = [
         link: 'curriculum-file-structure'
       },
       {
-        label: 'Debug outgoing emails locally',
+        label: english['Debug outgoing emails locally'],
         translations: {
           de: german['Debug outgoing emails locally'],
           es: spanish['Debug outgoing emails locally'],
@@ -363,7 +364,7 @@ export const sidebar = [
         link: 'how-to-catch-outgoing-emails-locally'
       },
       {
-        label: 'Work on Cypress Tests',
+        label: english['Work on Cypress Tests'],
         translations: {
           de: german['Work on Cypress Tests'],
           es: spanish['Work on Cypress Tests'],
@@ -377,7 +378,7 @@ export const sidebar = [
         link: 'how-to-add-cypress-tests'
       },
       {
-        label: 'Set up freeCodeCamp on Windows (WSL)',
+        label: english['Set up freeCodeCamp on Windows (WSL)'],
         translations: {
           de: german['Set up freeCodeCamp on Windows (WSL)'],
           es: spanish['Set up freeCodeCamp on Windows (WSL)'],
@@ -391,7 +392,7 @@ export const sidebar = [
         link: 'how-to-setup-wsl'
       },
       {
-        label: 'Use Docker on Windows Home',
+        label: english['Use Docker on Windows Home'],
         translations: {
           de: german['Use Docker on Windows Home'],
           es: spanish['Use Docker on Windows Home'],
@@ -405,7 +406,7 @@ export const sidebar = [
         link: 'how-to-use-docker-on-windows-home'
       },
       {
-        label: 'User Token Workflow',
+        label: english['User Token Workflow'],
         translations: {
           de: german['User Token Workflow'],
           es: spanish['User Token Workflow'],
@@ -419,7 +420,7 @@ export const sidebar = [
         link: 'user-token-workflow'
       },
       {
-        label: 'Troubleshooting Development Issues',
+        label: english['Troubleshooting Development Issues'],
         translations: {
           de: german['Troubleshooting Development Issues'],
           es: spanish['Troubleshooting Development Issues'],
@@ -433,7 +434,7 @@ export const sidebar = [
         link: 'troubleshooting-development-issues'
       },
       {
-        label: 'Authors Analytics Manual',
+        label: english['Authors Analytics Manual'],
         translations: {
           de: german['Authors Analytics Manual'],
           es: spanish['Authors Analytics Manual'],
@@ -449,7 +450,7 @@ export const sidebar = [
     ]
   },
   {
-    label: 'Flight Manuals (for Staff & Mods)',
+    label: english['Flight Manuals (for Staff & Mods)'],
     translations: {
       de: german['Flight Manuals (for Staff & Mods)'],
       es: spanish['Flight Manuals (for Staff & Mods)'],
@@ -462,7 +463,7 @@ export const sidebar = [
     },
     items: [
       {
-        label: 'Moderator Handbook',
+        label: english['Moderator Handbook'],
         translations: {
           de: german['Moderator Handbook'],
           es: spanish['Moderator Handbook'],
@@ -476,7 +477,7 @@ export const sidebar = [
         link: 'moderator-handbook'
       },
       {
-        label: 'Reply Templates',
+        label: english['Reply Templates'],
         translations: {
           de: german['Reply Templates'],
           es: spanish['Reply Templates'],
@@ -490,7 +491,7 @@ export const sidebar = [
         link: 'reply-templates'
       },
       {
-        label: 'Language Lead Handbook',
+        label: english['Language Lead Handbook'],
         translations: {
           de: german['Language Lead Handbook'],
           es: spanish['Language Lead Handbook'],
@@ -504,7 +505,7 @@ export const sidebar = [
         link: 'language-lead-handbook'
       },
       {
-        label: 'DevOps Handbook',
+        label: english['DevOps Handbook'],
         translations: {
           de: german['DevOps Handbook'],
           es: spanish['DevOps Handbook'],
@@ -518,7 +519,7 @@ export const sidebar = [
         link: 'devops'
       },
       {
-        label: 'Courses VSCode Extension',
+        label: english['Courses VSCode Extension'],
         translations: {
           de: german['Courses VSCode Extension'],
           es: spanish['Courses VSCode Extension'],
@@ -532,7 +533,7 @@ export const sidebar = [
         link: 'courses-vscode-extension'
       },
       {
-        label: 'Enable New Language',
+        label: english['Enable New Language'],
         translations: {
           de: german['Enable New Language'],
           es: spanish['Enable New Language'],
@@ -548,7 +549,7 @@ export const sidebar = [
     ]
   },
   {
-    label: 'Our Community',
+    label: english['Our Community'],
     translations: {
       de: german['Our Community'],
       es: spanish['Our Community'],
@@ -561,7 +562,7 @@ export const sidebar = [
     },
     items: [
       {
-        label: 'GitHub',
+        label: english['GitHub'],
         translations: {
           de: german['GitHub'],
           es: spanish['GitHub'],
@@ -574,7 +575,7 @@ export const sidebar = [
         link: 'https://github.com/freecodecamp/freecodecamp'
       },
       {
-        label: 'Discourse Forum',
+        label: english['Discourse Forum'],
         translations: {
           de: german['Discourse Forum'],
           es: spanish['Discourse Forum'],
@@ -588,7 +589,7 @@ export const sidebar = [
         link: 'https://freecodecamp.org/forum/c/contributors'
       },
       {
-        label: 'Chat Server',
+        label: english['Chat Server'],
         translations: {
           de: german['Chat Server'],
           es: spanish['Chat Server'],
