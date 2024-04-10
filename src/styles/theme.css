@@ -1,9 +1,23 @@
 :root,
 ::backdrop {
+  --gray-00: #ffffff;
+  --gray-85: #1b1b32;
   --sl-color-bg-nav: #0a0a23;
 }
 
 :root[data-theme='light'],
 [data-theme='light'] ::backdrop {
   --sl-color-bg-nav: #0a0a23;
+  color: var(--gray-00);
+}
+
+select,
+option,
+.icon {
+  color: var(--gray-00);
+}
+
+select[data-theme='dark'],
+option[data-theme='dark'] .icon[data-theme='dark'] {
+  color: var(--gray-00);
 }
