@@ -24,7 +24,7 @@ jobs:
         uses: freecodecamp/crowdin-action@main
         env:
           PLUGIN: 'generate-config'
-          PROJECT_NAME: 'client'
+          PROJECT_NAME: 'docs'
 
       - name: Crowdin Upload
         uses: crowdin/github-action@master

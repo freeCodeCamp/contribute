@@ -26,7 +26,7 @@ jobs:
         uses: freecodecamp/crowdin-action@main
         env:
           PLUGIN: 'generate-config'
-          PROJECT_NAME: 'client'
+          PROJECT_NAME: 'docs'
 
       ##### Download Chinese #####
       - name: Crowdin Download Chinese Translations
