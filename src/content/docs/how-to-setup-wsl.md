@@ -10,7 +10,7 @@ Before you follow these instructions make sure your system meets the requirement
 **Docker Desktop for Windows**: See respective requirements for [Windows 10 Pro](https://docs.docker.com/docker-for-windows/install/#system-requirements) and [Windows 10 Home](https://docs.docker.com/docker-for-windows/install-windows-home/#system-requirements)
 :::
 
-This guide covers some common steps with the setup of WSL2. Once some of the common issues with WSL2 are addressed, you should be able to follow [this local setup guide](how-to-setup-freecodecamp-locally) to work with freeCodeCamp on Windows running a WSL distro like Ubuntu.
+This guide covers some common steps with the setup of WSL2. Once some of the common issues with WSL2 are addressed, you should be able to follow [this local setup guide](/how-to-setup-freecodecamp-locally) to work with freeCodeCamp on Windows running a WSL distro like Ubuntu.
 
 ## Enable WSL
 
@@ -78,7 +78,7 @@ Once you have configured Docker Desktop to work with WSL2, follow these steps to
 
 1. Launch a new Ubuntu terminal
 
-2. Pull MongoDB from Docker Hub. Please refer to the [Prerequisites](how-to-setup-freecodecamp-locally#Prerequisites) table for the current version of MongoDB used by freeCodeCamp. For example, if the version number is `5.0.x`, replace `<x.y>` with `5.0` in the following two code snippets.
+2. Pull MongoDB from Docker Hub. Please refer to the [Prerequisites](/how-to-setup-freecodecamp-locally#Prerequisites) table for the current version of MongoDB used by freeCodeCamp. For example, if the version number is `5.0.x`, replace `<x.y>` with `5.0` in the following two code snippets.
 
    ```bash
    docker pull mongo:<x.y>
@@ -117,7 +117,7 @@ npm install -g pnpm
 
 ## Set up freeCodeCamp Locally
 
-Now that you have installed the pre-requisites, follow [our local setup guide](how-to-setup-freecodecamp-locally) to clone, install and set up freeCodeCamp locally on your machine.
+Now that you have installed the pre-requisites, follow [our local setup guide](/how-to-setup-freecodecamp-locally) to clone, install and set up freeCodeCamp locally on your machine.
 
 :::warning
 Please note, at this time the setup for Cypress tests (and related GUI needs) is a work in progress. You should still be able to work on most of the codebase.

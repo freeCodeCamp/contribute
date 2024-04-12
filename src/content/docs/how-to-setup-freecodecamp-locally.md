@@ -8,9 +8,9 @@ Follow these guidelines for setting up a development environment for freeCodeCam
 
 :::danger
 
-- freeCodeCamp does not build and run natively on Windows, you will [need to use WSL2](how-to-setup-wsl) for a Linux-like setup on Windows.
+- freeCodeCamp does not build and run natively on Windows, you will [need to use WSL2](/how-to-setup-wsl) for a Linux-like setup on Windows.
 - You can't use Windows Command Prompt, Git Bash or PowerShell to build and run the codebase.
-- Note that if using Windows, the hardware requirements need to be more than [what we mention](how-to-setup-freecodecamp-locally?id=how-to-prepare-your-local-machine) to accommodate for WSL-based setup.
+- Note that if using Windows, the hardware requirements need to be more than [what we mention](/how-to-setup-freecodecamp-locally?id=how-to-prepare-your-local-machine) to accommodate for WSL-based setup.
 
 :::
 
@@ -70,7 +70,7 @@ Here is a minimum system requirement for running freeCodeCamp locally:
 
 Start by installing the prerequisite software for your operating system.
 
-We primarily support development on Linux and Unix-based systems like Ubuntu and macOS. You can develop on Windows 10 or 11 with WSL2 only. You can follow [this guide](how-to-setup-wsl) to set up WSL2. You can't use Command Prompt, Git Bash or PowerShell to run freeCodeCamp natively within windows.
+We primarily support development on Linux and Unix-based systems like Ubuntu and macOS. You can develop on Windows 10 or 11 with WSL2 only. You can follow [this guide](/how-to-setup-wsl) to set up WSL2. You can't use Command Prompt, Git Bash or PowerShell to run freeCodeCamp natively within windows.
 
 #### Prerequisites:
 
@@ -81,7 +81,7 @@ We primarily support development on Linux and Unix-based systems like Ubuntu and
 | [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/) | `5.0.x` | -                                                                                           |
 
 :::danger
-If you have a different version, please install the recommended version. We can only support installation issues for recommended versions. See [troubleshooting section](troubleshooting-development-issues) for details.
+If you have a different version, please install the recommended version. We can only support installation issues for recommended versions. See [troubleshooting section](/troubleshooting-development-issues) for details.
 :::
 
 If Node.js is already installed on your machine, run the following commands to validate the versions:
@@ -253,7 +253,7 @@ Before you can run the application locally, you will need to start the MongoDB s
 :::note
 Unless you have MongoDB running in a setup different than the default, the URL stored as the `MONGOHQ_URL` value in the `.env` file should work fine. If you are using a custom configuration, modify this value as needed.
 
-If you followed along with the [Windows 10 via WSL2 Setup Guide](how-to-setup-wsl), then you should be able to skip this step if the MongoDB server from that guide is already running. You can confirm this by checking that you can reach `http://localhost:27017` on your local machine.
+If you followed along with the [Windows 10 via WSL2 Setup Guide](/how-to-setup-wsl), then you should be able to skip this step if the MongoDB server from that guide is already running. You can confirm this by checking that you can reach `http://localhost:27017` on your local machine.
 :::
 Start the MongoDB server in a separate terminal:
 
@@ -301,7 +301,7 @@ While you are logged in, if you visit <http://localhost:3000/explorer> you shoul
 Clearing your cookies or running `pnpm run seed:certified-user` will log you out, and you will have to sign in again.
 :::
 
-If you have issues while installing it, check out the [troubleshooting section](troubleshooting-development-issues).
+If you have issues while installing it, check out the [troubleshooting section](/troubleshooting-development-issues).
 
 ## Quick Commands Reference
 

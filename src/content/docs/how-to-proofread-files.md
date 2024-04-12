@@ -17,7 +17,7 @@ You should see the list of projects you have been granted access to. Select the 
 You should now see the list of available files. Choose your file by selecting the `Proofread` button on the right of that file, then choosing `Proofreading` from the drop-down menu that appears.
 
 :::note
-If you are in this workspace view, but want to work on [translating a file](how-to-translate-files) instead of proofreading, you may select `Crowdsourcing` from the dropdown menu instead.
+If you are in this workspace view, but want to work on [translating a file](/how-to-translate-files) instead of proofreading, you may select `Crowdsourcing` from the dropdown menu instead.
 :::
 
 ## Proofread Translations
