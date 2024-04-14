@@ -3,8 +3,6 @@
 
 :warning: **Please note**:
 
-This repository is under heavy refactoring and we are currently not accepting
-any contributions. We will be accepting contributions again in the future.
+This repository is under a heavy refactoring/development phase. We are building out a brand-new experience for our contributors. Please get in touch over on our discord: https://discord.gg/freecodecamp
 
-If want to fix a bug or typo in the <https://contribute.freecodecamp.org> pages,
-please contact us in the discord server: <https://chat.freecodecamp.org>.
+Project Board: https://github.com/orgs/freeCodeCamp/projects/40
