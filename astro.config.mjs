@@ -8,7 +8,7 @@ import { sidebar } from './src/sidebar';
 export default defineConfig({
   redirects: {
     '/index': '/intro',
-    '/FAQ': '/faq',
+    '/FAQ': '/faq'
   },
   integrations: [
     starlight({
