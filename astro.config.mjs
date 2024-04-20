@@ -6,6 +6,10 @@ import { sidebar } from './src/sidebar';
 
 // https://astro.build/config
 export default defineConfig({
+  redirects: {
+    '/index': '/intro',
+    '/FAQ': '/faq',
+  },
   integrations: [
     starlight({
       title: 'Contribute | freeCodeCamp.org',
