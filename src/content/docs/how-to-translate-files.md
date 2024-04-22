@@ -32,7 +32,15 @@ We just ask that you understand the following:
 
    For translating the curriculum, once a language reaches at least a few certifications we can begin deploying the language live on [`/learn`](https://www.freecodecamp.org/learn), while you continue to translate the remaining certifications.
 
-   For example, we would want to deploy at least the entire front-end certifications suite when we ship a new world language for the first time.
+   For example, we would want to deploy at least the first 3 certifications when we ship a new world language for the first time.
+
+   The directories on Crowdin containing the first 3 certifications are:
+
+   - 14-responsive-web-design-22
+   - 15-javascript-algorithms-and-data-structures-22
+   - 03-front-end-development-libraries
+
+   The files in these directories are top priorities if you are starting the translation of a new language.
 
 3. **But what about the languages not listed on the translation platform?**
 
