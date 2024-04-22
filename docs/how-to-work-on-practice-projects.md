@@ -160,6 +160,26 @@ The script is to be used if the step-based project has files that have challenge
 pnpm run rename-challenges
 ```
 
+### sync-i18n
+When you add or remove a step from a step-based project, this creates a mismatch in the list of steps between the English project and the project in other languages. So now you need to use this tool to bring the other languages in sync.
+
+If you have changed tests or seed code of the steps in a way that is not compatible with the previous version, you first need to delete the changed files or the whole project folder for the other languages.
+
+#### How to Run the Script
+
+[!TIP] You need to have node and typescript installed globally.
+
+ 1. Be in the root directory
+ 2. Run the following command
+    
+```bash
+ts-node tools/scripts/sync-i18n.ts
+```
+
+#### What the script does in detail
+
+The script identify the English files as the source of truth using the challengeId as key. Then it checks other languages for files that do not longer exist in English and removes them. Then it creates any file that are present in English but not in other languages. Finally it checks that each challenge file in the other languages has the same `dashedName` as the English files.
+
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request.md).
