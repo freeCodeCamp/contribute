@@ -164,6 +164,7 @@ pnpm run rename-challenges
 ```
 
 ### sync-i18n
+
 When you add or remove a step from a step-based project, this creates a mismatch in the list of steps between the English project and the project in other languages. So now you need to use this tool to bring the other languages in sync.
 
 If you have changed tests or seed code of the steps in a way that is not compatible with the previous version, you first need to delete the changed files or the whole project folder for the other languages.
@@ -172,8 +173,8 @@ If you have changed tests or seed code of the steps in a way that is not compati
 
 **Note:** You need to have node and typescript installed globally.
 
- 1. Be in the root directory
- 2. Run the following command
+1.  Be in the root directory
+2.  Run the following command
 
 ```bash
 ts-node tools/scripts/sync-i18n.ts
