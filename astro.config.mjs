@@ -18,39 +18,39 @@ export default defineConfig({
         root: {
           label: 'English',
           lang: 'en'
-        },
-        es: {
-          label: 'Español',
-          lang: 'es'
-        },
-        de: {
-          label: 'German',
-          lang: 'de'
-        },
-        it: {
-          label: 'Italian',
-          lang: 'it'
-        },
-        jp: {
-          label: 'Japanese',
-          lang: 'jp'
-        },
-        pt: {
-          label: 'Portuguese',
-          lang: 'pt'
-        },
-        uk: {
-          label: 'Ukrainian',
-          lang: 'uk'
-        },
-        zh: {
-          label: 'Chinese',
-          lang: 'zh'
-        },
-        'zh-Tw': {
-          label: 'Chinese Traditional',
-          lang: 'zh-TW'
         }
+        // es: {
+        //   label: 'Español',
+        //   lang: 'es'
+        // }
+        // de: {
+        //   label: 'German',
+        //   lang: 'de'
+        // },
+        // it: {
+        //   label: 'Italian',
+        //   lang: 'it'
+        // },
+        // jp: {
+        //   label: 'Japanese',
+        //   lang: 'jp'
+        // },
+        // pt: {
+        //   label: 'Portuguese',
+        //   lang: 'pt'
+        // },
+        // uk: {
+        //   label: 'Ukrainian',
+        //   lang: 'uk'
+        // },
+        // zh: {
+        //   label: 'Chinese',
+        //   lang: 'zh'
+        // },
+        // 'zh-Tw': {
+        //   label: 'Chinese Traditional',
+        //   lang: 'zh-TW'
+        // }
       },
       logo: {
         src: './public/icons/icon-96x96.png',
