@@ -186,4 +186,4 @@ The script identify the English files as the source of truth using the challenge
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request).
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request).

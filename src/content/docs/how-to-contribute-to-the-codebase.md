@@ -7,7 +7,7 @@ Ignoring these steps may soil your copy which makes the contributing, maintainin
 
 ## Contributing to the Codebase
 
-You can now make changes to files and commit your changes to your fork, which you can prepare by reading [how to set up freeCodeCamp locally](how-to-setup-freecodecamp-locally).
+You can now make changes to files and commit your changes to your fork, which you can prepare by reading [how to set up freeCodeCamp locally](/how-to-setup-freecodecamp-locally).
 
 Follow these steps:
 
@@ -201,7 +201,7 @@ The resulting output should be empty. This process is important, because you wil
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request).
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request).
 
 ## Quick commands reference
 

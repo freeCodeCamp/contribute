@@ -475,7 +475,7 @@ You only need to follow this section if you're modifying the challenge test runn
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](how-to-open-a-pull-request).
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request).
 
 <!-- ## Quick commands reference - NEED TO DISCUSS ABOUT THIS
 

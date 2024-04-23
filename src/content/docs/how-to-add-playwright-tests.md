@@ -157,9 +157,9 @@ describe('The campers landing page', () => {
 
 ### Ensure that MongoDB and Client Applications are Running
 
-- [Start MongoDB and seed the database](how-to-setup-freecodecamp-locally#step-3-start-mongodb-and-seed-the-database). In order for Playwright tests to work, be sure that you use the `pnpm run seed:certified-user` command.
+- [Start MongoDB and seed the database](/how-to-setup-freecodecamp-locally#step-3-start-mongodb-and-seed-the-database). In order for Playwright tests to work, be sure that you use the `pnpm run seed:certified-user` command.
 
-- [Start the freeCodeCamp client application and API server](how-to-setup-freecodecamp-locally#step-4-start-the-freecodecamp-client-application-and-api-server)
+- [Start the freeCodeCamp client application and API server](/how-to-setup-freecodecamp-locally#step-4-start-the-freecodecamp-client-application-and-api-server)
 
 ### Run the Playwright Tests
 
