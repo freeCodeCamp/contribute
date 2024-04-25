@@ -159,3 +159,33 @@ Using `__helpers.removeCssComments()`, `__helpers.removeHTMLComments()`, or `__h
 ### Removing Whitespace
 
 Using `__helpers.removeWhitespace()` allows you to pass the camper's code (through the `code` variable) to remove all whitespace.
+
+## AST-based Helpers
+
+These helpers need to be run in Python and they are built using the `ast` Python module.
+Tests that use them need to be in the format:
+
+```js
+({test: () => assert(runPython(`<python code>`))})
+```
+
+`_Node` is a chainable class that allows you to call methods on the result of parsing a string. To create an instance of `_Node` that parses the camper's code use `_Node(_code)`.
+
+To access a specific statement within the code you need to chain method calls until you reach the desired scope.
+
+For example, if the camper has written the following code:
+
+```py
+class Spam:
+  def __str__(self):
+    return 'spam!'    
+```
+To check the return value of `__str__` you would write:
+
+```js
+({test: () => assert(runPython(`_Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")`))})
+```
+
+### Methods
+
+The exstensive list of methods for parsing and testing Python code is available [here](https://opensource.freecodecamp.org/curriculum-helpers/python.html#ast-based-helpers)
