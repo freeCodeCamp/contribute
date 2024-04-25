@@ -170,7 +170,7 @@ These helpers need to be run in Python and they are built using the `ast` Python
 Tests that use them need to be in the format:
 
 ```js
-({test: () => assert(runPython(`<python code>`))})
+({ test: () => assert(runPython(`<python code>`)) });
 ```
 
 `_Node` is a chainable class that allows you to call methods on the result of parsing a string. To create an instance of `_Node` that parses the camper's code use `_Node(_code)`.
@@ -182,12 +182,20 @@ For example, if the camper has written the following code:
 ```py
 class Spam:
   def __str__(self):
-    return 'spam!'    
+    return 'spam!'
 ```
+
 To check the return value of `__str__` you would write:
 
 ```js
-({test: () => assert(runPython(`_Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")`))})
+({
+  test: () =>
+    assert(
+      runPython(
+        `_Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")`
+      )
+    )
+});
 ```
 
 ### Methods
