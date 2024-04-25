@@ -162,8 +162,7 @@ Using `__helpers.removeWhitespace()` allows you to pass the camper's code (throu
 
 ## AST-based Helpers
 
-These helpers need to be run in Python and they are built using the `ast` Python module.
-Tests that use them need to be in the format:
+These helpers need to be run in Python and tests that use them need to be in the format:
 
 ```js
 ({test: () => assert(runPython(`<python code>`))})
