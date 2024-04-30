@@ -57,7 +57,7 @@ devDependencies:
     version: 0.13.0
   wrangler:
     specifier: ^3.39.0
-    version: 3.52.0
+    version: 3.53.0
 
 packages:
 
@@ -246,7 +246,7 @@ packages:
     resolution: {integrity: sha512-FxOJldIl5ltZ5CNjocQxHkAO9orwHBjqtaU28o4smobp9vowS0nbGp+I9CrPxkzWdl1crSDm9vjL9tnvG1DSug==}
     dependencies:
       sitemap: 7.1.1
-      zod: 3.23.4
+      zod: 3.23.5
     dev: false
 
   /@astrojs/starlight@0.21.5(astro@4.7.0):
@@ -4753,9 +4753,9 @@ packages:
       stoppable: 1.1.0
       undici: 5.28.4
       workerd: 1.20231030.0
-      ws: 8.16.0
+      ws: 8.17.0
       youch: 3.3.3
-      zod: 3.23.4
+      zod: 3.23.5
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -4776,9 +4776,9 @@ packages:
       stoppable: 1.1.0
       undici: 5.28.4
       workerd: 1.20240419.0
-      ws: 8.16.0
+      ws: 8.17.0
       youch: 3.3.3
-      zod: 3.23.4
+      zod: 3.23.5
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -6291,8 +6291,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20240419.0
     dev: true
 
-  /wrangler@3.52.0:
-    resolution: {integrity: sha512-HR06jTym+yr7+CI3Ggld3nfp1OM9vSC7h4B8vwWHwhi5K0sYg8p44rxV514Gmsv9dkFHegkRP70SM3sjuuxxpQ==}
+  /wrangler@3.53.0:
+    resolution: {integrity: sha512-JxkvCQekL9j8Mu4CEKM/HEVyDnymWzKQuMUuJH0yum1AilutD5HAP9kVVYmvu7BvwlRyRUAj8TI5OUxXnLCEpQ==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -6355,8 +6355,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /ws@8.16.0:
-    resolution: {integrity: sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==}
+  /ws@8.17.0:
+    resolution: {integrity: sha512-uJq6108EgZMAl20KagGkzCKfMEjxmKvZHG7Tlq0Z6nOky7YF7aq4mOx6xK8TJ/i1LeK4Qus7INktacctDgY8Ow==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -6432,6 +6432,10 @@ packages:
 
   /zod@3.23.4:
     resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
+    dev: false
+
+  /zod@3.23.5:
+    resolution: {integrity: sha512-fkwiq0VIQTksNNA131rDOsVJcns0pfVUjHzLrNBiF/O/Xxb5lQyEXkhZWcJ7npWsYlvs+h0jFWXXy4X46Em1JA==}
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
