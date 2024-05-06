@@ -46,6 +46,12 @@
     /** Update select menu UI, document theme, and local storage state. */
     #onThemeChange(theme: CustomTheme): void {
       //StarlightThemeProvider.updatePickers(theme);
+      document.body.classList.remove("dark");
+      document.body.classList.remove("light");
+      if(theme == "dark" || theme == "light")
+      {
+        document.body.classList.add(theme);
+      }
       document.documentElement.dataset.theme =
         theme === 'auto' ? this.#getPreferredColorScheme() : theme;
       this.#storeTheme(theme);
@@ -70,3 +76,9 @@
   }
   customElements.define('starlight-theme-button', StarlightThemeButton);
 </script>
+
+<style>
+.theme-toggle {
+  background-color: var(--tertiary-background);
+}
+</style>
