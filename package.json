@@ -12,7 +12,8 @@
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
     "format": "prettier . --write --cache && eslint . --cache --fix",
-    "lint": "prettier . --check --cache && eslint . --cache"
+    "lint": "prettier . --check --cache && eslint . --cache",
+    "test:e2e": "playwright test"
   },
   "lint-staged": {
     "**/*.{astro, mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
@@ -27,6 +28,8 @@
     "typescript": "^5.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^20.12.10",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "eslint": "^8.57.0",
