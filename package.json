@@ -22,7 +22,7 @@
   "dependencies": {
     "@astrojs/check": "^0.5.10",
     "@astrojs/cloudflare": "^9.2.0",
-    "@astrojs/starlight": "^0.21.2",
+    "@astrojs/starlight": "^0.23.0",
     "astro": "^4.5.12",
     "typescript": "^5.4.3"
   },
