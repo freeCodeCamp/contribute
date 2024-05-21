@@ -1,0 +1,20 @@
+---
+---
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+    if (!hash || hash === '#/' || hash === '#') {
+      window.location.replace('/intro');
+    } else if (hash.startsWith('#/')) {
+      const [newPath, newHash] = hash.substring(2).split('?id=');
+      const newUrl = newHash ? `/${newPath}/#${newHash}` : `/${newPath}`;
+      window.location.replace(newUrl);
+    } else {
+      window.location.replace('/intro');
+    }
+  });
+</script>
+<div>
+  <!-- The below line ensures that the redirection logic is triggred  -->
+  Loading...
+</div>
