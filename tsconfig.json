@@ -1,4 +1,8 @@
 {
-  "compilerOptions": { "resolveJsonModule": true },
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
   "extends": "astro/tsconfigs/strict"
 }
