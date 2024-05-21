@@ -8,7 +8,7 @@
     "dev": "pnpm run develop",
     "develop": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "rm -rf ./dist && astro check && astro build",
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
     "format": "prettier . --write --cache && eslint . --cache --fix",

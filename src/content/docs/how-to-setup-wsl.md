@@ -40,7 +40,7 @@ As of November 2023, Ubuntu and Debian are the only Linux distributions [officia
 
 Git comes pre-installed with Ubuntu 18.04, verify your Git version with `git --version`.
 
-```output
+```txt
 ~
 ❯ git --version
 git version 2.25.1

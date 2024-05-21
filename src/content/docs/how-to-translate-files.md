@@ -225,14 +225,14 @@ The LearnToCode RPG runs on Ren'Py, which uses special syntax for translated str
 
 #### Before translation
 
-```renpy
+```python
 # "[player_name]? What a coincidence! Our VIP team member {a=[vip_profile_url]}[player_name]{/a} will be honored to hear that."
 "[player_name]? What a coincidence! Our VIP team member {a=[vip_profile_url]}[player_name]{/a} will be honored to hear that."  <--- this is the line that needs to be translated. see translation below
 ```
 
 #### After translation
 
-```renpy
+```python
 # "[player_name]? What a coincidence! Our VIP team member {a=[vip_profile_url]}[player_name]{/a} will be honored to hear that."
 "[player_name]？好巧，我们的VIP队友{a=[vip_profile_url]}[player_name]{/a}会很高兴的。"
 ```
@@ -243,14 +243,14 @@ Note: The `[]` and `{}` tags should be left intact.
 
 #### Before translation
 
-```renpy
+```python
 old "{icon=icon-fast-forward} Skip"
 new "{icon=icon-fast-forward} Skip" <-- translate this line, see below
 ```
 
 #### After translation
 
-```renpy
+```python
 old "{icon=icon-fast-forward} Skip"
 new "{icon=icon-fast-forward} 跳过"
 ```
@@ -261,14 +261,14 @@ Note: Again, the `new` prefix and the `{icon=icon-fast-forward}` tag should be l
 
 #### Before translation
 
-```renpy
+```python
 # layla @ neutral "Hehe, [player_name], you are a fun one. I'm sure you will enjoy your work as a developer."
 layla @ neutral "Hehe, [player_name], you are a fun one. I'm sure you will enjoy your work as a developer."
 ```
 
 #### After translation
 
-```renpy
+```python
 # layla @ neutral "Hehe, [player_name], you are a fun one. I'm sure you will enjoy your work as a developer."
 layla @ neutral "哈哈，[player_name]，你真有趣。我相信你一定会喜欢你的开发者工作的。"
 ```
@@ -279,14 +279,14 @@ Note: `layla @ neutral` and `[player_name]` are left unchanged.
 
 #### Before translation
 
-```renpy
+```python
 # player "Maybe this is all a dream?" nointeract
 player "Maybe this is all a dream?" nointeract
 ```
 
 #### After translation
 
-```renpy
+```python
 # player "Maybe this is all a dream?" nointeract
 player "也许这都是一场梦？" nointeract
 ```
@@ -299,7 +299,7 @@ Pay attention to how Crowdin segments a line of dialogue wrapped between opening
 
 This is the line to be translated:
 
-```renpy
+```python
 player @ surprised "{b}Full-stack{/b}... What is that? I better take notes so I can learn more about it."
 ```
 
@@ -307,7 +307,7 @@ Crowdin segments it into three parts like below:
 
 <img width="836" alt="Screen Shot 2022-01-23 at 10 36 43" src="https://user-images.githubusercontent.com/35674052/150693962-d3b091e5-2432-44d0-9d24-195ea7d7aeda.png">
 
-```renpy
+```python
 # original
 player @ surprised "{b}Full-stack{/b}
 # translated, keeping the opening quotes `"`
@@ -316,7 +316,7 @@ player @ surprised "{b}全栈{/b}
 
 <img width="750" alt="Screen Shot 2022-01-23 at 10 36 49" src="https://user-images.githubusercontent.com/35674052/150693965-15411504-791a-4db3-8b14-bc9177be6375.png">
 
-```renpy
+```python
 # original
 What is that?
 # translated, no quotes on either side
@@ -325,7 +325,7 @@ What is that?
 
 <img width="857" alt="Screen Shot 2022-01-23 at 10 36 54" src="https://user-images.githubusercontent.com/35674052/150693969-062e3268-580f-4ad2-97db-cab6240b6095.png">
 
-```renpy
+```python
 # original
 I better take notes so I can learn more about it."
 # translated, keeping the closing quotes `"`
