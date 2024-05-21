@@ -7,7 +7,7 @@
     "prepare": "npx is-ci || npx husky",
     "dev": "pnpm run develop",
     "develop": "astro dev",
-    "start": "pnpm run build && node ./run-server.mjs",
+    "start": "node ./run-server.mjs",
     "build": "rm -rf ./dist && astro check && astro build",
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
