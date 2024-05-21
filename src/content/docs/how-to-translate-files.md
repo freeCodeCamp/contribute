@@ -305,7 +305,7 @@ player @ surprised "{b}Full-stack{/b}... What is that? I better take notes so I 
 
 Crowdin segments it into three parts like below:
 
-<img width="836" alt="Screen Shot 2022-01-23 at 10 36 43" src="https://user-images.githubusercontent.com/35674052/150693962-d3b091e5-2432-44d0-9d24-195ea7d7aeda.png">
+<img width="836" alt="Screen Shot 2022-01-23 at 10 36 43" src="./images/crowdin/original-screenshot.png">
 
 ```python
 # original
@@ -314,7 +314,7 @@ player @ surprised "{b}Full-stack{/b}
 player @ surprised "{b}全栈{/b}
 ```
 
-<img width="750" alt="Screen Shot 2022-01-23 at 10 36 49" src="https://user-images.githubusercontent.com/35674052/150693965-15411504-791a-4db3-8b14-bc9177be6375.png">
+<img width="750" alt="Screen Shot 2022-01-23 at 10 36 49" src="./images/crowdin/translated-screenshot.png">
 
 ```python
 # original
@@ -323,7 +323,7 @@ What is that?
 这是什么？
 ```
 
-<img width="857" alt="Screen Shot 2022-01-23 at 10 36 54" src="https://user-images.githubusercontent.com/35674052/150693969-062e3268-580f-4ad2-97db-cab6240b6095.png">
+<img width="857" alt="Screen Shot 2022-01-23 at 10 36 54" src="./images/crowdin/quoted-screenshot.png">
 
 ```python
 # original
