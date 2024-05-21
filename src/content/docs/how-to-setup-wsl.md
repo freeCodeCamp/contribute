@@ -140,7 +140,7 @@ Open the System Properties control panel by pressing <kbd>Win + R</kbd> and ente
       Enter <code>sysdm.cpl</code> in the Run dialog (screenshot)
     </summary>
     <br>
-    <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/wsl/run-sysdm.png" alt="Enter `sysdm.cpl` in the Run dialog">
+    <img src="./images/wsl/run-sysdm.png" alt="Enter `sysdm.cpl` in the Run dialog">
 </details>
 <br>
 
@@ -151,7 +151,7 @@ Go to Advanced -> Performance -> Settings…
       Performance Settings button under Advanced tab in System Properties (screenshot)
     </summary>
     <br>
-    <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/wsl/advanced-performance-settings.png" alt="Performance Settings button under Advanced tab in System Properties">
+    <img src="./images/wsl/advanced-performance-settings.png" alt="Performance Settings button under Advanced tab in System Properties">
 </details>
 <br>
 
@@ -162,7 +162,7 @@ Under Advanced -> Processor scheduling, choose "Background services". Do not clo
       Background services radio button under Advanced tab in Performance Options (screenshot)
     </summary>
     <br>
-    <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/wsl/background-services.png" alt="Background services radio button under Advanced tab in Performance Options">
+    <img src="./images/wsl/background-services.png" alt="Background services radio button under Advanced tab in Performance Options">
 </details>
 
 ### Increase the size of Windows paging file for the system drive
@@ -174,7 +174,7 @@ Under Advanced -> Virtual memory, click "Change…"
       Change virtual memory button under Advanced tab in Performance Options (screenshot)
     </summary>
     <br>
-    <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/wsl/advanced-virtual-memory.png" alt="Change virtual memory button under Advanced tab in Performance Options">
+    <img src="./images/wsl/advanced-virtual-memory.png" alt="Change virtual memory button under Advanced tab in Performance Options">
 </details>
 <br>
 
@@ -185,7 +185,7 @@ Choose "Custom size". Set the initial size to 1.5x and the maximum size to 3x of
       Set custom size button in Virtual Memory window (screenshot)
     </summary>
     <br>
-    <img src="https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/wsl/set-custom-size.png" alt="Set custom size button in Virtual Memory window">
+    <img src="./images/wsl/set-custom-size.png" alt="Set custom size button in Virtual Memory window">
 </details>
 
 ### Increase the size of memory allocated to WSL
