@@ -20,7 +20,7 @@
     ]
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.10",
+    "@astrojs/check": "^0.7.0",
     "@astrojs/cloudflare": "^9.2.0",
     "@astrojs/starlight": "^0.21.2",
     "astro": "^4.5.12",
