@@ -318,9 +318,9 @@ Really useful to restore a lot of translations from the Translation Memory in bu
 You can find the Pre-Translation workflow at the top of the page in the console of a project.
 If you see "Go to console" in the upper right corner, click there first.
 
-![go to console button](./images/crowdin/pre-translate2.png)
+<!-- ![go to console button](./images/crowdin/pre-translate2.png) -->
 
-![pre-translate workflow](./images/crowdin/pre-translate1.png)
+<!-- ![pre-translate workflow](./images/crowdin/pre-translate1.png) -->
 
 You can choose "From Machine Translation" or "From Translation Memory". Choose "Translation Memory" to recover translations from memory.
 
@@ -330,7 +330,7 @@ Then there are three steps to complete:
 2. Languages. Set your language here.
 3. Existing Translations. The best combination here is "100% match" and "Apply to untranslated strings only". Do not approve automatically, as it's always best to have a human eye on things.
 
-![pre-translate existing translations](./images/crowdin/pre-translate3.png)
+<!-- ![pre-translate existing translations](./images/crowdin/pre-translate3.png) -->
 
 When you have finished setting this, press the Pre-Translate button and wait. It will alert you once it has finished. The time it takes depends on how many untranslated strings are in the chosen files.
 
