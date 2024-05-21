@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
 import starlight from '@astrojs/starlight';
-
 import { sidebar } from './src/sidebar';
+
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
@@ -78,9 +78,8 @@ export default defineConfig({
       ]
     })
   ],
-
-  output: 'hybrid',
-  adapter: cloudflare({
-    imageService: 'passthrough'
+  output: 'server',
+  adapter: node({
+    mode: 'middleware'
   })
 });

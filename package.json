@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prepare": "is-ci || husky",
+    "prepare": "npx is-ci || npx husky",
     "dev": "pnpm run develop",
     "develop": "astro dev",
     "start": "astro dev",
@@ -21,10 +21,13 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
-    "@astrojs/cloudflare": "^9.2.0",
+    "@astrojs/node": "^8.2.5",
     "@astrojs/starlight": "^0.23.1",
     "astro": "^4.5.12",
-    "typescript": "^5.4.3"
+    "express": "4.19.2",
+    "morgan": "1.10.0",
+    "typescript": "^5.4.3",
+    "winston": "3.13.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.5.0",
