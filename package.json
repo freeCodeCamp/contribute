@@ -7,7 +7,7 @@
     "prepare": "npx is-ci || npx husky",
     "dev": "pnpm run develop",
     "develop": "astro dev",
-    "start": "astro dev",
+    "start": "pnpm run build && node ./run-server.mjs",
     "build": "rm -rf ./dist && astro check && astro build",
     "preview": "wrangler pages dev ./dist",
     "astro": "astro",
@@ -41,6 +41,7 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
+    "sharp": "0.33.4",
     "wrangler": "^3.39.0"
   }
 }

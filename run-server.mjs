@@ -5,21 +5,21 @@ import { handler as ssrHandler } from './dist/server/entry.mjs';
 
 const app = express();
 
-// Logger configuration
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
+    winston.format.colorize(),
+    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level}] ${message}`;
+    })
   ),
   transports: [new winston.transports.Console()]
 });
-
 const morganStream = {
   write: message => logger.info(message.trim())
 };
-
-app.use(morgan('combined', { stream: morganStream }));
+app.use(morgan('tiny', { stream: morganStream }));
 
 // Change this based on your astro.config.mjs, `base` option.
 // They should match. The default value is "/".
