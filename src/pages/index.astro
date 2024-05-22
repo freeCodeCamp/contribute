@@ -1,5 +1,10 @@
 ---
 ---
+<!--
+  This page is a workaround to redirect users to the correct page based on the URL hash.
+  The previous implementation used docsify which used location hash to navigate between pages.
+  Location hashes are not passed to the server, so we need the below.
+-->
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const hash = window.location.hash;
@@ -14,7 +19,25 @@
     }
   });
 </script>
-<div>
-  <!-- The below line ensures that the redirection logic is triggred  -->
-  Loading...
-</div>
+<style>
+  .loader {
+    border: 8px solid #0a0a23;
+    border-top: 8px solid #f3f3f3;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+<div class="loader"></div>
