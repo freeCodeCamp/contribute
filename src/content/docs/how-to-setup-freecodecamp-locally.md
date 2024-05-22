@@ -139,7 +139,7 @@ The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often r
       How to fork freeCodeCamp on GitHub (screenshot)
    </summary>
    <br>
-   <img src="./images/github/how-to-fork-freeCodeCamp.gif" alt="How to fork freeCodeCamp on GitHub">
+   <img src="/images/github/how-to-fork-freeCodeCamp.gif" alt="How to fork freeCodeCamp on GitHub">
 </details>
 
 ## Clone your Fork from GitHub

@@ -376,6 +376,6 @@ Sometimes people will defend something offensive or incendiary that they said as
 
 This XKCD comic summarizes perfectly most communities' thoughts on free speech.
 
-<div align="center"><img src='./images/github/xkcd-free-speech.png' width="400" height="400" /></div>
+<div align="center"><img src='/images/github/xkcd-free-speech.png' width="400" height="400" /></div>
 
 Thanks for reading this, and thanks for helping the developer community!
