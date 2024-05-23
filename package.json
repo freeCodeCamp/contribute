@@ -2,6 +2,7 @@
   "name": "@freecodecamp/contribute",
   "type": "module",
   "version": "1.0.0",
+  "packageManager": "pnpm@9.1.2",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "npx is-ci || npx husky",
@@ -13,7 +14,8 @@
     "astro": "astro",
     "format": "prettier . --write --cache && eslint . --cache --fix",
     "lint": "prettier . --check --cache && eslint . --cache",
-    "test:e2e": "playwright test"
+    "playwright:run": "playwright test",
+    "playwright:watch": "playwright test --ui"
   },
   "lint-staged": {
     "**/*.{astro, mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
