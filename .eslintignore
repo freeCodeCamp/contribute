@@ -13,3 +13,9 @@
 pnpm-lock.yaml
 pre-commit
 .prettierignore
+
+# playwright test output
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
