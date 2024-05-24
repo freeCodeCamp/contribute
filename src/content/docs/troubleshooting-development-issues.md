@@ -48,7 +48,7 @@ git clean -ifdX
       How to clean git untracked files (screenshot)
    </summary>
    <br>
-   <img src="./images/github/how-to-untrack.gif" alt="How to clean git untracked files">
+   <img src="/images/github/how-to-untrack.gif" alt="How to clean git untracked files">
 </details>
 
 ## Issues with API, login, Challenge Submissions, etc.

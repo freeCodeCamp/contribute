@@ -92,7 +92,7 @@ In the upcoming days, we would improve this flow to be done via pull requests, f
         Checking status on GitHub Actions (screenshot)
       </summary>
       <br>
-      <img src="./images/devops/github-actions.png" alt="Check build status on GitHub Actions">
+      <img src="/images/devops/github-actions.png" alt="Check build status on GitHub Actions">
     </details>
 
    If this is failing you should stop and investigate the errors.
