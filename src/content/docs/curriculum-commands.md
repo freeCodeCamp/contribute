@@ -72,7 +72,7 @@ This script runs the challenge auditor and checks for any potential problems in 
 
 This script runs the web-based tool to help edit challenges.
 
-2.a `challenge-editorLclient`
+2.a `challenge-editor:client`
 
 This script runs client portion of the web-based tool to edit challenges.
 
