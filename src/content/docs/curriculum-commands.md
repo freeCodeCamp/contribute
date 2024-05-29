@@ -60,13 +60,88 @@ is included.
      This script removes the `lib` folder for the API server subfolder as it contains the babelized
      output of the API server source.
 
+## Editing Challenges
+
+There are a few different commands related to editing the freeCodeCamp challenges.
+
+1. `audit-challenges`
+
+This script runs the challenge auditor and checks for any potential problems in the curriculum.
+
+2. `challenge-editor`
+
+This script runs the web-based tool to help edit challenges.
+
+2.a `challenge-editorLclient`
+
+This script runs client portion of the web-based tool to edit challenges.
+
+2.b `challenge-editor:server`
+
+This script runs the api portion of the web-based tool to edit challenges.
+
 ## Testing
 
 Currently, there are two main test frameworks for the freeCodeCamp platform: Cypress and Playwright. We are
 in the process of phasing out Cypress and exclusively using Playwright though. Regardless, this information will
 remain present for the sake of posterity.
 
-### Cypress
+### Unit Testing
+
+1. `test`
+
+This builds the shared library, the curriculum, and the web workers then runs all of the the
+test subcommands.
+
+1.a `test:source`
+
+    This script runs the Jest tests for the main project, the client, and the API server.
+
+1.b `test:api`
+
+    This script runs all of the tests for the API.
+
+1.c `test:curriculum`
+
+    This script tests to see if the entire curriculum is working with the Mocha test runner.
+
+1.d `test:curriculum-full-output`
+
+    This script tests to see if the entire curriculum is working with the Mocha test runner with full
+    output provided.
+
+1.e `test-client`
+
+    This script runs the Jest tests for the client project.
+
+1.f `test-config`
+
+    This script runs the Jest tests for the configuration.
+
+1.g `test-curriculum-js`
+
+    This script runs the Jest tests for the curriculum components.
+
+1.h `test-server`
+
+    This script runs the Jest tests for the api server.
+
+1.i `test-tools`
+
+    This script run the Jest tests for all of our curriculum tools.
+
+1.j `test-utils`
+
+    This script runs the Jest tests for all of the utility scripts scattered throughout
+    the projects.
+
+### End to End testing
+
+Currently, there are two main test frameworks for testing if the platform works in the browser: Cypress and Playwright. We are
+in the process of phasing out Cypress and exclusively using Playwright though. Regardless, this information will
+remain present for the sake of posterity.
+
+#### Cypress
 
 1. `precypress`
 
@@ -93,7 +168,7 @@ remain present for the sake of posterity.
      This script installs all the dependencies necessary to perform Cypress testing. This script must be
      executed on a Linux system. Otherwise, it will not work.
 
-### Playwright
+#### Playwright
 
 1. `playwright:install-build-tools`
 
@@ -106,3 +181,41 @@ remain present for the sake of posterity.
 3. `playwright:watch`
 
    This script runs all of the Playwright tests in the `e2e` folder in a GUI.
+
+## Formatting
+
+1. `prelint`
+
+This script executes before the main lint script runs and builds all of the shared library code.
+
+2. `lint`
+
+This script transpiles our shared library and then proceeds to run all of the lint subcommands.
+
+2.a `lint:challenges`
+
+This script lints all of the challenges for the curriculum.
+
+2.b `lint:js`
+
+This script lints all of the Javascript code using Eslint.
+
+2.c `lint:ts`
+
+This script transpiles the main source, the shared library, and the api.
+
+2.d `lint:prettier`
+
+This script lints the codebase using Prettier.
+
+3. `format`
+
+This script reformats the entire project using both Eslint and Prettier.
+
+3.a `format: eslint`
+
+This script uses Eslint exclusively to fix formatting issues.
+
+3.b `format: prettier`
+
+This script uses Prettier exclusively to rewrite the files with the correct formatting.
