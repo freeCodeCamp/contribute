@@ -85,6 +85,10 @@ body .content {
   margin-right: auto;
 }
 
+.header {
+  background-color: var(--theme-color);
+}
+
 select,
 option,
 .icon {
