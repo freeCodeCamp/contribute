@@ -102,8 +102,11 @@ option[data-theme='dark'] .icon[data-theme='dark'] {
 
 /****** Sidebar ******/
 
-.sidebar-content {
+.sidebar-pane {
   background-color: var(--primary-background);
+}
+
+.sidebar-content {
   color: var(--quaternary-color);
   padding: 0;
 }
