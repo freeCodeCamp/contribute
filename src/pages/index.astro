@@ -6,14 +6,13 @@
   Location hashes are not passed to the server, so we need the below.
 -->
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash;
+  document.addEventListener('DOMContentLoaded', () => {
+    const { hash } = window.location;
     if (!hash || hash === '#/' || hash === '#') {
       window.location.replace('/intro');
     } else if (hash.startsWith('#/')) {
-      const [newPath, newHash] = hash.substring(2).split('?id=');
-      const newUrl = newHash ? `/${newPath}/#${newHash}` : `/${newPath}`;
-      window.location.replace(newUrl);
+      const [newPath, newHash] = hash.slice(2).split('?id=');
+      window.location.replace(newHash ? `/${newPath}/#${newHash}` : `/${newPath}`);
     } else {
       window.location.replace('/intro');
     }
