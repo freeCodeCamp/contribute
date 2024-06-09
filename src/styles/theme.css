@@ -92,12 +92,7 @@ body .content {
 select,
 option,
 .icon {
-  color: var(--gray-00);
-}
-
-select[data-theme='dark'],
-option[data-theme='dark'] .icon[data-theme='dark'] {
-  color: var(--gray-00);
+  color: var(--primary-color);
 }
 
 /****** Sidebar ******/
