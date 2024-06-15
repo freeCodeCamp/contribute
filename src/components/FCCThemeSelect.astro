@@ -1,81 +1,73 @@
-<starlight-theme-button>
-  <button class="theme-toggle">💡</button>
-</starlight-theme-button>
+<theme-button>
+   <button class="theme-toggle" aria-label="Toggle Theme">💡</button>
+</theme-button>
 
-{/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}
 <script is:inline>
-  StarlightThemeProvider.updatePickers();
-</script>
 
-<script>
-  type CustomTheme = 'auto' | 'dark' | 'light';
 
-  class StarlightThemeButton extends HTMLElement {
-    /** Key in `localStorage` to store color theme preference at. */
-    #key = 'starlight-theme';
+class ThemeButton extends HTMLElement {
+ constructor()
+ {
+  super();
+  const button = this.querySelector('.theme-toggle');
+   if (button)
+   {
+        button.addEventListener('click', () =>
+        {
+           const currentTheme = theme.getTheme();
+           if(currentTheme == "light")
+           {
+             theme.setTheme("dark");
+           }
+           else if(currentTheme == "dark")
+           {
+              theme.setTheme("light");
+           }
+           else
+           {
+             const newTheme = matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
+              theme.setTheme(newTheme);
+           }
+           this.updateSelectedTheme();
 
-    constructor() {
-      super();
-      this.#onThemeChange(this.#loadTheme());
-      const button = this.querySelector('.theme-toggle');
-      if (button) {
-        button.addEventListener('click', (e) => {
-          const theme = localStorage.getItem(this.#key);
-          const newTheme = theme === 'dark' ? 'light' : 'dark';
-          if (e.currentTarget instanceof HTMLButtonElement) {
-            this.#onThemeChange(this.#parseTheme(newTheme));
-          }
         });
-      }
-    }
-
-    /** Get a typesafe theme string from any JS value (unknown values are coerced to `'auto'`). */
-    #parseTheme(theme: unknown): CustomTheme {
-      if (theme === 'auto' || theme === 'dark' || theme === 'light') {
-        return theme;
-      } else {
-        return 'auto';
-      }
-    }
-
-    /** Get the preferred system color scheme. */
-    #getPreferredColorScheme(): CustomTheme {
-      return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
-
-    /** Update select menu UI, document theme, and local storage state. */
-    #onThemeChange(theme: CustomTheme): void {
-      //StarlightThemeProvider.updatePickers(theme);
-      document.body.classList.remove("dark");
-      document.body.classList.remove("light");
-      if(theme == "dark" || theme == "light")
-      {
-        document.body.classList.add(theme);
-      }
-      document.documentElement.dataset.theme =
-        theme === 'auto' ? this.#getPreferredColorScheme() : theme;
-      this.#storeTheme(theme);
-    }
-
-    /** Store the user’s preference in `localStorage`. */
-    #storeTheme(theme: CustomTheme): void {
-      if (typeof localStorage !== 'undefined') {
-        if (theme === 'light' || theme === 'dark') {
-          localStorage.setItem(this.#key, theme);
-        } else {
-          localStorage.removeItem(this.#key);
-        }
-      }
-    }
-
-    /** Load the user’s preference from `localStorage`. */
-    #loadTheme(): CustomTheme {
-      const theme = typeof localStorage !== 'undefined' && localStorage.getItem(this.#key);
-      return this.#parseTheme(theme);
+      document.addEventListener("theme-changed", (event) => {
+        this.updateSelectedTheme(event.detail.theme);
+      });
     }
   }
-  customElements.define('starlight-theme-button', StarlightThemeButton);
+    updateSelectedTheme(newTheme = theme.getTheme())
+    {
+      this.querySelector(".theme-toggle").value = newTheme;
+    }
+
+}
+  /*
+  if (!customElements.get("theme-selector")) {
+    customElements.define(
+      "theme-selector",
+      class extends HTMLElement {
+        connectedCallback() {
+          this.querySelector("select").onchange = (event) =>
+            theme.setTheme(event.target.value);
+          this.setAttribute("aria-label", "Select Theme");
+          this.updateSelectedTheme();
+
+          document.addEventListener("theme-changed", (event) => {
+            this.updateSelectedTheme(event.detail.theme);
+          });
+        }
+
+        updateSelectedTheme(newTheme = theme.getTheme()) {
+          this.querySelector("select").value = newTheme;
+        }
+      }
+    );
+
+  }*/
+ customElements.define('theme-button', ThemeButton);
 </script>
+
 
 <style>
 .theme-toggle {

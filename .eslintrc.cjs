@@ -1,4 +1,7 @@
 module.exports = {
+  globals: {
+    theme: 'readonly'
+  },
   env: {
     browser: true,
     es2022: true,
