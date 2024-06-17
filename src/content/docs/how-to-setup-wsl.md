@@ -119,10 +119,6 @@ npm install -g pnpm
 
 Now that you have installed the pre-requisites, follow [our local setup guide](/how-to-setup-freecodecamp-locally) to clone, install and set up freeCodeCamp locally on your machine.
 
-:::warning
-Please note, at this time the setup for Cypress tests (and related GUI needs) is a work in progress. You should still be able to work on most of the codebase.
-:::
-
 ## Optimize Windows and WSL
 
 :::note

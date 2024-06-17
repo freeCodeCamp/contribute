@@ -364,20 +364,6 @@ export const sidebar = [
         link: 'how-to-catch-outgoing-emails-locally'
       },
       {
-        label: english['Work on Cypress Tests'],
-        translations: {
-          de: german['Work on Cypress Tests'],
-          es: spanish['Work on Cypress Tests'],
-          it: italian['Work on Cypress Tests'],
-          jp: japanese['Work on Cypress Tests'],
-          pt: portuguese['Work on Cypress Tests'],
-          uk: ukrainian['Work on Cypress Tests'],
-          zh: chinese['Work on Cypress Tests'],
-          'zh-Tw': chineseTraditional['Work on Cypress Tests']
-        },
-        link: 'how-to-add-cypress-tests'
-      },
-      {
         label: english['Set up freeCodeCamp on Windows (WSL)'],
         translations: {
           de: german['Set up freeCodeCamp on Windows (WSL)'],

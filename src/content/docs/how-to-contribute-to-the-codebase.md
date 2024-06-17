@@ -217,6 +217,6 @@ A quick reference to the commands that you will need when working.
 | `FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum` | Test a specific SuperBlock.                                                         |
 | `pnpm run test-curriculum-full-output`                            | Run the curriculum test suite, without bailing after the first error                |
 | `pnpm run test-server`                                            | Run the server test suite.                                                          |
-| `pnpm run e2e`                                                    | Run the Cypress end to end tests.                                                   |
+| `pnpm run playwright:run`                                         | Run the Playwright end to end tests.                                                |
 | `pnpm run clean`                                                  | Uninstalls all dependencies and cleans up caches.                                   |
 | `pnpm run storybook`                                              | Starts Storybook for component library development.                                 |
