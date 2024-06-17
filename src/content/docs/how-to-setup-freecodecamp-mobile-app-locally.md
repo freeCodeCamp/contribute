@@ -467,10 +467,10 @@ You only need to follow this section if you're modifying the challenge test runn
     cd ../../freeCodeCamp
     ```
 
-13. Run the cypress tests:
+13. Run the Playwright tests:
 
     ```bash
-    pnpm cypress run --config retries=1,screenshotOnRunFailure=false,video=false,baseUrl=http://localhost:3000/generated-tests/,specPattern=cypress/e2e/mobile-learn/test-challenges.js -s cypress/e2e/mobile-learn/test-challenges.js -b chrome
+    pnpm playwright:run --config=playwright-mobile.config.ts
     ```
 
 ## Proposing a Pull Request (PR)
