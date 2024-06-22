@@ -270,7 +270,7 @@ Camperbot serves as our moderation bot, and all of the commands use Discord's na
 
    All moderation commands will take a `reason` parameter, which should be a short explanation of why the action was taken. Moderation actions done with the bot will be logged in `#mod-actions`, which allows us all to stay on the same page. As such, we should avoid using Discord's built-in moderation tools, as they will not be logged.
 
-:::warning
+:::caution
 The reason provided to a moderation command will also be included in the DM notification to the camper. Please remember to be professional here.
 :::
 

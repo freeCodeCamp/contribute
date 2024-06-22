@@ -237,7 +237,7 @@ You may send an email to `dev[at]freecodecamp.org` if you have any queries. As a
 
 ## Flight Manual - Server Maintenance
 
-:::warning
+:::caution
 
 1.  The guide applies to the **freeCodeCamp Staff members only**.
 2.  These instructions should not be considered exhaustive, please use caution.
@@ -316,7 +316,7 @@ No matter your choice of spinning resources, we have a few [handy cloud-init con
 You should keep the VMs up to date by performing updates and upgrades. This will
 ensure that the virtual machine is patched with the latest security fixes.
 
-:::warning
+:::caution
 Before you run these commands:
 
 - Make sure that the VM has been provisioned completely and that there are no
@@ -326,7 +326,7 @@ Before you run these commands:
   network bandwidth, memory and/or CPU usage spikes leading to outages on
   running applications.
 
-:::warning
+:::
 
 Update package information
 

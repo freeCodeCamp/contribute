@@ -18,7 +18,7 @@ Subsequent commit messages have to match the step number in `TUTORIAL.md` from t
 
 In order to make changes to commits on a version branch, you would need to rebase and edit the commits you want to change. This will rewrite the Git history, so we cannot accept PRs to these types of branches. Once a version branch is on the freeCodeCamp repo, it should never change.
 
-:::warning
+:::caution
 Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
 :::
 
@@ -70,7 +70,7 @@ Also, keep in mind that instructions usually use the lessons around them for con
 
 ### Working on Version Branch
 
-:::warning
+:::caution
 Reminder: Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
 :::
 
@@ -106,7 +106,7 @@ Before pushing a new version, view the new `feat/version-vX.X.Y` (will be merged
 
 If you have write access to the freeCodeCamp repo, have verified the `CHANGELOG` and `coderoad.yaml` files, have tested the changes using the instructions above, and want to push a new version of a tutorial:
 
-:::warning
+:::caution
 Reminder: Never make or push changes to a version branch that is on one of the freeCodeCamp repos. Always create a new one
 :::
 

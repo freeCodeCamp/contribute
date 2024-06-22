@@ -12,7 +12,7 @@ It is recommended to research your specific issue on resources such as Google, S
 
 If you are on a different OS or are still facing issues, see [getting help](#getting-help).
 
-:::warning
+:::caution
 Please avoid creating GitHub issues for problems with the prerequisite technologies. They are out of the scope of this project.
 :::
 
