@@ -211,7 +211,7 @@ Follow these steps:
 
 2. Sync the latest changes from the upstream `main` branch to your local main branch:
 
-:::warning
+:::caution
 If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
 You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
 :::
