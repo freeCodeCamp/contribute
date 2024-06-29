@@ -48,7 +48,7 @@ There are various ways to launch a Gitpod workspace:
 
 That's it, you can now skip to the 'syncing up from parent' section after you have launched a Gitpod workspace. Most parts of this guide applies to Gitpod workspaces, but be mindful of [how the URLs & Ports work within a Gitpod](https://www.gitpod.io/docs/configure/workspaces/ports) workspace.
 
-**Note: Troubleshooting port issues on Gitpod**
+#### Troubleshooting port issues on Gitpod
 
 Sometimes the service on port `8000` doesn't go live. This is common when you are restarting an inactive workspace.
 
@@ -168,7 +168,9 @@ Run these commands on your local machine:
 
 This will download the entire freeCodeCamp repository to your projects directory.
 
-Note: `--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
+:::note
+`--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
+:::
 
 ## Set up Syncing from Parent
 

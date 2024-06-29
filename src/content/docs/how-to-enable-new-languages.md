@@ -65,7 +65,9 @@ You will need to add a step to the [`crowdin-download.client-ui.yml`](https://gi
     # dryrun_action: true
 ```
 
-Note that the `download_language` key needs to be set to the language code displayed on Crowdin.
+:::note
+The `download_language` key needs to be set to the language code displayed on Crowdin.
+:::
 
 ## Enabling a Language
 

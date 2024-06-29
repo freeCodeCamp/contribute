@@ -86,7 +86,9 @@ Run these commands on your local machine:
 
 This will download the entire freeCodeCamp mobile repository to your projects directory.
 
-Note: `--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
+:::note
+`--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
+:::
 
 ## Set up Syncing from Parent
 

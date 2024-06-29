@@ -414,7 +414,9 @@ Use `parseInt` to convert the variable `realNumber` into an integer.
 - Multi-line code blocks **must be preceded by an empty line**. The next line must start with three backticks followed immediately by one of the [supported languages](https://prismjs.com/#supported-languages). To complete the code block, you must start a new line that only has three backticks and **another empty line**. See example below:
 - Whitespace matters in Markdown, so we recommend that you make it visible in your editor.
 
-**Note:** If you are going to use an example code in YAML, use `yaml` instead of `yml` for the language to the right of the backticks.
+:::note
+If you are going to use an example code in YAML, use `yaml` instead of `yml` for the language to the right of the backticks.
+:::
 
 The following is an example of code:
 
@@ -430,7 +432,9 @@ The following is an example of code:
 - If multiple notes are needed, then list all of the notes in separate sentences using the format: `**Notes:** First note text. Second note text.`
 - Use single quotes where applicable
 
-**Note:** The equivalent _Markdown_ should be used in place of _HTML_ tags.
+:::note
+The equivalent _Markdown_ should be used in place of _HTML_ tags.
+:::
 
 ## Writing tests
 

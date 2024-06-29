@@ -28,7 +28,11 @@ This will take you to a list of steps for the project. If you are working on an 
 
 When you click on a step, you'll be taken to the editor. This is a basic text editor that offers syntax highlighting.
 
-After you have made your changes, click the `Save Changes` button to save your changes. You will get a browser alert letting you know that your changes are ready to commit. Note that you'll need to use `git` manually to stage and commit your files - this tool will not do that for you.
+After you have made your changes, click the `Save Changes` button to save your changes. You will get a browser alert letting you know that your changes are ready to commit.
+
+:::note
+You'll need to use `git` manually to stage and commit your files - this tool will not do that for you.
+:::
 
 ### Step Tools
 
@@ -83,7 +87,9 @@ pnpm run create-next-step
 
 A one-off script that automatically adds a specified number of steps. The challenge seed code for all steps created will be empty.
 
-**Note:** This script also runs [update-step-titles](#update-step-titles).
+:::note
+This script also runs [update-step-titles](#update-step-titles).
+:::
 
 #### How to Run the Script
 
@@ -98,7 +104,9 @@ pnpm run create-empty-steps X # where X is the number of steps to create.
 
 A one-off script that automatically adds a new step at a specified position, incrementing all subsequent steps (both their titles and in their meta.json). The challenge seed code will use the previous step's challenge seed code with the editable region markers (ERMs) removed.
 
-**Note:** This script also runs [update-step-titles](#update-step-titles).
+:::note
+This script also runs [update-step-titles](#update-step-titles).
+:::
 
 #### How to Run the Script
 
@@ -113,7 +121,9 @@ pnpm run insert-step X # where X is the position to insert the new step.
 
 A one-off script that deletes an existing step, decrementing all subsequent steps (both their titles and in their meta.json)
 
-**Note:** This script also runs [update-step-titles](#update-step-titles).
+:::note
+This script also runs [update-step-titles](#update-step-titles).
+:::
 
 #### How to Run the Script
 
@@ -171,7 +181,9 @@ If you have changed tests or seed code of the steps in a way that is not compati
 
 #### How to Run the Script
 
-**Note:** You need to have node and typescript installed globally.
+:::note
+You need to have node and typescript installed globally.
+:::
 
 1.  Be in the root directory
 2.  Run the following command
