@@ -70,6 +70,7 @@ export default defineConfig({
       components: {
         // Override the default `SocialIcons` component.
         Header: './src/components/FCCHeader.astro',
+        MobileMenuToggle: './src/components/FCCMobileMenuToggle.astro',
         ThemeProvider: './src/components/FCCThemeProvider.astro'
       },
       customCss: [
