@@ -13,12 +13,15 @@ const { labels } = Astro.props;
     class='sl-flex md:sl-hidden'
   >
     <Icon name="bars" />
+    <Icon name="close" class="hidden" />
   </button>
 </starlight-menu-button>
 
 <script>
   class StarlightMenuButton extends HTMLElement {
     btn = this.querySelector('button')!;
+    bars = this.btn.querySelector(':first-child')!;
+    close = this.btn.querySelector(':nth-child(2)')!;
 
     constructor() {
       super();
@@ -35,6 +38,8 @@ const { labels } = Astro.props;
     setExpanded(expanded: boolean) {
       this.btn.setAttribute('aria-expanded', String(expanded));
       document.body.toggleAttribute('data-mobile-menu-expanded');
+      this.bars.classList.toggle('hidden');
+      this.close.classList.toggle('hidden');
     }
 
     toggleExpanded() {
@@ -72,6 +77,10 @@ const { labels } = Astro.props;
   button[aria-expanded='true'] {
     background-color: var(--sl-color-gray-2);
     box-shadow: none;
+  }
+
+  .hidden {
+    display: none;
   }
 
   :global(:has(button[aria-expanded='true']) ~ .sidebar-pane) {
