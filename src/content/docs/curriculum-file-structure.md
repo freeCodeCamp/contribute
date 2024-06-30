@@ -52,8 +52,14 @@ When renaming a certification, you will likely want to rename the associated sup
 1. In the YAML file, change the `title` to the new name.
 1. Rename the file and folder from step 3 for the rest of the curriculum languages.
 1. Update `client/src/redux/index.ts` to use the correct `title`.
-1. Optionally, update the `certSlug` for the superblock in the same file. **Note** that renaming a `certSlug` will change the URL for certifications and should only be done with careful consideration.
-1. Update the `title` in `client/src/resources/cert-and-project-map.ts` to the new value. **Note** that changing the `title` here **will break** the superBlock page for the associated certification. It relies on the superBlock title to match the certification title. You will likely want to rename the superBlock at the same time.
+1. Optionally, update the `certSlug` for the superblock in the same file.
+   :::note
+   Renaming a `certSlug` will change the URL for certifications and should only be done with careful consideration.
+   :::
+1. Update the `title` in `client/src/resources/cert-and-project-map.ts` to the new value.
+   :::note
+   Changing the `title` here **will break** the superBlock page for the associated certification. It relies on the superBlock title to match the certification title. You will likely want to rename the superBlock at the same time.
+   :::
 1. If you renamed the `certSlug` in step 7, change it here for the cert and all the nested `projects` values.
 1. In `shared/config/certification-settings.js`, update the value of `certTypeTitleMap` to the new name.
 1. If you renamed the `certSlug` in step 7, update the key of `certSlugTypeMap` in the same file.
@@ -74,7 +80,10 @@ Also, you will likely want to rename the certificate and the `{superBlock}-proje
 1. Rename the superblock folder in `client/src/pages/learn`.
 1. Update the `index.md` file in the above folder, changing the `title` and `superBlock` values to the new name.
 1. For each block folder within the above, update the `index.md` to use the correct `superBlock` value.
-1. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock. **Note** that changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.
+1. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock.
+   :::note
+   Changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.
+   :::
 1. Update the `superBlockCertTypeMap` key in `shared/config/certification-settings.js` to the new superBlock name.
 1. Update the path value in `client/src/assets/icons/index.tsx`.
 1. For each language in `client/i18n/locales`, update the `intro.json` file to use the new superBlock `dashedName`. In the English file, also update the `title`.

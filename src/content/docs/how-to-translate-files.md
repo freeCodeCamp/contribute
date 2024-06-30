@@ -237,7 +237,9 @@ The LearnToCode RPG runs on Ren'Py, which uses special syntax for translated str
 "[player_name]？好巧，我们的VIP队友{a=[vip_profile_url]}[player_name]{/a}会很高兴的。"
 ```
 
-Note: The `[]` and `{}` tags should be left intact.
+:::note
+The `[]` and `{}` tags should be left intact.
+:::
 
 ---
 
@@ -255,7 +257,9 @@ old "{icon=icon-fast-forward} Skip"
 new "{icon=icon-fast-forward} 跳过"
 ```
 
-Note: Again, the `new` prefix and the `{icon=icon-fast-forward}` tag should be left intact.
+:::note
+Again, the `new` prefix and the `{icon=icon-fast-forward}` tag should be left intact.
+:::
 
 ---
 
@@ -273,7 +277,9 @@ layla @ neutral "Hehe, [player_name], you are a fun one. I'm sure you will enjoy
 layla @ neutral "哈哈，[player_name]，你真有趣。我相信你一定会喜欢你的开发者工作的。"
 ```
 
-Note: `layla @ neutral` and `[player_name]` are left unchanged.
+:::note
+`layla @ neutral` and `[player_name]` are left unchanged.
+:::
 
 ---
 

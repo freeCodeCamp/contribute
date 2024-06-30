@@ -286,7 +286,9 @@ The reason provided to a moderation command will also be included in the DM noti
 
    Our moderation bot is configured to log deleted messages automatically in the `#mod-actions` channel. If a message is not in line with our Code of Conduct, or otherwise not appropriate for our community, you are generally safe to delete it.
 
-   Note that if the message contains content that violates Discord's terms of service, you'll want to report it via https://dis.gd/report **prior to** deleting it.
+   :::note
+   If the message contains content that violates Discord's terms of service, you'll want to report it via https://dis.gd/report **prior to** deleting it.
+   :::
 
 5. **Don’t threaten to take action**
 
