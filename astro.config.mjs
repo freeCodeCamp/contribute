@@ -71,7 +71,8 @@ export default defineConfig({
         // Override the default `SocialIcons` component.
         Header: './src/components/FCCHeader.astro',
         MobileMenuToggle: './src/components/FCCMobileMenuToggle.astro',
-        ThemeProvider: './src/components/FCCThemeProvider.astro'
+        ThemeProvider: './src/components/FCCThemeProvider.astro',
+        ThemeSelect: './src/components/FCCThemeSelect.astro'
       },
       customCss: [
         // Relative path to your custom CSS file

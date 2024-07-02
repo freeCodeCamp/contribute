@@ -1,6 +1,8 @@
 ---
+import type { Theme } from '../theme';
+
 type Props = {
-  defaultTheme?: "auto" | "dark" | "light" | undefined;
+  defaultTheme?: Theme;
 };
 
 const { defaultTheme = "auto" } = Astro.props;
