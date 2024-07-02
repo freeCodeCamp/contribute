@@ -1,71 +1,40 @@
 <theme-button>
-   <button class="theme-toggle" aria-label="Toggle Theme">💡</button>
+  <button class="theme-toggle" aria-label="Toggle Theme">💡</button>
 </theme-button>
 
-<script is:inline>
+<script>
+import type { ThemeChangeEvent, Theme } from '../theme';
 
-
+const theme = window.theme;
 class ThemeButton extends HTMLElement {
- constructor()
- {
-  super();
-  const button = this.querySelector('.theme-toggle');
-   if (button)
-   {
-        button.addEventListener('click', () =>
-        {
-           const currentTheme = theme.getTheme();
-           if(currentTheme == "light")
-           {
-             theme.setTheme("dark");
-           }
-           else if(currentTheme == "dark")
-           {
-              theme.setTheme("light");
-           }
-           else
-           {
-             const newTheme = matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
-              theme.setTheme(newTheme);
-           }
-           this.updateSelectedTheme();
+  constructor() {
+    super();
+    const button = this.querySelector('.theme-toggle');
+    if (!button) { return };
 
-        });
-      document.addEventListener("theme-changed", (event) => {
-        this.updateSelectedTheme(event.detail.theme);
-      });
-    }
+    button.addEventListener('click', () => {
+      const currentTheme = theme.getTheme();
+      let newTheme: Theme;
+      if (currentTheme == 'light') {
+        newTheme = 'dark';
+      } else if (currentTheme == 'dark') {
+        newTheme = 'light';
+      } else {
+        newTheme = matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light';
+        }
+      theme.setTheme(newTheme);
+      this.updateSelectedTheme(newTheme);
+
+    });
+    window.addEventListener("theme-changed", (event: ThemeChangeEvent) => {
+      this.updateSelectedTheme(event.detail.theme);
+    });
   }
-    updateSelectedTheme(newTheme = theme.getTheme())
-    {
-      this.querySelector(".theme-toggle").value = newTheme;
-    }
-
+  updateSelectedTheme(newTheme: Theme) {
+    (this.querySelector('.theme-toggle') as HTMLButtonElement).value = newTheme;
+  }
 }
-  /*
-  if (!customElements.get("theme-selector")) {
-    customElements.define(
-      "theme-selector",
-      class extends HTMLElement {
-        connectedCallback() {
-          this.querySelector("select").onchange = (event) =>
-            theme.setTheme(event.target.value);
-          this.setAttribute("aria-label", "Select Theme");
-          this.updateSelectedTheme();
-
-          document.addEventListener("theme-changed", (event) => {
-            this.updateSelectedTheme(event.detail.theme);
-          });
-        }
-
-        updateSelectedTheme(newTheme = theme.getTheme()) {
-          this.querySelector("select").value = newTheme;
-        }
-      }
-    );
-
-  }*/
- customElements.define('theme-button', ThemeButton);
+customElements.define('theme-button', ThemeButton);
 </script>
 
 
