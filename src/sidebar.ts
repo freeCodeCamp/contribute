@@ -138,6 +138,10 @@ export const sidebar = [
         link: 'how-to-setup-freecodecamp-locally'
       },
       {
+        label: english['Codebase Commands'],
+        link: 'curriculum-commands'
+      },
+      {
         label: english['Follow best-practices'],
         translations: {
           de: german['Follow best-practices'],
