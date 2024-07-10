@@ -204,7 +204,7 @@ swap=xGB
 This fixes the ["JavaScript heap out of memory" error](https://stackoverflow.com/a/54456814) with ESLint. Add the following to your `~/.bashrc` or `~/.zshrc`:
 
 ```sh
-export NODE_OPTIONS="--max-old-space-size=4096"
+export NODE_OPTIONS="--max-old-space-size=7168"
 ```
 
 ### Avoid `pnpm run test`
