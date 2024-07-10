@@ -38,13 +38,18 @@ Sometimes changing the file from `<filename>.js` to `<filename>.ts` (or `.tsx`) 
 
 The best bet at achieving this is to:
 
+<Steps>
 1. Rename the file
-2. Commit with the flag `--no-verify` to prevent Husky from complaining about the lint errors
+
+2. Commit with the flag `--no-verify` to prevent Husky from
+   complaining about the lint errors
+
 3. Refactor to TypeScript for migration, in a separate commit
 
-:::note
-Editors like VSCode are still likely to show you the file has been deleted and a new one created. If you use the CLI to `git add .`, then VSCode will show the file as renamed in stage
-:::
+</Steps>
+:::note Editors like VSCode are still likely to show you the file has been deleted
+and a new one created. If you use the CLI to `git add .`, then VSCode will show the
+file as renamed in stage :::
 
 ### Naming Conventions
 
@@ -76,9 +81,9 @@ interface MyObject {}
 const myObject: MyObject = {};
 ```
 
-<!-- #### Redux Actions -->
+//-- #### Redux Actions -->
 
-<!-- TODO: Once refactored to TS, showcase naming convention for Reducers/Actions and how to type dispatch funcs -->
+//-- TODO: Once refactored to TS, showcase naming convention for Reducers/Actions and how to type dispatch funcs -->
 
 ## Redux
 
@@ -149,8 +154,8 @@ const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {
 export default connect(null, mapDispatchToProps)(MyComponent);
 ```
 
-<!-- ### Redux Types File -->
-<!-- The types associated with the Redux store state are located in `client/src/redux/types.ts`... -->
+//-- ### Redux Types File -->
+//-- The types associated with the Redux store state are located in `client/src/redux/types.ts`... -->
 
 ## API
 
@@ -158,9 +163,7 @@ export default connect(null, mapDispatchToProps)(MyComponent);
 
 The `api/` tests are split into two parts:
 
-1. Unit tests
-2. Integration tests
-
+<Steps>1. Unit tests 2. Integration tests</Steps>
 #### Unit Tests
 
 Unit tests isolate a single function or component. The tests do not need mocking, but will require fixtures.

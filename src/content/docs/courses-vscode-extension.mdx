@@ -2,12 +2,15 @@
 title: Courses VSCode Extension
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 This details the maintenance guidelines for the [freeCodeCamp/courses-vscode-extension](https://github.com/freeCodeCamp/courses-vscode-extension) repository which contains the source code for the [freeCodeCamp - Courses](https://marketplace.visualstudio.com/items?itemName=freeCodeCamp.freecodecamp-courses) extension.
 
 ## Publishing the Extension
 
 A GitHub Action automagically publishes the extension to the Visual Studio Marketplace, on the release of a new GitHub Release.
 
+<Steps>
 1. Package a new version of the extension:
 
 ```bash
@@ -31,6 +34,8 @@ Optionally, you can push directly to `upstream/main`, but opening a new PR is re
 - Upload the `.vsix` file with the release.
 - Publish the release, and confirm the action succeeded.
 
+</Steps>
+
 :::note
 Creating a release requires write access to the `freeCodeCamp/courses-vscode-extension` repository.
 :::
@@ -39,7 +44,15 @@ Creating a release requires write access to the `freeCodeCamp/courses-vscode-ext
 
 A manual upload to the Visual Studio Marketplace can be achieved, by following these steps:
 
+<Steps>
 1. Visit https://marketplace.visualstudio.com/ and sign in
-2. Navigate to the [freeCodeCamp Publisher page](https://marketplace.visualstudio.com/manage/publishers/freecodecamp)
-3. Select the relevant extension, and select `Update`
+
+2. Navigate to the
+   [freeCodeCamp Publisher
+   page](https://marketplace.visualstudio.com/manage/publishers/freecodecamp)
+
+3.Select the relevant extension, and select `Update`
+
 4. Upload the file from your local files
+
+</Steps>

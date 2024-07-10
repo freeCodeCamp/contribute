@@ -2,6 +2,8 @@
 title: Contribute to the Codebase
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Follow these guidelines to contribute to the codebase. This is highly recommended if you want to contribute regularly.
 Ignoring these steps may soil your copy which makes the contributing, maintaining, and reviewing processes difficult.
 
@@ -11,26 +13,27 @@ You can now make changes to files and commit your changes to your fork, which yo
 
 Follow these steps:
 
+<Steps>
 1. Validate that you are on the `main` branch:
 
-   ```bash
-   git status
-   ```
+```bash
+git status
+```
 
-   You should get an output like this:
+You should get an output like this:
 
-   ```bash
-   On branch main
-   Your branch is up-to-date with 'origin/main'.
+```bash
+On branch main
+Your branch is up-to-date with 'origin/main'.
 
-   nothing to commit, working directory clean
-   ```
+nothing to commit, working directory clean
+```
 
-   If you got a different message, then you aren't on main or your working directory isn't clean, resolve any outstanding files/commits and checkout `main`:
+If you got a different message, then you aren't on main or your working directory isn't clean, resolve any outstanding files/commits and checkout `main`:
 
-   ```bash
-   git checkout main
-   ```
+```bash
+git checkout main
+```
 
 2. Sync the latest changes from the freeCodeCamp upstream `main` branch to your `main` fork branch:
 
@@ -198,6 +201,8 @@ The resulting output should be empty. This process is important, because you wil
     ```bash
     git push origin branch/name-here
     ```
+
+</Steps>
 
 ## Proposing a Pull Request (PR)
 
