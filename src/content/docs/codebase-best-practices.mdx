@@ -39,14 +39,14 @@ Sometimes changing the file from `<filename>.js` to `<filename>.ts` (or `.tsx`) 
 The best bet at achieving this is to:
 
 <Steps>
-1. Rename the file
 
+1. Rename the file
 2. Commit with the flag `--no-verify` to prevent Husky from
    complaining about the lint errors
-
 3. Refactor to TypeScript for migration, in a separate commit
 
 </Steps>
+
 :::note Editors like VSCode are still likely to show you the file has been deleted
 and a new one created. If you use the CLI to `git add .`, then VSCode will show the
 file as renamed in stage :::
@@ -163,7 +163,13 @@ export default connect(null, mapDispatchToProps)(MyComponent);
 
 The `api/` tests are split into two parts:
 
-<Steps>1. Unit tests 2. Integration tests</Steps>
+<Steps>
+
+1. Unit tests
+2. Integration tests
+
+</Steps>
+
 #### Unit Tests
 
 Unit tests isolate a single function or component. The tests do not need mocking, but will require fixtures.

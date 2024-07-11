@@ -74,13 +74,9 @@ You will want to [build the translated client locally](/how-to-enable-new-langua
 <Steps>
 
 1. Update your `.env` file to use your language for `CLIENT_LOCALE` and `CURRICULUM_LOCALE`.
-
 2. Run `pnpm run create:shared`. This will automatically generate the `trending.json` file for your language under the `/client/i18n/locales/` directory.
-
 3. Start the server by running `pnpm run develop:server` in one terminal window.
-
 4. Edit the `trending.json` to contain the titles you want to preview. You may want to convert your `.yaml` file into JSON format with an automatic tool.
-
 5. In another terminal window, run `pnpm run clean:client`, and then `pnpm run develop:client`
 
 </Steps>

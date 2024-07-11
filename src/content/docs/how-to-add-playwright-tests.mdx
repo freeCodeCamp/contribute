@@ -247,14 +247,11 @@ npx playwright show-report
   You can fix the above error with the following steps:
 
 <Steps>
+
 1. **Check the URL:** Ensure that the URL you're trying to navigate to is correct and properly formatted. Make sure there are no typos in the URL.
-
 2. **Server Status:** Check whether the server at the URL is running and accessible. You might encounter this error if the server is not running or is not accessible.
-
 3. **Port Availability:** Verify that the port mentioned in the URL (8000 in this case) is the correct port and is available for use. Make sure no other process is already using that port.
-
 4. **Firewall or Security Software:** Sometimes, firewall or security software can block connections to specific ports. Check your firewall settings to ensure that the port is allowed.
-
 5. **Network Connectivity:** Ensure that your system has a working network connection and can access external resources.
 
 </Steps>
@@ -266,16 +263,14 @@ npx playwright show-report
   ```
 
 <Steps>
-1. The network request was made using a method that does not include a
-  response body, such as HEAD or CONNECT.
 
+1. The network request was made using a method that does not include a
+   response body, such as HEAD or CONNECT.
 2. The network request was made over a
    secure (HTTPS) connection, and the response body is not available for security
    reasons.
-
 3. The network request was made by a third-party resource (such as an
    advertisement or a tracking pixel) that is not controlled by the script.
-
 4. The network request was made by a script that has been paused or stopped
    before the response was received.
 

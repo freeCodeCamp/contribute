@@ -47,24 +47,19 @@ Renaming files within the curriculum structure will often change the path (or UR
 When renaming a certification, you will likely want to rename the associated superblock along with it. Do the following to rename only the certificate:
 
 <Steps>
-1. Rename the `curriculum/challenges/_meta/{superBlock}-certificate` folder to
-  the new name.
 
+1. Rename the `curriculum/challenges/_meta/{superBlock}-certificate` folder to
+   the new name.
 2. In the `meta.json` file of that folder, rename the values in
    `name`, `dashedName`, and `challengeOrder` to the new cert name.
-
 3. In
    `curriculum/challenges/english/12-certificate`, rename the `{superBlock}
 -certificate` folder, and the YAML file within it, to the new name.
-
 4. In the YAML file, change the `title` to the new name.
-
 5. Rename the file and folder
    from step 3 for the rest of the curriculum languages.
-
 6. Update
    `client/src/redux/index.ts` to use the correct `title`.
-
 7. Optionally, update
    the `certSlug` for the superblock in the same file.
 
@@ -83,16 +78,12 @@ careful consideration. :::
 
 9. If you renamed the `certSlug` in step 7, change it here for the
    cert and all the nested `projects` values.
-
 10. In `shared/config/certification-settings.js`, update the value of
     `certTypeTitleMap` to the new name.
-
 11. If you renamed the `certSlug` in step 7, update the key of `certSlugTypeMap` in the same file.
-
 12. Update the
     certificate name in the `legacyCerts` array of the
     `client/src/client-only-routes/show-project-links.tsx` if needed.
-
 13. Update the main `README.md` file to the new name.
 
 </Steps>
