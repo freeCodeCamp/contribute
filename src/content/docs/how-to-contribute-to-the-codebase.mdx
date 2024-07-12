@@ -17,83 +17,83 @@ Follow these steps:
 
 1. Validate that you are on the `main` branch:
 
-```bash
-git status
-```
+      ```bash
+      git status
+      ```
 
-You should get an output like this:
+      You should get an output like this:
 
-```bash
-On branch main
-Your branch is up-to-date with 'origin/main'.
+      ```bash
+      On branch main
+      Your branch is up-to-date with 'origin/main'.
 
-nothing to commit, working directory clean
-```
+      nothing to commit, working directory clean
+      ```
 
-If you got a different message, then you aren't on main or your working directory isn't clean, resolve any outstanding files/commits and checkout `main`:
+      If you got a different message, then you aren't on main or your working directory isn't clean, resolve any outstanding files/commits and checkout `main`:
 
-```bash
-git checkout main
-```
+      ```bash
+      git checkout main
+      ```
 
 2. Sync the latest changes from the freeCodeCamp upstream `main` branch to your `main` fork branch:
 
-:::caution
-If you have any outstanding pull requests that you made from the `main` branch of your fork, you will lose them at the end of this step.
+    :::caution
+    If you have any outstanding pull requests that you made from the `main` branch of your fork, you will lose them at the end of this step.
 
-You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
+    You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
 
-:::
+    :::
 
-This step **will sync the latest changes** from the main repository of freeCodeCamp.
+    This step **will sync the latest changes** from the main repository of freeCodeCamp.
 
-Update your copy of the freeCodeCamp upstream repository:
+    Update your copy of the freeCodeCamp upstream repository:
 
-```bash
-git fetch upstream
-```
+    ```bash
+    git fetch upstream
+    ```
 
-Hard reset your main branch with the freeCodeCamp main:
+    Hard reset your main branch with the freeCodeCamp main:
 
-```bash
-git reset --hard upstream/main
-```
+    ```bash
+    git reset --hard upstream/main
+    ```
 
-Push your main branch to your origin to have a clean history on your fork on GitHub:
+    Push your main branch to your origin to have a clean history on your fork on GitHub:
 
-```bash
-git push origin main --force
-```
+    ```bash
+    git push origin main --force
+    ```
 
-You can validate that your current main matches the upstream/main by performing a diff:
+    You can validate that your current main matches the upstream/main by performing a diff:
 
-```bash
-git diff upstream/main
-```
+    ```bash
+    git diff upstream/main
+    ```
 
-The resulting output should be empty. This process is important, because you will be rebasing your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
+    The resulting output should be empty. This process is important, because you will be rebasing your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
 
 3. Create a fresh new branch:
 
-   Working on a separate branch for each issue helps you keep your work copy clean. You should never work on the `main`. This will soil your copy of freeCodeCamp and you may have to start over with a fresh clone or fork.
+    Working on a separate branch for each issue helps you keep your work copy clean. You should never work on the `main`. This will soil your copy of freeCodeCamp and you may have to start over with a fresh clone or fork.
 
-   Check that you are on `main` as explained previously, and branch off from there:
+    Check that you are on `main` as explained previously, and branch off from there:
 
-   ```bash
-   git checkout -b fix/update-guide-for-xyz
-   ```
+    ```bash
+    git checkout -b fix/update-guide-for-xyz
+    ```
 
-   Your branch name should start with a `fix/`, `feat/`, `docs/`, etc. Avoid using issue numbers in branches. Keep them short, meaningful and unique.
+    Your branch name should start with a `fix/`, `feat/`, `docs/`, etc. Avoid using issue numbers in branches. Keep them short, meaningful and unique.
 
-   Some examples of good branch names are:
+    Some examples of good branch names are:
 
-   ```md
-   fix/update-challenges-for-react
-   fix/update-guide-for-html-css
-   fix/platform-bug-sign-in-issues
-   feat/add-guide-article-for-javascript
-   translate/add-spanish-basic-html
-   ```
+    ```md
+    fix/update-challenges-for-react
+    fix/update-guide-for-html-css
+    fix/platform-bug-sign-in-issues
+    feat/add-guide-article-for-javascript
+    translate/add-spanish-basic-html
+    ```
 
 4. Edit pages and work on code in your favorite text editor.
 
