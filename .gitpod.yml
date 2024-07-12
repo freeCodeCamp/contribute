@@ -1,0 +1,10 @@
+image: gitpod/workspace-node-lts
+
+tasks:
+  - init: pnpm install
+    command: pnpm run develop
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
