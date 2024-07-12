@@ -149,11 +149,11 @@ The process is mostly the same as the staging platforms, with a few extra checks
 
 1. Make sure your `prod-staging` branch is pristine and in sync with the upstream.
 
-```sh
-git checkout prod-staging
-git fetch --all --prune
-git reset --hard upstream/prod-staging
-```
+   ```sh
+   git checkout prod-staging
+   git fetch --all --prune
+   git reset --hard upstream/prod-staging
+   ```
 
 2. Move changes from `prod-staging` to `prod-current` via a fast-forward merge
 
