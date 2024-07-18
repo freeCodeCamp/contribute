@@ -64,7 +64,7 @@ export default defineConfig({
         github: 'https://github.com/freeCodeCamp',
         twitter: 'https://twitter.com/freeCodeCamp',
         discord:
-          'https://discord.com/invite/freecodecamp-org-official-fi-fo-692816967895220344'
+          'https://discord.com/servers/freecodecamp-org-official-fi-fo-692816967895220344'
       },
       sidebar: sidebar,
       components: {
