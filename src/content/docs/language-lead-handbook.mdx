@@ -2,6 +2,8 @@
 title: The Official freeCodeCamp Language Lead Handbook
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 This handbook will help you set up and use the tools for your localization efforts.
 
 ## How to Invite New Contributors to Ghost
@@ -69,15 +71,15 @@ For each article, you will need to create a shorter title to use in the footer. 
 
 You will want to [build the translated client locally](/how-to-enable-new-languages) to see if the titles have the right length. You can preview the changes by editing the `trending.json` file in your local environment:
 
+<Steps>
+
 1. Update your `.env` file to use your language for `CLIENT_LOCALE` and `CURRICULUM_LOCALE`.
-
 2. Run `pnpm run create:shared`. This will automatically generate the `trending.json` file for your language under the `/client/i18n/locales/` directory.
-
 3. Start the server by running `pnpm run develop:server` in one terminal window.
-
 4. Edit the `trending.json` to contain the titles you want to preview. You may want to convert your `.yaml` file into JSON format with an automatic tool.
-
 5. In another terminal window, run `pnpm run clean:client`, and then `pnpm run develop:client`
+
+</Steps>
 
 ## How to Translate Articles in the Footer Links
 

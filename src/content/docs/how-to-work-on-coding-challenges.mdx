@@ -2,6 +2,8 @@
 title: How to work on coding challenges
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Our goal is to develop a fun and clear interactive learning experience.
 
 Designing interactive coding challenges is difficult. It would be much easier to write a lengthy explanation or to create a video tutorial. But for our core curriculum, we're sticking with what works best for most people - a fully interactive, video game-like experience.
@@ -538,10 +540,14 @@ If you find a problem with an existing challenge's hints/solutions topic, you ca
 
 Take the following steps when adding a new challenge hints/solutions-related topic.
 
+<Steps>
+
 1. Start by following the same steps for creating a new topic but review the next for creating the title.
 2. The title of the topic should start with `freeCodeCamp Challenge Guide: ` concatenated with the actual title of the curriculum challenge. For example, if the challenge is named "`Chunky Monkey`", the topic title would be "`freeCodeCamp Challenge Guide: Chunky Monkey`".
 3. `camperbot` should be the owner of these topics/posts, so you will need to request an admin to change the ownership of the main post to `camperbot`.
 4. Once the new topic is created, a forum topic id is created. It is located at the end of the forum topic URL. This id must be added to the frontmatter of the curriculum challenge file via the normal pull request process for the `Get a Hint` button to link to the topic.
+
+</Steps>
 
 ### Guidelines for Content of Hints and Solutions Topics
 
@@ -602,29 +608,35 @@ function myFunc() {
 
 Before you [create a pull request](/how-to-open-a-pull-request) for your changes, you need to validate that the changes you have made do not inadvertently cause problems with the challenge.
 
+<Steps>
+
 1. To test all challenges run the below command from the root directory
 
-```
-pnpm run test:curriculum
-```
+   ```
+   pnpm run test:curriculum
+   ```
 
-2. To test single challenge, you can use it challenge id with following command
+   2. To test single challenge, you can use it challenge id with following command
 
-```
-FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test:curriculum
-```
+   ```
+   FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test:curriculum
+   ```
 
-3. You can also test a block or a superblock of challenges with these commands
+2. You can also test a block or a superblock of challenges with these commands
 
-```
-FCC_BLOCK='Basic HTML and HTML5' pnpm run test:curriculum
-```
+   ```
+   FCC_BLOCK='Basic HTML and HTML5' pnpm run test:curriculum
+   ```
 
-```
-FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum
-```
+   ```
+   FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum
+   ```
+
+</Steps>
 
 You are also able to test challenges by title by performing the following steps:
+
+<Steps>
 
 1. Switch to the `curriculum` directory:
 
@@ -638,11 +650,13 @@ You are also able to test challenges by title by performing the following steps:
    pnpm run test -- -g challenge-title-goes-here
    ```
 
-:::tip
-You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test.
+   :::tip
+   You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test.
 
-The currently accepted values are `english` and `chinese`, with `english` being set by default.
-:::
+   The currently accepted values are `english` and `chinese`, with `english` being set by default.
+   :::
+
+</Steps>
 
 ## Proposing a Pull Request (PR)
 

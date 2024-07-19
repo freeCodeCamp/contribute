@@ -2,6 +2,8 @@
 title: How to Proofread Translations
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Our proofreading team is responsible for ensuring that translations accurately reflect the source text. We trust our proofreaders to ensure that we have very high quality translations.
 
 All our translations are done by hand, by real humans. Proofreading ensures that there is a consistent tone across all our translated resources like the curriculum.
@@ -24,11 +26,13 @@ If you are in this workspace view, but want to work on [translating a file](/how
 
 ![Image - Proofreading View](https://contribute.freecodecamp.org/images/crowdin/proofread.png)
 
-<!--Add proofread/crowdsource button to the image-->
+//--Add proofread/crowdsource button to the image-->
 
 Here you will see the list of strings in the selected file, with their related translations. The translation that is displayed here is the translation that has received the highest score (between upvotes and downvotes) from the translation community.
 
 While you can view _all_ proposed translations for a given string, the community scores (determined by the upvotes and downvotes) should be taken into consideration when choosing which translation to approve. The community can review proposed translations and recommend which one is most accurate and clear.
+
+<Steps>
 
 1. This is the original string (in English).
 2. This is the matching translated string. The most popular translation proposal, based on upvotes and downvotes, will be displayed here.
@@ -38,6 +42,8 @@ While you can view _all_ proposed translations for a given string, the community
 6. You can view the community proposed translations, their popularity scores, and Crowdin suggested translations here.
 7. This button shows/hides the right-hand side display pane, where you can view translations, comments, translation memory, and glossary terms.
 8. Crowdin displays error messages here from the quality assurance checks. In other words, if something does not seem correct in the translation, Crowdin will notify you. These translations should be approved with care.
+
+</Steps>
 
 No additional actions are required once a file has been proofread.
 

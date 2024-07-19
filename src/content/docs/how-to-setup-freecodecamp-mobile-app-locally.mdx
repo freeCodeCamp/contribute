@@ -2,6 +2,8 @@
 title: Setup freeCodeCamp Mobile App locally
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
 
 Some of the contribution workflows – like fixing bugs in the codebase – need you to run the freeCodeCamp app locally.
@@ -36,17 +38,17 @@ Once you have the prerequisites installed, you need to prepare your development 
 
 #### Follow these steps to get your development environment ready:
 
+<Steps>
+
 1. Install [Git](https://git-scm.com/) or your favorite Git client, if you haven't already. Update to the latest version; the version that came bundled with your OS may be outdated.
-
 2. Set up [Android Studio](https://developer.android.com/studio) and [Android Emulators](https://developer.android.com/studio/run/managing-avds) with the latest released Android version. We recommend using the Pixel 3a XL and Nexus One(for emulating smaller screens).
-
 3. (Optional for MacOS) Set up Xcode and iOS Simulator with the latest released iOS version.
-
 4. (Optional but recommended) [Set up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
-
 5. Install a code editor of your choice.
 
    We highly recommend using [Visual Studio Code](https://code.visualstudio.com/) or Android Studio. We also recommend installing the official [extensions](https://docs.flutter.dev/get-started/editor?tab=vscode).
+
+</Steps>
 
 ## Fork the Repository on GitHub
 
@@ -62,17 +64,21 @@ Your fork at `https://github.com/YOUR_USER_NAME/mobile` is often referred to as 
 
 **Follow these steps to fork the `https://github.com/freeCodeCamp/mobile` repository:**
 
-1. Go to the freeCodeCamp mobile repository on GitHub: <https://github.com/freeCodeCamp/mobile>
+<Steps>
 
+1. Go to the freeCodeCamp mobile repository on GitHub: `<https://github.com/freeCodeCamp/mobile>`
 2. Click the "Fork" Button in the upper right-hand corner of the interface ([More Details Here](https://help.github.com/articles/fork-a-repo/))
-
 3. After the repository has been forked, you will be taken to your copy of the repository at `https://github.com/YOUR_USER_NAME/mobile` (`YOUR_USER_NAME` would be replaced with your GitHub user name.)
+
+</Steps>
 
 ## Clone your Fork from GitHub
 
 [Cloning](https://help.github.com/articles/cloning-a-repository/) is where you **download** a copy of a repository from a `remote` location that is either owned by you or by someone else. In your case, this remote location is your `fork` of freeCodeCamp's repository which should be available at `https://github.com/YOUR_USER_NAME/mobile`. (`YOUR_USER_NAME` would be replaced with your GitHub user name.)
 
 Run these commands on your local machine:
+
+<Steps>
 
 1. Open a Terminal / Command Prompt / Shell in your projects directory
 
@@ -84,11 +90,13 @@ Run these commands on your local machine:
    git clone --depth=1 https://github.com/YOUR_USER_NAME/mobile.git
    ```
 
-This will download the entire freeCodeCamp mobile repository to your projects directory.
+   This will download the entire freeCodeCamp mobile repository to your projects directory.
 
-:::note
-`--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
-:::
+   :::note
+   `--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
+   :::
+
+</Steps>
 
 ## Set up Syncing from Parent
 
@@ -97,6 +105,8 @@ Now that you have downloaded a copy of your fork, you will need to set up an `up
 [As mentioned earlier](#fork-the-repository-on-github), the main repository is referred to as the `upstream` repository. Your fork is referred to as the `origin` repository.
 
 You need a reference from your local clone to the `upstream` repository in addition to the `origin` repository. This is so that you can sync changes from the main repository without the requirement of forking and cloning repeatedly.
+
+<Steps>
 
 1. Change directory to the new `mobile` directory:
 
@@ -124,6 +134,8 @@ You need a reference from your local clone to the `upstream` repository in addit
    upstream    https://github.com/freeCodeCamp/mobile.git (fetch)
    upstream    https://github.com/freeCodeCamp/mobile.git (push)
    ```
+
+</Steps>
 
 ## Running freeCodeCamp Mobile App Locally
 
@@ -190,6 +202,8 @@ You can now make changes to files and commit your changes to the local clone of 
 
 Follow these steps:
 
+<Steps>
+
 1. Validate that you are on the `main` branch:
 
    ```bash
@@ -213,38 +227,38 @@ Follow these steps:
 
 2. Sync the latest changes from the upstream `main` branch to your local main branch:
 
-:::caution
-If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
-You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
-:::
+   :::caution
+   If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
+   You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
+   :::
 
-This step **will sync the latest changes** from the main repository of freeCodeCamp mobile. It is important that you rebase your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
+   This step **will sync the latest changes** from the main repository of freeCodeCamp mobile. It is important that you rebase your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
 
-Update your local copy of the freeCodeCamp mobile upstream repository:
+   Update your local copy of the freeCodeCamp mobile upstream repository:
 
-```bash
-git fetch upstream
-```
+   ```bash
+   git fetch upstream
+   ```
 
-Hard reset your main branch with the freeCodeCamp mobile main:
+   Hard reset your main branch with the freeCodeCamp mobile main:
 
-```bash
-git reset --hard upstream/main
-```
+   ```bash
+   git reset --hard upstream/main
+   ```
 
-Push your main branch to your origin to have a clean history on your fork on GitHub:
+   Push your main branch to your origin to have a clean history on your fork on GitHub:
 
-```bash
-git push origin main --force
-```
+   ```bash
+   git push origin main --force
+   ```
 
-You can validate that your current main matches the upstream/main by performing a diff:
+   You can validate that your current main matches the upstream/main by performing a diff:
 
-```bash
-git diff upstream/main
-```
+   ```bash
+   git diff upstream/main
+   ```
 
-The resulting output should be empty.
+   The resulting output should be empty.
 
 3. Create a fresh new branch:
 
@@ -374,11 +388,15 @@ The resulting output should be empty.
     git push origin branch/name-here
     ```
 
+</Steps>
+
 ## Running mobile curriculum tests
 
 :::note
 You only need to follow this section if you're modifying the challenge test runner in the mobile app. Otherwise, you can go to the next section on [how to open a pull request](#proposing-a-pull-request-pr).
 :::
+
+<Steps>
 
 1. Clone a copy of the [freeCodeCamp repo](https://github.com/freeCodeCamp/freeCodeCamp) locally outside of your local copy of the freeCodeCamp mobile repo. Your folder structure should look like this:
 
@@ -475,18 +493,20 @@ You only need to follow this section if you're modifying the challenge test runn
     pnpm playwright:run --config=playwright-mobile.config.ts
     ```
 
+</Steps>
+
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request).
 
-<!-- ## Quick commands reference - NEED TO DISCUSS ABOUT THIS
+// Quick commands reference - NEED TO DISCUSS ABOUT THIS
 
 A quick reference to the commands that you will need when working locally.
 
-| command                                                        | description                                                                         |
-| -------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `npm ci`                                                       | Installs / re-install all dependencies and bootstraps the different services.       |
-| `npm run seed`                                                 | Parses all the challenge markdown files and inserts them into MongoDB.              | -->
+| command        | description                                                                   |
+| -------------- | ----------------------------------------------------------------------------- | --- |
+| `npm ci`       | Installs / re-install all dependencies and bootstraps the different services. |
+| `npm run seed` | Parses all the challenge markdown files and inserts them into MongoDB.        | --> |
 
 ## Troubleshooting
 

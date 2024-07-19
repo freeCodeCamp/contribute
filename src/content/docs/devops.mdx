@@ -2,6 +2,8 @@
 title: DevOps Handbook
 ---
 
+import { Steps } from '@astrojs/starlight/components';
+
 This guide will help you understand our infrastructure stack and how we maintain our platforms. While this guide does not have exhaustive details for all operations, it could be used as a reference for your understanding of the systems.
 
 Let us know if you have feedback or queries and we will be happy to clarify.
@@ -12,9 +14,16 @@ This repository is continuously built, tested, and deployed to **separate sets o
 
 This involves three steps to be followed in sequence:
 
-1. New changes (both fixes and features) are merged into our primary development branch (`main`) via pull requests.
-2. These changes are run through a series of automated tests.
-3. Once the tests pass we release the changes (or update them if needed) to deployments on our infrastructure.
+<Steps>
+
+1. New changes (both fixes and features) are merged into our primary
+   development branch (`main`) via pull requests.
+2. These changes are run
+   through a series of automated tests.
+3. Once the tests pass we release the
+   changes (or update them if needed) to deployments on our infrastructure.
+
+</Steps>
 
 ### Building the codebase - Mapping Git Branches to Deployments
 
@@ -60,61 +69,66 @@ In the upcoming days, we would improve this flow to be done via pull requests, f
 
 ### Pushing changes to Staging Applications
 
-1. Configure your remotes correctly.
+1.  Configure your remotes correctly.
 
-   ```sh
-   git remote -v
-   ```
+    ```sh
+    git remote -v
+    ```
 
-   **Results:**
+    **Results:**
 
-   ```
-   origin	git@github.com:raisedadead/freeCodeCamp.git (fetch)
-   origin	git@github.com:raisedadead/freeCodeCamp.git (push)
-   upstream	git@github.com:freeCodeCamp/freeCodeCamp.git (fetch)
-   upstream	git@github.com:freeCodeCamp/freeCodeCamp.git (push)
-   ```
+    ```
+    origin	git@github.com:raisedadead/freeCodeCamp.git (fetch)
+    origin	git@github.com:raisedadead/freeCodeCamp.git (push)
+    upstream	git@github.com:freeCodeCamp/freeCodeCamp.git (fetch)
+    upstream	git@github.com:freeCodeCamp/freeCodeCamp.git (push)
+    ```
 
-2. Make sure your `main` branch is pristine and in sync with the upstream.
+2.  Make sure your `main` branch is pristine and in sync with the upstream.
 
-   ```sh
-   git checkout main
-   git fetch --all --prune
-   git reset --hard upstream/main
-   ```
+    ```sh
+    git checkout main
+    git fetch --all --prune
+    git reset --hard upstream/main
+    ```
 
-3. Check that the GitHub CI is passing on the `main` branch for upstream.
+3.  Check that the GitHub CI is passing on the `main` branch for upstream.
 
-   The [continuous integration](https://github.com/freeCodeCamp/freeCodeCamp/actions) tests should be green and PASSING for the `main` branch. Click the green check mark next to the commit hash when viewing the `main` branch code.
+                    The [continuous integration](https://github.com/freeCodeCamp/freeCodeCamp/actions) tests should be green and PASSING for the `main` branch. Click the green check mark next to the commit hash when viewing the `main` branch code.
 
-    <details>
-      <summary>
-        Checking status on GitHub Actions (screenshot)
-      </summary>
-      <br>
-      <img src="/images/devops/github-actions.png" alt="Check build status on GitHub Actions">
+                          <details>
+
+                      <summary>
+                    Checking status on GitHub Actions (screenshot)
+
+                  </summary>
+
+              <br/>
+
+          <img src="/images/devops/github-actions.png" alt="Check build status on GitHub Actions"/>
+
     </details>
 
-   If this is failing you should stop and investigate the errors.
+    If this is failing you should stop and investigate the errors.
 
-4. Confirm that you are able to build the repository locally.
+4.  Confirm that you are able to build the repository locally.
 
-   ```
-   pnpm run clean-and-develop
-   ```
+    ```
+    pnpm run clean-and-develop
+    ```
 
-5. Move changes from `main` to `prod-staging` via a fast-forward merge
+5.  Move changes from `main` to `prod-staging` via a fast-forward merge
 
-   ```
-   git checkout prod-staging
-   git merge main
-   git push upstream
-   ```
+    ```
+    git checkout prod-staging
+    git merge main
+    git push upstream
+    ```
 
-:::note
-You will not be able to force push and if you have re-written the history in any way, these commands will error out.
-If they do, you may have done something incorrectly and you should just start over.
-:::
+    :::note
+    You will not be able to force push and if you have re-written the history in any way, these commands will error out.
+    If they do, you may have done something incorrectly and you should just start over.
+    :::
 
 The above steps will automatically trigger a run on the build pipeline for the `prod-staging` branch. Once the build is complete, the artifacts are saved as `.zip` files in a cold storage to be retrieved and used later.
 
@@ -127,13 +141,14 @@ The process is mostly the same as the staging platforms, with a few extra checks
 | Do NOT execute these commands unless you have verified that everything is working on the staging platform. You should not bypass or skip any testing on staging before proceeding further. |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
+<Steps>
 1. Make sure your `prod-staging` branch is pristine and in sync with the upstream.
 
-   ```sh
-   git checkout prod-staging
-   git fetch --all --prune
-   git reset --hard upstream/prod-staging
-   ```
+    ```sh
+    git checkout prod-staging
+    git fetch --all --prune
+    git reset --hard upstream/prod-staging
+    ```
 
 2. Move changes from `prod-staging` to `prod-current` via a fast-forward merge
 
@@ -143,10 +158,12 @@ The process is mostly the same as the staging platforms, with a few extra checks
    git push upstream
    ```
 
-:::note
-You will not be able to force push and if you have re-written the history in any way, these commands will error out.
-If they do, you may have done something incorrectly and you should just start over.
-:::
+   :::note
+   You will not be able to force push and if you have re-written the history in any way, these commands will error out.
+   If they do, you may have done something incorrectly and you should just start over.
+   :::
+
+</Steps>
 
 The above steps will automatically trigger a run on the build pipeline for the `prod-current` branch. Once a build artifact is ready, it will trigger a run on the release pipeline.
 
@@ -186,15 +203,15 @@ We thank you for reporting bugs that you encounter and help in making freeCodeCa
 
 Currently, a public beta testing version is available at:
 
-| Application | Language | URL                                      |
-| :---------- | :------- | :--------------------------------------- |
-| Learn       | English  | <https://www.freecodecamp.dev>           |
-|             | Espanol  | <https://www.freecodecamp.dev/espanol>   |
-|             | Chinese  | <https://www.freecodecamp.dev/chinese>   |
-| News        | English  | <https://www.freecodecamp.dev/news>      |
-| Forum       | English  | <https://forum.freecodecamp.dev>         |
-|             | Chinese  | <https://freecodecamp.dev/chinese/forum> |
-| API         | -        | `https://api.freecodecamp.dev`           |
+| Application | Language | URL                                        |
+| :---------- | :------- | :----------------------------------------- |
+| Learn       | English  | `<https://www.freecodecamp.dev>`           |
+|             | Espanol  | `<https://www.freecodecamp.dev/espanol>`   |
+|             | Chinese  | `<https://www.freecodecamp.dev/chinese>`   |
+| News        | English  | `<https://www.freecodecamp.dev/news>`      |
+| Forum       | English  | `<https://forum.freecodecamp.dev>`         |
+|             | Chinese  | `<https://freecodecamp.dev/chinese/forum>` |
+| API         | -        | `<https://api.freecodecamp.dev>`           |
 
 :::note
 The domain name is different than **`freeCodeCamp.org`**. This is intentional to prevent search engine indexing and avoid confusion for regular users of the platform.
@@ -241,8 +258,7 @@ You may send an email to `dev[at]freecodecamp.org` if you have any queries. As a
 
 1.  The guide applies to the **freeCodeCamp Staff members only**.
 2.  These instructions should not be considered exhaustive, please use caution.
-
-:::
+    :::
 
 As a member of the staff, you may have been given access to our cloud service providers like Azure, Digital Ocean, etc.
 
@@ -360,19 +376,21 @@ The NGINX config is available on
 
 Provisioning VMs with the Code
 
+<Steps>
+
 1. Install NGINX and configure from repository.
 
    ```bash
-   sudo su
+     sudo su
 
-   cd /var/www/html
-   git clone https://github.com/freeCodeCamp/error-pages
+     cd /var/www/html
+     git clone https://github.com/freeCodeCamp/error-pages
 
-   cd /etc/
-   rm -rf nginx
-   git clone https://github.com/freeCodeCamp/nginx-config nginx
+     cd /etc/
+     rm -rf nginx
+     git clone https://github.com/freeCodeCamp/nginx-config nginx
 
-   cd /etc/nginx
+     cd /etc/nginx
    ```
 
 2. Install Cloudflare origin certificates and upstream application config.
@@ -411,6 +429,8 @@ Provisioning VMs with the Code
    Configure and add rules to load balancer if needed. You may also need to add the
    VMs to load balancer backend pool if needed.
 
+</Steps>
+
 ### Logging and Monitoring
 
 1. Check status for NGINX service using the below command:
@@ -428,88 +448,95 @@ Provisioning VMs with the Code
 Config changes to our NGINX instances are maintained on GitHub, these should be
 deployed on each instance like so:
 
-1. SSH into the instance and enter sudo
+<Steps>
 
-```bash
-sudo su
-```
+1.  SSH into the instance and enter sudo
 
-2. Get the latest config code.
+    ```bash
+    sudo su
+    ```
 
-```bash
-cd /etc/nginx
-git fetch --all --prune
-git reset --hard origin/main
-```
+2.  Get the latest config code.
 
-3. Test and reload the config
-   [with Signals](https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/#controlling-nginx).
+    ```bash
+    cd /etc/nginx
+    git fetch --all --prune
+    git reset --hard origin/main
+    ```
 
-```bash
-nginx -t
-nginx -s reload
-```
+3.  Test and reload the config [with Signals](https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/#controlling-nginx).
+
+    ```bash
+    nginx -t
+    nginx -s reload
+    ```
+
+</Steps>
 
 ## Work on API Instances
 
 1. Install build tools for node binaries (`node-gyp`) etc.
 
-```bash
-sudo apt install build-essential
-```
+   ```bash
+   sudo apt install build-essential
+   ```
 
 ### First Install
 
 Provisioning VMs with the Code
 
-1. Install Node LTS.
+<Steps>
 
-2. Install pnpm globally.
+1.  Install Node LTS.
 
-```bash
-npm install -g pnpm
-```
+2.  Install pnpm globally.
 
-3. Install pm2 globally.
+    ```bash
+    npm install -g pnpm
+    ```
 
-```bash
-npm install -g pm2
-```
+3.  Install pm2 globally.
 
-4. Clone freeCodeCamp, set up env, and keys.
+    ```bash
+    npm install -g pm2
+    ```
 
-```bash
-git clone https://github.com/freeCodeCamp/freeCodeCamp.git
-cd freeCodeCamp
-git checkout prod-current # or any other branch to be deployed
-```
+4.  Clone freeCodeCamp, set up env, and keys.
 
-5. Create the `.env` from the secure credentials storage.
+    ```bash
+    git clone https://github.com/freeCodeCamp/freeCodeCamp.git
+    cd freeCodeCamp
+    git checkout prod-current # or any other branch to be deployed
+    ```
 
-6. Install dependencies
+5.  Create the `.env` from the secure credentials storage.
 
-```bash
-pnpm install
-```
+6.  Install dependencies
 
-7. Setup pm2 `logrotate` and startup on boot
+    ```bash
+    pnpm install
+    ```
 
-```bash
-pm2 install pm2-logrotate
-pm2 startup
-```
+7.  Setup pm2 `logrotate` and startup on boot
 
-8. Build the server
+    ```bash
+    pm2 install pm2-logrotate
+    pm2 startup
+    ```
 
-```bash
-pnpm prebuild && pnpm build:curriculum && pnpm build:server
-```
+8.  Build the server
+
+    ```bash
+    pnpm prebuild && pnpm build:curriculum && pnpm build:server
+    ```
 
 9.  Start Instances
 
-```bash
-pnpm start:server
-```
+    ```bash
+    pnpm start:server
+    ```
+
+</Steps>
 
 ### Logging and Monitoring
 
@@ -534,29 +561,33 @@ minute. We need to do a manual update before any deployment pipeline runs.
 
 #### 1. Manual Updates - Used for updating dependencies, env variables.
 
+<Steps>
+
 1. Stop all instances
 
-```bash
-pm2 stop all
-```
+   ```bash
+   pm2 stop all
+   ```
 
 2. Install dependencies
 
-```bash
-pnpm install
-```
+   ```bash
+   pnpm install
+   ```
 
 3. Build the server
 
-```bash
-pnpm prebuild && pnpm build:curriculum && pnpm build:server
-```
+   ```bash
+   pnpm prebuild && pnpm build:curriculum && pnpm build:server
+   ```
 
 4. Start Instances
 
-```bash
-pnpm start:server && pm2 logs
-```
+   ```bash
+   pnpm start:server && pm2 logs
+   ```
+
+</Steps>
 
 #### 2. Rolling updates - Used for logical changes to code.
 
@@ -590,6 +621,8 @@ sudo apt install build-essential
 ### First Install
 
 Provisioning VMs with the Code
+
+<Steps>
 
 1. Install Node LTS.
 
@@ -626,6 +659,8 @@ Provisioning VMs with the Code
    pm2 start  ./client-start-secondary.sh --name client-secondary
    ```
 
+</Steps>
+
 ### Logging and Monitoring
 
 ```bash
@@ -649,6 +684,8 @@ minute. We need to do a manual update before any deployment pipeline runs.
 
 #### 1. Manual Updates - Used for updating dependencies, env variables.
 
+<Steps>
+
 1. Stop all instances
 
    ```bash
@@ -662,6 +699,8 @@ minute. We need to do a manual update before any deployment pipeline runs.
    ```bash
    pm2 start all --update-env && pm2 logs
    ```
+
+</Steps>
 
 #### 2. Rolling updates - Used for logical changes to code.
 
@@ -685,6 +724,8 @@ We provision redundant NGINX instances which are themselves load balanced (Azure
 Provisioning VMs with the Code
 
 **NGINX Cluster:**
+
+<Steps>
 
 1. Install NGINX and configure from repository.
 
@@ -737,7 +778,11 @@ Provisioning VMs with the Code
    Configure and add rules to load balancer if needed. You may also need to add the
    VMs to load balancer backend pool if needed.
 
+</Steps>
+
 **Docker Cluster:**
+
+<Steps>
 
 1. Install Docker and configure from the repository
 
@@ -755,7 +800,11 @@ Provisioning VMs with the Code
    docker-compose up -d
    ```
 
+</Steps>
+
 ### Logging and Monitoring
+
+<Steps>
 
 1. Check status for NGINX service using the below command:
 
@@ -769,12 +818,16 @@ Provisioning VMs with the Code
    docker ps
    ```
 
+</Steps>
+
 ### Updating Instances (Maintenance)
 
 **NGINX Cluster:**
 
 Config changes to our NGINX instances are maintained on GitHub, these should be
 deployed on each instance like so:
+
+<Steps>
 
 1. SSH into the instance and enter sudo
 
@@ -798,7 +851,11 @@ deployed on each instance like so:
    nginx -s reload
    ```
 
+</Steps>
+
 **Docker Cluster:**
+
+<Steps>
 
 1. SSH into the instance and navigate to the chat config path
 
@@ -851,6 +908,8 @@ deployed on each instance like so:
    ```
 
    Select yes (y) to remove everything that is not in use. This will remove all stopped containers, all networks and volumes not used by at least one container, and all dangling images and build caches.
+
+</Steps>
 
 ## Work on Contributor Tools
 
@@ -957,6 +1016,8 @@ You should run the scripts in the home directory, and make sure no other `azagen
 
 Currently updating agents requires them to be removed and reconfigured. This is required for them to correctly pick up `PATH` values and other system environment variables. We need to do this for instance updating Node.js on our deployment target VMs.
 
+<Steps>
+
 1. Navigate and check status of the service
 
    ```bash
@@ -989,11 +1050,15 @@ Currently updating agents requires them to be removed and reconfigured. This is 
    rm -rf ~/azagent
    ```
 
+</Steps>
+
 Once You have completed the steps above, you can repeat the same steps as installing the agent.
 
 ## Flight Manual - Email Blast
 
 We use [a CLI tool](https://github.com/freecodecamp/sendgrid-email-blast) to send out the weekly newsletter. To spin this up and begin the process:
+
+<Steps>
 
 1. Sign in to DigitalOcean, and spin up new droplets under the `Sendgrid` project. Use the Ubuntu Sendgrid snapshot with the most recent date. This comes pre-loaded with the CLI tool and the script to fetch emails from the database. With the current volume, three droplets are sufficient to send the emails in a timely manner.
 
@@ -1022,11 +1087,15 @@ We use [a CLI tool](https://github.com/freecodecamp/sendgrid-email-blast) to sen
 
 7. When the email blast is complete, verify that no emails have failed before destroying the droplets.
 
+</Steps>
+
 ## Flight Manual - Adding news instances for new languages
 
 ### Theme Changes
 
 We use a custom [theme](https://github.com/freeCodeCamp/news-theme) for our news publication. Adding the following changes to the theme enables the addition of new languages.
+
+<Steps>
 
 1. Include an `else if` statement for the new [ISO language code](https://www.loc.gov/standards/iso639-2/php/code_list.php) in [`setup-locale.js`](https://github.com/freeCodeCamp/news-theme/blob/main/assets/config/setup-locale.js)
 2. Create an initial config folder by duplicating the [`assets/config/en`](https://github.com/freeCodeCamp/news-theme/tree/main/assets/config/en) folder and changing its name to the new language code. (`en` —> `es` for Spanish)
@@ -1034,6 +1103,8 @@ We use a custom [theme](https://github.com/freeCodeCamp/news-theme) for our news
 4. Duplicate the [`locales/en.json`](https://github.com/freeCodeCamp/news-theme/blob/main/locales/en.json) and rename it to the new language code.
 5. In [`partials/i18n.hbs`](https://github.com/freeCodeCamp/news-theme/blob/main/partials/i18n.hbs), add scripts for the newly created config files.
 6. Add the related language `day.js` script from [cdnjs](https://cdnjs.com/libraries/dayjs/1.10.4) to the [freeCodeCamp CDN](https://github.com/freeCodeCamp/cdn/tree/main/build/news-assets/dayjs/1.10.4/locale)
+
+</Steps>
 
 ### Ghost Dashboard Changes
 
