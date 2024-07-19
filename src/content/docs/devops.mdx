@@ -69,7 +69,6 @@ In the upcoming days, we would improve this flow to be done via pull requests, f
 
 ### Pushing changes to Staging Applications
 
-
 1.  Configure your remotes correctly.
 
     ```sh
@@ -131,7 +130,6 @@ In the upcoming days, we would improve this flow to be done via pull requests, f
     If they do, you may have done something incorrectly and you should just start over.
     :::
 
-
 The above steps will automatically trigger a run on the build pipeline for the `prod-staging` branch. Once the build is complete, the artifacts are saved as `.zip` files in a cold storage to be retrieved and used later.
 
 The release pipeline is triggered automatically when a fresh artifact is available from the connected build pipeline. For staging platforms, this process does not involve manual approval, and the artifacts are pushed to the Client CDN and API servers.
@@ -154,19 +152,18 @@ The process is mostly the same as the staging platforms, with a few extra checks
 
 2. Move changes from `prod-staging` to `prod-current` via a fast-forward merge
 
-    ```
-    git checkout prod-current
-    git merge prod-staging
-    git push upstream
-    ```
+   ```
+   git checkout prod-current
+   git merge prod-staging
+   git push upstream
+   ```
 
-    :::note
-    You will not be able to force push and if you have re-written the history in any way, these commands will error out.
-    If they do, you may have done something incorrectly and you should just start over.
-    :::
+   :::note
+   You will not be able to force push and if you have re-written the history in any way, these commands will error out.
+   If they do, you may have done something incorrectly and you should just start over.
+   :::
 
 </Steps>
-
 
 The above steps will automatically trigger a run on the build pipeline for the `prod-current` branch. Once a build artifact is ready, it will trigger a run on the release pipeline.
 
@@ -383,59 +380,58 @@ Provisioning VMs with the Code
 
 1. Install NGINX and configure from repository.
 
-      ```bash
-        sudo su
+   ```bash
+     sudo su
 
-        cd /var/www/html
-        git clone https://github.com/freeCodeCamp/error-pages
+     cd /var/www/html
+     git clone https://github.com/freeCodeCamp/error-pages
 
-        cd /etc/
-        rm -rf nginx
-        git clone https://github.com/freeCodeCamp/nginx-config nginx
+     cd /etc/
+     rm -rf nginx
+     git clone https://github.com/freeCodeCamp/nginx-config nginx
 
-        cd /etc/nginx
-      ```
+     cd /etc/nginx
+   ```
 
 2. Install Cloudflare origin certificates and upstream application config.
 
-      Get the Cloudflare origin certificates from the secure storage and install at
-      required locations.
+   Get the Cloudflare origin certificates from the secure storage and install at
+   required locations.
 
-      **OR**
+   **OR**
 
-      Move over existing certificates:
+   Move over existing certificates:
 
-      ```bash
-      # Local
-      scp -r username@source-server-public-ip:/etc/nginx/ssl ./
-      scp -pr ./ssl username@target-server-public-ip:/tmp/
+   ```bash
+   # Local
+   scp -r username@source-server-public-ip:/etc/nginx/ssl ./
+   scp -pr ./ssl username@target-server-public-ip:/tmp/
 
-      # Remote
-      rm -rf ./ssl
-      mv /tmp/ssl ./
-      ```
+   # Remote
+   rm -rf ./ssl
+   mv /tmp/ssl ./
+   ```
 
-      Update Upstream Configurations:
+   Update Upstream Configurations:
 
-      ```bash
-      vi configs/upstreams.conf
-      ```
+   ```bash
+   vi configs/upstreams.conf
+   ```
 
-      Add/update the source/origin application IP addresses.
+   Add/update the source/origin application IP addresses.
 
 3. Set up networking and firewalls.
 
-    Configure Azure firewalls and `ufw` as needed for ingress origin addresses.
+   Configure Azure firewalls and `ufw` as needed for ingress origin addresses.
 
 4. Add the VM to the load balancer backend pool.
 
-    Configure and add rules to load balancer if needed. You may also need to add the
-    VMs to load balancer backend pool if needed.
+   Configure and add rules to load balancer if needed. You may also need to add the
+   VMs to load balancer backend pool if needed.
 
 </Steps>
 
 ### Logging and Monitoring
-
 
 1. Check status for NGINX service using the below command:
 
@@ -447,8 +443,6 @@ Provisioning VMs with the Code
 
    NGINX Amplify: [https://amplify.nginx.com]('https://amplify.nginx.com'), our current basic monitoring dashboard. We are working on more granular metrics for better observability
 
-
-
 ### Updating Instances (Maintenance)
 
 Config changes to our NGINX instances are maintained on GitHub, these should be
@@ -456,13 +450,13 @@ deployed on each instance like so:
 
 <Steps>
 
-1. SSH into the instance and enter sudo
+1.  SSH into the instance and enter sudo
 
     ```bash
     sudo su
     ```
 
-2. Get the latest config code.
+2.  Get the latest config code.
 
     ```bash
     cd /etc/nginx
@@ -470,22 +464,22 @@ deployed on each instance like so:
     git reset --hard origin/main
     ```
 
-3. Test and reload the config
-   [with Signals](https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/#controlling-nginx).
+3.  Test and reload the config [with Signals](https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/#controlling-nginx).
 
-      ```bash
-      nginx -t
-      nginx -s reload
-      ```
+    ```bash
+    nginx -t
+    nginx -s reload
+    ```
+
 </Steps>
-## Work on API Instances
 
+## Work on API Instances
 
 1. Install build tools for node binaries (`node-gyp`) etc.
 
-    ```bash
-    sudo apt install build-essential
-    ```
+   ```bash
+   sudo apt install build-essential
+   ```
 
 ### First Install
 
@@ -493,54 +487,55 @@ Provisioning VMs with the Code
 
 <Steps>
 
-1. Install Node LTS.
+1.  Install Node LTS.
 
-2. Install pnpm globally.
+2.  Install pnpm globally.
 
     ```bash
     npm install -g pnpm
     ```
 
-3. Install pm2 globally.
+3.  Install pm2 globally.
 
     ```bash
     npm install -g pm2
     ```
 
-4. Clone freeCodeCamp, set up env, and keys.
+4.  Clone freeCodeCamp, set up env, and keys.
 
-      ```bash
-      git clone https://github.com/freeCodeCamp/freeCodeCamp.git
-      cd freeCodeCamp
-      git checkout prod-current # or any other branch to be deployed
-      ```
+    ```bash
+    git clone https://github.com/freeCodeCamp/freeCodeCamp.git
+    cd freeCodeCamp
+    git checkout prod-current # or any other branch to be deployed
+    ```
 
-5. Create the `.env` from the secure credentials storage.
+5.  Create the `.env` from the secure credentials storage.
 
-6. Install dependencies
+6.  Install dependencies
 
-      ```bash
-      pnpm install
-      ```
+    ```bash
+    pnpm install
+    ```
 
-7. Setup pm2 `logrotate` and startup on boot
+7.  Setup pm2 `logrotate` and startup on boot
 
-      ```bash
-      pm2 install pm2-logrotate
-      pm2 startup
-      ```
+    ```bash
+    pm2 install pm2-logrotate
+    pm2 startup
+    ```
 
-8. Build the server
+8.  Build the server
 
-      ```bash
-      pnpm prebuild && pnpm build:curriculum && pnpm build:server
-      ```
+    ```bash
+    pnpm prebuild && pnpm build:curriculum && pnpm build:server
+    ```
 
-9. Start Instances
+9.  Start Instances
 
     ```bash
     pnpm start:server
     ```
+
 </Steps>
 
 ### Logging and Monitoring
@@ -570,27 +565,27 @@ minute. We need to do a manual update before any deployment pipeline runs.
 
 1. Stop all instances
 
-    ```bash
-    pm2 stop all
-    ```
+   ```bash
+   pm2 stop all
+   ```
 
 2. Install dependencies
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 3. Build the server
 
-    ```bash
-    pnpm prebuild && pnpm build:curriculum && pnpm build:server
-    ```
+   ```bash
+   pnpm prebuild && pnpm build:curriculum && pnpm build:server
+   ```
 
 4. Start Instances
 
-    ```bash
-    pnpm start:server && pm2 logs
-    ```
+   ```bash
+   pnpm start:server && pm2 logs
+   ```
 
 </Steps>
 
@@ -611,10 +606,9 @@ should not need to run these commands. These are here for documentation.
 
 2. Update pm2 to use the new version
 
-  ```bash
-  pm2 update
-  ```
-
+```bash
+pm2 update
+```
 
 ## Work on Client Instances
 
@@ -735,54 +729,54 @@ Provisioning VMs with the Code
 
 1. Install NGINX and configure from repository.
 
-    ```bash
-    sudo su
+   ```bash
+   sudo su
 
-    cd /var/www/html
-    git clone https://github.com/freeCodeCamp/error-pages
+   cd /var/www/html
+   git clone https://github.com/freeCodeCamp/error-pages
 
-    cd /etc/
-    rm -rf nginx
-    git clone https://github.com/freeCodeCamp/chat-nginx-config nginx
+   cd /etc/
+   rm -rf nginx
+   git clone https://github.com/freeCodeCamp/chat-nginx-config nginx
 
-    cd /etc/nginx
-    ```
+   cd /etc/nginx
+   ```
 
 2. Install Cloudflare origin certificates and upstream application config.
 
-    Get the Cloudflare origin certificates from the secure storage and install at
-    required locations.
+   Get the Cloudflare origin certificates from the secure storage and install at
+   required locations.
 
-    **OR**
+   **OR**
 
-    Move over existing certificates:
+   Move over existing certificates:
 
-    ```bash
-    # Local
-    scp -r username@source-server-public-ip:/etc/nginx/ssl ./
-    scp -pr ./ssl username@target-server-public-ip:/tmp/
+   ```bash
+   # Local
+   scp -r username@source-server-public-ip:/etc/nginx/ssl ./
+   scp -pr ./ssl username@target-server-public-ip:/tmp/
 
-    # Remote
-    rm -rf ./ssl
-    mv /tmp/ssl ./
-    ```
+   # Remote
+   rm -rf ./ssl
+   mv /tmp/ssl ./
+   ```
 
-    Update Upstream Configurations:
+   Update Upstream Configurations:
 
-    ```bash
-    vi configs/upstreams.conf
-    ```
+   ```bash
+   vi configs/upstreams.conf
+   ```
 
-    Add/update the source/origin application IP addresses.
+   Add/update the source/origin application IP addresses.
 
 3. Set up networking and firewalls.
 
-    Configure Azure firewalls and `ufw` as needed for ingress origin addresses.
+   Configure Azure firewalls and `ufw` as needed for ingress origin addresses.
 
 4. Add the VM to the load balancer backend pool.
 
-    Configure and add rules to load balancer if needed. You may also need to add the
-    VMs to load balancer backend pool if needed.
+   Configure and add rules to load balancer if needed. You may also need to add the
+   VMs to load balancer backend pool if needed.
 
 </Steps>
 
@@ -852,10 +846,10 @@ deployed on each instance like so:
 3. Test and reload the config
    [with Signals](https://docs.nginx.com/nginx/admin-guide/basic-functionality/runtime-control/#controlling-nginx).
 
-    ```bash
-    nginx -t
-    nginx -s reload
-    ```
+   ```bash
+   nginx -t
+   nginx -s reload
+   ```
 
 </Steps>
 
@@ -896,24 +890,24 @@ deployed on each instance like so:
 
 6. Cleanup extraneous resources
 
-    ```bash
-    docker system prune --volumes
-    ```
+   ```bash
+   docker system prune --volumes
+   ```
 
-    Output:
+   Output:
 
-    ```bash
-    WARNING! This will remove:
-      - all stopped containers
-      - all networks not used by at least one container
-      - all volumes not used by at least one container
-      - all dangling images
-      - all dangling build cache
+   ```bash
+   WARNING! This will remove:
+     - all stopped containers
+     - all networks not used by at least one container
+     - all volumes not used by at least one container
+     - all dangling images
+     - all dangling build cache
 
-    Are you sure you want to continue? [y/N] y
-    ```
+   Are you sure you want to continue? [y/N] y
+   ```
 
-    Select yes (y) to remove everything that is not in use. This will remove all stopped containers, all networks and volumes not used by at least one container, and all dangling images and build caches.
+   Select yes (y) to remove everything that is not in use. This will remove all stopped containers, all networks and volumes not used by at least one container, and all dangling images and build caches.
 
 </Steps>
 
@@ -1079,11 +1073,11 @@ We use [a CLI tool](https://github.com/freecodecamp/sendgrid-email-blast) to sen
 
 3. Run the script.
 
-    ```bash
-    node get-emails.js emails.csv
-    ```
+   ```bash
+   node get-emails.js emails.csv
+   ```
 
-    This will save the email list in an `emails.csv` file.
+   This will save the email list in an `emails.csv` file.
 
 4. Break the emails down into multiple files, depending on the number of droplets you need. This is easiest to do by using `scp` to pull the email list locally and using your preferred text editor to split them into multiple files. Each file will need the `email,unsubscribeId` header.
 

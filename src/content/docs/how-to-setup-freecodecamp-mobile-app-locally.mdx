@@ -90,14 +90,13 @@ Run these commands on your local machine:
    git clone --depth=1 https://github.com/YOUR_USER_NAME/mobile.git
    ```
 
-    This will download the entire freeCodeCamp mobile repository to your projects directory.
+   This will download the entire freeCodeCamp mobile repository to your projects directory.
 
-    :::note
-    `--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
-    :::
+   :::note
+   `--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
+   :::
 
 </Steps>
-
 
 ## Set up Syncing from Parent
 
@@ -228,38 +227,38 @@ Follow these steps:
 
 2. Sync the latest changes from the upstream `main` branch to your local main branch:
 
-    :::caution
-    If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
-    You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
-    :::
+   :::caution
+   If you have any outstanding pull request that you made from the `main` branch of your fork, you will lose them at the end of this step.
+   You should ensure your pull request is merged by a moderator before performing this step. To avoid this scenario, you should **always** work on a branch other than the `main`.
+   :::
 
-    This step **will sync the latest changes** from the main repository of freeCodeCamp mobile. It is important that you rebase your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
+   This step **will sync the latest changes** from the main repository of freeCodeCamp mobile. It is important that you rebase your branch on top of the latest `upstream/main` as often as possible to avoid conflicts later.
 
-    Update your local copy of the freeCodeCamp mobile upstream repository:
+   Update your local copy of the freeCodeCamp mobile upstream repository:
 
-    ```bash
-    git fetch upstream
-    ```
+   ```bash
+   git fetch upstream
+   ```
 
-    Hard reset your main branch with the freeCodeCamp mobile main:
+   Hard reset your main branch with the freeCodeCamp mobile main:
 
-    ```bash
-    git reset --hard upstream/main
-    ```
+   ```bash
+   git reset --hard upstream/main
+   ```
 
-    Push your main branch to your origin to have a clean history on your fork on GitHub:
+   Push your main branch to your origin to have a clean history on your fork on GitHub:
 
-    ```bash
-    git push origin main --force
-    ```
+   ```bash
+   git push origin main --force
+   ```
 
-    You can validate that your current main matches the upstream/main by performing a diff:
+   You can validate that your current main matches the upstream/main by performing a diff:
 
-    ```bash
-    git diff upstream/main
-    ```
+   ```bash
+   git diff upstream/main
+   ```
 
-    The resulting output should be empty.
+   The resulting output should be empty.
 
 3. Create a fresh new branch:
 
