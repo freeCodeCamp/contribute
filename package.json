@@ -25,9 +25,9 @@
     ]
   },
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
+    "@astrojs/check": "^0.8.2",
     "@astrojs/node": "^8.2.5",
-    "@astrojs/starlight": "^0.24.0",
+    "@astrojs/starlight": "^0.25.1",
     "astro": "^4.5.12",
     "express": "4.19.2",
     "morgan": "1.10.0",
@@ -48,7 +48,7 @@
     "is-ci": "^3.0.1",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.14.0",
+    "prettier-plugin-astro": "^0.14.1",
     "sharp": "0.33.4"
   }
 }

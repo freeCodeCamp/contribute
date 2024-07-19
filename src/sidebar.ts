@@ -34,8 +34,7 @@ export const sidebar = [
           zh: chinese['Introduction'],
           'zh-Tw': chineseTraditional['Introduction']
         },
-        link: '/intro',
-        description: 'Contribute to the freeCodeCamp.org Community'
+        link: '/intro'
       },
       {
         label: english['Frequently Asked Questions'],
