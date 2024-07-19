@@ -11,7 +11,7 @@
 # All files are owned by ops
 # -------------------------------------------------
 
-* @freecodecamp/ops
+* @freeCodeCamp/dev-team
 
 # --- Owned by none (negate rule above) ---
 
@@ -23,7 +23,7 @@ pnpm-lock.yaml
 # All files in the root are owned by ops
 # -------------------------------------------------
 
-/* @freecodecamp/ops
+/* @freeCodeCamp/dev-team
 
 # --- Owned by none (negate rule above) ---
 
