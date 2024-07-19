@@ -14,26 +14,30 @@ const shouldRenderSearch = true;
 //config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
-<div class="header sl-flex">
-  <div class="sl-flex">
+<div class='header sl-flex'>
+  <div class='sl-flex'>
     {shouldRenderSearch && <Search {...Astro.props} />}
   </div>
 
-  <a class="title-wrapper sl-flex" data-nosearch="" href="/" style="justify-content:center">
+  <a
+    class='title-wrapper sl-flex'
+    data-nosearch=''
+    href='/'
+    style='justify-content:center'
+  >
     <img
-      alt="freeCodeCamp.org"
-      src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
-      style="max-width: 30%;"
+      alt='freeCodeCamp.org'
+      src='https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
+      style='max-width: 30%;'
     />
   </a>
 
-  <div class="sl-hidden md:sl-flex right-group">
-    <div class="sl-flex social-icons">
+  <div class='sl-hidden md:sl-flex right-group'>
+    <div class='sl-flex social-icons'>
       <SocialIcons {...Astro.props} />
     </div>
     <FCCThemeSelect {...Astro.props} />
     <LanguageSelect {...Astro.props} />
-
   </div>
 </div>
 
@@ -70,19 +74,26 @@ const shouldRenderSearch = true;
       --__toc-width: 0rem;
     }
     .header {
-      --__sidebar-width: max(0rem, var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x));
+      --__sidebar-width: max(
+        0rem,
+        var(--sl-content-inline-start, 0rem) - var(--sl-nav-pad-x)
+      );
       --__main-column-fr: calc(
         (
-            100% + var(--__sidebar-pad, 0rem) - var(--__toc-width, var(--sl-sidebar-width)) -
-              (2 * var(--__toc-width, var(--sl-nav-pad-x))) - var(--sl-content-inline-start, 0rem) -
-              var(--sl-content-width)
+            100% + var(--__sidebar-pad, 0rem) -
+              var(--__toc-width, var(--sl-sidebar-width)) -
+              (2 * var(--__toc-width, var(--sl-nav-pad-x))) -
+              var(--sl-content-inline-start, 0rem) - var(--sl-content-width)
           ) / 2
       );
       display: grid;
       grid-template-columns:
         /* 1 (site title): runs up until the main content column’s left edge or the width of the title, whichever is the largest  */
         minmax(
-          calc(var(--__sidebar-width) + max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))),
+          calc(
+            var(--__sidebar-width) +
+              max(0rem, var(--__main-column-fr) - var(--sl-nav-gap))
+          ),
           auto
         )
         /* 2 (search box): all free space that is available. */

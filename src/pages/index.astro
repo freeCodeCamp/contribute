@@ -1,5 +1,7 @@
 ---
+
 ---
+
 <!--
   This page is a workaround to redirect users to the correct page based on the URL hash.
   The previous implementation used docsify which used location hash to navigate between pages.
@@ -12,7 +14,9 @@
       window.location.replace('/intro');
     } else if (hash.startsWith('#/')) {
       const [newPath, newHash] = hash.slice(2).split('?id=');
-      window.location.replace(newHash ? `/${newPath}/#${newHash}` : `/${newPath}`);
+      window.location.replace(
+        newHash ? `/${newPath}/#${newHash}` : `/${newPath}`
+      );
     } else {
       window.location.replace('/intro');
     }
@@ -35,8 +39,12 @@
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 </style>
-<div class="loader"></div>
+<div class='loader'></div>
