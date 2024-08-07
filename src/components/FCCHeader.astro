@@ -28,7 +28,6 @@ const shouldRenderSearch = true;
     <img
       alt='freeCodeCamp.org'
       src='https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
-      style='max-width: 30%;'
     />
   </a>
 
@@ -53,6 +52,11 @@ const shouldRenderSearch = true;
   .title-wrapper {
     /* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
     overflow: hidden;
+  }
+
+  .title-wrapper > img {
+    min-width: 10rem;
+    max-width: 40%;
   }
 
   .right-group,
@@ -101,6 +105,10 @@ const shouldRenderSearch = true;
         /* 3 (right items): use the space that these need. */
         auto;
       align-content: center;
+    }
+    .title-wrapper > img {
+      min-width: 15rem;
+      max-width: 40%;
     }
   }
 </style>
