@@ -36,5 +36,6 @@
   "aside.tip": "Tip",
   "aside.caution": "Caution",
   "aside.danger": "Danger",
-  "fileTree.directory": "Directory"
+  "fileTree.directory": "Directory",
+  "sidebar.gettingStarted" : "Getting Started"
 }

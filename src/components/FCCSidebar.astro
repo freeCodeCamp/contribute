@@ -1,0 +1,59 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('i18n', Astro.currentLocale ?? 'en');
+---
+
+<!--<SidebarSublist sublist={sidebar} /> -->
+<nav>
+  <ul>
+    <li>
+      <strong>{entry?.data['sidebar.gettingStarted']}</strong>
+      <ul>
+        <li>
+          <a
+            href='{Astro.currentLocale}/index'
+            title={entry?.data['sidebar.introduction']}
+            >{entry?.data['sidebar.introduction']}</a>
+        </li>
+        <li><a href='FAQ'>{entry?.data['sidebar.faq']}</a></li>
+        <li>
+          <a href='security'>{entry?.data['sidebar.report_vulnerability']}</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>{entry?.data['sidebar.translation_contribution']}</strong>
+      <ul>
+        <li>
+          <a href='how-to-translate-files'
+            >{entry?.data['sidebar.translate_resources']}</a>
+        </li>
+        <li>
+          <a href='how-to-proofread-files'
+            >{entry?.data['sidebar.proofread_translations']}</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>{entry?.data['sidebar.code_contribution']}</strong>
+      <ul>
+        <li>
+          <a href='how-to-setup-freecodecamp-locally'
+            >{entry?.data['sidebar.setup_freecodecamp']}</a>
+        </li>
+        <li>
+          <a href='codebase-best-practices'
+            >{entry?.data['sidebar.best_practices']}</a>
+        </li>
+        <!-- Add other items with translations -->
+      </ul>
+    </li>
+    <!-- Add additional sections similarly -->
+  </ul>
+</nav>
+<div class='md:sl-hidden'>
+  <MobileMenuFooter {...Astro.props} />
+</div>

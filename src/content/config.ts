@@ -7,7 +7,8 @@ export const collections = {
     type: 'data',
     schema: i18nSchema({
       extend: z.object({
-        'custom.label': z.string().optional()
+        'sidebar.gettingStarted': z.string().optional(),
+        'sidebar.introduction': z.string().optional()
       })
     })
   })
