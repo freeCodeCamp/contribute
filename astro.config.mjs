@@ -11,8 +11,8 @@ export default defineConfig({
     '/FAQ': '/faq'
   },
   i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
+    defaultLocale: 'en',
+    locales: ['en'],
     routing: {
       prefixDefaultLocale: false
     }
@@ -34,7 +34,7 @@ export default defineConfig({
         twitter: 'https://twitter.com/freeCodeCamp',
         discord: 'https://chat.freecodecamp.org'
       },
-     //sidebar: sidebar,
+      //sidebar: sidebar,
       components: {
         // Override the default `SocialIcons` component.
         Header: './src/components/FCCHeader.astro',
