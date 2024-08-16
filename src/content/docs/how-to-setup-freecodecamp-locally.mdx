@@ -186,6 +186,16 @@ Run these commands on your local machine:
    `--depth=1` creates a shallow clone of your fork, with only the most recent history/commit.
    :::
 
+3. (Optional) The localized versions of our curriculum are stored in the [i18n-curriculum repo.](https://github.com/freeCodeCamp/i18n-curriculum) If you intend to run a localized version of the curriculum, you need to download the files from there. If not, you can skip this step. Run:
+
+   ```bash
+   cd freeCodeCamp
+   ```
+
+   ```bash
+   git submodule update --init
+   ```
+
 </Steps>
 
 ## Set up Syncing from Parent
@@ -198,7 +208,7 @@ You need a reference from your local clone to the `upstream` repository in addit
 
 <Steps>
 
-1. Change the directory to the new freeCodeCamp directory:
+1. Change the directory to the new freeCodeCamp directory if you aren't already there:
 
    ```bash
    cd freeCodeCamp
