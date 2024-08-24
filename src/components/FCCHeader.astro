@@ -52,11 +52,12 @@ const shouldRenderSearch = true;
   .title-wrapper {
     /* Prevent long titles overflowing and covering the search and menu buttons on narrow viewports. */
     overflow: hidden;
+    margin: auto;
   }
 
   .title-wrapper > img {
-    min-width: 10rem;
-    max-width: 40%;
+    height: 24px;
+    width: 210px;
   }
 
   .right-group,
@@ -105,10 +106,6 @@ const shouldRenderSearch = true;
         /* 3 (right items): use the space that these need. */
         auto;
       align-content: center;
-    }
-    .title-wrapper > img {
-      min-width: 15rem;
-      max-width: 40%;
     }
   }
 </style>
