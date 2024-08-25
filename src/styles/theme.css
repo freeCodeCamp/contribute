@@ -157,6 +157,12 @@ body .content {
   background-color: var(--theme-color);
 }
 
+@media (max-width: 50em) {
+  [data-theme='light'] button[data-open-modal] {
+    color: var(--sl-color-black);
+  }
+}
+
 select,
 option,
 .icon {
