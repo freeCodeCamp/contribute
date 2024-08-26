@@ -15,8 +15,8 @@ importers:
         specifier: ^8.2.5
         version: 8.3.3(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))
       '@astrojs/starlight':
-        specifier: ^0.25.1
-        version: 0.25.4(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))
+        specifier: ^0.26.0
+        version: 0.26.1(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))
       astro:
         specifier: ^4.5.12
         version: 4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4)
@@ -133,8 +133,8 @@ packages:
   '@astrojs/sitemap@3.1.6':
     resolution: {integrity: sha512-1Qp2NvAzVImqA6y+LubKi1DVhve/hXXgFvB0szxiipzh7BvtuKe4oJJ9dXSqaubaTkt4nMa6dv6RCCAYeB6xaQ==}
 
-  '@astrojs/starlight@0.25.4':
-    resolution: {integrity: sha512-TRPgRsd5opi2tCXvh8rWizpLsJsRRXbYecULG5b/1x4BFyp40ZJVB77cLMjTj3lHwqWs0Sybtq5OBpOy6fuIEQ==}
+  '@astrojs/starlight@0.26.1':
+    resolution: {integrity: sha512-0qNYWZJ+ZOdSfM7du6fGuwUhyTHtAeRIl0zYe+dF0TxDvcakplO1SYLbGGX6lEVYE3PdBne7dcJww85bXZJIIQ==}
     peerDependencies:
       astro: ^4.8.6
 
@@ -785,9 +785,6 @@ packages:
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
-
-  '@types/unist@3.0.2':
-    resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -1665,9 +1662,6 @@ packages:
 
   hast-util-embedded@3.0.0:
     resolution: {integrity: sha512-naH8sld4Pe2ep03qqULEtvYr7EjrLK2QHY8KJR6RJkTUjPGObe1vnx585uzem2hGra+s1q08DZZpfgDVYRbaXA==}
-
-  hast-util-from-html@2.0.1:
-    resolution: {integrity: sha512-RXQBLMl9kjKVNkJTIO6bZyb2n+cUH8LFaSSzo82jiLT6Tfc+Pt7VQCS+/h3YwG4jaNE2TA2sdJisGWR+aJrp0g==}
 
   hast-util-from-html@2.0.2:
     resolution: {integrity: sha512-HwOHwxdt2zC5KQ/CNoybBntRook2zJvfZE/u5/Ap7aLPe22bDqen7KwGkOqOyzL5zIqKwiYX/OTtE0FWgr6XXA==}
@@ -3336,7 +3330,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight@0.25.4(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))':
+  '@astrojs/starlight@0.26.1(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))':
     dependencies:
       '@astrojs/mdx': 3.1.3(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))
       '@astrojs/sitemap': 3.1.6
@@ -3346,7 +3340,7 @@ snapshots:
       astro: 4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4)
       astro-expressive-code: 0.35.6(astro@4.14.5(@types/node@20.16.1)(rollup@4.21.0)(typescript@5.5.4))
       bcp-47: 2.1.0
-      hast-util-from-html: 2.0.1
+      hast-util-from-html: 2.0.2
       hast-util-select: 6.0.2
       hast-util-to-string: 3.0.0
       hastscript: 9.0.0
@@ -3940,11 +3934,11 @@ snapshots:
 
   '@types/hast@3.0.4':
     dependencies:
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
 
   '@types/mdast@4.0.4':
     dependencies:
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
 
   '@types/mdx@2.0.13': {}
 
@@ -3967,8 +3961,6 @@ snapshots:
   '@types/triple-beam@1.3.5': {}
 
   '@types/unist@2.0.11': {}
-
-  '@types/unist@3.0.2': {}
 
   '@types/unist@3.0.3': {}
 
@@ -5035,15 +5027,6 @@ snapshots:
       '@types/hast': 3.0.4
       hast-util-is-element: 3.0.0
 
-  hast-util-from-html@2.0.1:
-    dependencies:
-      '@types/hast': 3.0.4
-      devlop: 1.1.0
-      hast-util-from-parse5: 8.0.1
-      parse5: 7.1.2
-      vfile: 6.0.2
-      vfile-message: 4.0.2
-
   hast-util-from-html@2.0.2:
     dependencies:
       '@types/hast': 3.0.4
@@ -5107,7 +5090,7 @@ snapshots:
   hast-util-select@6.0.2:
     dependencies:
       '@types/hast': 3.0.4
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
       bcp-47-match: 2.0.3
       comma-separated-tokens: 2.0.3
       css-selector-parser: 3.0.5
@@ -5471,7 +5454,7 @@ snapshots:
   mdast-util-directive@3.0.0:
     dependencies:
       '@types/mdast': 4.0.4
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
       devlop: 1.1.0
       mdast-util-from-markdown: 2.0.1
       mdast-util-to-markdown: 2.1.0
@@ -5491,7 +5474,7 @@ snapshots:
   mdast-util-from-markdown@2.0.1:
     dependencies:
       '@types/mdast': 4.0.4
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
       decode-named-character-reference: 1.0.2
       devlop: 1.1.0
       mdast-util-to-string: 4.0.0
@@ -5632,7 +5615,7 @@ snapshots:
   mdast-util-to-markdown@2.1.0:
     dependencies:
       '@types/mdast': 4.0.4
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
       longest-streak: 3.1.0
       mdast-util-phrasing: 4.1.0
       mdast-util-to-string: 4.0.0
@@ -6722,7 +6705,7 @@ snapshots:
 
   unified@11.0.5:
     dependencies:
-      '@types/unist': 3.0.2
+      '@types/unist': 3.0.3
       bail: 2.0.2
       devlop: 1.1.0
       extend: 3.0.2
