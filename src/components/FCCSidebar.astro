@@ -61,64 +61,59 @@ const { nested } = Astro.props;
             >{entry?.data['sidebar.work_on_codebase']}</a
           >
         </li>
-        <li>
-          <a href={`${prefix}/how-to-contribute-to-the-codebase`}
-            >{entry?.data['sidebar.work_on_codebase']}</a
-          >
-        </li>
 
         <li>
-          <a href={`prefix}/how-to-work-on-coding-challenges`}
+          <a href={`${prefix}/how-to-work-on-coding-challenges`}
             >{entry?.data['sidebar.work_on_coding_challenges']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/curriculum-help`}
+          <a href={`${prefix}/curriculum-help`}
             >{entry?.data['sidebar.use_the_curriculum_helpers']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-work-on-the-component-library`}
+          <a href={`${prefix}/how-to-work-on-the-component-library`}
             >{entry?.data['sidebar.work_on_component_library']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-work-on-practice-projects`}
+          <a href={`${prefix}/how-to-work-on-practice-projects`}
             >{entry?.data['sidebar.work_on_practice_projects']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-setup-freecodecamp-mobile-app-locally`}
+          <a href={`${prefix}/how-to-setup-freecodecamp-mobile-app-locally`}
             >{entry?.data['sidebar.work_on_mobile_app']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-work-on-tutorials-that-use-coderoad`}
+          <a href={`${prefix}/how-to-work-on-tutorials-that-use-coderoad`}
             >{entry?.data['sidebar.coderoad']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-work-on-localized-client-webapp`}
+          <a href={`${prefix}/how-to-work-on-localized-client-webapp`}
             >{entry?.data['sidebar.work_on_webapp']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-add-playwright-tests`}
+          <a href={`${prefix}/how-to-add-playwright-tests`}
             >{entry?.data['sidebar.work_on_playwright_tests']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-help-with-video-challenges`}
+          <a href={`${prefix}/how-to-help-with-video-challenges`}
             >{entry?.data['sidebar.work_on_video_challenges']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-work-on-the-docs-theme`}
+          <a href={`${prefix}/how-to-work-on-the-docs-theme`}
             >{entry?.data['sidebar.work_on_documentation']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-open-a-pull-request`}
+          <a href={`${prefix}/how-to-open-a-pull-request`}
             >{entry?.data['sidebar.open_a_pull_request']}</a
           >
         </li>
@@ -127,37 +122,37 @@ const { nested } = Astro.props;
     <li>
       <strong>{entry?.data['sidebar.additional_guides']}</strong><ul>
         <li>
-          <a href={`prefix}/curriculum-file-structure`}
+          <a href={`${prefix}/curriculum-file-structure`}
             >{entry?.data['sidebar.file_structure']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-catch-outgoing-emails-locally`}
+          <a href={`${prefix}/how-to-catch-outgoing-emails-locally`}
             >{entry?.data['sidebar.debug_outgoing_emails_locally']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-setup-wsl`}
+          <a href={`${prefix}/how-to-setup-wsl`}
             >{entry?.data['sidebar.setup_fcc_on_wsl']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-use-docker-on-windows-home`}
+          <a href={`${prefix}/how-to-use-docker-on-windows-home`}
             >{entry?.data['sidebar.docker_on_windows_home']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/user-token-workflow`}
+          <a href={`${prefix}/user-token-workflow`}
             >{entry?.data['sidebar.user_token_workflow']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/troubleshooting-development-issues`}
+          <a href={`${prefix}/troubleshooting-development-issues`}
             >{entry?.data['sidebar.troubleshooting_development_issues']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/authors-analytics-manual`}
+          <a href={`${prefix}/authors-analytics-manual`}
             >{entry?.data['sidebar.authors_analytics_manual']}</a
           >
         </li>
@@ -170,31 +165,32 @@ const { nested } = Astro.props;
       <strong>{entry?.data['sidebar.flight_manuals']}</strong>
       <ul>
         <li>
-          <a href={`prefix}/moderator-handbook`}
+          <a href={`${prefix}/moderator-handbook`}
             >{entry?.data['sidebar.moderator_handbook']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/reply-templates`}
+          <a href={`${prefix}/reply-templates`}
             >{entry?.data['sidebar.reply_templates']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/language-lead-handbook`}
+          <a href={`${prefix}/language-lead-handbook`}
             >{entry?.data['sidebar.language_lead_handbook']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/devops`}>{entry?.data['sidebar.devops_handbook']}</a
+          <a href={`${prefix}/devops`}
+            >{entry?.data['sidebar.devops_handbook']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/courses-vscode-extension`}
+          <a href={`${prefix}/courses-vscode-extension`}
             >{entry?.data['sidebar.courses_vscode_extension']}</a
           >
         </li>
         <li>
-          <a href={`prefix}/how-to-enable-new-languages`}
+          <a href={`${prefix}/how-to-enable-new-languages`}
             >{entry?.data['sidebar.enable_new_language']}</a
           >
         </li>
