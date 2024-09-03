@@ -44,7 +44,9 @@ export default defineConfig({
       },
       customCss: ['./src/styles/tailwind.css']
     }),
-    tailwind()
+    tailwind({
+      applyBaseStyles: false
+    })
   ],
   output: 'server',
   adapter: node({
