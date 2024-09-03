@@ -40,7 +40,8 @@ export default defineConfig({
         MobileMenuToggle: './src/components/FCCMobileMenuToggle.astro',
         ThemeProvider: './src/components/FCCThemeProvider.astro',
         ThemeSelect: './src/components/FCCThemeSelect.astro',
-        Sidebar: './src/components/FCCSidebar.astro'
+        Sidebar: './src/components/FCCSidebar.astro',
+        Pagination: './src/components/FCCPagination.astro'
       },
       customCss: ['./src/styles/tailwind.css']
     }),
