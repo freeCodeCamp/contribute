@@ -1,17 +1,17 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
 import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
-import { getEntry } from 'astro:content';
+import { type CollectionEntry, getEntry } from 'astro:content';
 
 const entry = await getEntry('i18n', Astro.currentLocale ?? '');
 const prefix = Astro.currentLocale == 'en' ? '' : Astro.currentLocale;
 const { nested } = Astro.props;
 
 interface Section {
-  title: string;
+  title: keyof CollectionEntry<'i18n'>['data'];
   contents: {
     href: string;
-    title: string;
+    title: keyof CollectionEntry<'i18n'>['data'];
     strong?: boolean;
   }[];
   addSeparator?: boolean;
