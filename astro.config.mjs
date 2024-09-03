@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-//import { sidebar } from './src/sidebar';
-
 import node from '@astrojs/node';
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
@@ -45,9 +44,10 @@ export default defineConfig({
       },
       customCss: [
         // Relative path to your custom CSS file
-        './src/styles/theme.css'
+        './src/styles/tailwind.css'
       ]
-    })
+    }),
+    tailwind()
   ],
   output: 'server',
   adapter: node({
