@@ -1,5 +1,15 @@
 <theme-button>
-  <button class='theme-toggle' aria-label='Toggle Theme'>💡</button>
+  <button class='theme-toggle' aria-label='Toggle Theme'>
+    <span class='theme-option auto'>
+      <span class='theme-icon'>🌓</span> Auto
+    </span>
+    <span class='theme-option light'>
+      <span class='theme-icon'>☀️</span> Light
+    </span>
+    <span class='theme-option dark'>
+      <span class='theme-icon'>🌙</span> Dark
+    </span>
+  </button>
 </theme-button>
 
 <script>
@@ -10,32 +20,31 @@
     constructor() {
       super();
       const button = this.querySelector('.theme-toggle');
-      if (!button) {
-        return;
-      }
+      if (!button) return;
 
       button.addEventListener('click', () => {
         const currentTheme = theme.getTheme();
         let newTheme: Theme;
-        if (currentTheme == 'light') {
-          newTheme = 'dark';
-        } else if (currentTheme == 'dark') {
-          newTheme = 'light';
-        } else {
-          newTheme = matchMedia('(prefers-color-scheme: light)').matches
-            ? 'dark'
-            : 'light';
-        }
+        if (currentTheme === 'auto') newTheme = 'light';
+        else if (currentTheme === 'light') newTheme = 'dark';
+        else newTheme = 'auto';
+
         theme.setTheme(newTheme);
         this.updateSelectedTheme(newTheme);
       });
+
       window.addEventListener('theme-changed', (event: ThemeChangeEvent) => {
         this.updateSelectedTheme(event.detail.theme);
       });
+
+      this.updateSelectedTheme(theme.getTheme());
     }
+
     updateSelectedTheme(newTheme: Theme) {
-      (this.querySelector('.theme-toggle') as HTMLButtonElement).value =
-        newTheme;
+      const button = this.querySelector('.theme-toggle') as HTMLButtonElement;
+      button.value = newTheme;
+      button.classList.remove('auto-theme', 'light-theme', 'dark-theme');
+      button.classList.add(`${newTheme}-theme`);
     }
   }
   customElements.define('theme-button', ThemeButton);
@@ -44,5 +53,26 @@
 <style>
   .theme-toggle {
     background-color: var(--tertiary-background);
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-option {
+    display: none;
+  }
+
+  .auto-theme .theme-option.auto,
+  .light-theme .theme-option.light,
+  .dark-theme .theme-option.dark {
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-icon {
+    margin-right: 5px;
   }
 </style>
