@@ -1,13 +1,16 @@
 <theme-button>
-  <button class='theme-toggle' aria-label='Toggle Theme'>
-    <span class='theme-option auto'>
-      <span class='theme-icon'>🌓</span> Auto
+  <button
+    class='theme-toggle rounded-full bg-accent-900 border-none cursor-pointer px-2 py-1 flex items-center'
+    aria-label='Toggle Theme'
+  >
+    <span class='theme-option auto hidden'>
+      <span class='mx-1.5 my-1'>🌓</span>
     </span>
-    <span class='theme-option light'>
-      <span class='theme-icon'>☀️</span> Light
+    <span class='theme-option light hidden'>
+      <span class='mx-1.5 my-1'>☀️</span>
     </span>
-    <span class='theme-option dark'>
-      <span class='theme-icon'>🌙</span> Dark
+    <span class='theme-option dark hidden'>
+      <span class='mx-1.5 my-1'>🌙</span>
     </span>
   </button>
 </theme-button>
@@ -45,34 +48,19 @@
       button.value = newTheme;
       button.classList.remove('auto-theme', 'light-theme', 'dark-theme');
       button.classList.add(`${newTheme}-theme`);
+
+      // Update visibility of theme options
+      const options = this.querySelectorAll('.theme-option');
+      options.forEach(option => {
+        option.classList.add('hidden');
+        option.classList.remove('flex');
+      });
+      const activeOption = this.querySelector(`.theme-option.${newTheme}`);
+      if (activeOption) {
+        activeOption.classList.remove('hidden');
+        activeOption.classList.add('flex');
+      }
     }
   }
   customElements.define('theme-button', ThemeButton);
 </script>
-
-<style>
-  .theme-toggle {
-    background-color: var(--tertiary-background);
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-  }
-
-  .theme-option {
-    display: none;
-  }
-
-  .auto-theme .theme-option.auto,
-  .light-theme .theme-option.light,
-  .dark-theme .theme-option.dark {
-    display: flex;
-    align-items: center;
-  }
-
-  .theme-icon {
-    margin-right: 5px;
-  }
-</style>
