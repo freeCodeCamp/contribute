@@ -42,10 +42,7 @@ export default defineConfig({
         ThemeSelect: './src/components/FCCThemeSelect.astro',
         Sidebar: './src/components/FCCSidebar.astro'
       },
-      customCss: [
-        // Relative path to your custom CSS file
-        './src/styles/tailwind.css'
-      ]
+      customCss: ['./src/styles/tailwind.css']
     }),
     tailwind()
   ],

@@ -22,13 +22,10 @@ const shouldRenderSearch = true;
   <a
     class='title-wrapper sl-flex'
     data-nosearch=''
-    href='/'
+    href='/intro'
     style='justify-content:center'
   >
-    <img
-      alt='freeCodeCamp.org'
-      src='https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
-    />
+    <img alt='freeCodeCamp.org' class='fcc-logo' />
   </a>
 
   <div class='sl-hidden md:sl-flex right-group'>
@@ -55,9 +52,10 @@ const shouldRenderSearch = true;
     margin: auto;
   }
 
-  .title-wrapper > img {
+  .title-wrapper > .fcc-logo {
     height: 24px;
     width: 210px;
+    content: var(--fcc-logo);
   }
 
   .right-group,
@@ -107,5 +105,13 @@ const shouldRenderSearch = true;
         auto;
       align-content: center;
     }
+  }
+
+  :root {
+    --fcc-logo: url('https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg');
+  }
+
+  :root[data-theme='light'] {
+    --fcc-logo: url('https://cdn.freecodecamp.org/platform/universal/fcc_secondary.svg');
   }
 </style>
