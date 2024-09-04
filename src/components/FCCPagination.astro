@@ -1,7 +1,22 @@
 ---
 import { Icon } from '@astrojs/starlight/components';
-
+import { type CollectionEntry } from 'astro:content';
 import { updatePagination } from '../updatePagination';
+
+interface Pagination {
+  prev?: { label: keyof CollectionEntry<'i18n'>['data']; href: string };
+  next?: { label: keyof CollectionEntry<'i18n'>['data']; href: string };
+}
+
+interface Label {
+  [key: string]: string;
+}
+
+interface Props {
+  dir: string;
+  labels: Label;
+  pagination: Pagination;
+}
 
 const { dir, labels, pagination } = Astro.props;
 const { prev, next } = pagination;

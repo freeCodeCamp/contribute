@@ -11,8 +11,8 @@ interface Section {
 }
 
 interface Pagination {
-  prev?: { label: string | number | symbol; href: string };
-  next?: { label: string | number | symbol; href: string };
+  prev?: { label: string; href: string };
+  next?: { label: string; href: string };
 }
 
 export const content: Section[] = [
