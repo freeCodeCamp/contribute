@@ -7,7 +7,7 @@ const entry = await getEntry('i18n', Astro.currentLocale ?? '');
 const prefix = Astro.currentLocale == 'en' ? '' : Astro.currentLocale;
 const { nested } = Astro.props;
 
-import { content } from '../update-paginationn';
+import { content } from '../update-pagination';
 ---
 
 <nav class:list={{ 'top-level': !nested }}>
