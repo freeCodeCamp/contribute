@@ -11,12 +11,13 @@ import { getEntry } from 'astro:content';
 
 const entry = await getEntry<'i18n', string>('i18n', Astro.currentLocale ?? '');
 updatePagination(Astro.url, pagination);
+const prefix = Astro.currentLocale == 'en' ? '' : Astro.currentLocale;
 ---
 
 <div class='pagination-links' dir={dir}>
   {
     prev && (
-      <a href={prev.href} rel='prev'>
+      <a href={`${prefix}${prev.href}`} rel='prev'>
         <Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size='1.5rem' />
         <span>
           {labels['page.previousLink']}
@@ -28,7 +29,7 @@ updatePagination(Astro.url, pagination);
   }
   {
     next && (
-      <a href={next.href} rel='next'>
+      <a href={`${prefix}${next.href}`} rel='next'>
         <Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size='1.5rem' />
         <span>
           {labels['page.nextLink']}
