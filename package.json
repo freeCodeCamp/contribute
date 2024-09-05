@@ -27,7 +27,7 @@
   "dependencies": {
     "@astrojs/check": "0.9.3",
     "@astrojs/node": "8.3.3",
-    "@astrojs/starlight": "0.26.2",
+    "@astrojs/starlight": "0.26.3",
     "@astrojs/starlight-tailwind": "2.0.3",
     "@astrojs/tailwind": "5.1.0",
     "astro": "4.15.3",
