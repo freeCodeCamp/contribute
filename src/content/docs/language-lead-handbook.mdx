@@ -70,6 +70,20 @@ I have an md file, please translate it into [Language]. The translation must str
 3. Add the file for your language. Make sure to use the language code that matches with the key you added in the prompt object above, as shown in the image below
 4. Open a pull request
 
+The issue template should look like this:
+
+```
+---
+name: Translation Task (Machine Translation)
+about: "Add new articles to be translated and automatically crawled using automatic GitHub Actions."
+title: "[<2-letter language code>] (Put the translated title here)"
+labels: ["<language>"]
+assignees: ''
+---
+
+[Original Title](https://example.com/path/to/your/article/)
+```
+
 ![Use the same language code](../../../public/images/github/auto-translate-langcode.png)
 
 ## How to start the auto-translation workflow
