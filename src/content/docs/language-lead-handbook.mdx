@@ -43,6 +43,7 @@ With `link` being the link of the original article.
 ## How to set up the auto-translation workflow for a new language
 
 To set up the auto-translation workflow for your language, you need to:
+
 - Add the prompt that you want to give to the OpenAI API
 - Add the GitHub issue template
 
@@ -55,6 +56,7 @@ To set up the auto-translation workflow for your language, you need to:
 5. Open a pull request including the modified files (`src/tasks/task_auto_translate_step_02_trans_articels.ts` and `dist/index.js`)
 
 The prompt should say something similar to below. You can customize the prompt to get the best result for your language.
+
 ```
 I have an md file, please translate it into [Language]. The translation must strictly maintain the format and layout of the original markdown file. Please provide the translation directly without asking questions.
 ```
@@ -83,6 +85,7 @@ In this workflow, each GitHub issue corresponds to an article to be translated.
 3. Click "Get started" button for your language to open the issue template
 
 The minimum requirements to make the workflow work are as follows:
+
 - 2-letter language code in the square brackets at the beginning of the issue title
 - URL of the English article in the description as a link
 - `auto` label
@@ -90,6 +93,7 @@ The minimum requirements to make the workflow work are as follows:
 ![Issue templage](../../../public/images/github/auto-translate-issue.png)
 
 Additional information:
+
 - When you just paste the URL, GitHub automatically converts it into a link so it works too. You don't necessarily have to make it a markdown link in [title](URL) format.
 - You need to add `auto` label manually, since this step works as a permission check. Only users with "Triage" role or higher can add labels. We usually invite new contributors as "Read" role, so they can't trigger auto-translation workflow.
 - If you forget to add the `auto` label when creating an issue, you can add it later. You can also restart the workflow by removing and adding the `auto` label.
