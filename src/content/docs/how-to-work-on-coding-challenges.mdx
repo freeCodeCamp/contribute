@@ -2,19 +2,22 @@
 title: How to work on coding challenges
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Steps, Card, Code, Aside } from '@astrojs/starlight/components';
+import challengeTemplate from '../../data/challenge-template.txt?raw';
+
+## Introduction
 
 Our goal is to develop a fun and clear interactive learning experience.
 
-Designing interactive coding challenges is difficult. It would be much easier to write a lengthy explanation or to create a video tutorial. But for our core curriculum, we're sticking with what works best for most people - a fully interactive, video game-like experience.
+Designing interactive coding challenges is difficult. It would be much easier to write a lengthy explanation or create a video tutorial. But for our core curriculum, we're sticking with what works best for most people—a fully interactive, video game-like experience.
 
-We want campers to achieve a flow state. We want them to build momentum and blast through our curriculum with as few snags as possible. We want them to go into the projects with confidence and gain wide exposure to programming concepts.
+We want campers to achieve a flow state. We want them to build momentum and move through our curriculum with as few snags as possible. We want them to approach projects with confidence and gain broad exposure to programming concepts.
 
-Note that for Version 7.0 of the freeCodeCamp curriculum, we are moving toward [an entirely project-focused model with a lot more repetition](https://www.freecodecamp.org/news/python-curriculum-is-live/).
+Since the Version 7.0 of the freeCodeCamp curriculum, we use [an entirely project-focused model with a lot more repetition](https://www.freecodecamp.org/news/python-curriculum-is-live/).
 
-Creating these challenges requires immense creativity and attention to detail. There's plenty of help available. You'll have support from a whole team of contributors to whom you can bounce ideas off and demo your challenges.
+Creating these challenges requires immense creativity and attention to detail. There's plenty of help available. You'll have support from a team of contributors with whom you can bounce ideas and demo your challenges.
 
-And as always, feel free to ask questions on the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
+As always, feel free to ask questions in the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors' chat room](https://discord.gg/PRyKn3Vbay).
 
 With your help, we can design an interactive coding curriculum that will help millions of people learn to code for years to come.
 
@@ -24,325 +27,82 @@ You can find all of freeCodeCamp.org's curricular content in the [`/curriculum/c
 
 ## Set up the tooling for the curriculum
 
-Before you work on the curriculum, you would need to set up some tooling to help you test your changes. You can use any option from the below:
+<Card>
 
-- You can [set up freeCodeCamp locally](/how-to-setup-freecodecamp-locally). This is **highly recommended** for regular/repeat contributions. This setup allows you to work and test your changes.
-- Use Gitpod, a free online dev environment. Clicking the button below will start a ready-to-code dev environment for freeCodeCamp in your browser. It only takes a few minutes.
+Before you work on the curriculum, you would need [to set up freeCodeCamp locally](/how-to-setup-freecodecamp-locally) to help you test your changes.
 
-  [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/freeCodeCamp/freeCodeCamp)
-
-### How to work on practice projects
-
-The practice projects have some additional tooling to help create new projects and steps. To read more, see [these docs](/how-to-work-on-practice-projects)
+</Card>
 
 ## Challenge Template
 
-````md
----
-id: Unique identifier (alphanumerical, MongoDB_id)
-title: 'Challenge Title'
-challengeType: Integer, defined in `client/utils/challenge-types.js`
-videoUrl: 'url of video explanation'
-forumTopicId: 12345
----
-
-# --description--
-
-Challenge description text, in markdown
-
-```html
-<div>example code</div>
-```
-
-# --instructions--
-
-Challenge instruction text, in markdown
-
-# --hints--
-
-Tests to run against user code, in pairs of markdown text and code block test code.
-
-```js
-Code for test one
-```
-
-If you want dynamic output based on the user's code, --fcc-expected-- and --fcc-actual-- will be replaced with the expected and actual values of the test's assertion. Take care if you have multiple assertions since the first failing assertion will determine the values of --fcc-expected-- and --fcc-actual--.
-
-```js
-assert.equal(
-  'this will replace --fcc-actual--',
-  'this will replace --fcc-expected--'
-);
-```
-
-# --notes--
-
-Extra information for a challenge, in markdown
-
-# --seed--
-
-## --before-user-code--
-
-```lang
-Code evaluated before the user’s code.
-```
-
-## --after-user-code--
-
-```lang
-Code evaluated after the user’s code, and just before the tests
-```
-
-## --seed-contents--
-
-Boilerplate code to render to the editor. This section should only contain code inside backticks, like the following:
-
-```html
-<body>
-  <p class="main-text">Hello world!</p>
-</body>
-```
-
-```css
-body {
-  margin: 0;
-  background-color: #3a3240;
-}
-
-.main-text {
-  color: #aea8d3;
-}
-```
-
-```js
-console.log('freeCodeCamp is awesome!');
-```
-
-# --solutions--
-
-Solutions are used for the CI tests to ensure that changes to the hints will still pass as intended
-
-```js
-// first solution - the language(s) should match the seed.
-```
-
----
-
-```js
-// second solution - so if the seed is written in HTML...
-```
-
----
-
-```js
-// third solution etc. - Your solutions should be in HTML.
-```
-
-# --assignments--
-
-This will show a checkbox that campers have to check before completing a challenge
-
----
-
-This will show another checkbox that campers have to check before completing a challenge
-
-# --question--
-
-These fields are currently used for the multiple-choice Python challenges.
-
-## --text--
-
-The question text goes here.
-
-## --answers--
-
-Answer 1
-
-### --feedback--
-
-This will be shown as feedback when campers guess this answer
-
----
-
-Answer 2
-
----
-
-More answers
-
-## --video-solution--
-
-The number for the correct answer goes here.
-
-# --fillInTheBlank--
-
-These are for the English curriculum challenges.
-
-## --sentence--
-
-Sentence to be shown with with blanks that campers have to fill in. Example:
-
-`Hello, You _ the new graphic designer, _?`
-
-The two underscores will show up as blanks. The sentence must be surrounded in backticks.
-
-## --blanks--
-
-The solution for the first blank in the sentence above. Example:
-
-`are`
-
-### --feedback--
-
-Feedback shown when campers input the wrong solution for this blank.
-
----
-
-Solution for the second blank. Example:
-
-`right`
-
-If no feedback is here, a generic "wrong answer" message will be shown.
-
-# --scene--
-
-```json
-// # --scene-- can only consist of a single json object
-{
-  // Setup the scene. Properties not marked optional are required.
-  "setup": {
-    // Background file to start the scene. A list of scene asset filenames can be found here: https://github.com/freeCodeCamp/cdn/pull/233/files
-    "background": "company2-center.png",
-    // Array of all characters that will appear in the scene
-    "characters": [
-      {
-        // Name of character. See list of available characters in scene-assets.tsx
-        "character": "Maria",
-        // Where to start the character. Maria will start off screen to the left
-        "position": { "x": -25, "y": 0, "z": 1 }
-      },
-      {
-        "character": "Tom",
-        // Tom will start 70% from the left of the screen and 1.5 times regular size
-        "position": { "x": 70, "y": 0, "z": 1.5 },
-        // Optional, defaults to 1. Tom will start invisible
-        "opacity": 0
-      }
-    ],
-    "audio": {
-      // Audio filename
-      "filename": "1.1-1.mp3",
-      // Seconds after the scene starts before the audio starts playing
-      "startTime": 1.3,
-      // Optional. Timestamp of the audio file where it starts playing from.
-      "startTimestamp": 0,
-      // Optional. Timestamp of the audio file where is stops playing. If these two aren't used, the whole audio file will play.
-      "finishTimestamp": 8.4
-    },
-    // Optional, defaults to false. Use this for the long dialogues. It stops the accessibility icon from showing which gives campers the option to show or hide the dialogue text
-    "alwaysShowDialogue": true
-  },
-  // Array of commands that make up the scene
-  "commands": [
-    {
-      // Character that will have an action for this command
-      "character": "Maria",
-      // Optional, defaults to previous value. Maria will move to 25% from the left of the screen. The movement takes 0.5 seconds
-      "position": { "x": 25, "y": 0, "z": 1 },
-      // When the command will start. Zero seconds after the camper presses play
-      "startTime": 0
-    },
-    {
-      "character": "Tom",
-      // Optional, defaults to previous value. Tom will fade into view. The transition take 0.5 seconds. Movement and Opacity transitions take 0.5 seconds
-      "opacity": 1,
-      // Tom will fade into view 0.5 seconds into the scene (immediately after Maria finishes moving on screen)
-      "startTime": 0.5
-    },
-    {
-      "character": "Maria",
-      // When the command starts: Maria will start saying this line 1.3 seconds into the scene. Note that this is the same time as the audio.startTime above. It doesn't have to match that (maybe there's a pause at the beginning of the audio or something)
-      "startTime": 1.3,
-      // The character will stop moving their mouth at the finishTime
-      "finishTime": 4.95,
-      "dialogue": {
-        // Text that will appear if the dialogue is visible
-        "text": "Hello! You're the new graphic designer, right? I'm Maria, the team lead.",
-        // Where the dialogue text will be aligned. Can be 'left', 'center', or 'right'
-        "align": "left"
-      }
-    },
-    {
-      // background will change to this at 5.4 seconds into the scene
-      "background": "company2-breakroom.png",
-      "character": "Tom",
-      "startTime": 5.4,
-      "finishTime": 9.4,
-      "dialogue": {
-        "text": "Hi, that's right!  I'm Tom McKenzie. It's a pleasure to meet you.",
-        // Tom's text will be aligned to the right since he is on the right side of the screen
-        "align": "right"
-      }
-    },
-    {
-      "character": "Tom",
-      // Tom will fade to 0 opacity
-      "opacity": 0,
-      // I like to move characters off screen or fade them 0.5 second after the last talking command
-      "startTime": 9.9
-    },
-    {
-      "character": "Maria",
-      // Maria will slide back off the screen to the left
-      "position": { "x": -25, "y": 0, "z": 1 },
-      // The animation will stop playing 0.5 seconds after the 'finishTime' of the last command - or 0.5 seconds after 'startTime' if 'finishTime' isn't there.
-      "startTime": 10.4
-    }
-  ]
-}
-```
-````
-
-:::note
-
-1. In the above sections, examples of `lang` are:
+Here we showcase a reference challenge template you can use to create your own challenge. The templates use syntax highlighting for various coding languages, some examples are:
 
 - `html` - HTML/CSS
 - `js` - JavaScript
 - `jsx` - JSX
 
-:::
+You will see them highlighted in the full challenge template below.
+
+<details>
+  <summary>Full challenge template</summary>
+  <Code
+    lang='markdown'
+    code={challengeTemplate}
+    title='challenge-template.md'
+    mark={['```jsx', '```html', '```js', '```json', '```jsx', '```css']}
+  />
+</details>
 
 ## Numbering Challenges
 
 Every challenge needs an `id`. If you don't specify one, then MongoDB will create a new random one when it saves the data; however, we don't want it to do that, since we want the challenge ids to be consistent across different environments (staging, production, lots of different developers, etc.).
 
-To generate a new one in a shell (assuming MongoDB is running separately):
+**To generate a new one in a shell (assuming MongoDB is running separately):**
+
+<Steps>
 
 1. Run `mongo` command.
+
+   ```bash
+   mongo
+   ```
+
+   ```txt
+   MongoDB shell version v3.6.1
+   connecting to: mongodb://127.0.0.1:27017
+   MongoDB server version: 3.4.10
+   ...
+   ```
+
 2. Run `ObjectId()` command.
 
-For example:
+   ```bash
+   ObjectId()
+   ```
 
-```bash
-$ mongo
-MongoDB shell version v3.6.1
-connecting to: mongodb://127.0.0.1:27017
-MongoDB server version: 3.4.10
-...
-$ ObjectId()
-ObjectId("5a474d78df58bafeb3535d34")
-```
+   ```txt
+   ObjectId("5a474d78df58bafeb3535d34")
+   ```
 
-The result is a new id, for example, `5a474d78df58bafeb3535d34` above.
+   The result is a new id, for example, `5a474d78df58bafeb3535d34` above.
 
-Once you have your id, put it into the markdown file as the `id` field at the top, e.g.
+3. Once you have your id, put it into the markdown file as the `id` field at the top, e.g.
 
-```yml
----
-id: 5a474d78df58bafeb3535d34
-title: Challenge Title
-```
+   ```yml
+   ---
+   id: 5a474d78df58bafeb3535d34
+   title: Challenge Title
+   ```
+
+</Steps>
+
+## Working on practice projects
+
+<Card>
+
+The practice projects have some additional tooling to help create new projects and steps. [ Follow these docs](/how-to-work-on-practice-projects) to learn more.
+
+</Card>
 
 ## Naming challenges
 
@@ -405,38 +165,56 @@ Our goal is to have thousands of 2-minute challenges. These can flow together an
 
 Here are specific formatting guidelines for challenge text and examples:
 
-- Language keywords go in `\`` backticks. For example, HTML tag names or CSS property names.
-- References to code parts (i.e. function, method, or variable names) should be wrapped in `\`` backticks. See example below:
+- Language keywords go in backticks <code>`</code>. For example, HTML tag names or CSS property names.
+- References to code parts (i.e. function, method, or variable names) should be wrapped in backticks <code>`</code>. See example below:
 
-```md
-Use `parseInt` to convert the variable `realNumber` into an integer.
-```
+  ```markdown
+  Use `parseInt` to convert the variable `realNumber` into an integer.
+  ```
 
-- References to file names and path directories (e.g. `package.json`, `src/components`) should be wrapped in `\`` backticks.
-- Multi-line code blocks **must be preceded by an empty line**. The next line must start with three backticks followed immediately by one of the [supported languages](https://prismjs.com/#supported-languages). To complete the code block, you must start a new line that only has three backticks and **another empty line**. See example below:
+- References to file names and path directories (e.g. `package.json`, `src/components`) should be wrapped in backticks <code>`</code>.
 - Whitespace matters in Markdown, so we recommend that you make it visible in your editor.
+- Multi-line code blocks **must be preceded by an empty line**. The next line must start with three backticks followed immediately by one of the [supported languages](https://prismjs.com/#supported-languages). To complete the code block, you must start a new line that only has three backticks and **another empty line**.
 
-:::note
-If you are going to use an example code in YAML, use `yaml` instead of `yml` for the language to the right of the backticks.
-:::
+  See examples below, the `...` is just to show that there can be other text before and after the code block:
 
-The following is an example of code:
+  <Code
+    lang='markdown'
+    code={'\n...\n\n```lang\n[YOUR CODE HERE]\n```\n\n...\n'}
+    mark={['```lang', '```']}
+  />
 
-````md
-```{language}
+  <Aside type='note'>
 
-[YOUR CODE HERE]
+  If you are going to use an example code in YAML, use `yaml` instead of `yml` for the language to the right of the backticks.
 
-```
-````
+  </Aside>
 
-- Additional information in the form of a note should be surrounded by blank lines, and formatted: `**Note:** Rest of note text...`
-- If multiple notes are needed, then list all of the notes in separate sentences using the format: `**Notes:** First note text. Second note text.`
+- Additional information in the form of a note should be surrounded by blank lines, and formatted:
+
+  ```markdown
+  ...
+
+  **Note:** Rest of note text...
+
+  ...
+  ```
+
+- If multiple notes are needed, then list all of the notes in separate sentences using the format:
+
+  ```markdown
+  ...
+
+  **Notes:**
+
+  First note text.
+  Second note text.
+
+  ...
+  ```
+
 - Use single quotes where applicable
-
-:::note
-The equivalent _Markdown_ should be used in place of _HTML_ tags.
-:::
+- The equivalent _Markdown_ should be used in place of _HTML_ tags.
 
 ## Writing tests
 
@@ -526,9 +304,10 @@ Some comments may contain a word/phrase that should not be translated. For examp
 Declare the myGlobal variable below this line
 ```
 
-:::note
-We are working on an integration to make it possible to work on i18n for the comment dictionary.
-:::
+<Aside type='note'>
+  We are working on an integration to make it possible to work on i18n for the
+  comment dictionary.
+</Aside>
 
 ## Hints and Solutions
 
@@ -612,23 +391,23 @@ Before you [create a pull request](/how-to-open-a-pull-request) for your changes
 
 1. To test all challenges run the below command from the root directory
 
-   ```
+   ```bash
    pnpm run test:curriculum
    ```
 
-   2. To test single challenge, you can use it challenge id with following command
+2. To test single challenge, you can use it challenge id with following command
 
-   ```
+   ```bash
    FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test:curriculum
    ```
 
-2. You can also test a block or a superblock of challenges with these commands
+3. You can also test a block or a superblock of challenges with these commands
 
-   ```
+   ```bash
    FCC_BLOCK='Basic HTML and HTML5' pnpm run test:curriculum
    ```
 
-   ```
+   ```bash
    FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum
    ```
 
@@ -640,21 +419,21 @@ You are also able to test challenges by title by performing the following steps:
 
 1. Switch to the `curriculum` directory:
 
-   ```
+   ```bash
    cd curriculum
    ```
 
 2. Run the following for each challenge file for which you have changed (replacing `challenge-title-goes-here` with the full title of the challenge):
 
-   ```
+   ```bash
    pnpm run test -- -g challenge-title-goes-here
    ```
 
-   :::tip
-   You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test.
+   <Aside type='tip'>
 
-   The currently accepted values are `english` and `chinese`, with `english` being set by default.
-   :::
+   You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test. The currently accepted values are `english` and `chinese`, with `english` being set by default.
+
+   </Aside>
 
 </Steps>
 
@@ -672,9 +451,10 @@ Creating and Editing Challenges:
 
 ## Helper Scripts
 
-:::note
-If you are working with the step-based challenges, refer to the [Work on Practice Projects](/how-to-work-on-practice-projects) section.
-:::
+<Aside type='note'>
+  If you are working with the step-based challenges, refer to the [Work on
+  Practice Projects](/how-to-work-on-practice-projects) section.
+</Aside>
 
 There are a few helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:
 
