@@ -2,19 +2,49 @@
 title: Troubleshooting Development Issues
 ---
 
-If you are facing an issue, there is a high chance that the resolution is in this documentation.
+import { Aside } from '@astrojs/starlight/components';
 
 ## Issues with Installing the Recommended Prerequisites
 
-We regularly develop on the latest or most popular operating systems like macOS 10.15 or later, Ubuntu 18.04 or later, and Windows 10 (with WSL2).
+We regularly develop on the latest or most popular operating systems like macOS 10.15 or later, Ubuntu 20.04 or later, and Windows 10 or later (with WSL2).
 
 It is recommended to research your specific issue on resources such as Google, Stack Overflow, and Stack Exchange. There is a good chance that someone has faced the same issue and there is already an answer to your specific query.
 
 If you are on a different OS or are still facing issues, see [getting help](#getting-help).
 
-:::caution
+<Aside type='danger' title='Important'>
+
 Please avoid creating GitHub issues for problems with the prerequisite technologies. They are out of the scope of this project.
-:::
+
+</Aside>
+
+## Performance and Stability Issues on WSL2 Linux Distro
+
+If you are working on a WSL2 Linux Distro, you might get performance and stability issues by running this project in a folder which is shared between Windows and WSL2 (e.g. `/mnt/c/Users/`).
+
+Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
+
+See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
+
+## Troubleshooting port issues on Gitpod
+
+Sometimes the service on port `8000` doesn't go live. This is common when you are restarting an inactive workspace.
+
+If the service is not coming up on port `8000`, you can troubleshoot using these steps:
+
+- **Start the server**: Run the below command in one terminal window from the root project directory (`/workspace/freeCodeCamp`).
+
+  ```bash
+  pnpm run develop:server
+  ```
+
+- **Start the client**: In another terminal window, run the below command from the client directory (`/workspace/freeCodeCamp/client`).
+
+  ```bash
+  pnpm run develop -- -H '0.0.0.0'
+  ```
+
+This should make port `8000` available. Be mindful of [how the URLs & Ports work within a Gitpod](https://www.gitpod.io/docs/configure/workspaces/ports) workspace.
 
 ## Issues with Missing UI, Fonts, Language Strings, or Build Errors
 
@@ -22,16 +52,25 @@ When you build the client, Gatsby will cache the fonts, language strings, and UI
 
 ```bash
 pnpm run clean
+```
+
+```bash
 pnpm install
+```
+
+```bash
 pnpm run seed
+```
+
+```bash
 pnpm run develop
 ```
 
 OR
 
-Use the shortcut
+Use the shorter handy command that does the above steps:
 
-```
+```bash
 pnpm run clean-and-develop
 ```
 
@@ -39,7 +78,7 @@ If you continue to face issues with the build, cleaning up the workspace is reco
 
 Use `git clean` in interactive mode:
 
-```
+```bash
 git clean -ifdX
 ```
 
@@ -60,7 +99,11 @@ If you can't sign in, and instead you see a banner with an error message saying 
 
 ```bash
 netstat -a | grep "3000"
+```
 
+Check the output:
+
+```
 tcp4    0   0    0.0.0.0:3000           DESKTOP      LISTEN
 ```
 
@@ -80,15 +123,15 @@ There is a "Preview Custom 404 Page" button, click it to see the profile.
 
 If you get errors while installing the dependencies, please make sure that you are not in a restricted network or your firewall settings do not prevent you from accessing resources.
 
-The first time setup can take a while depending on your network bandwidth. Be patient, and if you are still stuck we recommend using Gitpod instead of an offline setup.
+<Aside type='caution' title='Slow downloads'>
 
-:::note
-If you are using Apple Devices with M1 Chip to run the application locally, it is suggested to use Node v14.7 or above. You might run into issues with dependencies like Sharp otherwise.
-:::
+The first time setup can take a while depending on your network bandwidth. Be patient, and if you are still stuck we recommend using Gitpod instead of an offline setup. We recommed 30-50 mbps connections for the best experience.
+
+</Aside>
 
 ## Working With Other Languages
 
-To see how the client renders in another language go to /how-to-work-on-localized-client-webapp#Testing-the-Client-App-in-a-World-Language)
+To see how the client renders in another language go to [How to Work on Localized Client Webapp](/how-to-work-on-localized-client-webapp#testing-the-client-app-in-a-world-language).
 
 ## Getting Help
 
