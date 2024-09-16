@@ -446,6 +446,29 @@ Our goal is to communicate the single point that the challenge is trying to teac
 
 Challenge tests can make use of the Node.js and Chai.js assertion libraries. Also, if needed, user-generated code can be accessed in the `code` variable. In addition, the `__helpers` object exposes several functions that simplify the process of writing tests. The available functions are defined in the [curriculum-helpers](https://github.com/freeCodeCamp/curriculum-helpers/blob/main/lib/index.ts) repo.
 
+### Guidlines for assertions 
+
+If a method exists in Chai.js that expresses what is being tested for, it is preferred to be used.
+
+Example one
+
+```js
+assert(Array.isArray([]), 'empty arrays are arrays');
+```
+
+Example two 
+
+```js
+assert.isArray([], 'empty arrays are arrays');
+```
+
+In the first example, what the test means isn't immediately clear. The main thing 
+that explains the test is the assertion message. 
+
+Meanwhile in example two, the test spells out its purpose; to determine if something is an array.
+
+Overall, we prefer the internal testing library implementation. 
+
 ## Formatting Seed Code
 
 Here are specific formatting guidelines for the challenge seed code:
