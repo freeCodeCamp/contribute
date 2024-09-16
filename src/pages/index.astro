@@ -11,14 +11,14 @@
   document.addEventListener('DOMContentLoaded', () => {
     const { hash } = window.location;
     if (!hash || hash === '#/' || hash === '#') {
-      window.location.replace('/intro');
+      window.location.replace('/intro/');
     } else if (hash.startsWith('#/')) {
       const [newPath, newHash] = hash.slice(2).split('?id=');
       window.location.replace(
-        newHash ? `/${newPath}/#${newHash}` : `/${newPath}`
+        newHash ? `/${newPath}/#${newHash}` : `/${newPath}/`
       );
     } else {
-      window.location.replace('/intro');
+      window.location.replace('/intro/');
     }
   });
 </script>
