@@ -111,7 +111,7 @@ export const content: Section[] = [
       { href: '/user-token-workflow/', title: 'sidebar.user_token_workflow' },
       {
         href: '/troubleshooting-development-issues/',
-        title: '/sidebar.troubleshooting_development_issues'
+        title: 'sidebar.troubleshooting_development_issues'
       },
       {
         href: '/authors-analytics-manual/',
