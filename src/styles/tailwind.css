@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .sl-link-button.primary {
+    background-color: #feac32;
+    background-image: linear-gradient(#fecc4c, #ffac33);
+    border: 3px solid #feac32;
+    color: #0a0a23 !important;
+    text-align: center;
+  }
+
+  .sl-link-button.primary:hover,
+  .sl-link-button.primary:focus {
+    background-color: #fecc4c !important;
+    border: 3px solid #f1a02a;
+    background-image: none;
+    color: #0a0a23 !important;
+  }
+}
