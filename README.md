@@ -43,12 +43,9 @@ pnpm build
 pnpm start
 ```
 
-Build and Deploy the project (Docker):
+Build and Deploy the project (Cloudflare Pages):
 
-```bash
-docker build -t contribute .
-docker run -p 3000:3000 contribute
-```
+Set `NPM_FLAGS = --version` in the Cloudflare Pages UI and set `npx pnpm i --store=node_modules/.pnpm-store && npm run build` in the build command field.
 
 # License
 
