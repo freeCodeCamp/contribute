@@ -8,17 +8,12 @@ interface Pagination {
   next?: { label: keyof CollectionEntry<'i18n'>['data']; href: string };
 }
 
-interface Label {
-  [key: string]: string;
-}
-
 interface Props {
   dir: string;
-  labels: Label;
   pagination: Pagination;
 }
 
-const { dir, labels, pagination } = Astro.props;
+const { dir, pagination } = Astro.props;
 const { prev, next } = pagination;
 
 const isRtl = dir === 'rtl';
@@ -35,7 +30,7 @@ const prefix = Astro.currentLocale == 'en' ? '' : Astro.currentLocale;
       <a href={`${prefix}${prev.href}`} rel='prev'>
         <Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size='1.5rem' />
         <span>
-          {labels['page.previousLink']}
+          {Astro.locals.t('page.previousLink')}
           <br />
           <span class='link-title'>{entry?.data[prev.label]}</span>
         </span>
@@ -47,7 +42,7 @@ const prefix = Astro.currentLocale == 'en' ? '' : Astro.currentLocale;
       <a href={`${prefix}${next.href}`} rel='next'>
         <Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size='1.5rem' />
         <span>
-          {labels['page.nextLink']}
+          {Astro.locals.t('page.nextLink')}
           <br />
           <span class='link-title'>{entry?.data[next.label]}</span>
         </span>
