@@ -24,7 +24,10 @@ export default defineConfig({
         src: './public/icons/icon-96x96.png',
         replacesTitle: true
       },
-      tableOfContents: true,
+      tableOfContents: {
+        minHeadingLevel: 1,
+        maxHeadingLevel: 2
+      },
       editLink: {
         baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
       },
