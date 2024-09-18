@@ -6,8 +6,8 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   redirects: {
-    '/index': '/intro',
-    '/FAQ': '/faq'
+    '/index': '/intro/',
+    '/FAQ': '/faq/'
   },
   i18n: {
     defaultLocale: 'en',
@@ -50,6 +50,7 @@ export default defineConfig({
     })
   ],
   output: 'server',
+  trailingSlash: 'always',
   adapter: node({
     mode: 'middleware'
   })
