@@ -2,9 +2,7 @@
   "name": "@freecodecamp/contribute",
   "type": "module",
   "version": "1.0.0",
-  "engines": {
-    "pnpm": "9"
-  },
+  "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "npx is-ci || npx husky",
@@ -26,7 +24,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.3",
-    "@astrojs/node": "8.3.3",
+    "@astrojs/cloudflare": "^11.0.5",
     "@astrojs/starlight": "0.27.1",
     "@astrojs/starlight-tailwind": "2.0.3",
     "@astrojs/tailwind": "5.1.1",
@@ -52,6 +50,8 @@
     "lint-staged": "15.2.10",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "0.14.1",
-    "sharp": "0.33.5"
-  }
+    "sharp": "0.33.5",
+    "wrangler": "^3.78.4"
+  },
+  "packageManager": "pnpm@9.10.0"
 }

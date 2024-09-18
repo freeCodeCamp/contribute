@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
@@ -49,9 +49,12 @@ export default defineConfig({
       applyBaseStyles: false
     })
   ],
-  output: 'server',
   trailingSlash: 'always',
-  adapter: node({
-    mode: 'middleware'
-  })
+  adapter: cloudflare({
+    imageService: 'cloudflare'
+    // platformProxy: {
+    //   enabled: true
+    // }
+  }),
+  output: 'hybrid'
 });
