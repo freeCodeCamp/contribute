@@ -20,7 +20,7 @@
     "playwright:watch": "playwright test --ui"
   },
   "lint-staged": {
-    "**/*.{astro, mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
+    "**/*.{astro,mdx,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
       "pnpm format"
     ]
   },
