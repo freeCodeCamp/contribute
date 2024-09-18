@@ -43,7 +43,7 @@ export default defineConfig({
         Sidebar: './src/components/FCCSidebar.astro',
         Pagination: './src/components/FCCPagination.astro'
       },
-      customCss: ['./src/styles/tailwind.css']
+      customCss: ['./src/styles/tailwind.css', './src/styles/variables.css']
     }),
     tailwind({
       applyBaseStyles: false
