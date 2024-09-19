@@ -2,20 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* Brand color palette */
+    --brand-theme-color: #0a0a23;
+    --brand-yellow-gold: #ffbf00;
+    --brand-gray-00: #ffffff;
+    --brand-gray-05: #f5f6f7;
+    --brand-gray-10: #dfdfe2;
+    --brand-gray-15: #d0d0d5;
+    --brand-gray-45: #858591;
+    --brand-gray-75: #3b3b4f;
+    --brand-gray-80: #2a2a40;
+    --brand-gray-85: #1b1b32;
+    --brand-gray-90: #0a0a23;
+    --brand-purple-light: #dbb8ff;
+    --brand-purple-dark: #5a01a7;
+    --brand-yellow-light: #ffc300;
+    --brand-yellow-dark: #4d3800;
+    --brand-blue-light: rgb(153, 201, 255);
+    --brand-blue-light-translucent: rgba(153, 201, 255, 0.3);
+    --brand-blue-dark: rgb(0, 46, 173);
+    --brand-blue-dark-translucent: rgba(0, 46, 173, 0.3);
+    --brand-green-light: #acd157;
+    --brand-blue-mid: #198eee;
+    --brand-purple-mid: #9400d3;
+    --brand-green-dark: #00471b;
+    --brand-red-light: #ffadad;
+    --brand-red-dark: #850000;
+    --brand-love-light: #f8577c;
+    --brand-love-dark: #f82153;
+    --brand-editor-background-light: #fffffe;
+    --brand-editor-background-dark: #2a2b40;
+
+    /* Accent colors derived from brand palette */
+    --blue-accent-200: var(--brand-blue-dark);
+    --blue-accent-600: var(--brand-blue-mid);
+    --blue-accent-900: var(--brand-blue-light);
+
+    --yellow-accent-200: var(--brand-yellow-dark);
+    --yellow-accent-600: var(--brand-yellow-gold);
+    --yellow-accent-900: var(--brand-yellow-light);
+
+    --green-accent-200: var(--brand-green-dark);
+    --green-accent-600: var(--brand-green-light);
+    --green-accent-900: var(--brand-green-light);
+
+    --purple-accent-200: var(--brand-purple-dark);
+    --purple-accent-600: var(--brand-purple-mid);
+    --purple-accent-900: var(--brand-purple-light);
+
+    --red-accent-200: var(--brand-red-dark);
+    --red-accent-600: var(--brand-red-dark);
+    --red-accent-900: var(--brand-red-light);
+
+    /* Theme accent (default to blue) */
+    --tw-accent-200: var(--blue-accent-200);
+    --tw-accent-600: var(--blue-accent-600);
+    --tw-accent-900: var(--blue-accent-900);
+
+    /* Starlight essential mappings */
+    --sl-color-white: var(--brand-gray-00);
+    --sl-color-gray-1: var(--brand-gray-05);
+    --sl-color-gray-2: var(--brand-gray-10);
+    --sl-color-gray-3: var(--brand-gray-15);
+    --sl-color-gray-4: var(--brand-gray-45);
+    --sl-color-gray-5: var(--brand-gray-75);
+    --sl-color-gray-6: var(--brand-gray-80);
+    --sl-color-gray-7: var(--brand-gray-85);
+    --sl-color-black: var(--brand-gray-90);
+
+    --sl-color-accent-low: var(--tw-accent-200);
+    --sl-color-accent: var(--tw-accent-600);
+    --sl-color-accent-high: var(--tw-accent-900);
+
+    --sl-color-text: var(--brand-gray-90);
+    --sl-color-bg: var(--brand-gray-00);
+    --sl-color-bg-sidebar: var(--brand-gray-05);
+  }
+
+  :root[data-theme='dark'] {
+    --tw-accent-200: var(--yellow-accent-200);
+    --tw-accent-600: var(--yellow-accent-600);
+    --tw-accent-900: var(--yellow-accent-900);
+
+    --sl-color-text: var(--brand-gray-05);
+    --sl-color-bg: var(--brand-gray-90);
+    --sl-color-bg-sidebar: var(--brand-gray-85);
+  }
+}
+
 @layer components {
   .sl-link-button.primary {
-    background-color: #feac32;
-    background-image: linear-gradient(#fecc4c, #ffac33);
-    border: 3px solid #feac32;
+    background-color: #feac32 !important;
+    background-image: linear-gradient(#fecc4c, #ffac33) !important;
+    border: 3px solid #feac32 !important;
     color: #0a0a23 !important;
-    text-align: center;
+    text-align: center !important;
   }
 
   .sl-link-button.primary:hover,
   .sl-link-button.primary:focus {
     background-color: #fecc4c !important;
-    border: 3px solid #f1a02a;
-    background-image: none;
+    border: 3px solid #f1a02a !important;
+    background-image: none !important;
     color: #0a0a23 !important;
   }
 }
