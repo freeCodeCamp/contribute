@@ -4,20 +4,26 @@ description: Help us make freeCodeCamp better for everyone.
 template: splash
 hero:
   tagline: This community is possible thanks to thousands of kind volunteers like you.
+  image:
+    html: <img src="/images/branding/banner.png" class="hidden md:block w-96 rounded-full overflow-clip" alt="Contribute to freeCodeCamp" />
   actions:
     - text: Get Started
       link: /getting-started/
       icon: right-arrow
       variant: primary
+    - text: Donate to our charity
+      link: https://www.freecodecamp.org/donate
+      icon: heart
+      variant: secondary
 prev: false
 next: false
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps:
+## Get Involved:
 
-<CardGrid stagger>
+<CardGrid>
   <Card title='Help Others' icon='pen'>
     [Help by answering coding questions](https://forum.freecodecamp.org) on our
     community forum.
@@ -31,8 +37,8 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     [Help us translate](/getting-started/#translations) freeCodeCamp.org's
     resources.
   </Card>
-  <Card title='Open Source' icon='github'>
-    [Contribute to our open-source
-    codebase](/getting-started/#learning-platform) on GitHub.
+  <Card title='Write Code' icon='seti:json'>
+    [Contribute with code](/getting-started/#learning-platform) to our
+    open-source codebases.
   </Card>
 </CardGrid>
