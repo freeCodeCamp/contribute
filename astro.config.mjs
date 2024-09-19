@@ -56,7 +56,7 @@ const config = defineConfig({
         Sidebar: './src/components/FCCSidebar.astro',
         Pagination: './src/components/FCCPagination.astro'
       },
-      customCss: ['./src/styles/tailwind.css']
+      customCss: ['./src/styles/tailwind.css', './src/styles/override.css']
     }),
     tailwind({
       applyBaseStyles: false,
