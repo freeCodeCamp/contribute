@@ -30,10 +30,11 @@ const config = defineConfig({
       title: 'Contribute | freeCodeCamp.org',
       description: 'Contribute to freeCodeCamp.org',
       logo: {
-        src: './public/icons/icon-96x96.png',
+        light: './public/icons/secondary_logo.svg',
+        dark: './public/icons/primary_logo.svg',
         replacesTitle: true
       },
-      favicon: './public/favicon-32x32.png',
+      favicon: 'favicon.ico',
       tableOfContents: {
         minHeadingLevel: 1,
         maxHeadingLevel: 2
