@@ -82,10 +82,6 @@
   }
 
   :root[data-theme='dark'] {
-    --tw-accent-200: var(--yellow-accent-200);
-    --tw-accent-600: var(--yellow-accent-600);
-    --tw-accent-900: var(--yellow-accent-900);
-
     --sl-color-text: var(--brand-gray-05);
     --sl-color-bg: var(--brand-gray-90);
     --sl-color-bg-sidebar: var(--brand-gray-85);
