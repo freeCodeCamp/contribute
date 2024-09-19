@@ -45,7 +45,13 @@ pnpm start
 
 Build and Deploy the project (Cloudflare Pages):
 
-Set `NPM_FLAGS = --version` in the Cloudflare Pages UI and set `npx pnpm i --store=node_modules/.pnpm-store && npm run build` in the build command field.
+Set these in the Build configuration:
+
+- Framework Preset: `none` - Astro is available as a preset, but we're not using it.
+- Build Command: `pnpm build`
+- Build Directory: `dist`
+
+Leave the remaining settings as their defaults.
 
 # License
 
