@@ -1,28 +1,51 @@
 ---
-title: freeCodeCamp.org's Security Policy
+title: Reporting a Vulnerability
 ---
 
-This document outlines our security policy for the codebases, platforms that we operate, and how to report vulnerabilities.
+import { Steps, Aside, Card } from '@astrojs/starlight/components';
 
-## Reporting a Vulnerability
+This document outlines freeCodeCamp.org's security policy for the codebases, platforms that we operate, and how to report vulnerabilities.
 
-:::note
-If you think you have found a vulnerability, **please report it responsibly**. Do not create GitHub issues for security issues. Instead, follow this guide.
-:::
+<Aside type='danger' title='Security is important to us'>
+
+If you think you have found a vulnerability, **please report it responsibly**. Do not create public GitHub issues for security issues. Instead, follow this guide.
+
+</Aside>
 
 ### Guidelines
 
 We appreciate responsible disclosure of vulnerabilities that might impact the integrity of our platforms and users. In the interest of saving everyone time, we encourage you to report vulnerabilities with these in mind:
 
-1. Ensure that you are using the **latest**, **stable**, and **updated** versions of the Operating System and Web Browser(s) available to you on your machine.
-2. We consider using tools & online utilities to report issues with SPF & DKIM configs, SSL Server tests, etc., in the category of ["beg bounties"](https://www.troyhunt.com/beg-bounties) and are unable to respond to these reports.
-3. While we do not offer any bounties or swags at the moment, we'll be happy to list your name in our [Hall of Fame](/security-hall-of-fame/) list, provided the reports are not low-effort.
+<Card title="Versions" icon="information">
+
+Ensure that you are using the **latest**, **stable**, and **updated** versions of the Operating System and Web Browser(s) available to you on your machine.
+
+</Card>
+
+<Card title="Beg Bounties" icon="warning">
+
+We consider using tools & online utilities to report issues with SPF & DKIM configs, SSL Server tests, etc., in the category of ["beg bounties"](https://www.troyhunt.com/beg-bounties) and are unable to respond to these reports.
+
+</Card>
+
+<Card title="Hall of Fame" icon="rocket">
+
+While we do not offer any bounties or swags at the moment, we'll be happy to list your name in our [Hall of Fame](/security-hall-of-fame/) list, provided the reports are not low-effort.
+
+</Card>
 
 ### Reporting
 
-After confirming the above guidelines, please feel free to send an email to `possible-security-issue [at] freecodecamp.org`. You can also send us a PGP encrypted message at `flowcrypt.com/me/freecodecamp`.
+<Steps>
 
-Once you report a vulnerability, we will look into it and ensure that it is not a false positive. If we need to clarify any details, we will get back to you. You can submit separate reports for each issue you find. Please note that we will not be able to respond to any issues that we think are outside the guidelines.
+1. Please feel free to send an email to `possible-security-issue [at] freecodecamp.org`. You can also send us a PGP encrypted message at `flowcrypt.com/me/freecodecamp`.
+2. Once you report a vulnerability, we will look into it and ensure that it is not a false positive. If we need to clarify any details, we will get back to you.
+3. You can submit separate reports for each issue you find.
+4. If the issue is confirmed, we will fix it and release a new version as soon as possible.
+
+</Steps>
+
+Please note that we will not be able to respond to any issues that we think are outside the guidelines.
 
 ## Platforms and Codebases
 
@@ -30,24 +53,24 @@ Here is a list of the platforms and codebases we are accepting reports for:
 
 ### Learn Platform
 
-| Version     | Branch         | Supported | Website active           |
-| ----------- | -------------- | --------- | ------------------------ |
-| production  | `prod-current` | Yes       | `freecodecamp.org/learn` |
-| staging     | `prod-staging` | Yes       | `freecodecamp.dev/learn` |
-| development | `main`         | No        |                          |
+| Version | Branch         | Website active           |
+| ------- | -------------- | ------------------------ |
+| Live    | `prod-current` | `freecodecamp.org/learn` |
+| Beta    | `prod-staging` | `freecodecamp.dev/learn` |
 
 ### Publication Platform
 
-| Version    | Supported | Website active                     |
-| ---------- | --------- | ---------------------------------- |
-| production | Yes       | `freecodecamp.org/news`            |
-| localized  | Yes       | `freecodecamp.org/<language>/news` |
+| Version         | Website active                     |
+| --------------- | ---------------------------------- |
+| English         | `freecodecamp.org/news`            |
+| World Languages | `freecodecamp.org/<language>/news` |
 
 ### Mobile App
 
-| Version    | Supported | Website active                                                   |
-| ---------- | --------- | ---------------------------------------------------------------- |
-| production | Yes       | `https://play.google.com/store/apps/details?id=org.freecodecamp` |
+| Platform | Website active                                                   |
+| -------- | ---------------------------------------------------------------- |
+| Android  | `https://play.google.com/store/apps/details?id=org.freecodecamp` |
+| iOS      | `https://apps.apple.com/us/app/freecodecamp/id1442777773`        |
 
 ### Other Platforms
 
