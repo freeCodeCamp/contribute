@@ -14,3 +14,7 @@ table * {
 .task-list-item input[type='checkbox'] {
   margin-right: 0.5rem;
 }
+
+.tree-entry > span {
+  display: flex;
+}
