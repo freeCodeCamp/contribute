@@ -7,6 +7,14 @@ table * {
   --sl-text-h5: var(--sl-text-base);
 }
 
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item input[type='checkbox'] {
+  margin-right: 0.5rem;
+}
+
 .tree-entry > span {
   display: flex;
 }
