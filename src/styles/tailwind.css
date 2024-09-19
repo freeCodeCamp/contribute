@@ -5,8 +5,6 @@
 @layer base {
   :root {
     /* Brand color palette */
-    --brand-theme-color: #0a0a23;
-    --brand-yellow-gold: #ffbf00;
     --brand-gray-00: #ffffff;
     --brand-gray-05: #f5f6f7;
     --brand-gray-10: #dfdfe2;
@@ -16,50 +14,22 @@
     --brand-gray-80: #2a2a40;
     --brand-gray-85: #1b1b32;
     --brand-gray-90: #0a0a23;
+
     --brand-purple-light: #dbb8ff;
     --brand-purple-dark: #5a01a7;
-    --brand-yellow-light: #ffc300;
+
+    --brand-yellow-light: #f1be32;
     --brand-yellow-dark: #4d3800;
-    --brand-blue-light: rgb(153, 201, 255);
-    --brand-blue-light-translucent: rgba(153, 201, 255, 0.3);
-    --brand-blue-dark: rgb(0, 46, 173);
-    --brand-blue-dark-translucent: rgba(0, 46, 173, 0.3);
+
+    --brand-blue-light: #99c9ff;
+    --brand-blue-dark: #002ead;
+
     --brand-green-light: #acd157;
-    --brand-blue-mid: #198eee;
-    --brand-purple-mid: #9400d3;
     --brand-green-dark: #00471b;
-    --brand-red-light: #ffadad;
-    --brand-red-dark: #850000;
-    --brand-love-light: #f8577c;
-    --brand-love-dark: #f82153;
-    --brand-editor-background-light: #fffffe;
-    --brand-editor-background-dark: #2a2b40;
 
-    /* Accent colors derived from brand palette */
-    --blue-accent-200: var(--brand-blue-dark);
-    --blue-accent-600: var(--brand-blue-mid);
-    --blue-accent-900: var(--brand-blue-light);
-
-    --yellow-accent-200: var(--brand-yellow-dark);
-    --yellow-accent-600: var(--brand-yellow-gold);
-    --yellow-accent-900: var(--brand-yellow-light);
-
-    --green-accent-200: var(--brand-green-dark);
-    --green-accent-600: var(--brand-green-light);
-    --green-accent-900: var(--brand-green-light);
-
-    --purple-accent-200: var(--brand-purple-dark);
-    --purple-accent-600: var(--brand-purple-mid);
-    --purple-accent-900: var(--brand-purple-light);
-
-    --red-accent-200: var(--brand-red-dark);
-    --red-accent-600: var(--brand-red-dark);
-    --red-accent-900: var(--brand-red-light);
-
-    /* Theme accent (default to blue) */
-    --tw-accent-200: var(--blue-accent-200);
-    --tw-accent-600: var(--blue-accent-600);
-    --tw-accent-900: var(--blue-accent-900);
+    --brand-theme-color: #0a0a23;
+    --brand-yellow-gold: #ffbf00;
+    /* Brand color palette */
 
     /* Starlight essential mappings */
     --sl-color-white: var(--brand-gray-00);
@@ -71,10 +41,13 @@
     --sl-color-gray-6: var(--brand-gray-80);
     --sl-color-gray-7: var(--brand-gray-85);
     --sl-color-black: var(--brand-gray-90);
+    /* Starlight essential mappings */
+  }
 
-    --sl-color-accent-low: var(--tw-accent-200);
-    --sl-color-accent: var(--tw-accent-600);
-    --sl-color-accent-high: var(--tw-accent-900);
+  :root[data-theme='light'] {
+    --sl-color-accent-high: var(--brand-purple-dark);
+    --sl-color-accent: var(--brand-purple-dark);
+    --sl-color-accent-low: var(--brand-purple-light);
 
     --sl-color-text: var(--brand-gray-90);
     --sl-color-bg: var(--brand-gray-00);
@@ -82,6 +55,10 @@
   }
 
   :root[data-theme='dark'] {
+    --sl-color-accent-high: var(--brand-purple-light);
+    --sl-color-accent: var(--brand-purple-light);
+    --sl-color-accent-low: var(--brand-purple-dark);
+
     --sl-color-text: var(--brand-gray-05);
     --sl-color-bg: var(--brand-gray-90);
     --sl-color-bg-sidebar: var(--brand-gray-85);
