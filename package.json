@@ -18,8 +18,11 @@
     "playwright:watch": "playwright test --ui"
   },
   "lint-staged": {
-    "**/*.{astro,mdx,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
+    "**/*.{astro,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
       "pnpm format"
+    ],
+    "**/*.{mdx,md}": [
+      "npx prettier . --write"
     ]
   },
   "dependencies": {
