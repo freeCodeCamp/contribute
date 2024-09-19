@@ -1,5 +1,7 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
+
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 import Search from '@astrojs/starlight/components/Search.astro';
 import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
@@ -7,35 +9,22 @@ import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
 import FCCThemeSelect from './FCCThemeSelect.astro';
 ---
 
-<nav class='fixed top-0 left-0 right-0 shadow-md z-50'>
-  <div class='mx-auto px-4 h-16 flex items-center justify-between'>
-    {/* Left: Search */}
-    <div class='flex-shrink-0 w-64'>
-      <Search {...Astro.props} />
-    </div>
-
-    {/* Center: Logo */}
-    <div class='flex-grow flex justify-center'>
-      <a href='/intro/' class='flex items-center'>
-        <img
-          src='https://cdn.freecodecamp.org/platform/universal/fcc_secondary.svg'
-          alt='freeCodeCamp.org'
-          class='h-8 dark:hidden'
-        />
-        <img
-          src='https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg'
-          alt='freeCodeCamp.org'
-          class='h-8 hidden dark:block'
-        />
-      </a>
-    </div>
-
-    {/* Right: Icons */}
-    <div class='flex-shrink-0 flex items-center space-x-4'>
-      <SocialIcons {...Astro.props} />
-      <div class='h-6 w-px bg-gray-300 dark:bg-gray-700'></div>
-      <FCCThemeSelect {...Astro.props} />
-      <LanguageSelect {...Astro.props} />
+<div class='flex justify-between items-center'>
+  <div class='flex md:w-64'>
+    <Search {...Astro.props} />
+  </div>
+  <div class='flex-1 flex justify-center'>
+    <div class='overflow-hidden max-w-[240px]'>
+      <SiteTitle {...Astro.props} />
     </div>
   </div>
-</nav>
+  <div class='hidden md:flex items-center space-x-4'>
+    <div
+      class="flex items-center space-x-4 after:content-[''] after:h-8 after:border-r after:border-gray-300 dark:after:border-gray-700"
+    >
+      <SocialIcons {...Astro.props} />
+    </div>
+    <FCCThemeSelect {...Astro.props} />
+    <LanguageSelect {...Astro.props} />
+  </div>
+</div>
