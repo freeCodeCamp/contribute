@@ -2,6 +2,8 @@
 title: How to Work on Localized Client Webapp
 ---
 
+import { Aside, FileTree } from '@astrojs/starlight/components';
+
 The React-based client web app that powers our learning platform is built using Gatsby. It is translated into various world languages using [react-i18next](https://react.i18next.com/) and [i18next](https://www.i18next.com/).
 
 You can learn more about setting up the client application locally for development by following [our local setup guide here](/how-to-setup-freecodecamp-locally/). By default, the application is available only in English.
@@ -10,9 +12,11 @@ Once you have set up the project locally you should be able to follow this docum
 
 This could be helpful when you are working on a feature that specifically targets something that involves localization, and requires you to validate for instance a button's label in a different language.
 
-:::tip
-You do not need to follow this document to translate freeCodeCamp's curriculum or contributing documentation. Read [this guide here](/how-to-translate-files/) instead.
-:::
+<Aside type='note' title='Interested in translating freeCodeCamp?'>
+
+You do not need to follow this document to translate freeCodeCamp's curriculum or contributing documentation. Follow [this guide here](/how-to-translate-files/) instead.
+
+</Aside>
 
 Let's understand how the i18n frameworks and tooling work.
 
@@ -20,44 +24,42 @@ Let's understand how the i18n frameworks and tooling work.
 
 Most of the files for translating the platform are located in the [`client/i18n`](https://github.com/freeCodeCamp/freeCodeCamp/tree/main/client/i18n) folder. Each language has a directory that contains JSON files with the translations.
 
-```bash
-  config
-  └── i18n.ts
-  ...
-  client/i18n
-  ├── configForTests.js
-  ├── config.js
-  ├── locales
-  │   ├── chinese
-  │   │   ├── intro.json
-  │   │   ├── links.json
-  │   │   ├── meta-tags.json
-  │   │   ├── motivation.json
-  │   │   └── translations.json
-  ... ...
-  │   ├── dothraki
-  │   │   ├── intro.json
-  │   │   ├── links.json
-  │   │   ├── meta-tags.json
-  │   │   ├── motivation.json
-  │   │   └── translations.json
-  ... ...
-  │   ├── english
-  │   │   ├── intro.json
-  │   │   ├── links.json
-  │   │   ├── meta-tags.json
-  │   │   ├── motivation.json
-  │   │   └── translations.json
-  │   └── espanol
-  │       ├── intro.json
-  │       ├── links.json
-  │       ├── meta-tags.json
-  │       ├── motivation.json
-  │       └── translations.json
-  ├── locales.test.js
-  ├── schema-validation.js
-  └── validate-keys.ts
-```
+<FileTree>
+
+- config
+  - i18n.ts
+- i18n
+
+  - configForTests.js
+  - config.js
+  - locales
+
+    - **chinese** _Name of the world language_
+      - intro.json
+      - links.json
+      - meta-tags.json
+      - motivation.json
+      - translations.json
+    - dothraki/
+    - .../
+    - english
+      - **intro.json** _Intro text on the certification pages_
+      - links.json
+      - meta-tags.json
+      - motivation.json
+      - **translations.json** _Text that appears on the UI elements_
+    - espanol
+      - intro.json
+      - links.json
+      - ...
+
+  - locales.test.js
+  - schema-validation.js
+  - validate-keys.ts
+
+- .../
+
+</FileTree>
 
 Some of these files are translated on our translation platform (Crowdin) and some are translated or created via PRs on GitHub.
 
@@ -81,7 +83,7 @@ Some of these files are translated on our translation platform (Crowdin) and som
 
 You can test the client app in any language available in the [list of `availableLangs` here](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/i18n.ts).
 
-```js
+```js {3-14}
 export const availableLangs = {
   client: [
     Languages.English,
@@ -93,9 +95,13 @@ export const availableLangs = {
     Languages.Ukrainian,
     Languages.Japanese,
     Languages.German,
-    Languages.Arabic
+    Languages.Arabic,
+    Languages.Swahili,
+    Languages.Korean
   ],
-  ...
+  curriculum: [
+    ...
+  ]
 };
 ```
 
@@ -266,15 +272,19 @@ If the text you want to add to the client exists in the relevant `.json` file, u
 
 The English file is the "source of truth" for all of the `.json` files sharing the same name. If you need to add a new key, add it there. Then, add the key to **all** of the `translations.json` files.
 
-:::note
+<Aside type='note'>
+
 Use English text for all languages if the file is translated through Crowdin. The tests will fail if you don't.
-:::
+
+</Aside>
 
 It would be nice to keep the keys in the same order across all the files as well. Also, try to put all punctuation, spacing, quotes, etc. in the JSON files and not in the components or server files.
 
-:::note
+<Aside type='note'>
+
 The underscore (`_`) is a reserved character for keys in the client-side files. See [the documentation](https://www.i18next.com/translation-function/plurals) for how they are used.
-:::
+
+</Aside>
 
 Run `pnpm run clean-and-develop` to apply the change.
 
