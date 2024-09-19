@@ -82,7 +82,3 @@
     color: #0a0a23 !important;
   }
 }
-
-@view-transition {
-  navigation: auto;
-}
