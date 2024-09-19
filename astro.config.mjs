@@ -4,7 +4,8 @@ import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
-export default defineConfig({
+const config = defineConfig({
+  site: 'https://contribute.freecodecamp.org',
   redirects: {
     '/index': '/intro/',
     '/FAQ': '/faq/'
@@ -16,6 +17,14 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+  trailingSlash: 'always',
+  adapter: cloudflare({
+    imageService: 'cloudflare'
+    // platformProxy: {
+    //   enabled: true
+    // }
+  }),
+  output: 'hybrid',
   integrations: [
     starlight({
       title: 'Contribute | freeCodeCamp.org',
@@ -24,6 +33,7 @@ export default defineConfig({
         src: './public/icons/icon-96x96.png',
         replacesTitle: true
       },
+      favicon: './public/favicon-32x32.png',
       tableOfContents: {
         minHeadingLevel: 1,
         maxHeadingLevel: 2
@@ -46,18 +56,13 @@ export default defineConfig({
         Sidebar: './src/components/FCCSidebar.astro',
         Pagination: './src/components/FCCPagination.astro'
       },
-      customCss: ['./src/styles/tailwind.css', './src/styles/variables.css']
+      customCss: ['./src/styles/tailwind.css']
     }),
     tailwind({
-      applyBaseStyles: false
+      applyBaseStyles: false,
+      configFile: './tailwind.config.mjs'
     })
-  ],
-  trailingSlash: 'always',
-  adapter: cloudflare({
-    imageService: 'cloudflare'
-    // platformProxy: {
-    //   enabled: true
-    // }
-  }),
-  output: 'hybrid'
+  ]
 });
+
+export default config;
