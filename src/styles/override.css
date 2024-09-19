@@ -6,3 +6,11 @@ table * {
   --sl-text-h4: var(--sl-text-base);
   --sl-text-h5: var(--sl-text-base);
 }
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item input[type='checkbox'] {
+  margin-right: 0.5rem;
+}
