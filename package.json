@@ -53,5 +53,5 @@
     "sharp": "0.33.5",
     "wrangler": "^3.78.4"
   },
-  "packageManager": "pnpm@9.10.0"
+  "packageManager": "pnpm@9.11.0"
 }
