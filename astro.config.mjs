@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 
 // https://astro.build/config
 const config = defineConfig({
@@ -26,6 +27,7 @@ const config = defineConfig({
   }),
   output: 'hybrid',
   integrations: [
+    react(),
     starlight({
       title: 'Contribute | freeCodeCamp.org',
       description: 'Contribute to freeCodeCamp.org',
