@@ -15,11 +15,11 @@ importers:
         specifier: ^11.0.5
         version: 11.1.0(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))
       '@astrojs/starlight':
-        specifier: 0.28.1
-        version: 0.28.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))
+        specifier: 0.28.2
+        version: 0.28.2(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))
       '@astrojs/starlight-tailwind':
         specifier: 2.0.3
-        version: 2.0.3(@astrojs/starlight@0.28.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2)))(@astrojs/tailwind@5.1.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))(tailwindcss@3.4.13))(tailwindcss@3.4.13)
+        version: 2.0.3(@astrojs/starlight@0.28.2(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2)))(@astrojs/tailwind@5.1.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))(tailwindcss@3.4.13))(tailwindcss@3.4.13)
       '@astrojs/tailwind':
         specifier: 5.1.1
         version: 5.1.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))(tailwindcss@3.4.13)
@@ -144,8 +144,8 @@ packages:
       '@astrojs/tailwind': ^5.0.0
       tailwindcss: ^3.3.3
 
-  '@astrojs/starlight@0.28.1':
-    resolution: {integrity: sha512-aEBy6k1w8L25lP+jV1WYvujxfigFxh10NFPxHCW76J695Xgw1jC1TVALbhkctIuCdIAmzUElpXfuOuOiARJf0g==}
+  '@astrojs/starlight@0.28.2':
+    resolution: {integrity: sha512-Q1/Ujl2EzWX71qwqdt/0KP3wOyX6Rvyzcep/zD3hRCtw/Vi2TReh4Q2wLwz7mnbuYU9H7YvBKYknbkmjC+K/0w==}
     peerDependencies:
       astro: ^4.14.0
 
@@ -3643,13 +3643,13 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.28.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2)))(@astrojs/tailwind@5.1.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))(tailwindcss@3.4.13))(tailwindcss@3.4.13)':
+  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.28.2(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2)))(@astrojs/tailwind@5.1.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))(tailwindcss@3.4.13))(tailwindcss@3.4.13)':
     dependencies:
-      '@astrojs/starlight': 0.28.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))
+      '@astrojs/starlight': 0.28.2(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))
       '@astrojs/tailwind': 5.1.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))(tailwindcss@3.4.13)
       tailwindcss: 3.4.13
 
-  '@astrojs/starlight@0.28.1(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))':
+  '@astrojs/starlight@0.28.2(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))':
     dependencies:
       '@astrojs/mdx': 3.1.5(astro@4.15.12(@types/node@20.16.10)(rollup@4.21.2)(typescript@5.6.2))
       '@astrojs/sitemap': 3.1.6
