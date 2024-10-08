@@ -43,7 +43,7 @@ With `link` being the link of the original article.
 ## How to set up the auto-translation workflow for a new language
 
 - Add the prompt that you want to give to the OpenAI API
-- Add the GitHub issue template
+- Add the GitHub issue template and the CODEOWNERS configuration
 
 ### Add prompt
 
@@ -61,12 +61,13 @@ I have an md file, please translate it into [Language]. The translation must str
 
 ![Where to add the prompt](https://contribute.freecodecamp.org/images/github/auto-translate-prompt.png)
 
-### Add issue template
+### Add issue template and update CODEOWNERS
 
 1. Clone the repository [freeCodeCamp/news-translation-tasks](https://github.com/freeCodeCamp/news-translation-tasks)
 2. The issue template files are in [.github/ISSUE_TEMPLATE](https://github.com/freeCodeCamp/news-translation-tasks/tree/main/.github/ISSUE_TEMPLATE) directory
 3. Add the file for your language. Make sure to use the language code that matches with the key you added in the prompt object above, as shown in the image below
-4. Open a pull request
+4. Update the file [.github/CODEOWNERS](https://github.com/freeCodeCamp/news-translation-tasks/blob/main/.github/CODEOWNERS) to add the new language
+5. Open a pull request
 
 The issue template should look like this:
 
@@ -83,6 +84,23 @@ assignees: ''
 ```
 
 ![Use the same language code](https://contribute.freecodecamp.org/images/github/auto-translate-langcode.png)
+
+The CODEOWNERS file should look like this:
+
+```
+# -------------------------------------------------
+# Files that need attention from each language lead
+# -------------------------------------------------
+
+/articles/es/*.md @RafaelDavisH
+/articles/ja/*.md @sidemt
+...
+
+```
+
+Add a line in the following format: `/articles/<2-letter language code>/*.md @<username of the language lead>`
+
+This way, the language lead can get notified when someone opens a PR for the translation files for that language.
 
 ## How to start the auto-translation workflow
 
