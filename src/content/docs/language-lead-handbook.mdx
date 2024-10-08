@@ -43,7 +43,7 @@ With `link` being the link of the original article.
 ## How to set up the auto-translation workflow for a new language
 
 - Add the prompt that you want to give to the OpenAI API
-- Add the GitHub issue template
+- Add the GitHub issue template and the CODEOWNERS configuration
 
 ### Add prompt
 
@@ -59,14 +59,15 @@ The prompt should say something similar to below. You can customize the prompt t
 I have an md file, please translate it into [Language]. The translation must strictly maintain the format and layout of the original markdown file. Please provide the translation directly without asking questions.
 ```
 
-![Where to add the prompt](../../../public/images/github/auto-translate-prompt.png)
+![Where to add the prompt](https://contribute.freecodecamp.org/images/github/auto-translate-prompt.png)
 
-### Add issue template
+### Add issue template and update CODEOWNERS
 
 1. Clone the repository [freeCodeCamp/news-translation-tasks](https://github.com/freeCodeCamp/news-translation-tasks)
 2. The issue template files are in [.github/ISSUE_TEMPLATE](https://github.com/freeCodeCamp/news-translation-tasks/tree/main/.github/ISSUE_TEMPLATE) directory
 3. Add the file for your language. Make sure to use the language code that matches with the key you added in the prompt object above, as shown in the image below
-4. Open a pull request
+4. Update the file [.github/CODEOWNERS](https://github.com/freeCodeCamp/news-translation-tasks/blob/main/.github/CODEOWNERS) to add the new language
+5. Open a pull request
 
 The issue template should look like this:
 
@@ -82,7 +83,24 @@ assignees: ''
 [Original Title](https://example.com/path/to/your/article/)
 ```
 
-![Use the same language code](../../../public/images/github/auto-translate-langcode.png)
+![Use the same language code](https://contribute.freecodecamp.org/images/github/auto-translate-langcode.png)
+
+The CODEOWNERS file should look like this:
+
+```
+# -------------------------------------------------
+# Files that need attention from each language lead
+# -------------------------------------------------
+
+/articles/es/*.md @RafaelDavisH
+/articles/ja/*.md @sidemt
+...
+
+```
+
+Add a line in the following format: `/articles/<2-letter language code>/*.md @<username of the language lead>`
+
+This way, the language lead can get notified when someone opens a PR for the translation files for that language.
 
 ## How to start the auto-translation workflow
 
@@ -102,7 +120,7 @@ The minimum requirements to use the workflow are as follows:
 - URL of the English article in the description as a link
 - `auto` label
 
-![Issue template](../../../public/images/github/auto-translate-issue.png)
+![Issue template](https://contribute.freecodecamp.org/images/github/auto-translate-issue.png)
 
 Additional information:
 
@@ -112,11 +130,11 @@ Additional information:
 
 4. When the `auto` label is added to an issue, the auto-translation workflow is triggered. You can check the status of the workflow run in the "Actions" tab.
 
-![GitHub Actions status](../../../public/images/github/auto-translate-actions.png)
+![GitHub Actions status](https://contribute.freecodecamp.org/images/github/auto-translate-actions.png)
 
 5. When the workflow run is complete, it adds an issue comment like below. It is ready for contributors to start post-editing.
 
-![Comment added by GitHub Actions](../../../public/images/github/auto-translate-comment.png)
+![Comment added by GitHub Actions](https://contribute.freecodecamp.org/images/github/auto-translate-comment.png)
 
 ## How to Update Trending Articles
 
@@ -398,9 +416,9 @@ Really useful to restore a lot of translations from the Translation Memory in bu
 You can find the Pre-Translation workflow at the top of the page in the console of a project.
 If you see "Go to console" in the upper right corner, click there first.
 
-![go to console button](../../../public/images/crowdin/pre-translate2.png)
+![go to console button](https://contribute.freecodecamp.org/images/crowdin/pre-translate2.png)
 
-![pre-translate workflow](../../../public/images/crowdin/pre-translate1.png)
+![pre-translate workflow](https://contribute.freecodecamp.org/images/crowdin/pre-translate1.png)
 
 You can choose "From Machine Translation" or "From Translation Memory". Choose "Translation Memory" to recover translations from memory.
 
@@ -410,7 +428,7 @@ Then there are three steps to complete:
 2. Languages. Set your language here.
 3. Existing Translations. The best combination here is "100% match" and "Apply to untranslated strings only". Do not approve automatically, as it's always best to have a human eye on things.
 
-![pre-translate existing translations](../../../public/images/crowdin/pre-translate3.png)
+![pre-translate existing translations](https://contribute.freecodecamp.org/images/crowdin/pre-translate3.png)
 
 When you have finished setting this, press the Pre-Translate button and wait. It will alert you once it has finished. The time it takes depends on how many untranslated strings are in the chosen files.
 
