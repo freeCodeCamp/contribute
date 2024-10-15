@@ -8,7 +8,7 @@ This is the place where you can find information about how to contribute to free
 
 Here's a Project Board: https://github.com/orgs/freeCodeCamp/projects/40 that shows the current status of the project.
 
-If you're looking for for opportunities to contribute to this project, look for help wanted issues in the [issues tab](https://github.com/freeCodeCamp/contribute/issues).
+If you're looking for opportunities to contribute to this project, look for help wanted issues in the [issues tab](https://github.com/freeCodeCamp/contribute/issues).
 
 > [!WARNING]
 > This repository is under a heavy refactoring/development phase. We are building out a brand-new experience for our contributors. Please get in touch over on our discord: https://chat.freecodecamp.org if you have any questions or need help.
