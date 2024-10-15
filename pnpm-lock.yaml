@@ -13,19 +13,19 @@ importers:
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.3)
       '@astrojs/cloudflare':
         specifier: ^11.0.5
-        version: 11.1.0(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+        version: 11.1.0(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
       '@astrojs/starlight':
         specifier: 0.27.1
-        version: 0.27.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+        version: 0.27.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
       '@astrojs/starlight-tailwind':
         specifier: 2.0.3
-        version: 2.0.3(@astrojs/starlight@0.27.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)))(@astrojs/tailwind@5.1.2(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14))(tailwindcss@3.4.14)
+        version: 2.0.3(@astrojs/starlight@0.27.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)))(@astrojs/tailwind@5.1.2(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14))(tailwindcss@3.4.14)
       '@astrojs/tailwind':
         specifier: 5.1.2
-        version: 5.1.2(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14)
+        version: 5.1.2(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14)
       astro:
-        specifier: 4.16.4
-        version: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+        specifier: 4.16.5
+        version: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
       tailwindcss:
         specifier: 3.4.14
         version: 3.4.14
@@ -229,11 +229,6 @@ packages:
   '@babel/highlight@7.25.7':
     resolution: {integrity: sha512-iYyACpW3iW8Fw+ZybQK+drQre+ns/tKpXbNESfrhNnPLIklLbXr7MYJ6gPEd0iETGLOK+SxMjVvKb/ffmk+FEw==}
     engines: {node: '>=6.9.0'}
-
-  '@babel/parser@7.25.7':
-    resolution: {integrity: sha512-aZn7ETtQsjjGG5HruveUK06cU3Hljuhd9Iojm4M8WWv3wLE6OkE5PWbDUkItmMgegmccaITudyuW5RPYrYlgWw==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
 
   '@babel/parser@7.25.8':
     resolution: {integrity: sha512-HcttkxzdPucv3nNFmfOOMfFf64KgdJVqm1KaCm25dPGMLElo9nsLvXeJECQg8UzPuBGLyTSA0ZzqCtDSzKTEoQ==}
@@ -1262,8 +1257,8 @@ packages:
     peerDependencies:
       astro: ^4.12.0
 
-  astro@4.16.4:
-    resolution: {integrity: sha512-W/ETxHRkt9iEAj1RVSqV3bjSGaGXEFJHqeNpPhvJIj720hC3V/ZBDAd6FpMW291eiZPtxhGh+c/VDtkD6avPXQ==}
+  astro@4.16.5:
+    resolution: {integrity: sha512-v8mKWcEPN7hkfyVsMFWV0F8UgL4GUJKT172KTB7dePO3yJb64HBwCckC0QnA60QQh3jK6+2xwyWEc5QvCeqjtg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2816,9 +2811,6 @@ packages:
   remark-parse@11.0.0:
     resolution: {integrity: sha512-FCxlKLNGknS5ba/1lmpYijMUzX2esxW5xQqjWxw2eHFfS2MSdaHVINFmhjo+qN1WhZhNimq0dZATN9pH0IDrpA==}
 
-  remark-rehype@11.1.0:
-    resolution: {integrity: sha512-z3tJrAs2kIs1AqIIy6pzHmAHlF1hWQ+OdY4/hv+Wxe35EhyLKcajL33iUEn3ScxtFox9nUvRufR/Zre8Q08H/g==}
-
   remark-rehype@11.1.1:
     resolution: {integrity: sha512-g/osARvjkBXb6Wo0XvAeXQohVta8i84ACbenPpoSsxTOQH/Ae0/RGP4WZgnMH5pMLpsj4FG7OHmcIcXxpza8eQ==}
 
@@ -3542,13 +3534,13 @@ snapshots:
       - prettier
       - prettier-plugin-astro
 
-  '@astrojs/cloudflare@11.1.0(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
+  '@astrojs/cloudflare@11.1.0(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
     dependencies:
       '@astrojs/internal-helpers': 0.4.1
       '@astrojs/underscore-redirects': 0.3.4
       '@cloudflare/workers-types': 4.20240919.0
-      '@inox-tools/astro-when': 0.2.3(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      '@inox-tools/astro-when': 0.2.3(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
       esbuild: 0.21.5
       estree-walker: 3.0.3
       magic-string: 0.30.11
@@ -3594,7 +3586,7 @@ snapshots:
     dependencies:
       '@astrojs/prism': 3.1.0
       github-slugger: 2.0.0
-      hast-util-from-html: 2.0.2
+      hast-util-from-html: 2.0.3
       hast-util-to-text: 4.0.2
       import-meta-resolve: 4.1.0
       mdast-util-definitions: 6.0.0
@@ -3602,7 +3594,7 @@ snapshots:
       rehype-stringify: 10.0.1
       remark-gfm: 4.0.0
       remark-parse: 11.0.0
-      remark-rehype: 11.1.0
+      remark-rehype: 11.1.1
       remark-smartypants: 3.0.2
       shiki: 1.22.0
       unified: 11.0.5
@@ -3636,12 +3628,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@3.1.5(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
+  '@astrojs/mdx@3.1.5(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
     dependencies:
       '@astrojs/markdown-remark': 5.2.0
       '@mdx-js/mdx': 3.0.1
       acorn: 8.12.1
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       gray-matter: 4.0.3
@@ -3666,21 +3658,21 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.27.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)))(@astrojs/tailwind@5.1.2(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14))(tailwindcss@3.4.14)':
+  '@astrojs/starlight-tailwind@2.0.3(@astrojs/starlight@0.27.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)))(@astrojs/tailwind@5.1.2(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14))(tailwindcss@3.4.14)':
     dependencies:
-      '@astrojs/starlight': 0.27.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
-      '@astrojs/tailwind': 5.1.2(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14)
+      '@astrojs/starlight': 0.27.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+      '@astrojs/tailwind': 5.1.2(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14)
       tailwindcss: 3.4.14
 
-  '@astrojs/starlight@0.27.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
+  '@astrojs/starlight@0.27.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
     dependencies:
-      '@astrojs/mdx': 3.1.5(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+      '@astrojs/mdx': 3.1.5(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
       '@astrojs/sitemap': 3.1.6
       '@pagefind/default-ui': 1.1.1
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
-      astro-expressive-code: 0.35.6(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      astro-expressive-code: 0.35.6(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
       bcp-47: 2.1.0
       hast-util-from-html: 2.0.2
       hast-util-select: 6.0.2
@@ -3699,9 +3691,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/tailwind@5.1.2(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14)':
+  '@astrojs/tailwind@5.1.2(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))(tailwindcss@3.4.14)':
     dependencies:
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
       autoprefixer: 10.4.20(postcss@8.4.47)
       postcss: 8.4.47
       postcss-load-config: 4.0.2(postcss@8.4.47)
@@ -3816,10 +3808,6 @@ snapshots:
       chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.1.0
-
-  '@babel/parser@7.25.7':
-    dependencies:
-      '@babel/types': 7.25.8
 
   '@babel/parser@7.25.8':
     dependencies:
@@ -4222,10 +4210,10 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@inox-tools/astro-when@0.2.3(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
+  '@inox-tools/astro-when@0.2.3(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))':
     dependencies:
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
-      astro-integration-kit: 0.16.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      astro-integration-kit: 0.16.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3))
       debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
@@ -4279,7 +4267,7 @@ snapshots:
       periscopic: 3.1.0
       remark-mdx: 3.0.1
       remark-parse: 11.0.0
-      remark-rehype: 11.1.0
+      remark-rehype: 11.1.1
       source-map: 0.7.4
       unified: 11.0.5
       unist-util-position-from-estree: 2.0.0
@@ -4418,7 +4406,7 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.25.7
+      '@babel/parser': 7.25.8
       '@babel/types': 7.25.8
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
@@ -4430,7 +4418,7 @@ snapshots:
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.25.7
+      '@babel/parser': 7.25.8
       '@babel/types': 7.25.8
 
   '@types/babel__traverse@7.20.6':
@@ -4739,18 +4727,18 @@ snapshots:
       - supports-color
       - typescript
 
-  astro-expressive-code@0.35.6(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)):
+  astro-expressive-code@0.35.6(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)):
     dependencies:
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
       rehype-expressive-code: 0.35.6
 
-  astro-integration-kit@0.16.1(astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)):
+  astro-integration-kit@0.16.1(astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)):
     dependencies:
-      astro: 4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
+      astro: 4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3)
       pathe: 1.1.2
       recast: 0.23.9
 
-  astro@4.16.4(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3):
+  astro@4.16.5(@types/node@20.16.11)(rollup@4.21.2)(typescript@5.6.3):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.1
@@ -5921,7 +5909,7 @@ snapshots:
 
   magicast@0.3.5:
     dependencies:
-      '@babel/parser': 7.25.7
+      '@babel/parser': 7.25.8
       '@babel/types': 7.25.8
       source-map-js: 1.2.1
 
@@ -6783,7 +6771,7 @@ snapshots:
   rehype-parse@9.0.0:
     dependencies:
       '@types/hast': 3.0.4
-      hast-util-from-html: 2.0.2
+      hast-util-from-html: 2.0.3
       unified: 11.0.5
 
   rehype-raw@7.0.0:
@@ -6853,14 +6841,6 @@ snapshots:
       unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
-
-  remark-rehype@11.1.0:
-    dependencies:
-      '@types/hast': 3.0.4
-      '@types/mdast': 4.0.4
-      mdast-util-to-hast: 13.2.0
-      unified: 11.0.5
-      vfile: 6.0.3
 
   remark-rehype@11.1.1:
     dependencies:
