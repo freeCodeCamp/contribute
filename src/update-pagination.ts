@@ -6,6 +6,7 @@ interface Section {
     href: string;
     title: keyof CollectionEntry<'i18n'>['data'];
     strong?: boolean;
+    external?: boolean;
   }[];
   addSeparator?: boolean;
 }
@@ -147,17 +148,20 @@ export const content: Section[] = [
       {
         href: 'https://github.com/freecodecamp/freecodecamp',
         title: 'sidebar.github',
-        strong: true
+        strong: true,
+        external: true
       },
       {
         href: 'https://freecodecamp.org/forum/c/contributors',
         title: 'sidebar.discourse_forum',
-        strong: true
+        strong: true,
+        external: true
       },
       {
         href: 'https://discord.gg/PRyKn3Vbay',
         title: 'sidebar.chat_server',
-        strong: true
+        strong: true,
+        external: true
       }
     ]
   }
