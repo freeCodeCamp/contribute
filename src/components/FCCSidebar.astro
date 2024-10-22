@@ -32,6 +32,9 @@ import { content } from '../update-pagination';
                               class={
                                 Astro.url.pathname == item.href ? 'current' : ''
                               }
+                              target={
+                                item.external === undefined ? '_self' : '_blank'
+                              }
                             >
                               {item.strong ? (
                                 <strong>{entry?.data[item.title]}</strong>
