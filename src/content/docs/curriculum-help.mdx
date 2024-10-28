@@ -197,6 +197,25 @@ To check the return value of `__str__` you would write:
 });
 ```
 
+AST-based helpers are also exposed in the Python challenges in `ast_helpers` module. `_Node` class corresponds to the `ast_helpers.Node`:
+
+```py
+import ast_helpers
+
+code = '''
+class Spam:
+  def __str__(self):
+    return 'spam!'
+'''
+
+print(
+    ast_helpers.Node(code)
+    .find_class("Spam")
+    .find_function("__str__")
+    .has_return("'spam!'")
+)
+```
+
 ### Methods
 
 The exstensive list of methods for parsing and testing Python code is available [here](https://opensource.freecodecamp.org/curriculum-helpers/python.html#ast-based-helpers)
