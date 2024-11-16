@@ -1,0 +1,74 @@
+---
+const { text = 'Made with ❤️ by the freeCodeCamp community' } = Astro.props;
+---
+
+<footer class='bg-gray-800 text-white py-6 mt-8'>
+  <div class='max-w-6xl mx-auto text-center'>
+    <p class='text-sm'>{text}</p>
+    <div class='space-x-4'>
+      <!-- Navigation Links Section -->
+      <ul class='inline-flex space-x-6 items-center'>
+        <li><a href='/' class='text-white hover:text-gray-400'>Home</a></li>
+        <li>
+          <a href='/about' class='text-white hover:text-gray-400'>About</a>
+        </li>
+        <li>
+          <a href='/contact' class='text-white hover:text-gray-400'
+            >Contact Us</a
+          >
+        </li>
+        <li>
+          <a href='/get-involved' class='text-white hover:text-gray-400'
+            >Get Involved</a
+          >
+        </li>
+      </ul>
+    </div>
+    <!-- Social Media Links Section -->
+    <div class='mt-4 space-x-6'>
+      <a
+        href='https://x.com/freeCodeCamp'
+        target='_blank'
+        class='text-white hover:text-gray-400 no-underline'
+      >
+        <i class='fab fa-twitter fa-lg'></i>
+        <!-- Font Awesome Twitter Icon -->
+      </a>
+      <a
+        href='https://facebook.com/yourusername'
+        target='_blank'
+        class='text-white hover:text-gray-400 no-underline'
+      >
+        <i class='fab fa-facebook fa-lg'></i>
+        <!-- Font Awesome Facebook Icon -->
+      </a>
+      <a
+        href='https://instagram.com/yourusername'
+        target='_blank'
+        class='text-white hover:text-gray-400 no-underline'
+      >
+        <i class='fab fa-instagram fa-lg'></i>
+        <!-- Font Awesome Instagram Icon -->
+      </a>
+      <a
+        href='https://github.com/freeCodeCamp'
+        target='_blank'
+        class='text-white hover:text-gray-400 no-underline'
+      >
+        <i class='fab fa-github fa-lg'></i>
+        <!-- Font Awesome GitHub Icon -->
+      </a>
+      <a
+        href='https://discord.com/servers/freecodecamp-org-official-fi-fo-692816967895220344'
+        target='_blank'
+        class='text-white hover:text-gray-400 no-underline'
+      >
+        <i class='fab fa-discord fa-lg'></i>
+        <!-- Font Awesome Discord Icon -->
+      </a>
+    </div>
+    <p class='text-xs mt-2'>
+      freeCodeCamp.org is a 501(c)(3) nonprofit organization
+    </p>
+  </div>
+</footer>
