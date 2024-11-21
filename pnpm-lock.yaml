@@ -80,7 +80,7 @@ importers:
         version: 0.33.5
       wrangler:
         specifier: ^3.78.4
-        version: 3.88.0(@cloudflare/workers-types@4.20241022.0)
+        version: 3.89.0(@cloudflare/workers-types@4.20241022.0)
 
 packages:
 
@@ -2398,8 +2398,8 @@ packages:
     engines: {node: '>=16.13'}
     hasBin: true
 
-  miniflare@3.20241106.0:
-    resolution: {integrity: sha512-PjOoJKjUUofCueQskfhXlGvvHxZj36UAJAp1DnquMK88MFF50zCULblh0KXMSNM+bXeQYA94Gj06a7kfmBGxPw==}
+  miniflare@3.20241106.1:
+    resolution: {integrity: sha512-dM3RBlJE8rUFxnqlPCaFCq0E7qQqEQvKbYX7W/APGCK+rLcyLmEBzC4GQR/niXdNM/oV6gdg9AA50ghnn2ALuw==}
     engines: {node: '>=16.13'}
     hasBin: true
 
@@ -3391,8 +3391,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.88.0:
-    resolution: {integrity: sha512-1yM5cgerjKkIBL9GOzIWhl8MsyEGNTsN4emJCiLLHJFz52TSNjJJlMbd1x0hX351mfy2MsGgUqKcx8iRL51PcQ==}
+  wrangler@3.89.0:
+    resolution: {integrity: sha512-ix3Rir/cu9Cn6FklvPDIW1QwOMcRU8iPj3IrkBWGdB66K9z1uqyqoTP64UZZyXrBItfrU7SbQT4L5wJ5y10TPA==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -3519,7 +3519,7 @@ snapshots:
       magic-string: 0.30.12
       miniflare: 3.20241022.0
       tiny-glob: 0.2.9
-      wrangler: 3.88.0(@cloudflare/workers-types@4.20241022.0)
+      wrangler: 3.89.0(@cloudflare/workers-types@4.20241022.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -6351,7 +6351,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  miniflare@3.20241106.0:
+  miniflare@3.20241106.1:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.14.0
@@ -7443,7 +7443,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20241106.1
       '@cloudflare/workerd-windows-64': 1.20241106.1
 
-  wrangler@3.88.0(@cloudflare/workers-types@4.20241022.0):
+  wrangler@3.89.0(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@cloudflare/workers-shared': 0.7.1
@@ -7454,7 +7454,7 @@ snapshots:
       date-fns: 4.1.0
       esbuild: 0.17.19
       itty-time: 1.0.6
-      miniflare: 3.20241106.0
+      miniflare: 3.20241106.1
       nanoid: 3.3.7
       path-to-regexp: 6.3.0
       resolve: 1.22.8
