@@ -18,3 +18,11 @@ table * {
 .tree-entry > span {
   display: flex;
 }
+
+footer a {
+  color: white !important;
+}
+
+footer a:hover {
+  color: #d1d5db !important; /* Light grey hover */
+}
