@@ -48,7 +48,7 @@
     "husky": "9.1.7",
     "is-ci": "3.0.1",
     "lint-staged": "15.2.10",
-    "prettier": "3.3.3",
+    "prettier": "3.4.0",
     "prettier-plugin-astro": "0.14.1",
     "sharp": "0.33.5",
     "wrangler": "^3.78.4"
