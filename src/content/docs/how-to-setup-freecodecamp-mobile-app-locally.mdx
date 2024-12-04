@@ -466,7 +466,7 @@ You only need to follow this section if you're modifying the challenge test runn
 9. Update the test file to use the challenge data JSON file:
 
    ```bash
-   sed -i '' 's/..\/..\/shared\/config\/curriculum.json/.\/curriculum.json/g' test/widget_test.dart
+   sed -i 's/..\/..\/shared\/config\/curriculum.json/.\/curriculum.json/g' test/widget_test.dart
    ```
 
 10. Generate the challenge files:
