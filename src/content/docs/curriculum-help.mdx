@@ -35,6 +35,8 @@ body {
 }
 ```
 
+and call the `getStyle` method with `body` as an argument;
+
 You would get an object that looks like this:
 
 ```js
@@ -89,24 +91,18 @@ the first matching CSS style declaration object.
 For example, if the camper has written the following CSS:
 
 ```css
-.earth {
-  background: linear-gradient(45deg, rgb(118, 201, 255), rgb(247, 255, 222));
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
 .sky {
-  background: linear-gradient(45deg, rgb(118, 201, 255), rgb(247, 255, 222));
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  background: radial-gradient(
+    closest-corner circle at 15% 15%,
+    #ffcf33,
+    #ffcf33 20%,
+    #ffff66 21%,
+    #bbeeff 100%
+  );
 }
 ```
+
+and call the `getStyleAny()` method with `.earth` and `.sky` as arguments;
 
 You would get an object that looks like this:
 
