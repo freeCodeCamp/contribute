@@ -83,6 +83,9 @@ The helper attaches a `.getPropVal()` method to the style declaration object tha
 assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
 ```
 
+On the style object returned, there is a native method called `getPropertyValue` that can retrieve
+CSS properties. More info at [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
+
 #### `.getStyleAny()`
 
 The `.getStyleAny()` method takes multiple CSS possible selectors and returns
