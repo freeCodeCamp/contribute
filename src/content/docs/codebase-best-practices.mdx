@@ -1,12 +1,9 @@
----
-title: Codebase Best Practices
----
+# Codebase Best Practices
 
-import { Steps } from '@astrojs/starlight/components';
 
 ## Styling a component
 
-We recommend styling components using our [design style guide](https://design-style-guide.freecodecamp.org/).
+We recommend styling components using our [`design style guide`](https://design-style-guide.freecodecamp.org/).
 
 The colors are defined in [`variable.css`](/client/src/components/layouts/variables.css), and the fonts are in [`fonts.css`](/client/src/components/layouts/fonts.css).
 
@@ -20,13 +17,13 @@ We are striving to support right-to-left (RTL) layout in the codebase for langua
 
 - Don't use `float` properties
   - Use Flexbox and Grid layouts instead, as they have RTL support already built-in, and those will be easier to maintain and review.
-- Don't define the direction while using `margin` and `padding`: it may seem harmless to use `padding-right` and `margin-left`, but these directions aren't mirrored when the layout changes to RTL, and adding counter values for them in the RTL file makes maintaining the codebase harder.
+- Don't define the direction while using `margin` and `padding` it may seem harmless to use `padding-right` and `margin-left`, but these directions aren't mirrored when the layout changes to RTL, and adding counter values for them in the RTL file makes maintaining the codebase harder.
   - Use logical properties for them: You can add the same spacing by using `padding-inline-end` and `margin-inline-start`, and you won't need to worry about RTL layout, as they follow where the line starts and ends, and you won't need to add any extra values in the RTL files, so people won't need to remember to change the same values in two files.
-- Don't use `!important` in `font-family`: RTL layout uses different fonts compared to the LTR layout, when you add `!important` in the `font-family` property it affects the RTL layout too.
+- Don't use `!important` in `font-family` RTL layout uses different fonts compared to the LTR layout, when you add `!important` in the `font-family` property it affects the RTL layout too.
 
 ## General JavaScript
 
-In most cases, our [linter](/how-to-setup-freecodecamp-locally/#follow-these-steps-to-get-your-development-environment-ready) will warn of any formatting which goes against this codebase's preferred practice.
+In most cases, our [`linter`](/how-to-setup-freecodecamp-locally/#follow-these-steps-to-get-your-development-environment-ready) will warn of any formatting which goes against this codebase's preferred practice.
 
 It is encouraged to use functional components over class-based components.
 
@@ -49,11 +46,11 @@ The best bet at achieving this is to:
 
 </Steps>
 
-:::note
+note
 Editors like VSCode are still likely to show you the file has been deleted
 and a new one created. If you use the CLI to `git add .`, then VSCode will show the
 file as renamed in the staging area.
-:::
+
 
 ### Naming Conventions
 
@@ -85,9 +82,6 @@ interface MyObject {}
 const myObject: MyObject = {};
 ```
 
-//-- #### Redux Actions -->
-
-//-- TODO: Once refactored to TS, showcase naming convention for Reducers/Actions and how to type dispatch funcs -->
 
 ## Redux
 
@@ -135,7 +129,7 @@ export const reducer = (
 
 ### How to Dispatch
 
-Within a component, import the actions and selectors needed.
+With in a component, import the actions and selectors needed.
 
 ```tsx
 // Add type definition
@@ -158,8 +152,6 @@ const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {
 export default connect(null, mapDispatchToProps)(MyComponent);
 ```
 
-//-- ### Redux Types File -->
-//-- The types associated with the Redux store state are located in `client/src/redux/types.ts`... -->
 
 ## API
 
