@@ -55,6 +55,10 @@ export const content: Section[] = [
         title: 'sidebar.work_on_coding_challenges'
       },
       {
+        href: '/how-to-work-on-quizzes/',
+        title: 'sidebar.work_on_quizzes'
+      },
+      {
         href: '/curriculum-help/',
         title: 'sidebar.use_the_curriculum_helpers'
       },
