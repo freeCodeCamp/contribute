@@ -1,0 +1,160 @@
+---
+title: How to Work on Quizzes
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+We are currently in the process of developing four new certifications which will be more rigorous and time consuming then our previous certifications.
+
+Here are the four new certifications:
+
+- [The Certified Full Stack Developer (fCC-CFSD) Certification](https://www.freecodecamp.org/learn/full-stack-developer/)
+- The Certified Machine Learning Engineer Certification (fCC-CMLE)
+- The Certified Software Systems Engineer Certification (fCC-CSSE)
+- The Certified Data Scientist Certification (fCC-CDS)
+
+You can learn more about these new certification plans in [Quincy's announcement article](https://www.freecodecamp.org/news/freecodecamp-turns-10-major-curriculum-updates/).
+
+Every certification will have a series of quizzes to test camper's knowledge as they move throughout the curriculum.
+
+## Basic Structure for Quizzes
+
+Each quiz will have a total of 20 questions. Every quiz question will have a set of 4 options (1 correct answer and 3 distractors).
+
+To pass the quiz, a camper will need to get at least 17 questions correct. If they fail the quiz, then there will be a brief cool down period before they are able to take the quiz again.
+
+Before each quiz, there will be a review page listing out all of the topics that were previously discussed in the module.
+
+## Guidelines for Designing Questions and Answers
+
+All quiz questions should come from either the corresponding review page or prior workshop(s). If a particular concept has not been taught so far in the curriculum, it cannot be asked on a quiz.
+
+If you believe a corresponding review page is missing a concept that was covered in the module, then please open a separate issue on our [issue tracker](https://github.com/freeCodeCamp/freeCodeCamp/issues).
+
+All quiz questions should be short and easy to understand. If it takes longer then 2 minutes to read and understand the question, then it is to long or unclear.
+
+Here is an example of well designed quiz question:
+
+```md
+Which of the following is the correct syntax for a `div` element?
+```
+
+<Aside type="caution">
+
+Please avoid creating quiz questions that contain multiple questions like this:
+
+```md
+What does the `let` keyword do in JavaScript and what are the differences between `let`, `var` and `const`?
+```
+
+In these situations, it is best to break that question down in smaller separate questions.
+
+</Aside>
+
+Any references to language keywords(ex. HTML element names, CSS properties, JavaScript method names) should be wrapped in `\`` backticks.
+
+```md
+`caption` element
+`outline` property
+`toString()` method
+```
+
+For the list of answers, it is best to keep each option down to two sentences or less.
+
+Here is an example:
+
+```md
+What is an HTML validator used for?
+
+A validator is a tool that makes your HTML code run faster.
+
+A validator is a tool that automatically formats your HTML code.
+
+A validator is a tool that applies styles to your HTML.
+
+A validator is a tool that checks the syntax of HTML code to ensure it is valid.
+```
+
+<Aside type="tip">
+
+From a learning perspective, it is best to have all of the options of similar length.
+
+If the correct answer is always twice as large then the wrong answers, then it becomes too obvious which one to choose.
+
+Also, it is important to note that all answers will be shuffled. So using `all of the above` for an option will not work.
+
+</Aside>
+
+For any question that includes a code block, it is important for that code block to appear below the question like this:
+
+````md
+What will be the output for the following example?
+
+```js
+if (null) {
+  console.log('Example message');
+}
+```
+````
+
+All multi-line code blocks **must be preceded by an empty line**. The next line must start with three backticks followed immediately by one of the [supported languages](https://prismjs.com/#supported-languages). To complete the code block, you must start a new line that only has three backticks and **another empty line**. See example below:
+
+````md
+```{language}
+
+[YOUR CODE HERE]
+
+```
+````
+
+It is best to keep all code examples to a few lines of code like this:
+
+````md
+#### --text--
+
+Which of the following is the correct way to access the third character of a string?
+
+#### --distractors--
+
+```js
+const developer = 'Jessica';
+developer[3];
+```
+
+```js
+const developer = 'Jessica';
+developer[-1];
+```
+
+```js
+const developer = 'Jessica';
+developer[0];
+```
+
+#### --answer--
+
+```js
+const developer = 'Jessica';
+developer[2];
+```
+````
+
+## Acceptable Resources to Use for Creating Questions
+
+If you need help creating questions, then you can look through a few of the existing quizzes in the certification.
+
+You can also look to our [Developer Quiz Site](https://developerquiz.org/) which has over 1600 quiz questions. Just make sure that question was in fact covered in the module before adding it.
+
+If you need help with formatting your questions, please reach out on the [Discord](https://discord.com/invite/freecodecamp-692816967895220344) or [forum](https://forum.freecodecamp.org/) contributor channels.
+
+<Aside type="danger">
+
+Any use of AI tools to help you create questions is prohibited.
+
+We have found these tools to be unreliable and not always producing the highest quality of results.
+
+Also, any question that was taken from external quiz sites is prohibited.
+
+Please come up with your own quiz questions and answers.
+
+</Aside>
