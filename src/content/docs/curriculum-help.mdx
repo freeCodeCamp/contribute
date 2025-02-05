@@ -35,9 +35,7 @@ body {
 }
 ```
 
-and call the `getStyle` method with `body` as an argument;
-
-You would get an object that looks like this:
+If you call the `getStyle` method with `body` as an argument, you would get an object that looks like this:
 
 ```js
 {
@@ -105,9 +103,7 @@ For example, if the camper has written the following CSS:
 }
 ```
 
-and call the `getStyleAny()` method with `.earth` and `.sky` as arguments;
-
-You would get an object that looks like this:
+If you call the `getStyleAny()` method with `.earth` and `.sky` as arguments, you would get an object that looks like this:
 
 ```js
 {
@@ -227,7 +223,7 @@ The `.getStyleSheet()` method returns the camper's CSS, parsed into a CSS Style 
 
 #### `.selectorsFromSelector()`
 
-The `.selectorsFromSelector` returns all equivalent selectors from a given selector based on what's nearby
+The `.selectorsFromSelector` method returns all equivalent selectors from a given selector based on what's nearby
 the given element.
 
 For example if `a` is passed in a selector, it will return an array filled with several alternate selectors based
@@ -241,7 +237,7 @@ These mock methods that can prove to be unpredictable for testing purposes.
 
 #### RandomMocker
 
-Mocks Math.random for testing purposes. Each time mock() is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. restore() restores the native Math.random function.
+Mocks `Math.random` for testing purposes. Each time `mock()` is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. `restore()` restores the native `Math.random` function.
 
 ```js
 const randomMocker = new RandomMocker();
@@ -258,14 +254,13 @@ Math.random(); // back to native Math.random
 
 There are a few methods on the `__helpers` object to retrieve data from JavaScript methods.
 
-These do NOT need to be instantiated they are static methods.
+These do NOT need to be instantiated; they are static methods.
 
 #### `.isCalledWithNoArgs()`
 
-This method checks the current code string to see if a function called with any arguments.
+This method checks the current code string to see if a function is called with any arguments.
 
-If so, true is returned. Otherwise it returns false. Additionally, if the function is commented out, false
-is returns.
+If so, `true` is returned. Otherwise it returns `false`. Additionally, if the function call is commented out, `false` is returned.
 
 #### `.concatRegex()`
 
@@ -284,7 +279,7 @@ concatRegex(regex1, regex2).source === 'a\\sb';
 Given a function name and, optionally, a list of parameters, returns a regex that can be used to match that function declaration in a code block.
 
 ```js
-let regex = functionRegex('foo', ['bar', 'baz']);
+const regex = functionRegex('foo', ['bar', 'baz']);
 regex.test('function foo(bar, baz){}'); // true
 regex.test('function foo(bar, baz, qux){}'); // false
 regex.test('foo = (bar, baz) => {}'); // true
@@ -292,32 +287,32 @@ regex.test('foo = (bar, baz) => {}'); // true
 
 Options
 
-- capture: boolean - If true, the regex will capture the function definition, including it's body, otherwise not. Defaults to false.
-- includeBody: boolean - If true, the regex will include the function body in the match. Otherwise it will stop at the first bracket. Defaults to true.
+- `capture: boolean` - If `true`, the regex will capture the function definition, including its body, otherwise not. Defaults to `false`.
+- `includeBody: boolean` - If `true`, the regex will include the function body in the match. Otherwise it will stop at the first bracket. Defaults to `true`.
 
 ```js
-let regEx = functionRegex('foo', ['bar', 'baz'], { capture: true });
-let combinedRegEx = concatRegex(/var x = "y"; /, regEx);
+const regEx = functionRegex('foo', ['bar', 'baz'], { capture: true });
+const combinedRegEx = concatRegex(/var x = "y"; /, regEx);
 
-let match = `var x = "y";
+const match = `var x = "y";
 function foo(bar, baz){}`.match(regex);
 match[1]; // "function foo(bar, baz){}"
 // i.e. only the function definition is captured
 ```
 
 ```js
-let regEx = functionRegex('foo', ['bar', 'baz'], { includeBody: false });
+const regEx = functionRegex('foo', ['bar', 'baz'], { includeBody: false });
 
-let match = `function foo(bar, baz){console.log('ignored')}`.match(regex);
+const match = `function foo(bar, baz){console.log('ignored')}`.match(regex);
 match[1]; // "function foo(bar, baz){"
 ```
 
 NOTE: capture does not work properly with arrow functions. It will capture text after the function body, too.
 
 ```js
-let regEx = functionRegex('myFunc', ['arg1'], { capture: true });
+const regEx = functionRegex('myFunc', ['arg1'], { capture: true });
 
-let match =
+const match =
   'myFunc = arg1 => arg1; console.log();\n // captured, unfortunately'.match(
     regEx
   );
@@ -1043,7 +1038,7 @@ Node().is_empty() # True
 Node("x = 1").find_variable("x").is_empty() # False
 ```
 
-#### get the nth statement
+#### `get_nth_statement()`
 
 ```python
 stmts = """
@@ -1058,7 +1053,7 @@ Node(stmts).get_nth_statement(1).is_equivalent("x = 1") # True
 
 #### `value_is_call()`
 
-This allows you to check if the return value of function call is assigned to a variable.
+This allows you to check if the return value of a function call is assigned to a variable.
 
 ```python
 explorer = Node("def foo():\n  x = bar()")
