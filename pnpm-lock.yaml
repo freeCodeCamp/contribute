@@ -80,7 +80,7 @@ importers:
         version: 0.33.5
       wrangler:
         specifier: ^3.78.4
-        version: 3.108.1(@cloudflare/workers-types@4.20241022.0)
+        version: 3.109.0(@cloudflare/workers-types@4.20241022.0)
 
 packages:
 
@@ -2407,8 +2407,8 @@ packages:
     engines: {node: '>=16.13'}
     hasBin: true
 
-  miniflare@3.20250204.0:
-    resolution: {integrity: sha512-f7tezEkOvVRVHIVul2EbTyKvWJCXpTDRAOxTxtD4N92+YI8PC2P8AvO4Z30vlN61r5Pje33fTBG8G1fEwSZIqQ==}
+  miniflare@3.20250204.1:
+    resolution: {integrity: sha512-B4PQi/Ai4d0ZTWahQwsFe5WAfr1j8ISMYxJZTc56g2/btgbX+Go099LmojAZY/fMRLhIYsglcStW8SeW3f/afA==}
     engines: {node: '>=16.13'}
     hasBin: true
 
@@ -3408,8 +3408,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.108.1:
-    resolution: {integrity: sha512-SuiMv/ys52Cu7r6CVRXJT/GvneXHoB0ef5nGBWghSWyHxUSIm4KavGO6F/hTphn+WmSpHYQt3xNl5hdxk6rJlA==}
+  wrangler@3.109.0:
+    resolution: {integrity: sha512-hh/04/2+e8lUHdJhMJTiT7Ea1kt+0b+WVM2u3RKwRBCQ3SaN6jw6h0EX3DJtC1C+wrrzTJYDcsp1tWrcGDMaGA==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -3545,7 +3545,7 @@ snapshots:
       magic-string: 0.30.12
       miniflare: 3.20241022.0
       tiny-glob: 0.2.9
-      wrangler: 3.108.1(@cloudflare/workers-types@4.20241022.0)
+      wrangler: 3.109.0(@cloudflare/workers-types@4.20241022.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -6378,7 +6378,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  miniflare@3.20250204.0:
+  miniflare@3.20250204.1:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.14.0
@@ -7500,14 +7500,14 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250204.0
       '@cloudflare/workerd-windows-64': 1.20250204.0
 
-  wrangler@3.108.1(@cloudflare/workers-types@4.20241022.0):
+  wrangler@3.109.0(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
       esbuild: 0.17.19
-      miniflare: 3.20250204.0
+      miniflare: 3.20250204.1
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.1
       workerd: 1.20250204.0
