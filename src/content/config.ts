@@ -19,6 +19,7 @@ export const collections = {
         'sidebar.best_practices': z.string(),
         'sidebar.work_on_codebase': z.string(),
         'sidebar.work_on_coding_challenges': z.string(),
+        'sidebar.work_on_quizzes': z.string(),
         'sidebar.use_the_curriculum_helpers': z.string(),
         'sidebar.work_on_component_library': z.string(),
         'sidebar.work_on_practice_projects': z.string(),

@@ -30,28 +30,28 @@
     "@astrojs/cloudflare": "^11.0.5",
     "@astrojs/starlight": "0.27.1",
     "@astrojs/starlight-tailwind": "2.0.3",
-    "@astrojs/tailwind": "5.1.4",
+    "@astrojs/tailwind": "5.1.5",
     "astro": "4.16.18",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3"
   },
   "devDependencies": {
-    "@playwright/test": "1.49.1",
-    "@types/node": "20.17.13",
+    "@playwright/test": "1.50.1",
+    "@types/node": "22.13.4",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "dotenv": "16.4.7",
     "eslint": "8.57.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-astro": "0.34.0",
-    "eslint-plugin-prettier": "5.2.2",
+    "eslint-plugin-prettier": "5.2.3",
     "husky": "9.1.7",
     "is-ci": "3.0.1",
-    "lint-staged": "15.3.0",
-    "prettier": "3.4.2",
+    "lint-staged": "15.4.3",
+    "prettier": "3.5.1",
     "prettier-plugin-astro": "0.14.1",
     "sharp": "0.33.5",
     "wrangler": "^3.78.4"
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "pnpm@10.4.0"
 }
