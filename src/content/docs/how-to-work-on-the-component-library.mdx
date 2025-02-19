@@ -2,10 +2,10 @@
 title: How to Work on the Component Library
 ---
 
-Welcome to freeCodeCamp's `ui-components` library. The components are built mostly from scratch with basic HTML elements and [Tailwind CSS](https://tailwindcss.com/).
+Welcome to freeCodeCamp's `ui` library. The components are built mostly from scratch with basic HTML elements and [Tailwind CSS](https://tailwindcss.com/).
 
 :::note
-freeCodeCamp has been using Bootstrap components in the UI. However, we are moving away from it and building our own component library, which helps standardize our UX/UI patterns and improve accessibility. The project is tracked in [this GitHub issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/44668).
+We have our own component library which helps standardize our UX/UI patterns and improve accessibility. The project is stored in [this GitHub repository](https://github.com/freeCodeCamp/ui).
 :::
 
 The following steps are recommended when working on a new component:
@@ -19,7 +19,7 @@ The following steps are recommended when working on a new component:
 
 Before building a component, you need to research and document on how the existing version behaves and looks, to ensure that the new one has matching styles and supports all the current usages. In order to meet the web accessibility requirements, you should also pay attention to the accessibility aspect of the component, see which HTML elements and ARIA attributes are used under the hood.
 
-Once you have gathered enough information about the component, you can start thinking about the props interface. Ideally, the interface should be as similar to the current version as possible, to ease the adoption later on. Since we are using Bootstrap components, the simplest approach is to mimic [their implementation](https://github.com/react-bootstrap/react-bootstrap/tree/master/src).
+Once you have gathered enough information about the component, you can start thinking about the props interface. Ideally, the interface should be as similar to the current version as possible, to ease the adoption later on. Since we previously used Bootstrap components and modeled our components off of those, the simplest approach is to mimic [their implementation](https://github.com/react-bootstrap/react-bootstrap/tree/master/src).
 
 We prefer smaller pull requests rather than a large one, because they speed up the review time and reduce cognitive overload for the reviewers. For that reason, you should think about how you would break down the implementation and come up with a delivery plan.
 
@@ -30,12 +30,10 @@ We recommend opening a separate GitHub issue for each component and include all 
 A new component can be created using the following command from the root directory:
 
 ```bash
-cd tools/ui-components
-
 pnpm run gen-component MyComponent
 ```
 
-The command will generate a new folder inside the `ui-components` directory, with the following files:
+The command will generate a new folder inside the `ui` project, with the following files:
 
 | File name                  | Purpose                                                    |
 | -------------------------- | ---------------------------------------------------------- |
@@ -92,19 +90,18 @@ We use [React Testing Library](https://testing-library.com/docs/react-testing-li
 To run tests against the component library, run the following command from the root directory:
 
 ```bash
-pnpm run test-ui-components
+pnpm run test
 ```
 
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
 
-## Adding Packages to the UI-Component Library
+## Adding Packages to the UI Library
 
 We restrict adding new packages to the UI Components to help with the project's maintainability. In the rare chance that you think a dependency is needed, please check with the maintainers first and then use the following command to add a package:
 
 ```bash
-cd tools/ui-components
 pnpm add package_name
 ```
 
