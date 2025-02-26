@@ -42,7 +42,7 @@ export const content: Section[] = [
     title: 'sidebar.english_contribution',
     contents: [
       {
-        href: '/how-to-work-on-english-curriculum-files/',
+        href: '/english-for-developers-intro/',
         title: 'sidebar.english_resources'
       },
       {
