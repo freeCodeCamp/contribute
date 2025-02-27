@@ -62,6 +62,16 @@ Transcript of the video, should only be used in video challenges.
 
 Challenge instruction text, in markdown
 
+# --before-all--
+
+```js
+// This code will run before the user code and tests. For example:
+window.fetch = () =>
+  Promise.resolve({ json: () => Promise.resolve({ data: 'example' }) });
+// Warning: this is currently only supported in challenges that render HTML.
+// Note: the --before-all-- section is optional.
+```
+
 # --hints--
 
 Tests to run against user code, in pairs of markdown text and code block test code.
