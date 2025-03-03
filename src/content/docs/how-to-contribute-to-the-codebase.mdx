@@ -36,6 +36,24 @@ Follow these steps:
    git checkout main
    ```
 
+   If you get a message similar to this one:
+
+   ```bash
+   On branch feat/colour-picker
+   Changes not staged for commit:
+     (use "git add <file>..." to update what will be committed)
+     (use "git restore <file>..." to discard changes in working directory)
+        modified:   curriculum/i18n-curriculum (new commits)
+   ```
+
+   Then the i18n curriculum submodule is out of sync. You should NOT commit changes to the submodule through our main repository. Instead, to resolve this, run:
+
+   ```bash
+   git submodule update --init
+   ```
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
 2. Sync the latest changes from the freeCodeCamp upstream `main` branch to your `main` fork branch:
 
    :::caution
