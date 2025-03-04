@@ -80,7 +80,7 @@ importers:
         version: 0.33.5
       wrangler:
         specifier: ^3.78.4
-        version: 3.111.0(@cloudflare/workers-types@4.20241022.0)
+        version: 3.112.0(@cloudflare/workers-types@4.20241022.0)
 
 packages:
 
@@ -2407,8 +2407,8 @@ packages:
     engines: {node: '>=16.13'}
     hasBin: true
 
-  miniflare@3.20250214.1:
-    resolution: {integrity: sha512-NE66QV+2n9ZndaP5jgPlcVref3Arvizb+l2QqhgeXtKM5Orhi8UU2mijoiN3mHEUexKaBES2S1VubT4LDPqkxQ==}
+  miniflare@3.20250214.2:
+    resolution: {integrity: sha512-t+lT4p2lbOcKv4PS3sx1F/wcDAlbEYZCO2VooLp4H7JErWWYIi9yjD3UillC3CGOpiBahVg5nrPCoFltZf6UlA==}
     engines: {node: '>=16.13'}
     hasBin: true
 
@@ -2490,8 +2490,8 @@ packages:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
 
-  ohash@1.1.4:
-    resolution: {integrity: sha512-FlDryZAahJmEF3VR3w1KogSEdWX3WhA5GPakFx4J81kEAiHyLMpdLLElS8n8dfNadMgAne/MywcvmogzscVt4g==}
+  ohash@1.1.5:
+    resolution: {integrity: sha512-AtXrG/lMFjPBWj3uhWYFwYVZQqutPYRsv6nnPLTipnC+gJuMFc+WFzf/jx+94Ebray1vxfQfEFDtpIpppOe4xQ==}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -3408,8 +3408,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.111.0:
-    resolution: {integrity: sha512-3j/Wq5aj/sCQRSmkjBLxbkIH7LCx0h2UnaxmhOplDjJmZty10lGRs/jGgaG/M/GEsDg5TJ7UHvBh3hSldgjfKg==}
+  wrangler@3.112.0:
+    resolution: {integrity: sha512-PNQWGze3ODlWwG33LPr8kNhbht3eB3L9fogv+fapk2fjaqj0kNweRapkwmvtz46ojcqWzsxmTe4nOC0hIVUfPA==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -3545,7 +3545,7 @@ snapshots:
       magic-string: 0.30.12
       miniflare: 3.20241022.0
       tiny-glob: 0.2.9
-      wrangler: 3.111.0(@cloudflare/workers-types@4.20241022.0)
+      wrangler: 3.112.0(@cloudflare/workers-types@4.20241022.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -6378,7 +6378,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  miniflare@3.20250214.1:
+  miniflare@3.20250214.2:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.14.0
@@ -6458,7 +6458,7 @@ snapshots:
 
   object-hash@3.0.0: {}
 
-  ohash@1.1.4: {}
+  ohash@1.1.5: {}
 
   once@1.4.0:
     dependencies:
@@ -7254,7 +7254,7 @@ snapshots:
     dependencies:
       defu: 6.1.4
       mlly: 1.7.4
-      ohash: 1.1.4
+      ohash: 1.1.5
       pathe: 1.1.2
       ufo: 1.5.4
 
@@ -7500,14 +7500,14 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250214.0
       '@cloudflare/workerd-windows-64': 1.20250214.0
 
-  wrangler@3.111.0(@cloudflare/workers-types@4.20241022.0):
+  wrangler@3.112.0(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
       esbuild: 0.17.19
-      miniflare: 3.20250214.1
+      miniflare: 3.20250214.2
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.1
       workerd: 1.20250214.0
