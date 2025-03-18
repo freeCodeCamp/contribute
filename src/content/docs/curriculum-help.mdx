@@ -250,6 +250,27 @@ randomMocker.restore();
 Math.random(); // back to native Math.random
 ```
 
+#### spyOn
+
+Wraps an object's property in a spy object that records calls and returns.
+
+The spy's `calls` property is an array of arrays, each containing the arguments passed to the method in the order it was called.
+
+The spy's `returns` property is an array of the return values of the method.
+
+To restore the original method, call `restore()` on the spy object.
+
+```js
+const obj = { method: (arg1, arg2) => `called by: ${arg1} + ${arg2}` };
+const spy = helper.spyOn(obj, 'method');
+obj.method('arg', 'another arg');
+obj.method('2nd call');
+spy.calls; // [["arg", "another arg"], ["2nd call"]]
+spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefined"]
+// to turn it off
+spy.restore();
+```
+
 ### Static Methods
 
 There are a few methods on the `__helpers` object to retrieve data from JavaScript methods.
