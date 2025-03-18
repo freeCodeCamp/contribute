@@ -250,6 +250,27 @@ randomMocker.restore();
 Math.random(); // back to native Math.random
 ```
 
+#### spyOn
+
+Wraps an object's property in a spy object that records calls and returns.
+
+The spy's `calls` property is an array of arrays, each containing the arguments passed to the method in the order it was called.
+
+The spy's `returns` property is an array of the return values of the method.
+
+To restore the original method, call `restore()` on the spy object.
+
+```js
+const obj = { method: (arg1, arg2) => `called by: ${arg1} + ${arg2}` };
+const spy = helper.spyOn(obj, 'method');
+obj.method('arg', 'another arg');
+obj.method('2nd call');
+spy.calls; // [["arg", "another arg"], ["2nd call"]]
+spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefined"]
+// to turn it off
+spy.restore();
+```
+
 ### Static Methods
 
 There are a few methods on the `__helpers` object to retrieve data from JavaScript methods.
@@ -332,6 +353,64 @@ Using `__helpers.removeCssComments()`, `__helpers.removeHtmlComments()`, or `__h
 ### Removing Whitespace
 
 Using `__helpers.removeWhitespace()` allows you to pass the camper's code (through the `code` variable) to remove all whitespace.
+
+## permutateRegex
+
+Permutates regular expressions or source strings, to create regex matching elements in any order.
+
+```javascript
+const source1 = 'a';
+const regex1 = /b/;
+const source2 = 'c';
+
+permutateRegex([source1, regex1, source2]).source ===
+  new RegExp(
+    /(?:a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
+  ).source;
+```
+
+Inputs can have capturing groups, but both groups and backreferrences need to be named. In the resulting regex they will be renamed to avoid duplicated names, and to allow backreferrences to refer to correct group.
+
+```javascript
+const regex = permutateRegex(['a', /(?<ref>'|"|`)b\k<ref>/], {
+  elementsSeparator: String.raw`\s*===\s*`
+});
+
+regex.source ===
+  new RegExp(
+    /(?:a\s*===\s*(?<ref_0>'|"|`)b\k<ref_0>|(?<ref_1>'|"|`)b\k<ref_1>\s*===\s*a)/
+  ).source;
+
+regex.test('a === "b"'); // true
+regex.test("'b' === a"); // true
+regex.test('a === `b`'); // true
+regex.test(`a === 'b"`); // false
+```
+
+### Options
+
+- capture: boolean - Whole regex is wrapped in regex group. If `capture` is `true` the group will be capturing, otherwise it will be non-capturing. Defaults to `false`.
+- elementsSeparator: string - Separates permutated elements within single permutation. Defaults to `\s*\|\|\s*`.
+- permutationsSeparator: string - Separates permutations. Defaults to `|`.
+
+```javascript
+permutateRegex(['a', /b/, 'c'], { capture: true }).source ===
+  new RegExp(
+    /(a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
+  ).source;
+```
+
+```javascript
+permutateRegex(['a', /b/, 'c'], { elementsSeparator: ',' }).source ===
+  new RegExp(/(?:a,b,c|b,a,c|c,a,b|a,c,b|b,c,a|c,b,a)/).source;
+```
+
+```javascript
+permutateRegex(['a', /b/, 'c'], { permutationsSeparator: '&' }).source ===
+  new RegExp(
+    /(?:a\s*\|\|\s*b\s*\|\|\s*c&b\s*\|\|\s*a\s*\|\|\s*c&c\s*\|\|\s*a\s*\|\|\s*b&a\s*\|\|\s*c\s*\|\|\s*b&b\s*\|\|\s*c\s*\|\|\s*a&c\s*\|\|\s*b\s*\|\|\s*a)/
+  ).source;
+```
 
 ## AST-based Helpers
 
