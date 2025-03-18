@@ -2,27 +2,110 @@
 title: Using the Curriculum Helpers
 ---
 
-The test runner has access to a few helpers that can assist with testing campers' code.
+# Index
 
 ## CSS Helper
 
-To instantiate the helper within a test block, use this:
+The CSS Helper is used to parse and test CSS written by campers.
+
+- [getStyle()](#getstyle) – Returns a CSS style declaration for a given selector.
+- [getStyleAny()](#getstyleany) – Returns the first matching CSS style declaration from multiple selectors.
+- [getCSSRules()](#getcssrules) – Retrieves an array of CSS rules for a specified at-rule (e.g., media, fontface).
+- [getRuleListsWithinMedia()](#getrulelistswithinmedia) – Returns the CSS rules inside a specific media query.
+- **Less Frequent Methods**
+  - [getStyleDeclarations()](#getstyledeclarations) – Returns an array of style declarations for a selector.
+  - [isPropertyUsed()](#ispropertyused) – Checks if a specific CSS property is used anywhere in the code.
+  - [getStyleRule()](#getstylerule) – Returns a style rule with additional methods (e.g., isDeclaredAfter).
+  - [getStyleSheet()](#getstylesheet) – Returns the entire parsed CSS as a style sheet object.
+  - [selectorsFromSelector()](#selectorsfromselector) – Provides alternate selectors based on a given one.
+
+## JS Helper
+
+The JS Helper provides utilities to test and manipulate JavaScript code.
+
+- **Mockers**
+  - [RandomMocker](#randommocker) – Mocks Math.random to generate a predictable sequence.
+  - [spyOn](#spyon) – Wraps a method to record its calls and return values.
+- **Static Methods**
+  - [isCalledWithNoArgs()](#iscalledwithnoargs) – Checks if a function is called without any arguments.
+  - [concatRegex()](#concatregex) – Combines two regexes or strings into a single regex.
+  - [functionRegex()](#functionregex) – Creates a regex to match a function declaration with specified parameters.
+- [Strip Content](#strip-content) – Provides methods to remove comments and whitespace from code.
+- [permutateRegex](#permutateregex) – Generates a regex that matches elements in any order.
+
+## AST-based Helpers (Python)
+
+AST-based Helpers parse Python code into an Abstract Syntax Tree (AST) for detailed analysis.
+
+- [find_function()](#find_function) – Finds a function by name in the Python code.
+- [find_functions()](#find_functions) – Returns multiple functions with the same name.
+- [find_async_function()](#find_async_function) – Locates an asynchronous function.
+- [find_awaits()](#find_awaits) – Retrieves all await expressions inside an async function.
+- [find_variable()](#find_variable) – Searches for variable assignments.
+- [find_aug_variable()](#find_aug_variable) – Finds augmented assignments (e.g., x += 1).
+- [find_body()](#find_body) – Returns the body of a function.
+- [find_return()](#find_return) – Finds the return statement(s) in a function.
+- [find_calls()](#find_calls) – Searches for function calls in the code.
+- [find_call_args()](#find_call_args) – Retrieves the arguments passed to a function call.
+- [find_class()](#find_class) – Finds a class definition by name.
+- [find_ifs()](#find_ifs) – Finds all if statements.
+- [find_if()](#find_if) – Locates a specific if statement by its condition.
+- [find_whiles()](#find_whiles) – Retrieves all while loops.
+- [find_while()](#find_while) – Finds a specific while loop by its condition.
+- [find_conditions()](#find_conditions) – Returns the conditions from if or while statements.
+- [find_for_loops()](#find_for_loops) – Retrieves all for loops.
+- [find_for()](#find_for) – Finds a specific for loop based on variables and iterators.
+- [find_for_vars()](#find_for_vars) – Returns the iteration variables in a for loop.
+- [find_for_iter()](#find_for_iter) – Retrieves the iterable part of a for loop.
+- [find_bodies()](#find_bodies) – Gets the bodies of control structures.
+- [find_imports()](#find_imports) – Finds import statements.
+- [find_comps()](#find_comps) – Retrieves list, set, dict comprehensions, and generator expressions.
+- [find_comp_iters()](#find_comp_iters) – Returns iterables used in comprehensions.
+- [find_comp_targets()](#find_comp_targets) – Returns target variables in comprehensions.
+- [find_comp_key()](#find_comp_key) – Finds the key in a dictionary comprehension.
+- [find_comp_expr()](#find_comp_expr) – Retrieves the expression evaluated in a comprehension.
+- [find_comp_ifs()](#find_comp_ifs) – Returns any if conditions used in comprehensions.
+- [get_variable()](#get_variable) – Returns the value assigned to a variable.
+- [has_variable()](#has_variable) – Checks for the existence of a variable.
+- [has_function()](#has_function) – Checks if a function exists.
+- [has_stmt()](#has_stmt) – Checks for the presence of a specific statement.
+- [has_args()](#has_args) – Checks if a function has specific arguments.
+- [has_pass()](#has_pass) – Checks for the use of a pass statement.
+- [has_return()](#has_return) – Verifies if a function returns a specific value.
+- [has_returns()](#has_returns) – Checks for a specific return annotation.
+- [has_decorators()](#has_decorators) – Verifies if a function has specific decorators.
+- [has_call()](#has_call) – Checks for a specific function call.
+- [has_import()](#has_import) – Verifies the presence of import statements.
+- [has_class()](#has_class) – Checks if a class is defined.
+- [is_equivalent()](#is_equivalent) – Performs a loose equivalence check between code snippets.
+- [is_empty()](#is_empty) – Determines if a node is empty.
+- [get_nth_statement()](#get_nth_statement) – Retrieves the nth statement from the code.
+- [value_is_call()](#value_is_call) – Checks if a variable’s value is assigned via a function call.
+- [is_integer()](#is_integer) – Determines if a variable is assigned an integer value.
+- [inherits_from()](#inherits_from) – Checks if a class inherits from specified classes.
+- [is_ordered()](#is_ordered) – Verifies that certain statements appear in a given order.
+
+---
+
+# CSS Helper
+
+The CSS Helper assists with testing campers' CSS code. You instantiate the helper within a test block as follows:
+
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 const helper = new __helpers.CSSHelp(document);
 ```
 
-In that example, the `document` variable refers to the document object of the test runner's iframe.
+</details>
 
-### Methods
+## getStyle()
 
-There are a few methods available for parsing and testing CSS.
+This method takes a CSS selector and returns a CSS style declaration object. For example, if the camper has written:
 
-#### `.getStyle()`
-
-The `.getStyle()` method takes a CSS selector and returns a CSS style declaration object.
-
-For example, if the camper has written the following CSS:
+<details>
+  <summary>Example Usage</summary>
 
 ```css
 body {
@@ -35,61 +118,27 @@ body {
 }
 ```
 
-If you call the `getStyle` method with `body` as an argument, you would get an object that looks like this:
+</details>
 
-```js
-{
-    0: "background-image",
-    1: "background-position-x",
-    2: "background-position-y",
-    3: "background-size",
-    4: "background-repeat-x",
-    5: "background-repeat-y",
-    6: "background-attachment",
-    7: "background-origin",
-    8: "background-clip",
-    9: "background-color",
-    10: "margin-top",
-    11: "margin-right",
-    12: "margin-bottom",
-    13: "margin-left",
-    14: "padding-top",
-    15: "padding-right",
-    16: "padding-bottom",
-    17: "padding-left",
-    18: "width",
-    19: "height",
-    20: "overflow-x",
-    21: "overflow-y",
-    "accentColor": "",
-    "additiveSymbols": "",
-    "alignContent": "",
-    "alignItems": "",
-    ...
-}
-```
+Then calling:
 
-This method allows you to test that specific properties have been set:
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 assert.strictEqual(helper.getStyle('body')?.width, '100%');
 ```
 
-The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
+</details>
 
-```js
-assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
-```
+The returned object contains a native method `getPropertyValue` as well as a helper method `getPropVal()`.
 
-On the style object returned, there is a native method called `getPropertyValue` that can retrieve
-CSS properties. More info at [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
+## getStyleAny()
 
-#### `.getStyleAny()`
+This method takes multiple CSS selectors and returns the first matching CSS style declaration object. For example, if the camper has written:
 
-The `.getStyleAny()` method takes multiple CSS possible selectors and returns
-the first matching CSS style declaration object.
-
-For example, if the camper has written the following CSS:
+<details>
+  <summary>Example Usage</summary>
 
 ```css
 .sky {
@@ -103,60 +152,27 @@ For example, if the camper has written the following CSS:
 }
 ```
 
-If you call the `getStyleAny()` method with `.earth` and `.sky` as arguments, you would get an object that looks like this:
+</details>
 
-```js
-{
-    0: "background-image",
-    1: "background-position-x",
-    2: "background-position-y",
-    3: "background-size",
-    4: "background-repeat-x",
-    5: "background-repeat-y",
-    6: "background-attachment",
-    7: "background-origin",
-    8: "background-clip",
-    9: "background-color",
-    10: "margin-top",
-    11: "margin-right",
-    12: "margin-bottom",
-    13: "margin-left",
-    14: "padding-top",
-    15: "padding-right",
-    16: "padding-bottom",
-    17: "padding-left",
-    18: "width",
-    19: "height",
-    20: "overflow-x",
-    21: "overflow-y",
-    "accentColor": "",
-    "additiveSymbols": "",
-    "alignContent": "",
-    "alignItems": "",
-    ...
-}
-```
+Then calling:
 
-This method allows you to test that specific properties have been set:
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 assert.strictEqual(helper.getStyleAny(['.earth', '.sky'])?.width, '100%');
 ```
 
-The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
+</details>
 
-```js
-assert.strictEqual(
-  helper.getStyleAny(['.earth', '.sky']).getPropVal('width'),
-  '100%'
-);
-```
+Similarly, the returned object provides a `getPropVal()` method.
 
-#### `.getCSSRules()`
+## getCSSRules()
 
-The `.getCSSRules()` takes an at-rule type from the union `media | fontface | import | keyframes`, and returns an array of CSS rules matching that at-rule.
+This method takes an at-rule type from the union `media | fontface | import | keyframes` and returns an array of CSS rules matching that at-rule. For example, if the camper has written:
 
-For example, if the camper has written the following code:
+<details>
+  <summary>Example Usage</summary>
 
 ```css
 @media (max-width: 100px) {
@@ -166,78 +182,63 @@ For example, if the camper has written the following code:
 }
 ```
 
-Then the returned value of `helper.getCSSRules('media')` would be this array:
+</details>
+
+Then:
+
+<details>
+  <summary>Example Usage</summary>
 
 ```js
-[
-    {
-        conditionText: "(max-width: 100px)",
-        cssRules: [
-            selectorText: 'body',
-            style: CSSStyleDeclaration,
-            styleMap: StylePropertyMap,
-            cssRules: CSSRuleList,
-            type: 1,
-            ...
-        ],
-        cssText: "@media (max-width: 100px) {\n  body { background-color: green; }\n}",
-        ...
-    }
-]
+const rules = helper.getCSSRules('media');
 ```
 
-You can then test that the camper has written the correct media query:
+</details>
 
-```js
-const hasCorrectHeight = helper
-  .getCSSRules('media')
-  .some(x => x.style.height === '3px');
-assert.isTrue(hasCorrectHeight);
-```
+The returned array includes objects representing each matching media rule.
 
-#### `.getRuleListsWithinMedia()`
+## getRuleListsWithinMedia()
 
-The `.getRuleListsWithinMedia()` method takes a media text (e.g. `("max-width: 200")`) and returns the CSS rules within that media query.
+This method takes a media query text (e.g. `("max-width: 200")`) and returns the CSS rules within that media query. It is equivalent to accessing the media rule's `cssRules` property.
 
-The return result is the equivalent of that media rule's `cssRules` property from the return value of `.getCSSRules("media")`.
+---
 
-### Less Frequent Methods
+## Less Frequent Methods
 
-These methods are not as commonly used, but are available if needed.
+### getStyleDeclarations()
 
-#### `.getStyleDeclarations()`
+Takes a CSS selector and returns an array of CSS style declaration objects.
 
-The `.getStyleDeclarations()` method takes a CSS selector and returns an array of CSS style declaration objects (from the `.getStyle()` method).
+### isPropertyUsed()
 
-#### `.isPropertyUsed()`
+Checks if a specific CSS property is used anywhere in the camper's CSS.
 
-The `.isPropertyUsed()` method takes a CSS **property** and checks if it has been set/used anywhere in the camper's CSS.
+### getStyleRule()
 
-#### `.getStyleRule()`
+Returns the CSS style declaration for a given selector, with an extra method `isDeclaredAfter()`.
 
-The `.getStyleRule()` method takes a CSS selector and returns the CSS Style Declaration, much like `.getStyle()`. However, the declaration returned from this method includes an additional `.isDeclaredAfter()` method which takes a selector and returns whether this rule is declared after the selector passed in.
+### getStyleSheet()
 
-#### `.getStyleSheet()`
+Returns the camper's CSS parsed into a CSS Style Sheet object.
 
-The `.getStyleSheet()` method returns the camper's CSS, parsed into a CSS Style Sheet object.
+### selectorsFromSelector()
 
-#### `.selectorsFromSelector()`
+Returns alternate selectors based on a given selector (e.g., `a`, `label > a`, etc.).
 
-The `.selectorsFromSelector` method returns all equivalent selectors from a given selector based on what's nearby
-the given element.
+---
 
-For example if `a` is passed in a selector, it will return an array filled with several alternate selectors based
-on what's nearby. The selectors could include `a`, `label > a` , `label a` , `form label a` and `body form label a`.
+# JS Helper
 
-## JS Helper
+The JS Helper provides methods to test and manipulate JavaScript code.
 
-### Mockers
+## Mockers
 
-These mock methods that can prove to be unpredictable for testing purposes.
+### RandomMocker
 
-#### RandomMocker
+Mocks `Math.random` for testing purposes, ensuring a predictable sequence of random numbers.
 
-Mocks `Math.random` for testing purposes. Each time `mock()` is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. `restore()` restores the native `Math.random` function.
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 const randomMocker = new RandomMocker();
@@ -245,20 +246,19 @@ randomMocker.mock();
 Math.random(); // first call is always 0.2523451747838408
 Math.random(); // second call is always 0.08812504541128874
 randomMocker.mock();
-Math.random(); // generator is reset, so we get 0.2523451747838408 again
+Math.random(); // resets to 0.2523451747838408
 randomMocker.restore();
-Math.random(); // back to native Math.random
+Math.random(); // native Math.random is restored
 ```
 
-#### spyOn
+</details>
 
-Wraps an object's property in a spy object that records calls and returns.
+### spyOn
 
-The spy's `calls` property is an array of arrays, each containing the arguments passed to the method in the order it was called.
+Wraps an object's method to record its calls and return values.
 
-The spy's `returns` property is an array of the return values of the method.
-
-To restore the original method, call `restore()` on the spy object.
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 const obj = { method: (arg1, arg2) => `called by: ${arg1} + ${arg2}` };
@@ -267,27 +267,24 @@ obj.method('arg', 'another arg');
 obj.method('2nd call');
 spy.calls; // [["arg", "another arg"], ["2nd call"]]
 spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefined"]
-// to turn it off
+// Restore the original method:
 spy.restore();
 ```
 
-### Static Methods
+</details>
 
-There are a few methods on the `__helpers` object to retrieve data from JavaScript methods.
+## Static Methods
 
-These do NOT need to be instantiated; they are static methods.
+### isCalledWithNoArgs()
 
-#### `.isCalledWithNoArgs()`
+Checks if a function is invoked without any arguments, ignoring commented-out calls.
 
-This method checks the current code string to see if a function is called with any arguments.
+### concatRegex()
 
-If so, `true` is returned. Otherwise it returns `false`. Additionally, if the function call is commented out, `false` is returned.
+Combines two regexes or strings into a single compiled regex.
 
-#### `.concatRegex()`
-
-This method combines and returns a compiled regex when given two regexes or strings.
-
-For example, if `.concatRegex` is called with `.*` and `b\s` the resulting regex will be equivalent to `.*b\s`.
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 const regex1 = /a\s/;
@@ -295,9 +292,14 @@ const regex2 = /b/;
 concatRegex(regex1, regex2).source === 'a\\sb';
 ```
 
-### `.functionRegex()`
+</details>
 
-Given a function name and, optionally, a list of parameters, returns a regex that can be used to match that function declaration in a code block.
+### functionRegex()
+
+Creates a regex to match a function declaration given its name and parameters. Options include capturing the function body.
+
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 const regex = functionRegex('foo', ['bar', 'baz']);
@@ -306,10 +308,12 @@ regex.test('function foo(bar, baz, qux){}'); // false
 regex.test('foo = (bar, baz) => {}'); // true
 ```
 
-Options
+</details>
 
-- `capture: boolean` - If `true`, the regex will capture the function definition, including its body, otherwise not. Defaults to `false`.
-- `includeBody: boolean` - If `true`, the regex will include the function body in the match. Otherwise it will stop at the first bracket. Defaults to `true`.
+Additional examples with options:
+
+<details>
+  <summary>Example Usage (capture option)</summary>
 
 ```js
 const regEx = functionRegex('foo', ['bar', 'baz'], { capture: true });
@@ -318,47 +322,42 @@ const combinedRegEx = concatRegex(/var x = "y"; /, regEx);
 const match = `var x = "y";
 function foo(bar, baz){}`.match(regex);
 match[1]; // "function foo(bar, baz){}"
-// i.e. only the function definition is captured
 ```
+
+</details>
+
+<details>
+  <summary>Example Usage (includeBody option)</summary>
 
 ```js
 const regEx = functionRegex('foo', ['bar', 'baz'], { includeBody: false });
-
 const match = `function foo(bar, baz){console.log('ignored')}`.match(regex);
 match[1]; // "function foo(bar, baz){"
 ```
 
-NOTE: capture does not work properly with arrow functions. It will capture text after the function body, too.
+</details>
 
-```js
-const regEx = functionRegex('myFunc', ['arg1'], { capture: true });
-
-const match =
-  'myFunc = arg1 => arg1; console.log();\n // captured, unfortunately'.match(
-    regEx
-  );
-match[1]; // "myFunc = arg1 => arg1; console.log();\n // captured, unfortunately"
-```
+Note: The capture option may not work as expected with arrow functions.
 
 ## Strip Content
 
-There are a few methods on the `__helpers` object to remove content from the camper's code.
+Static methods available:
 
-These do NOT need to be instantiated they are static methods.
+- `__helpers.removeCssComments()`
+- `__helpers.removeHtmlComments()`
+- `__helpers.removeJSComments()`
+- `__helpers.removeWhitespace()`
 
-### Removing Comments
-
-Using `__helpers.removeCssComments()`, `__helpers.removeHtmlComments()`, or `__helpers.removeJSComments()` allows you to pass the camper's code (through the `code` variable) to remove comments matching the language's comment syntax.
-
-### Removing Whitespace
-
-Using `__helpers.removeWhitespace()` allows you to pass the camper's code (through the `code` variable) to remove all whitespace.
+These methods remove comments and whitespace from the camper's code.
 
 ## permutateRegex
 
-Permutates regular expressions or source strings, to create regex matching elements in any order.
+Generates a regex that matches elements in any order. It accepts options to customize separators between elements and permutations.
 
-```javascript
+<details>
+  <summary>Example Usage</summary>
+
+```js
 const source1 = 'a';
 const regex1 = /b/;
 const source2 = 'c';
@@ -369,138 +368,70 @@ permutateRegex([source1, regex1, source2]).source ===
   ).source;
 ```
 
-Inputs can have capturing groups, but both groups and backreferrences need to be named. In the resulting regex they will be renamed to avoid duplicated names, and to allow backreferrences to refer to correct group.
+</details>
 
-```javascript
-const regex = permutateRegex(['a', /(?<ref>'|"|`)b\k<ref>/], {
-  elementsSeparator: String.raw`\s*===\s*`
-});
+Other examples with custom separators:
 
-regex.source ===
-  new RegExp(
-    /(?:a\s*===\s*(?<ref_0>'|"|`)b\k<ref_0>|(?<ref_1>'|"|`)b\k<ref_1>\s*===\s*a)/
-  ).source;
+<details>
+  <summary>Example Usage (elementsSeparator)</summary>
 
-regex.test('a === "b"'); // true
-regex.test("'b' === a"); // true
-regex.test('a === `b`'); // true
-regex.test(`a === 'b"`); // false
-```
-
-### Options
-
-- capture: boolean - Whole regex is wrapped in regex group. If `capture` is `true` the group will be capturing, otherwise it will be non-capturing. Defaults to `false`.
-- elementsSeparator: string - Separates permutated elements within single permutation. Defaults to `\s*\|\|\s*`.
-- permutationsSeparator: string - Separates permutations. Defaults to `|`.
-
-```javascript
-permutateRegex(['a', /b/, 'c'], { capture: true }).source ===
-  new RegExp(
-    /(a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
-  ).source;
-```
-
-```javascript
+```js
 permutateRegex(['a', /b/, 'c'], { elementsSeparator: ',' }).source ===
   new RegExp(/(?:a,b,c|b,a,c|c,a,b|a,c,b|b,c,a|c,b,a)/).source;
 ```
 
-```javascript
+</details>
+
+<details>
+  <summary>Example Usage (permutationsSeparator)</summary>
+
+```js
 permutateRegex(['a', /b/, 'c'], { permutationsSeparator: '&' }).source ===
   new RegExp(
     /(?:a\s*\|\|\s*b\s*\|\|\s*c&b\s*\|\|\s*a\s*\|\|\s*c&c\s*\|\|\s*a\s*\|\|\s*b&a\s*\|\|\s*c\s*\|\|\s*b&b\s*\|\|\s*c\s*\|\|\s*a&c\s*\|\|\s*b\s*\|\|\s*a)/
   ).source;
 ```
 
-## AST-based Helpers
+</details>
 
-These helpers need to be run in Python and tests that use them need to be in the format:
+---
+
+# AST-based Helpers (Python)
+
+AST-based Helpers allow you to analyze Python code by converting it into an Abstract Syntax Tree (AST). They are run in Python within tests like so:
+
+<details>
+  <summary>Example Usage</summary>
 
 ```js
 ({ test: () => assert(runPython(`<python code>`)) });
 ```
 
-`_Node` is a chainable class that allows you to call methods on the result of parsing a string. To create an instance of `_Node` that parses the camper's code use `_Node(_code)`.
+</details>
 
-To access a specific statement within the code you need to chain method calls until you reach the desired scope.
+The primary class is `_Node`, corresponding to `ast_helpers.Node` in Python. Once instantiated with `_Node(_code)`, you can chain methods to explore the AST.
 
-For example, if the camper has written the following code:
+## find_function()
 
-```py
-class Spam:
-  def __str__(self):
-    return 'spam!'
-```
+Searches for a function by name and returns its AST node.
 
-To check the return value of `__str__` you would write:
-
-```js
-({
-  test: () =>
-    assert(
-      runPython(
-        `_Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")`
-      )
-    )
-});
-```
-
-AST-based helpers are also exposed in the Python challenges in `ast_helpers` module. `_Node` class corresponds to the `ast_helpers.Node`:
+<details>
+  <summary>Example Usage</summary>
 
 ```py
-import ast_helpers
-
-code = '''
-class Spam:
-  def __str__(self):
-    return 'spam!'
-'''
-
-print(
-    ast_helpers.Node(code)
-    .find_class("Spam")
-    .find_function("__str__")
-    .has_return("'spam!'")
-)
+_Node('def foo():\n  x = "1"').find_function("foo").has_variable("x")  # True
 ```
 
-### Methods
+</details>
 
-#### Formatting output
+## find_functions()
 
-`str` returns a string that would parse to the same AST as the node. For example:
+Returns an array of nodes for functions with the same name.
 
-```python
-function_str = """
-def foo():
-  # will not be in the output
-  x = 1
+<details>
+  <summary>Example Usage</summary>
 
-"""
-output_str = """
-def foo():
-    x = 1"""
-str(Node(function_str)) == output_str # True
-```
-
-The output and source string compile to the same AST, but the output is indented with 4 spaces. Comments and trailing whitespace are removed.
-
-##### Finding nodes
-
-`find_` functions search the current scope and return one of the following:
-
-- A single Node object if there can be only one match. E.g. `find_function`
-- A list of Node objects if there can be multiple matches. E.g.: `find_ifs`
-
-#### `find_function()`
-
-```python
-Node('def foo():\n  x = "1"').find_function("foo").has_variable("x") # True
-```
-
-#### `find_functions()`
-
-```python
+```py
 code_str = """
 class Spam(ABC):
   @property
@@ -514,20 +445,32 @@ class Spam(ABC):
     self.x = new_x
 """
 explorer = Node(code_str)
-len(explorer.find_class("Spam").find_functions("foo")) # 2
-explorer.find_class("Spam").find_functions("foo")[0].is_equivalent("@property\n@abstractmethod\ndef foo(self):\n  return self.x") # True
-explorer.find_class("Spam").find_functions("foo")[1].is_equivalent("@foo.setter\n@abstractmethod\ndef foo(self, new_x):\n  self.x = new_x") # True
+len(explorer.find_class("Spam").find_functions("foo"))  # 2
 ```
 
-#### `find_async_function()`
+</details>
 
-```python
-Node('async def foo():\n  await bar()').find_async_function("foo").is_equivalent("async def foo():\n  await bar()") # True
+## find_async_function()
+
+Finds an asynchronous function.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+_Node('async def foo():\n  await bar()').find_async_function("foo").is_equivalent("async def foo():\n  await bar()")  # True
 ```
 
-#### `find_awaits()`
+</details>
 
-```python
+## find_awaits()
+
+Retrieves all await expressions within an async function.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 async def foo(spam):
   if spam:
@@ -536,58 +479,115 @@ async def foo(spam):
   await func()
 """
 explorer = Node(code_str)
-explorer.find_async_function("foo").find_awaits()[0].is_equivalent("await bar()") # True
-explorer.find_async_function("foo").find_awaits()[1].is_equivalent("await func()") # True
-explorer.find_async_function("foo").find_ifs()[0].find_awaits()[0].is_equivalent("await spam()") # True
+explorer.find_async_function("foo").find_awaits()[0].is_equivalent("await bar()")  # True
 ```
 
-#### `find_variable()`
+</details>
 
-```python
-Node("y = 2\nx = 1").find_variable("x").is_equivalent("x = 1")
-Node("a: int = 1").find_variable("a").is_equivalent("a: int = 1")
-Node("self.spam = spam").find_variable("self.spam").is_equivalent("self.spam = spam")
+## find_variable()
+
+Searches for variable assignments in the code.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+_Node("y = 2\nx = 1").find_variable("x").is_equivalent("x = 1")
 ```
 
-#### `find_aug_variable()`
+</details>
 
-```python
-Node("x += 1").find_aug_variable("x").is_equivalent("x += 1")
-Node("x -= 1").find_aug_variable("x").is_equivalent("x -= 1")
+Also supports type annotations and object properties:
+
+<details>
+  <summary>Example Usage (annotations)</summary>
+
+```py
+_Node("a: int = 1").find_variable("a").is_equivalent("a: int = 1")
 ```
 
-When the variable is out of scope, `find_variable` returns an `None` node (i.e. `Node()` or `Node(None)`):
+</details>
 
-```python
-Node('def foo():\n  x = "1"').find_variable("x") == Node() # True
+<details>
+  <summary>Example Usage (object properties)</summary>
+
+```py
+_Node("self.spam = spam").find_variable("self.spam").is_equivalent("self.spam = spam")
 ```
 
-#### `find_body()`
+</details>
 
-```python
+## find_aug_variable()
+
+Finds augmented assignments (e.g., x += 1).
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+_Node("x += 1").find_aug_variable("x").is_equivalent("x += 1")
+_Node("x -= 1").find_aug_variable("x").is_equivalent("x -= 1")
+```
+
+</details>
+
+## find_body()
+
+Returns the body of a function as an AST node.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 func_str = """
 def foo():
-    x = 1"""
-Node(func_str).find_function("foo").find_body().is_equivalent("x = 1") # True
+    x = 1
+"""
+Node(func_str).find_function("foo").find_body().is_equivalent("x = 1")  # True
 ```
 
-#### `find_return()`
+</details>
 
-```python
+## find_return()
+
+Finds return statements in a function.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 def foo():
   if x == 1:
     return False
   return True
 """
-Node(code_str).find_function("foo").find_return().is_equivalent("return True") # True
-Node(code_str).find_function("foo").find_ifs()[0].find_return().is_equivalent("return False") # True
+explorer = Node(code_str)
+explorer.find_function("foo").find_return().is_equivalent("return True")  # True
 ```
 
-#### `find_calls()`
+</details>
 
-```python
- code_str = """
+It can also find returns inside if blocks:
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+explorer.find_function("foo").find_ifs()[0].find_return().is_equivalent("return False")  # True
+```
+
+</details>
+
+## find_calls()
+
+Searches for function calls.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+code_str = """
 print(1)
 print(2)
 foo("spam")
@@ -595,38 +595,63 @@ obj.foo("spam")
 obj.bar.foo("spam")
 """
 explorer = Node(code_str)
-len(explorer.find_calls("print")) # 2
+len(explorer.find_calls("print"))  # 2
+```
+
+</details>
+
+And inspects individual calls:
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 explorer.find_calls("print")[0].is_equivalent("print(1)")
 explorer.find_calls("print")[1].is_equivalent("print(2)")
-len(explorer.find_calls("foo")) # 3
-explorer.find_calls("foo")[0].is_equivalent("foo('spam')")
-explorer.find_calls("foo")[1].is_equivalent("obj.foo('spam')")
-explorer.find_calls("foo")[2].is_equivalent("obj.bar.foo('spam')")
 ```
 
-#### `find_call_args()`
+</details>
 
-```python
+## find_call_args()
+
+Retrieves arguments from a function call.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 explorer = Node("print(1, 2)")
-len(explorer.find_calls("print")[0].find_call_args()) # 2
-explorer.find_calls("print")[0].find_call_args()[0].is_equivalent("1")
-explorer.find_calls("print")[0].find_call_args()[1].is_equivalent("2")
+len(explorer.find_calls("print")[0].find_call_args())  # 2
 ```
 
-#### `find_class()`
+</details>
 
-```python
+## find_class()
+
+Searches for a class definition.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 class_str = """
 class Foo:
   def __init__(self):
     pass
 """
-Node(class_str).find_class("Foo").has_function("__init__") # True
+Node(class_str).find_class("Foo").has_function("__init__")  # True
 ```
 
-#### `find_ifs()`
+</details>
 
-```python
+## find_ifs()
+
+Finds all if statements in the code.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 if_str = """
 if x == 1:
   x += 1
@@ -638,14 +663,19 @@ else:
 if True:
   pass
 """
-
 Node(if_str).find_ifs()[0].is_equivalent("if x == 1:\n  x += 1\nelif x == 2:\n  pass\nelse:\n  return")
-Node(if_str).find_ifs()[1].is_equivalent("if True:\n  pass")
 ```
 
-#### `find_if()`
+</details>
 
-```python
+## find_if()
+
+Locates a specific if statement by its condition.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 if_str = """
 if x == 1:
   x += 1
@@ -657,14 +687,19 @@ else:
 if True:
   pass
 """
-
 Node(if_str).find_if("x == 1").is_equivalent("if x == 1:\n  x += 1\nelif x == 2:\n  pass\nelse:\n  return")
-Node(if_str).find_if("True").is_equivalent("if True:\n  pass")
 ```
 
-#### `find_whiles()`
+</details>
 
-```python
+## find_whiles()
+
+Finds all while loops.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 while_str = """
 while True:
   x += 1
@@ -675,13 +710,19 @@ while False:
   pass
 """
 explorer = Node(while_str)
-explorer.find_whiles()[0].is_equivalent("while True:\n  x += 1\nelse:\n  return") # True
-explorer.find_whiles()[1].is_equivalent("while False:\n  pass") # True
+explorer.find_whiles()[0].is_equivalent("while True:\n  x += 1\nelse:\n  return")
 ```
 
-#### `find_while()`
+</details>
 
-```python
+## find_while()
+
+Finds a specific while loop by its condition.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 while_str = """
 while True:
   x += 1
@@ -692,13 +733,19 @@ while False:
   pass
 """
 explorer = Node(while_str)
-explorer.find_while("True").is_equivalent("while True:\n  x += 1\nelse:\n  return") # True
-explorer.find_while("False").is_equivalent("while False:\n  pass") # True
+explorer.find_while("True").is_equivalent("while True:\n  x += 1\nelse:\n  return")
 ```
 
-#### `find_conditions()`
+</details>
 
-```python
+## find_conditions()
+
+Returns conditions from if or while statements.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 if_str = """
 if x > 0:
   x = 1
@@ -708,30 +755,19 @@ else:
   return x
 """
 explorer1 = Node(if_str)
-len(explorer1.find_ifs()[0].find_conditions()) # 3
-explorer1.find_ifs()[0].find_conditions()[0].is_equivalent("x > 0") # True
-explorer1.find_ifs()[0].find_conditions()[1].is_equivalent("x < 0") # True
-explorer1.find_ifs()[0].find_conditions()[2] == Node() # True
-Node("x = 1").find_conditions() # []
-
-while_str = """
-while True:
-  x += 1
-else:
-  return
-
-while False:
-  pass
-"""
-explorer2 = Node(while_str)
-explorer2.find_whiles()[0].find_conditions()[0].is_equivalent("True") # True
-explorer2.find_whiles()[0].find_conditions()[1] == Node() # True
-explorer2.find_whiles()[1].find_conditions()[0].is_equivalent("False") # True
+len(explorer1.find_ifs()[0].find_conditions())  # 3
 ```
 
-#### `find_for_loops()`
+</details>
 
-```python
+## find_for_loops()
+
+Finds all for loops.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 for_str = """
 dict = {'a': 1, 'b': 2, 'c': 3}
 for x, y in enumerate(dict):
@@ -743,67 +779,61 @@ for i in range(4):
     pass
 """
 explorer = Node(for_str)
-explorer.find_for_loops()[0].is_equivalent("for x, y in enumerate(dict):\n  print(x, y)\nelse:\n  pass") # True
-explorer.find_for_loops()[1].is_equivalent("for i in range(4):\n  pass") # True
+explorer.find_for_loops()[0].is_equivalent("for x, y in enumerate(dict):\n  print(x, y)\nelse:\n  pass")
 ```
 
-#### `find_for()`
+</details>
 
-```python
-for_str = """
-dict = {'a': 1, 'b': 2, 'c': 3}
-for x, y in enumerate(dict):
-    print(x, y)
-else:
-    pass
+## find_for()
 
-for i in range(4):
-    pass
-"""
-explorer = Node(for_str)
-explorer.find_for("(x, y)", "enumerate(dict)").is_equivalent("for x, y in enumerate(dict):\n  print(x, y)\nelse:\n  pass") # True
-explorer.find_for("i", "range(4)").is_equivalent("for i in range(4):\n  pass") # True
+Finds a for loop matching specific variables and iterators.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+explorer.find_for("(x, y)", "enumerate(dict)").is_equivalent("for x, y in enumerate(dict):\n  print(x, y)\nelse:\n  pass")
+explorer.find_for("i", "range(4)").is_equivalent("for i in range(4):\n  pass")
 ```
 
-#### `find_for_vars()`
+</details>
 
-```python
-for_str = """
-dict = {'a': 1, 'b': 2, 'c': 3}
-for x, y in enumerate(dict):
-    print(x, y)
-else:
-    pass
+## find_for_vars()
 
-for i in range(4):
-    pass
-"""
-explorer = Node(for_str)
-explorer.find_for_loops()[0].find_for_vars().is_equivalent("(x, y)") # True
-explorer.find_for_loops()[1].find_for_vars().is_equivalent("i") # True
+Returns the target variables of a for loop.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+explorer.find_for_loops()[0].find_for_vars().is_equivalent("(x, y)")
+explorer.find_for_loops()[1].find_for_vars().is_equivalent("i")
 ```
 
-#### `find_for_iter()`
+</details>
 
-```python
-for_str = """
-dict = {'a': 1, 'b': 2, 'c': 3}
-for x, y in enumerate(dict):
-    print(x, y)
-else:
-    pass
+## find_for_iter()
 
-for i in range(4):
-    pass
-"""
-explorer = Node(for_str)
-explorer.find_for_loops()[0].find_for_iter().is_equivalent("enumerate(dict)") # True
-explorer.find_for_loops()[1].find_for_iter().is_equivalent("range(4)") # True
+Returns the iterable part of a for loop.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+explorer.find_for_loops()[0].find_for_iter().is_equivalent("enumerate(dict)")
+explorer.find_for_loops()[1].find_for_iter().is_equivalent("range(4)")
 ```
 
-#### `find_bodies()`
+</details>
 
-```python
+## find_bodies()
+
+Gets the bodies of control structures like if, while, or for loops.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 if_str = """
 if True:
   x = 1
@@ -811,58 +841,37 @@ elif False:
   x = 2
 """
 explorer1 = Node(if_str)
-explorer1.find_ifs()[0].find_bodies()[0].is_equivalent("x = 1") # True
-explorer1.find_ifs()[0].find_bodies()[1].is_equivalent("x = 2") # True
-
-while_str = """
-while True:
-  x += 1
-else:
-  x = 0
-
-while False:
-  pass
-"""
-explorer2 = Node(while_str)
-explorer2.find_whiles()[0].find_bodies()[0].is_equivalent("x += 1") # True
-explorer2.find_whiles()[0].find_bodies()[1].is_equivalent("x = 0") # True
-explorer2.find_whiles()[1].find_bodies()[0].is_equivalent("pass") # True
-
-for_str = """
-dict = {'a': 1, 'b': 2, 'c': 3}
-for x, y in enumerate(dict):
-    print(x, y)
-else:
-    print(x)
-
-for i in range(4):
-    pass
-"""
-explorer3 = Node(for_str)
-explorer3.find_for_loops()[0].find_bodies()[0].is_equivalent("print(x, y)") # True
-explorer3.find_for_loops()[0].find_bodies()[1].is_equivalent("print(x)") # True
-explorer3.find_for_loops()[1].find_bodies()[0].is_equivalent("pass") # True
+explorer1.find_ifs()[0].find_bodies()[0].is_equivalent("x = 1")
 ```
 
-#### `find_imports()`
+</details>
 
-```python
+## find_imports()
+
+Finds import statements.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 import ast, sys
 from math import factorial as f
 """
-
 explorer = Node(code_str)
-len(explorer.find_imports()) # 2
-explorer.find_imports()[0].is_equivalent("import ast, sys")
-explorer.find_imports()[1].is_equivalent("from math import factorial as f")
+len(explorer.find_imports())  # 2
 ```
 
-#### `find_comps()`
+</details>
 
-Returns a list of list comprehensions, set comprehensions, dictionary comprehensions and generator expressions nodes not assigned to a variable or part of other statements.
+## find_comps()
 
-```python
+Retrieves list comprehensions, set comprehensions, dict comprehensions, and generator expressions not assigned to a variable.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 [i**2 for i in lst]
 (i for i in lst)
@@ -871,18 +880,19 @@ code_str = """
 comp = [i for i in lst]
 """
 explorer = Node(code_str)
-len(explorer.find_comps()) # 4
-explorer.find_comps()[0].is_equivalent("[i**2 for i in lst]")
-explorer.find_comps()[1].is_equivalent("(i for i in lst)")
-explorer.find_comps()[2].is_equivalent("{i * j for i in spam for j in lst}")
-explorer.find_comps()[3].is_equivalent("{k: v for k,v in dict}")
+len(explorer.find_comps())  # 4
 ```
 
-#### `find_comp_iters()`
+</details>
 
-Returns a list of comprehension/generator expression iterables. It can be chained to `find_variable`, `find_return`, `find_call_args()[n]`.
+## find_comp_iters()
 
-```python
+Returns the iterables used in comprehensions or generator expressions.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 x = [i**2 for i in lst]
 
@@ -890,19 +900,19 @@ def foo(spam):
   return [i * j for i in spam for j in lst]
 """
 explorer = Node(code_str)
-len(explorer.find_variable("x").find_comp_iters()) # 1
-explorer.find_variable("x").find_comp_iters()[0].is_equivalent("lst")
-
-len(explorer.find_function("foo").find_return().find_comp_iters()) # 2
-explorer.find_function("foo").find_return().find_comp_iters()[0].is_equivalent("spam")
-explorer.find_function("foo").find_return().find_comp_iters()[1].is_equivalent("lst")
+len(explorer.find_variable("x").find_comp_iters())  # 1
 ```
 
-#### `find_comp_targets()`
+</details>
 
-Returns a list of comprhension/generator expression targets (i.e. the iteration variables).
+## find_comp_targets()
 
-```python
+Returns the target variables in comprehensions.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 x = [i**2 for i in lst]
 
@@ -910,19 +920,19 @@ def foo(spam):
   return [i * j for i in spam for j in lst]
 """
 explorer = Node(code_str)
-len(explorer.find_variable("x").find_comp_targets()) # 1
 explorer.find_variable("x").find_comp_targets()[0].is_equivalent("i")
-
-len(explorer.find_function("foo").find_return().find_comp_targets()) # 2
-explorer.find_function("foo").find_return().find_comp_targets()[0].is_equivalent("i")
-explorer.find_function("foo").find_return().find_comp_targets()[1].is_equivalent("j")
 ```
 
-#### `find_comp_key()`
+</details>
 
-Returns the dictionary comprehension key.
+## find_comp_key()
 
-```python
+Finds the key in a dictionary comprehension.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 x = {k: v for k,v in dict}
 
@@ -931,15 +941,18 @@ def foo(spam):
 """
 explorer = Node(code_str)
 explorer.find_variable("x").find_comp_key().is_equivalent("k")
-
-explorer.find_function("foo").find_return().find_comp_key().is_equivalent("k")
 ```
 
-#### `find_comp_expr()`
+</details>
 
-Returns the expression evaluated at each iteration of comprehensions/generator expressions. It includes the `if`/`else` portion. In case only the `if` is present, use `find_comp_ifs`.
+## find_comp_expr()
 
-```python
+Retrieves the expression evaluated in comprehensions, including any if/else constructs.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 x = [i**2 if i else -1 for i in lst]
 
@@ -948,15 +961,18 @@ def foo(spam):
 """
 explorer = Node(code_str)
 explorer.find_variable("x").find_comp_expr().is_equivalent("i**2 if i else -1")
-
-explorer.find_function("foo").find_return().find_comp_expr().is_equivalent("i * j")
 ```
 
-#### `find_comp_ifs()`
+</details>
 
-Returns a list of comprehension/generator expression `if` conditions. The `if`/`else` construct instead is part of the expression and is found with `find_comp_expr`.
+## find_comp_ifs()
 
-```python
+Returns any if conditions used in comprehensions.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 x = [i**2 if i else -1 for i in lst]
 
@@ -964,65 +980,97 @@ def foo(spam):
   return [i * j for i in spam if i > 0 for j in lst if j != 6]
 """
 explorer = Node(code_str)
-len(explorer.find_variable("x").find_comp_ifs()) # 0
-
-len(explorer.find_function("foo").find_return().find_comp_ifs()) # 2
-explorer.find_function("foo").find_return().find_comp_ifs()[0].is_equivalent("i > 0")
-explorer.find_function("foo").find_return().find_comp_ifs()[1].is_equivalent("j != 6")
+len(explorer.find_function("foo").find_return().find_comp_ifs())  # 2
 ```
 
-#### Getting values
+</details>
 
-`get_` functions return the value of the node, not the node itself.
+## get_variable()
 
-#### `get_variable()`
+Returns the value assigned to a variable.
 
-```python
-Node("x = 1").get_variable("x") # 1
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("x = 1").get_variable("x")  # 1
 ```
 
-#### Checking for existence
+</details>
 
-`has_` functions return a boolean indicating whether the node exists.
+## has_variable()
 
-#### `has_variable()`
+Checks if a variable exists.
 
-```python
-Node("x = 1").has_variable("x") # True
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("x = 1").has_variable("x")  # True
 ```
 
-#### `has_function()`
+</details>
 
-```python
-Node("def foo():\n  pass").has_function("foo") # True
+## has_function()
+
+Checks if a function exists.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("def foo():\n  pass").has_function("foo")  # True
 ```
 
-#### `has_stmt()`
+</details>
 
-Returns a boolean indicating if the specified statement is found.
+## has_stmt()
 
-```python
-Node("name = input('hi')\nself.matrix[1][5] = 3").has_stmt("self.matrix[1][5] = 3") # True
+Checks for the presence of a specific statement.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("name = input('hi')\nself.matrix[1][5] = 3").has_stmt("self.matrix[1][5] = 3")  # True
 ```
 
-#### `has_args()`
+</details>
 
-```python
-Node("def foo(*, a, b, c=0):\n  pass").find_function("foo").has_args("*, a, b, c=0") # True
+## has_args()
+
+Checks if a function has specific arguments.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("def foo(*, a, b, c=0):\n  pass").find_function("foo").has_args("*, a, b, c=0")  # True
 ```
 
-#### `has_pass()`
+</details>
 
-```python
-Node("def foo():\n  pass").find_function("foo").has_pass() # True
-Node("if x==1:\n  x+=1\nelse:  pass").find_ifs()[0].find_bodies()[1].has_pass() # True
+## has_pass()
+
+Checks for the use of a pass statement.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("def foo():\n  pass").find_function("foo").has_pass()  # True
 ```
 
-#### `has_return()`
+</details>
 
-Returns a boolean indicating if the function returns the specified expression/object.
+## has_return()
 
-```python
+Verifies if a function returns a specified value.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 def foo():
   if x == 1:
@@ -1030,22 +1078,43 @@ def foo():
   return True
 """
 explorer = Node(code_str)
-explorer.find_function("foo").has_return("True") # True
-explorer.find_function("foo").find_ifs()[0].has_return("False") # True
+explorer.find_function("foo").has_return("True")  # True
 ```
 
-#### `has_returns()`
+</details>
 
-Returns a boolean indicating if the function has the specified return annotation.
+It can also check returns inside if blocks:
 
-```python
-Node("def foo() -> int:\n  return 0").find_function("foo").has_returns("int") # True
-Node("def foo() -> 'spam':\n  pass").find_function("foo").has_returns("spam") # True
+<details>
+  <summary>Example Usage</summary>
+
+```py
+explorer.find_function("foo").find_ifs()[0].has_return("False")  # True
 ```
 
-#### `has_decorators()`
+</details>
 
-```python
+## has_returns()
+
+Checks for a specific return annotation.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("def foo() -> int:\n  return 0").find_function("foo").has_returns("int")  # True
+```
+
+</details>
+
+## has_decorators()
+
+Verifies if a function has specified decorators (order matters).
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 class A:
   @property
@@ -1053,112 +1122,165 @@ class A:
   def foo():
     pass
 """
-Node(code_str).find_class("A").find_function("foo").has_decorators("property") # True
-Node(code_str).find_class("A").find_function("foo").has_decorators("property", "staticmethod") # True
-Node(code_str).find_class("A").find_function("foo").has_decorators("staticmethod", "property") # False, order does matter
+Node(code_str).find_class("A").find_function("foo").has_decorators("property")  # True
 ```
 
-#### `has_call()`
+</details>
 
-```python
+## has_call()
+
+Checks for a specific function call.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 print(math.sqrt(25))
 if True:
   spam()
 """
-
 explorer = Node(code_str)
 explorer.has_call("print(math.sqrt(25))")
 explorer.find_ifs()[0].find_bodies()[0].has_call("spam()")
 ```
 
-#### `has_import()`
+</details>
 
-```python
+## has_import()
+
+Verifies the presence of import statements.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 import ast, sys
 from math import factorial as f
 """
-
 explorer = Node(code_str)
 explorer.has_import("import ast, sys")
 explorer.has_import("from math import factorial as f")
 ```
 
-#### `has_class()`
+</details>
 
-```python
+## has_class()
+
+Checks if a class is defined.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 class spam:
   pass
 """
-
 Node(code_str).has_class("spam")
 ```
 
-#### Misc
+</details>
 
-#### `is_equivalent()`
+## is_equivalent()
 
-This is a somewhat loose check. The AST of the target string and the AST of the node do not have to be identical, but the code must be equivalent.
+Performs a loose equivalence check between code snippets.
 
-```python
-Node("x = 1").is_equivalent("x = 1") # True
-Node("\nx = 1").is_equivalent("x =    1") # True
-Node("x = 1").is_equivalent("x = 2") # False
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("x = 1").is_equivalent("x = 1")  # True
+Node("x = 1").is_equivalent("x =    1")  # True
+Node("x = 1").is_equivalent("x = 2")  # False
 ```
 
-#### `is_empty()`
+</details>
 
-This is syntactic sugar for `== Node()`.
+## is_empty()
 
-```python
-Node().is_empty() # True
-Node("x = 1").find_variable("x").is_empty() # False
+Determines if a node is empty.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node().is_empty()  # True
+Node("x = 1").find_variable("x").is_empty()  # False
 ```
 
-#### `get_nth_statement()`
+</details>
 
-```python
+## get_nth_statement()
+
+Retrieves the nth statement from the code.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 stmts = """
 if True:
   pass
 
 x = 1
 """
-
-Node(stmts).get_nth_statement(1).is_equivalent("x = 1") # True
+Node(stmts).get_nth_statement(1).is_equivalent("x = 1")  # True
 ```
 
-#### `value_is_call()`
+</details>
 
-This allows you to check if the return value of a function call is assigned to a variable.
+## value_is_call()
 
-```python
+Checks if a variable’s value is assigned via a function call.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 explorer = Node("def foo():\n  x = bar()")
-
-explorer.find_function("foo").find_variable("x").value_is_call("bar") # True
+explorer.find_function("foo").find_variable("x").value_is_call("bar")  # True
 ```
 
-#### `is_integer()`
+</details>
 
-```python
-Node("x = 1").find_variable("x").is_integer() # True
-Node("x = '1'").find_variable("x").is_integer() # False
+## is_integer()
+
+Determines if a variable is assigned an integer value.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("x = 1").find_variable("x").is_integer()  # True
+Node("x = '1'").find_variable("x").is_integer()  # False
 ```
 
-#### `inherits_from()`
+</details>
 
-```python
-Node("class C(A, B):\n  pass").find_class("C").inherits_from("A") # True
-Node("class C(A, B):\n  pass").find_class("C").inherits_from("A", "B") # True
+## inherits_from()
+
+Checks if a class inherits from specified classes.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
+Node("class C(A, B):\n  pass").find_class("C").inherits_from("A")  # True
+Node("class C(A, B):\n  pass").find_class("C").inherits_from("A", "B")  # True
 ```
 
-#### `is_ordered()`
+</details>
 
-Returs a boolean indicating if the statements passed as arguments are found in the same order in the tree (statements can be non-consecutive)
+## is_ordered()
 
-```python
+Verifies that certain statements appear in a given order.
+
+<details>
+  <summary>Example Usage</summary>
+
+```py
 code_str = """
 x = 1
 if x:
@@ -1168,38 +1290,9 @@ if x:
   return y
 x = 0
 """
-
-if_str = """
-if x:
-  print("x is:")
-  y = 0
-  print(x)
-  return y
-"""
 explorer = Node(code_str)
-explorer.is_ordered("x=1", "x=0") # True
-explorer.is_ordered("x=1", if_str, "x=0") # True
-explorer.find_ifs()[0].is_ordered("print('x is:')", "print(x)", "return y") # True
-explorer.is_ordered("x=0", "x=1") # False
-explorer.find_ifs()[0].is_ordered("print(x)", "print('x is:')") # False
+explorer.is_ordered("x=1", "x=0")  # True
+explorer.is_ordered("x=1", "x=0", "if x:\n  print(\"x is:\")\n  y = 0\n  print(x)\n  return y")  # True
 ```
 
-## Notes on Python
-
-- Python does **not** allow newline characters between keywords and their arguments. E.g:
-
-```python
-def
-    add(x, y):
-    return x + y
-```
-
-- Python **does** allow newline characters between function arguments. E.g:
-
-```python
-def add(
-  x,
-  y
-):
-    return x + y
-```
+</details>
