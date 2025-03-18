@@ -4,7 +4,7 @@ title: Using the Curriculum Helpers
 
 # Index
 
-## CSS Helpers
+## CSS Helper
 
 The CSS Helper is used to parse and test CSS written by campers.
 
@@ -19,7 +19,7 @@ The CSS Helper is used to parse and test CSS written by campers.
   - [getStyleSheet()](#getstylesheet) – Returns the entire parsed CSS as a style sheet object.
   - [selectorsFromSelector()](#selectorsfromselector) – Provides alternate selectors based on a given one.
 
-## JS Helpers
+## JS Helper
 
 The JS Helper provides utilities to test and manipulate JavaScript code.
 
@@ -31,7 +31,7 @@ The JS Helper provides utilities to test and manipulate JavaScript code.
   - [concatRegex()](#concatregex) – Combines two regexes or strings into a single regex.
   - [functionRegex()](#functionregex) – Creates a regex to match a function declaration with specified parameters.
 - [Strip Content](#strip-content) – Provides methods to remove comments and whitespace from code.
-- [permutateRegex](#permutateregex) – Generates a regex that matches elements in any order.
+- [permutateRegex](#permutaterex) – Generates a regex that matches elements in any order.
 
 ## AST-based Helpers (Python)
 
@@ -87,7 +87,7 @@ AST-based Helpers parse Python code into an Abstract Syntax Tree (AST) for detai
 
 ---
 
-# CSS Helpers
+# CSS Helper
 
 The CSS Helper assists with testing campers' CSS code. You instantiate the helper within a test block as follows:
 
@@ -95,7 +95,7 @@ The CSS Helper assists with testing campers' CSS code. You instantiate the helpe
   <summary>Example Usage</summary>
 
 ```js
-const helper = new __helpers.CSSHelp(document);
+const helper = new \_\_helpers.CSSHelp(document);
 ```
 
 </details>
@@ -419,7 +419,7 @@ Searches for a function by name and returns its AST node.
   <summary>Example Usage</summary>
 
 ```py
-_Node('def foo():\n  x = "1"').find_function("foo").has_variable("x")  # True
+\_Node('def foo():\n x = "1"').find_function("foo").has_variable("x") # True
 ```
 
 </details>
@@ -434,18 +434,18 @@ Returns an array of nodes for functions with the same name.
 ```py
 code_str = """
 class Spam(ABC):
-  @property
-  @abstractmethod
-  def foo(self):
-    return self.x
+@property
+@abstractmethod
+def foo(self):
+return self.x
 
-  @foo.setter
-  @abstractmethod
-  def foo(self, new_x):
-    self.x = new_x
+@foo.setter
+@abstractmethod
+def foo(self, new_x):
+self.x = new_x
 """
 explorer = Node(code_str)
-len(explorer.find_class("Spam").find_functions("foo"))  # 2
+len(explorer.find_class("Spam").find_functions("foo")) # 2
 ```
 
 </details>
@@ -458,7 +458,7 @@ Finds an asynchronous function.
   <summary>Example Usage</summary>
 
 ```py
-_Node('async def foo():\n  await bar()').find_async_function("foo").is_equivalent("async def foo():\n  await bar()")  # True
+\_Node('async def foo():\n await bar()').find_async_function("foo").is_equivalent("async def foo():\n await bar()") # True
 ```
 
 </details>
@@ -473,13 +473,13 @@ Retrieves all await expressions within an async function.
 ```py
 code_str = """
 async def foo(spam):
-  if spam:
-    await spam()
-  await bar()
-  await func()
+if spam:
+await spam()
+await bar()
+await func()
 """
 explorer = Node(code_str)
-explorer.find_async_function("foo").find_awaits()[0].is_equivalent("await bar()")  # True
+explorer.find_async_function("foo").find_awaits()[0].is_equivalent("await bar()") # True
 ```
 
 </details>
@@ -492,7 +492,7 @@ Searches for variable assignments in the code.
   <summary>Example Usage</summary>
 
 ```py
-_Node("y = 2\nx = 1").find_variable("x").is_equivalent("x = 1")
+\_Node("y = 2\nx = 1").find_variable("x").is_equivalent("x = 1")
 ```
 
 </details>
@@ -503,7 +503,7 @@ Also supports type annotations and object properties:
   <summary>Example Usage (annotations)</summary>
 
 ```py
-_Node("a: int = 1").find_variable("a").is_equivalent("a: int = 1")
+\_Node("a: int = 1").find_variable("a").is_equivalent("a: int = 1")
 ```
 
 </details>
@@ -512,7 +512,7 @@ _Node("a: int = 1").find_variable("a").is_equivalent("a: int = 1")
   <summary>Example Usage (object properties)</summary>
 
 ```py
-_Node("self.spam = spam").find_variable("self.spam").is_equivalent("self.spam = spam")
+\_Node("self.spam = spam").find_variable("self.spam").is_equivalent("self.spam = spam")
 ```
 
 </details>
@@ -525,8 +525,8 @@ Finds augmented assignments (e.g., x += 1).
   <summary>Example Usage</summary>
 
 ```py
-_Node("x += 1").find_aug_variable("x").is_equivalent("x += 1")
-_Node("x -= 1").find_aug_variable("x").is_equivalent("x -= 1")
+\_Node("x += 1").find_aug_variable("x").is_equivalent("x += 1")
+\_Node("x -= 1").find_aug_variable("x").is_equivalent("x -= 1")
 ```
 
 </details>
@@ -541,9 +541,9 @@ Returns the body of a function as an AST node.
 ```py
 func_str = """
 def foo():
-    x = 1
+x = 1
 """
-Node(func_str).find_function("foo").find_body().is_equivalent("x = 1")  # True
+Node(func_str).find_function("foo").find_body().is_equivalent("x = 1") # True
 ```
 
 </details>
@@ -558,12 +558,12 @@ Finds return statements in a function.
 ```py
 code_str = """
 def foo():
-  if x == 1:
-    return False
-  return True
+if x == 1:
+return False
+return True
 """
 explorer = Node(code_str)
-explorer.find_function("foo").find_return().is_equivalent("return True")  # True
+explorer.find_function("foo").find_return().is_equivalent("return True") # True
 ```
 
 </details>
@@ -574,7 +574,7 @@ It can also find returns inside if blocks:
   <summary>Example Usage</summary>
 
 ```py
-explorer.find_function("foo").find_ifs()[0].find_return().is_equivalent("return False")  # True
+explorer.find_function("foo").find_ifs()[0].find_return().is_equivalent("return False") # True
 ```
 
 </details>
@@ -595,7 +595,7 @@ obj.foo("spam")
 obj.bar.foo("spam")
 """
 explorer = Node(code_str)
-len(explorer.find_calls("print"))  # 2
+len(explorer.find_calls("print")) # 2
 ```
 
 </details>
@@ -621,7 +621,7 @@ Retrieves arguments from a function call.
 
 ```py
 explorer = Node("print(1, 2)")
-len(explorer.find_calls("print")[0].find_call_args())  # 2
+len(explorer.find_calls("print")[0].find_call_args()) # 2
 ```
 
 </details>
@@ -636,10 +636,10 @@ Searches for a class definition.
 ```py
 class_str = """
 class Foo:
-  def __init__(self):
-    pass
+def **init**(self):
+pass
 """
-Node(class_str).find_class("Foo").has_function("__init__")  # True
+Node(class_str).find_class("Foo").has_function("**init**") # True
 ```
 
 </details>
@@ -654,16 +654,16 @@ Finds all if statements in the code.
 ```py
 if_str = """
 if x == 1:
-  x += 1
+x += 1
 elif x == 2:
-  pass
+pass
 else:
-  return
+return
 
 if True:
-  pass
+pass
 """
-Node(if_str).find_ifs()[0].is_equivalent("if x == 1:\n  x += 1\nelif x == 2:\n  pass\nelse:\n  return")
+Node(if_str).find_ifs()[0].is_equivalent("if x == 1:\n x += 1\nelif x == 2:\n pass\nelse:\n return")
 ```
 
 </details>
@@ -678,16 +678,16 @@ Locates a specific if statement by its condition.
 ```py
 if_str = """
 if x == 1:
-  x += 1
+x += 1
 elif x == 2:
-  pass
+pass
 else:
-  return
+return
 
 if True:
-  pass
+pass
 """
-Node(if_str).find_if("x == 1").is_equivalent("if x == 1:\n  x += 1\nelif x == 2:\n  pass\nelse:\n  return")
+Node(if_str).find_if("x == 1").is_equivalent("if x == 1:\n x += 1\nelif x == 2:\n pass\nelse:\n return")
 ```
 
 </details>
@@ -702,15 +702,15 @@ Finds all while loops.
 ```py
 while_str = """
 while True:
-  x += 1
+x += 1
 else:
-  return
+return
 
 while False:
-  pass
+pass
 """
 explorer = Node(while_str)
-explorer.find_whiles()[0].is_equivalent("while True:\n  x += 1\nelse:\n  return")
+explorer.find_whiles()[0].is_equivalent("while True:\n x += 1\nelse:\n return")
 ```
 
 </details>
@@ -725,15 +725,15 @@ Finds a specific while loop by its condition.
 ```py
 while_str = """
 while True:
-  x += 1
+x += 1
 else:
-  return
+return
 
 while False:
-  pass
+pass
 """
 explorer = Node(while_str)
-explorer.find_while("True").is_equivalent("while True:\n  x += 1\nelse:\n  return")
+explorer.find_while("True").is_equivalent("while True:\n x += 1\nelse:\n return")
 ```
 
 </details>
@@ -748,14 +748,14 @@ Returns conditions from if or while statements.
 ```py
 if_str = """
 if x > 0:
-  x = 1
+x = 1
 elif x < 0:
-  x = -1
+x = -1
 else:
-  return x
+return x
 """
 explorer1 = Node(if_str)
-len(explorer1.find_ifs()[0].find_conditions())  # 3
+len(explorer1.find_ifs()[0].find_conditions()) # 3
 ```
 
 </details>
@@ -771,15 +771,15 @@ Finds all for loops.
 for_str = """
 dict = {'a': 1, 'b': 2, 'c': 3}
 for x, y in enumerate(dict):
-    print(x, y)
+print(x, y)
 else:
-    pass
+pass
 
 for i in range(4):
-    pass
+pass
 """
 explorer = Node(for_str)
-explorer.find_for_loops()[0].is_equivalent("for x, y in enumerate(dict):\n  print(x, y)\nelse:\n  pass")
+explorer.find_for_loops()[0].is_equivalent("for x, y in enumerate(dict):\n print(x, y)\nelse:\n pass")
 ```
 
 </details>
@@ -792,8 +792,8 @@ Finds a for loop matching specific variables and iterators.
   <summary>Example Usage</summary>
 
 ```py
-explorer.find_for("(x, y)", "enumerate(dict)").is_equivalent("for x, y in enumerate(dict):\n  print(x, y)\nelse:\n  pass")
-explorer.find_for("i", "range(4)").is_equivalent("for i in range(4):\n  pass")
+explorer.find_for("(x, y)", "enumerate(dict)").is_equivalent("for x, y in enumerate(dict):\n print(x, y)\nelse:\n pass")
+explorer.find_for("i", "range(4)").is_equivalent("for i in range(4):\n pass")
 ```
 
 </details>
@@ -836,9 +836,9 @@ Gets the bodies of control structures like if, while, or for loops.
 ```py
 if_str = """
 if True:
-  x = 1
+x = 1
 elif False:
-  x = 2
+x = 2
 """
 explorer1 = Node(if_str)
 explorer1.find_ifs()[0].find_bodies()[0].is_equivalent("x = 1")
@@ -859,7 +859,7 @@ import ast, sys
 from math import factorial as f
 """
 explorer = Node(code_str)
-len(explorer.find_imports())  # 2
+len(explorer.find_imports()) # 2
 ```
 
 </details>
@@ -875,12 +875,12 @@ Retrieves list comprehensions, set comprehensions, dict comprehensions, and gene
 code_str = """
 [i**2 for i in lst]
 (i for i in lst)
-{i * j for i in spam for j in lst}
+{i \* j for i in spam for j in lst}
 {k: v for k,v in dict}
 comp = [i for i in lst]
 """
 explorer = Node(code_str)
-len(explorer.find_comps())  # 4
+len(explorer.find_comps()) # 4
 ```
 
 </details>
@@ -897,10 +897,10 @@ code_str = """
 x = [i**2 for i in lst]
 
 def foo(spam):
-  return [i * j for i in spam for j in lst]
+return [i * j for i in spam for j in lst]
 """
 explorer = Node(code_str)
-len(explorer.find_variable("x").find_comp_iters())  # 1
+len(explorer.find_variable("x").find_comp_iters()) # 1
 ```
 
 </details>
@@ -917,7 +917,7 @@ code_str = """
 x = [i**2 for i in lst]
 
 def foo(spam):
-  return [i * j for i in spam for j in lst]
+return [i * j for i in spam for j in lst]
 """
 explorer = Node(code_str)
 explorer.find_variable("x").find_comp_targets()[0].is_equivalent("i")
@@ -937,7 +937,7 @@ code_str = """
 x = {k: v for k,v in dict}
 
 def foo(spam):
-  return {k: v for k in spam for v in lst}
+return {k: v for k in spam for v in lst}
 """
 explorer = Node(code_str)
 explorer.find_variable("x").find_comp_key().is_equivalent("k")
@@ -957,10 +957,10 @@ code_str = """
 x = [i**2 if i else -1 for i in lst]
 
 def foo(spam):
-  return [i * j for i in spam for j in lst]
+return [i * j for i in spam for j in lst]
 """
 explorer = Node(code_str)
-explorer.find_variable("x").find_comp_expr().is_equivalent("i**2 if i else -1")
+explorer.find_variable("x").find_comp_expr().is_equivalent("i\*\*2 if i else -1")
 ```
 
 </details>
@@ -977,10 +977,10 @@ code_str = """
 x = [i**2 if i else -1 for i in lst]
 
 def foo(spam):
-  return [i * j for i in spam if i > 0 for j in lst if j != 6]
+return [i * j for i in spam if i > 0 for j in lst if j != 6]
 """
 explorer = Node(code_str)
-len(explorer.find_function("foo").find_return().find_comp_ifs())  # 2
+len(explorer.find_function("foo").find_return().find_comp_ifs()) # 2
 ```
 
 </details>
@@ -993,7 +993,7 @@ Returns the value assigned to a variable.
   <summary>Example Usage</summary>
 
 ```py
-Node("x = 1").get_variable("x")  # 1
+Node("x = 1").get_variable("x") # 1
 ```
 
 </details>
@@ -1006,7 +1006,7 @@ Checks if a variable exists.
   <summary>Example Usage</summary>
 
 ```py
-Node("x = 1").has_variable("x")  # True
+Node("x = 1").has_variable("x") # True
 ```
 
 </details>
@@ -1019,7 +1019,7 @@ Checks if a function exists.
   <summary>Example Usage</summary>
 
 ```py
-Node("def foo():\n  pass").has_function("foo")  # True
+Node("def foo():\n pass").has_function("foo") # True
 ```
 
 </details>
@@ -1032,7 +1032,7 @@ Checks for the presence of a specific statement.
   <summary>Example Usage</summary>
 
 ```py
-Node("name = input('hi')\nself.matrix[1][5] = 3").has_stmt("self.matrix[1][5] = 3")  # True
+Node("name = input('hi')\nself.matrix[1][5] = 3").has_stmt("self.matrix[1][5] = 3") # True
 ```
 
 </details>
@@ -1045,7 +1045,7 @@ Checks if a function has specific arguments.
   <summary>Example Usage</summary>
 
 ```py
-Node("def foo(*, a, b, c=0):\n  pass").find_function("foo").has_args("*, a, b, c=0")  # True
+Node("def foo(_, a, b, c=0):\n pass").find_function("foo").has_args("_, a, b, c=0") # True
 ```
 
 </details>
@@ -1058,7 +1058,7 @@ Checks for the use of a pass statement.
   <summary>Example Usage</summary>
 
 ```py
-Node("def foo():\n  pass").find_function("foo").has_pass()  # True
+Node("def foo():\n pass").find_function("foo").has_pass() # True
 ```
 
 </details>
@@ -1073,12 +1073,12 @@ Verifies if a function returns a specified value.
 ```py
 code_str = """
 def foo():
-  if x == 1:
-    return False
-  return True
+if x == 1:
+return False
+return True
 """
 explorer = Node(code_str)
-explorer.find_function("foo").has_return("True")  # True
+explorer.find_function("foo").has_return("True") # True
 ```
 
 </details>
@@ -1089,7 +1089,7 @@ It can also check returns inside if blocks:
   <summary>Example Usage</summary>
 
 ```py
-explorer.find_function("foo").find_ifs()[0].has_return("False")  # True
+explorer.find_function("foo").find_ifs()[0].has_return("False") # True
 ```
 
 </details>
@@ -1102,7 +1102,7 @@ Checks for a specific return annotation.
   <summary>Example Usage</summary>
 
 ```py
-Node("def foo() -> int:\n  return 0").find_function("foo").has_returns("int")  # True
+Node("def foo() -> int:\n return 0").find_function("foo").has_returns("int") # True
 ```
 
 </details>
@@ -1117,12 +1117,12 @@ Verifies if a function has specified decorators (order matters).
 ```py
 code_str = """
 class A:
-  @property
-  @staticmethod
-  def foo():
-    pass
+@property
+@staticmethod
+def foo():
+pass
 """
-Node(code_str).find_class("A").find_function("foo").has_decorators("property")  # True
+Node(code_str).find_class("A").find_function("foo").has_decorators("property") # True
 ```
 
 </details>
@@ -1138,7 +1138,7 @@ Checks for a specific function call.
 code_str = """
 print(math.sqrt(25))
 if True:
-  spam()
+spam()
 """
 explorer = Node(code_str)
 explorer.has_call("print(math.sqrt(25))")
@@ -1176,7 +1176,7 @@ Checks if a class is defined.
 ```py
 code_str = """
 class spam:
-  pass
+pass
 """
 Node(code_str).has_class("spam")
 ```
@@ -1191,9 +1191,9 @@ Performs a loose equivalence check between code snippets.
   <summary>Example Usage</summary>
 
 ```py
-Node("x = 1").is_equivalent("x = 1")  # True
-Node("x = 1").is_equivalent("x =    1")  # True
-Node("x = 1").is_equivalent("x = 2")  # False
+Node("x = 1").is_equivalent("x = 1") # True
+Node("x = 1").is_equivalent("x = 1") # True
+Node("x = 1").is_equivalent("x = 2") # False
 ```
 
 </details>
@@ -1206,8 +1206,8 @@ Determines if a node is empty.
   <summary>Example Usage</summary>
 
 ```py
-Node().is_empty()  # True
-Node("x = 1").find_variable("x").is_empty()  # False
+Node().is_empty() # True
+Node("x = 1").find_variable("x").is_empty() # False
 ```
 
 </details>
@@ -1222,11 +1222,11 @@ Retrieves the nth statement from the code.
 ```py
 stmts = """
 if True:
-  pass
+pass
 
 x = 1
 """
-Node(stmts).get_nth_statement(1).is_equivalent("x = 1")  # True
+Node(stmts).get_nth_statement(1).is_equivalent("x = 1") # True
 ```
 
 </details>
@@ -1239,8 +1239,8 @@ Checks if a variable’s value is assigned via a function call.
   <summary>Example Usage</summary>
 
 ```py
-explorer = Node("def foo():\n  x = bar()")
-explorer.find_function("foo").find_variable("x").value_is_call("bar")  # True
+explorer = Node("def foo():\n x = bar()")
+explorer.find_function("foo").find_variable("x").value_is_call("bar") # True
 ```
 
 </details>
@@ -1253,8 +1253,8 @@ Determines if a variable is assigned an integer value.
   <summary>Example Usage</summary>
 
 ```py
-Node("x = 1").find_variable("x").is_integer()  # True
-Node("x = '1'").find_variable("x").is_integer()  # False
+Node("x = 1").find_variable("x").is_integer() # True
+Node("x = '1'").find_variable("x").is_integer() # False
 ```
 
 </details>
@@ -1267,8 +1267,8 @@ Checks if a class inherits from specified classes.
   <summary>Example Usage</summary>
 
 ```py
-Node("class C(A, B):\n  pass").find_class("C").inherits_from("A")  # True
-Node("class C(A, B):\n  pass").find_class("C").inherits_from("A", "B")  # True
+Node("class C(A, B):\n pass").find_class("C").inherits_from("A") # True
+Node("class C(A, B):\n pass").find_class("C").inherits_from("A", "B") # True
 ```
 
 </details>
@@ -1284,15 +1284,15 @@ Verifies that certain statements appear in a given order.
 code_str = """
 x = 1
 if x:
-  print("x is:")
-  y = 0
-  print(x)
-  return y
+print("x is:")
+y = 0
+print(x)
+return y
 x = 0
 """
 explorer = Node(code_str)
-explorer.is_ordered("x=1", "x=0")  # True
-explorer.is_ordered("x=1", "x=0", "if x:\n  print(\"x is:\")\n  y = 0\n  print(x)\n  return y")  # True
+explorer.is_ordered("x=1", "x=0") # True
+explorer.is_ordered("x=1", "x=0", "if x:\n print(\"x is:\")\n y = 0\n print(x)\n return y") # True
 ```
 
 </details>
