@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -50,7 +50,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - name: Cache
-        uses: actions/cache@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: |
             ${{ steps.pnpm-cache.outputs.STORE_PATH }}
