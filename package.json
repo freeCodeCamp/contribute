@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@playwright/test": "1.51.1",
-    "@types/node": "22.13.13",
+    "@types/node": "22.13.14",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "dotenv": "16.4.7",
@@ -53,5 +53,5 @@
     "sharp": "0.33.5",
     "wrangler": "^3.78.4"
   },
-  "packageManager": "pnpm@10.6.5"
+  "packageManager": "pnpm@10.7.0"
 }
