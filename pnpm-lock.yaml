@@ -80,7 +80,7 @@ importers:
         version: 0.33.5
       wrangler:
         specifier: ^3.78.4
-        version: 3.114.3(@cloudflare/workers-types@4.20241022.0)
+        version: 3.114.4(@cloudflare/workers-types@4.20241022.0)
 
 packages:
 
@@ -2420,8 +2420,8 @@ packages:
     engines: {node: '>=16.13'}
     hasBin: true
 
-  miniflare@3.20250310.1:
-    resolution: {integrity: sha512-c9QPrgBUFzjL4pYvW6GIUw+NqeYlZGVHASKJqjIXB1WVsl14nYfpfHphYK8tluKaBqwA9NFyO5dC2zatJkC/mA==}
+  miniflare@3.20250310.2:
+    resolution: {integrity: sha512-Kjtr5XMvQyRQZFsqAHcgFaKccTDMlslUOugAEWhQUkEfozS/e5GAiXE9lftNW6xTWZ3DTigt+FkShBI106MHKQ==}
     engines: {node: '>=16.13'}
     hasBin: true
 
@@ -3419,8 +3419,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.114.3:
-    resolution: {integrity: sha512-H87s4USPQhRQmN8V4Q2Fh+0ZGiuWVrVwVKoxjdgEtpR88gVQEN5Ua9C3TQDaXCppsdAFl/J4lxLoxfJaW2XFdQ==}
+  wrangler@3.114.4:
+    resolution: {integrity: sha512-7F8zF3CZmzOQLwpKOiwzu24d2c98ch4AP+Uz4L3uTXe8Bjq6g5rPjKwovg2whXJGc64X2DjTZJOAFN3KlWmscA==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -3556,7 +3556,7 @@ snapshots:
       magic-string: 0.30.12
       miniflare: 3.20241022.0
       tiny-glob: 0.2.9
-      wrangler: 3.114.3(@cloudflare/workers-types@4.20241022.0)
+      wrangler: 3.114.4(@cloudflare/workers-types@4.20241022.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -6397,7 +6397,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  miniflare@3.20250310.1:
+  miniflare@3.20250310.2:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.14.0
@@ -7511,7 +7511,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250310.0
       '@cloudflare/workerd-windows-64': 1.20250310.0
 
-  wrangler@3.114.3(@cloudflare/workers-types@4.20241022.0):
+  wrangler@3.114.4(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@cloudflare/unenv-preset': 2.0.2(unenv@2.0.0-rc.14)(workerd@1.20250310.0)
@@ -7519,7 +7519,7 @@ snapshots:
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
       esbuild: 0.17.19
-      miniflare: 3.20250310.1
+      miniflare: 3.20250310.2
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.14
       workerd: 1.20250310.0
