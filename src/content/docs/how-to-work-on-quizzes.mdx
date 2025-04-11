@@ -19,11 +19,19 @@ Every certification will have a series of quizzes to test camper's knowledge as 
 
 ## Basic Structure for Quizzes
 
-Each quiz will have a total of 20 questions. Every quiz question will have a set of 4 options (1 correct answer and 3 distractors).
+Each quiz can have either a total of 10 or 20 questions. Every quiz question will have a set of 4 options (1 correct answer and 3 distractors).
 
-To pass the quiz, a camper will need to get at least 17 questions correct. If they fail the quiz, then there will be a brief cool down period before they are able to take the quiz again.
+To pass the quiz, a camper will need to get at least 90% of the questions correct. If they fail the quiz, then there will be a brief cool down period before they are able to take the quiz again.
 
 Before each quiz, there will be a review page listing out all of the topics that were previously discussed in the module.
+
+## Creating a new quiz
+
+In order to quickly create a new quiz run `pnpm run create-new-quiz` in a command prompt at the root of the project and it will add the boilerplate files for quizzes. This command runs a NPM script which prompts for relevant information for the quiz. 
+
+The command is responsible for several things. First it will create a new entry in the curriculum's `intro.json`. Secondly the command will create an `index.md` at `client/src/pages/learn/cert-name-goes-here/dashed-name-goes-here`. This file describes the introduction for the quiz. Thirdly the command creates a `meta.json` file in the `curriculum/challenges/_meta/dashed-name-goes-here/meta.json`. This file holds metadata about the challenge such as if it's upcoming and what help category it's in. 
+
+The final file created by the command is the boilerplate itself. The file should be located at `curriculum/challenges/english/cert-folder-name-goes-here/quiz-dashed-name-goes-here/mongo-id-goes-here.md`. Depending on if ten or twenty questions were selected, there will be either ten or twenty question samples present. 
 
 ## Guidelines for Designing Questions and Answers
 
