@@ -1117,19 +1117,6 @@ Node().is_empty() # True
 Node("x = 1").find_variable("x").is_empty() # False
 ```
 
-#### `get_nth_statement()`
-
-```python
-stmts = """
-if True:
-  pass
-
-x = 1
-"""
-
-Node(stmts).get_nth_statement(1).is_equivalent("x = 1") # True
-```
-
 #### `value_is_call()`
 
 This allows you to check if the return value of a function call is assigned to a variable.
@@ -1182,6 +1169,19 @@ explorer.is_ordered("x=1", if_str, "x=0") # True
 explorer.find_ifs()[0].is_ordered("print('x is:')", "print(x)", "return y") # True
 explorer.is_ordered("x=0", "x=1") # False
 explorer.find_ifs()[0].is_ordered("print(x)", "print('x is:')") # False
+```
+
+#### How to get the nth statement
+
+```python
+stmts = """
+if True:
+  pass
+
+x = 1
+"""
+
+Node(stmts)[1].is_equivalent("x = 1") # True
 ```
 
 ## Notes on Python
