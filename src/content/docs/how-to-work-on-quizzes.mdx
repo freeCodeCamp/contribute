@@ -27,7 +27,9 @@ Before each quiz, there will be a review page listing out all of the topics that
 
 ## Creating a new quiz
 
-In order to quickly create a new quiz run `pnpm run create-new-quiz` in a command prompt at the root of the project and it will add the boilerplate files for quizzes. This command runs a NPM script which prompts for relevant information for the quiz. 
+The core team will be responsible for creating new quizzes for the certifications.
+
+To create a new quiz, run `pnpm run create-new-quiz` in a command prompt at the root of the project. This will add the necessary boilerplate files for quizzes. 
 
 The command is responsible for several things. First it will create a new entry in the curriculum's `intro.json`. Secondly the command will create an `index.md` at `client/src/pages/learn/cert-name-goes-here/dashed-name-goes-here`. This file describes the introduction for the quiz. Thirdly the command creates a `meta.json` file in the `curriculum/challenges/_meta/dashed-name-goes-here/meta.json`. This file holds metadata about the challenge such as if it's upcoming and what help category it's in. 
 
