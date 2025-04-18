@@ -271,6 +271,48 @@ spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefine
 spy.restore();
 ```
 
+#### spyOnCallbacks
+
+Wraps a method in a spy object that records calls to callbacks passed to that method.
+
+The spy's `callbackSpies` property is an array of arrays, where the inner arrays
+contain spy objects. One for each callback passed to the method. Each time the
+method is called, a new array of spies is created. i.e. the length of the
+`callbackSpies` array is equal to the number of times the spied on method was
+called.
+
+The spies are either the original argument (if it was not a function) or a spy
+object with `calls` and `returns` properties. The `calls` is populated with the
+arguments passed to that callback and the `returns` with the return values of
+that callback.
+
+```js
+const obj = {
+  method: (callback, value) => {
+    return arg1 => {
+      return callback(arg1, value);
+    };
+  }
+};
+
+const spy = helper.spyOnCallbacks(obj, 'method');
+const cb = (arg1, arg2) => {
+  return `callback called with: ${arg1} + ${arg2}`;
+};
+const func = obj.method(cb, 'test');
+func('one');
+func('two');
+
+obj.method(cb, 'test2')('another one');
+
+spy.callbackSpies[0][0].calls; // [["one", "test"], ["two", "test"]]
+spy.callbackSpies[0][0].returns; // ["callback called with: one + test", "callback called with: two + test"]
+spy.callbackSpies[1][0].calls; // [["another one", "test2"]]
+spy.callbackSpies[1][0].returns; // ["callback called with: another one + test2"]
+```
+
+Finally, the spy's `restore` method restores the original method.
+
 ### Static Methods
 
 There are a few methods on the `__helpers` object to retrieve data from JavaScript methods.
