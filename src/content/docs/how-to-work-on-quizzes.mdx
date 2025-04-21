@@ -19,11 +19,25 @@ Every certification will have a series of quizzes to test camper's knowledge as 
 
 ## Basic Structure for Quizzes
 
-Each quiz will have a total of 20 questions. Every quiz question will have a set of 4 options (1 correct answer and 3 distractors).
+Each quiz can have either a total of 10 or 20 questions. Every quiz question will have a set of 4 options (1 correct answer and 3 distractors).
 
-To pass the quiz, a camper will need to get at least 17 questions correct. If they fail the quiz, then there will be a brief cool down period before they are able to take the quiz again.
+To pass the quiz, a camper will need to get at least 90% of the questions correct.
 
 Before each quiz, there will be a review page listing out all of the topics that were previously discussed in the module.
+
+## Creating a new quiz
+
+The core team will be responsible for creating new quizzes for the certifications.
+
+To create a new quiz, run `pnpm run create-new-quiz` in a command prompt at the root of the project. This will add the necessary boilerplate files for quizzes.
+
+## Multiple sets of questions
+
+Most quizzes will have multiple sets of questions that campers can go through. This is to ensure that campers
+will be able to increase their familiarity with the content.
+
+At times there will be open issues marked with `help-wanted` that request additional sets of questions. In order to add a new set of
+questions, you need to add the `## --quiz--` header at the bottom of the last set of questions.
 
 ## Guidelines for Designing Questions and Answers
 
