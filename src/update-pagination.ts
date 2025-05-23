@@ -134,7 +134,6 @@ export const content: Section[] = [
         href: '/language-lead-handbook/',
         title: 'sidebar.language_lead_handbook'
       },
-      { href: '/devops/', title: 'sidebar.devops_handbook' },
       {
         href: '/courses-vscode-extension/',
         title: 'sidebar.courses_vscode_extension'

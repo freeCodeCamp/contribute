@@ -7,7 +7,6 @@ const legacyRoutes = [
     from: '/#/how-to-setup-freecodecamp-locally',
     to: '/how-to-setup-freecodecamp-locally/'
   },
-  { from: '/#/devops', to: '/devops/' },
   {
     from: '/#/how-to-add-playwright-tests',
     to: '/how-to-add-playwright-tests/'
