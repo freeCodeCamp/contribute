@@ -10,7 +10,7 @@
 .changeset
 
 # Files
-pnpm-lock.yaml
+pnpm-*.yaml
 pre-commit
 .prettierignore
 

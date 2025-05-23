@@ -42,7 +42,6 @@ export const collections = {
         'sidebar.moderator_handbook': z.string(),
         'sidebar.reply_templates': z.string(),
         'sidebar.language_lead_handbook': z.string(),
-        'sidebar.devops_handbook': z.string(),
         'sidebar.courses_vscode_extension': z.string(),
         'sidebar.enable_new_language': z.string(),
         'sidebar.our_community': z.string(),
