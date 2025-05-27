@@ -324,17 +324,19 @@ pnpm run create:shared
 
 ### Step 3: Start MongoDB and Seed the Database
 
-Before you can run the application locally, you will need to start the MongoDB Server.
+Before you can run the application locally, you will need to start a MongoDB Server as a replica set.
 
 <Steps>
 
-1. Start the MongoDB server
+1. Stop any existing MongoDB server that uses port 27017 (if you already have a replica set running on that port, you can skip this and the next step)
+
+1. Start the MongoDB server as a replica set:
 
    ```bash
    docker compose --file ./api/tools/docker-compose.yml up -d
    ```
 
-2. Seed the database and setup a new user:
+1. Seed the database and setup a new user:
 
    <Aside type='note' title='MongoDB URI'>
 
@@ -348,7 +350,7 @@ Before you can run the application locally, you will need to start the MongoDB S
 
    This will set up a new user without any completed certifications among other things. This is usually more than enough to get you started.
 
-3. **(Optional)** Setup a user with completed certifications:
+1. **(Optional)** Setup a user with completed certifications:
 
    ```bash
    pnpm run seed:certified-user
