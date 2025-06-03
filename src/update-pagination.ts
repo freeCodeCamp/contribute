@@ -39,6 +39,19 @@ export const content: Section[] = [
     ]
   },
   {
+    title: 'sidebar.english_contribution',
+    contents: [
+      {
+        href: '/english-for-developers-intro/',
+        title: 'sidebar.english_resources'
+      },
+      {
+        href: '/english-tasks-description/',
+        title: 'sidebar.english_description'
+      }
+    ]
+  },
+  {
     title: 'sidebar.code_contribution',
     contents: [
       {
