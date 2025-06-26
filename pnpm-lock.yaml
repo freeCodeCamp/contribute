@@ -80,7 +80,7 @@ importers:
         version: 0.34.2
       wrangler:
         specifier: ^4.0.0
-        version: 4.21.2(@cloudflare/workers-types@4.20241022.0)
+        version: 4.22.0(@cloudflare/workers-types@4.20241022.0)
 
 packages:
 
@@ -3721,8 +3721,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.114.9:
-    resolution: {integrity: sha512-1e0gL+rxLF04kM9bW4sxoDGLXpJ1x53Rx1t18JuUm6F67qadKKPISyUAXuBeIQudWrCWEBXaTVnSdLHz0yBXbA==}
+  wrangler@3.114.10:
+    resolution: {integrity: sha512-UMs4bSH+P47oXvXqgziRqD8UOT8KBF6D/4O0bB9Kyh9QrT1FGpG2p4rV4FtbKFOchDrXQozbthScND+vLc8gqw==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -3731,8 +3731,8 @@ packages:
       '@cloudflare/workers-types':
         optional: true
 
-  wrangler@4.21.2:
-    resolution: {integrity: sha512-POC8gGIAsJIYISxVe/oWIjSNwCqfaHMcDPzo6zuGTGvqYC33UM5WI82nULse1bNpXBC0L0XpqtHysW3sDqa8DQ==}
+  wrangler@4.22.0:
+    resolution: {integrity: sha512-m8qVO3YxhUTII+4U889G/f5UuLSvMkUkCNatupV2f/SJ+iqaWtP1QbuQII8bs2J/O4rqxsz46Wu2S50u7tKB5Q==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -3865,7 +3865,7 @@ snapshots:
       magic-string: 0.30.12
       miniflare: 3.20241022.0
       tiny-glob: 0.2.9
-      wrangler: 3.114.9(@cloudflare/workers-types@4.20241022.0)
+      wrangler: 3.114.10(@cloudflare/workers-types@4.20241022.0)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -8060,7 +8060,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20250617.0
       '@cloudflare/workerd-windows-64': 1.20250617.0
 
-  wrangler@3.114.9(@cloudflare/workers-types@4.20241022.0):
+  wrangler@3.114.10(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@cloudflare/unenv-preset': 2.0.2(unenv@2.0.0-rc.14)(workerd@1.20250408.0)
@@ -8080,7 +8080,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  wrangler@4.21.2(@cloudflare/workers-types@4.20241022.0):
+  wrangler@4.22.0(@cloudflare/workers-types@4.20241022.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.0
       '@cloudflare/unenv-preset': 2.3.3(unenv@2.0.0-rc.17)(workerd@1.20250617.0)
