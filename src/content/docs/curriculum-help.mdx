@@ -1213,8 +1213,8 @@ match x:
 """
 node = Node(code_str)
 len(node.find_matches()[0].find_match_cases()) # 2
-node.find_matches()[0].find_match_cases()[0].find_case_body().is_equivalent("print(0)\nprint('spam')") # True
-node.find_matches()[0].find_match_cases()[1].find_case_body().is_equivalent("pass") # True
+node.find_matches()[0].find_match_cases()[0].find_body().is_equivalent("print(0)\nprint('spam')") # True
+node.find_matches()[0].find_match_cases()[1].find_body().is_equivalent("pass") # True
 ```
 
 `is_equivalent()` cannot be used on the items found by `find_match_cases()` because a standalone `case` raises a `SyntaxError`.
