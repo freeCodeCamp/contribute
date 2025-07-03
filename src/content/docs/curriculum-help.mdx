@@ -591,6 +591,28 @@ Node("a: int = 1").find_variable("a").is_equivalent("a: int = 1")
 Node("self.spam = spam").find_variable("self.spam").is_equivalent("self.spam = spam")
 ```
 
+#### `find_variables()`
+
+Returns a list of all variable assignments with the given name (unlike `find_variable` which returns only the first match).
+
+```python
+code_str = """
+x: int = 0
+a.b = 0
+x = 5
+a.b = 2
+x = 10
+"""
+node = Node(code_str)
+len(node.find_variables("x")) # 3
+node.find_variables("x")[0].is_equivalent("x: int = 0") # True
+node.find_variables("x")[1].is_equivalent("x = 5") # True
+node.find_variables("x")[2].is_equivalent("x = 10") # True
+len(node.find_variables("a.b")) # 2
+node.find_variables("a.b")[0].is_equivalent("a.b = 0") # True
+node.find_variables("a.b")[1].is_equivalent("a.b = 2") # True
+```
+
 #### `find_aug_variable()`
 
 ```python
@@ -1013,7 +1035,231 @@ explorer.find_function("foo").find_return().find_comp_ifs()[0].is_equivalent("i 
 explorer.find_function("foo").find_return().find_comp_ifs()[1].is_equivalent("j != 6")
 ```
 
-#### Getting values
+#### `find_trys()`
+
+Returns a list of all try statements.
+
+```python
+code_str = """
+try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("division by zero")
+else:
+    print("no error")
+finally:
+    print("cleanup")
+
+try:
+    y = int("abc")
+except:
+    pass
+"""
+node = Node(code_str)
+len(node.find_trys()) # 2
+node.find_trys()[0].is_equivalent("try:\n  x = 1 / 0\nexcept ZeroDivisionError:\n  print('division by zero')\nelse:\n  print('no error')\nfinally:\n  print('cleanup')") # True
+node.find_trys()[1].is_equivalent("try:\n  y = int('abc')\nexcept:\n  pass") # True
+```
+
+#### `find_excepts()`
+
+Returns a list of all except handlers in a try statement.
+
+```python
+code_str = """
+try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("division by zero")
+except ValueError as e:
+    print(f"value error: {e}")
+except:
+    print("other error")
+"""
+node = Node(code_str)
+try_stmt = node.find_trys()[0]
+len(try_stmt.find_excepts()) # 3
+```
+
+`is_equivalent()` cannot be used on the items found by `find_excepts()` because a standalone `except` raises a `SyntaxError`.
+
+#### `find_except()`
+
+Returns a specific except handler matching the exception type and optional variable name.
+
+```python
+code_str = """
+try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("division by zero")
+except ValueError as e:
+    print(f"value error: {e}")
+except:
+    print("other error")
+"""
+node = Node(code_str)
+try_stmt = node.find_trys()[0]
+try_stmt.find_except("ZeroDivisionError").find_body().is_equivalent("print('division by zero')") # True
+try_stmt.find_except("ValueError", "e").find_body().is_equivalent("print(f'value error: {e}')") # True
+try_stmt.find_except().find_body().is_equivalent("print('other error')") # True (bare except)
+```
+
+#### `has_except()`
+
+Returns True if a try statement has an except handler for the given exception type and variable name.
+
+```python
+code_str = """
+try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("division by zero")
+except ValueError as e:
+    print(f"value error: {e}")
+"""
+node = Node(code_str)
+try_stmt = node.find_trys()[0]
+try_stmt.has_except("ZeroDivisionError") # True
+try_stmt.has_except("ValueError", "e") # True
+try_stmt.has_except("ValueError") # False
+```
+
+#### `find_try_else()`
+
+Returns the else block of a try statement.
+
+```python
+code_str = """
+try:
+    x = 1
+except ValueError:
+    print("error")
+else:
+    print("success")
+    x = 2
+"""
+node = Node(code_str)
+try_stmt = node.find_trys()[0]
+try_stmt.find_try_else().is_equivalent("print('success')\nx = 2") # True
+```
+
+#### `find_finally()`
+
+Returns the finally block of a try statement.
+
+```python
+code_str = """
+try:
+    x = 1
+except ValueError:
+    print("error")
+finally:
+    print("cleanup")
+    x = None
+"""
+node = Node(code_str)
+try_stmt = node.find_trys()[0]
+try_stmt.find_finally().is_equivalent("print('cleanup')\nx = None") # True
+```
+
+#### `find_matches()`
+
+Returns a list of match statements.
+
+```python
+code_str = """
+match x:
+  case 0:
+    pass
+  case _:
+    pass
+
+match y:
+  case 1:
+    pass
+"""
+node = Node(code_str)
+len(node.find_matches()) # 2
+node.find_matches()[0].is_equivalent("match x:\n  case 0:\n    pass\n  case _:\n    pass") # True
+```
+
+#### `find_match_subject()`
+
+Returns the subject of a match statement.
+
+```python
+code_str = """
+match x:
+  case 0:
+    pass
+"""
+node = Node(code_str)
+node.find_matches()[0].find_match_subject().is_equivalent("x") # True
+```
+
+#### `find_match_cases()`
+
+Returns a list of case blocks in a match statement.
+
+```python
+code_str = """
+match x:
+  case 0:
+    print(0)
+    print('spam')
+  case _:
+    pass
+"""
+node = Node(code_str)
+len(node.find_matches()[0].find_match_cases()) # 2
+node.find_matches()[0].find_match_cases()[0].find_body().is_equivalent("print(0)\nprint('spam')") # True
+node.find_matches()[0].find_match_cases()[1].find_body().is_equivalent("pass") # True
+```
+
+`is_equivalent()` cannot be used on the items found by `find_match_cases()` because a standalone `case` raises a `SyntaxError`.
+
+#### `find_case_pattern()`
+
+Returns the pattern of a case block.
+
+```python
+code_str = """
+match x:
+  case 0:
+    pass
+  case [a, b]:
+    pass
+  case _:
+    pass
+"""
+node = Node(code_str)
+node.find_matches()[0].find_match_cases()[0].find_case_pattern().is_equivalent("0") # True
+node.find_matches()[0].find_match_cases()[1].find_case_pattern().is_equivalent("[a, b]") # True
+node.find_matches()[0].find_match_cases()[2].find_case_pattern().is_equivalent("_") # True
+```
+
+#### `find_case_guard()`
+
+Returns the guard condition of a case block.
+
+```python
+code_str = """
+match x:
+  case 0 if y > 0:
+    pass
+  case [a, b] if y == -1:
+    pass
+  case _:
+    pass
+"""
+node = Node(code_str)
+node.find_matches()[0].find_match_cases()[0].find_case_guard().is_equivalent("y > 0") # True
+node.find_matches()[0].find_match_cases()[1].find_case_guard().is_equivalent("y == -1") # True
+node.find_matches()[0].find_match_cases()[2].find_case_guard().is_empty() # True (no guard)
+```
+
+### Getting values
 
 `get_` functions return the value of the node, not the node itself.
 
@@ -1112,6 +1358,34 @@ if True:
 explorer = Node(code_str)
 explorer.has_call("print(math.sqrt(25))")
 explorer.find_ifs()[0].find_bodies()[0].has_call("spam()")
+```
+
+#### `block_has_call()`
+
+Checks if a function/method call exists within a specific function or the entire code.
+
+```python
+code_str = """
+srt = sorted([5, 1, 9])
+
+def foo(lst):
+  return sorted(lst)
+
+def spam(lst):
+  return lst.sort()
+
+def eggs(dictionary):
+  if True:
+    k = dictionary.get(key)
+"""
+node = Node(code_str)
+
+node.block_has_call("sorted", "foo") # True
+node.block_has_call("sorted") # True
+node.block_has_call("sort", "spam") # True
+node.block_has_call("get", "eggs") # True
+node.block_has_call("get") # True
+node.block_has_call("split") # False
 ```
 
 #### `has_import()`
