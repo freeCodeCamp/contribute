@@ -1,17 +1,14 @@
 # Contribute
 
-> docs site for all things contributions. begin your contribution journey here.
+> Documentation site for all things contributions. Begin your contribution journey here.
 
 Welcome to the repository for freeCodeCamp.org's "Contribute" website.
 
-This is the place where you can find information about how to contribute to freeCodeCamp, as well as the code for the website itself. This website is built using [Astro](https://astro.build/), a modern static site generator. The goal is to make this a one-stop shop for all things related to contributing to freeCodeCamp.
+This is the place where you can find information about how to contribute to freeCodeCamp, as well as the code for the website itself. This website is built using [Astro](https://astro.build/) with the [Starlight](https://starlight.astro.build/) theme, deployed on Cloudflare Pages. The goal is to make this a one-stop shop for all things related to contributing to freeCodeCamp.
 
 Here's a Project Board: https://github.com/orgs/freeCodeCamp/projects/40 that shows the current status of the project.
 
 If you're looking for opportunities to contribute to this project, look for help wanted issues in the [issues tab](https://github.com/freeCodeCamp/contribute/issues).
-
-> [!WARNING]
-> This repository is under a heavy refactoring/development phase. We are building out a brand-new experience for our contributors. Please get in touch on our Discord: https://chat.freecodecamp.org if you have any questions or need help.
 
 ## Getting Started
 
@@ -28,31 +25,67 @@ Your typical development workflow will look something like this:
 
 For more detailed instructions, check out this guide (_TBD_).
 
-Develop the project:
+## Development Commands
+
+### Prerequisites
+
+- Node.js (LTS version recommended)
+- pnpm v10 (required - do not use npm or yarn)
+
+### Core Development
 
 ```bash
+# Install pnpm globally if not already installed
 npm install -g pnpm
+
+# Install dependencies
 pnpm install
+
+# Start the development server (localhost:4321)
 pnpm develop
+
+# Build for production
+pnpm build
+
+# Build and preview locally using Cloudflare Pages
+pnpm preview
 ```
 
-Build and Deploy the project (VM):
+### Code Quality
 
 ```bash
-pnpm build
-pnpm start
+# Run Prettier and ESLint checks
+pnpm lint
+
+# Auto-fix Prettier and ESLint issues
+pnpm format
+
+# Install Git hooks (runs automatically on install)
+pnpm prepare
 ```
 
-Build and Deploy the project (Cloudflare Pages):
+### Testing
 
-Set these in the Build configuration:
+```bash
+# Run all tests once
+pnpm test
 
-- Framework Preset: `none` - Astro is available as a preset, but we're not using it.
-- Build Command: `pnpm build`
-- Build Directory: `dist`
+# Update test snapshots
+pnpm test:update
 
-Leave the remaining settings as their defaults.
+# Run a specific test file
+npx vitest run tests/homepage.test.ts
 
-# License
+# Run tests matching a pattern
+npx vitest run -t "has correct title"
+```
+
+## Deployment
+
+### Cloudflare Pages Deployment
+
+The site is deployed on Cloudflare Pages, please check the wrangler config for details.
+
+## License
 
 Copyright © 2024 freeCodeCamp.org, licensed under the [BSD 3-Clause License](LICENSE).
