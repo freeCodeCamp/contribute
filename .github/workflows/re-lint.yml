@@ -49,9 +49,6 @@ jobs:
         run: |
           pnpm install --frozen-lockfile
 
-      - name: Install dependencies and lint
+      - name: Lint
         run: |
-          pnpm install
           pnpm lint
-        env:
-          CI: true

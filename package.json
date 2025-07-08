@@ -10,8 +10,8 @@
     "preview": "pnpm build && wrangler pages dev",
     "format": "prettier . --write --cache && eslint . --cache --fix",
     "lint": "prettier . --check --cache && eslint . --cache",
-    "playwright:run": "playwright test",
-    "playwright:watch": "playwright test --ui"
+    "test": "vitest run",
+    "test:update": "vitest --update"
   },
   "lint-staged": {
     "**/*.{astro,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
@@ -32,7 +32,7 @@
     "typescript": "5.8.3"
   },
   "devDependencies": {
-    "@playwright/test": "1.53.2",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "22.16.0",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
@@ -43,10 +43,12 @@
     "eslint-plugin-prettier": "5.5.1",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
+    "jsdom": "^26.1.0",
     "lint-staged": "16.1.2",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "sharp": "0.34.2",
+    "vitest": "3.2.4",
     "wrangler": "^4.0.0"
   },
   "packageManager": "pnpm@10.12.4"
