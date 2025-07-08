@@ -1,4 +1,3 @@
-import { describe, it, expect, beforeEach } from 'vitest';
 import { JSDOM } from 'jsdom';
 
 describe('Homepage', () => {
@@ -39,6 +38,12 @@ describe('Homepage', () => {
       { url: 'http://localhost:4321' }
     );
     document = dom.window.document;
+  });
+
+  afterEach(() => {
+    if (dom) {
+      dom.window.close();
+    }
   });
 
   describe('Page Metadata', () => {
