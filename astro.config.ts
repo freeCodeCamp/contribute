@@ -11,13 +11,6 @@ const config = defineConfig({
     '/index': '/intro/',
     '/FAQ': '/faq/'
   },
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-    routing: {
-      prefixDefaultLocale: false
-    }
-  },
   trailingSlash: 'always',
   integrations: [
     starlight({

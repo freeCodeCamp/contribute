@@ -1,10 +1,8 @@
-import { type CollectionEntry } from 'astro:content';
-
 interface Section {
-  title: keyof CollectionEntry<'i18n'>['data'];
+  title: string;
   contents: {
     href: string;
-    title: keyof CollectionEntry<'i18n'>['data'];
+    title: string;
     strong?: boolean;
     external?: boolean;
   }[];
@@ -18,151 +16,157 @@ interface Pagination {
 
 export const content: Section[] = [
   {
-    title: 'sidebar.introduction',
+    title: 'Introduction',
     contents: [
-      { href: '/getting-started/', title: 'sidebar.gettingStarted' },
-      { href: '/faq/', title: 'sidebar.faq' },
-      { href: '/security/', title: 'sidebar.report_vulnerability' }
+      { href: '/getting-started/', title: 'Getting Started' },
+      { href: '/faq/', title: 'Frequently Asked Questions' },
+      { href: '/security/', title: 'Reporting a Vulnerability' }
     ]
   },
   {
-    title: 'sidebar.translation_contribution',
+    title: 'Translation Contribution',
     contents: [
       {
         href: '/how-to-translate-files/',
-        title: 'sidebar.translate_resources'
+        title: 'Work on translating resources'
       },
       {
         href: '/how-to-proofread-files/',
-        title: 'sidebar.proofread_translations'
+        title: 'Work on proofreading translations'
       }
     ]
   },
   {
-    title: 'sidebar.code_contribution',
+    title: 'Code Contribution',
     contents: [
       {
         href: '/how-to-setup-freecodecamp-locally/',
-        title: 'sidebar.setup_freecodecamp'
+        title: 'Set up freeCodeCamp'
       },
-      { href: '/codebase-best-practices/', title: 'sidebar.best_practices' },
+      { href: '/codebase-best-practices/', title: 'Follow best-practices' },
       {
         href: '/how-to-contribute-to-the-codebase/',
-        title: 'sidebar.work_on_codebase'
+        title: 'Work on Codebase'
       },
       {
         href: '/how-to-work-on-coding-challenges/',
-        title: 'sidebar.work_on_coding_challenges'
+        title: 'Work on Coding Challenges'
       },
       {
         href: '/how-to-work-on-quizzes/',
-        title: 'sidebar.work_on_quizzes'
+        title: 'Work on Quizzes'
       },
       {
         href: '/curriculum-help/',
-        title: 'sidebar.use_the_curriculum_helpers'
+        title: 'Use the Curriculum Helpers'
       },
       {
         href: '/how-to-work-on-the-component-library/',
-        title: 'sidebar.work_on_component_library'
+        title: 'Work on Component Library'
       },
       {
         href: '/how-to-work-on-practice-projects/',
-        title: 'sidebar.work_on_practice_projects'
+        title: 'Work on Practice Projects'
       },
       {
         href: '/how-to-setup-freecodecamp-mobile-app-locally/',
-        title: 'sidebar.work_on_mobile_app'
+        title: 'Work on Mobile app'
       },
       {
         href: '/how-to-work-on-tutorials-that-use-coderoad/',
-        title: 'sidebar.coderoad'
+        title: 'Work on tutorials with CodeRoad'
       },
       {
         href: '/how-to-work-on-localized-client-webapp/',
-        title: 'sidebar.work_on_webapp'
+        title: 'Work on Localized Web App'
       },
       {
         href: '/how-to-add-playwright-tests/',
-        title: 'sidebar.work_on_playwright_tests'
+        title: 'Work on Playwright Tests'
       },
       {
         href: '/how-to-help-with-video-challenges/',
-        title: 'sidebar.work_on_video_challenges'
+        title: 'Work on Video Challenges'
       },
       {
         href: '/how-to-work-on-the-docs-theme/',
-        title: 'sidebar.work_on_documentation'
+        title: 'Work on Documentation'
       },
       {
         href: '/how-to-open-a-pull-request/',
-        title: 'sidebar.open_a_pull_request'
+        title: 'Open a pull request'
       }
     ]
   },
   {
-    title: 'sidebar.additional_guides',
+    title: 'Additional Guides',
     contents: [
-      { href: '/curriculum-file-structure/', title: 'sidebar.file_structure' },
+      {
+        href: '/curriculum-file-structure/',
+        title: 'Understand the curriculum file structure'
+      },
       {
         href: '/how-to-catch-outgoing-emails-locally/',
-        title: 'sidebar.debug_outgoing_emails_locally'
+        title: 'Debug outgoing emails locally'
       },
-      { href: '/how-to-setup-wsl/', title: 'sidebar.setup_fcc_on_wsl' },
+      {
+        href: '/how-to-setup-wsl/',
+        title: 'Set up freeCodeCamp on Windows (WSL)'
+      },
       {
         href: '/how-to-use-docker-on-windows-home/',
-        title: 'sidebar.docker_on_windows_home'
+        title: 'Use Docker on Windows Home'
       },
-      { href: '/user-token-workflow/', title: 'sidebar.user_token_workflow' },
+      { href: '/user-token-workflow/', title: 'User Token Workflow' },
       {
         href: '/troubleshooting-development-issues/',
-        title: 'sidebar.troubleshooting_development_issues'
+        title: 'Troubleshooting Development Issues'
       },
       {
         href: '/authors-analytics-manual/',
-        title: 'sidebar.authors_analytics_manual'
+        title: 'Authors Analytics Manual'
       }
     ]
   },
   {
-    title: 'sidebar.flight_manuals',
+    title: 'Flight Manuals (for Staff & Mods)',
     addSeparator: true,
     contents: [
-      { href: '/moderator-handbook/', title: 'sidebar.moderator_handbook' },
-      { href: '/reply-templates/', title: 'sidebar.reply_templates' },
+      { href: '/moderator-handbook/', title: 'Moderator Handbook' },
+      { href: '/reply-templates/', title: 'Reply Templates' },
       {
         href: '/language-lead-handbook/',
-        title: 'sidebar.language_lead_handbook'
+        title: 'Language Lead Handbook'
       },
       {
         href: '/courses-vscode-extension/',
-        title: 'sidebar.courses_vscode_extension'
+        title: 'Courses VSCode Extension'
       },
       {
         href: '/how-to-enable-new-languages/',
-        title: 'sidebar.enable_new_language'
+        title: 'Enable New Language'
       }
     ]
   },
   {
-    title: 'sidebar.our_community',
+    title: 'Our Community',
     addSeparator: true,
     contents: [
       {
         href: 'https://github.com/freecodecamp/freecodecamp',
-        title: 'sidebar.github',
+        title: 'GitHub',
         strong: true,
         external: true
       },
       {
         href: 'https://freecodecamp.org/forum/c/contributors',
-        title: 'sidebar.discourse_forum',
+        title: 'Discourse Forum',
         strong: true,
         external: true
       },
       {
         href: 'https://discord.gg/PRyKn3Vbay',
-        title: 'sidebar.chat_server',
+        title: 'Chat Server',
         strong: true,
         external: true
       }
