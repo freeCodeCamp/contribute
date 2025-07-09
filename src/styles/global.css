@@ -36,6 +36,10 @@
     color: #0a0a23 !important;
   }
 
+  .sl-link-button.secondary {
+    border: 3px solid #c0c0c0 !important;
+  }
+
   .sl-link-button.secondary:hover,
   .sl-link-button.secondary:focus {
     background-color: #d0d0d0 !important;

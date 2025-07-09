@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import starlight from '@astrojs/starlight';
 import starlightScrollToTop from 'starlight-scroll-to-top';
 import starlightLinksValidator from 'starlight-links-validator';
+import sidebar from './src/sidebar';
 
 const config = defineConfig({
   vite: { plugins: [tailwindcss()] },
@@ -46,9 +47,7 @@ const config = defineConfig({
           icon: 'discord'
         }
       ],
-      components: {
-        Sidebar: './src/components/FCCSidebar.astro'
-      },
+      sidebar: sidebar,
       plugins: [
         ...(process.env.CHECK_LINKS ? [starlightLinksValidator()] : []),
         starlightScrollToTop()
