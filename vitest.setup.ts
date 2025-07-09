@@ -1,5 +1,32 @@
 import { afterEach, vi, beforeAll } from 'vitest';
 
+// Track unhandled errors for better debugging
+const originalConsoleError = console.error;
+console.error = (...args) => {
+  // Check if this is an unhandled error we want to track
+  if (args.some(arg => typeof arg === 'object' && arg !== null)) {
+    // Convert objects to string for better error reporting
+    const stringifiedArgs = args.map(arg =>
+      typeof arg === 'object' && arg !== null
+        ? JSON.stringify(arg, null, 2)
+        : arg
+    );
+    originalConsoleError.apply(console, stringifiedArgs);
+  } else {
+    originalConsoleError.apply(console, args);
+  }
+};
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Promise Rejection at:', promise, 'reason:', reason);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', error => {
+  console.error('Uncaught Exception:', error);
+});
+
 // Mock Astro content collections before any imports
 beforeAll(() => {
   // Mock astro:content module
@@ -28,6 +55,15 @@ afterEach(() => {
   if (typeof document !== 'undefined') {
     document.body.innerHTML = '';
     document.head.innerHTML = '';
+  }
+
+  // Clear JSDOM instances properly
+  if (typeof window !== 'undefined' && window.close) {
+    try {
+      window.close();
+    } catch (e) {
+      // Ignore errors during window cleanup
+    }
   }
 
   // Clear global window modifications

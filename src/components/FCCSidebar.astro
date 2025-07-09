@@ -28,7 +28,7 @@ import { content } from '../update-pagination';
                           <li>
                             <a
                               href={`${prefix}${item.href}`}
-                              title={entry?.data[item.title]}
+                              title={String(entry?.data[item.title] ?? '')}
                               class={
                                 Astro.url.pathname == item.href ? 'current' : ''
                               }
