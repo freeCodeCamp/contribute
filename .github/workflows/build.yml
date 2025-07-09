@@ -1,4 +1,4 @@
-name: Build Check
+name: Build
 
 on:
   push:
@@ -14,12 +14,14 @@ jobs:
     name: Lint
     uses: ./.github/workflows/re-lint.yml
 
-  # test:
+  test:
+    name: Test
+    uses: ./.github/workflows/re-test.yml
 
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: lint
+    needs: [lint, test]
     env:
       CI: true
 
