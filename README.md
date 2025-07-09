@@ -23,7 +23,7 @@ Your typical development workflow will look something like this:
 7. **Push** your branch to your forked repository.
 8. **Open a Pull Request** to the original repository.
 
-For more detailed instructions, check out this guide (_TBD_).
+For more detailed instructions, check out this [contribution guide](https://contribute.freecodecamp.org/how-to-setup-freecodecamp-locally/).
 
 ## Development Commands
 
