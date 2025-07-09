@@ -1,10 +1,6 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
 import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
-import { getEntry } from 'astro:content';
 
-const entry = await getEntry('i18n', Astro.currentLocale ?? '');
-const prefix = Astro.currentLocale == 'en' ? '' : Astro.currentLocale;
 const { nested } = Astro.props;
 
 import { content } from '../update-pagination';
@@ -19,7 +15,7 @@ import { content } from '../update-pagination';
             <>
               {addSeparator && <hr />}
               <li>
-                <strong>{entry?.data[title]}</strong>
+                <strong>{title}</strong>
                 <ul>
                   {contents &&
                     contents.map(
@@ -27,8 +23,8 @@ import { content } from '../update-pagination';
                         item.title && (
                           <li>
                             <a
-                              href={`${prefix}${item.href}`}
-                              title={String(entry?.data[item.title] ?? '')}
+                              href={item.href}
+                              title={item.title}
                               class={
                                 Astro.url.pathname == item.href ? 'current' : ''
                               }
@@ -37,9 +33,9 @@ import { content } from '../update-pagination';
                               }
                             >
                               {item.strong ? (
-                                <strong>{entry?.data[item.title]}</strong>
+                                <strong>{item.title}</strong>
                               ) : (
-                                entry?.data[item.title]
+                                item.title
                               )}
                             </a>
                           </li>
