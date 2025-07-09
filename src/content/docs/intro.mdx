@@ -21,24 +21,36 @@ next: false
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Get Involved:
+## Get Involved :
 
 <CardGrid>
-  <Card title='Help Others' icon='pen'>
+  <div class = "hover:scale-105 hover:shadow-lg transition-all duration-300 "> 
+  <Card title='Help Others' icon='pen' class = "cursor-pointer">
     [Help by answering coding questions](https://forum.freecodecamp.org) on our
     community forum.
   </Card>
-  <Card title='Feedback' icon='magnifier'>
+  </div>
+  
+  <div class = "hover:scale-105 hover:shadow-lg transition-all duration-300 "> 
+  <Card title='Feedback' icon='magnifier' class = "cursor-pointer">
     [Give feedback on coding
     projects](https://forum.freecodecamp.org/c/project-feedback?max_posts=1)
     built by campers.
   </Card>
-  <Card title='Translations' icon='translate'>
+  </div>
+
+<div class='hover:scale-105 hover:shadow-lg transition-all duration-300'>
+  <Card title='Translations' icon='translate' class='cursor-pointer'>
     [Help us translate](/getting-started/#translations) freeCodeCamp.org's
     resources.
   </Card>
-  <Card title='Write Code' icon='seti:json'>
+</div>
+
+  <div class = "hover:scale-105 hover:shadow-lg transition-all duration-300">
+  <Card title='Write Code' icon='seti:json' class = "cursor-pointer">
     [Contribute with code](/getting-started/#learning-platform) to our
     open-source codebases.
   </Card>
+  </div>
+  
 </CardGrid>
