@@ -12,4 +12,4 @@ If you're looking for opportunities to contribute to this project, look for help
 
 ## License
 
-Copyright © 2024 freeCodeCamp.org, licensed under the [BSD 3-Clause License](LICENSE).
+Copyright © 2025 freeCodeCamp.org, licensed under the [BSD 3-Clause License](LICENSE).
