@@ -9,10 +9,10 @@ const config = defineConfig({
   vite: { plugins: [tailwindcss()] },
   site: 'https://contribute.freecodecamp.org',
   redirects: {
-    '/index': '/intro/',
-    '/FAQ': '/faq/'
+    '/index': '/intro',
+    '/FAQ': '/faq',
+    '/how-to-work-on-the-docs-theme': '/how-to-work-on-the-docs-site'
   },
-  trailingSlash: 'always',
   integrations: [
     starlight({
       title: 'Contribute | freeCodeCamp.org',

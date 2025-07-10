@@ -19,7 +19,7 @@ const sidebar = [
       'how-to-work-on-localized-client-webapp',
       'how-to-add-playwright-tests',
       'how-to-help-with-video-challenges',
-      'how-to-work-on-the-docs-theme',
+      'how-to-work-on-the-docs-site',
       'how-to-open-a-pull-request'
     ]
   },
@@ -40,7 +40,7 @@ const sidebar = [
     ]
   },
   {
-    label: 'Flight Manuals (for Staff & Mods)',
+    label: 'Handbooks (Staff & Mods)',
     items: [
       'moderator-handbook',
       'reply-templates',

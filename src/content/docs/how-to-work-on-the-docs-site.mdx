@@ -1,0 +1,238 @@
+---
+title: How to Work on Documentation
+sidebar:
+  label: Work on Documentation
+---
+
+import { Steps, Aside, LinkButton } from '@astrojs/starlight/components';
+
+Welcome to the guide for contributing to freeCodeCamp's documentation site! This site is built using [Astro](https://astro.build/) with the [Starlight](https://starlight.astro.build/) theme and deployed on Cloudflare Pages.
+
+Follow these guidelines for setting up a development environment for the freeCodeCamp documentation site. This is highly recommended if you want to contribute regularly to our contributing guidelines.
+
+### Fork the contribute repository on GitHub
+
+You will need to [fork](https://help.github.com/articles/about-forks) the contribute repository on GitHub to get your own copy of the codebase. This will allow you to follow a Git-based workflow to contribute to freeCodeCamp's documentation.
+
+**Follow these steps to fork the repository:**
+
+<Steps>
+
+1. Click the button below to fork the contribute repository on GitHub.
+
+   <LinkButton
+     href='https://github.com/freeCodeCamp/contribute/fork'
+     icon='seti:github'
+     iconPlacement='start'
+     variant='secondary'
+     target='_blank'
+   >
+     Fork "freeCodeCamp/contribute"
+   </LinkButton>
+
+2. On the create new fork page, check the details and click the **Create fork** button.
+
+3. You should automatically be redirected to your fork, the URL should be something like `https://github.com/YOUR_USER_NAME/contribute`.
+
+</Steps>
+
+That's it! You have successfully forked the contribute repository. You can always delete your fork if you want to start fresh.
+
+<Aside type='tip' title='Did you know?'>
+
+The main repository at `https://github.com/freeCodeCamp/contribute` is often referred to as the `upstream` repository. Your fork at `https://github.com/YOUR_USER_NAME/contribute` is often referred to as the `origin` repository.
+
+</Aside>
+
+### Clone your Fork from GitHub
+
+Next, you will need to [clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
+
+**Run these commands on your local machine:**
+
+<Steps>
+
+1. Open a terminal in your projects directory, for example:
+
+   ```
+   /home/username/projects/
+   ```
+
+2. Clone your fork of the contribute repository, replacing `YOUR_USER_NAME` with your GitHub Username
+
+   ```bash
+   git clone --depth=1 https://github.com/YOUR_USER_NAME/contribute.git
+   ```
+
+   This will download the entire contribute repository to your projects directory.
+
+   <Aside type='note'>
+     `--depth=1` creates a shallow clone of your fork, with files from the most
+     recent history/commit.
+   </Aside>
+
+</Steps>
+
+### Set up Syncing from Parent
+
+Now that you have downloaded a copy of your fork, you will need to set up an `upstream` remote to the parent repository.
+
+[As mentioned earlier](#fork-the-contribute-repository-on-github), the main repository is referred to as the `upstream` repository. Your fork is referred to as the `origin` repository.
+
+You need a reference from your local clone to the `upstream` repository in addition to the `origin` repository. This is so that you can sync changes from the main repository without the requirement of forking and cloning repeatedly.
+
+<Steps>
+
+1. Change the directory to the new contribute directory:
+
+   ```bash
+   cd contribute
+   ```
+
+2. Add a remote reference to the main contribute repository:
+
+   ```bash
+   git remote add upstream https://github.com/freeCodeCamp/contribute.git
+   ```
+
+3. Ensure the configuration looks correct:
+
+   ```bash
+   git remote -v
+   ```
+
+   The output should look something like below (replacing `YOUR_USER_NAME` with your GitHub username):
+
+   ```
+   origin    https://github.com/YOUR_USER_NAME/contribute.git (fetch)
+   origin    https://github.com/YOUR_USER_NAME/contribute.git (push)
+   upstream    https://github.com/freeCodeCamp/contribute.git (fetch)
+   upstream    https://github.com/freeCodeCamp/contribute.git (push)
+   ```
+
+</Steps>
+
+### Create a Working Branch
+
+Before making any changes, it's important to create a new branch for your work. This keeps your changes organized and separate from the main codebase.
+
+<Steps>
+
+1. Create and switch to a new branch, replacing `feature/your-feature-name` with a descriptive name for your changes:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. Ensure you are on your new branch:
+
+   ```bash
+   git branch
+   ```
+
+   You should see your new branch name with an asterisk (\*) next to it, indicating it's the active branch.
+
+</Steps>
+
+## Prerequisites
+
+- Node.js (LTS version recommended)
+- pnpm v10 (required - do not use npm or yarn)
+
+## Core Development Commands
+
+```bash
+# Install pnpm globally if not already installed
+npm install -g pnpm
+
+# Install dependencies
+pnpm install
+
+# Start the development server (localhost:4321)
+pnpm develop
+
+# Build for production
+pnpm build
+
+# Build and preview locally using Cloudflare Pages
+pnpm preview
+```
+
+## Code Quality Commands
+
+```bash
+# Run Prettier and ESLint checks
+pnpm lint
+
+# Auto-fix Prettier and ESLint issues
+pnpm format
+
+# Install Git hooks (runs automatically on install)
+pnpm prepare
+```
+
+## Testing Commands
+
+```bash
+# Run all tests once
+pnpm test
+
+# Update test snapshots
+pnpm test:update
+
+# Run a specific test file
+npx vitest run tests/homepage.test.ts
+
+# Run tests matching a pattern
+npx vitest run -t "has correct title"
+```
+
+## Working on Documentation Content
+
+To work on the contributing guidelines, you can edit or add files in the `src/content/docs` directory [available here](https://github.com/freeCodeCamp/contribute/tree/main/src/content/docs). When your changes are merged, they will be made available automatically at the documentation site.
+
+When adding a new file to the `docs` directory, you should evaluate if the file should also be added to the sidebar navigation. We typically create a link in the [`src/sidebar.ts`](https://github.com/freeCodeCamp/contribute/blob/main/src/sidebar.ts) file for new and independent guides.
+
+### Creating Internal Links
+
+If you want to create a link targeting a different section of the contributing guidelines, follow this format:
+
+```md
+[Link text](/target-file-name#target-section-heading-id)
+
+// If the target section is within the same page, you can omit the file name
+[Link text](#target-section-heading-id)
+```
+
+This is necessary to make these links work for the translated version of the document. Otherwise, they will redirect to the English version of the page regardless of the language.
+
+#### Translating Docs with Internal Links
+
+When you work on translating docs on Crowdin, make sure to replace the `#target-section-heading-id` with the id on the translated document. [Learn more about translating files here](/how-to-translate-files/#translate-documentation).
+
+## Structure of the Docs Website
+
+The site is generated using Astro and served using Cloudflare Pages. Here's how it works:
+
+- All documentation content is stored in `src/content/docs/` as MDX files
+- The sidebar navigation is configured in `src/sidebar.ts`
+- Site configuration is managed in `astro.config.ts`
+- The site is automatically built and deployed via Cloudflare Pages
+
+### Serving the Documentation Site Locally
+
+The documentation site can be served locally using the development command:
+
+```bash
+pnpm develop
+```
+
+The documentation site should be available at `http://localhost:4321`
+
+## Deployment
+
+The site is deployed on Cloudflare Pages. Please check the wrangler config for deployment details.
+
+## Proposing a Pull Request (PR)
+
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
