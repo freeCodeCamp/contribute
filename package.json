@@ -25,10 +25,10 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
-    "@astrojs/starlight": "0.34.4",
+    "@astrojs/starlight": "0.34.5",
     "@astrojs/starlight-tailwind": "4.0.1",
     "@tailwindcss/vite": "4.1.11",
-    "astro": "5.11.0",
+    "astro": "5.11.1",
     "starlight-links-validator": "0.17.0",
     "starlight-scroll-to-top": "0.1.1",
     "tailwindcss": "4.1.11",
@@ -36,12 +36,12 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
-    "@eslint/js": "9.30.1",
+    "@eslint/js": "9.31.0",
     "@types/jsdom": "21.1.7",
-    "@types/node": "22.16.2",
-    "@typescript-eslint/eslint-plugin": "8.36.0",
-    "@typescript-eslint/parser": "8.36.0",
-    "eslint": "9.30.1",
+    "@types/node": "22.16.4",
+    "@typescript-eslint/eslint-plugin": "8.37.0",
+    "@typescript-eslint/parser": "8.37.0",
+    "eslint": "9.31.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-astro": "1.3.1",
     "eslint-plugin-prettier": "5.5.1",
@@ -52,9 +52,9 @@
     "lint-staged": "16.1.2",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
-    "sharp": "0.34.2",
+    "sharp": "0.34.3",
     "vitest": "3.2.4",
-    "wrangler": "4.24.1"
+    "wrangler": "4.24.3"
   },
   "packageManager": "pnpm@10.13.1"
 }
