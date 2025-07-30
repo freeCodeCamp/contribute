@@ -1,84 +1,137 @@
 ---
 title: Reporting a Vulnerability
-tableOfContents: false
 sidebar:
   label: Reporting a Vulnerability
 ---
 
-import { Steps, Aside, Card } from '@astrojs/starlight/components';
-
-This document outlines freeCodeCamp.org's security policy for the codebases, platforms that we operate, and how to report vulnerabilities.
+import { Aside, Card } from '@astrojs/starlight/components';
 
 <Aside type='danger' title='Security is important to us'>
 
-If you think you have found a vulnerability, **please report it responsibly**. Do not create public GitHub issues for security issues. Instead, follow this guide.
+Found a vulnerability? **Report it responsibly**. Don't create public GitHub issues for security problems. Follow this guide instead.
 
 </Aside>
 
-### Guidelines
+## What We Accept Reports For
 
-We appreciate responsible disclosure of vulnerabilities that might impact the integrity of our platforms and users. In the interest of saving everyone time, we encourage you to report vulnerabilities with these in mind:
+We only accept vulnerability reports for these platforms:
 
-<Card title="Versions" icon="information">
-
-Ensure that you are using the **latest**, **stable**, and **updated** versions of the Operating System and Web Browser(s) available to you on your machine.
-
-</Card>
-
-<Card title="Beg Bounties" icon="warning">
-
-We consider using tools & online utilities to report issues with SPF & DKIM configs, SSL Server tests, etc., in the category of ["beg bounties"](https://www.troyhunt.com/beg-bounties) and are unable to respond to these reports.
-
-</Card>
-
-<Card title="Hall of Fame" icon="rocket">
-
-While we do not offer any bounties or swags at the moment, we'll be happy to list your name in our [Hall of Fame](/security-hall-of-fame/) list, provided the reports are not low-effort.
-
-</Card>
-
-### Reporting
-
-<Steps>
-
-1. Please feel free to send an email to `possible-security-issue [at] freecodecamp.org`. You can also send us a PGP encrypted message at `flowcrypt.com/me/freecodecamp`.
-2. Once you report a vulnerability, we will look into it and ensure that it is not a false positive. If we need to clarify any details, we will get back to you.
-3. You can submit separate reports for each issue you find.
-4. If the issue is confirmed, we will fix it and release a new version as soon as possible.
-
-</Steps>
-
-Please note that we will not be able to respond to any issues that we think are outside the guidelines.
-
-## Platforms and Codebases
-
-Here is a list of the platforms and codebases we are accepting reports for:
-
-### Learn Platform
+### Learning Platforms
 
 | Version | Branch         | Website active           |
 | ------- | -------------- | ------------------------ |
 | Live    | `prod-current` | `freecodecamp.org/learn` |
 | Beta    | `prod-staging` | `freecodecamp.dev/learn` |
 
-### Publication Platform
+### Publications
 
 | Version         | Website active                     |
 | --------------- | ---------------------------------- |
 | English         | `freecodecamp.org/news`            |
 | World Languages | `freecodecamp.org/<language>/news` |
 
-### Mobile App
+### Mobile Apps
 
 | Platform | Website active                                                   |
 | -------- | ---------------------------------------------------------------- |
 | Android  | `https://play.google.com/store/apps/details?id=org.freecodecamp` |
 | iOS      | `https://apps.apple.com/us/app/freecodecamp/id1442777773`        |
 
-### Other Platforms
+### Other Platforms & Self-Hosted Services
 
-Apart from the above, we are also accepting reports for repositories hosted on GitHub under the freeCodeCamp organization.
+- We self-host some platforms using Open Source software. Only report vulnerabilities in our specific setup and configuration, contact upstream projects for other issues.
+- Additionally, we may selectively accept reports for some freeCodeCamp GitHub repositories.
 
-### Other Self-hosted Applications
+## Research Guidelines
 
-We self-host some of our platforms using open-source software like Ghost & Discourse. If you are reporting a vulnerability, please ensure that it is not a bug in the upstream software.
+Follow these guidelines when testing and reporting vulnerabilities:
+
+### Rules
+
+- Ensure that you are using the latest, stable, and updated versions of the Operating System and Web Browser(s) available to you on your machine.
+- Never attempt non-technical attacks such as social engineering, phishing, or physical attacks against our employees, users, or infrastructure.
+- Perform testing only on our official platforms listed above.
+- Do not attempt to access or modify user data without permission other than your own. Stop immediately if you find sensitive user data.
+- Do not use automated tools that could cause service disruption or violate our terms of service.
+
+### Report Requirements
+
+Your report should include:
+
+- **Clear and detailed steps** to reproduce the vulnerability.
+- **Impact description** - what could an attacker do?
+- **Evidence** - screenshots, code, or examples.
+- **Environment** - browser, OS, configuration
+
+Here are some examples of valid and invalid reports:
+
+**Valid:**
+
+- Authentication bypass
+- SQL injection exposing user data
+- XSS affecting multiple users
+- Remote code execution vulnerabilities
+
+**Invalid:**
+
+- SSL scanner warnings
+- Clickjacking on non-sensitive pages
+- Issues requiring local machine access
+- Vulnerabilities requiring admin privileges
+
+## What We Don't Accept
+
+### Automated Reports & "Beg Bounties"
+
+- Generic tool output without manual verification
+- SSL/DNS configuration warnings
+- Dependency alerts without proof of exploit
+- Subdomain enumeration lists
+
+We treat low-effort reports as ["beg bounties"](https://www.bugbountyhunter.com/beg-bounties/). These are reports that don't meet our quality standards or are not actionable.
+
+### Low-Impact Issues
+
+- Self-exploitation vulnerabilities like installing a malicious extension
+- Issues requiring extensive social engineering
+- Theoretical vulnerabilities without real impact
+- Problems only affecting outdated OS or browsers
+
+### Third-Party & Non-Security Issues
+
+- Vulnerabilities in services we don't control
+- Known upstream software issues
+- Regular bugs, Feature requests & Content violations
+- Physical access requirements
+
+## How to Report
+
+**Email your report** to `possible-security-issue [at] freecodecamp.org`. You can also send us a PGP-encrypted email using this [public key](https://flowcrypt.com/pub/freecodecamp?show=pubkey) or use [this form](https://flowcrypt.com/me/freecodecamp).
+
+**We will acknowledge** the report, check if it's in scope and let you know if we need more information.
+
+**We will analyze** the report and may ask for more details for investigation.
+
+**We will fix** confirmed issues and coordinate disclosure timing with you
+
+**We will recognize** valid reports in our [Hall of Fame](/security-hall-of-fame/).
+
+<Aside type='note' title='Notes'>
+
+- You may send us separate reports for each vulnerability.
+- Factors like complexity and responsiveness can affect timing.
+- We prioritize user safety and thoroughness over speed.
+- We will not respond to reports that don't meet our guidelines or are out of scope.
+
+</Aside>
+
+## Timeline
+
+- **Acknowledgement**: Within 48-72 hours
+- **Initial Assessment**: Within 5-7 business days
+- **Updates**: During investigation as needed
+- **Disclosure**: Within 90 days maximum
+
+## Recognition
+
+We don't offer any bounties, but we maintain a [Hall of Fame](/security-hall-of-fame/) for researchers who submit high-effort and good-quality reports.
