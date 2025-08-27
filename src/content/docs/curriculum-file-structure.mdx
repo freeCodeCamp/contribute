@@ -58,11 +58,42 @@ The main `curriculum.json` file contains two arrays:
 
 ### superblocks/{superblock}.json
 
-Each superblock has its own JSON file that defines which blocks belong to it:
+Each superblock has its own JSON file that defines which blocks belong to it. Simple superblocks only contain a `blocks` array:
 
 ```json
 {
   "blocks": ["basic-html-and-html5", "basic-css", "applied-visual-design"]
+}
+```
+
+More complex superblocks can organize blocks into chapters and modules for better structure:
+
+```json
+{
+  "chapters": [
+    {
+      "dashedName": "learn-bash-and-sql",
+      "blocks": [
+        "learn-bash-by-building-a-boilerplate",
+        "learn-relational-databases-by-building-a-mario-database",
+        "learn-bash-scripting-by-building-five-programs",
+        "learn-sql-by-building-a-student-database-part-1"
+      ]
+    },
+    {
+      "dashedName": "learn-git-and-github",
+      "blocks": [
+        "learn-git-by-building-an-sql-reference-object",
+        "learn-github-by-building-a-list-of-inspirational-quotes"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "dashedName": "full-stack-developer",
+      "blocks": ["full-stack-developer-portfolio"]
+    }
+  ]
 }
 ```
 
@@ -94,19 +125,7 @@ Each certification YAML file includes the following key properties:
 - **`id`**: Unique identifier for the certification
 - **`title`**: Display name of the certification
 - **`certification`**: Internal name used to reference the certification
-- **`isPrivate`**: Boolean flag that controls build visibility
 - **`tests`**: Array of required projects with their IDs and titles
-
-### Build Control with `isPrivate`
-
-The `isPrivate: true` property serves as a build control mechanism:
-
-- **`isPrivate: true`**: The certification is excluded from the public build and will not appear on the live site
-- **`isPrivate: false`**: The certification is included in all builds and appears on the live site
-
-:::important
-The `isPrivate` property is required for certification files due to schema validation. Certification files must have either `isPrivate` or `helpCategory`, but not both (XOR validation).
-:::
 
 ## Internationalization Structure
 
@@ -189,7 +208,8 @@ Also, you will likely want to rename the certificate and the `{superBlock}-proje
 9. Update the path value in `client/src/assets/icons/index.tsx`.
 10. For each language in `client/i18n/locales`, update the `intro.json` file to use the new superBlock `dashedName`. In the English file, also update the `title`.
 11. Check the `shared/config/i18n/all-langs.js` file to see if the superBlock is enabled in i18n builds. Update all the values where it is used.
-12. Update the main `README.md` file to the new name.
+12. Update the `superBlockNames` map in `curriculum/build-curriculum.js`. This map links superblock filenames (keys) to certification names (values) - update the key if the superblock filename changed, and update the value if the certification name changed.
+13. Update the main `README.md` file to the new name.
 
 </Steps>
 
