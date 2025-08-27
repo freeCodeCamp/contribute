@@ -11,8 +11,8 @@ To enable a new language on `/learn` (curriculum), you need to complete the foll
 - Complete translating and approving all strings in Learn UI project on Crowdin.
 - Update Crowdin settings to add a custom language code for the new language.
 - Open the 1st PR to configure GitHub Actions. You need to update 2 files:
-  - `crowdin-download.client-ui.yml`
-  - `crowdin-download.curriculum.yml`
+  - `crowdin-download.client-ui.yml` (in the main repository)
+  - `download-curriculum.yml` (in the i18n-curriculum repository)
 - Open the 2nd PR to add other configurations. You need to update/add the following files:
   - Update `i18n.ts`
   - Update `superblocks.ts`
@@ -35,7 +35,7 @@ In the `Curriculum` and `Learn UI` projects on Crowdin, you will need to select 
 
 Then you need to configure the syncing between Crowdin and GitHub.
 
-You will need to add a step to the [`crowdin-download.client-ui.yml`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/.github/workflows/crowdin-download.client-ui.yml) and [`crowdin-download.curriculum.yml`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/.github/workflows/crowdin-download.curriculum.yml). The step for these will be the same. For example, if you want to enable Dothraki downloads:
+You will need to add a step to the [`crowdin-download.client-ui.yml`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/.github/workflows/crowdin-download.client-ui.yml) in the main repository. For curriculum content, you will need to add a step to the [`download-curriculum.yml`](https://github.com/freeCodeCamp/i18n-curriculum/blob/main/.github/workflows/download-curriculum.yml) workflow in the [i18n-curriculum repository](https://github.com/freeCodeCamp/i18n-curriculum). The step for both workflows will be similar. For example, if you want to enable Dothraki downloads:
 
 ```yml
 ##### Download Dothraki #####
@@ -153,7 +153,7 @@ When a language has been set up in the deployment pipeline AND has a public `/le
 
 ### Set Translated SuperBlocks
 
-In the [shared/config/superblocks.ts](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/superblocks.ts) file, add the new language to the `notAuditedSuperBlocks` object. This lists all the superblocks which are not fully translated. Add an array of superblocks that have not been fully translated to it. For example:
+In the [shared/config/curriculum.ts](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/curriculum.ts) file, add the new language to the `notAuditedSuperBlocks` object. This lists all the superblocks which are not fully translated. Add an array of superblocks that have not been fully translated to it. For example:
 
 ```js
 export const notAuditedSuperBlocks: NotAuditedSuperBlocks = {
@@ -298,7 +298,7 @@ export interface VideoLocaleIds {
 }
 ```
 
-And finally, update the challenge schema in `curriculum/schema/challengeSchema.js`.
+And finally, update the challenge schema in `curriculum/schema/challenge-schema.js`.
 
 ```js
 videoLocaleIds: Joi.when('challengeType', {
@@ -318,7 +318,7 @@ If you would like to test translations locally, before adding them to our main r
 
 Because the language has not been approved for production, our scripts are not automatically downloading the translations yet. Only staff have access to directly download the translations - you are welcome to reach out to us in our [contributors chat room](https://discord.gg/PRyKn3Vbay), or you can translate the English markdown files locally for testing purposes.
 
-Once you have the files, you will need to place them in the correct directory. For the curriculum challenges, you should place the certification folders (i.e. `01-responsive-web-design`) within the `curriculum/challenges/{lang}` directory. For our Dothraki translations, this would be `curriculum/challenges/dothraki`. The client translation `.json` files will go in the `client/i18n/locales/{lang}` directory.
+Once you have the files, you will need to place them in the correct directory. For the curriculum challenges, you should place the block folders (individual learning modules) within the `curriculum/challenges/english/blocks/` directory for English content. For translated content, the structure is handled automatically by the i18n-curriculum submodule - translated markdown files are stored in the submodule and synchronized automatically. The client translation `.json` files will go in the `client/i18n/locales/{lang}` directory.
 
 Update your `.env` file to use your new language for `CLIENT_LOCALE` and `CURRICULUM_LOCALE`.
 

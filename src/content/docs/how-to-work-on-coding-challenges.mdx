@@ -722,7 +722,7 @@ If you are working with the step-based challenges, refer to the [Work on Practic
 There are a few helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:
 
 ```bash
-cd curriculum/challenges/english/02-javascript-algorithms-and-data-structures/basic-algorithm-scripting
+cd curriculum/challenges/english/blocks/basic-algorithm-scripting
 ```
 
 ### Add New Challenge
@@ -733,7 +733,7 @@ To add a new challenge at the end of a block, call the script:
 pnpm run create-next-challenge
 ```
 
-This will prompt you for the challenge information and create the challenge file, updating the `meta.json` file with the new challenge information.
+This will prompt you for the challenge information and create the challenge file, updating the block's JSON structure file with the new challenge information.
 
 ### Delete a Challenge
 
@@ -743,7 +743,7 @@ To delete a challenge, call the script:
 pnpm run delete-challenge
 ```
 
-This will prompt you to select which challenge should be deleted, then delete the file and update the `meta.json` file to remove the challenge from the order.
+This will prompt you to select which challenge should be deleted, then delete the file and update the block's JSON structure file to remove the challenge from the order.
 
 ### Insert a Challenge
 
@@ -790,8 +790,8 @@ If you see the following error in the console while previewing a challenge:
 Potential infinite loop detected on line <number>...
 ```
 
-This means that the loop-protect plugin has found a long-running loop or recursive function. If your challenge needs to do that (e.g. it contains an event loop that is supposed to run indefinitely), then you can prevent the plugin from being used in the preview. To do so, add `disableLoopProtectPreview: true` to the block's `meta.json` file.
+This means that the loop-protect plugin has found a long-running loop or recursive function. If your challenge needs to do that (e.g. it contains an event loop that is supposed to run indefinitely), then you can prevent the plugin from being used in the preview. To do so, add `disableLoopProtectPreview: true` to the block's JSON structure file in `curriculum/structure/blocks/`.
 
-If your tests are computationally intensive, then you may see this error when they run. If this happens then you can add `disableLoopProtectTests: true` to the block's `meta.json` file.
+If your tests are computationally intensive, then you may see this error when they run. If this happens then you can add `disableLoopProtectTests: true` to the block's JSON structure file.
 
 It's not typically necessary to have both set to true, so only set them as needed.
