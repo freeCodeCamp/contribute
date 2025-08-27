@@ -26,23 +26,23 @@ curriculum/
 ├─ challenges/
 │ ├─ english/
 │ │ ├─ blocks/
-│ │ │ ├─ {block}/
-│ │ │ │ ├─ {challenge}.md
+│ │ │ ├─ <block>/
+│ │ │ │ ├─ <challenge>.md
 │ │ ├─ certifications/
-│ │ │ ├─ {certification}.yml
+│ │ │ ├─ <certification>.yml
 ├─ i18n-curriculum/ (git submodule)
 │ ├─ curriculum/
 │ │ ├─ challenges/
-│ │ │ ├─ {language}/
+│ │ │ ├─ <language>/
 │ │ │ │ ├─ blocks/
-│ │ │ │ │ ├─ {block}/
-│ │ │ │ │ │ ├─ {challenge}.md
+│ │ │ │ │ ├─ <block>/
+│ │ │ │ │ │ ├─ <challenge>.md
 ├─ structure/
 │ ├─ curriculum.json
 │ ├─ superblocks/
-│ │ ├─ {superblock}.json
+│ │ ├─ <superblock>.json
 │ ├─ blocks/
-│ │ ├─ {block}.json
+│ │ ├─ <block>.json
 ```
 
 ## The Structure Directory
@@ -56,7 +56,7 @@ The main `curriculum.json` file contains two arrays:
 - `superblocks`: An ordered list of all superblocks in the curriculum
 - `certifications`: A list of all available certifications
 
-### superblocks/{superblock}.json
+### superblocks/&lt;superblock&gt;.json
 
 Each superblock has its own JSON file that defines which blocks belong to it. Simple superblocks only contain a `blocks` array:
 
@@ -97,7 +97,7 @@ More complex superblocks can organize blocks into chapters and modules for bette
 }
 ```
 
-### blocks/{block}.json
+### blocks/&lt;block&gt;.json
 
 Each block has its own JSON file that contains metadata and the order of challenges:
 
@@ -132,7 +132,7 @@ Each certification YAML file includes the following key properties:
 The curriculum content is internationalized using a git submodule located at `curriculum/i18n-curriculum/`. This submodule contains translated versions of curriculum content:
 
 - **English content**: Located directly in `curriculum/challenges/english/`
-- **Translated content**: Located in the submodule at `curriculum/i18n-curriculum/curriculum/challenges/{language}/`
+- **Translated content**: Located in the submodule at `curriculum/i18n-curriculum/curriculum/challenges/<language>/`
 
 The structure within each language directory mirrors the English structure exactly, with the same block folders and challenge files. However, only the Markdown challenge files (`.md`) are translated and stored in the i18n-curriculum submodule. Configuration files such as YAML certification files and JSON structure files remain in English only.
 
@@ -154,35 +154,23 @@ When renaming a certification, you will likely want to rename the associated sup
 
 <Steps>
 
-1. Rename the `curriculum/challenges/english/certifications/{certification}.yml` file to the new name.
+1. Rename the `curriculum/challenges/english/certifications/<certification>.yml` file to the new name.
 2. In the YAML file, change the `title` to the new name.
 3. Update the `certifications` array in `curriculum/structure/curriculum.json` to use the new certification name.
 4. Update `client/src/redux/index.ts` to use the correct `title`.
-5. Optionally, update the `certSlug` for the superblock in the same file.
-
-   :::note
-   Renaming a `certSlug` will change the URL for certifications and should only be done with careful consideration.
-   :::
-
-6. Update the `title` in `client/src/resources/cert-and-project-map.ts` to the new value.
-
-   :::note
-   Changing the `title` here **will break** the superBlock page for the
-   associated certification. It relies on the superBlock title to match the
-   certification title. You will likely want to rename the superBlock at the same
-   time. :::
-
+5. Optionally, update the `certSlug` for the superblock in the same file. (Note: Renaming a `certSlug` will change the URL for certifications and should only be done with careful consideration.)
+6. Update the `title` in `client/src/resources/cert-and-project-map.ts` to the new value. (Note: Changing the `title` here **will break** the superBlock page for the associated certification. It relies on the superBlock title to match the certification title. You will likely want to rename the superBlock at the same time.)
 7. If you renamed the `certSlug` in step 5, change it here for the cert and all the nested `projects` values.
 8. In `shared/config/certification-settings.js`, update the value of `certTypeTitleMap` to the new name.
 9. If you renamed the `certSlug` in step 5, update the key of `certSlugTypeMap` in the same file.
 10. Update the certificate name in the `legacyCerts` array of the `client/src/client-only-routes/show-project-links.tsx` if needed.
 11. Update the main `README.md` file to the new name.
 
+</Steps>
+
 :::note
 Translated content in the i18n-curriculum submodule will be updated automatically and does not require manual intervention.
 :::
-
-</Steps>
 
 ### Renaming a Superblock
 
@@ -190,20 +178,17 @@ Translated content in the i18n-curriculum submodule will be updated automaticall
 When you rename a superBlock, the new folder name is used as the path and should be considered the "correct" name. All other values should be updated to reflect that change.
 :::
 
-Also, you will likely want to rename the certificate and the `{superBlock}-projects` block when you rename a superBlock since they all share a name. To rename only a superBlock you need to:
+Also, you will likely want to rename the certificate and the `<superBlock>-projects` block when you rename a superBlock since they all share a name. To rename only a superBlock you need to:
 
 <Steps>
 
-1. Rename the superblock file in `curriculum/structure/superblocks/` from `{old-name}.json` to `{new-name}.json`.
+1. Rename the superblock file in `curriculum/structure/superblocks/` from `<old-name>.json` to `<new-name>.json`.
 2. Update the `superblocks` array in `curriculum/structure/curriculum.json` to use the new superblock name.
 3. For each block within that superBlock, update the `superBlock` value in their respective JSON files in `curriculum/structure/blocks/` to the new dashedName.
 4. Rename the superblock folder in `client/src/pages/learn`.
 5. Update the `index.md` file in the above folder, changing the `title` and `superBlock` values to the new name.
 6. For each block folder within the above, update the `index.md` to use the correct `superBlock` value.
-7. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock.
-   :::note
-   Changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.
-   :::
+7. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock. (Note: Changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.)
 8. Update the `superBlockCertTypeMap` key in `shared/config/certification-settings.js` to the new superBlock name.
 9. Update the path value in `client/src/assets/icons/index.tsx`.
 10. For each language in `client/i18n/locales`, update the `intro.json` file to use the new superBlock `dashedName`. In the English file, also update the `title`.
@@ -219,20 +204,20 @@ When renaming a curriculum block, you need to:
 
 <Steps>
 
-1. Change the name of the block folder in the `curriculum/challenges/english/blocks/{block}` directory.
-2. Rename the block's JSON file in `curriculum/structure/blocks/` from `{old-name}.json` to `{new-name}.json`.
+1. Change the name of the block folder in the `curriculum/challenges/english/blocks/<block>` directory.
+2. Rename the block's JSON file in `curriculum/structure/blocks/` from `<old-name>.json` to `<new-name>.json`.
 3. Update the `name` and `dashedName` properties in the renamed block JSON file.
 4. Update the superblock's JSON file in `curriculum/structure/superblocks/` to reference the new block name in its `blocks` array.
-5. Update the block folder in `client/src/pages/learn/{superBlock}`.
+5. Update the block folder in `client/src/pages/learn/<superBlock>`.
 6. In the `index.md` file of the above folder, update the `block` value in the frontmatter.
-7. In the `client/i18n/locales/{language}/intro.json` files, update the block name to the new name for all the languages. In the English `intro.json` file, update the `title` as well.
+7. In the `client/i18n/locales/<language>/intro.json` files, update the block name to the new name for all the languages. In the English `intro.json` file, update the `title` as well.
 8. Update the main `README.md` file to the new name.
+
+</Steps>
 
 :::note
 Translated content in the i18n-curriculum submodule will be updated automatically and does not require manual intervention.
 :::
-
-</Steps>
 
 ### Renaming a Challenge
 
@@ -240,18 +225,18 @@ When renaming a single challenge file, you need to:
 
 <Steps>
 
-1. Change the name of the challenge file in the `curriculum/challenges/english/blocks/{block}/` directory.
+1. Change the name of the challenge file in the `curriculum/challenges/english/blocks/<block>/` directory.
 2. Change the name of the `title` and `dashedName` within that file.
-3. Update the challenge title in the relevant block JSON file in `curriculum/structure/blocks/{block}.json`. The challenge names in the `challengeOrder` array are used in the build and provide the order of challenges.
-4. If the challenge is a certificate project, update the YAML file in `curriculum/challenges/english/certifications/{certification}.yml` to the new name.
+3. Update the challenge title in the relevant block JSON file in `curriculum/structure/blocks/<block>.json`. The challenge names in the `challengeOrder` array are used in the build and provide the order of challenges.
+4. If the challenge is a certificate project, update the YAML file in `curriculum/challenges/english/certifications/<certification>.yml` to the new name.
 5. If the challenge is a certificate project, update the `title` and `link` in `client/src/resources/cert-and-project-map.ts`
 6. If the challenge is a certificate project, update the main `README.md` file to the new name.
+
+</Steps>
 
 :::note
 Translated content in the i18n-curriculum submodule will be updated automatically and does not require manual intervention.
 :::
-
-</Steps>
 
 ## The `dashedName` Property
 
