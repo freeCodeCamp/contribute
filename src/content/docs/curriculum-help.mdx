@@ -546,17 +546,20 @@ For Python challenges, these helpers need to be run in Python and tests should b
 
 For complex tests, you can use `assert` inside Python and avoid the `assert` around `runPython`.
 
-The `_Node` class provides a chainable API for AST analysis. To create an instance that parses camper code:
+```js
+({ test: () => runPython(`<python code>`) });
+```
+
+An example would be if you need to test multiple things at once.
 
 ```js
-// In a test context with runPython
 ({
   test: () =>
-    assert(
-      runPython(
-        `_Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")`
-      )
-    )
+    runPython(`
+assert _Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")
+s = Spam()
+assert f'{s}' == 'spam!'
+`)
 });
 ```
 
@@ -585,7 +588,7 @@ To check the return value of `__str__` you would write:
 });
 ```
 
-AST-based helpers are also exposed in the Python challenges in `ast_helpers` module. `_Node` class corresponds to the `ast_helpers.Node`:
+AST-based helpers are also exposed in the Python challenges in `ast_helpers` module. `_Node` class corresponds to `ast_helpers.Node`:
 
 ```py
 import ast_helpers
