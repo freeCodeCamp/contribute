@@ -42,12 +42,10 @@ The practice projects have some additional tooling to help create new projects a
 ````md
 ---
 id: Unique identifier (alphanumerical, MongoDB_id)
-title: 'Challenge Title'
-sidebar:
-  label: Work on Coding Challenges
+title: Challenge Title
 challengeType: Integer, defined in `client/utils/challenge-types.js`
 videoUrl: 'url of video explanation'
-forumTopicId: 12345
+forumTopicId: 12345 (deprecated)
 ---
 
 # --description--
@@ -74,6 +72,16 @@ window.fetch = () =>
   Promise.resolve({ json: () => Promise.resolve({ data: 'example' }) });
 // Warning: this is currently only supported in challenges that render HTML.
 // Note: the --before-all-- section is optional.
+// Warning: __helpers are not available in --before-all-- sections.
+```
+
+# --before-each--
+
+```js
+// This code will run before each test execution. For example:
+globalThis.testVariable = 'initial value';
+// Note: the --before-each-- section is optional.
+// Warning: __helpers are not available in --before-each-- sections.
 ```
 
 # --hints--
@@ -99,16 +107,16 @@ Extra information for a challenge, in markdown
 
 # --seed--
 
-## --before-user-code--
+## --before-user-code-- (deprecated)
 
-```lang
-Code evaluated before the user’s code.
+```js
+Code evaluated before the user's code.
 ```
 
-## --after-user-code--
+## --after-user-code-- (deprecated)
 
-```lang
-Code evaluated after the user’s code, and just before the tests
+```js
+Code evaluated after the user's code, and just before the tests
 ```
 
 ## --seed-contents--
@@ -360,8 +368,6 @@ Once you have your id, put it into the markdown file as the `id` field at the to
 ---
 id: 5a474d78df58bafeb3535d34
 title: Challenge Title
-sidebar:
-  label: Work on Coding Challenges
 ```
 
 ## Naming challenges
@@ -466,6 +472,10 @@ Our goal is to communicate the single point that the challenge is trying to teac
 
 Challenge tests can make use of the Node.js and Chai.js assertion libraries. Also, if needed, user-generated code can be accessed in the `code` variable. In addition, the `__helpers` object exposes several functions that simplify the process of writing tests. The available functions are defined in the [curriculum-helpers](https://github.com/freeCodeCamp/curriculum-helpers/blob/main/lib/index.ts) repo.
 
+:::note
+The `__helpers` object is only available in the `# --hints--` test sections. It is not available in `# --before-all--` or `# --before-each--` sections.
+:::
+
 ### Guidlines for assertions
 
 If a method exists in Chai.js that expresses what is being tested for, its use is preferred.
@@ -561,7 +571,9 @@ class MyComponent extends React.Component {
 
 ### Translation of Seed Code Comments
 
-There are separate comment dictionaries for each language. The [English version of the comment dictionary](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments.json) is the basis for the translations found in the corresponding non-English versions of the files. The non-English version of the Chinese comment dictionary would be located at `/curriculum/dictionaries/chinese/comments.json`. Each dictionary consists of an array of objects with a unique `id` property and a `text` property. Only the `text` should be modified to encompass the translation of the corresponding English comment.
+There are separate comment dictionaries for each language. The [English version of the comment dictionary](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments.json) is the basis for the translations found in the corresponding non-English versions of the files. The non-English versions of the comment dictionaries are located in the i18n-curriculum git submodule at `/curriculum/dictionaries/{language}/comments.json` (for example, `/curriculum/dictionaries/chinese/comments.json` for Chinese). Each dictionary consists of an array of objects with a unique `id` property and a `text` property. Only the `text` should be modified to encompass the translation of the corresponding English comment.
+
+Additionally, there is a [comments-to-not-translate.json](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments-to-not-translate.json) file that contains rules for comments that should remain in English and not be translated. This is usually used for comments added by the camper in workshops and tested by the tests of the steps.
 
 Some comments may contain a word/phrase that should not be translated. For example, variable names or proper library names like "React" should not be translated. See the comment below as an example. The word `myGlobal` should not be translated.
 
@@ -579,7 +591,7 @@ Each challenge has a `Get a Hint` button, so a user can access any hints/solutio
 
 If you find a problem with an existing challenge's hints/solutions topic, you can make suggestions in the [contributors category](https://forum.freecodecamp.org/c/contributors) on the forum. Moderators and users with trust level 3 will review the comments and decide whether or not to include the changes in the corresponding hint/solutions topic.
 
-### Adding new Challenge hints/solutions Topics
+### Adding new Challenge hints/solutions Topics (deprecated)
 
 Take the following steps when adding a new challenge hints/solutions-related topic.
 
@@ -592,7 +604,7 @@ Take the following steps when adding a new challenge hints/solutions-related top
 
 </Steps>
 
-### Guidelines for Content of Hints and Solutions Topics
+### Guidelines for Content of Hints and Solutions Topics (deprecated)
 
 When proposing a solution for a curriculum challenge-related Guide topic, the full code must be added. This includes all the original seed code plus any changes needed to pass all the challenge tests. The following template should be used when creating new hints/solutions topics:
 
@@ -668,8 +680,10 @@ Before you [create a pull request](/how-to-open-a-pull-request/) for your change
 2. You can also test a block or a superblock of challenges with these commands
 
    ```
-   FCC_BLOCK='Basic HTML and HTML5' pnpm run test:curriculum
+   FCC_BLOCK='basic-html-and-html5' pnpm run test:curriculum
    ```
+
+   Use the block's `dashedName` (the folder's name) for the `FCC_BLOCK` value.
 
    ```
    FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum
