@@ -516,25 +516,6 @@ __helpers.escapeRegExp('hello.world'); // "hello\\.world"
 __helpers.escapeRegExp('test[123]'); // "test\\[123\\]"
 ```
 
-## React Testing Helper
-
-### `.prepTestComponent()`
-
-Available via `__helpers.prepTestComponent(component, props)`, this async function prepares React components for testing by rendering them and making them available for DOM queries.
-
-```js
-// Assuming you have a React component
-const TestComponent = ({ message }) => <div>{message}</div>;
-
-// Prepare the component for testing
-const container = await __helpers.prepTestComponent(TestComponent, {
-  message: 'Hello, World!'
-});
-
-// Now you can query the rendered component
-assert.strictEqual(container.textContent, 'Hello, World!');
-```
-
 ## Python Helper
 
 ### Removing Python Comments
@@ -551,26 +532,19 @@ const cleaned = __helpers.python.removeComments(codeWithComments);
 // Returns: "\ndef test():  \n    return True  \n"
 ```
 
-### Accessing Python Helpers
-
-Python helpers are available via `__helpers.python` which includes:
-
-- `astHelpers` - Complete Python AST parsing module
-- `getDef(code, functionName)` - Extract function definition from code
-- `getBlock(code, blockPattern)` - Extract code blocks (like if/for/while statements)
-- `removeComments(code)` - Remove Python comments from code
-
 ### Python AST-based Helpers
 
 The `__helpers` object includes comprehensive Python code analysis tools through the `python` property. These helpers provide powerful Abstract Syntax Tree (AST) analysis capabilities for Python challenges.
 
-### Basic Usage Pattern
+#### Basic Usage Pattern
 
 For Python challenges, these helpers need to be run in Python and tests should be formatted as:
 
 ```js
 ({ test: () => assert(runPython(`<python code>`)) });
 ```
+
+For complex tests, you can use `assert` inside Python and avoid the `assert` around `runPython`.
 
 The `_Node` class provides a chainable API for AST analysis. To create an instance that parses camper code:
 
@@ -584,37 +558,6 @@ The `_Node` class provides a chainable API for AST analysis. To create an instan
       )
     )
 });
-```
-
-### Python Helper Functions
-
-#### `getDef(code, functionName)`
-
-Extracts function definition details from Python code:
-
-```js
-const pythonCode = `
-def calculate_area(length, width):
-    """Calculate rectangle area"""
-    return length * width
-`;
-
-// Via __helpers.python.getDef
-const funcInfo = __helpers.python.getDef(pythonCode, 'calculate_area');
-// Returns: {
-//   def: "def calculate_area(length, width):\n    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
-//   function_parameters: "length, width",
-//   function_body: "    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
-//   function_indentation: 0
-// }
-```
-
-#### `getBlock(code, blockPattern)`
-
-Extracts code blocks matching patterns (if, for, while, etc.):
-
-```js
-({ test: () => assert(runPython(`<python code>`)) });
 ```
 
 `_Node` is a chainable class that allows you to call methods on the result of parsing a string. To create an instance of `_Node` that parses the camper's code use `_Node(_code)`.
@@ -1749,6 +1692,55 @@ x = 1
 """
 
 Node(stmts)[1].is_equivalent("x = 1") # True
+```
+
+### Python Helper Functions
+
+The Python helpers also include some standalone utility functions for extracting specific information from Python code.
+
+#### `getDef(code, functionName)`
+
+Available via `__helpers.python.getDef(code, functionName)`, this function extracts function definition details from Python code:
+
+```js
+const pythonCode = `
+def calculate_area(length, width):
+    """Calculate rectangle area"""
+    return length * width
+`;
+
+// Via __helpers.python.getDef
+const funcInfo = __helpers.python.getDef(pythonCode, 'calculate_area');
+// Returns: {
+//   def: "def calculate_area(length, width):\n    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
+//   function_parameters: "length, width",
+//   function_body: "    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
+//   function_indentation: 0
+// }
+```
+
+#### `getBlock(code, blockPattern)`
+
+Available via `__helpers.python.getBlock(code, blockPattern)`, this function extracts code blocks matching specific patterns (if, for, while, etc.):
+
+```js
+const pythonCode = `
+if x > 0:
+    print("positive")
+else:
+    print("not positive")
+
+for i in range(5):
+    print(i)
+`;
+
+// Extract if block
+const ifBlock = __helpers.python.getBlock(pythonCode, 'if');
+// Returns the if statement block
+
+// Extract for block
+const forBlock = __helpers.python.getBlock(pythonCode, 'for');
+// Returns the for loop block
 ```
 
 ### Notes on Python
