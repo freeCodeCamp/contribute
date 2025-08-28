@@ -72,6 +72,7 @@ window.fetch = () =>
   Promise.resolve({ json: () => Promise.resolve({ data: 'example' }) });
 // Warning: this is currently only supported in challenges that render HTML.
 // Note: the --before-all-- section is optional.
+// Warning: __helpers are not available in --before-all-- sections.
 ```
 
 # --before-each--
@@ -80,7 +81,7 @@ window.fetch = () =>
 // This code will run before each test execution. For example:
 globalThis.testVariable = 'initial value';
 // Note: the --before-each-- section is optional.
-// Warning: __helpers are not available in --before-all-- or --before-each-- sections.
+// Warning: __helpers are not available in --before-each-- sections.
 ```
 
 # --hints--
