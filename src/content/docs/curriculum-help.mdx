@@ -6,7 +6,111 @@ sidebar:
 
 The test runner has access to a few helpers that can assist with testing campers' code.
 
+## General Helpers
+
+### Removing Whitespace
+
+Use `__helpers.removeWhiteSpace(codeString)` to remove all whitespace from code:
+
+```js
+const code = 'function test() {\n  return true;\n}';
+__helpers.removeWhiteSpace(code); // "functiontest(){returntrue;}"
+```
+
+### `.permutateRegex()`
+
+Available via `__helpers.permutateRegex(arrayOfRegexOrStrings, options)`, this method creates a regex that matches elements in any order by generating all possible permutations.
+
+```javascript
+const source1 = 'a';
+const regex1 = /b/;
+const source2 = 'c';
+
+__helpers.permutateRegex([source1, regex1, source2]).source ===
+  new RegExp(
+    /(?:a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
+  ).source; // true
+```
+
+The method supports named capturing groups and backreferences:
+
+```javascript
+const regex = __helpers.permutateRegex(['a', /(?<ref>'|"|`)b\k<ref>/], {
+  elementsSeparator: String.raw`\s*===\s*`
+});
+
+regex.source ===
+  new RegExp(
+    /(?:a\s*===\s*(?<ref_0>'|"|`)b\k<ref_0>|(?<ref_1>'|"|`)b\k<ref_1>\s*===\s*a)/
+  ).source; // true
+
+regex.test('a === "b"'); // true
+regex.test("'b' === a"); // true
+regex.test('a === `b`'); // true
+regex.test(`a === 'b"`); // false
+```
+
+#### Options
+
+- `capture: boolean` - Whole regex is wrapped in regex group. If `capture` is `true` the group will be capturing, otherwise it will be non-capturing. Defaults to `false`.
+- `elementsSeparator: string` - Separates permutated elements within single permutation. Defaults to `\s*\|\|\s*`.
+- `permutationsSeparator: string` - Separates permutations. Defaults to `|`.
+
+```javascript
+__helpers.permutateRegex(['a', /b/, 'c'], { capture: true }).source ===
+  new RegExp(
+    /(a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
+  ).source; // true
+```
+
+```javascript
+__helpers.permutateRegex(['a', /b/, 'c'], { elementsSeparator: ',' }).source ===
+  new RegExp(/(?:a,b,c|b,a,c|c,a,b|a,c,b|b,c,a|c,b,a)/).source; // true
+```
+
+```javascript
+__helpers.permutateRegex(['a', /b/, 'c'], { permutationsSeparator: '&' })
+  .source ===
+  new RegExp(
+    /(?:a\s*\|\|\s*b\s*\|\|\s*c&b\s*\|\|\s*a\s*\|\|\s*c&c\s*\|\|\s*a\s*\|\|\s*b&a\s*\|\|\s*c\s*\|\|\s*b&b\s*\|\|\s*c\s*\|\|\s*a&c\s*\|\|\s*b\s*\|\|\s*a)/
+  ).source; // true
+```
+
+### `.concatRegex()`
+
+Available via `__helpers.concatRegex(...regexOrStrings)`, this method combines and returns a compiled regex when given two or more regexes or strings.
+
+For example, if `.concatRegex` is called with `.*` and `b\s` the resulting regex will be equivalent to `.*b\s`.
+
+```js
+const regex1 = /a\s/;
+const regex2 = /b/;
+__helpers.concatRegex(regex1, regex2).source === 'a\\sb'; // true
+```
+
+## HTML Helper
+
+### Removing HTML Comments
+
+Use `__helpers.removeHtmlComments(codeString)` to remove HTML comments (`<!-- -->`) from code:
+
+```js
+const htmlCode = '<div>Hello <!-- this is a comment --> World</div>';
+__helpers.removeHtmlComments(htmlCode); // "<div>Hello  World</div>"
+```
+
 ## CSS Helper
+
+### Removing CSS Comments
+
+Use `__helpers.removeCssComments(codeString)` to remove CSS-style comments (`/* */`) from code:
+
+```js
+const cssCode = 'body { color: red; /* this is a comment */ }';
+__helpers.removeCssComments(cssCode); // "body { color: red;  }"
+```
+
+### CSS Helper Class
 
 To instantiate the helper within a test block, use this:
 
@@ -233,16 +337,25 @@ on what's nearby. The selectors could include `a`, `label > a` , `label a` , `fo
 
 ## JS Helper
 
+### Removing JavaScript Comments
+
+Use `__helpers.removeJSComments(codeString)` to remove JavaScript comments (`//` and `/* */`) from code:
+
+```js
+const jsCode = 'console.log("hello"); // this is a comment';
+__helpers.removeJSComments(jsCode); // "console.log('hello'); "
+```
+
 ### Mockers
 
 These mock methods that can prove to be unpredictable for testing purposes.
 
 #### RandomMocker
 
-Mocks `Math.random` for testing purposes. Each time `mock()` is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. `restore()` restores the native `Math.random` function.
+Available via `__helpers.RandomMocker`, this class mocks `Math.random` for testing purposes. Each time `mock()` is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. `restore()` restores the native `Math.random` function.
 
 ```js
-const randomMocker = new RandomMocker();
+const randomMocker = new __helpers.RandomMocker();
 randomMocker.mock();
 Math.random(); // first call is always 0.2523451747838408
 Math.random(); // second call is always 0.08812504541128874
@@ -254,7 +367,7 @@ Math.random(); // back to native Math.random
 
 #### spyOn
 
-Wraps an object's property in a spy object that records calls and returns.
+Available via `__helpers.spyOn`, this function wraps an object's property in a spy object that records calls and returns.
 
 The spy's `calls` property is an array of arrays, each containing the arguments passed to the method in the order it was called.
 
@@ -264,7 +377,7 @@ To restore the original method, call `restore()` on the spy object.
 
 ```js
 const obj = { method: (arg1, arg2) => `called by: ${arg1} + ${arg2}` };
-const spy = helper.spyOn(obj, 'method');
+const spy = __helpers.spyOn(obj, 'method');
 obj.method('arg', 'another arg');
 obj.method('2nd call');
 spy.calls; // [["arg", "another arg"], ["2nd call"]]
@@ -275,7 +388,7 @@ spy.restore();
 
 #### spyOnCallbacks
 
-Wraps a method in a spy object that records calls to callbacks passed to that method.
+Available via `__helpers.spyOnCallbacks`, this function wraps a method in a spy object that records calls to callbacks passed to that method.
 
 The spy's `callbackSpies` property is an array of arrays, where the inner arrays
 contain spy objects. One for each callback passed to the method. Each time the
@@ -297,7 +410,7 @@ const obj = {
   }
 };
 
-const spy = helper.spyOnCallbacks(obj, 'method');
+const spy = __helpers.spyOnCallbacks(obj, 'method');
 const cb = (arg1, arg2) => {
   return `callback called with: ${arg1} + ${arg2}`;
 };
@@ -323,41 +436,35 @@ These do NOT need to be instantiated; they are static methods.
 
 #### `.isCalledWithNoArgs()`
 
-This method checks the current code string to see if a function is called with any arguments.
+Available via `__helpers.isCalledWithNoArgs(functionName, codeString)`, this method checks the current code string to see if a function is called with any arguments.
 
-If so, `true` is returned. Otherwise it returns `false`. Additionally, if the function call is commented out, `false` is returned.
-
-#### `.concatRegex()`
-
-This method combines and returns a compiled regex when given two regexes or strings.
-
-For example, if `.concatRegex` is called with `.*` and `b\s` the resulting regex will be equivalent to `.*b\s`.
+If the function is called without arguments, `true` is returned. Otherwise it returns `false`. Additionally, if the function call is commented out, `false` is returned.
 
 ```js
-const regex1 = /a\s/;
-const regex2 = /b/;
-concatRegex(regex1, regex2).source === 'a\\sb';
+const code = 'console.log(); alert("test");';
+__helpers.isCalledWithNoArgs('console.log', code); // true
+__helpers.isCalledWithNoArgs('alert', code); // false
 ```
 
-### `.functionRegex()`
+#### `.functionRegex()`
 
-Given a function name and, optionally, a list of parameters, returns a regex that can be used to match that function declaration in a code block.
+Available via `__helpers.functionRegex(functionName, parameterArray, options)`, this method returns a regex that can be used to match function declarations in a code block given a function name and, optionally, a list of parameters.
 
 ```js
-const regex = functionRegex('foo', ['bar', 'baz']);
+const regex = __helpers.functionRegex('foo', ['bar', 'baz']);
 regex.test('function foo(bar, baz){}'); // true
 regex.test('function foo(bar, baz, qux){}'); // false
 regex.test('foo = (bar, baz) => {}'); // true
 ```
 
-Options
+Options:
 
 - `capture: boolean` - If `true`, the regex will capture the function definition, including its body, otherwise not. Defaults to `false`.
 - `includeBody: boolean` - If `true`, the regex will include the function body in the match. Otherwise it will stop at the first bracket. Defaults to `true`.
 
 ```js
-const regEx = functionRegex('foo', ['bar', 'baz'], { capture: true });
-const combinedRegEx = concatRegex(/var x = "y"; /, regEx);
+const regEx = __helpers.functionRegex('foo', ['bar', 'baz'], { capture: true });
+const combinedRegEx = __helpers.concatRegex(/var x = "y"; /, regEx);
 
 const match = `var x = "y";
 function foo(bar, baz){}`.match(regex);
@@ -366,7 +473,9 @@ match[1]; // "function foo(bar, baz){}"
 ```
 
 ```js
-const regEx = functionRegex('foo', ['bar', 'baz'], { includeBody: false });
+const regEx = __helpers.functionRegex('foo', ['bar', 'baz'], {
+  includeBody: false
+});
 
 const match = `function foo(bar, baz){console.log('ignored')}`.match(regex);
 match[1]; // "function foo(bar, baz){"
@@ -375,7 +484,7 @@ match[1]; // "function foo(bar, baz){"
 NOTE: capture does not work properly with arrow functions. It will capture text after the function body, too.
 
 ```js
-const regEx = functionRegex('myFunc', ['arg1'], { capture: true });
+const regEx = __helpers.functionRegex('myFunc', ['arg1'], { capture: true });
 
 const match =
   'myFunc = arg1 => arg1; console.log();\n // captured, unfortunately'.match(
@@ -384,84 +493,76 @@ const match =
 match[1]; // "myFunc = arg1 => arg1; console.log();\n // captured, unfortunately"
 ```
 
-## Strip Content
+#### `.getFunctionParams()`
 
-There are a few methods on the `__helpers` object to remove content from the camper's code.
+Available via `__helpers.getFunctionParams(codeString)`, this method extracts parameter information from a function definition string.
 
-These do NOT need to be instantiated they are static methods.
-
-### Removing Comments
-
-Using `__helpers.removeCssComments()`, `__helpers.removeHtmlComments()`, or `__helpers.removeJSComments()` allows you to pass the camper's code (through the `code` variable) to remove comments matching the language's comment syntax.
-
-### Removing Whitespace
-
-Using `__helpers.removeWhiteSpace()` allows you to pass the camper's code (through the `code` variable) to remove all whitespace.
-
-## permutateRegex
-
-Permutates regular expressions or source strings, to create regex matching elements in any order.
-
-```javascript
-const source1 = 'a';
-const regex1 = /b/;
-const source2 = 'c';
-
-permutateRegex([source1, regex1, source2]).source ===
-  new RegExp(
-    /(?:a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
-  ).source;
+```js
+const funcString = 'function test(a, b = "default", c) { return a + b + c; }';
+const params = __helpers.getFunctionParams(funcString);
+// params = [
+//   { name: 'a', defaultValue: undefined },
+//   { name: 'b', defaultValue: 'default' },
+//   { name: 'c', defaultValue: undefined }
+// ]
 ```
 
-Inputs can have capturing groups, but both groups and backreferrences need to be named. In the resulting regex they will be renamed to avoid duplicated names, and to allow backreferrences to refer to correct group.
+#### `.escapeRegExp()`
 
-```javascript
-const regex = permutateRegex(['a', /(?<ref>'|"|`)b\k<ref>/], {
-  elementsSeparator: String.raw`\s*===\s*`
-});
+Available via `__helpers.escapeRegExp(string)`, this method escapes special regular expression characters in a string.
 
-regex.source ===
-  new RegExp(
-    /(?:a\s*===\s*(?<ref_0>'|"|`)b\k<ref_0>|(?<ref_1>'|"|`)b\k<ref_1>\s*===\s*a)/
-  ).source;
-
-regex.test('a === "b"'); // true
-regex.test("'b' === a"); // true
-regex.test('a === `b`'); // true
-regex.test(`a === 'b"`); // false
+```js
+__helpers.escapeRegExp('hello.world'); // "hello\\.world"
+__helpers.escapeRegExp('test[123]'); // "test\\[123\\]"
 ```
 
-### Options
+## Python Helper
 
-- capture: boolean - Whole regex is wrapped in regex group. If `capture` is `true` the group will be capturing, otherwise it will be non-capturing. Defaults to `false`.
-- elementsSeparator: string - Separates permutated elements within single permutation. Defaults to `\s*\|\|\s*`.
-- permutationsSeparator: string - Separates permutations. Defaults to `|`.
+The `__helpers` object includes comprehensive Python code analysis tools through the `python` property.
 
-```javascript
-permutateRegex(['a', /b/, 'c'], { capture: true }).source ===
-  new RegExp(
-    /(a\s*\|\|\s*b\s*\|\|\s*c|b\s*\|\|\s*a\s*\|\|\s*c|c\s*\|\|\s*a\s*\|\|\s*b|a\s*\|\|\s*c\s*\|\|\s*b|b\s*\|\|\s*c\s*\|\|\s*a|c\s*\|\|\s*b\s*\|\|\s*a)/
-  ).source;
+### Removing Python Comments
+
+Use `__helpers.python.removeComments(code)` to remove Python comments from code strings:
+
+```js
+const codeWithComments = `
+def test():  # This is a comment
+    return True  # Another comment
+`;
+
+const cleaned = __helpers.python.removeComments(codeWithComments);
+// Returns: "\ndef test():  \n    return True  \n"
 ```
 
-```javascript
-permutateRegex(['a', /b/, 'c'], { elementsSeparator: ',' }).source ===
-  new RegExp(/(?:a,b,c|b,a,c|c,a,b|a,c,b|b,c,a|c,b,a)/).source;
-```
+### Python AST-based Helpers
 
-```javascript
-permutateRegex(['a', /b/, 'c'], { permutationsSeparator: '&' }).source ===
-  new RegExp(
-    /(?:a\s*\|\|\s*b\s*\|\|\s*c&b\s*\|\|\s*a\s*\|\|\s*c&c\s*\|\|\s*a\s*\|\|\s*b&a\s*\|\|\s*c\s*\|\|\s*b&b\s*\|\|\s*c\s*\|\|\s*a&c\s*\|\|\s*b\s*\|\|\s*a)/
-  ).source;
-```
+These helpers provide powerful Abstract Syntax Tree (AST) analysis capabilities for Python challenges.
 
-## AST-based Helpers
+#### Basic Usage Pattern
 
-These helpers need to be run in Python and tests that use them need to be in the format:
+For Python challenges, these helpers need to be run in Python and tests should be formatted as:
 
 ```js
 ({ test: () => assert(runPython(`<python code>`)) });
+```
+
+For complex tests, you can use `assert` inside Python and avoid the `assert` around `runPython`.
+
+```js
+({ test: () => runPython(`<python code>`) });
+```
+
+An example would be if you need to test multiple things at once.
+
+```js
+({
+  test: () =>
+    runPython(`
+assert _Node(_code).find_class("Spam").find_function("__str__").has_return("'spam!'")
+s = Spam()
+assert f'{s}' == 'spam!'
+`)
+});
 ```
 
 `_Node` is a chainable class that allows you to call methods on the result of parsing a string. To create an instance of `_Node` that parses the camper's code use `_Node(_code)`.
@@ -489,7 +590,7 @@ To check the return value of `__str__` you would write:
 });
 ```
 
-AST-based helpers are also exposed in the Python challenges in `ast_helpers` module. `_Node` class corresponds to the `ast_helpers.Node`:
+AST-based helpers are also exposed in the Python challenges in `ast_helpers` module. `_Node` class corresponds to `ast_helpers.Node`:
 
 ```py
 import ast_helpers
@@ -1176,7 +1277,6 @@ match x:
     pass
   case _:
     pass
-
 match y:
   case 1:
     pass
@@ -1271,7 +1371,7 @@ node.find_matches()[0].find_match_cases()[2].find_case_guard().is_empty() # True
 Node("x = 1").get_variable("x") # 1
 ```
 
-#### Checking for existence
+### Checking for existence
 
 `has_` functions return a boolean indicating whether the node exists.
 
@@ -1502,7 +1602,56 @@ x = 1
 Node(stmts)[1].is_equivalent("x = 1") # True
 ```
 
-## Notes on Python
+### Python Helper Functions
+
+The Python helpers also include some standalone utility functions for extracting specific information from Python code.
+
+#### `getDef(code, functionName)`
+
+Available via `__helpers.python.getDef(code, functionName)`, this function extracts function definition details from Python code:
+
+```js
+const pythonCode = `
+def calculate_area(length, width):
+    """Calculate rectangle area"""
+    return length * width
+`;
+
+// Via __helpers.python.getDef
+const funcInfo = __helpers.python.getDef(pythonCode, 'calculate_area');
+// Returns: {
+//   def: "def calculate_area(length, width):\n    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
+//   function_parameters: "length, width",
+//   function_body: "    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
+//   function_indentation: 0
+// }
+```
+
+#### `getBlock(code, blockPattern)`
+
+Available via `__helpers.python.getBlock(code, blockPattern)`, this function extracts code blocks matching specific patterns (if, for, while, etc.):
+
+```js
+const pythonCode = `
+if x > 0:
+    print("positive")
+else:
+    print("not positive")
+
+for i in range(5):
+    print(i)
+`;
+
+// Extract if block
+const ifBlock = __helpers.python.getBlock(pythonCode, 'if');
+// Returns the if statement block
+
+// Extract for block
+const forBlock = __helpers.python.getBlock(pythonCode, 'for');
+// Returns the for loop block
+```
+
+### Notes on Python
 
 - Python does **not** allow newline characters between keywords and their arguments. E.g:
 
