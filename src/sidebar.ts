@@ -11,6 +11,8 @@ const sidebar = [
       'how-to-contribute-to-the-codebase',
       'how-to-work-on-coding-challenges',
       'how-to-work-on-quizzes',
+      'how-to-work-on-reviews',
+      'how-to-work-on-labs',
       'curriculum-help',
       'how-to-work-on-the-component-library',
       'how-to-work-on-practice-projects',
