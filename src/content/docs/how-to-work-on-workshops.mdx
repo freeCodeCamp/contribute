@@ -1,16 +1,28 @@
 ---
-title: How to Work on Practice Projects
+title: How to Work on Workshops
 sidebar:
-  label: Work on Practice Projects
+  label: Work on Workshops
 ---
 
-Our practice projects use a step-based approach to teach concepts to campers. A project will consist of multiple files, which we refer to as **"steps"**. These files are named by the challenge ID, to avoid issues with the translation flow. Unfortunately, this makes it difficult to find the file associated with a specific step.
+Our workshops use a step-based approach to teach concepts to campers. A workshop will consist of multiple files, which we refer to as **"steps"**. These files are named by the challenge ID, to avoid issues with the translation flow. Unfortunately, this makes it difficult to find the file associated with a specific step.
 
-We've built a challenge editor tool that helps remedy this. This tool allows you to navigate the available projects, and the steps for each project (in order). There's also an embedded code editor you can use to work on the files directly.
+We've built a challenge editor tool that helps remedy this. This tool allows you to navigate the available workshops, and the steps for each workshop (in order). There's also an embedded code editor you can use to work on the files directly.
+
+## Styling pointers
+
+Workshops should alternate steps in which new concepts are introduced small piece by piece, and steps where there is freedom of implementation.
+
+Instructions should always be written using second person, and the hints usually use a format like "You should have...", or "This thing should be/have/do/return...".
+
+If it's possible to test the effects of the code instead of what's being written exactly, that is preferred.
+
+For the tests, the [chai asserts](https://www.chaijs.com/api/assert/) are available for use. It is preferred to use specific methods instead of the generic `assert()`.
+
+Consult the curriculum helpers to know what's available to help you test the code written by the camper.
 
 ## Using the Challenge Editor
 
-These instructions will tell you how to use our challenge editor tool to work on the practice projects.
+These instructions will tell you how to use our challenge editor tool to work on the workshops.
 
 ### Starting the Editor
 
@@ -22,7 +34,7 @@ The client will run on port `3300`, so you can access it at `http://localhost:33
 
 The default view will list the available `superblocks` - these are the certifications. Click on the certification link you want to work on.
 
-This will take you to the list of blocks. These are the practice projects. Click on the project link you want to work on.
+This will take you to the list of blocks. These are the workshops. Click on the workshop link you want to work on.
 
 This will take you to a list of steps for the project. If you are working on an existing step, you can click on the step link to open the editor. If you are adding or removing steps, click the `Use the step tools` link to switch to the step tools for that challenge.
 
@@ -174,29 +186,6 @@ The script is to be used if the step-based project has files that have challenge
 ```bash
 pnpm run rename-challenges
 ```
-
-### sync-i18n
-
-When you add or remove a step from a step-based project, this creates a mismatch in the list of steps between the English project and the project in other languages. So now you need to use this tool to bring the other languages in sync.
-
-If you have changed tests or seed code of the steps in a way that is not compatible with the previous version, you first need to delete the changed files or the whole project folder for the other languages.
-
-#### How to Run the Script
-
-:::note
-You need to have node and typescript installed globally.
-:::
-
-1.  Be in the root directory
-2.  Run the following command
-
-```bash
-ts-node tools/scripts/sync-i18n.ts
-```
-
-#### What the script does in detail
-
-The script identifies the English files as the source of truth using the challengeId as key. Then it checks other languages for files that no longer exist in English and removes them. Then it creates any file that are present in English but not in other languages. Finally it checks that each challenge file in the other languages has the same `dashedName` as the English files.
 
 ## Proposing a Pull Request (PR)
 
