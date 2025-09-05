@@ -27,18 +27,18 @@
     "@astrojs/check": "0.9.4",
     "@astrojs/starlight": "0.35.2",
     "@astrojs/starlight-tailwind": "4.0.1",
-    "@tailwindcss/vite": "4.1.12",
+    "@tailwindcss/vite": "4.1.13",
     "astro": "5.13.5",
     "starlight-links-validator": "0.17.2",
     "starlight-scroll-to-top": "0.3.1",
-    "tailwindcss": "4.1.12",
+    "tailwindcss": "4.1.13",
     "typescript": "5.9.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.34.0",
     "@types/jsdom": "21.1.7",
-    "@types/node": "22.18.0",
+    "@types/node": "22.18.1",
     "@typescript-eslint/eslint-plugin": "8.42.0",
     "@typescript-eslint/parser": "8.42.0",
     "eslint": "9.34.0",
@@ -54,7 +54,7 @@
     "prettier-plugin-astro": "0.14.1",
     "sharp": "0.34.3",
     "vitest": "3.2.4",
-    "wrangler": "4.33.2"
+    "wrangler": "4.34.0"
   },
   "packageManager": "pnpm@10.15.1"
 }
