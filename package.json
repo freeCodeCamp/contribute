@@ -30,7 +30,7 @@
     "@tailwindcss/vite": "4.1.13",
     "astro": "5.13.8",
     "starlight-links-validator": "0.17.2",
-    "starlight-scroll-to-top": "0.3.1",
+    "starlight-scroll-to-top": "0.4.0",
     "tailwindcss": "4.1.13",
     "typescript": "5.9.2"
   },
