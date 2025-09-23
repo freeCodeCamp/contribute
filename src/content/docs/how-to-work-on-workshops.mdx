@@ -6,7 +6,7 @@ sidebar:
 
 Our workshops use a step-based approach to teach concepts to campers. A workshop will consist of multiple files, which we refer to as **"steps"**. These files are named by the challenge ID, to avoid issues with the translation flow. Unfortunately, this makes it difficult to find the file associated with a specific step.
 
-We've built a challenge editor tool that helps remedy this. This tool allows you to navigate the available workshops, and the steps for each workshop (in order). There's also an embedded code editor you can use to work on the files directly.
+We've built a [challenge editor tool](#using-the-challenge-editor) that helps remedy this. This tool allows you to navigate the available workshops, and the steps for each workshop (in order). There's also an embedded code editor you can use to work on the files directly.
 
 ## Styling pointers
 
@@ -16,11 +16,21 @@ Instructions should always be written using second person, and the hints usually
 
 If it's possible to test the effects of the code instead of what's being written exactly, that is preferred.
 
+For example, you could ask in a step to create a variable inside a function, and that would need to be tested with regex. Ideally you would ask to instead log a specific value with `console.log`, or an other side effect that can be tested.
+
+We can test the existence and the value of a variable in the global scope, so that's less of an issue.
+
 For the tests, the [chai asserts](https://www.chaijs.com/api/assert/) are available for use. It is preferred to use specific methods instead of the generic `assert()`.
 
-Consult the curriculum helpers to know what's available to help you test the code written by the camper.
+For example, you can test if the variable `a` has a value of `2` with `assert(a === 2)`, but it is preferred the useage of `assert.strictEqual(a, 2)` (specifically `strictEqual` as the `equal` method is equivalent to using `==` and we don't want to have a success if the variable has a value of the string `"2"`).
+
+Consult the [curriculum helpers](/curriculum-help/) to know what's available to help you test the code written by the camper.
 
 ## Create the workshop
+
+Workshops will have a dashedName of the kind `workshop-cat-photo-app`, that is the word `workshop` followed by the name of the app that is being built.
+
+Workshop titles start with "Build a" or "Design a", followed by the name of the app.
 
 You can create the workshop with `pnpm run create-new-project`.
 
