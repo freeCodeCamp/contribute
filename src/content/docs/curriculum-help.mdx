@@ -53,7 +53,7 @@ regex.test(`a === 'b"`); // false
 #### Options
 
 - `capture: boolean` - Whole regex is wrapped in regex group. If `capture` is `true` the group will be capturing, otherwise it will be non-capturing. Defaults to `false`.
-- `elementsSeparator: string` - Separates permutated elements within single permutation. Defaults to `\s*\|\|\s*`.
+- `elementsSeparator: string` - Separates permuted elements within single permutation. Defaults to `\s*\|\|\s*`.
 - `permutationsSeparator: string` - Separates permutations. Defaults to `|`.
 
 ```javascript
@@ -1067,7 +1067,7 @@ explorer.find_function("foo").find_return().find_comp_iters()[1].is_equivalent("
 
 #### `find_comp_targets()`
 
-Returns a list of comprhension/generator expression targets (i.e. the iteration variables).
+Returns a list of comprehension/generator expression targets (i.e. the iteration variables).
 
 ```python
 code_str = """
@@ -1561,7 +1561,7 @@ Node("class C(A, B):\n  pass").find_class("C").inherits_from("A", "B") # True
 
 #### `is_ordered()`
 
-Returs a boolean indicating if the statements passed as arguments are found in the same order in the tree (statements can be non-consecutive)
+Returns a boolean indicating if the statements passed as arguments are found in the same order in the tree (statements can be non-consecutive).
 
 ```python
 code_str = """
