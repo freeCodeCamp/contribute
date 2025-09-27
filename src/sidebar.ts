@@ -13,7 +13,7 @@ const sidebar = [
       'how-to-work-on-quizzes',
       'curriculum-help',
       'how-to-work-on-the-component-library',
-      'how-to-work-on-practice-projects',
+      'how-to-work-on-workshops',
       'how-to-setup-freecodecamp-mobile-app-locally',
       'how-to-work-on-tutorials-that-use-coderoad',
       'how-to-work-on-localized-client-webapp',
