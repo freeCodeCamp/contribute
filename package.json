@@ -27,11 +27,11 @@
     "@astrojs/check": "0.9.4",
     "@astrojs/starlight": "0.36.0",
     "@astrojs/starlight-tailwind": "4.0.1",
-    "@tailwindcss/vite": "4.1.13",
+    "@tailwindcss/vite": "4.1.14",
     "astro": "5.14.1",
     "starlight-links-validator": "0.18.0",
     "starlight-scroll-to-top": "0.4.0",
-    "tailwindcss": "4.1.13",
+    "tailwindcss": "4.1.14",
     "typescript": "5.9.3"
   },
   "devDependencies": {
