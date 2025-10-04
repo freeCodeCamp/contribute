@@ -6,31 +6,23 @@ sidebar:
 
 import { Steps } from '@astrojs/starlight/components';
 
-A pull request (PR) enables you to send changes from your fork on GitHub to freeCodeCamp.org's main repository. Once you are done making changes to the code, you should test your changes locally before opening a PR to ensure everything works as expected. Follow these guidelines carefully to open a successful PR that will be reviewed and merged efficiently.
+A pull request (PR), enables you to send changes from your fork on GitHub to freeCodeCamp.org's main repository. Once you are done making changes to the code, you can follow these guidelines to open a PR.
 
-We expect our contributors to be aware of the process specific to this project. Following the guidelines carefully earns you the respect of fellow maintainers and saves everyone time. A well-prepared PR demonstrates professionalism and makes the review process smoother for everyone involved.
+We expect our contributors to be aware of the process specific to this project. Following the guidelines carefully earns you the respect of fellow maintainers and saves everyone time.
 
 Some examples of this are:
 
 <Steps>
 
-1. Do not edit files directly through GitHub – while you can, it's not a good idea. Always clone the repository, make changes locally, test them thoroughly, and then push to your fork before creating a PR.
-
-2. Make sure the PR title follows [our convention](#prepare-a-good-pr-title). A properly formatted title helps maintainers quickly understand the nature of your changes and prioritize reviews accordingly.
-
-3. Make sure you follow the PR checklist and not just tick things off; otherwise, we won't take you seriously. Each checklist item exists for a reason - skipping steps may lead to bugs or break existing functionality.
-
-4. Use the correct way to link issues in the description of the PR by updating the `XXXXXX`. Do not just add issue numbers everywhere and anywhere you feel like. The proper format is `Closes #123` or `Fixes #456` at the end of your PR description.
-
+1. Do not edit files directly through GitHub – while you can, it's not a good idea.
+2. Make sure the PR title follows [our convention](#prepare-a-good-pr-title).
+3. Make sure you follow the PR checklist and not just tick things off; otherwise, we won't take you seriously.
+4. Use the correct way to link issues in the description of the PR by updating the `XXXXXX`. Do not just add issue numbers everywhere and anywhere you feel like.
 5. Do not "@mention" or request someone for reviews too many times.
 
-   We understand you are excited about contributing. As much as a maintainer will love to get back to you, they are busy people looking after hundreds of requests just like yours. Be patient, someone will get to you sooner or later. If you haven't received feedback within a week, a polite follow-up comment is acceptable.
+   We understand you are excited about contributing. As much as a maintainer will love to get back to you, they are busy people looking after hundreds of requests just like yours. Be patient, someone will get to you sooner or later.
 
-6. Do not work directly off your `main` branch - create a new branch for the changes you are working on. This keeps your fork's main branch clean and makes it easier to sync with upstream changes. Use descriptive branch names like `fix/search-bar-contrast` or `feat/add-python-tests`.
-
-7. Ensure your code follows the project's style guidelines and passes all linting checks before submitting. Run `pnpm run lint` locally to catch any style issues.
-
-8. Write clear, descriptive commit messages that explain what and why, not just what. This helps reviewers understand your thought process.
+6. Do not work directly off your `main` branch - create a new branch for the changes you are working on.
 
 </Steps>
 
@@ -52,28 +44,21 @@ Whenever you open a Pull Request (PR), you can use the below to determine the ty
 
 **Type:**
 
-| Type     | Description                                                                                                     |
-| -------- | --------------------------------------------------------------------------------------------------------------- |
-| fix      | Bug fixes - when you repair something that wasn't working correctly or fix broken tests                         |
-| feat     | New features - when you add new functionality that didn't exist before, like a new challenge or learning module |
-| refactor | Code cleanup - reorganizing code without changes to logic or behavior, improving code quality                   |
-| chore    | Maintenance tasks - updating dependencies, build configs, project setup, or non-user-facing changes             |
-| docs     | Documentation - updating README files, comments, help documentation, or contribution guides                     |
+| Type     | Description                                                                |
+| -------- | -------------------------------------------------------------------------- |
+| fix      | Bug fixes - when you repair something that wasn't working correctly        |
+| feat     | New features - when you add new functionality that didn't exist before     |
+| refactor | Code cleanup - reorganizing code without changes to logic                  |
+| chore    | Maintenance tasks - updating dependencies, build configs, or project setup |
+| docs     | Documentation - updating README files, comments, or help documentation     |
 
 **Scope:**
 
-You can select a scope from [this list of labels](https://github.com/freeCodeCamp/freeCodeCamp/labels?q=scope). Common scopes include:
-
-- `learn` - for changes to the learning platform
-- `api` - for backend API changes
-- `client` - for frontend client changes
-- `a11y` - for accessibility improvements
-- `i18n` - for internationalization work
-- `curriculum` - for curriculum content updates
+You can select a scope from [this list of labels](https://github.com/freeCodeCamp/freeCodeCamp/labels?q=scope).
 
 **Description:**
 
-Keep it short (less than 30 characters) and simple; you can add more information in the PR description box and comments. Use imperative mood (e.g., "add" not "added" or "adds"). Be specific about what changed, not how it changed.
+Keep it short (less than 30 characters) and simple; you can add more information in the PR description box and comments.
 
 Some examples of good PR titles would be:
 
@@ -81,21 +66,12 @@ Some examples of good PR titles would be:
 - `feat: add more tests to HTML and CSS challenges`
 - `fix(api,client): prevent CORS errors on form submission`
 - `docs(i18n): fix links to be relative instead of absolute`
-- `feat(learn): add Python data structures challenges`
-- `chore: update Node.js to version 20.x`
-- `refactor(client): simplify authentication logic`
-
-Examples of bad PR titles to avoid:
-
-- `Update README.md` (too vague, missing type and scope)
-- `Fixed bug` (not descriptive, which bug?)
-- `feat: made some changes to the homepage` (too vague and not concise)
 
 ## Proposing a Pull Request
 
 <Steps>
 
-1.  Once the edits have been committed, you will be prompted to create a pull request on your fork's GitHub Page. Make sure all your changes are committed and pushed to your fork before proceeding.
+1.  Once the edits have been committed, you will be prompted to create a pull request on your fork's GitHub Page.
 
           <details>
 
@@ -107,7 +83,7 @@ Examples of bad PR titles to avoid:
 
 2.  By default, all pull requests should be against the freeCodeCamp main repo, `main` branch.
 
-    Make sure that your Base Fork is set to freeCodeCamp/freeCodeCamp when raising a Pull Request. Double-check that the base repository is correct - accidentally targeting the wrong repository or branch is a common mistake.
+    Make sure that your Base Fork is set to freeCodeCamp/freeCodeCamp when raising a Pull Request.
 
           <details>
 
@@ -117,26 +93,22 @@ Examples of bad PR titles to avoid:
 
           </details>
 
-3.  Submit the pull request from your branch to freeCodeCamp's `main` branch. Review your changes one more time in the "Files changed" tab before clicking "Create pull request" to ensure you're not including any unintended changes.
+3.  Submit the pull request from your branch to freeCodeCamp's `main` branch.
 
 4.  Include a more detailed summary of the changes you made and how your changes are helpful in the body of your PR.
     - You will be presented with a pull request template. This is a checklist that you should have followed before opening the pull request.
 
-    - Fill in the details as you see fit. Ensure that you give the reviewers enough context to review the changes. Explain the problem you're solving, your approach to solving it, and any alternative solutions you considered. If the PR makes changes to the UI, be sure to include screenshots of the changes as well (both before and after, if applicable). All of this information will be reviewed and the reviewers will decide whether or not your pull request is accepted.
+    - Fill in the details as you see fit. Ensure that you give the reviewers enough context to review the changes. If the PR makes changes to the UI, be sure to include screenshots of the changes as well. All of this information will be reviewed and the reviewers will decide whether or not your pull request is accepted.
 
     - If the PR is meant to address an existing GitHub Issue then, at the end of
-      your PR's description body, use the keyword _Closes_ with the issue number to [automatically close that issue if the PR is accepted and merged](https://help.github.com/en/articles/closing-issues-using-keywords). Other valid keywords include `Fixes`, and `Resolves`.
+      your PR's description body, use the keyword _Closes_ with the issue number to [automatically close that issue if the PR is accepted and merged](https://help.github.com/en/articles/closing-issues-using-keywords).
 
-      > Example: `Closes #123` will close issue 123 when the PR is merged
-      >
-      > Example: `Fixes #456 and closes #789` will close both issues when merged
+      > Example: `Closes #123` will close issue 123
 
 5.  Indicate if you have tested on a local copy of the site or not.
     - This is very important when making changes that are not just edits to text content like documentation or a challenge description. Examples of changes that need local testing include JavaScript, CSS, or HTML, which could change the functionality or layout of a page.
 
-    - If your PR affects the behavior of a page, it should be accompanied by corresponding [Playwright integration tests](/how-to-add-playwright-tests/). Explain in your PR description what testing you performed and what the results were.
-
-    - For curriculum changes, specify which challenges or lessons you tested and confirm they work as expected. Include details about any edge cases you tested.
+    - If your PR affects the behavior of a page, it should be accompanied by corresponding [Playwright integration tests](/how-to-add-playwright-tests/).
 
 </Steps>
 
@@ -144,26 +116,17 @@ Examples of bad PR titles to avoid:
 
 > 🎉 Congratulations on making a PR and thanks a lot for taking the time to contribute.
 
-Our moderators will now take a look and leave you feedback. Please be patient with the fellow moderators and respect their time. All pull requests are reviewed in due course. Review times can vary depending on the complexity of the changes and the current workload of the maintainers.
+Our moderators will now take a look and leave you feedback. Please be patient with the fellow moderators and respect their time. All pull requests are reviewed in due course.
 
-If you receive feedback requesting changes:
-
-- Read the feedback carefully and make sure you understand what's being requested
-- Ask questions if anything is unclear - maintainers are happy to clarify
-- Make the requested changes in new commits on your PR branch
-- Push the changes to your fork - they will automatically appear in the PR
-- Do not close the PR and open a new one with the same changes
-- Respond to comments once you've addressed them to notify reviewers
-
-And as always, feel free to ask questions on the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors chat room](https://discord.gg/PRyKn3Vbay). The community is here to help you succeed.
+And as always, feel free to ask questions on the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
 
 :::tip
-If you are to be contributing more pull requests, we recommend you read the [making changes and syncing](/how-to-setup-freecodecamp-locally/#making-changes-locally) guidelines to avoid having to delete your fork. Keeping your fork in sync with upstream will make future contributions much smoother.
+If you are to be contributing more pull requests, we recommend you read the [making changes and syncing](/how-to-setup-freecodecamp-locally/#making-changes-locally) guidelines to avoid having to delete your fork.
 :::
 
 ## Conflicts on a Pull Request
 
-Conflicts can arise because many contributors work on the repository, and changes can break your PR which is pending a review and merge. This is normal and happens frequently in active repositories. Don't be discouraged - resolving conflicts is a valuable skill to learn.
+Conflicts can arise because many contributors work on the repository, and changes can break your PR which is pending a review and merge.
 
 Since we squash all commits, you may not need to do a rebase. However, if a rebase is requested, check our [For Usual Bug Fixes and Features](#for-usual-bug-fixes-and-features) or [For Upcoming Curriculum and Features](#for-upcoming-curriculum-and-features) guides to learn how to do this process for your corresponding PR.
 
@@ -199,10 +162,6 @@ When you are working on regular bugs and features on our development branch `mai
    ```
 
 </Steps>
-
-:::note
-Be careful with `git push --force` - make sure you're pushing to your own fork and not the upstream repository. Always double-check the remote name and branch before force pushing.
-:::
 
 ### For Upcoming Curriculum and Features
 
