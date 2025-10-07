@@ -37,7 +37,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.37.0",
-    "@types/jsdom": "21.1.7",
+    "@types/jsdom": "27.0.0",
     "@types/node": "22.18.8",
     "@typescript-eslint/eslint-plugin": "8.46.0",
     "@typescript-eslint/parser": "8.46.0",
@@ -48,7 +48,7 @@
     "globals": "16.4.0",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
-    "jsdom": "26.1.0",
+    "jsdom": "27.0.0",
     "lint-staged": "16.2.3",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
