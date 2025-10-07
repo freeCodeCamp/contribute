@@ -1,0 +1,19 @@
+{
+  "name": "fCCContribute",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "Website",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "containerEnv": {
+    "ASTRO_TELEMETRY_DISABLED": "1"
+  },
+  "updateContentCommand": "pnpm install",
+  "postAttachCommand": {
+    "Develop": "bash -c 'pnpm develop'"
+  }
+}
