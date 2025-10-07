@@ -4,13 +4,19 @@ sidebar:
   label: Work on Documentation
 ---
 
-import { Steps, Aside, LinkButton } from '@astrojs/starlight/components';
-
-Welcome to the guide for contributing to freeCodeCamp's documentation site! This site is built using [Astro](https://astro.build/) with the [Starlight](https://starlight.astro.build/) theme and deployed on Cloudflare Pages.
+import {
+  Steps,
+  Aside,
+  LinkButton,
+  Card,
+  Badge,
+  Tabs,
+  TabItem
+} from '@astrojs/starlight/components';
 
 Follow these guidelines for setting up a development environment for the freeCodeCamp documentation site. This is highly recommended if you want to contribute regularly to our contributing guidelines.
 
-### Fork the contribute repository on GitHub
+## Fork the contribute repository on GitHub
 
 You will need to [fork](https://help.github.com/articles/about-forks) the contribute repository on GitHub to get your own copy of the codebase. This will allow you to follow a Git-based workflow to contribute to freeCodeCamp's documentation.
 
@@ -36,7 +42,7 @@ You will need to [fork](https://help.github.com/articles/about-forks) the contri
 
 </Steps>
 
-That's it! You have successfully forked the contribute repository. You can always delete your fork if you want to start fresh.
+That's it! You have successfully forked the contribute repository.
 
 <Aside type='tip' title='Did you know?'>
 
@@ -44,7 +50,125 @@ The main repository at `https://github.com/freeCodeCamp/contribute` is often ref
 
 </Aside>
 
-### Clone your Fork from GitHub
+## Cloud IDE or your own machine?
+
+Next, you need to choose between setting up a cloud IDE or your own machine.
+
+If you're looking to make a one-time contribution or want the fastest setup, use GitHub Codespaces which provides a ready-to-code environment in your web browser using devcontainers. For long-term contributions where you prefer local development, you can set up the documentation site on your local machine.
+
+| Feature                     | GitHub Codespaces <Badge text="Recommended" variant="tip" size="small" /> | Your own machine                                 |
+| --------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------ |
+| **Hardware requirements**   | No minimum hardware requirements                                          | Minimum hardware requirements (Node.js, pnpm)    |
+| **Software installation**   | No need to install any software                                           | Additional software needed                       |
+| **Repository status**       | Always up-to-date repository                                              | Manual updates required                          |
+| **Setup complexity**        | Easy setup with devcontainers, works in any browser                       | Larger download and setup time                   |
+| **Internet dependency**     | Requires an internet connection to work                                   | Minimal internet connection required once set up |
+| **Performance**             | Consistent cloud-based performance                                        | Depends on your machine capabilities             |
+| **Usage limits**            | 60 hours free per month for personal accounts                             | No usage limits                                  |
+| **Environment consistency** | Identical setup for all contributors via devcontainers                    | May vary between different machines and OS       |
+
+Once you have decided, follow the relevant tab below to continue with the setup.
+
+<Tabs syncKey="environment">
+<TabItem label="GitHub Codespaces" icon="seti:github">
+
+#### GitHub Codespaces
+
+We have automated the development environment setup using devcontainers. With GitHub Codespaces, you get a consistent, ready-to-code environment that runs in your browser with all dependencies pre-installed.
+
+**Launch a Codespace from your fork:**
+
+<Steps>
+
+1. Go to your fork at `https://github.com/YOUR_USER_NAME/contribute`
+
+2. Click the green **Code** button
+
+3. Select the **Codespaces** tab
+
+4. Click **Create codespace on main**
+
+   Your codespace will automatically set up the development environment using our devcontainer configuration. This includes:
+   - Installing Node.js, pnpm, and all dependencies
+   - Configuring VS Code extensions
+   - Preparing the environment
+
+5. Wait for the setup to complete (usually 1-2 minutes)
+
+</Steps>
+
+**Start the development server:**
+
+Once your Codespace is ready, the development server should start automatically. If not, you can start it manually:
+
+```bash
+pnpm develop
+```
+
+Once ready, you will see a notification to open the site. Click on the notification to open the client application in a new browser tab.
+
+<Aside type='tip' title="Congratulations - you're all set!">
+
+You now have a copy of freeCodeCamp's documentation site running in your Codespace. Go ahead and start making changes to the documentation.
+
+</Aside>
+
+</TabItem>
+
+<TabItem label="Local Machine" icon="laptop">
+
+## Prerequisites
+
+<Card title='System Requirements' icon='laptop'>
+
+| Prerequisite                         | Version | Notes                           |
+| ------------------------------------ | ------- | ------------------------------- |
+| [Node.js](http://nodejs.org)         | `22.x`  | We use the "Active LTS" version |
+| [pnpm](https://pnpm.io/installation) | `10.x`  |                                 |
+
+</Card>
+
+<Aside type='caution' title='Did you check the version?'>
+
+If you have a different version installed, please install the recommended version. You can check your versions by running `node -v` and `pnpm -v` in your terminal.
+
+</Aside>
+
+**Run the following commands to validate the versions:**
+
+```bash
+node -v
+```
+
+```bash
+pnpm -v
+```
+
+Once you have the prerequisites installed, you need to prepare your development environment. This is common for many development workflows, and you will only need to do this once.
+
+## Additional Prerequisites
+
+<Steps>
+
+1. Install [Git](https://git-scm.com/) or your favorite Git client, if you haven't already. Update to the latest version; the version that came bundled with your OS may be outdated.
+
+2. (Optional but recommended) [Set up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
+
+3. Install a code editor of your choice. If you aren't sure which one to use, we recommend [Visual Studio Code](https://code.visualstudio.com/) — it's free and open source.
+
+4. Set up linting for your code editor.
+
+   You should have [ESLint running in your editor](http://eslint.org/docs/user-guide/integrations.html), and it will highlight anything that doesn't conform to [freeCodeCamp's JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
+
+   <Aside type='tip' title='Pay Attention to errors'>
+
+   Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
+
+   </Aside>
+
+</Steps>
+
+## Clone your Fork from GitHub
 
 Next, you will need to [clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
 
@@ -73,7 +197,7 @@ Next, you will need to [clone](https://help.github.com/articles/cloning-a-reposi
 
 </Steps>
 
-### Set up Syncing from Parent
+## Set up Syncing from Parent
 
 Now that you have downloaded a copy of your fork, you will need to set up an `upstream` remote to the parent repository.
 
@@ -112,7 +236,57 @@ You need a reference from your local clone to the `upstream` repository in addit
 
 </Steps>
 
-### Create a Working Branch
+## Install Dependencies
+
+First, ensure you have pnpm installed globally:
+
+```bash
+npm install -g pnpm
+```
+
+Then install the project dependencies:
+
+```bash
+pnpm install
+```
+
+This will install all required dependencies and set up Git hooks automatically.
+
+## Start the Development Server
+
+You can now start up the development server:
+
+```bash
+pnpm develop
+```
+
+Once ready, open a web browser and visit `http://localhost:4321`:
+
+<LinkButton
+  href='http://localhost:4321'
+  icon='external'
+  variant='secondary'
+  target='_blank'
+>
+  `http://localhost:4321`
+</LinkButton>
+
+<Aside type='tip' title="Congratulations - you're all set!">
+
+You now have a copy of freeCodeCamp's documentation site running on your local machine. Go ahead and start making changes to the documentation.
+
+</Aside>
+
+<Aside type='note'>
+
+If you have issues with the setup or need to run other commands like linting, testing, or building for production, check the [Quick Commands Reference](#quick-commands-reference) at the end of this guide.
+
+</Aside>
+
+</TabItem>
+</Tabs>
+
+## Create a Working Branch
 
 Before making any changes, it's important to create a new branch for your work. This keeps your changes organized and separate from the main codebase.
 
@@ -134,64 +308,15 @@ Before making any changes, it's important to create a new branch for your work. 
 
 </Steps>
 
-## Prerequisites
-
-- Node.js (LTS version recommended)
-- pnpm v10 (required - do not use npm or yarn)
-
-## Core Development Commands
-
-```bash
-# Install pnpm globally if not already installed
-npm install -g pnpm
-
-# Install dependencies
-pnpm install
-
-# Start the development server (localhost:4321)
-pnpm develop
-
-# Build for production
-pnpm build
-
-# Build and preview locally using Cloudflare Pages
-pnpm preview
-```
-
-## Code Quality Commands
-
-```bash
-# Run Prettier and ESLint checks
-pnpm lint
-
-# Auto-fix Prettier and ESLint issues
-pnpm format
-
-# Install Git hooks (runs automatically on install)
-pnpm prepare
-```
-
-## Testing Commands
-
-```bash
-# Run all tests once
-pnpm test
-
-# Update test snapshots
-pnpm test:update
-
-# Run a specific test file
-npx vitest run tests/homepage.test.ts
-
-# Run tests matching a pattern
-npx vitest run -t "has correct title"
-```
-
 ## Working on Documentation Content
 
-To work on the contributing guidelines, you can edit or add files in the `src/content/docs` directory [available here](https://github.com/freeCodeCamp/contribute/tree/main/src/content/docs). When your changes are merged, they will be made available automatically at the documentation site.
+You can edit or add files in the `src/content/docs` directory [available here](https://github.com/freeCodeCamp/contribute/tree/main/src/content/docs). When your changes are merged, they will be made available automatically at the documentation site.
+
+<Aside type='note'>
 
 When adding a new file to the `docs` directory, you should evaluate if the file should also be added to the sidebar navigation. We typically create a link in the [`src/sidebar.ts`](https://github.com/freeCodeCamp/contribute/blob/main/src/sidebar.ts) file for new and independent guides.
+
+</Aside>
 
 ### Creating Internal Links
 
@@ -206,32 +331,42 @@ If you want to create a link targeting a different section of the contributing g
 
 This is necessary to make these links work for the translated version of the document. Otherwise, they will redirect to the English version of the page regardless of the language.
 
-#### Translating Docs with Internal Links
-
-When you work on translating docs on Crowdin, make sure to replace the `#target-section-heading-id` with the id on the translated document. [Learn more about translating files here](/how-to-translate-files/#translate-documentation).
-
 ## Structure of the Docs Website
 
-The site is generated using Astro and served using Cloudflare Pages. Here's how it works:
+The site is generated using Astro and served using Cloudflare Workers. Here's how it works:
+
+<Card title='Key Architecture' icon='seti:config'>
 
 - All documentation content is stored in `src/content/docs/` as MDX files
 - The sidebar navigation is configured in `src/sidebar.ts`
 - Site configuration is managed in `astro.config.ts`
-- The site is automatically built and deployed via Cloudflare Pages
+- The site is automatically built and deployed via Cloudflare Workers
 
-### Serving the Documentation Site Locally
-
-The documentation site can be served locally using the development command:
-
-```bash
-pnpm develop
-```
-
-The documentation site should be available at `http://localhost:4321`
+</Card>
 
 ## Deployment
 
-The site is deployed on Cloudflare Pages. Please check the wrangler config for deployment details.
+The site is deployed on Cloudflare Workers. Please check the wrangler config for deployment details.
+
+## Quick Commands Reference
+
+<Card title='Handy Scripts for Local Development' icon='open-book'>
+
+| Command                                 | Description                                         |
+| --------------------------------------- | --------------------------------------------------- |
+| `pnpm install`                          | Install all dependencies                            |
+| `pnpm develop`                          | Start the Astro development server (localhost:4321) |
+| `pnpm build`                            | Build the site for production                       |
+| `pnpm preview`                          | Build and preview locally using Cloudflare Workers  |
+| `pnpm test`                             | Run all tests                                       |
+| `pnpm test:update`                      | Update test snapshots                               |
+| `pnpm lint`                             | Check formatting and linting                        |
+| `pnpm format`                           | Auto-fix formatting and linting issues              |
+| `pnpm check:astro`                      | Run Astro type checking                             |
+| `pnpm check:links`                      | Validate internal and external links                |
+| `npx vitest run tests/filename.test.ts` | Run a specific test file                            |
+
+</Card>
 
 ## Proposing a Pull Request (PR)
 
