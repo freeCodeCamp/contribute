@@ -12,15 +12,10 @@ describe('Legacy URL redirects', () => {
     }
   ];
 
-  it('redirect configuration exists in astro config', async () => {
-    // The redirects are defined in astro.config.mjs
+  it('redirect configuration exists', async () => {
+    // The redirects are defined in public/_redirects (Cloudflare Workers format)
     // We're verifying the expected redirect paths that should be handled
-    // by the client-side routing in the deployed application
-
-    const expectedRedirects = {
-      '/index': '/intro/',
-      '/FAQ': '/faq/'
-    };
+    // by the deployed application
 
     // These would be handled by client-side JavaScript for hash-based routes
     const hashRoutes = legacyRoutes.map(route => ({
@@ -29,8 +24,6 @@ describe('Legacy URL redirects', () => {
     }));
 
     // Verify the structure is as expected
-    expect(expectedRedirects).toHaveProperty('/index');
-    expect(expectedRedirects).toHaveProperty('/FAQ');
     expect(hashRoutes).toHaveLength(4);
   });
 

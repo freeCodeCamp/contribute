@@ -9,11 +9,6 @@ const config = defineConfig({
   // @ts-expect-error - Vite 6/7 plugin type incompatibility: Astro 5 uses Vite 6, @tailwindcss/vite 4.1.14 uses Vite 7
   vite: { plugins: [tailwindcss()] },
   site: 'https://contribute.freecodecamp.org',
-  redirects: {
-    '/index': '/intro',
-    '/FAQ': '/faq',
-    '/how-to-work-on-the-docs-theme': '/how-to-work-on-the-docs-site'
-  },
   integrations: [
     starlight({
       title: 'Contribute | freeCodeCamp.org',
