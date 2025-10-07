@@ -1,0 +1,11 @@
+{
+	"name": "contribute",
+	"compatibility_date": "2025-10-07",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page"
+	},
+	"placement": {
+		"mode": "smart"
+	}
+}

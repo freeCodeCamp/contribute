@@ -7,7 +7,7 @@
     "prepare": "is-ci || husky",
     "develop": "astro dev",
     "build": "astro build",
-    "preview": "pnpm build && wrangler pages dev",
+    "preview": "pnpm build && wrangler dev",
     "format": "prettier . --write && eslint . --fix",
     "lint": "prettier . --check && eslint .",
     "test": "vitest run",
