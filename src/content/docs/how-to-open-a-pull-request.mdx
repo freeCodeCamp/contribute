@@ -44,16 +44,25 @@ Whenever you open a Pull Request (PR), you can use the below to determine the ty
 
 **Type:**
 
-| Type  | When to select                                                                  |
-| :---- | :------------------------------------------------------------------------------ |
-| fix   | Changed or updated/improved functionality, tests, the wording of a lesson, etc. |
-| feat  | Only if you are adding new functionality, tests, etc.                           |
-| chore | Changes that are not related to code, tests, or verbiage of a lesson.           |
-| docs  | Changes to `/docs` directory or the contributing guidelines, etc.               |
+| Type     | Description                                                                |
+| -------- | -------------------------------------------------------------------------- |
+| fix      | Bug fixes - when you repair something that wasn't working correctly        |
+| feat     | New features - when you add new functionality that didn't exist before     |
+| refactor | Code cleanup - reorganizing code without changes to logic                  |
+| chore    | Maintenance tasks - updating dependencies, build configs, or project setup |
+| docs     | Documentation - updating README files, comments, or help documentation     |
 
 **Scope:**
 
-You can select a scope from [this list of labels](https://github.com/freeCodeCamp/freeCodeCamp/labels?q=scope).
+`Scope` is optional but it helps reviewers understand which areas of the project are impacted. Common scopes include:
+
+- **curriculum**: Lessons, challenges, projects, and learning content
+- **ui**: User interface and user experience improvements
+- **a11y**: Accessibility improvements and fixes
+- **i18n**: Internationalization and language translations
+- **api**: Backend API and server-side code
+- **client**: Frontend client application code
+- **tools**: Development scripts, build tools, and configuration
 
 **Description:**
 
@@ -217,11 +226,11 @@ When you are working on features for our upcoming curriculum `next-*` branches, 
    pnpm run clean
 
    pnpm install
-   FCC_SUPERBLOCK='<superblock-name>' pnpm run test:curriculum
+   FCC_SUPERBLOCK='<superblock-name>' pnpm run test:curriculum:content
 
    # example:
 
-   # FCC_SUPERBLOCK='python-for-everybody' pnpm run test:curriculum
+   # FCC_SUPERBLOCK='python-for-everybody' pnpm run test:curriculum:content
 
    ```
 

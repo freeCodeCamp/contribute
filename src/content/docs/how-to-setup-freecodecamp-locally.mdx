@@ -10,18 +10,20 @@ import {
   Aside,
   Badge,
   Card,
-  LinkButton
+  LinkButton,
+  Tabs,
+  TabItem
 } from '@astrojs/starlight/components';
-
-Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
 
 <Aside type='danger' title='Warning for Windows Users'>
 
-- You can't build and run the codebase on Windows, you will [need to use WSL2](/how-to-setup-wsl/) and then follow the rest of the instructions for Linux or macOS.
-- You can't use Windows Command Prompt, Git Bash or PowerShell.
-- The hardware requirements need to be better than [what we recommend](/how-to-setup-freecodecamp-locally/#how-to-prepare-your-local-machine) to accommodate for a WSL-based setup.
+- This project ONLY supports development on **macOS and Linux systems such as Ubuntu**.
+- On Windows, you cannot use `Command Prompt`, `Git Bash`, or `PowerShell`. Instead, install [WSL2](/how-to-setup-wsl/) (Windows Subsystem for Linux) to create a Linux environment and then follow the Linux instructions.
+- We recommend using [Windows Terminal](https://github.com/microsoft/terminal) to run your WSL2 environment for the best experience.
 
 </Aside>
+
+Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
 
 ## Fork the freeCodeCamp repository on GitHub
 
@@ -61,100 +63,67 @@ The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often r
 
 Next, you need to choose between setting up a cloud IDE or your own machine.
 
-If you're looking to make a one-time contribution, use Gitpod, GitHub Codespaces, or another cloud-based IDE to make changes. Gitpod sets up a ready-to-code environment in just a few minutes in your web browser. For long-term contributions, we recommend setting up freeCodeCamp on your local machine.
+If you're looking to make a one-time contribution or want the fastest setup, use GitHub Codespaces which provides a ready-to-code environment in your web browser using devcontainers. For long-term contributions where you prefer local development, you can set up freeCodeCamp on your local machine.
 
-#### Cloud IDE (Gitpod, CodeSpaces, etc.) <Badge text="Recommended" variant="tip" size="small" />
+| Feature                     | GitHub Codespaces <Badge text="Recommended" variant="tip" size="small" /> | Your own machine                                 |
+| --------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------ |
+| **Hardware requirements**   | No minimum hardware requirements                                          | Powerful minimum hardware requirements           |
+| **Software installation**   | No need to install any software                                           | Additional software needed                       |
+| **Repository status**       | Always up-to-date repository                                              | Manual updates required                          |
+| **Setup complexity**        | Easy setup with devcontainers, works in any browser                       | Larger download and setup time                   |
+| **Internet dependency**     | Requires an internet connection to work                                   | Minimal internet connection required once set up |
+| **Performance**             | Consistent cloud-based performance                                        | Depends on your machine capabilities             |
+| **Usage limits**            | 60 hours free per month for personal accounts                             | No usage limits                                  |
+| **Environment consistency** | Identical setup for all contributors via devcontainers                    | May vary between different machines and OS       |
 
-**Pros:**
+Once you have decided, follow the relevant tab below to continue with the setup.
 
-- No minimum hardware requirements.
-- No need to install any software.
-- Always up-to-date repository.
-- Easy to setup, you only need a browser—including mobile browsers.
+<Tabs syncKey="environment">
+<TabItem label="GitHub Codespaces" icon="seti:github">
 
-**Cons:**
+#### GitHub Codespaces
 
-- Requires an internet connection to work.
-- Limited free usage—50 hours or so.
+We have automated the development environment setup using devcontainers. With GitHub Codespaces, you get a consistent, ready-to-code environment that runs in your browser with all dependencies pre-installed.
 
-#### Your own machine (local setup)
-
-**Pros:**
-
-- Quicker to make changes and see them live (depending on machine capabilities).
-- Minimal internet connection required once set up.
-
-**Cons:**
-
-- Powerful minimum hardware requirements.
-- Additional software needed.
-- Larger download and setup time.
-
-### How to prepare a Cloud IDE
-
-<Aside type='note'>
-
-Skip to [how to prepare your local machine](#how-to-prepare-your-local-machine) if you are not interested in using a cloud IDE.
-
-</Aside>
-
-#### Gitpod
-
-We have automated the process of installing all the dependencies & tools you will need. With Gitpod you get a free ready-to-code environment in a few minutes, and is useful if you do not have access to a computer or want to make one-time changes.
-
-**There are various ways to launch a Gitpod workspace:**
+**Launch a Codespace from your fork:**
 
 <Steps>
 
-1. Prepend `gitpod.io/#` in front of any URL from GitHub.
+1. Go to your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp`
 
-   Visit your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp.git` add `gitpod.io/#` in the front of the URL in the address bar and hit enter.
+2. Click the green **Code** button
 
-   In summary, go to
+3. Select the **Codespaces** tab
 
-   ```
-   gitpod.io/#https://github.com/YOUR_USER_NAME/freeCodeCamp.git
-   ```
+4. Click **Create codespace on main**
 
-   and you should see a workspace created for you. This works for any repository or pull-request on GitHub.
+   Your codespace will automatically set up the development environment using our devcontainer configuration. This includes:
+   - Installing Node.js, pnpm, and all dependencies
+   - Setting up MongoDB
+   - Configuring VS Code extensions
+   - Preparing the environment variables
 
-2. Alternatively install one of the below extensions for your browser.
-   - [Chrome Webstore](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki) - works with Chromium-based browsers like Google Chrome, Brave, Edge, etc.
-   - [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/gitpod) - Firefox
-
-   Once installed you will see a 'Gitpod' button on every repository, pull-request, etc. as a handy shortcut to launch a workspace from there. See the extension page for details, screenshots, etc.
+5. Wait for the setup to complete (usually 2-3 minutes)
 
 </Steps>
 
-<Aside type='note' title='GitPod is ready!'>
+</TabItem>
 
-That's it, you can now skip to the [syncing up from parent](#set-up-syncing-from-parent) section after you have launched a Gitpod workspace.
-
-Most parts of this guide applies to Gitpod workspaces, make sure to check the [troubleshooting section](/troubleshooting-development-issues/) for any gotchas.
-
-</Aside>
-
-### How to prepare your local machine
-
-<Aside type='note'>
-
-Skip to [how to prepare a cloud IDE](#how-to-prepare-a-cloud-ide) if you are not interested in setting up a local machine.
-
-</Aside>
-
-<Card title='System Requirements' icon='laptop'>
+<TabItem label="Local Machine" icon="laptop">
 
 Here is a minimum system requirement for running freeCodeCamp locally:
 
+<Card title='System Requirements' icon='laptop'>
+
 - A fast CPU (4+ cores)
 - At least 8 GB RAM
-- macOS, Linux or Windows 10 or 11 ([with WSL](/how-to-setup-wsl/))
+- macOS, Linux
 - 8-10 GB of free disk space
 - (Optional) 30-50 Mbps internet connection
 
-</Card>
+> **Windows users:** You will need more resources like memory and CPU than above, to allow running the project on Linux with WSL.
 
-We primarily support development on Linux and Unix-based systems like Ubuntu and macOS. You can develop on Windows 10 or 11 with WSL2 only. You can follow [this guide](/how-to-setup-wsl/) to set up WSL2. You can't use Command Prompt, Git Bash or PowerShell to run freeCodeCamp natively within windows.
+</Card>
 
 Start by installing the prerequisite software for your operating system.
 
@@ -207,7 +176,7 @@ Once you have the prerequisites installed, you need to prepare your development 
 
 </Steps>
 
-## Clone your Fork from GitHub
+#### Clone your Fork from GitHub
 
 You should already have a fork of freeCodeCamp on GitHub. If not, [follow these instructions to fork the repository](/how-to-setup-freecodecamp-locally/#fork-the-freecodecamp-repository-on-github). Next, you will need to [clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
 
@@ -248,11 +217,11 @@ You should already have a fork of freeCodeCamp on GitHub. If not, [follow these 
 
 </Steps>
 
-## Set up Syncing from Parent
+#### Set up Syncing from Parent
 
 Now that you have downloaded a copy of your fork, you will need to set up an `upstream` remote to the parent repository.
 
-[As mentioned earlier](#fork-the-repository-on-github), the main repository is referred to as the `upstream` repository. Your fork is referred to as the `origin` repository.
+[As mentioned earlier](#fork-the-freecodecamp-repository-on-github), the main repository is referred to as the `upstream` repository. Your fork is referred to as the `origin` repository.
 
 You need a reference from your local clone to the `upstream` repository in addition to the `origin` repository. This is so that you can sync changes from the main repository without the requirement of forking and cloning repeatedly.
 
@@ -287,13 +256,43 @@ You need a reference from your local clone to the `upstream` repository in addit
 
 </Steps>
 
-## Running freeCodeCamp Locally
+</TabItem>
+</Tabs>
 
-Now that you have a local copy of freeCodeCamp, you can follow these instructions to run it locally. This will allow you to:
+## Running freeCodeCamp
+
+Now that you have a copy of freeCodeCamp, you can follow these instructions to run it. This will allow you to:
 
 - Preview edits to pages as they would appear on the learning platform.
 - Work on UI related issues and enhancements.
 - Debug and fix issues with the application servers and client apps.
+
+<Tabs syncKey="environment">
+<TabItem label="GitHub Codespaces" icon="seti:github">
+
+Your Codespace comes pre-configured with all dependencies installed and services like the database already running. You can start developing immediately:
+
+1. In the terminal, run:
+
+   ```bash
+   pnpm run develop
+   ```
+
+   This will start both the API server and the client applications.
+
+2. Wait for the process to complete. It can take a few minutes, you will see a notification to for the `8000` port when it's ready.
+
+3. Click on the notification to open the client application in a new browser tab.
+
+<Aside type='tip' title="Congratulations - you're all set!">
+
+You now have a copy of freeCodeCamp's entire learning platform running in your Codespace. Go ahead and start making changes to the codebase.
+
+</Aside>
+
+</TabItem>
+
+<TabItem label="Local Machine" icon="laptop">
 
 ### Step 1: Set up the Environment Variable File
 
@@ -334,7 +333,7 @@ Before you can run the application locally, you will need to start a MongoDB Ser
 1. Start the MongoDB server as a replica set:
 
    ```bash
-   docker compose --file ./api/tools/docker-compose.yml up -d
+   docker compose -f docker/docker-compose.yml up -d
    ```
 
 1. Seed the database and setup a new user:
@@ -397,7 +396,7 @@ Once ready, open a web browser and visit: `http://localhost:8000`
 
 <Aside type='tip' title="Congratulations - you're all set!">
 
-If the app loads, sign in. You now have a copy of freeCodeCamp's entire learning platform running on your local machine. Go ahead and start making changes to the codebase.
+You now have a copy of freeCodeCamp's entire learning platform running on your local machine. Go ahead and start making changes to the codebase.
 
 </Aside>
 
@@ -413,6 +412,9 @@ If you have issues with the setup, check out the [troubleshooting section](/trou
 
 </Aside>
 
+</TabItem>
+</Tabs>
+
 ## Quick Commands Reference
 
 <Card title='Handy Scripts to use locally' icon='open-book'>
@@ -423,7 +425,7 @@ If you have issues with the setup, check out the [troubleshooting section](/trou
 | `pnpm run seed`                | Creates authorized test users and inserts them into MongoDB. Also runs `seed:exams` and `seed:surveys` below. |
 | `pnpm run seed:certified-user` | Creates authorized test users with certifications fully completed, and inserts them into MongoDB.             |
 | `pnpm run seed:exams`          | Creates exams and inserts them into MongoDB.                                                                  |
-| `pnpm run seed:surveys`        | Creates surveys for defaults users and inserts them into MongoDB.                                             |
+| `pnpm run seed:surveys`        | Creates surveys for default users and inserts them into MongoDB.                                              |
 | `pnpm run develop`             | Starts the freeCodeCamp API Server and Client Applications.                                                   |
 | `pnpm run clean`               | Uninstalls all dependencies and cleans up caches.                                                             |
 

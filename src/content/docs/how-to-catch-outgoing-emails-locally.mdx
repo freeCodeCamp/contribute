@@ -1,125 +1,37 @@
 ---
-title: Catching emails locally
+title: Debug outgoing emails
 sidebar:
-  label: Debug outgoing emails locally
+  label: Debug outgoing emails
 ---
 
-:::note
-This is an **optional** step and is required only when working with email workflows
-:::
+Some email workflows require the back-end API server to send outgoing emails. [Mailpit](https://github.com/axllent/mailpit) is a developer tool for email testing that will catch the email messages sent by local API server, without needing to set up any email server.
 
-- [Introduction](#introduction)
-- [Installing MailHog](#installing-mailhog)
-- [Using MailHog](#using-mailhog)
-- [Useful Links](#useful-links)
+### Scenarios that send emails
 
-## Introduction
+- **Update email**: Users changing their email address
+- **Report user**: Abuse reports that notify moderators
+- **Certifications**: Certificate verification emails
 
-Some email workflows, like updating a user's email, require the back-end API server to send outgoing emails. MailHog is an alternative to using an email service provider to send actual email messages. It is a developer tool for email testing that will catch the email messages sent by your freeCodeCamp instance.
+## Using Mailpit
 
-## Installing MailHog
+Mailpit is automatically included when you run `docker compose -f docker/docker-compose.yml up -d` as part of the local setup. No additional installation is required.
 
-MailHog can be installed on macOS, Windows, and Linux or used via Docker.
+Once the containers are running, open your browser and navigate to [http://localhost:8025](http://localhost:8025) to access the Mailpit web interface where you can view all emails sent by your local freeCodeCamp instance.
 
-<details>
-  <summary>Installing MailHog with Docker</summary>
+## Troubleshooting
 
-If you have Docker installed then you can use
+**Emails not appearing?**
 
-```bash
-docker run --name mailhog -d -e "MH_STORAGE=maildir" -v $PWD/maildir:/maildir -p 1025:1025 -p 8025:8025 mailhog/mailhog
-```
+1. Check containers are running: `docker ps`
+2. Verify Mailpit is listed and healthy
+3. Check API logs for email sending errors
+4. Restart containers: `docker compose -f docker/docker-compose.yml restart mailpit`
 
-to start MailHog in the background and
+**Can't access the UI?**
 
-```bash
-docker stop mailhog
-```
-
-to stop it.
-
-When the installation completes, you can start [using MailHog](#using-mailhog).
-
-</details>
-
-<details>
-<summary>Installing MailHog on macOS</summary>
-
-Install MailHog on macOS with [Homebrew](https://brew.sh/):
-
-```bash
-brew install mailhog
-brew services start mailhog
-```
-
-The above commands will start a MailHog service in the background.
-
-When the installation completes, you can start [using MailHog](#using-mailhog).
-
-</details>
-
-<details>
-
-<summary>Installing MailHog on Windows</summary>
-
-Download the latest version of MailHog from [MailHog's official repository](https://github.com/mailhog/MailHog/releases). Locate and click on the link for your Windows version (32 or 64 bit) and a `.exe` file will be downloaded to your computer.
-
-When the download completes, click to open the file. A Windows firewall notification may appear, requesting access permission for MailHog. A standard Windows command line prompt will open where MailHog will be running once firewall access is granted.
-
-Close MailHog by closing the command prompt window. To start MailHog again, click on the MailHog executable (`.exe`) file that was downloaded initially - it is not necessary to download a new MailHog installation file.
-
-Start [using MailHog](#using-mailhog).
-
-</details>
-
-<details>
-
-<summary>Installing MailHog on Linux</summary>
-
-First, install [Go](https://golang.org).
-
-Run the following commands to install GO on Debian-based systems like Ubuntu and Linux Mint.
-
-```bash
-sudo apt-get install golang
-```
-
-Run the following commands to install GO on RPM-based systems like CentOS, Fedora, Red Hat Linux, etc.
-
-```bash
-sudo dnf install golang
-```
-
-Alternatively, run the following commands to install GO.
-
-```bash
-sudo yum install golang
-```
-
-Now set the path for Go with the following commands.
-
-```bash
-echo "export GOPATH=$HOME/go" >> ~/.profile
-echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin' >> ~/.profile
-source ~/.profile
-```
-
-Finally, enter the commands below to install and run MailHog.
-
-```bash
-go get github.com/mailhog/MailHog
-sudo cp /home/$(whoami)/go/bin/MailHog /usr/local/bin/mailhog
-mailhog
-```
-
-Start [using MailHog](#using-mailhog).
-
-</details>
-
-## Using MailHog
-
-Open a new browser tab or window and navigate to [http://localhost:8025](http://localhost:8025) to open your MailHog inbox when the MailHog installation has been completed and MailHog is running.
+- Ensure port 8025 isn't in use by another service
+- Try [http://127.0.0.1:8025](http://127.0.0.1:8025) instead of localhost
 
 ## Useful Links
 
-- Check out the [MailHog](https://github.com/mailhog/MailHog) repository for further information related to MailHog. Additional information is also available regarding custom MailHog configurations.
+- [Mailpit repository](https://github.com/axllent/mailpit) for documentation and advanced features

@@ -476,7 +476,7 @@ Challenge tests can make use of the Node.js and Chai.js assertion libraries. Als
 The `__helpers` object is only available in the `# --hints--` test sections. It is not available in `# --before-all--` or `# --before-each--` sections.
 :::
 
-### Guidlines for assertions
+### Guidelines for assertions
 
 If a method exists in Chai.js that expresses what is being tested for, its use is preferred.
 
@@ -668,25 +668,25 @@ Before you [create a pull request](/how-to-open-a-pull-request/) for your change
 1. To test all challenges run the below command from the root directory
 
    ```
-   pnpm run test:curriculum
+   pnpm run test:curriculum:content
    ```
 
    2. To test single challenge, you can use it challenge id with following command
 
    ```
-   FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test:curriculum
+   FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test:curriculum:content
    ```
 
 2. You can also test a block or a superblock of challenges with these commands
 
    ```
-   FCC_BLOCK='basic-html-and-html5' pnpm run test:curriculum
+   FCC_BLOCK='basic-html-and-html5' pnpm run test:curriculum:content
    ```
 
    Use the block's `dashedName` (the folder's name) for the `FCC_BLOCK` value.
 
    ```
-   FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum
+   FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum:content
    ```
 
 </Steps>

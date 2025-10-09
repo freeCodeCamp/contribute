@@ -1,0 +1,23 @@
+{
+  "name": "contribute",
+  "compatibility_date": "2025-10-07",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+
+  // Enable preview URLs but disable workers.dev subdomain (main deployment)
+  "preview_urls": true,
+  "workers_dev": false,
+
+  "routes": [
+    {
+      "pattern": "contribute.freecodecamp.org",
+      "custom_domain": true
+    }
+  ],
+
+  "placement": {
+    "mode": "smart"
+  }
+}

@@ -10,7 +10,14 @@ import { Steps } from '@astrojs/starlight/components';
 
 We recommend styling components using our [design style guide](https://design-style-guide.freecodecamp.org/).
 
-The colors are defined in [`variable.css`](/client/src/components/layouts/variables.css), and the fonts are in [`fonts.css`](/client/src/components/layouts/fonts.css).
+The colors, fonts, and base styles are defined in the external [`@freecodecamp/ui`](https://github.com/freeCodeCamp/ui) component library. To contribute to this library, see our [component library contribution guide](/how-to-work-on-the-component-library/). This package provides:
+
+- Color variables and design tokens
+- Font definitions and typography
+- Tailwind CSS utilities and base styles
+- Reusable UI components
+
+You can import components from `@freecodecamp/ui` in your React code, and the CSS is automatically included via the `base.css` file.
 
 We are strongly opinionated about adding new variables/tokens to the colors. After careful research, the colors have been chosen to respect the freeCodeCamp brand identity, developer experience, and accessibility.
 
@@ -28,7 +35,7 @@ We are striving to support right-to-left (RTL) layout in the codebase for langua
 
 ## General JavaScript
 
-In most cases, our [linter](/how-to-setup-freecodecamp-locally/#follow-these-steps-to-get-your-development-environment-ready) will warn of any formatting which goes against this codebase's preferred practice.
+In most cases, our [linter](/how-to-setup-freecodecamp-locally/#additional-prerequisites) will warn of any formatting which goes against this codebase's preferred practice.
 
 It is encouraged to use functional components over class-based components.
 
