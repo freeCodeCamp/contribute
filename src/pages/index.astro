@@ -10,18 +10,31 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const { hash } = window.location;
+
+    // List of default routes you want to support
+    const defaultRoutes = ['/intro', '/documentation'];
+
     if (!hash || hash === '#/' || hash === '#') {
-      window.location.replace('/intro/');
+      // Redirect to the first default route (you can choose intro or documentation)
+      window.location.replace(defaultRoutes[0] + '/');
     } else if (hash.startsWith('#/')) {
       const [newPath, newHash] = hash.slice(2).split('?id=');
-      window.location.replace(
-        newHash ? `/${newPath}/#${newHash}` : `/${newPath}/`
-      );
+
+      // If the hash matches one of the default routes, redirect there
+      if (defaultRoutes.includes(`/${newPath}`)) {
+        window.location.replace(
+          newHash ? `/${newPath}/#${newHash}` : `/${newPath}/`
+        );
+      } else {
+        // Fallback: redirect to intro
+        window.location.replace('/intro/');
+      }
     } else {
       window.location.replace('/intro/');
     }
   });
 </script>
+
 <style>
   .loader {
     border: 8px solid #0a0a23;
