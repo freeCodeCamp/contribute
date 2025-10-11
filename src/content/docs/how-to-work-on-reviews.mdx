@@ -1,0 +1,33 @@
+---
+title: How to work on review pages
+sidebar:
+  label: Work on Review Pages
+---
+
+The reviews summarise the topics introduced in the corresponding chapter or module, in lectures and workshops (as some workshops introduce new concepts not taught in the lectures). Some modules could have more than one review depending on how they are structured.
+
+The concepts in a review should follow this pattern.
+
+````md
+- **some topic**: some explanation
+
+```
+some code here if necessary
+```
+````
+
+The topics can be divided in sections using headings, headings should start from `h2` level.
+
+```md
+## Topic
+
+- **some topic**: some explanation
+
+### Sub topic (if needed)
+```
+
+The metadata for reviews require a `blockType` property with a value of `review`, and a `blockLayout` with a value of `link`.
+
+Reviews use a `challengeType` of 31.
+
+Reviews have a dashedName with `review-topic`, and titles of the reviews are like `Topic Review`.
