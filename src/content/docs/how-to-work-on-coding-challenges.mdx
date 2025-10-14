@@ -67,21 +67,36 @@ Challenge instruction text, in markdown
 # --before-all--
 
 ```js
-// This code will run before the user code and tests. For example:
-window.fetch = () =>
-  Promise.resolve({ json: () => Promise.resolve({ data: 'example' }) });
-// Warning: this is currently only supported in challenges that render HTML.
 // Note: the --before-all-- section is optional.
 // Warning: __helpers are not available in --before-all-- sections.
+// This code will run before the learner's code and tests. For example, initializing fake timers
+let clock = __FakeTimers.install();
+// It is necessary for HTML challenges when something needs to be mocked before the learner's code is evaluated. For example, fake timers need to be setup ahead of time if the learner's code will call setTimeout.
 ```
 
 # --before-each--
 
 ```js
-// This code will run before each test execution. For example:
-globalThis.testVariable = 'initial value';
 // Note: the --before-each-- section is optional.
-// Warning: __helpers are not available in --before-each-- sections.
+// Precisely when this is evaluated depends on the type of challenge. HTML challenges run it after the learner's code, but before each test. In all other challenges the order is before-each, learner code and then test code.
+const _testFixture = 'provides data for the tests';
+const clock = __FakeTimers.install();
+```
+
+# --after-each--
+
+```js
+// Note: the --after-each-- section is optional.
+// Undo any lasting changes caused by --before-each-- e.g.
+clock.uninstall();
+```
+
+# --after-all--
+
+```js
+// Note: the --after-all-- section is optional.
+// Undo any lasting changes caused by --before-all-- e.g.
+clock.uninstall();
 ```
 
 # --hints--
@@ -106,18 +121,6 @@ assert.equal(
 Extra information for a challenge, in markdown
 
 # --seed--
-
-## --before-user-code-- (deprecated)
-
-```js
-Code evaluated before the user's code.
-```
-
-## --after-user-code-- (deprecated)
-
-```js
-Code evaluated after the user's code, and just before the tests
-```
 
 ## --seed-contents--
 
