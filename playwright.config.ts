@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+console.log('hi');
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -68,12 +70,12 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ]
+  ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    command: 'pnpm run develop',
+    port: 4321,
+    reuseExistingServer: true
+  }
 });
