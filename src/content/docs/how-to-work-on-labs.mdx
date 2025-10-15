@@ -1,0 +1,37 @@
+---
+title: How to work on lab challenges
+sidebar:
+  label: Work on Lab Challenges
+---
+
+Labs are a type of challenge that presents an empty or almost empty editor to the camper, and a list of user stories to satisfy.
+
+Lab descriptions should have this format:
+
+```md
+[introduction]
+
+**Objective:** Fulfill the user stories below and get all the tests to pass to complete the lab.
+
+**User Stories:**
+
+[numbered list with all the details needed to pass the lab]
+
+Note/Hint: (this is optional)
+```
+
+These challenges are used to allow for practice and reinforce concepts and practice problem solving.
+
+It can be that in the user stories there is written something that is not tested (for various reasons, including test limitations), but everything tested must be written in the user stories.
+
+The demo projects (the code under the solution header in the markdown file) can be more involved, it should be a good example of what could be created going above and beyond the user stories. For the beginning labs, the demo projects are usually simpler, to avoid overwhelming the campers.
+
+:::note
+All labs have a solution, but not all labs have a demo project.
+
+For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
+:::
+
+The labs that have a demo project have a `demoType` property in the frontmatter with a value of `onClick`, the labs that do not have a demo project do not have a `demoType` project.
+
+The metadata for labs require a `blockType` property with a value of `lab`, and a `blockLayout` with a value of `link`.

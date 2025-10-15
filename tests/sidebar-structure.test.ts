@@ -106,8 +106,8 @@ describe('Sidebar Structure', () => {
       expect(codeContribs).toBeDefined();
     });
 
-    it('should have exactly 15 items', () => {
-      expect(codeContribs?.items.length).toBe(15);
+    it('should have exactly 17 items', () => {
+      expect(codeContribs?.items.length).toBe(17);
     });
 
     it('should include setup guide as first item', () => {
@@ -324,7 +324,7 @@ describe('Sidebar Structure', () => {
     it('should have expected number of items per section', () => {
       const expectedCounts: Record<string, number> = {
         Introduction: 3,
-        'Code Contributions': 15,
+        'Code Contributions': 17,
         'Translation Contributions': 2,
         'Additional Guides': 7,
         'Handbooks (Staff & Mods)': 5,
