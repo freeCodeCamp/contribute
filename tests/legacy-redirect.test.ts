@@ -12,7 +12,7 @@ describe('Legacy URL redirects', () => {
     }
   ];
 
-  it('redirect configuration exists', async () => {
+  it('redirect configuration exists', () => {
     // The redirects are defined in public/_redirects (Cloudflare Workers format)
     // We're verifying the expected redirect paths that should be handled
     // by the deployed application

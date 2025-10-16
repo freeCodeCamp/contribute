@@ -47,9 +47,9 @@ jobs:
             ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install dependencies
-        run: |
-          pnpm install --frozen-lockfile
-
+        run: pnpm install --frozen-lockfile
+      # astro check has to run first because it generates TS files that eslint needs
+      - name: Diagnostics
+        run: pnpm astro check
       - name: Lint
-        run: |
-          pnpm lint
+        run: pnpm lint
