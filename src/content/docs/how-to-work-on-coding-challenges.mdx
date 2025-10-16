@@ -39,6 +39,24 @@ The workshops have some additional tooling to help create new projects and steps
 
 ## Challenge Template
 
+:::note
+
+The four hooks, `--before-each--`, `--before-all--`, `--after-each--` and -`-after-all--` are only evaluated when running tests.
+
+Due to differences in the testing environments, global variables are not handled the same way across hooks.
+
+- In DOM challenges, any variables declared in either `--before-all--` or `--before-each--` hooks are available in the tests.
+
+- In the other challenges, `--before-each--` is the same, but `--before-all--` is different. You have to explicitly add variables to `globalThis` for them to be available in tests.
+
+:::
+
+:::danger
+
+Since `globalThis` persists until the page is reloaded, it's very important to undo any changes to it in an after hook.
+
+:::
+
 ````md
 ---
 id: Unique identifier (alphanumerical, MongoDB_id)
@@ -67,21 +85,39 @@ Challenge instruction text, in markdown
 # --before-all--
 
 ```js
-// This code will run before the user code and tests. For example:
-window.fetch = () =>
-  Promise.resolve({ json: () => Promise.resolve({ data: 'example' }) });
-// Warning: this is currently only supported in challenges that render HTML.
-// Note: the --before-all-- section is optional.
-// Warning: __helpers are not available in --before-all-- sections.
+// This code will run before the learner's code and tests.
+let clock = __FakeTimers.install();
+globalThis.x = 1;
+// It is necessary for DOM challenges when something needs to be
+// mocked before the learner's code is evaluated. For example,
+// fake timers need to be set up ahead of time if the learner's code
+// will call setTimeout.
 ```
 
 # --before-each--
 
 ```js
-// This code will run before each test execution. For example:
-globalThis.testVariable = 'initial value';
-// Note: the --before-each-- section is optional.
-// Warning: __helpers are not available in --before-each-- sections.
+// Precisely when this is evaluated depends on the type of
+// challenge. HTML challenges run it after the learner's code,
+// but before each test. In all other challenges the order is
+// --before-each--, learner's code and then test code.
+const _testFixture = 'provides data for the tests';
+const clock = __FakeTimers.install();
+```
+
+# --after-each--
+
+```js
+// Undo any lasting changes caused by --before-each-- e.g.
+clock.uninstall();
+```
+
+# --after-all--
+
+```js
+// Undo any lasting changes caused by --before-all-- e.g.
+clock.uninstall();
+delete globalThis.x;
 ```
 
 # --hints--
@@ -106,18 +142,6 @@ assert.equal(
 Extra information for a challenge, in markdown
 
 # --seed--
-
-## --before-user-code-- (deprecated)
-
-```js
-Code evaluated before the user's code.
-```
-
-## --after-user-code-- (deprecated)
-
-```js
-Code evaluated after the user's code, and just before the tests
-```
 
 ## --seed-contents--
 
@@ -471,10 +495,6 @@ Challenges should have the minimum number of tests necessary to verify that a ca
 Our goal is to communicate the single point that the challenge is trying to teach, and test that they have understood that point.
 
 Challenge tests can make use of the Node.js and Chai.js assertion libraries. Also, if needed, user-generated code can be accessed in the `code` variable. In addition, the `__helpers` object exposes several functions that simplify the process of writing tests. The available functions are defined in the [curriculum-helpers](https://github.com/freeCodeCamp/curriculum-helpers/blob/main/lib/index.ts) repo.
-
-:::note
-The `__helpers` object is only available in the `# --hints--` test sections. It is not available in `# --before-all--` or `# --before-each--` sections.
-:::
 
 ### Guidelines for assertions
 
