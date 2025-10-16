@@ -1,4 +1,5 @@
 {
+  "exclude": ["playwright-report", "dist"],
   "compilerOptions": {
     "resolveJsonModule": true,
     "types": ["node", "vitest/globals"],
