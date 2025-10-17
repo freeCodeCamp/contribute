@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
-    "@astrojs/starlight": "0.36.0",
+    "@astrojs/starlight": "0.36.1",
     "@astrojs/starlight-tailwind": "4.0.1",
     "@tailwindcss/vite": "4.1.14",
     "astro": "5.14.5",
