@@ -22,7 +22,8 @@ const sidebar = [
       'how-to-add-playwright-tests',
       'how-to-help-with-video-challenges',
       'how-to-work-on-the-docs-site',
-      'how-to-open-a-pull-request'
+      'how-to-open-a-pull-request',
+      'how-to-fix-merge-conflicts'
     ]
   },
   {
