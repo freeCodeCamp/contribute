@@ -6,7 +6,7 @@ console.error = (...args) => {
   // Check if this is an unhandled error we want to track
   if (args.some(arg => typeof arg === 'object' && arg !== null)) {
     // Convert objects to string for better error reporting
-    const stringifiedArgs = args.map(arg =>
+    const stringifiedArgs = args.map((arg: unknown) =>
       typeof arg === 'object' && arg !== null
         ? JSON.stringify(arg, null, 2)
         : arg
@@ -61,7 +61,7 @@ afterEach(() => {
   if (typeof window !== 'undefined' && window.close) {
     try {
       window.close();
-    } catch (e) {
+    } catch {
       // Ignore errors during window cleanup
     }
   }

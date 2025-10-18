@@ -1,6 +1,13 @@
 import eslintPluginAstro from 'eslint-plugin-astro';
-export default [
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+export default defineConfig([
   ...eslintPluginAstro.configs.recommended,
+  {
+    ignores: ['**/*.astro'],
+    extends: [tseslint.configs.recommendedTypeChecked]
+  }, // TypeScript ESLint does not support .astro files
+  { languageOptions: { parserOptions: { projectService: true } } },
   {
     ignores: [
       '**/node_modules',
@@ -18,4 +25,4 @@ export default [
       '**/.wrangler/'
     ]
   }
-];
+]);
