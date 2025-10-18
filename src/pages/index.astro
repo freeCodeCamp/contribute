@@ -8,18 +8,10 @@
   Location hashes are not passed to the server, so we need the below.
 -->
 <script>
+  import { getRedirectedPath } from '../modules/redirect';
   document.addEventListener('DOMContentLoaded', () => {
-    const { hash } = window.location;
-    if (!hash || hash === '#/' || hash === '#') {
-      window.location.replace('/intro/');
-    } else if (hash.startsWith('#/')) {
-      const [newPath, newHash] = hash.slice(2).split('?id=');
-      window.location.replace(
-        newHash ? `/${newPath}/#${newHash}` : `/${newPath}/`
-      );
-    } else {
-      window.location.replace('/intro/');
-    }
+    const hash = getRedirectedPath(window.location.hash);
+    window.location.replace(hash);
   });
 </script>
 <style>
