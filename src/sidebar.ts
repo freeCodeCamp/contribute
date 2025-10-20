@@ -27,10 +27,6 @@ const sidebar = [
     ]
   },
   {
-    label: 'Translation Contributions',
-    items: ['how-to-translate-files', 'how-to-proofread-files']
-  },
-  {
     label: 'Additional Guides',
     items: [
       'curriculum-file-structure',
