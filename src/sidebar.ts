@@ -13,11 +13,9 @@ const sidebar = [
       'how-to-work-on-quizzes',
       'how-to-work-on-reviews',
       'how-to-work-on-labs',
-      'curriculum-help',
       'how-to-work-on-the-component-library',
       'how-to-work-on-workshops',
       'how-to-setup-freecodecamp-mobile-app-locally',
-      'how-to-work-on-tutorials-that-use-coderoad',
       'how-to-work-on-localized-client-webapp',
       'how-to-add-playwright-tests',
       'how-to-help-with-video-challenges',
@@ -30,12 +28,12 @@ const sidebar = [
     label: 'Additional Guides',
     items: [
       'curriculum-file-structure',
+      'curriculum-help',
+      'user-token-workflow',
       'how-to-catch-outgoing-emails-locally',
       'how-to-setup-wsl',
-      'how-to-use-docker-on-windows-home',
-      'user-token-workflow',
-      'troubleshooting-development-issues',
-      'authors-analytics-manual'
+      'how-to-work-on-tutorials-that-use-coderoad',
+      'troubleshooting-development-issues'
     ]
   },
   {
@@ -45,7 +43,8 @@ const sidebar = [
       'reply-templates',
       'language-lead-handbook',
       'courses-vscode-extension',
-      'how-to-enable-new-languages'
+      'how-to-enable-new-languages',
+      'authors-analytics-manual'
     ]
   },
   {
