@@ -4,17 +4,29 @@ sidebar:
   label: Set up freeCodeCamp on Windows
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+import { Aside, Steps, Card } from '@astrojs/starlight/components';
 
-:::note
+This guide covers some common steps with the setup of WSL2.
+
+Once some of the common issues with WSL2 are addressed, you should be able to follow [this local setup guide](/how-to-setup-freecodecamp-locally/) to work with freeCodeCamp on Windows running a WSL distro like Ubuntu.
+
+<Aside type='note'>
+
 Before you follow these instructions make sure your system meets the requirements.
 
-**WSL 2**: Windows 10 64-bit (Version 2004, Build 19041 or higher) - available for all distributions including Windows 10 Home.
+</Aside>
 
-**Docker Desktop for Windows**: See respective requirements for [Windows 10 Pro](https://docs.docker.com/docker-for-windows/install/#system-requirements) and [Windows 10 Home](https://docs.docker.com/docker-for-windows/install-windows-home/#system-requirements)
-:::
+<Card title='System Requirements' icon='laptop'>
 
-This guide covers some common steps with the setup of WSL2. Once some of the common issues with WSL2 are addressed, you should be able to follow [this local setup guide](/how-to-setup-freecodecamp-locally/) to work with freeCodeCamp on Windows running a WSL distro like Ubuntu.
+- **Hardware**:
+  - A fast CPU (6+ cores)
+  - At least 12+ GB RAM
+  - 20+ GB of free disk space
+  - (Optional) 30-50 Mbps internet connection
+- **Operating System**: Windows 10 64-bit (Version 2004, Build 19041 or higher).
+- **Docker Desktop for Windows**: See [the requirements](https://docs.docker.com/docker-for-windows/install/#system-requirements) for Windows.
+
+</Card>
 
 ## Enable WSL
 
@@ -24,13 +36,13 @@ Follow the instructions on the [official documentation](https://docs.microsoft.c
 
 <Steps>
 
-1. We recommend using Ubuntu-18.04 or above with WSL2.
-
-   :::note
-   While you may use other non-Debian-based distributions, they all come with their own 'gotchas' that are beyond the scope of this guide.
-   :::
+1. We recommend using Ubuntu-22.04 or above with WSL2.
 
    As of November 2023, Ubuntu and Debian are the only Linux distributions [officially supported by Playwright](https://playwright.dev/docs/intro#system-requirements), the end-to-end testing library used by freeCodeCamp.
+
+   You may use other non-Debian-based distributions, they all come with their own 'gotchas' that are beyond the scope of this guide.
+
+   Here is how you can [run a linux flavour](https://learn.microsoft.com/en-us/windows/wsl/install#ways-to-run-multiple-linux-distributions-with-wsl) of your choice
 
 2. Update the dependencies for the OS
 
@@ -46,7 +58,7 @@ Follow the instructions on the [official documentation](https://docs.microsoft.c
 
 ## Set up Git
 
-Git comes pre-installed with Ubuntu 18.04, verify your Git version with `git --version`.
+Git comes pre-installed with Ubuntu 22.04, verify your Git version with `git --version`.
 
 ```txt
 ~
@@ -58,13 +70,9 @@ git version 2.25.1
 
 ## Installing a Code Editor
 
-We highly recommend installing [Visual Studio Code](https://code.visualstudio.com) on Windows 10. It has great support for WSL and automatically installs all the necessary extensions on your WSL distribution.
+We recommend installing [Visual Studio Code](https://code.visualstudio.com). It has great support for WSL and automatically installs all the necessary extensions on your WSL distribution.
 
-Essentially, you will edit and store your code on Ubuntu-18.04 with VS Code installed on Windows.
-
-If you use [IntelliJ Idea](https://www.jetbrains.com/idea/), you may need to update your Node interpreter and npm package manager to what is installed on your WSL distro.
-
-You can check these settings by going to Settings > Languages & Frameworks > Node.js and npm.
+**Essentially, you will edit and store your code on Ubuntu-22.04 with VS Code installed on Windows.**
 
 ## Installing Docker Desktop
 
@@ -72,48 +80,15 @@ You can check these settings by going to Settings > Languages & Frameworks > Nod
 
 Follow the instructions on the [official documentation](https://docs.docker.com/docker-for-windows/install) and install Docker Desktop for your Windows distribution.
 
-There are some minimum hardware requirements for the best experience.
-
 ## Configure Docker Desktop for WSL
 
-Once Docker Desktop is installed, [follow these instructions](https://docs.docker.com/docker-for-windows/wsl) and configure it to use the Ubuntu-18.04 installation as a backend.
+Once Docker Desktop is installed, [follow these instructions](https://docs.docker.com/docker-for-windows/wsl) and configure it to use the Ubuntu-22.04 installation as a backend.
 
 This makes it so that the containers run on the WSL side instead of running on Windows. You will be able to access the services over `http://localhost` on both Windows and Ubuntu.
 
-## Install MongoDB from Docker Hub
-
-Once you have configured Docker Desktop to work with WSL2, follow these steps to start a MongoDB service:
-
-<Steps>
-
-1. Launch a new Ubuntu terminal
-
-2. Pull MongoDB from Docker Hub. Please refer to the [Prerequisites](/how-to-setup-freecodecamp-locally/#Prerequisites) table for the current version of MongoDB used by freeCodeCamp. For example, if the version number is `5.0.x`, replace `<x.y>` with `5.0` in the following two code snippets.
-
-   ```bash
-   docker pull mongo:<x.y>
-   ```
-
-3. Start the MongoDB service at port `27017`, and configure it to run automatically on system restarts
-
-   ```bash
-   docker run -it \
-     -v mongodata:/data/db \
-     -p 27017:27017 \
-     --name mongodb \
-     --restart unless-stopped \
-     -d mongo:<x.y>
-   ```
-
-4. You can now access the service from both Windows or Ubuntu at `mongodb://localhost:27017`.
-
-</Steps>
-
 ## Installing Node.js and pnpm
 
-We recommend you install the LTS release for Node.js with a node version manager - [nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-Once installed use this command to install and use the latest Node.js LTS version:
+We recommend you install the LTS release for Node.js with [node version manager - `nvm`](https://github.com/nvm-sh/nvm#installing-and-updating). Once installed use this command to install and use the latest Node.js LTS version:
 
 ```bash
 nvm install --lts
@@ -131,119 +106,35 @@ npm install -g pnpm
 
 Now that you have installed the pre-requisites, follow [our local setup guide](/how-to-setup-freecodecamp-locally/) to clone, install and set up freeCodeCamp locally on your machine.
 
-## Optimize Windows and WSL
+## Optimize memory allocation
 
-:::note
-The following tips were collected from across the web and have not gone through vigorous testing. Your mileage may vary.
-:::
+The default settings for your WSL installtion can vary, we recommend tuning the memory allocated to WSL by Windows by following these steps.
 
-### Adjust processor scheduling for background services
-
-This may reduce incidents of Docker containers crashing due to lack of resources.
-
-Open the System Properties control panel by pressing <kbd>Win + R</kbd> and entering `sysdm.cpl`
-
-<details>
-  <summary>
-    Enter <code>sysdm.cpl</code> in the Run dialog (screenshot)
-  </summary>
-  <br />
-  <img
-    src='/images/wsl/run-sysdm.png'
-    alt='Enter `sysdm.cpl` in the Run dialog'
-  />
-</details>
-<br />
-
-Go to Advanced -> Performance -> Settings…
-
-<details>
-  <summary>
-    Performance Settings button under Advanced tab in System Properties
-    (screenshot)
-  </summary>
-  <br />
-  <img
-    src='/images/wsl/advanced-performance-settings.png'
-    alt='Performance Settings button under Advanced tab in System Properties'
-  />
-</details>
-<br />
-
-Under Advanced -> Processor scheduling, choose "Background services". Do not close the window. Continue to the next tip.
-
-<details>
-  <summary>
-    Background services radio button under Advanced tab in Performance Options
-    (screenshot)
-  </summary>
-  <br />
-  <img
-    src='/images/wsl/background-services.png'
-    alt='Background services radio button under Advanced tab in Performance Options'
-  />
-</details>
-
-### Increase the size of Windows paging file for the system drive
-
-Under Advanced -> Virtual memory, click "Change…"
-
-<details>
-  <summary>
-    Change virtual memory button under Advanced tab in Performance Options
-    (screenshot)
-  </summary>
-  <br />
-  <img
-    src='/images/wsl/advanced-virtual-memory.png'
-    alt='Change virtual memory button under Advanced tab in Performance Options'
-  />
-</details>
-<br />
-
-Choose "Custom size". Set the initial size to 1.5x and the maximum size to 3x of your physical memory. Then click "Set".
-
-<details>
-  <summary>
-    Set custom size button in Virtual Memory window (screenshot)
-  </summary>
-  <br />
-  <img
-    src='/images/wsl/set-custom-size.png'
-    alt='Set custom size button in Virtual Memory window'
-  />
-</details>
-
-### Increase the size of memory allocated to WSL
-
-Create a [`.wslconfig` file](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#configuration-setting-for-wslconfig) in your [`%UserProfile%` directory](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig) (typically `C:\Users\<UserName>\.wslconfig`). Please read the [WSL documentation](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#configuration-setting-for-wslconfig) carefully and replace `x` with values that suit your own needs:
+Create a `.wslconfig` file in your `%UserProfile%` directory, typically at `C:\Users\<UserName>\.wslconfig`. Replace `x` with values that suit your own needs:
 
 ```ini
 # Settings apply across all Linux distros running on WSL 2
 [wsl2]
-
-# How much memory to assign to the WSL 2 VM. The default value might not be enough
+# Memory to assign to the WSL 2 VMs.
 memory=xGB
-
-# How much swap space to add to the WSL 2 VM, default is 25% of available RAM
+# Swap space (on disk) for the WSL 2 VMs, default is 25% of available RAM
 swap=xGB
 ```
 
-### Increase Node.js max old space size
+You can read more about the config in the [official guide here](https://learn.microsoft.com/en-us/windows/wsl/wsl-config).
 
-This fixes the ["JavaScript heap out of memory" error](https://stackoverflow.com/a/54456814) with ESLint. Add the following to your `~/.bashrc` or `~/.zshrc`:
+## Troubleshooting
 
-```sh
-export NODE_OPTIONS="--max-old-space-size=7168"
-```
+Here are some useful links:
 
-### Avoid `pnpm run test`
+- Official FAQ for [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/faq).
+- Official FAQ for [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/faqs).
+- Getting help from [our community](/troubleshooting-development-issues/#getting-help).
 
-Instead, use the script [appropriate to your PR](https://forum.freecodecamp.org/t/wsl-performance-issues-while-working-on-the-codebase/644215/2#:~:text=usually%2C%20you%20just%20want%20to%20test%20something%20specific%20to%20either%20the%20curriculum%20or%20the%20client%20or%20the%20api%20-%20almost%20never%20all%203.); either `pnpm run test:api`, `pnpm run test:curriculum:content`, or `pnpm run test-client`.
+<Aside type='note' title='More Help'>
 
-## Useful Links
+We are unable to provide help related to WSL and installing a linux system on it beyond this guide since it is out of scope for this project.
 
-- [A WSL2 Dev Setup with Ubuntu 20.04, Node.js, MongoDB, VS Code, and Docker](https://hn.mrugesh.dev/wsl2-dev-setup-with-ubuntu-nodejs-mongodb-and-docker) - an article by Mrugesh Mohapatra (Staff Developer at freeCodeCamp.org)
-- Frequently asked questions on:
-  - [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/faq)
-  - [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/faqs)
+If you face any issues with the setup, we highly recommend using online resources like StackOverflow, Reddit etc.
+
+</Aside>
