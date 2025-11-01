@@ -36,10 +36,10 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
-    "@eslint/js": "9.38.0",
+    "@eslint/js": "9.39.0",
     "@types/jsdom": "27.0.0",
     "@types/node": "22.18.12",
-    "eslint": "9.38.0",
+    "eslint": "9.39.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "1.4.0",
     "eslint-plugin-prettier": "5.5.4",
