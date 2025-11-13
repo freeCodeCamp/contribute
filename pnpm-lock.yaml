@@ -91,8 +91,8 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0(postcss@8.5.6))(lightningcss@1.30.2)(yaml@2.8.1)
       wrangler:
-        specifier: 4.47.0
-        version: 4.47.0
+        specifier: 4.48.0
+        version: 4.48.0
 
 packages:
 
@@ -2597,8 +2597,8 @@ packages:
     resolution: {integrity: sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==}
     engines: {node: '>=18'}
 
-  miniflare@4.20251109.0:
-    resolution: {integrity: sha512-fm0J/IFrrx7RT1w3SIoDM5m7zPCa2wBtxBApy6G0QVjd2tx8w0WGlMFop6R49XyTfF1q3LRHCjFMfzJ8YS0RzQ==}
+  miniflare@4.20251109.1:
+    resolution: {integrity: sha512-btcTw1pH40PGVMwn1pZDcrodQkgY8ijKJA/r7LKgJQGqVZ1k9gqfHHtbelZp8O9bJ995eQqdURyvXMflZwCo+g==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -3631,8 +3631,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.47.0:
-    resolution: {integrity: sha512-JP0U8oqUETK9D+ZbrSjFFOxGdufYsS6HsT0vLU1IAQrban9a6woMHdBZlGNn/lt8QA70xv1uFiJK8DUMPzC73A==}
+  wrangler@4.48.0:
+    resolution: {integrity: sha512-qkcwysx96XNDWXl4w/5VjAZjqWatxAq9chMXVeqv/etL9e06ouPaZ+Hwwbe5XYV2GYf/XhZVZ3fHJcTBrq60gQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -6697,7 +6697,7 @@ snapshots:
 
   mimic-function@5.0.1: {}
 
-  miniflare@4.20251109.0:
+  miniflare@4.20251109.1:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.14.0
@@ -7805,13 +7805,13 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20251109.0
       '@cloudflare/workerd-windows-64': 1.20251109.0
 
-  wrangler@4.47.0:
+  wrangler@4.48.0:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.0
       '@cloudflare/unenv-preset': 2.7.10(unenv@2.0.0-rc.24)(workerd@1.20251109.0)
       blake3-wasm: 2.1.5
       esbuild: 0.25.4
-      miniflare: 4.20251109.0
+      miniflare: 4.20251109.1
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
       workerd: 1.20251109.0
