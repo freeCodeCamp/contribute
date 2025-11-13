@@ -386,9 +386,28 @@ Before you can run the application locally, you will need to start a MongoDB Ser
 
 You can now start up the API server and the client applications.
 
+**If you're working on curriculum content**, we strongly recommend using selective builds to significantly reduce build time. Set one of the following environment variables to build only what you need:
+
+- `FCC_SUPERBLOCK` — build a single superBlock
+- `FCC_BLOCK` — build a single block
+- `FCC_CHALLENGE_ID` — build a single challenge by its ID
+
+For example, to build only the Responsive Web Design superblock:
+
+```bash
+FCC_SUPERBLOCK='responsive-web-design' pnpm run develop
+```
+
+Or to build only the Basic HTML and HTML5 block:
+
+```bash
+FCC_BLOCK='basic-html-and-html5' pnpm run develop
+```
+
+To build the entire curriculum (only recommended for thorough testing):
+
 ```bash
 pnpm run develop
-
 ```
 
 Once ready, open a web browser and visit: `http://localhost:8000`
@@ -427,14 +446,17 @@ If you have issues with the setup, check out the [troubleshooting section](/trou
 
 <Card title='Handy Scripts to use locally' icon='open-book'>
 
-| Command                        | Description                                                                                                   |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `pnpm install`                 | Installs / re-installs all dependencies and bootstraps the different services.                                |
-| `pnpm run seed`                | Creates authorized test users and inserts them into MongoDB. Also runs `seed:exams` and `seed:surveys` below. |
-| `pnpm run seed:certified-user` | Creates authorized test users with certifications fully completed, and inserts them into MongoDB.             |
-| `pnpm run seed:exams`          | Creates exams and inserts them into MongoDB.                                                                  |
-| `pnpm run seed:surveys`        | Creates surveys for default users and inserts them into MongoDB.                                              |
-| `pnpm run develop`             | Starts the freeCodeCamp API Server and Client Applications.                                                   |
-| `pnpm run clean`               | Uninstalls all dependencies and cleans up caches.                                                             |
+| Command                                                      | Description                                                                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| `pnpm install`                                               | Installs / re-installs all dependencies and bootstraps the different services.                                |
+| `pnpm run seed`                                              | Creates authorized test users and inserts them into MongoDB. Also runs `seed:exams` and `seed:surveys` below. |
+| `pnpm run seed:certified-user`                               | Creates authorized test users with certifications fully completed, and inserts them into MongoDB.             |
+| `pnpm run seed:exams`                                        | Creates exams and inserts them into MongoDB.                                                                  |
+| `pnpm run seed:surveys`                                      | Creates surveys for default users and inserts them into MongoDB.                                              |
+| `FCC_SUPERBLOCK='responsive-web-design' pnpm run develop`    | Starts the API Server and Client, building only the specified SuperBlock (recommended for curriculum work).   |
+| `FCC_BLOCK='basic-html-and-html5' pnpm run develop`          | Starts the API Server and Client, building only the specified Block (recommended for curriculum work).        |
+| `FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run develop` | Starts the API Server and Client, building only the specified Challenge (recommended for curriculum work).    |
+| `pnpm run develop`                                           | Starts the freeCodeCamp API Server and Client Applications with full curriculum build (for thorough testing). |
+| `pnpm run clean`                                             | Uninstalls all dependencies and cleans up caches.                                                             |
 
 </Card>
