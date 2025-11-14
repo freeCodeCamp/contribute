@@ -4,6 +4,19 @@
     {
       "matchDatasources": ["node-version"],
       "minimumReleaseAge": "7 days"
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": [
+        "@astrojs/check",
+        "@astrojs/starlight",
+        "starlight-links-validator",
+        "starlight-scroll-to-top",
+        "sharp"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     }
   ]
 }
