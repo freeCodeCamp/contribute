@@ -12,7 +12,6 @@
         "@astrojs/starlight",
         "starlight-links-validator",
         "starlight-scroll-to-top",
-        "prettier-plugin-astro",
         "sharp"
       ],
       "automerge": true,
