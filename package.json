@@ -29,7 +29,7 @@
     "@astrojs/starlight-tailwind": "4.0.2",
     "@tailwindcss/vite": "4.1.17",
     "astro": "5.15.6",
-    "starlight-links-validator": "0.19.0",
+    "starlight-links-validator": "0.19.1",
     "starlight-scroll-to-top": "0.4.0",
     "tailwindcss": "4.1.17",
     "typescript": "5.9.3"
