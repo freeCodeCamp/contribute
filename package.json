@@ -50,7 +50,7 @@
     "lint-staged": "16.2.6",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
-    "sharp": "0.34.4",
+    "sharp": "0.34.5",
     "typescript-eslint": "8.46.4",
     "vitest": "3.2.4",
     "wrangler": "4.48.0"
