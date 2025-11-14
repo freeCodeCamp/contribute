@@ -1,10 +1,9 @@
-name: Build
+name: Build Check
 
 on:
   push:
     branches:
       - main
-      - live
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
@@ -12,58 +11,21 @@ on:
 jobs:
   lint:
     name: Lint
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
     uses: ./.github/workflows/re-lint.yml
+    secrets: inherit
 
   test:
     name: Test
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
     uses: ./.github/workflows/re-test.yml
+    secrets: inherit
 
   build:
     name: Build
-    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
     needs: [lint, test]
-    env:
-      CI: true
-
-    strategy:
-      matrix:
-        node-version: [22.x]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
-        with:
-          node-version: ${{ matrix.node-version }}
-          package-manager-cache: false
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
-        id: pnpm-install
-        with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: Cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: |
-            ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-
-      - name: Install dependencies
-        run: |
-          pnpm install --frozen-lockfile
-
-      - name: Build
-        run: |
-          pnpm build
+    uses: ./.github/workflows/re-build.yml
+    with:
+      upload-artifacts: true
+    secrets: inherit
