@@ -2,10 +2,6 @@
   "extends": ["github>freecodecamp/renovate-config"],
   "packageRules": [
     {
-      "matchDatasources": ["node-version"],
-      "minimumReleaseAge": "7 days"
-    },
-    {
       "matchUpdateTypes": ["minor", "patch"],
       "matchPackageNames": [
         "@astrojs/check",
