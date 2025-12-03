@@ -4,7 +4,7 @@
 
 # Contribute
 
-> Documentation site for all things contributions. Begin your contribution journey here.
+> This is the Documentation site for all things contributions. Begin your contribution journey here.
 
 This code is running live at [contribute.freecodecamp.org](https://contribute.freecodecamp.org).
 
