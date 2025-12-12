@@ -88,6 +88,20 @@ const regex2 = /b/;
 __helpers.concatRegex(regex1, regex2).source === 'a\\sb'; // true
 ```
 
+### `retryingTest`
+
+```js
+await __helpers.retryingTest(callback, numberOfTries);
+```
+
+`retryingTest` consider the test passed if the `callback` returns a truthy value, and failed if it returns a falsy value.
+
+This helper is useful in a situation in which the thing being tested could have a delay happening, like having data from an API written on the page. Then, the `callback` is called up to `numberOfTries` or until it succeds, whatever comes first. If there is never a success, then the test fails.
+
+It needs to be used sparingly, because it causes the tests to take a long time.
+
+An example of its use can be found [in this file](https://github.com/freeCodeCamp/freeCodeCamp/blob/1ffd4568c4bda861d3a65ffaf1c39cb435b82648/curriculum/challenges/english/blocks/learn-fetch-and-promises-by-building-an-fcc-authors-page/641da803d9892447d059804e.md);
+
 ## HTML Helper
 
 ### Removing HTML Comments
