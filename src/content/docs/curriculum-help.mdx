@@ -198,7 +198,13 @@ assert.strictEqual(helper.getStyle('body')?.width, '100%');
 The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
 
 ```js
-assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
+assert.strictEqual(helper.getStyle('body').getPropVal('background-color'), 'rgb(118, 201, 255)');
+```
+
+The `.getPropVal()` method accepts an optional second parameter that controls whitespace handling. When you pass `true` as the second argument, it automatically strips all whitespace from the returned value:
+
+```js
+assert.strictEqual(helper.getStyle('body').getPropVal('background-color', true), 'rgb(118,201,255)');
 ```
 
 On the style object returned, there is a native method called `getPropertyValue` that can retrieve
@@ -263,12 +269,17 @@ This method allows you to test that specific properties have been set:
 assert.strictEqual(helper.getStyleAny(['.earth', '.sky'])?.width, '100%');
 ```
 
-The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
+Like the style objects returned by `.getStyle()`, the object returned by `.getStyleAny()` also includes the enhanced `.getPropVal()` method (documented in the `.getStyle()` section). This provides the same convenient property access and whitespace handling:
 
 ```js
 assert.strictEqual(
-  helper.getStyleAny(['.earth', '.sky']).getPropVal('width'),
-  '100%'
+  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color'),
+  'rgb(255, 207, 51)'
+);
+
+assert.strictEqual(
+  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color'),
+  'rgb(255,207,51)'
 );
 ```
 
