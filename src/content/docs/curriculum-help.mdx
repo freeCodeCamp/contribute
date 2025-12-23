@@ -275,7 +275,7 @@ This method allows you to test that specific properties have been set:
 assert.strictEqual(helper.getStyleAny(['.earth', '.sky'])?.width, '100%');
 ```
 
-Like the style objects returned by `.getStyle()`, the object returned by `.getStyleAny()` also includes the enhanced `.getPropVal()` method (documented in the `.getStyle()` section). This provides the same convenient property access and whitespace handling:
+Like the style objects returned by `.getStyle()`, the object returned by `.getStyleAny()` also includes the `.getPropVal()` method (as desired in the `.getStyle()` section). Here `.getPropVal()` provides the same property access and whitespace handling:
 
 ```js
 assert.strictEqual(
@@ -284,7 +284,7 @@ assert.strictEqual(
 );
 
 assert.strictEqual(
-  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color'),
+  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color', true),
   'rgb(255,207,51)'
 );
 ```
