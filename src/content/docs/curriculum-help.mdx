@@ -198,13 +198,19 @@ assert.strictEqual(helper.getStyle('body')?.width, '100%');
 The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
 
 ```js
-assert.strictEqual(helper.getStyle('body').getPropVal('background-color'), 'rgb(118, 201, 255)');
+assert.strictEqual(
+  helper.getStyle('body').getPropVal('background-color'),
+  'rgb(118, 201, 255)'
+);
 ```
 
 The `.getPropVal()` method accepts an optional second parameter that controls whitespace handling. When you pass `true` as the second argument, it automatically strips all whitespace from the returned value:
 
 ```js
-assert.strictEqual(helper.getStyle('body').getPropVal('background-color', true), 'rgb(118,201,255)');
+assert.strictEqual(
+  helper.getStyle('body').getPropVal('background-color', true),
+  'rgb(118,201,255)'
+);
 ```
 
 On the style object returned, there is a native method called `getPropertyValue` that can retrieve
