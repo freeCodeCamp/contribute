@@ -199,7 +199,7 @@ There are three ways to retrieve CSS values from the returned object:
 
 `.getPropertyValue()` is a native CSS style declaration object method for reading CSS properties by their kebab-case name (for example, 'background-color'). See [MDN: CSSStyleDeclaration.getPropertyValue()](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
 
-The `.getStyle()` helper attaches the `.getPropVal()` method to the style declaration object. It is a wrapper around the native `getPropertyValue()` method with an optional whitespace-stripping feature. It accepts an optional second parameter that, when `true`, strips all whitespace from the returned value.
+The `.getStyle()` helper attaches the `.getPropVal()` method to the style declaration object. It wraps the native `getPropertyValue()` method and optionally strips whitespace. It accepts an optional second parameter that, when `true`, removes all whitespace from the returned value.
 
 `getPropVal()` default behavior (preserves whitespace):
 
