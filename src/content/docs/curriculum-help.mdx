@@ -189,25 +189,39 @@ If you call the `getStyle` method with `body` as an argument, you would get an o
 }
 ```
 
-This method allows you to test that specific properties have been set:
+There are three ways to retrieve CSS values from the returned object:
+
+| Method                       | Example                                       | Returns  |
+| ---------------------------- | --------------------------------------------- | -------- |
+| Direct property access       | `getStyle('body')?.width`                     | `'100%'` |
+| Native `.getPropertyValue()` | `getStyle('body')?.getPropertyValue('width')` | `'100%'` |
+| Helper `.getPropVal()`       | `getStyle('body')?.getPropVal('width')`       | `'100%'` |
+
+`.getPropertyValue()` is a native CSS style declaration object method for reading CSS properties by their kebab-case name (for example, 'background-color'). See [MDN: CSSStyleDeclaration.getPropertyValue()](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
+
+The `.getStyle()` helper attaches the `.getPropVal()` method to the style declaration object. It wraps the native `getPropertyValue()` method and optionally strips whitespace. It accepts an optional second parameter that, when `true`, removes all whitespace from the returned value.
+
+`getPropVal()` default behavior (preserves whitespace):
 
 ```js
-assert.strictEqual(helper.getStyle('body')?.width, '100%');
+assert.strictEqual(
+  helper.getStyle('body').getPropVal('background-color'),
+  'rgb(118, 201, 255)'
+);
 ```
 
-The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
+`getPropVal()` with whitespace stripping (true removes all whitespace):
 
 ```js
-assert.strictEqual(helper.getStyle('body').getPropVal('width'), '100%');
+assert.strictEqual(
+  helper.getStyle('body').getPropVal('background-color', true),
+  'rgb(118,201,255)'
+);
 ```
-
-On the style object returned, there is a native method called `getPropertyValue` that can retrieve
-CSS properties. More info at [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
 
 #### `.getStyleAny()`
 
-The `.getStyleAny()` method takes multiple CSS possible selectors and returns
-the first matching CSS style declaration object.
+The `.getStyleAny()` method takes multiple CSS possible selectors and returns the first matching CSS style declaration object.
 
 For example, if the camper has written the following CSS:
 
@@ -257,18 +271,31 @@ If you call the `getStyleAny()` method with `.earth` and `.sky` as arguments, yo
 }
 ```
 
-This method allows you to test that specific properties have been set:
+There are three ways to retrieve CSS values from the returned object:
 
-```js
-assert.strictEqual(helper.getStyleAny(['.earth', '.sky'])?.width, '100%');
-```
+| Method                       | Example                                                      | Returns  |
+| ---------------------------- | ------------------------------------------------------------ | -------- |
+| Direct property access       | `getStyleAny(['.earth', '.sky'])?.width`                     | `'100%'` |
+| Native `.getPropertyValue()` | `getStyleAny(['.earth', '.sky'])?.getPropertyValue('width')` | `'100%'` |
+| Helper `.getPropVal()`       | `getStyleAny(['.earth', '.sky'])?.getPropVal('width')`       | `'100%'` |
 
-The helper attaches a `.getPropVal()` method to the style declaration object that allows you to get the value of a specific property:
+Like the CSS style declaration objects returned by `.getStyle()`, the object returned by `.getStyleAny()` also includes the `.getPropVal()` method (see the `.getStyle()` section). It provides the same property access and whitespace stripping feature.
+
+`getPropVal()` default behavior (preserves whitespace):
 
 ```js
 assert.strictEqual(
-  helper.getStyleAny(['.earth', '.sky']).getPropVal('width'),
-  '100%'
+  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color'),
+  'rgb(255, 207, 51)'
+);
+```
+
+`getPropVal()` with whitespace stripping (true removes all whitespace):
+
+```js
+assert.strictEqual(
+  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color', true),
+  'rgb(255,207,51)'
 );
 ```
 
