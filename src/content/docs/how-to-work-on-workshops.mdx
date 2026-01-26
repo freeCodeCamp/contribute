@@ -42,9 +42,13 @@ The metadata for workshops require a `blockType` property with a value of `works
 
 These instructions will tell you how to use our challenge editor tool to work on the workshops.
 
+### Setting Up the Challenge Editor
+
+The first time you want to use the editor, make sure you are in the root freeCodeCamp directory and run: `pnpm challenge-editor-setup`.
+
 ### Starting the Editor
 
-To start the editor, make sure you are in the root freeCodeCamp directory. Then, run `pnpm run challenge-editor` to start both the client and the API that powers the editor.
+Once the editor is set up, run `pnpm run challenge-editor` (again in the root directory) to start both the client and the API that powers the editor.
 
 The client will run on port `3300`, so you can access it at `http://localhost:3300`. The API runs on port `3200`, to avoid conflicts with the learn client and server. This will allow you to run the freeCodeCamp application at the same time as the editor, so you can test your changes locally.
 
