@@ -1,10 +1,11 @@
 ---
 title: Getting Started
 prev: false
-tableOfContents: false
 sidebar:
   label: Getting Started
 ---
+
+import { Card, CardGrid, Steps, LinkCard } from '@astrojs/starlight/components';
 
 The [freeCodeCamp.org](https://freecodecamp.org) community is possible thanks to thousands of kind volunteers like you. If you want to contribute your time and expertise, we would be excited to welcome you aboard.
 
@@ -12,26 +13,241 @@ The [freeCodeCamp.org](https://freecodecamp.org) community is possible thanks to
 Before you proceed, please take a quick 2 minutes to read our [Code of Conduct](https://www.freecodecamp.org/code-of-conduct). We strictly enforce it across our community so that contributing to freeCodeCamp.org is a safe, inclusive experience for everyone.
 :::
 
-You are welcome to create, update and fix bugs in our [curriculum](#curriculum), help us fix bugs in freeCodeCamp.org's [learning platform](#learning-platform).
+## Choose Your Contribution Path
 
-We answer the most common questions about contributing [in our contributor FAQ](/faq/).
+Select the pathway that best matches what you want to work on. Each path guides you through exactly which documentation you need.
 
-Happy contributing.
+<CardGrid>
+  <LinkCard
+    title='Curriculum & Challenges'
+    description='Work on coding challenges, certifications, and learning content'
+    href='#curriculum--challenges'
+  />
+  <LinkCard
+    title='UI & Client'
+    description='Improve the web app interface and user experience'
+    href='#ui--client'
+  />
+  <LinkCard
+    title='Quick Fixes'
+    description='Fix typos, small bugs, or make minor documentation updates'
+    href='#quick-fixes'
+  />
+  <LinkCard
+    title='Mobile App'
+    description='Contribute to the freeCodeCamp mobile application'
+    href='#mobile-app'
+  />
+  <LinkCard
+    title='Documentation'
+    description='Improve this contribution documentation site'
+    href='#documentation'
+  />
+  <LinkCard
+    title='Translations'
+    description='Help translate freeCodeCamp resources into other languages'
+    href='#translations'
+  />
+</CardGrid>
+
+<LinkCard
+  title='Contributor FAQ'
+  description='We answer common questions about contributing'
+  href='/faq/'
+/>
+
+<LinkCard
+  title='Finding issues to work on'
+  description="Looking for something to work on? Check out issues labeled 'help wanted' on GitHub"
+  href='https://github.com/freecodecamp/freecodecamp/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22'
+/>
+---
+
+### Curriculum & Challenges
+
+Our curriculum is curated by the global freeCodeCamp community. You can help expand and improve the curriculum, update project user stories to better explain concepts, and improve automated tests.
+
+<Steps>
+
+1. **Set up freeCodeCamp locally**
+
+   Follow our [local setup guide](/how-to-setup-freecodecamp-locally/) to get the codebase running on your machine.
+
+2. **Learn the Git workflow**
+
+   Read [how to contribute to the codebase](/how-to-contribute-to-the-codebase/) for our branching and commit conventions.
+
+3. **Work on curriculum challenges**
+
+   Our main guide for curriculum work: [how to work on coding challenges](/how-to-work-on-coding-challenges/).
+
+4. **Understand the curriculum structure**
+
+   Review the [curriculum file structure](/curriculum-file-structure/) to understand how content is organized.
+
+5. **Submit your changes**
+
+   Follow [how to open a pull request](/how-to-open-a-pull-request/) when you're ready to submit.
+
+</Steps>
+
+:::tip[Optional Reading]
+
+- [Work on quizzes](/how-to-work-on-quizzes/), [reviews](/how-to-work-on-reviews/), [labs](/how-to-work-on-labs/), or [workshops](/how-to-work-on-workshops/) - for specific content types
+- [Help with video challenges](/how-to-help-with-video-challenges/) - for video-based curriculum content
+- [Add Playwright tests](/how-to-add-playwright-tests/) - if adding test coverage for your changes
+- [Curriculum testing helpers](/curriculum-help/) - utilities for testing curriculum content
+
+:::
 
 ---
 
-## Curriculum
+### UI & Client
 
-Our curriculum is curated by the global freeCodeCamp community. This way, we are able to incorporate expert knowledge from volunteers like you.
+Our learning platform runs on a modern JavaScript stack including Node.js, MongoDB, React, and more. This path covers both frontend UI work and backend API contributions.
 
-You can help expand and improve the curriculum. You can also update project user stories to better-explain concepts. And you can improve our automated tests so that we can more accurately test people's code.
+<Steps>
 
-**If you're interested in improving our curriculum, here's [how to contribute to the curriculum](/how-to-work-on-coding-challenges/).**
+1. **Set up freeCodeCamp locally**
 
-## Learning Platform
+   Follow our [local setup guide](/how-to-setup-freecodecamp-locally/) to get the codebase running on your machine.
 
-Our learning platform runs on a modern JavaScript stack. It has various components, tools, and libraries. These include Node.js, MongoDB, OAuth 2.0, React, Gatsby, Webpack, and more.
+2. **Learn the Git workflow**
 
-Broadly, we have a Node.js based API server, a set of React-based client applications, testing scripts to evaluate camper-submitted curriculum projects, and more. If you want to productively contribute to the learning platform, we recommend some familiarity with these tools.
+   Read [how to contribute to the codebase](/how-to-contribute-to-the-codebase/) for our branching and commit conventions.
 
-**If you want to help us improve our codebase here's [how to set up freeCodeCamp](/how-to-setup-freecodecamp-locally/).**
+3. **Review codebase best practices**
+
+   Study our [codebase best practices](/codebase-best-practices/) for coding standards and conventions.
+
+4. **Submit your changes**
+
+   Follow [how to open a pull request](/how-to-open-a-pull-request/) when you're ready to submit.
+
+</Steps>
+
+:::tip[Optional Reading]
+
+- [Work on the component library](/how-to-work-on-the-component-library/) - for UI component development
+- [Add Playwright tests](/how-to-add-playwright-tests/) - if your changes affect user flows
+- [Work on localized client webapp](/how-to-work-on-localized-client-webapp/) - for internationalization work
+- [Fix merge conflicts](/how-to-fix-merge-conflicts/) - if you encounter conflicts when syncing
+- [Troubleshooting guide](/troubleshooting-development-issues/) - if you run into issues
+
+:::
+
+---
+
+### Quick Fixes
+
+Want to fix a typo or small bug in the [main freeCodeCamp repository](https://github.com/freecodecamp/freecodecamp)? Even for small changes, you should set up locally to run linters and tests before submitting.
+
+For fixes to this documentation site, use the [Documentation pathway](#documentation) instead.
+
+<Steps>
+
+1. **Set up freeCodeCamp locally**
+
+   Follow our [local setup guide](/how-to-setup-freecodecamp-locally/) to get the codebase running on your machine.
+
+2. **Make your change**
+
+   Fix the typo, bug, or documentation issue you found.
+
+3. **Run linters and tests**
+
+   Ensure your changes pass all checks before submitting. This catches errors early and saves time for everyone.
+
+4. **Submit your changes**
+
+   Follow [how to open a pull request](/how-to-open-a-pull-request/).
+
+</Steps>
+
+:::caution
+Always test changes locally before submitting. Untested changes may introduce errors that affect millions of learners!
+:::
+
+---
+
+### Mobile App
+
+Contribute to the freeCodeCamp mobile application, available on iOS and Android.
+
+<Steps>
+
+1. **Set up the mobile app locally**
+
+   Follow our [mobile app setup guide](/how-to-setup-freecodecamp-mobile-app-locally/) to get the app running.
+
+2. **Learn the Git workflow**
+
+   Read [how to contribute to the codebase](/how-to-contribute-to-the-codebase/) for our branching and commit conventions.
+
+3. **Submit your changes**
+
+   Follow [how to open a pull request](/how-to-open-a-pull-request/) when you're ready to submit.
+
+</Steps>
+
+---
+
+### Documentation
+
+Help improve this very documentation site you're reading! Good documentation helps more people contribute.
+
+<Steps>
+
+1. **Set up the docs site locally**
+
+   Follow [how to work on the docs site](/how-to-work-on-the-docs-site/) to run it locally.
+
+2. **Learn the Git workflow**
+
+   Read [how to contribute to the codebase](/how-to-contribute-to-the-codebase/) for our branching and commit conventions.
+
+3. **Make your improvements**
+
+   Add new content, clarify existing guides, fix errors, or improve navigation.
+
+4. **Submit your changes**
+
+   Follow [how to open a pull request](/how-to-open-a-pull-request/) when you're ready to submit.
+
+</Steps>
+
+---
+
+### Translations
+
+Help make freeCodeCamp accessible to people around the world by translating our resources.
+
+:::caution[Currently Paused]
+We're exploring new ways to translate freeCodeCamp's resources into world languages. For now, we're not accepting contributions to translate our curriculum.
+
+In the meantime, please consider contributing to other areas listed above. If you have any questions, feel free to reach out to us on our [Discord server](https://chat.freecodecamp.org).
+:::
+
+---
+
+## Need Help?
+
+<CardGrid>
+  <Card title='FAQ' icon='information'>
+    Check our [contributor FAQ](/faq/) for answers to common questions.
+  </Card>
+  <Card title='Troubleshooting' icon='warning'>
+    Having issues? See our [troubleshooting
+    guide](/troubleshooting-development-issues/).
+  </Card>
+  <Card title='Community' icon='discord'>
+    Join our [Discord server](https://chat.freecodecamp.org) to chat with other
+    contributors.
+  </Card>
+  <Card title='Forum' icon='comment-alt'>
+    Ask questions on our [contributor
+    forum](https://forum.freecodecamp.org/c/contributors).
+  </Card>
+</CardGrid>
+
+Happy contributing!
