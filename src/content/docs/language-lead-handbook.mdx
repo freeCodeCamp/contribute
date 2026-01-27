@@ -175,7 +175,7 @@ You will want to [build the translated client locally](/how-to-enable-new-langua
 
 1. Update your `.env` file to use your language for `CLIENT_LOCALE` and `CURRICULUM_LOCALE`.
 
-2. TypeScript is compiled automatically using Turborepo, so you do not need to run `pnpm run compile:ts` manually. The `trending.json` file will be generated during the build process.
+2. Run `pnpm -F=client run create:trending`. This will automatically generate the `trending.json` file for your language under the `/client/i18n/locales/` directory.
 
 3. Start the server by running `pnpm run develop:server` in one terminal window.
 
