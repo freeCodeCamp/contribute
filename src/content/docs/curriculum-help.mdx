@@ -1531,6 +1531,17 @@ node.block_has_call("get") # True
 node.block_has_call("split") # False
 ```
 
+### Asserting absence of a function call
+
+Sometimes a challenge requires learners to remove a specific statement, such as a `print()` call.
+
+To assert that a function call does not exist in the learner’s code, simply negate the helper result:
+
+```python
+assert not Node(code).has_call("print()")
+assert not Node(code).block_has_call("print")
+```
+
 #### `has_import()`
 
 ```python
