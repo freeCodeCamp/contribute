@@ -689,46 +689,28 @@ Did you know you can also build and develop selectively? Use `FCC_CHALLENGE_ID`,
 
 <Steps>
 
-1. To test all challenges run the below command from the root directory
+1. To test all challenges run the command below from the root directory
 
    ```
-   pnpm run test:curriculum:content
+   pnpm run test-curriculum-content
    ```
 
    2. To test single challenge, you can use it challenge id with following command
 
    ```
-   FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test:curriculum:content
+   FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test-curriculum-content
    ```
 
 2. You can also test a block or a superblock of challenges with these commands
 
    ```
-   FCC_BLOCK='basic-html-and-html5' pnpm run test:curriculum:content
+   FCC_BLOCK='basic-html-and-html5' pnpm run test-curriculum-content
    ```
 
    Use the block's `dashedName` (the folder's name) for the `FCC_BLOCK` value.
 
    ```
-   FCC_SUPERBLOCK='responsive-web-design' pnpm run test:curriculum:content
-   ```
-
-</Steps>
-
-You are also able to test challenges by title by performing the following steps:
-
-<Steps>
-
-1. Switch to the `curriculum` directory:
-
-   ```
-   cd curriculum
-   ```
-
-2. Run the following for each challenge file for which you have changed (replacing `challenge-title-goes-here` with the full title of the challenge):
-
-   ```
-   pnpm run test -- -g challenge-title-goes-here
+   FCC_SUPERBLOCK='responsive-web-design' pnpm run test-curriculum-content
    ```
 
    :::tip
