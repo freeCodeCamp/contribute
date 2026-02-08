@@ -284,32 +284,18 @@ npx playwright show-report
 
 ### Ensure Development Environment is Running
 
-- Follow the [MongoDB installation guide](https://www.mongodb.com/basics/get-started).
-
-- Create the .env
-
-  ```bash
-  cp sample.env .env
-  ```
-
-- Seed the database
-
-  ```bash
-  pnpm run seed:certified-user
-  ```
-
-- Develop the server and client
-
-  ```bash
-  pnpm run develop
-  ```
-
-### Install Playwright Build Tools
-
-To install necessary dependencies for running Playwright run the following command:
+The Codespace devcontainer automatically sets up `.env`, installs dependencies, and seeds the database. Start the development server:
 
 ```bash
-pnpm run playwright:install-build-tools
+pnpm run develop
+```
+
+### Install Playwright
+
+To install the browser binary needed for running Playwright tests:
+
+```bash
+npx playwright install chromium
 ```
 
 ### Run the Playwright Tests on GitHub Codespaces
