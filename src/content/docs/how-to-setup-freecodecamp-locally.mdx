@@ -105,13 +105,13 @@ We have automated the development environment setup using devcontainers. With Gi
 
 4. Click **Create codespace on main**
 
-   Your codespace will automatically set up the development environment using our devcontainer configuration. This includes:
-   - Installing Node.js, pnpm, and all dependencies
-   - Setting up MongoDB
-   - Configuring VS Code extensions
+   Your codespace will automatically set up the development environment using our custom devcontainer image. This includes:
+   - Pre-populated pnpm dependency cache and Turbo build cache for fast installs
+   - Setting up and seeding MongoDB
+   - Configuring VS Code extensions (ESLint, Prettier)
    - Preparing the environment variables
 
-5. Wait for the setup to complete (usually 2-3 minutes)
+5. Wait for the setup to complete. The custom image has pre-cached dependencies, so this should be quick after the initial image pull.
 
 </Steps>
 
@@ -280,17 +280,17 @@ Now that you have a copy of freeCodeCamp, you can follow these instructions to r
 
 Your Codespace comes pre-configured with all dependencies installed and services like the database already running. You can start developing immediately:
 
-1. In the terminal, run:
+**Option 1:** Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type "Run Task", and select **Start Development**.
 
-   ```bash
-   pnpm run develop
-   ```
+**Option 2:** In the terminal, run:
 
-   This will start both the API server and the client applications.
+```bash
+pnpm run develop
+```
 
-2. Wait for the process to complete. It can take a few minutes, you will see a notification to for the `8000` port when it's ready.
+Both options will start the API server and the client application.
 
-3. Click on the notification to open the client application in a new browser tab.
+Wait for the process to complete. It can take a few minutes, you will see a notification for the `8000` port when it's ready. Click on the notification to open the client application in a new browser tab.
 
 <Aside type='tip' title="Congratulations - you're all set!">
 
