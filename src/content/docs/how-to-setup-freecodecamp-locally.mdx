@@ -67,57 +67,43 @@ The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often r
 
 </Aside>
 
-## Cloud IDE or your own machine?
+## Local machine or devcontainer setup?
 
-Next, you need to choose between setting up a cloud IDE or your own machine.
+Next, choose between a machine-native setup (recommended) or a containerized setup using devcontainers.
 
-If you're looking to make a one-time contribution or want the fastest setup, use GitHub Codespaces which provides a ready-to-code environment in your web browser using devcontainers. For long-term contributions where you prefer local development, you can set up freeCodeCamp on your local machine.
+The **local machine setup** is the recommended approach for regular contributors. You install the prerequisites (Node.js, pnpm, MongoDB) directly on your machine, which gives you the best performance, no usage limits, and no Docker dependency. This requires a macOS or Linux environment (Windows users need [WSL2](/how-to-setup-wsl)).
 
-| Feature                     | GitHub Codespaces                                      | Your own machine                                 |
-| --------------------------- | ------------------------------------------------------ | ------------------------------------------------ |
-| **Hardware requirements**   | No minimum hardware requirements                       | Powerful minimum hardware requirements           |
-| **Software installation**   | No need to install any software                        | Additional software needed                       |
-| **Repository status**       | Always up-to-date repository                           | Manual updates required                          |
-| **Setup complexity**        | Easy setup with devcontainers, works in any browser    | Larger download and setup time                   |
-| **Internet dependency**     | Requires an internet connection to work                | Minimal internet connection required once set up |
-| **Performance**             | Consistent cloud-based performance                     | Depends on your machine capabilities             |
-| **Usage limits**            | 60 hours free per month for personal accounts          | No usage limits                                  |
-| **Environment consistency** | Identical setup for all contributors via devcontainers | May vary between different machines and OS       |
+The **devcontainer setup** uses a pre-configured development container that works identically whether you run it locally (via VS Code + Docker) or in the cloud (via GitHub Codespaces). All dependencies, database services, and tooling are pre-installed inside the container — useful if you want a zero-config environment or you're on Windows without WSL2.
+
+<Aside type='note' title='How do you decide which one?'>
+
+<details>
+
+<summary>
+
+Read the detailed comparision here
+
+</summary>
+
+| Feature                     | Local Machine (Recommended)                                              | Devcontainer                                                       |
+| --------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| **Platform support**        | macOS and Linux only. <br/> Or with [WSL2](/how-to-setup-wsl) on Windows | Works on Windows, macOS, and Linux                                 |
+| **Software installation**   | Node.js, pnpm, MongoDB, and more needed                                  | Only Docker and VS Code needed                                     |
+| **Setup complexity**        | Manual installation and configuration                                    | Automated — dependencies and services pre-configured               |
+| **Environment consistency** | May vary between different machines and OS                               | Identical setup for all contributors                               |
+| **Cloud option**            | Local only                                                               | Can also run on GitHub Codespaces (basic tier is not sufficient)   |
+| **Internet dependency**     | Minimal once set up                                                      | Initial image pull, then minimal (local); always-on for Codespaces |
+| **Performance**             | Depends on your machine capabilities                                     | Depends on Docker resources allocated (local) or Codespaces tier   |
+| **Usage limits**            | No usage limits                                                          | None locally; Codespaces has 60 free hours/month                   |
+
+</details>
+
+</Aside>
 
 Once you have decided, follow the relevant tab below to continue with the setup.
 
 <Tabs syncKey="environment">
-<TabItem label="GitHub Codespaces" icon="seti:github">
-
-#### GitHub Codespaces
-
-We have automated the development environment setup using devcontainers. With GitHub Codespaces, you get a consistent, ready-to-code environment that runs in your browser with all dependencies pre-installed.
-
-**Launch a Codespace from your fork:**
-
-<Steps>
-
-1. Go to your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp`
-
-2. Click the green **Code** button
-
-3. Select the **Codespaces** tab
-
-4. Click **Create codespace on main**
-
-   Your codespace will automatically set up the development environment using our devcontainer configuration. This includes:
-   - Installing Node.js, pnpm, and all dependencies
-   - Setting up MongoDB
-   - Configuring VS Code extensions
-   - Preparing the environment variables
-
-5. Wait for the setup to complete (usually 2-3 minutes)
-
-</Steps>
-
-</TabItem>
-
-<TabItem label="Local Machine" icon="laptop">
+<TabItem label="Local Machine (Recommended)" icon="laptop">
 
 Here is a minimum system requirement for running freeCodeCamp locally:
 
@@ -139,7 +125,7 @@ Start by installing the prerequisite software for your operating system.
 
 | Prerequisite                                                                                  | Version | Notes                                                                                       |
 | --------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
-| [Node.js](http://nodejs.org)                                                                  | `22.x`  | We use the "Active LTS" version, see [LTS Schedule](https://nodejs.org/en/about/releases/). |
+| [Node.js](http://nodejs.org)                                                                  | `24.x`  | We use the "Active LTS" version, see [LTS Schedule](https://nodejs.org/en/about/releases/). |
 | [pnpm](https://pnpm.io/installation)                                                          | `10.x`  | -                                                                                           |
 | [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/) | `8.0.x` | -                                                                                           |
 | [Docker Compose](https://docs.docker.com/compose/install/)                                    | `2.x`   | -                                                                                           |
@@ -265,6 +251,58 @@ You need a reference from your local clone to the `upstream` repository in addit
 </Steps>
 
 </TabItem>
+
+<TabItem label="Devcontainer" icon="seti:docker">
+
+We have automated the development environment setup using devcontainers. The same container configuration works both locally (via VS Code + Docker) and in the cloud (via GitHub Codespaces), giving you a consistent, ready-to-code environment with all dependencies pre-installed.
+
+#### Option A: Run locally with VS Code and Docker
+
+<Steps>
+
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [Visual Studio Code](https://code.visualstudio.com/) if you haven't already.
+
+2. Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) in VS Code.
+
+3. Clone your fork to your local machine:
+
+   ```bash
+   git clone --depth=1 https://github.com/YOUR_USER_NAME/freeCodeCamp.git
+   ```
+
+4. Open the cloned folder in VS Code. You should see a prompt to **Reopen in Container** — click it. Alternatively, press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type "Reopen in Container", and select the option.
+
+5. Wait for the container to build and start. The devcontainer image has pre-cached dependencies, so this should be quick after the initial image pull. This includes:
+   - Pre-populated pnpm dependency cache and Turbo build cache for fast installs
+   - Setting up and seeding MongoDB
+   - Configuring VS Code extensions (ESLint, Prettier)
+   - Preparing the environment variables
+
+</Steps>
+
+#### Option B: Run on GitHub Codespaces
+
+<Aside type='caution' title='Codespaces machine type'>
+
+The default (basic) Codespaces machine type is not sufficient for running freeCodeCamp. Select at least a **4-core machine** when creating your Codespace.
+
+</Aside>
+
+<Steps>
+
+1. Go to your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp`
+
+2. Click the green **Code** button
+
+3. Select the **Codespaces** tab
+
+4. Click **Create codespace on main** (use the **...** menu to select a 4-core or larger machine type)
+
+5. Wait for the setup to complete. The custom image has pre-cached dependencies, so this should be quick after the initial image pull.
+
+</Steps>
+
+</TabItem>
 </Tabs>
 
 ## Running freeCodeCamp
@@ -276,31 +314,7 @@ Now that you have a copy of freeCodeCamp, you can follow these instructions to r
 - Debug and fix issues with the application servers and client apps.
 
 <Tabs syncKey="environment">
-<TabItem label="GitHub Codespaces" icon="seti:github">
-
-Your Codespace comes pre-configured with all dependencies installed and services like the database already running. You can start developing immediately:
-
-1. In the terminal, run:
-
-   ```bash
-   pnpm run develop
-   ```
-
-   This will start both the API server and the client applications.
-
-2. Wait for the process to complete. It can take a few minutes, you will see a notification to for the `8000` port when it's ready.
-
-3. Click on the notification to open the client application in a new browser tab.
-
-<Aside type='tip' title="Congratulations - you're all set!">
-
-You now have a copy of freeCodeCamp's entire learning platform running in your Codespace. Go ahead and start making changes to the codebase.
-
-</Aside>
-
-</TabItem>
-
-<TabItem label="Local Machine" icon="laptop">
+<TabItem label="Local Machine (Recommended)" icon="laptop">
 
 ### Step 1: Set up the Environment Variable File
 
@@ -432,6 +446,34 @@ You now have a copy of freeCodeCamp's entire learning platform running on your l
 <Aside type='note'>
 
 If you have issues with the setup, check out the [troubleshooting section](/troubleshooting-development-issues/).
+
+</Aside>
+
+</TabItem>
+
+<TabItem label="Devcontainer" icon="seti:docker">
+
+Your devcontainer comes pre-configured with all dependencies installed and services like the database already running, whether you launched it locally via VS Code + Docker or in GitHub Codespaces. You can start developing immediately:
+
+#### Option 1: VS Code task
+
+Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), type "Run Task", and select **Start Development**.
+
+#### Option 2: Terminal
+
+In the terminal, run:
+
+```bash
+pnpm run develop
+```
+
+Both options will start the API server and the client application.
+
+Wait for the process to complete. It can take a few minutes, you will see a notification for the `8000` port when it's ready. Click on the notification to open the client application in a new browser tab.
+
+<Aside type='tip' title="Congratulations - you're all set!">
+
+You now have a copy of freeCodeCamp's entire learning platform running in your devcontainer. Go ahead and start making changes to the codebase.
 
 </Aside>
 
