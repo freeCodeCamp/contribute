@@ -163,12 +163,9 @@ Renaming files within the curriculum structure will often change the path (or UR
 
 ### Setting Up Redirects
 
-When renaming curriculum items that change URLs, you **must** set up redirects to ensure existing links continue to work. This requires updating two `serve.json` files with identical redirect configurations:
+When renaming curriculum items that change URLs, you **must** set up redirects to ensure existing links continue to work. This requires updating the file `serve.json` in the [client-config](https://github.com/freeCodeCamp/client-config) repo.
 
-1. **Client Configuration**: `/client-config/serve.json`
-2. **Main Application**: `/client/serve/serve.json`
-
-Both files contain a `"redirects"` array where you need to add redirect objects. The redirect format follows this pattern:
+The file contains a `"redirects"` array where you need to add redirect objects. The redirect format follows this pattern:
 
 ```json
 {
@@ -213,8 +210,7 @@ For individual challenge renaming:
 ```
 
 :::important
-**Both `serve.json` files must be updated with identical redirects.**
-**The redirect setup must be done in a separate PR that gets merged AT THE SAME TIME as the PR that actually renames the curriculum items.** This ensures the redirects go live simultaneously with the URL changes, preventing any broken links.
+**The redirect setup must be done in a PR that gets merged AT THE SAME TIME as the PR that actually renames the curriculum items.** This ensures the redirects go live simultaneously with the URL changes, preventing any broken links.
 :::
 
 ### Renaming a Certification
@@ -228,7 +224,7 @@ When renaming a certification, you will likely want to rename the associated sup
 3. Update the `certifications` array in `curriculum/structure/curriculum.json` to use the new certification name.
 4. Update `client/src/redux/index.ts` to use the correct `title`.
 5. Optionally, update the `certSlug` for the superblock in the same file. (Note: Renaming a `certSlug` will change the URL for certifications and should only be done with careful consideration.)
-6. **If you renamed the `certSlug`**, add redirects to both `serve.json` files (`/client-config/serve.json` and `/client/serve/serve.json`) to redirect from old certification URLs to new ones:
+6. **If you renamed the `certSlug`**, [add redirects to the `serve.json` file](#setting-up-redirects) to redirect from old certification URLs to new ones:
    ```json
    {
      "source": "/certification/old-cert-slug",
@@ -261,7 +257,7 @@ Also, you will likely want to rename the certificate and the `<superBlock>-proje
 1. Rename the superblock file in `curriculum/structure/superblocks/` from `<old-name>.json` to `<new-name>.json`.
 2. Update the `superblocks` array in `curriculum/structure/curriculum.json` to use the new superblock name.
 3. For each block within that superBlock, update the `superBlock` value in their respective JSON files in `curriculum/structure/blocks/` to the new dashedName.
-4. **Add redirects** to both `serve.json` files (`/client-config/serve.json` and `/client/serve/serve.json`) to redirect from old superblock URLs to new ones:
+4. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old superblock URLs to new ones:
    ```json
    {
      "source": "/learn/old-superblock-name/:block?/:challenge?",
@@ -291,7 +287,7 @@ When renaming a curriculum block, you need to:
 2. Rename the block's JSON file in `curriculum/structure/blocks/` from `<old-name>.json` to `<new-name>.json`.
 3. Update the `name` and `dashedName` properties in the renamed block JSON file.
 4. Update the superblock's JSON file in `curriculum/structure/superblocks/` to reference the new block name in its `blocks` array.
-5. **Add redirects** to both `serve.json` files (`/client-config/serve.json` and `/client/serve/serve.json`) to redirect from old block URLs to new ones:
+5. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old block URLs to new ones:
    ```json
    {
      "source": "/learn/superblock-name/old-block-name/:challenge?",
@@ -318,7 +314,7 @@ When renaming a single challenge file, you need to:
 1. Change the name of the challenge file in the `curriculum/challenges/english/blocks/<block>/` directory.
 2. Change the name of the `title` and `dashedName` within that file.
 3. Update the challenge title in the relevant block JSON file in `curriculum/structure/blocks/<block>.json`. The challenge names in the `challengeOrder` array are used in the build and provide the order of challenges.
-4. **Add redirects** to both `serve.json` files (`/client-config/serve.json` and `/client/serve/serve.json`) to redirect from old challenge URLs to new ones:
+4. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old challenge URLs to new ones:
    ```json
    {
      "source": "/learn/superblock-name/block-name/old-challenge-name",
