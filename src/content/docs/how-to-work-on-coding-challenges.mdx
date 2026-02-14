@@ -494,6 +494,15 @@ Challenges should have the minimum number of tests necessary to verify that a ca
 
 Our goal is to communicate the single point that the challenge is trying to teach, and test that they have understood that point.
 
+## Writing Maintainable and Reliable Tests
+
+When writing tests:
+
+- Test behavior, not specific implementations.
+- Avoid overly strict pattern matching where possible.
+- Ensure error messages are clear and helpful.
+- Keep tests resilient to small formatting differences.
+
 Challenge tests can make use of the Node.js and Chai.js assertion libraries. Also, if needed, user-generated code can be accessed in the `code` variable. In addition, the `__helpers` object exposes several functions that simplify the process of writing tests. The available functions are defined in the [curriculum-helpers](https://github.com/freeCodeCamp/curriculum-helpers/blob/main/lib/index.ts) repo.
 
 ### Guidelines for assertions
