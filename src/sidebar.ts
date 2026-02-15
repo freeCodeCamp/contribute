@@ -44,7 +44,8 @@ const sidebar = [
       'language-lead-handbook',
       'courses-vscode-extension',
       'how-to-enable-new-languages',
-      'authors-analytics-manual'
+      'authors-analytics-manual',
+      'how-to-create-catalog-items'
     ]
   },
   {
