@@ -55,5 +55,5 @@
     "vitest": "4.0.18",
     "wrangler": "4.63.0"
   },
-  "packageManager": "pnpm@10.29.1"
+  "packageManager": "pnpm@10.29.2"
 }
