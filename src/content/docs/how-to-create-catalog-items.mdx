@@ -1,0 +1,141 @@
+---
+title: How to create catalog items
+sidebar:
+  label: How to create catalog items
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Catalog items are standalone learning units (superblocks) that are made from a collection of blocks.
+These units could be created from existing blocks, or new blocks, or a mix or both.
+
+:::note
+In the chapter-mocule-block stucture, modules are also a collection of blocks. As a result, existing modules could be easily referenced and re-arranged into a catalog item without the need to create new block and challenge files.
+:::
+
+## Creating catalog items from new blocks
+
+<p>
+  The followings are all the steps needed to create a new catalog item. Skip the
+  block and challenge file creation steps if block and challenge files already
+  exist.
+</p>
+
+<Steps>
+  <ol>
+    <li>
+      Add a superblock json file that includes the superblocks contents.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/superblocks/learn-python-for-beginners.json'>
+        example
+      </a>
+    </li>
+    <li>
+      List the new superblock in the superBlocks list.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the superblock to the superBlocks shared config
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      List the new superblock in the curriculum config.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the superblock enum value in shared config.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      Register the superblock name mapping in the curriculum build.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/src/build-curriculum.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      Include the superblock name in the certification settings.
+      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/packages/shared/src/config/certification-settings.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      Add superblock name in the curriculum schema.
+      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/curriculum/schema/curriculum-schema.js'>
+        example
+      </a>
+    </li>
+    <li>
+      Add block configuration files.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/blocks/learn-python-setup-first-steps.json'>
+        example
+      </a>
+    </li>
+    <li>
+      Add a challenge files in the block.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/blocks/learn-python-setup-first-steps/learn-python-intro-video.md'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the superblock page file.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/learn/learn-python-for-beginners/index.md'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the translation string for the superblock.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the intro title and summary.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/intro.json'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the catalog entry and a topic if the topic is new.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the superblock to the catalog stage list.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      Add the superblock icon.
+      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/assets/superblock-icon.tsx'>
+        example
+      </a>
+    </li>
+    <li>
+      Add label styling for new topics.
+      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/templates/Introduction/intro.css'>
+        example
+      </a>
+    </li>
+    <li>
+      Keep the catalog test in sync.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.test.ts'>
+        example
+      </a>
+    </li>
+    <li>
+      Ensure the catalog page imports catalog config.
+      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/catalog.tsx'>
+        example
+      </a>
+    </li>
+  </ol>
+</Steps>
