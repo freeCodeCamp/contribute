@@ -10,7 +10,7 @@ The purpose of the catalog is to offer a wide range of courses on everything fro
 Some of the courses will be video based with comprehension check questions along the way. Others will be interactive with lessons, projects and quizzes.
 
 Catalog items are standalone learning units (superblocks) that are made from a collection of blocks.
-These units could be created from existing blocks, or new blocks, or a mix or both.
+These units could be created from existing blocks, or new blocks, or a mix of both.
 
 <Aside>
   In the chapter-module-block structure, modules are also a collection of
@@ -26,122 +26,64 @@ block and challenge file creation steps if block and challenge files already
 exist.
 
 <Steps>
-  <ol>
-    <li>
-      Add a superblock json file that includes the superblocks contents.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/superblocks/learn-python-for-beginners.json'>
-        example
-      </a>
-    </li>
-    <li>
-      List the new superblock in the superBlocks list.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the superblock to the superBlocks shared config
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      List the new superblock in the curriculum config.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the superblock enum value in shared config.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      Register the superblock name mapping in the curriculum build.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/src/build-curriculum.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      Include the superblock name in the certification settings.
-      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/packages/shared/src/config/certification-settings.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      Add superblock name in the curriculum schema.
-      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/curriculum/schema/curriculum-schema.js'>
-        example
-      </a>
-    </li>
-    <li>
-      Add block configuration files.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/blocks/learn-python-setup-first-steps.json'>
-        example
-      </a>
-    </li>
-    <li>
-      Add a challenge files in the block.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/blocks/learn-python-setup-first-steps/learn-python-intro-video.md'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the superblock page file.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/learn/learn-python-for-beginners/index.md'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the translation string for the superblock.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the intro title and summary.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/intro.json'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the catalog entry and a topic if the topic is new.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the superblock to the catalog stage list.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      Add the superblock icon.
-      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/assets/superblock-icon.tsx'>
-        example
-      </a>
-    </li>
-    <li>
-      Add label styling for new topics.
-      <a href='https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/templates/Introduction/intro.css'>
-        example
-      </a>
-    </li>
-    <li>
-      Keep the catalog test in sync.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.test.ts'>
-        example
-      </a>
-    </li>
-    <li>
-      Ensure the catalog page imports catalog config.
-      <a href='https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/catalog.tsx'>
-        example
-      </a>
-    </li>
-  </ol>
+
+1. Add a superblock JSON file that includes the superblock's contents.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/superblocks/learn-python-for-beginners.json)
+
+2. List the new superblock in the `superBlocks` list.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json)
+
+3. Add the superblock to the `superBlocks` shared config.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts)
+
+4. List the new superblock in the curriculum config.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json)
+
+5. Add the superblock enum value in shared config.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts)
+
+6. Register the superblock name mapping in the curriculum build.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/src/build-curriculum.ts)
+
+7. Include the superblock name in the certification settings.  
+   [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/packages/shared/src/config/certification-settings.ts)
+
+8. Add the superblock name in the curriculum schema.  
+   [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/curriculum/schema/curriculum-schema.js)
+
+9. Add block configuration files.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/blocks/learn-python-setup-first-steps.json)
+
+10. Add challenge files in the block.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/blocks/learn-python-setup-first-steps/learn-python-intro-video.md)
+
+11. Add the superblock page file.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/learn/learn-python-for-beginners/index.md)
+
+12. Add the translation string for the superblock.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json)
+
+13. Add the intro title and summary.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/intro.json)
+
+14. Add the catalog entry and a topic if the topic is new.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.ts)
+
+15. Add the superblock to the catalog stage list.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts)
+
+16. Add the superblock icon.  
+    [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/assets/superblock-icon.tsx)
+
+17. Add label styling for new topics.  
+    [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/templates/Introduction/intro.css)
+
+18. Keep the catalog test in sync.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.test.ts)
+
+19. Ensure the catalog page imports catalog config.  
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/catalog.tsx)
+
 </Steps>
 
 ## Creating Video Courses
@@ -222,6 +164,6 @@ All videos need be unlisted and have monetization turned off.
 
 ### Creating Comprehension Check Questions
 
-Each video in the course will have a comprehension check question associated with it. This is to ensure that campers will engage with the video and understanding the material.
+Each video in the course will have a comprehension check question associated with it. This is to ensure that campers will engage with the video and understand the material.
 
-You can review how to create comprehension check questions in this [detailed guide](./how-to-help-with-video-challenges.mdx).
+You can review how to create comprehension check questions in this [detailed guide](/how-to-help-with-video-challenges/).
