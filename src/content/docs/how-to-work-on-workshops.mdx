@@ -10,64 +10,66 @@ We've built a [challenge editor tool](#using-the-challenge-editor) that helps re
 
 ## Styling pointers
 
-Workshops should alternate steps in which new concepts are introduced small piece by piece, and steps where there is freedom of implementation.
+Workshops should introduce new concepts gradually. Break complex ideas into small, easy-to-understand steps.
 
 Instructions should always be written using second person, and the hints usually use a format like "You should have...", or "This thing should be/have/do/return...".
 
-If it's possible to test the effects of the code instead of what's being written exactly, that is preferred.
+Whenever possible, test the effects of the code rather than verifying exactly what was written.
 
-For example, you could ask in a step to create a variable inside a function, and that would need to be tested with regex. Ideally you would ask to instead log a specific value with `console.log`, or an other side effect that can be tested.
+For example, you might ask learners to create a variable inside a function, which would require testing with regular expressions. Instead, it is preferable to ask them to log a specific value using `console.log`, or produce another side effect that can be tested more reliably.
 
-We can test the existence and the value of a variable in the global scope, so that's less of an issue.
+We can test the existence and value of a variable in the global scope, so that is less of an issue.
 
-For the tests, the [chai asserts](https://www.chaijs.com/api/assert/) are available for use. It is preferred to use specific methods instead of the generic `assert()`.
+For writing tests, the [Chai assertions](https://www.chaijs.com/api/assert/) are available for use. It is preferred to use specific assertion methods rather than the generic `assert()` function.
 
-For example, you can test if the variable `a` has a value of `2` with `assert(a === 2)`, but it is preferred the useage of `assert.strictEqual(a, 2)` (specifically `strictEqual` as the `equal` method is equivalent to using `==` and we don't want to have a success if the variable has a value of the string `"2"`).
+For example, you could test whether the variable `a` has a value of `2` using `assert(a === 2)`. However, it is recommended to use `assert.strictEqual(a, 2)` instead. The `strictEqual` method is preferred because `equal` performs a loose comparison (equivalent to using `==`), which could incorrectly pass if the variable has the string value `"2"` instead of the number `2`.
 
-Consult the [curriculum helpers](/curriculum-help/) to know what's available to help you test the code written by the camper.
+Consult the [curriculum helpers](/curriculum-help/) to see what utilities are available to help you test the code written by the camper.
 
 ## Create the workshop
 
-Workshops will have a dashedName of the kind `workshop-cat-photo-app`, that is the word `workshop` followed by the name of the app that is being built.
+Workshops use a `dashedName` format such as `workshop-cat-photo-app`. This consists of the word `workshop` followed by the name of the app being built.
 
-Workshop titles start with "Build a" or "Design a", followed by the name of the app.
+Workshop titles should start with "Build a" or "Design a", followed by the name of the app.
 
-Some workshops, which are debugging workshop, will be called `Debugging a ...` and have prefix `workshop-debugging` in the `dashedName`.
+Some workshops are debugging workshops. These should start with `Debugging a ...` and use the prefix `workshop-debugging` in the `dashedName`.
 
-You can create the workshop with `pnpm run create-new-project`.
+You can create a workshop by running `pnpm run create-new-project`.
 
-The metadata for workshops require a `blockType` property with a value of `workshop`, and a `blockLayout` with a value of `challenge-grid`.
+The workshop metadata requires a `blockType` property with a value of `workshop`, and a `blockLayout` property with a value of `challenge-grid`.
 
 ## Using the Challenge Editor
 
-These instructions will tell you how to use our challenge editor tool to work on the workshops.
+These instructions explain how to use the challenge editor tool to work on workshops.
 
 ### Setting Up the Challenge Editor
 
-The first time you want to use the editor, and after you use `clean` commands (like `clean-and-develop`), make sure you are in the root freeCodeCamp directory and run: `pnpm challenge-editor-setup`.
+The first time you use the editor, and after running `clean` commands (such as `clean-and-develop`), ensure you are in the root `freeCodeCamp` directory and run:
+
+`pnpm challenge-editor-setup`
 
 ### Starting the Editor
 
-Once the editor is set up, run `pnpm run challenge-editor` (again in the root directory) to start both the client and the API that powers the editor.
+Once the editor is set up, run `pnpm run challenge-editor` (again from the root directory) to start both the client and the API that powers the editor.
 
-The client will run on port `3300`, so you can access it at `http://localhost:3300`. The API runs on port `3200`, to avoid conflicts with the learn client and server. This will allow you to run the freeCodeCamp application at the same time as the editor, so you can test your changes locally.
+The client runs on port `3300`, which you can access at `http://localhost:3300`. The API runs on port `3200` to avoid conflicts with the learn client and server. This setup allows you to run the freeCodeCamp application at the same time as the editor, so you can test your changes locally.
 
 ### Navigating the Editor
 
-The default view will list the available `superblocks` - these are the certifications. Click on the certification link you want to work on.
+The default view displays the available `superblocks`, which represent the certifications. Click on the certification you want to work on.
 
-This will take you to the list of blocks. These are the workshops. Click on the workshop link you want to work on.
+This will take you to a list of blocks, which correspond to workshops. Select the workshop you want to edit.
 
-This will take you to a list of steps for the project. If you are working on an existing step, you can click on the step link to open the editor. If you are adding or removing steps, click the `Use the step tools` link to switch to the step tools for that challenge.
+You will then see a list of steps for that project. If you are editing an existing step, click the corresponding step to open it in the editor. If you are adding or removing steps, use the appropriate options provided in the interface.
 
 ### Editing Steps
 
-When you click on a step, you'll be taken to the editor. This is a basic text editor that offers syntax highlighting.
+When you click on a step, you will be taken to the editor. This is a basic text editor with syntax highlighting.
 
-After you have made your changes, click the `Save Changes` button to save your changes. You will get a browser alert letting you know that your changes are ready to commit.
+After making your changes, click the `Save Changes` button. You will see a browser alert confirming that your changes are ready to be committed.
 
 :::note
-You'll need to use `git` manually to stage and commit your files - this tool will not do that for you.
+You will need to use `git` manually to stage and commit your files. The challenge editor does not perform these actions automatically.
 :::
 
 ### Step Tools
@@ -96,7 +98,7 @@ You should not have to use this tool unless you've manually deleted or added ste
 
 ## Using the Scripts Manually
 
-If you want to work on the steps manually, in your local IDE, you can run the step management scripts directly.
+If you want to work on the steps manually, in your local IDE, you can run the following commands directly.
 
 The `tools/challenge-helper-scripts` folder contains tools to help facilitate the creation and maintenance of the freeCodeCamp project-based curriculum.
 
@@ -112,7 +114,7 @@ A one-off script that will automatically add the next step based on the last ste
 
 #### How to Run the Script
 
-1. Change to the directory of the project.
+1. Change the directory to the currrent project by copying the path and running in terminal.
 2. Run the following command:
 
 ```bash
@@ -129,7 +131,7 @@ This script also runs [update-step-titles](#update-step-titles).
 
 #### How to Run the Script
 
-1. Change to the directory of the project.
+1. Change to the directory of the project by copying the path and running in terminal.
 2. Run the following command:
 
 ```bash
@@ -146,7 +148,7 @@ This script also runs [update-step-titles](#update-step-titles).
 
 #### How to Run the Script
 
-1. Change to the directory of the project.
+1. Change to the directory of the project by copying the path and running in terminal.
 2. Run the following command:
 
 ```bash
@@ -163,7 +165,7 @@ This script also runs [update-step-titles](#update-step-titles).
 
 #### How to Run the Script
 
-1. Change to the directory of the project.
+1. Change to the directory of the project by copying the path and running in terminal.
 2. Run the following command:
 
 ```bash
@@ -176,7 +178,7 @@ A one-off script that automatically updates the frontmatter in a project's markd
 
 #### How to Run the Script
 
-1. Change to the directory of the project.
+1. Change to the directory of the project by copying the path and running in terminal.
 2. Run the following command:
 
 ```bash
@@ -189,7 +191,7 @@ One-off script to parse the step names from the project and update the block's J
 
 #### How to Run the Script
 
-1. Change to the directory of the project.
+1. Change to the directory of the project by copying the path and running in terminal.
 2. Run the following command:
 
 ```bash
@@ -211,4 +213,4 @@ pnpm run rename-challenges
 
 ## Proposing a Pull Request (PR)
 
-After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/) and thats's a quick step .
