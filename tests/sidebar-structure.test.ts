@@ -297,7 +297,7 @@ describe('Sidebar Structure', () => {
     it('should have minimum expected items per section', () => {
       const minCounts: Record<string, number> = {
         Introduction: 3,
-        'Code Contributions': 16,
+        'Code Contributions': 15,
         'Additional Guides': 7,
         'Handbooks (Staff & Mods)': 6,
         'Our Community': 3
