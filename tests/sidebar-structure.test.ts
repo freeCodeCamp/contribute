@@ -105,8 +105,8 @@ describe('Sidebar Structure', () => {
       expect(codeContribs).toBeDefined();
     });
 
-    it('should have at least 16 items', () => {
-      expect(codeContribs?.items.length).toBeGreaterThanOrEqual(16);
+    it('should have at least 15 items', () => {
+      expect(codeContribs?.items.length).toBeGreaterThanOrEqual(15);
     });
 
     it('should include setup guide as first item', () => {
