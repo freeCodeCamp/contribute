@@ -18,7 +18,6 @@ const sidebar = [
       'how-to-setup-freecodecamp-mobile-app-locally',
       'how-to-work-on-localized-client-webapp',
       'how-to-add-playwright-tests',
-      'how-to-help-with-video-challenges',
       'how-to-work-on-the-docs-site',
       'how-to-open-a-pull-request',
       'how-to-fix-merge-conflicts'
@@ -45,7 +44,8 @@ const sidebar = [
       'courses-vscode-extension',
       'how-to-enable-new-languages',
       'authors-analytics-manual',
-      'how-to-create-catalog-items'
+      'how-to-create-catalog-items',
+      'how-to-help-with-video-challenges'
     ]
   },
   {
