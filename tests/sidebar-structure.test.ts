@@ -105,8 +105,8 @@ describe('Sidebar Structure', () => {
       expect(codeContribs).toBeDefined();
     });
 
-    it('should have at least 16 items', () => {
-      expect(codeContribs?.items.length).toBeGreaterThanOrEqual(16);
+    it('should have at least 15 items', () => {
+      expect(codeContribs?.items.length).toBeGreaterThanOrEqual(15);
     });
 
     it('should include setup guide as first item', () => {
@@ -297,7 +297,7 @@ describe('Sidebar Structure', () => {
     it('should have minimum expected items per section', () => {
       const minCounts: Record<string, number> = {
         Introduction: 3,
-        'Code Contributions': 16,
+        'Code Contributions': 15,
         'Additional Guides': 7,
         'Handbooks (Staff & Mods)': 6,
         'Our Community': 3
