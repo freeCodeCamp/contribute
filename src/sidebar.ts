@@ -32,6 +32,7 @@ const sidebar = [
       'how-to-catch-outgoing-emails-locally',
       'how-to-setup-wsl',
       'how-to-work-on-tutorials-that-use-coderoad',
+      'writing-style-guide',
       'troubleshooting-development-issues'
     ]
   },
