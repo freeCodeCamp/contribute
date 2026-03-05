@@ -17,6 +17,7 @@ const sidebar = [
       'how-to-work-on-workshops',
       'how-to-setup-freecodecamp-mobile-app-locally',
       'how-to-work-on-localized-client-webapp',
+      'how-to-work-on-language-curricula',
       'how-to-add-playwright-tests',
       'how-to-work-on-the-docs-site',
       'how-to-open-a-pull-request',

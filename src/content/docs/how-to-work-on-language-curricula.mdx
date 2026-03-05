@@ -1,0 +1,105 @@
+---
+title: How to Work on Language Curricula
+sidebar:
+  label: Work on Language Curricula
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+## Using Challenge Helper Scripts
+
+All commands must be run from the `tools/challenge-helper-scripts` directory. To navigate to this directory, run:
+
+```bash
+cd tools/challenge-helper-scripts
+```
+
+## Creating a New Block
+
+To create a new block, run:
+
+```bash
+pnpm run create-language-block
+```
+
+The script walks you through a series of prompts:
+
+| Prompt            | What to provide                                              |
+| ----------------- | ------------------------------------------------------------ |
+| Super block       | The super block this block belongs to (e.g., A2 English)     |
+| Block label       | The type of block: `practice`, `learn`, `quiz`, etc.         |
+| Block dashed name | A unique kebab-case identifier for the block                 |
+| Block title       | A human-readable title (defaults to the dashed name)         |
+| Help category     | The support category for this block's forum posts            |
+| Block layout      | The visual layout used to display challenges                 |
+| Chapter           | The chapter this block belongs to (you can create a new one) |
+| Module            | The module within that chapter (you can create a new one)    |
+| Position          | Where in the module this block appears (1-based)             |
+
+### Block Naming
+
+Block names for language curricula follow an automatic prefix based on the super block and block label. For example, a `learn` block in A2 English gets the prefix `en-a2-learn-`. When prompted, enter only the unique part of the name after the prefix.
+
+<Aside type="caution">
+
+Do not include the block label at the end of the name you enter. For example, if the prefix is `en-a2-learn-`, entering `greetings-learn` is incorrect.
+
+</Aside>
+
+### Creating a New Chapter
+
+Chapters are selected from a list during the block creation flow. If the chapter you need doesn't exist yet:
+
+- Run `pnpm run create-language-block`
+- Choose **-- Create new chapter --** when prompted
+
+You will then be asked for:
+
+| Prompt              | What to provide                                          |
+| ------------------- | -------------------------------------------------------- |
+| Chapter dashed name | A unique kebab-case identifier (e.g., `getting-started`) |
+| Chapter title       | A human-readable display title (e.g., `Getting Started`) |
+
+The chapter is created and the new block is placed inside it.
+
+### Creating a New Module
+
+Modules are selected from a list scoped to the chosen chapter during the block creation flow. If the module you need doesn't exist yet:
+
+- Run `pnpm run create-language-block`
+- Choose **-- Create new module --** when prompted
+
+You will be asked for:
+
+| Prompt             | What to provide                                                      |
+| ------------------ | -------------------------------------------------------------------- |
+| Module dashed name | A unique kebab-case identifier (e.g., `greetings-and-introductions`) |
+| Module title       | A human-readable display title (e.g., `Greetings and Introductions`) |
+
+## Renaming a Block
+
+The `rename-block` script renames an existing block and updates every file that references it, including the block metadata, the challenge directory, all superblock structures, and the locale intro file.
+
+To rename a block, run:
+
+```bash
+pnpm run rename-block
+```
+
+The script prompts you for:
+
+| Prompt                | What to provide                                           |
+| --------------------- | --------------------------------------------------------- |
+| Old block dashed name | The current dashed name of the block (must already exist) |
+| New display name      | The new human-readable title for the block                |
+| New dashed name       | The new kebab-case identifier for the block               |
+
+## Publishing New Content
+
+When a chapter, module, or block is created via the script, it is hidden by default, meaning it won't be visible on the production site until you choose to publish it.
+
+When you're ready to publish:
+
+- For blocks, change the `isUpcomingChange` property to `false` in the block's structure file (located in `curriculum/structure/blocks/`).
+- For chapters and modules, remove the `comingSoon` property from the super block structure file (located in `curriculum/structure/superblocks/`).
