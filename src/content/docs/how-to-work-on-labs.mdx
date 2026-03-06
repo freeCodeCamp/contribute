@@ -39,3 +39,13 @@ For the labs that do not have a demo project, the solution can be the minimum ne
 The labs that have a demo project have a `demoType` property in the frontmatter with a value of `onClick`, the labs that do not have a demo project do not have a `demoType` project.
 
 The metadata for labs require a `blockType` property with a value of `lab`, and a `blockLayout` with a value of `link`.
+
+## Using the Scripts Manually
+
+If you want to work on the challenges manually, in your local IDE, you can run the step management scripts directly.
+
+The `tools/challenge-helper-scripts` folder contains tools to help facilitate the creation and maintenance of the freeCodeCamp project-based curriculum.
+
+### Create a New Project
+
+Run `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
