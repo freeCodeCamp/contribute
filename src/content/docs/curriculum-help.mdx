@@ -1250,7 +1250,6 @@ def add(
 
 These helpers provide Abstract Syntax Tree (AST) analysis capabilities for TypeScript challenges.
 
-
 ### Basic Usage
 
 `Explorer` is a chainable class that allows you to call methods on the result of parsing a string. Here's how to create an instance of `Explorer` that parses the camper's code:
@@ -1262,14 +1261,20 @@ const explorer = await __helpers.Explorer(code);
 To access a specific statement within the code you need to chain method calls until you reach the desired scope. For example, if the camper has written the following code:
 
 ```ts
-class Spam { method(): number { return 42; } };
+class Spam {
+  method(): number {
+    return 42;
+  }
+}
 ```
 
 To check the return type annotation you would write:
 
 ```js
 const explorer = await __helpers.Explorer(code);
-assert.isTrue(explorer.getClasses().Spam.getMethods().method.hasReturnAnnotation("number"));
+assert.isTrue(
+  explorer.getClasses().Spam.getMethods().method.hasReturnAnnotation('number')
+);
 ```
 
 ### Methods
@@ -1279,7 +1284,7 @@ assert.isTrue(explorer.getClasses().Spam.getMethods().method.hasReturnAnnotation
 Returns `true` if the Explorer instance has no AST node, otherwise returns `false`.
 
 ```js
-const explorer = new Explorer("const a = 1;");
+const explorer = new Explorer('const a = 1;');
 explorer.isEmpty(); // false
 ```
 
@@ -1288,7 +1293,7 @@ explorer.isEmpty(); // false
 Returns the source code representation of the current node, or `"no ast"` if the node is empty.
 
 ```js
-const explorer = new Explorer("const a = 1;");
+const explorer = new Explorer('const a = 1;');
 explorer.toString(); // "const a = 1;"
 ```
 
@@ -1297,9 +1302,9 @@ explorer.toString(); // "const a = 1;"
 Compares the current tree with another tree or string, ignoring semicolons and irrelevant whitespace differences.
 
 ```js
-const explorer = new Explorer("const a = 1;");
-explorer.matches("const a =  1"); // true (ignores whitespace and semicolons)
-explorer.matches("const b = 1;"); // false
+const explorer = new Explorer('const a = 1;');
+explorer.matches('const a =  1'); // true (ignores whitespace and semicolons)
+explorer.matches('const b = 1;'); // false
 ```
 
 #### `getVariables()`
@@ -1307,12 +1312,12 @@ explorer.matches("const b = 1;"); // false
 Returns an object mapping variable names to `Explorer` instances for all variables in the current scope.
 
 ```js
-const explorer = new Explorer("var a = 1; let b = 2; const c = () => {}");
+const explorer = new Explorer('var a = 1; let b = 2; const c = () => {}');
 const variables = explorer.getVariables(); // { a: Explorer, b: Explorer, c: Explorer }
 const { a, b, c } = variables;
-a.matches("var a = 1;"); // true
-b.matches("let b = 1;"); // true
-c.matches("const c = () => {}"); // true
+a.matches('var a = 1;'); // true
+b.matches('let b = 1;'); // true
+c.matches('const c = () => {}'); // true
 ```
 
 #### `getValue()`
@@ -1320,10 +1325,10 @@ c.matches("const c = () => {}"); // true
 Returns an `Explorer` instance representing the assigned value of a variable, property, parameter, or property assignment. Returns an empty `Explorer` if there is no initializer.
 
 ```js
-const explorer = new Explorer("const a = 1; const b = { x: 10 };");
+const explorer = new Explorer('const a = 1; const b = { x: 10 };');
 const { a, b } = explorer.getVariables();
 a.getValue().toString(); // "1"
-b.getValue().matches("{ x: 10 }"); // true
+b.getValue().matches('{ x: 10 }'); // true
 ```
 
 #### `getObjectProps()`
@@ -1341,7 +1346,9 @@ const props = obj.getValue().getObjectProps(); // { x: Explorer, y: Explorer, z:
 Returns an object mapping function names to `Explorer` instances; pass `true` to include arrow functions and function expressions assigned to variables.
 
 ```js
-const explorer = new Explorer("function foo() { return 42; } const bar = () => 24;");
+const explorer = new Explorer(
+  'function foo() { return 42; } const bar = () => 24;'
+);
 explorer.getFunctions(); // { foo: Explorer }
 explorer.getFunctions(true); // { foo: Explorer, bar: Explorer }
 ```
@@ -1351,10 +1358,12 @@ explorer.getFunctions(true); // { foo: Explorer, bar: Explorer }
 Returns an array of `Explorer` instances representing the parameters of a function or method.
 
 ```js
-const explorer = new Explorer("function foo(x: number, y: string) { return 42; }");
+const explorer = new Explorer(
+  'function foo(x: number, y: string) { return 42; }'
+);
 const parameters = explorer.getFunctions().foo.getParameters();
-parameters[0].toString() // x: number
-parameters[1].toString() // y: string
+parameters[0].toString(); // x: number
+parameters[1].toString(); // y: string
 ```
 
 #### `getAnnotation()`
@@ -1362,7 +1371,9 @@ parameters[1].toString() // y: string
 Returns an `Explorer` instance representing the type annotation of the current node, or an empty `Explorer` if none exists.
 
 ```js
-const explorer = new Explorer("const a: number = 1; const b: { age: number } = { age: 33 }");
+const explorer = new Explorer(
+  'const a: number = 1; const b: { age: number } = { age: 33 }'
+);
 const { a, b } = explorer.getVariables();
 a.getAnnotation(); // Explorer with "number"
 b.getAnnotation(); // Explorer with "{ age: number }"
@@ -1373,10 +1384,10 @@ b.getAnnotation(); // Explorer with "{ age: number }"
 Returns `true` if the current node has a type annotation matching the specified string.
 
 ```js
-const explorer = new Explorer("const a: number = 1;");
+const explorer = new Explorer('const a: number = 1;');
 const { a } = explorer.getVariables();
-a.hasAnnotation("number"); // true
-a.hasAnnotation("string"); // false
+a.hasAnnotation('number'); // true
+a.hasAnnotation('string'); // false
 ```
 
 #### `hasReturnAnnotation(annotation: string)`
@@ -1384,10 +1395,10 @@ a.hasAnnotation("string"); // false
 Returns `true` if the function/method has a return type annotation matching the specified type.
 
 ```js
-const explorer = new Explorer("function foo(): number { return 42; }");
+const explorer = new Explorer('function foo(): number { return 42; }');
 const { foo } = explorer.getFunctions();
-foo.hasReturnAnnotation("number"); // true
-foo.hasReturnAnnotation("string"); // false
+foo.hasReturnAnnotation('number'); // true
+foo.hasReturnAnnotation('string'); // false
 ```
 
 #### `getTypes()`
@@ -1395,10 +1406,12 @@ foo.hasReturnAnnotation("string"); // false
 Returns an object mapping type alias names to `Explorer` instances for all type aliases in the current scope.
 
 ```js
-const explorer = new Explorer("type Foo = { x: number; }; type Bar = { y: string; };");
+const explorer = new Explorer(
+  'type Foo = { x: number; }; type Bar = { y: string; };'
+);
 const types = explorer.getTypes(); // { Foo: Explorer, Bar: Explorer }
-types.Foo.matches("type Foo = { x: number; };"); // true
-types.Bar.matches("type Bar = { y: string; };"); // true
+types.Foo.matches('type Foo = { x: number; };'); // true
+types.Bar.matches('type Bar = { y: string; };'); // true
 ```
 
 #### `getInterfaces()`
@@ -1406,10 +1419,12 @@ types.Bar.matches("type Bar = { y: string; };"); // true
 Returns an object mapping interface names to `Explorer` instances for all interfaces in the current scope.
 
 ```js
-const explorer = new Explorer("interface Foo { x: number; } interface Bar { y: string; }");
+const explorer = new Explorer(
+  'interface Foo { x: number; } interface Bar { y: string; }'
+);
 const interfaces = explorer.getInterfaces(); // { Foo: Explorer, Bar: Explorer }
-interfaces.Foo.matches("interface Foo { x: number; }"); // true
-interfaces.Bar.matches("interface Bar { y: string; }"); // true
+interfaces.Foo.matches('interface Foo { x: number; }'); // true
+interfaces.Bar.matches('interface Bar { y: string; }'); // true
 ```
 
 #### `getClasses()`
@@ -1417,10 +1432,12 @@ interfaces.Bar.matches("interface Bar { y: string; }"); // true
 Returns an object mapping class names to `Explorer` instances for all classes in the current scope.
 
 ```js
-const explorer = new Explorer("class Foo { x: number; } class Bar { y: string; }");
+const explorer = new Explorer(
+  'class Foo { x: number; } class Bar { y: string; }'
+);
 const classes = explorer.getClasses(); // { Foo: Explorer, Bar: Explorer }
-classes.Foo.matches("class Foo { x: number; }"); // true
-classes.Bar.matches("class Bar { y: string; }"); // true
+classes.Foo.matches('class Foo { x: number; }'); // true
+classes.Bar.matches('class Bar { y: string; }'); // true
 ```
 
 #### `getMethods()`
@@ -1428,7 +1445,7 @@ classes.Bar.matches("class Bar { y: string; }"); // true
 Returns an object mapping method names to `Explorer` instances for all methods in the current class.
 
 ```js
-const explorer = new Explorer("class Foo { method1() {} method2() {} }");
+const explorer = new Explorer('class Foo { method1() {} method2() {} }');
 const classes = explorer.getClasses();
 classes.Foo.getMethods(); // { method1: Explorer, method2: Explorer }
 ```
@@ -1438,7 +1455,7 @@ classes.Foo.getMethods(); // { method1: Explorer, method2: Explorer }
 Returns an object mapping property names to `Explorer` instances for all properties in the current class.
 
 ```js
-const explorer = new Explorer("class Foo { prop1: number; prop2: string; }");
+const explorer = new Explorer('class Foo { prop1: number; prop2: string; }');
 const classes = explorer.getClasses();
 classes.Foo.getClassProps(); // { prop1: Explorer, prop2: Explorer }
 ```
@@ -1448,7 +1465,7 @@ classes.Foo.getClassProps(); // { prop1: Explorer, prop2: Explorer }
 Returns an object mapping property names to `Explorer` instances for all properties in a type, interface, or type literal.
 
 ```js
-const explorer = new Explorer("type Foo = { x: number; y: string; };");
+const explorer = new Explorer('type Foo = { x: number; y: string; };');
 const types = explorer.getTypes();
 types.Foo.getTypeProps(); // { x: Explorer, y: Explorer }
 ```
@@ -1458,15 +1475,17 @@ types.Foo.getTypeProps(); // { x: Explorer, y: Explorer }
 Returns `true` if all specified properties exist in a type, interface, or type literal, with optional type and optionality verification. `TypeProp` is an object with the form `{ name: string; type?: string; isOptional?: boolean }`.
 
 ```js
-const explorer = new Explorer("type Foo = { x: number; y: string; z?: boolean; };");
+const explorer = new Explorer(
+  'type Foo = { x: number; y: string; z?: boolean; };'
+);
 const { Foo } = explorer.getTypes();
-Foo.hasTypeProps({ name: "x" }); // true
+Foo.hasTypeProps({ name: 'x' }); // true
 Foo.hasTypeProps([
-  { name: "x", type: "number" },
-  { name: "y", type: "string", isOptional: false },
-  { name: "z", isOptional: true }
+  { name: 'x', type: 'number' },
+  { name: 'y', type: 'string', isOptional: false },
+  { name: 'z', isOptional: true }
 ]); // true
-Foo.hasTypeProps({ name: "a" }); // false
+Foo.hasTypeProps({ name: 'a' }); // false
 ```
 
 #### `isUnionOf(types: string[])`
@@ -1474,10 +1493,10 @@ Foo.hasTypeProps({ name: "a" }); // false
 Returns `true` if the current node has a union type annotation that includes all specified types, ignoring order.
 
 ```js
-const explorer = new Explorer("const a: number | string | boolean;");
+const explorer = new Explorer('const a: number | string | boolean;');
 const { a } = explorer.getVariables();
-a.getAnnotation().isUnionOf(["number", "string", "boolean"]); // true
-a.getAnnotation().isUnionOf(["number", "string"]); // false
+a.getAnnotation().isUnionOf(['number', 'string', 'boolean']); // true
+a.getAnnotation().isUnionOf(['number', 'string']); // false
 ```
 
 #### `hasCast(expectedType?: string)`
@@ -1485,12 +1504,12 @@ a.getAnnotation().isUnionOf(["number", "string"]); // false
 Checks if the current node is a type assertion (cast using `as`). Optionally verify the cast type matches the provided type string.
 
 ```js
-const explorer = new Explorer("const a = 1 as number; const b = 2 as string;");
+const explorer = new Explorer('const a = 1 as number; const b = 2 as string;');
 const { a, b } = explorer.getVariables();
 a.getValue().hasCast(); // true
-a.getValue().hasCast("number"); // true
-a.getValue().hasCast("string"); // false
-b.getValue().hasCast("string"); // true
+a.getValue().hasCast('number'); // true
+a.getValue().hasCast('string'); // false
+b.getValue().hasCast('string'); // true
 ```
 
 #### `doesExtend(basesToCheck: string | string[])`
@@ -1498,11 +1517,11 @@ b.getValue().hasCast("string"); // true
 Checks if a class or interface extends the specified base class or interface(s). Accepts a single string or an array of strings.
 
 ```js
-const explorer = new Explorer("class Foo extends Bar { }");
+const explorer = new Explorer('class Foo extends Bar { }');
 const { Foo } = explorer.getClasses();
-Foo.doesExtend("Bar"); // true
-Foo.doesExtend(["Bar", "Baz"]); // true if Bar or Baz is extended
-Foo.doesExtend("Baz"); // false
+Foo.doesExtend('Bar'); // true
+Foo.doesExtend(['Bar', 'Baz']); // true if Bar or Baz is extended
+Foo.doesExtend('Baz'); // false
 ```
 
 #### `doesImplement(basesToCheck: string | string[])`
@@ -1510,9 +1529,9 @@ Foo.doesExtend("Baz"); // false
 Checks if a class implements the specified interface(s). Accepts a single string or an array of strings.
 
 ```js
-const explorer = new Explorer("class Foo implements Bar, Baz { }");
+const explorer = new Explorer('class Foo implements Bar, Baz { }');
 const { Foo } = explorer.getClasses();
-Foo.doesImplement("Bar"); // true
-Foo.doesImplement(["Bar", "Baz"]); // true
-Foo.doesImplement("Spam"); // false
+Foo.doesImplement('Bar'); // true
+Foo.doesImplement(['Bar', 'Baz']); // true
+Foo.doesImplement('Spam'); // false
 ```
