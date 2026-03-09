@@ -247,3 +247,16 @@ A quick reference to the commands that you will need when working.
 | `FCC_BLOCK='basic-html-and-html5' pnpm run develop`                      | Build and develop a specific Block.                                          |
 | `FCC_SUPERBLOCK='responsive-web-design' pnpm run develop`                | Build and develop a specific SuperBlock.                                     |
 | `pnpm run clean`                                                         | Uninstalls all dependencies and cleans up caches.                            |
+
+## Speeding up your workflows
+
+We make use of turborepo for caching and parallelizing tasks. To take advantage of the remote cache, add the following variables to your `.env` file `TURBO_API`, `TURBO_TEAM`, `TURBO_TOKEN`, `TURBO_REMOTE_CACHE_SIGNATURE_KEY` and `TURBO_CACHE`. These values are in Turborepo Remote Cache in 1password.
+
+The easiest way to do this to make use of [direnv](https://direnv.net/). After installing it, it needs [configuring](https://direnv.net/man/direnv.toml.1.html#description) with
+
+```toml
+[global]
+load_dotenv = true
+```
+
+typically in `~/.config/direnv/direnv.toml`.
