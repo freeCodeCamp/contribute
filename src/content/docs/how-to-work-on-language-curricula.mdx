@@ -7,15 +7,33 @@ sidebar:
 import { Steps } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 
-## Using Challenge Helper Scripts
+## Curriculum Structure
 
-All commands must be run from the `tools/challenge-helper-scripts` directory. To navigate to this directory, run:
+Language curricula follow a five-level hierarchy:
+
+- **Superblock** — The top-level course (e.g., _A2 English for Developers_)
+- **Chapter** — A broad thematic group within a superblock
+- **Module** — A focused topic within a chapter
+- **Block** — A set of tasks covering a specific lesson topic
+- **Task** — An individual challenge within a block (multiple-choice, fill-in-the-blank, quiz, etc.)
+
+For file structure, see [Curriculum File Structure](./curriculum-file-structure.mdx).
+
+## Modifying Curriculum Outer Layer
+
+To add or edit an outer layer (chapter, module, or block), we use the challenge helper scripts.
+
+### Creating a New Block
+
+<Aside type="note">
+
+Navigate to the `tools/challenge-helper-scripts` directory before running this script:
 
 ```bash
 cd tools/challenge-helper-scripts
 ```
 
-## Creating a New Block
+</Aside>
 
 To create a new block, run:
 
@@ -25,21 +43,21 @@ pnpm run create-language-block
 
 The script walks you through a series of prompts:
 
-| Prompt            | What to provide                                              |
-| ----------------- | ------------------------------------------------------------ |
-| Super block       | The super block this block belongs to (e.g., A2 English)     |
-| Block label       | The type of block: `practice`, `learn`, `quiz`, etc.         |
-| Block dashed name | A unique kebab-case identifier for the block                 |
-| Block title       | A human-readable title (defaults to the dashed name)         |
-| Help category     | The support category for this block's forum posts            |
-| Block layout      | The visual layout used to display challenges                 |
-| Chapter           | The chapter this block belongs to (you can create a new one) |
-| Module            | The module within that chapter (you can create a new one)    |
-| Position          | Where in the module this block appears (1-based)             |
+| Prompt            | What to provide                                                                                |
+| ----------------- | ---------------------------------------------------------------------------------------------- |
+| Superblock        | The superblock this block belongs to (e.g., A2 English)                                        |
+| Block label       | The type of block: `practice`, `learn`, `quiz`, etc.                                           |
+| Block dashed name | A unique kebab-case identifier for the block (e.g., `en-a2-learn-greetings-and-introductions`) |
+| Block title       | A human-readable title (e.g., `Greetings and Introductions`)                                   |
+| Help category     | The support category for this block's forum posts                                              |
+| Block layout      | The visual layout used to display challenges                                                   |
+| Chapter           | The chapter this block belongs to (you can create a new one)                                   |
+| Module            | The module within that chapter (you can create a new one)                                      |
+| Position          | Where in the module this block appears (1-based)                                               |
 
 ### Block Naming
 
-Block names for language curricula follow an automatic prefix based on the super block and block label. For example, a `learn` block in A2 English gets the prefix `en-a2-learn-`. When prompted, enter only the unique part of the name after the prefix.
+Block names for language curricula follow an automatic prefix based on the superblock and block label. For example, a `learn` block in A2 English gets the prefix `en-a2-learn-`. When prompted, enter only the unique part of the name after the prefix.
 
 <Aside type="caution">
 
@@ -79,6 +97,16 @@ You will be asked for:
 
 ## Renaming a Block
 
+<Aside type="note">
+
+Navigate to the `tools/challenge-helper-scripts` directory before running this script:
+
+```bash
+cd tools/challenge-helper-scripts
+```
+
+</Aside>
+
 The `rename-block` script renames an existing block and updates every file that references it, including the block metadata, the challenge directory, all superblock structures, and the locale intro file.
 
 To rename a block, run:
@@ -95,6 +123,109 @@ The script prompts you for:
 | New display name      | The new human-readable title for the block                |
 | New dashed name       | The new kebab-case identifier for the block               |
 
+## Working with Tasks
+
+### Creating the Next Task
+
+<Aside type="note">
+
+Navigate to the `curriculum/` directory before running this script:
+
+```bash
+cd curriculum
+```
+
+</Aside>
+
+To add a new task at the end of a block, run:
+
+```bash
+pnpm run create-next-task
+```
+
+The script prompts you for:
+
+| Prompt                                        | What to provide                                                         |
+| --------------------------------------------- | ----------------------------------------------------------------------- |
+| Task challenge type                           | The type of challenge: `multipleChoice`, `fillInTheBlank`, or `generic` |
+| Input type _(Chinese fill-in-the-blank only)_ | `pinyin-tone` or `pinyin-to-hanzi`                                      |
+
+After running, the script creates the task file, appends it to the `[block-name].json` file, and renumbers all tasks in the block.
+
+### Inserting a Task
+
+<Aside type="note">
+
+Navigate to the `curriculum/` directory before running this script:
+
+```bash
+cd curriculum
+```
+
+</Aside>
+
+To insert a new task before an existing one, run:
+
+```bash
+pnpm run insert-task
+```
+
+The script prompts you for:
+
+| Prompt                                          | What to provide                                                         |
+| ----------------------------------------------- | ----------------------------------------------------------------------- |
+| Which challenge should come AFTER this new one? | Select from the list of existing tasks                                  |
+| Task challenge type                             | The type of challenge: `multipleChoice`, `fillInTheBlank`, or `generic` |
+| Input type _(Chinese fill-in-the-blank only)_   | `pinyin-tone` or `pinyin-to-hanzi`                                      |
+
+After running, the script creates the task file, inserts it at the correct position in the `[block-name].json` file, and renumbers all tasks in the block.
+
+### Reordering Tasks
+
+<Aside type="note">
+
+Navigate to the `curriculum/` directory before running this script:
+
+```bash
+cd curriculum
+```
+
+</Aside>
+
+To resync task numbering after manual edits, run:
+
+```bash
+pnpm run reorder-tasks
+```
+
+The script takes no prompts. It reads the current task order from `[block-name].json` and updates all task file names and titles to match.
+
+### Deleting a Task
+
+<Aside type="note">
+
+Navigate to the `curriculum/` directory before running this script:
+
+```bash
+cd curriculum
+```
+
+</Aside>
+
+To delete a task from a block, run:
+
+```bash
+pnpm run delete-task
+```
+
+The script prompts you for:
+
+| Prompt                             | What to provide                        |
+| ---------------------------------- | -------------------------------------- |
+| Which challenge should be deleted? | Select from the list of existing tasks |
+
+After running, the script deletes the task file, removes it from `[block-name].json`, and renumbers the remaining tasks.
+
 ## Publishing New Content
 
 When a chapter, module, or block is created via the script, it is hidden by default, meaning it won't be visible on the production site until you choose to publish it.
@@ -102,4 +233,43 @@ When a chapter, module, or block is created via the script, it is hidden by defa
 When you're ready to publish:
 
 - For blocks, change the `isUpcomingChange` property to `false` in the block's structure file (located in `curriculum/structure/blocks/`).
-- For chapters and modules, remove the `comingSoon` property from the super block structure file (located in `curriculum/structure/superblocks/`).
+- For chapters and modules, remove the `comingSoon` property from the superblock structure file (located in `curriculum/structure/superblocks/`).
+
+## Working with CJK
+
+CJK language curricula (Chinese, Japanese, Korean) use a **base text — annotation** pair convention to link source characters to their pronunciation guide. For example:
+
+```
+`你好 (nǐ hǎo)`
+
+`こんにちは (konnichiwa)`
+
+`안녕하세요 (annyeonghaseyo)`
+```
+
+The challenge parser converts these inline pairs into HTML `<ruby>` elements for display.
+
+### Writing Convention
+
+The decision of where to split segments is ultimately up to the author, but the following are general guidelines:
+
+- Punctuation marks — place the annotation _before_ the punctuation
+- English words — do not annotate them
+- `BLANK` markers in fill-in-the-blank tasks
+
+Here are some examples:
+
+| Content type                            | Example                                           |
+| --------------------------------------- | ------------------------------------------------- |
+| Static text (basic)                     | `我叫王华 (wǒ jiào Wang Hua)。`                   |
+| Static text (with internal punctuation) | `你好 (nǐ hǎo)，我是王华 (wǒ shì Wang Hua)。`     |
+| Static text (with English)              | `我是 (wǒ shì) UI 设计师 (shè jì shī)。`          |
+| Fill-in-the-blank                       | `BLANK 好 (hǎo)，我 (wǒ) BLANK 王华 (Wang Hua)。` |
+
+### Chinese Input Types
+
+Chinese fill-in-the-blank tasks use one of two input types. You select the input type when creating a task with `create-next-task` or `insert-task`.
+
+- Pinyin-to-Hanzi: The learner types Pinyin with tone numbers (1–5). When a correctly typed syllable is entered, it converts to the corresponding Chinese character. Pressing backspace on a Chinese character reverts it to Pinyin and removes the last typed element (tone number or letter).
+
+- Pinyin Tone: The learner types Pinyin with tone numbers (1–5). Tone numbers are converted to tone marks in real time (e.g., typing `3` after `i` produces `ǐ`). Pressing backspace removes the last typed element (tone number or letter).
