@@ -7,8 +7,6 @@ sidebar:
 import { Steps } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 
-## Curriculum Structure
-
 Language curricula follow a five-level hierarchy:
 
 - **Superblock** — The top-level course (e.g., _A2 English for Developers_)
@@ -17,7 +15,372 @@ Language curricula follow a five-level hierarchy:
 - **Block** — A set of tasks covering a specific lesson topic
 - **Task** — An individual challenge within a block (multiple-choice, fill-in-the-blank, quiz, etc.)
 
-For file structure, see [Curriculum File Structure](./curriculum-file-structure.mdx).
+For file structure, see [Curriculum File Structure](/curriculum-file-structure).
+
+## Task Template
+
+Tasks are written in markdown with frontmatter metadata. The boilerplate is automatically generated when you create a new task with the helper scripts.
+
+The following examples show the possible sections for each task type. Most tasks only use a subset of these sections.
+
+<details>
+  <summary>Multiple-Choice Question (Challenge Type 19)</summary>
+
+````
+---
+id: Unique identifier (alphanumerical, MongoDB_id)
+title: Task Title
+dashedName: kebab-case-name-for-task
+challengeType: 19
+lang: language code (e.g., `en-US`, `es`, `zh-CN`)
+videoId: YouTube video ID (if applicable)
+---
+
+# --description--
+
+Task description text.
+
+# --transcript--
+
+Transcript of the video, should only be used if the task has a video (`videoId` is defined).
+
+# --instructions--
+
+Task instructions text, in markdown.
+
+# --questions--
+
+## --text--
+
+Question text.
+
+## --answers--
+
+First option
+
+### --audio-id--
+
+Audio ID for this option (the name of the audio file, without the extension)
+
+### --feedback--
+
+Feedback shown when campers guess this answer
+
+---
+
+Second option
+
+### --audio-id--
+
+Audio ID for this option
+
+### --feedback--
+
+Feedback shown when campers guess this answer
+
+---
+
+Third option
+
+### --feedback--
+
+Feedback shown when campers guess this answer
+
+---
+
+Fourth option
+
+## --video-solution--
+
+The number for the correct answer goes here (1-based).
+
+# --explanation--
+
+Explanation text.
+
+# --scene--
+
+```json
+// # --scene-- can only consist of a single json object
+{
+  // Setup the scene. Properties not marked optional are required.
+  "setup": {
+    // Background file to start the scene. A list of scene asset filenames can be found here: https://github.com/freeCodeCamp/cdn/pull/233/files
+    "background": "company2-center.png",
+    // Array of all characters that will appear in the scene
+    "characters": [
+      {
+        // Name of character. See list of available characters in scene-assets.tsx
+        "character": "Maria",
+        // Where to start the character. Maria will start off screen to the left
+        "position": { "x": -25, "y": 0, "z": 1 }
+      },
+      {
+        "character": "Tom",
+        // Tom will start 70% from the left of the screen and 1.5 times regular size
+        "position": { "x": 70, "y": 0, "z": 1.5 },
+        // Optional, defaults to 1. Tom will start invisible
+        "opacity": 0
+      }
+    ],
+    "audio": {
+      // Audio filename
+      "filename": "1.1-1.mp3",
+      // Seconds after the scene starts before the audio starts playing
+      "startTime": 1.3,
+      // Optional. Timestamp of the audio file where it starts playing from.
+      "startTimestamp": 0,
+      // Optional. Timestamp of the audio file where is stops playing. If these two aren't used, the whole audio file will play.
+      "finishTimestamp": 8.4
+    },
+    // Optional, defaults to false. Use this for the long dialogues. It stops the accessibility icon from showing which gives campers the option to show or hide the dialogue text
+    "alwaysShowDialogue": true
+  },
+  // Array of commands that make up the scene
+  "commands": [
+    {
+      // Character that will have an action for this command
+      "character": "Maria",
+      // Optional, defaults to previous value. Maria will move to 25% from the left of the screen. The movement takes 0.5 seconds
+      "position": { "x": 25, "y": 0, "z": 1 },
+      // When the command will start. Zero seconds after the camper presses play
+      "startTime": 0
+    },
+    {
+      "character": "Tom",
+      // Optional, defaults to previous value. Tom will fade into view. The transition take 0.5 seconds. Movement and Opacity transitions take 0.5 seconds
+      "opacity": 1,
+      // Tom will fade into view 0.5 seconds into the scene (immediately after Maria finishes moving on screen)
+      "startTime": 0.5
+    },
+    {
+      "character": "Maria",
+      // When the command starts: Maria will start saying this line 1.3 seconds into the scene. Note that this is the same time as the audio.startTime above. It doesn't have to match that (maybe there's a pause at the beginning of the audio or something)
+      "startTime": 1.3,
+      // The character will stop moving their mouth at the finishTime
+      "finishTime": 4.95,
+      "dialogue": {
+        // Text that will appear if the dialogue is visible
+        "text": "Hello! You're the new graphic designer, right? I'm Maria, the team lead.",
+        // Where the dialogue text will be aligned. Can be 'left', 'center', or 'right'
+        "align": "left"
+      }
+    },
+    {
+      // background will change to this at 5.4 seconds into the scene
+      "background": "company2-breakroom.png",
+      "character": "Tom",
+      "startTime": 5.4,
+      "finishTime": 9.4,
+      "dialogue": {
+        "text": "Hi, that's right!  I'm Tom McKenzie. It's a pleasure to meet you.",
+        // Tom's text will be aligned to the right since he is on the right side of the screen
+        "align": "right"
+      }
+    },
+    {
+      "character": "Tom",
+      // Tom will fade to 0 opacity
+      "opacity": 0,
+      // I like to move characters off screen or fade them 0.5 second after the last talking command
+      "startTime": 9.9
+    },
+    {
+      "character": "Maria",
+      // Maria will slide back off the screen to the left
+      "position": { "x": -25, "y": 0, "z": 1 },
+      // The animation will stop playing 0.5 seconds after the 'finishTime' of the last command - or 0.5 seconds after 'startTime' if 'finishTime' isn't there.
+      "startTime": 10.4
+    }
+  ]
+}
+```
+````
+
+</details>
+
+<details>
+  <summary>Fill-in-the-Blank (Challenge Type 22)</summary>
+
+````
+---
+id: Unique identifier (alphanumerical, MongoDB_id)
+title: Task Title
+dashedName: kebab-case-name-for-task
+challengeType: 22
+lang: language code (e.g., `en-US`, `es`, `zh-CN`)
+---
+
+# --description--
+
+Task description text.
+
+# --instructions--
+
+Task instructions text, in markdown.
+
+# --fillInTheBlank--
+
+## --sentence--
+
+`The sentence with BLANK markers`
+
+## --blanks--
+
+`First blank answer`
+
+### --feedback--
+
+Feedback for the first blank
+
+---
+
+`Second blank answer`
+
+### --feedback--
+
+Feedback for the second blank
+
+# --explanation--
+
+Explanation text.
+
+# --scene--
+
+```json
+{
+  "setup": {
+    "background": "company2-center.png",
+    "characters": [
+      {
+        "character": "Maria",
+        "position": { "x": 50, "y": 25, "z": 1.5 },
+        "opacity": 0
+      }
+    ],
+    "audio": {
+      "filename": "1.1-1.mp3",
+      "startTime": 1,
+      "startTimestamp": 0,
+      "finishTimestamp": 4.5
+    }
+  },
+  "commands": [
+    {
+      "character": "Maria",
+      "opacity": 1,
+      "startTime": 0
+    },
+    {
+      "character": "Maria",
+      "startTime": 1,
+      "finishTime": 3.5,
+      "dialogue": {
+        "text": "Hello! Nice to meet you.",
+        "align": "center"
+      }
+    },
+    {
+      "character": "Maria",
+      "opacity": 0,
+      "startTime": 4
+    }
+  ]
+}
+```
+````
+
+</details>
+
+<details>
+  <summary>Review (Challenge Type 31)</summary>
+
+```
+---
+id: Unique identifier (alphanumerical, MongoDB_id)
+title: Task Title
+dashedName: kebab-case-name-for-task
+challengeType: 31
+lang: language code (e.g., `en-US`, `es`, `zh-CN`)
+---
+
+# --description--
+
+Review content in markdown.
+
+# --assignments--
+
+This will show a checkbox that campers have to check before completing a task.
+
+---
+
+This will show another checkbox that campers have to check before completing a challenge.
+```
+
+</details>
+
+<details>
+  <summary>Quiz (Challenge Type 8)</summary>
+
+````
+---
+id: Unique identifier (alphanumerical, MongoDB_id)
+title: Quiz Title
+dashedName: kebab-case-name-for-quiz
+challengeType: 8
+lang: language code (e.g., `en-US`, `es`, `zh-CN`)
+---
+
+# --description--
+
+Quiz description text.
+
+# --quizzes--
+
+## --quiz--
+
+### --question--
+
+#### --text--
+
+Question text.
+
+#### --audio--
+
+```json
+{
+  "audio": {
+    "filename": "audio-filename.mp3",
+    "startTimestamp": 0,
+    "finishTimestamp": 4.5
+  },
+  "transcript": [
+    {
+      "character": "Character Name",
+      "text": "Audio transcript text."
+    }
+  ]
+}
+```
+
+#### --distractors--
+
+First distractor option
+
+---
+
+Second distractor option
+
+---
+
+Third distractor option
+
+#### --answer--
+
+The correct answer
+````
+
+</details>
 
 ## Modifying Curriculum Outer Layer
 
@@ -94,6 +457,21 @@ You will be asked for:
 | ------------------ | -------------------------------------------------------------------- |
 | Module dashed name | A unique kebab-case identifier (e.g., `greetings-and-introductions`) |
 | Module title       | A human-readable display title (e.g., `Greetings and Introductions`) |
+
+## Renaming a Chapter
+
+To rename a chapter, update the chapter's dashed name and display name in the following files:
+
+- `curriculum/structure/superblocks/[superblock-name].json`
+- `client/i18n/locales/english/intro.json`
+- `packages/shared/src/config/chapters.ts`
+
+## Renaming a Module
+
+To rename a module, update the module's dashed name and display name in the following files:
+
+- `curriculum/structure/superblocks/[superblock-name].json`
+- `client/i18n/locales/english/intro.json`
 
 ## Renaming a Block
 
@@ -232,39 +610,36 @@ When a chapter, module, or block is created via the script, it is hidden by defa
 
 When you're ready to publish:
 
-- For blocks, change the `isUpcomingChange` property to `false` in the block's structure file (located in `curriculum/structure/blocks/`).
-- For chapters and modules, remove the `comingSoon` property from the superblock structure file (located in `curriculum/structure/superblocks/`).
+- For blocks, change the `isUpcomingChange` property to `false` in the block's structure file (`curriculum/structure/blocks/[block-name].json`).
+- For chapters and modules, remove the `comingSoon` property from the superblock structure file (`curriculum/structure/superblocks/[superblock-name].json`).
 
 ## Working with CJK
 
 CJK language curricula (Chinese, Japanese, Korean) use a **base text — annotation** pair convention to link source characters to their pronunciation guide. For example:
 
-```
-`你好 (nǐ hǎo)`
-
-`こんにちは (konnichiwa)`
-
-`안녕하세요 (annyeonghaseyo)`
-```
+- `你好 (nǐ hǎo)`
+- `こんにちは (konnichiwa)` or `こ (ko) ん (n) に (ni) ち (chi) は (wa)`
+- `안녕하세요 (annyeonghaseyo)` or `안 (an) 녕 (nyeong) 하 (ha) 세 (se) 요 (yo)`
 
 The challenge parser converts these inline pairs into HTML `<ruby>` elements for display.
 
-### Writing Convention
+### CJK Writing Convention
 
 The decision of where to split segments is ultimately up to the author, but the following are general guidelines:
 
-- Punctuation marks — place the annotation _before_ the punctuation
-- English words — do not annotate them
-- `BLANK` markers in fill-in-the-blank tasks
+- Punctuation marks: place the annotation _before_ the punctuation
+- English words: do not annotate them
+- `BLANK` markers in fill-in-the-blank tasks: do not annotate them
+- Lowercase annotations: use lowercase for annotations, even if the base text is a proper noun or is the first word of a sentence
 
 Here are some examples:
 
 | Content type                            | Example                                           |
 | --------------------------------------- | ------------------------------------------------- |
-| Static text (basic)                     | `我叫王华 (wǒ jiào Wang Hua)。`                   |
-| Static text (with internal punctuation) | `你好 (nǐ hǎo)，我是王华 (wǒ shì Wang Hua)。`     |
+| Static text (basic)                     | `我叫王华 (wǒ jiào wáng huá)。`                   |
+| Static text (with internal punctuation) | `你好 (nǐ hǎo)，我是王华 (wǒ shì wáng huá)。`     |
 | Static text (with English)              | `我是 (wǒ shì) UI 设计师 (shè jì shī)。`          |
-| Fill-in-the-blank                       | `BLANK 好 (hǎo)，我 (wǒ) BLANK 王华 (Wang Hua)。` |
+| Fill-in-the-blank                       | `BLANK 好 (hǎo)，我 (wǒ) BLANK 王华 (wáng huá)。` |
 
 ### Chinese Input Types
 
