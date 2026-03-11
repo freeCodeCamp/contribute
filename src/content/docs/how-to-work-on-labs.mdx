@@ -36,7 +36,7 @@ All labs have a solution, but not all labs have a demo project.
 For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
 :::
 
-The labs that have a demo project have a `demoType` property in the frontmatter with a value of `onClick`, the labs that do not have a demo project do not have a `demoType` project.
+Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory even for HTML labs.
 
 The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`.
 
@@ -61,6 +61,7 @@ id: <ObjectId>
 title: Build / Implement / Design / Debug [Name]
 challengeType: 26
 dashedName: lab-name
+demoType: onClick
 ---
 
 # --description--
