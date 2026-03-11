@@ -226,6 +226,8 @@ Each step in a workshop is a Markdown file named after its challenge `id`. The `
 
 All step files use `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
 
+The `demoType: onLoad` field is only present in the first step of workshops that have a demo project.
+
 Here is the template for a JavaScript workshop step:
 
 <!-- prettier-ignore -->
@@ -235,6 +237,7 @@ id: <ObjectId>
 title: Step N
 challengeType: 1
 dashedName: step-n
+demoType: onLoad
 ---
 
 # --description--
