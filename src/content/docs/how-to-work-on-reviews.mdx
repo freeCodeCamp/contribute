@@ -35,3 +35,65 @@ The metadata for reviews require a `blockLabel` property with a value of `review
 Reviews use a `challengeType` of 31.
 
 Reviews have a dashedName with `review-topic`, and titles of the reviews are like `Topic Review`.
+
+## Review File Template
+
+Each review is a single Markdown file. The content section uses either `# --interactive--` or `# --description--` depending on whether the review includes interactive code editors.
+
+Use `# --interactive--` when the review includes `:::interactive_editor` blocks that campers can run directly:
+
+````md
+---
+id: <ObjectId>
+title: [Topic] Review
+challengeType: 31
+dashedName: review-topic-name
+---
+
+# --interactive--
+
+## Section Heading
+
+- **concept**: explanation
+
+```js
+// optional static code example
+```
+
+:::interactive_editor
+
+```js
+// interactive code example campers can run
+```
+
+:::
+
+# --assignment--
+
+Review the [topic] topics and concepts.
+````
+
+Use `# --description--` when the review only contains static markdown content:
+
+````md
+---
+id: <ObjectId>
+title: [Topic] Review
+challengeType: 31
+dashedName: review-topic-name
+---
+
+# --description--
+
+## Section Heading
+
+- **concept**: explanation
+
+```bash
+# optional code example
+```
+
+# --assignment--
+
+Review the [topic] topics and concepts.
+````

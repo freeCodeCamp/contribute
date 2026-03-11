@@ -213,6 +213,60 @@ The script is to be used if the step-based project has files that have challenge
 pnpm run rename-challenges
 ```
 
+## Step File Template
+
+Each step in a workshop is a Markdown file named after its challenge `id`. The `challengeType` and seed language depend on the type of workshop:
+
+| `challengeType` | Workshop type | Seed language(s)                                               |
+| --------------- | ------------- | -------------------------------------------------------------- |
+| `0`             | HTML/CSS      | `html` only, or `html` + `css`, or `html` + `css` + `js`/`jsx` |
+| `1`             | JavaScript    | `js`                                                           |
+| `20`            | Python        | `py`                                                           |
+| `12`            | Bash/SQL/etc. | no seed — the workshop runs via a CodeRoad `url` field         |
+
+All step files use `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
+
+Here is the template for a JavaScript workshop step:
+
+<!-- prettier-ignore -->
+````md
+---
+id: <ObjectId>
+title: Step N
+challengeType: 1
+dashedName: step-n
+---
+
+# --description--
+
+Step description in markdown.
+
+# --hints--
+
+Description of what the test checks.
+
+```js
+// test code
+```
+
+# --seed--
+
+## --seed-contents--
+
+```js
+// seed code
+--fcc-editable-region--
+
+--fcc-editable-region--
+```
+
+# --solutions--
+
+```js
+// solution code (only required for the last step)
+```
+````
+
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
