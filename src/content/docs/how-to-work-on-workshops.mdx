@@ -4,6 +4,10 @@ sidebar:
   label: Work on Workshops
 ---
 
+:::tip
+You'll need this guide if you're creating or modifying workshop-style curriculum (step-based learning). If you're working on other types of challenges like coding projects, labs, or quizzes, check their respective guides.
+:::
+
 Our workshops use a step-based approach to teach concepts to campers. A workshop will consist of multiple files, which we refer to as **"steps"**. These files are named by the challenge ID, to avoid issues with the translation flow. Unfortunately, this makes it difficult to find the file associated with a specific step.
 
 We've built a [challenge editor tool](#using-the-challenge-editor) that helps remedy this. This tool allows you to navigate the available workshops, and the steps for each workshop (in order). There's also an embedded code editor you can use to work on the files directly.
@@ -36,7 +40,7 @@ Some workshops, which are debugging workshop, will be called `Debugging a ...` a
 
 You can create the workshop with `pnpm run create-new-project`.
 
-The metadata for workshops require a `blockType` property with a value of `workshop`, and a `blockLayout` with a value of `challenge-grid`.
+The metadata for workshops require a `blockLabel` property with a value of `workshop`, and a `blockLayout` with a value of `challenge-grid`.
 
 ## Using the Challenge Editor
 
