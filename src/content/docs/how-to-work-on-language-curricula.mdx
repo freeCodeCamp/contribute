@@ -550,11 +550,11 @@ pnpm run insert-task
 
 The script prompts you for:
 
-| Prompt                                          | What to provide                                                         |
-| ----------------------------------------------- | ----------------------------------------------------------------------- |
-| Which challenge should come AFTER this new one? | Select from the list of existing tasks                                  |
-| Task challenge type                             | The type of challenge: `multipleChoice`, `fillInTheBlank`, or `generic` |
-| Input type _(Chinese fill-in-the-blank only)_   | `pinyin-tone` or `pinyin-to-hanzi`                                      |
+| Prompt                                        | What to provide                                                         |
+| --------------------------------------------- | ----------------------------------------------------------------------- |
+| Which task should come AFTER this new one?    | Select from the list of existing tasks                                  |
+| Task challenge type                           | The type of challenge: `multipleChoice`, `fillInTheBlank`, or `generic` |
+| Input type _(Chinese fill-in-the-blank only)_ | `pinyin-tone` or `pinyin-to-hanzi`                                      |
 
 After running, the script creates the task file, inserts it at the correct position in the `[block-name].json` file, and renumbers all tasks in the block.
 
@@ -604,13 +604,25 @@ The script prompts you for:
 
 After running, the script deletes the task file, removes it from `[block-name].json`, and renumbers the remaining tasks.
 
+## Adding Scene Assets
+
+Scene assets (backgrounds, characters, and audio) are stored in the `cdn` repository. To add new assets:
+
+- Create a PR to upload the files to the `cdn` repository
+  - If the asset is an image, upload it to https://github.com/freeCodeCamp/cdn/tree/main/build/curriculum/english/animation-assets/images
+  - If the asset is audio, upload it to https://github.com/freeCodeCamp/cdn/tree/main/build/curriculum/english/animation-assets/sounds
+- Create a PR to add the asset to the main repository:
+  - Add the new filename or character name to `curriculum/schema/scene-assets.js`
+  - Update the snapshot test by running `pnpm --filter @freecodecamp/curriculum exec vitest run schema/challenge-schema.test.mjs -u`
+  - The `curriculum/schema/__snapshots__/challenge-schema.test.mjs.snap` file should now be automatically updated with the new asset. Include this change in your PR.
+
 ## Publishing New Content
 
 When a chapter, module, or block is created via the script, it is hidden by default, meaning it won't be visible on the production site until you choose to publish it.
 
 When you're ready to publish:
 
-- For blocks, change the `isUpcomingChange` property to `false` in the block's structure file (`curriculum/structure/blocks/[block-name].json`).
+- For blocks, change the `isUpcomingChange` property to `false` in the block structure file (`curriculum/structure/blocks/[block-name].json`).
 - For chapters and modules, remove the `comingSoon` property from the superblock structure file (`curriculum/structure/superblocks/[superblock-name].json`).
 
 ## Working with CJK
@@ -621,7 +633,7 @@ CJK language curricula (Chinese, Japanese, Korean) use a **base text — annotat
 - `こんにちは (konnichiwa)` or `こ (ko) ん (n) に (ni) ち (chi) は (wa)`
 - `안녕하세요 (annyeonghaseyo)` or `안 (an) 녕 (nyeong) 하 (ha) 세 (se) 요 (yo)`
 
-The challenge parser converts these inline pairs into HTML `<ruby>` elements for display.
+The challenge parser converts these pairs into HTML `<ruby>` elements for display.
 
 ### CJK Writing Convention
 
@@ -630,7 +642,7 @@ The decision of where to split segments is ultimately up to the author, but the 
 - Punctuation marks: place the annotation _before_ the punctuation
 - English words: do not annotate them
 - `BLANK` markers in fill-in-the-blank tasks: do not annotate them
-- Lowercase annotations: use lowercase for annotations, even if the base text is a proper noun or is the first word of a sentence
+- Lowercase annotations: always use lowercase for annotations, even if the base text is a proper noun or is the first word of a sentence
 
 Here are some examples:
 
