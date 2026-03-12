@@ -224,7 +224,8 @@ Each step in a workshop is a Markdown file named after its challenge `id`. The `
 | `20`            | Python        | `py`                                                           |
 | `12`            | Bash/SQL/etc. | no seed — the workshop runs via a CodeRoad `url` field         |
 
-All step files use `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
+All step files use exactly two `--fcc-editable-region--` markers in the seed to highlight 
+where campers should make changes. Only the last step requires a `# --solutions--` section.
 
 The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory, if the project design calls for it it can be omitted.
 
@@ -255,7 +256,7 @@ Description of what the test checks.
 
 ## --seed-contents--
 
-```text
+```lang
 // seed code
 --fcc-editable-region--
 
@@ -264,7 +265,7 @@ Description of what the test checks.
 
 # --solutions--
 
-```js
+```lang
 // solution code (only required for the last step)
 ```
 ````
