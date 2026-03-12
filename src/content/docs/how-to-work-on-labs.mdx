@@ -36,7 +36,7 @@ All labs have a solution, but not all labs have a demo project.
 For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
 :::
 
-Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory even for HTML labs.
+Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory, if the project design calls for it it can be omitted.
 
 The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`.
 
@@ -125,10 +125,10 @@ for each test:
 --after-all--
 ```
 
-For JavaScript and Python labs (`challengeType: 26` and `27`), `--before-all--` runs once when the Worker initialises, before any test. User code is then re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`):
+For JavaScript and Python labs (`challengeType: 26` and `27`), `--before-all--` runs once before any test. User code is then re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`):
 
 ```
---before-all-- (Worker init)
+--before-all-- (once)
   ↓
 for each test:
   --before-each-- + user code + test → --after-each--
@@ -136,13 +136,10 @@ for each test:
 --after-all--
 ```
 
-There is no DOM access in Worker-based labs.
-
 **Syntax:**
 
 Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
 
-<!-- prettier-ignore -->
 ````md
 # --description--
 

@@ -226,11 +226,10 @@ Each step in a workshop is a Markdown file named after its challenge `id`. The `
 
 All step files use `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
 
-The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory even for those.
+The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory, if the project design calls for it it can be omitted.
 
 Here is the template for a JavaScript workshop step:
 
-<!-- prettier-ignore -->
 ````md
 ---
 id: <ObjectId>
@@ -258,9 +257,9 @@ Description of what the test checks.
 
 ```js
 // seed code
---fcc-editable-region--
+--fcc - editable - region--;
 
---fcc-editable-region--
+--fcc - editable - region--;
 ```
 
 # --solutions--
@@ -300,10 +299,10 @@ for each test:
 --after-all--
 ```
 
-For JavaScript and Python workshops (`challengeType: 1` and `20`), `--before-all--` runs once when the Worker initialises, before any test. User code is then re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`):
+For JavaScript and Python workshops (`challengeType: 1` and `20`), `--before-all--` runs once before any test. User code is then re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`):
 
 ```
---before-all-- (Worker init)
+--before-all-- (once)
   ↓
 for each test:
   --before-each-- + user code + test → --after-each--
@@ -311,13 +310,10 @@ for each test:
 --after-all--
 ```
 
-There is no DOM access in Worker-based workshops.
-
 **Syntax:**
 
 Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
 
-<!-- prettier-ignore -->
 ````md
 # --description--
 
