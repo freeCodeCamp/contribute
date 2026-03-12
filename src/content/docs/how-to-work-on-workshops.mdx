@@ -270,6 +270,79 @@ Description of what the test checks.
 ```
 ````
 
+## Hooks
+
+Hooks are optional code blocks that run at specific points during test execution. They can be used to set up shared state, install fake timers, or clean up after tests.
+
+Hooks are supported for workshop types `0`, `1`, and `20`.
+
+Four hooks are available:
+
+| Hook              | When it runs                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `--before-all--`  | Once, before any test runs                                                                  |
+| `--before-each--` | Before each individual test                                                                 |
+| `--after-each--`  | After each individual test (in a `finally` block, so it always runs even if the test fails) |
+| `--after-all--`   | Once, after all tests have finished                                                         |
+
+**Execution order:**
+
+```
+--before-all-- (once)
+  ↓
+  For each test:
+    --before-each-- → test → --after-each--
+  ↓
+--after-all-- (once)
+```
+
+**DOM vs non-DOM steps:**
+
+For HTML/CSS workshops (`challengeType: 0`), `--before-all--` is injected as a `<script>` tag into the sandboxed iframe when the page loads. It runs with full access to DOM APIs and global test helpers like `__FakeTimers` and `$` (jQuery).
+
+For JavaScript and Python workshops (`challengeType: 1` and `20`), all hooks run in a Web Worker context. There is no DOM access.
+
+**Syntax:**
+
+Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
+
+<!-- prettier-ignore -->
+````md
+# --description--
+
+...
+
+# --before-all--
+
+```js
+// Runs once before any test. Set up shared state here.
+let clock = __FakeTimers.install();
+```
+
+# --before-each--
+
+```js
+// Runs before each test.
+```
+
+# --after-each--
+
+```js
+// Runs after each test, even if it fails.
+```
+
+# --after-all--
+
+```js
+// Runs once after all tests. Clean up here.
+clock.uninstall();
+```
+
+# --hints--
+
+...
+````
+
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
