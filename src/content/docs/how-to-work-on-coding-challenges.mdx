@@ -225,51 +225,6 @@ The number for the correct answer goes here.
 
 :::
 
-## Numbering Challenges
-
-Every challenge needs an `id`. If you don't specify one, then MongoDB will create a new random one when it saves the data; however, we don't want it to do that, since we want the challenge ids to be consistent across different environments (staging, production, lots of different developers, etc.).
-
-To generate a new one in a shell (assuming MongoDB is running separately):
-
-1. Run `mongo` command.
-2. Run `ObjectId()` command.
-
-For example:
-
-```bash
-$ mongo
-MongoDB shell version v3.6.1
-connecting to: mongodb://127.0.0.1:27017
-MongoDB server version: 3.4.10
-...
-$ ObjectId()
-ObjectId("5a474d78df58bafeb3535d34")
-```
-
-The result is a new id, for example, `5a474d78df58bafeb3535d34` above.
-
-Once you have your id, put it into the markdown file as the `id` field at the top, e.g.
-
-```yml
----
-id: 5a474d78df58bafeb3535d34
-title: Challenge Title
-```
-
-## Naming challenges
-
-Naming things is hard. We've made it easier by imposing some constraints.
-
-All challenge titles should be explicit and should follow this pattern:
-
-[verb][object clause]
-
-Here are some example challenge names:
-
-- Use Clockwise Notation to Specify the Padding of an Element
-- Condense arrays with .reduce
-- Use Bracket Notation to Find the First Character in a String
-
 ## Challenge descriptions/instructions
 
 Sentences should be clear and concise with minimal jargon. If used, jargon should be immediately defined in plain English.

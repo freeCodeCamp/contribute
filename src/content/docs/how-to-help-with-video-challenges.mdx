@@ -8,6 +8,37 @@ A video challenge is a small section of a full-length video course on a particul
 
 The video challenge pages are created by members of the freeCodeCamp team. YouTube videos are also uploaded by members of the freeCodeCamp team.
 
+## Numbering Challenges
+
+Every challenge needs an `id`. If you don't specify one, then MongoDB will create a new random one when it saves the data; however, we don't want it to do that, since we want the challenge ids to be consistent across different environments (staging, production, lots of different developers, etc.).
+
+To generate a new one in a shell (assuming MongoDB is running separately):
+
+1. Run `mongo` command.
+2. Run `ObjectId()` command.
+
+For example:
+
+```bash
+$ mongo
+MongoDB shell version v3.6.1
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.10
+...
+$ ObjectId()
+ObjectId("5a474d78df58bafeb3535d34")
+```
+
+The result is a new id, for example, `5a474d78df58bafeb3535d34` above.
+
+Once you have your id, put it into the markdown file as the `id` field at the top, e.g.
+
+```yml
+---
+id: 5a474d78df58bafeb3535d34
+title: Challenge Title
+```
+
 ## Challenge Template
 
 Below is a template of what the challenge markdown files look like.
@@ -20,7 +51,6 @@ sidebar:
   label: Work on Video Challenges
 challengeType: 11
 videoId: 'YouTube videoId for video challenge'
-forumTopicId: 12345
 ---
 
 # --description--
