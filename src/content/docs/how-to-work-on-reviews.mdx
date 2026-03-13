@@ -40,7 +40,9 @@ Reviews have a dashedName with `review-topic`, and titles of the reviews are lik
 
 Each review is a single Markdown file. The content section uses either `# --interactive--` or `# --description--` depending on whether the review includes interactive code editors.
 
-Use `# --interactive--` when the review includes `:::interactive_editor` blocks that campers can run directly:
+Use `# --interactive--` when the review includes `:::interactive_editor` blocks that campers can run directly.
+
+For JavaScript-only examples:
 
 ````md
 ---
@@ -71,6 +73,28 @@ dashedName: review-topic-name
 # --assignment--
 
 Review the [topic] topics and concepts.
+````
+
+For HTML/CSS/JS examples, include all three file types inside the same `:::interactive_editor` block. The HTML file must explicitly link to the CSS and JS files — they are not linked automatically:
+
+````md
+:::interactive_editor
+
+```html
+<link rel="stylesheet" href="styles.css" />
+<!-- HTML content -->
+<script src="index.js"></script>
+```
+
+```css
+/* CSS styles */
+```
+
+```js
+// JavaScript code
+```
+
+:::
 ````
 
 Use `# --description--` when the review only contains static markdown content:
