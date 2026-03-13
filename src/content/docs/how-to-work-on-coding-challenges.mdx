@@ -389,11 +389,11 @@ If a challenge only has a single place where code changes are needed, please use
 
 ```js
 // TODO: use a different type of loop
---fcc-editable-region--
+--fcc - editable - region--;
 for (let i = 1; i <= count; i++) {
   rows.push(padRow(i, count));
 }
---fcc-editable-region--
+--fcc - editable - region--;
 ```
 
 ### Translation of Seed Code Comments
@@ -474,7 +474,13 @@ After you've committed your changes, check here for [how to open a Pull Request]
 If you are working with the step-based challenges, refer to the [Work on Workshops](/how-to-work-on-workshops/) section.
 :::
 
-There are a few helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:
+### Creating a New Projects
+
+To create a new lecture block, workshop, lab, review page or quiz, you can run `pnpm run create-new-project` in the root directory. This opens up a command line UI that guides you through the process.
+
+Once that has finished, there should be a new challenge in the curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+
+There are a few other helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:
 
 ```bash
 cd curriculum/challenges/english/blocks/basic-algorithm-scripting
