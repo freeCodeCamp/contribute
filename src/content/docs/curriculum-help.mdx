@@ -1262,7 +1262,7 @@ To access a specific statement within the code you need to chain method calls un
 
 ```ts
 class Spam {
-  method(): number {
+  get42(): number {
     return 42;
   }
 }
@@ -1273,7 +1273,7 @@ To check the return type annotation you would write:
 ```js
 const explorer = await __helpers.Explorer(code);
 assert.isTrue(
-  explorer.classes.Spam.methods.method.hasReturnAnnotation('number')
+  explorer.classes.Spam.methods.get42.hasReturnAnnotation('number')
 );
 ```
 
