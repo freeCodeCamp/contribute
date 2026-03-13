@@ -33,12 +33,14 @@ Before you work on the curriculum, you would need to set up some tooling to help
 
 ## Specialized Guides for the Curriculum
 
-The workshops, labs and quizzes have additional tooling and processes. To learn more, refer to these guides:
+The core curriculum is broken down into workshops, labs, review pages and quizzes. Each of those components has its own tooling and processes.
+
+To learn more, refer to these specialized guides:
 
 - [How to Work on Workshops](/how-to-work-on-workshops/)
 - [How to Work on Labs](/how-to-work-on-labs)
-- [How to Work on Quizzes](/how-to-work-on-quizzes)
 - [How to work on Review Pages](/how-to-work-on-reviews)
+- [How to Work on Quizzes](/how-to-work-on-quizzes)
 
 ## Challenge Template
 
@@ -365,45 +367,12 @@ Example of a valid CSS comment:
 If a challenge only has a single place where code changes are needed, please use the comments in the following example to instruct the user where changes should be made.
 
 ```js
-var a = 3;
-var b = 17;
-var c = 12;
-
-// Only change code below this line
-a = a + 12;
-b = 9 + b;
-c = c + 7;
-```
-
-If a challenge has multiple places where the user is expected to change code (i.e. the React challenges)
-
-```jsx
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: 'Hello'
-    };
-    // Change code below this line
-
-    // Change code above this line
-  }
-  handleClick() {
-    this.setState({
-      text: 'You clicked!'
-    });
-  }
-  render() {
-    return (
-      <div>
-        {/* Change code below this line */}
-        <button>Click Me</button>
-        {/* Change code above this line */}
-        <h1>{this.state.text}</h1>
-      </div>
-    );
-  }
+// TODO: use a different type of loop
+--fcc - editable - region--;
+for (let i = 1; i <= count; i++) {
+  rows.push(padRow(i, count));
 }
+--fcc - editable - region--;
 ```
 
 ### Translation of Seed Code Comments
@@ -476,11 +445,7 @@ After you've committed your changes, check here for [how to open a Pull Request]
 
 ## Useful Links
 
-Creating and Editing Challenges:
-
-1. [Challenge types](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/challenge-types.ts#L1-#L28) - what the numeric challenge type values mean (enum).
-
-2. [Contributing to FreeCodeCamp - Writing ES6 Challenge Tests](https://www.youtube.com/watch?v=iOdD84OSfAE#t=2h49m55s) - a video following [Ethan Arrowood](https://twitter.com/ArrowoodTech) as he contributes to the old version of the curriculum.
+- [Challenge types](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/challenge-types.ts#L1-#L28) - what the numeric challenge type values mean (enum).
 
 ## Helper Scripts
 
