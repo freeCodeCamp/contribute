@@ -150,6 +150,57 @@ developer[2];
 ```
 ````
 
+## Quiz File Template
+
+Each quiz is a single Markdown file. The `### --question--` block is repeated once per question — 10 or 20 times per `## --quiz--` set. A quiz file can contain multiple sets of questions, each introduced by a new `## --quiz--` header within the same `# --quizzes--` section.
+
+```md
+---
+id: <ObjectId>
+title: [Topic] Quiz
+challengeType: 8
+dashedName: quiz-topic-name
+---
+
+# --description--
+
+To pass the quiz, you must correctly answer at least 18 of the 20 questions below.
+
+# --quizzes--
+
+## --quiz--
+
+### --question-- (repeated 10 or 20 times)
+
+#### --text--
+
+Question text
+
+#### --distractors--
+
+Wrong answer 1
+
+---
+
+Wrong answer 2
+
+---
+
+Wrong answer 3
+
+#### --answer--
+
+Correct answer
+
+## --quiz--
+
+### --question-- (another full set of 10 or 20 questions, same structure as above)
+
+#### --text--
+
+...
+```
+
 ## Acceptable Resources to Use for Creating Questions
 
 If you need help creating questions, then you can look through a few of the existing quizzes in the certification.

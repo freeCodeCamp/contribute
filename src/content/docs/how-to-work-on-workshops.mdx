@@ -4,6 +4,8 @@ sidebar:
   label: Work on Workshops
 ---
 
+import HooksShared from './_hooks-shared.mdx';
+
 :::tip
 You'll need this guide if you're creating or modifying workshop-style curriculum (step-based learning). If you're working on other types of challenges like coding projects, labs, or quizzes, check their respective guides.
 :::
@@ -212,6 +214,70 @@ The script is to be used if the step-based project has files that have challenge
 ```bash
 pnpm run rename-challenges
 ```
+
+## Step File Template
+
+Each step in a workshop is a Markdown file named after its challenge `id`. The `challengeType` and seed language depend on the type of workshop:
+
+| `challengeType` | Workshop type | Seed language(s)                                               |
+| --------------- | ------------- | -------------------------------------------------------------- |
+| `0`             | HTML/CSS      | `html` only, or `html` + `css`, or `html` + `css` + `js`/`jsx` |
+| `1`             | JavaScript    | `js`                                                           |
+| `20`            | Python        | `py`                                                           |
+| `12`            | Bash/SQL/etc. | no seed — the workshop runs via a CodeRoad `url` field         |
+
+All step files use exactly two `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
+
+The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory, if the project design does not require it it can be omitted.
+
+Here is the template for a JavaScript workshop step:
+
+````md
+---
+id: <ObjectId>
+title: Step N
+challengeType: X
+dashedName: step-n
+demoType: onLoad
+---
+
+# --description--
+
+Step description in markdown.
+
+# --hints--
+
+Description of what the test checks.
+
+```js
+// test code
+```
+
+# --seed--
+
+## --seed-contents--
+
+```lang
+// seed code
+--fcc-editable-region--
+
+--fcc-editable-region--
+```
+
+# --solutions--
+
+```lang
+// solution code (only required for the last step)
+```
+````
+
+## Hooks
+
+Hooks are optional code blocks that run at specific points during test execution. They can be used to set up shared state, install fake timers, or clean up after tests.
+
+Hooks are supported for workshop types `0`, `1`, and `20`.
+
+<HooksShared />
 
 ## Proposing a Pull Request (PR)
 
