@@ -1,0 +1,48 @@
+Four hooks are available:
+
+| Hook              | When it runs                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `--before-all--`  | Once, before any test runs                                                                  |
+| `--before-each--` | Before each individual test                                                                 |
+| `--after-each--`  | After each individual test (in a `finally` block, so it always runs even if the test fails) |
+| `--after-all--`   | Once, after all tests have finished                                                         |
+
+**Syntax:**
+
+Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
+
+````md
+# --description--
+
+...
+
+# --before-all--
+
+```js
+// Runs once before any test. Set up shared state here.
+let clock = __FakeTimers.install();
+```
+
+# --before-each--
+
+```js
+// Runs before each test.
+```
+
+# --after-each--
+
+```js
+// Runs after each test, even if it fails.
+```
+
+# --after-all--
+
+```js
+// Runs once after all tests. Clean up here.
+clock.uninstall();
+```
+
+# --hints--
+
+...
+````

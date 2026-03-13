@@ -4,6 +4,8 @@ sidebar:
   label: Work on Workshops
 ---
 
+import HooksShared from './_hooks-shared.mdx';
+
 :::tip
 You'll need this guide if you're creating or modifying workshop-style curriculum (step-based learning). If you're working on other types of challenges like coding projects, labs, or quizzes, check their respective guides.
 :::
@@ -226,7 +228,7 @@ Each step in a workshop is a Markdown file named after its challenge `id`. The `
 
 All step files use exactly two `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
 
-The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory, if the project design calls for it it can be omitted.
+The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory, if the project design does not require it it can be omitted.
 
 Here is the template for a JavaScript workshop step:
 
@@ -275,14 +277,7 @@ Hooks are optional code blocks that run at specific points during test execution
 
 Hooks are supported for workshop types `0`, `1`, and `20`.
 
-Four hooks are available:
-
-| Hook              | When it runs                                                                                |
-| ----------------- | ------------------------------------------------------------------------------------------- |
-| `--before-all--`  | Once, before any test runs                                                                  |
-| `--before-each--` | Before each individual test                                                                 |
-| `--after-each--`  | After each individual test (in a `finally` block, so it always runs even if the test fails) |
-| `--after-all--`   | Once, after all tests have finished                                                         |
+<HooksShared />
 
 **Execution order:**
 
@@ -309,46 +304,6 @@ for each test:
   ↓
 --after-all--
 ```
-
-**Syntax:**
-
-Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
-
-````md
-# --description--
-
-...
-
-# --before-all--
-
-```js
-// Runs once before any test. Set up shared state here.
-let clock = __FakeTimers.install();
-```
-
-# --before-each--
-
-```js
-// Runs before each test.
-```
-
-# --after-each--
-
-```js
-// Runs after each test, even if it fails.
-```
-
-# --after-all--
-
-```js
-// Runs once after all tests. Clean up here.
-clock.uninstall();
-```
-
-# --hints--
-
-...
-````
 
 ## Proposing a Pull Request (PR)
 

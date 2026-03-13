@@ -4,6 +4,8 @@ sidebar:
   label: Work on Lab Challenges
 ---
 
+import HooksShared from './_hooks-shared.mdx';
+
 :::tip
 You'll need this guide if you're creating or modifying lab challenges (project-based learning with user stories). If you're working on other types of challenges like workshops, coding projects, or quizzes, check their respective guides.
 :::
@@ -36,7 +38,7 @@ All labs have a solution, but not all labs have a demo project.
 For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
 :::
 
-Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory, if the project design calls for it it can be omitted.
+Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory, if the project design does not require it it can be omitted.
 
 The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`.
 
@@ -101,14 +103,7 @@ Hooks are optional code blocks that run at specific points during test execution
 
 Hooks are supported for lab types `25`, `26`, and `27`.
 
-Four hooks are available:
-
-| Hook              | When it runs                                                                                |
-| ----------------- | ------------------------------------------------------------------------------------------- |
-| `--before-all--`  | Once, before any test runs                                                                  |
-| `--before-each--` | Before each individual test                                                                 |
-| `--after-each--`  | After each individual test (in a `finally` block, so it always runs even if the test fails) |
-| `--after-all--`   | Once, after all tests have finished                                                         |
+<HooksShared />
 
 **Execution order:**
 
@@ -135,43 +130,3 @@ for each test:
   ↓
 --after-all--
 ```
-
-**Syntax:**
-
-Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
-
-````md
-# --description--
-
-...
-
-# --before-all--
-
-```js
-// Runs once before any test. Set up shared state here.
-let clock = __FakeTimers.install();
-```
-
-# --before-each--
-
-```js
-// Runs before each test.
-```
-
-# --after-each--
-
-```js
-// Runs after each test, even if it fails.
-```
-
-# --after-all--
-
-```js
-// Runs once after all tests. Clean up here.
-clock.uninstall();
-```
-
-# --hints--
-
-...
-````
