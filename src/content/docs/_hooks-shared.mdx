@@ -12,25 +12,23 @@ Four hooks are available:
 For challenges that have an HTML file, `--before-all--` is injected as a `<script>` tag into the sandboxed iframe _before_ the user's HTML is parsed, so it runs before user code. It has full access to DOM APIs and global test helpers like `__FakeTimers` and `$` (jQuery). The user's code then renders into the page, and each test runs against the live DOM:
 
 ```
---before-all--
-  ↓
-user code (renders once)
-  ↓
-for each test:
-  --before-each-- + test → --after-each--
-  ↓
---after-all--
+1. --before-all--
+
+2. user code (evaluated once)
+
+3. (for each test): --before-each-- → test → --after-each--
+
+4.--after-all--
 ```
 
 For challenges that do not have an HTML file, `--before-all--` runs once before any test. However, because user code is re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`), variables declared in `--before-all--` will not be in scope during tests. To share state across tests, assign to the global object directly (e.g. `globalThis.x = 1` instead of `let x = 1`):
 
 ```
---before-all-- (once)
-  ↓
-for each test:
-  --before-each-- + user code + test → --after-each--
-  ↓
---after-all--
+1. --before-all-- 
+
+2. (for each test): --before-each-- → user code → test → --after-each--
+
+3. --after-all--
 ```
 
 **Syntax:**
