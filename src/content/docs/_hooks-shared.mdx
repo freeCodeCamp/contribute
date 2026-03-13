@@ -24,7 +24,7 @@ For challenges that have an HTML file, `--before-all--` is injected as a `<scrip
 For challenges that do not have an HTML file, `--before-all--` runs once before any test. However, because user code is re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`), variables declared in `--before-all--` will not be in scope during tests. To share state across tests, assign to the global object directly (e.g. `globalThis.x = 1` instead of `let x = 1`):
 
 ```
-1. --before-all-- 
+1. --before-all--
 
 2. (for each test): --before-each-- → user code → test → --after-each--
 
