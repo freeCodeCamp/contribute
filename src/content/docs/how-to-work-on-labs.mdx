@@ -4,6 +4,8 @@ sidebar:
   label: Work on Lab Challenges
 ---
 
+import HooksShared from './_hooks-shared.mdx';
+
 :::tip
 You'll need this guide if you're creating or modifying lab challenges (project-based learning with user stories). If you're working on other types of challenges like workshops, coding projects, or quizzes, check their respective guides.
 :::
@@ -36,6 +38,73 @@ All labs have a solution, but not all labs have a demo project.
 For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
 :::
 
-The labs that have a demo project have a `demoType` property in the frontmatter with a value of `onClick`, the labs that do not have a demo project do not have a `demoType` project.
+Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory, if the project design does not require it it can be omitted.
 
 The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`. For an overview of how blocks fit into the broader curriculum hierarchy, refer to the [curriculum file structure](/curriculum-file-structure/) page.
+
+## Lab File Template
+
+Each lab is a single Markdown file. The `challengeType` and seed language depend on the type of lab:
+
+| `challengeType` | Lab type          | Seed language(s)                          | Solution language(s) |
+| --------------- | ----------------- | ----------------------------------------- | -------------------- |
+| `25`            | HTML/CSS(/JS/JSX) | `html` + `css`, or + `js`, or + `jsx`     | same combination     |
+| `26`            | JavaScript        | `js`                                      | `js`                 |
+| `27`            | Python            | `py`                                      | `py`                 |
+| `13`            | Bash/SQL/etc.     | no seed — runs via a CodeRoad `url` field | none                 |
+
+`saveSubmissionToDB: true` is only present in cert-project labs.
+
+Here is the template for a JavaScript lab:
+
+````md
+---
+id: <ObjectId>
+title: Build / Implement / Design / Debug [Name]
+challengeType: X
+dashedName: lab-name
+demoType: onClick
+---
+
+# --description--
+
+**Objective:** Fulfill the user stories below and get all the tests to pass to complete the lab.
+
+**User Stories:**
+
+1. ...
+
+# --hints--
+
+Description of what the test checks.
+
+```js
+// test code
+```
+
+# --seed--
+
+## --seed-contents--
+
+```lang
+
+```
+
+# --solutions--
+
+```lang
+// solution code
+```
+````
+
+## Hooks
+
+Hooks are optional code blocks that run at specific points during test execution. They can be used to set up shared state, install fake timers, or clean up after tests.
+
+Hooks are supported for lab types `25`, `26`, and `27`.
+
+<HooksShared />
+
+## Proposing a Pull Request (PR)
+
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).

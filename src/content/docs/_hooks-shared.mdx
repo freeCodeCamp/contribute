@@ -1,0 +1,72 @@
+Four hooks are available:
+
+| Hook              | When it runs                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `--before-all--`  | Once, before any test runs                                                                  |
+| `--before-each--` | Before each individual test                                                                 |
+| `--after-each--`  | After each individual test (in a `finally` block, so it always runs even if the test fails) |
+| `--after-all--`   | Once, after all tests have finished                                                         |
+
+**Execution order:**
+
+For challenges that have an HTML file, `--before-all--` is injected as a `<script>` tag into the sandboxed iframe _before_ the user's HTML is parsed, so it runs before user code. It has full access to DOM APIs and global test helpers like `__FakeTimers` and `$` (jQuery). The user's code then renders into the page, and each test runs against the live DOM:
+
+```
+1. --before-all--
+
+2. user code (evaluated once)
+
+3. (for each test): --before-each-- → test → --after-each--
+
+4.--after-all--
+```
+
+For challenges that do not have an HTML file, `--before-all--` runs once before any test. However, because user code is re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`), variables declared in `--before-all--` will not be in scope during tests. To share state across tests, assign to the global object directly (e.g. `globalThis.x = 1` instead of `let x = 1`):
+
+```
+1. --before-all--
+
+2. (for each test): --before-each-- → user code → test → --after-each--
+
+3. --after-all--
+```
+
+**Syntax:**
+
+Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
+
+````md
+# --description--
+
+...
+
+# --before-all--
+
+```js
+// Runs once before any test. Set up shared state here.
+let clock = __FakeTimers.install();
+```
+
+# --before-each--
+
+```js
+// Runs before each test.
+```
+
+# --after-each--
+
+```js
+// Runs after each test, even if it fails.
+```
+
+# --after-all--
+
+```js
+// Runs once after all tests. Clean up here.
+clock.uninstall();
+```
+
+# --hints--
+
+...
+````
