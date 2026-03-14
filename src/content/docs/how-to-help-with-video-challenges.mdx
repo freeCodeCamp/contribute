@@ -10,6 +10,10 @@ The video challenge pages are created by members of the freeCodeCamp team. YouTu
 
 ## Numbering Challenges
 
+:::note
+This section only applies to the catalog items which don't use the existing scripts for generating files with MongoDB ids.
+:::
+
 Every challenge needs an `id`. If you don't specify one, then MongoDB will create a new random one when it saves the data; however, we don't want it to do that, since we want the challenge ids to be consistent across different environments (staging, production, lots of different developers, etc.).
 
 To generate a new one in a shell (assuming MongoDB is running separately):
