@@ -1,5 +1,5 @@
 ---
-title: How to work on lab challenges
+title: How to Work on Lab Challenges
 sidebar:
   label: Work on Lab Challenges
 ---
@@ -40,7 +40,11 @@ For the labs that do not have a demo project, the solution can be the minimum ne
 
 Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory, if the project design does not require it it can be omitted.
 
-The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`. For an overview of how blocks fit into the broader curriculum hierarchy, refer to the [curriculum file structure](/curriculum-file-structure/) page.
+## Create the Lab
+
+You can create the lab with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the lab belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
+
+The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`.
 
 ## Lab File Template
 
