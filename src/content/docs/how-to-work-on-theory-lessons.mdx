@@ -1,0 +1,271 @@
+---
+title: How to Work on Theory Lessons
+sidebar:
+  label: Work on Theory Lessons
+---
+
+:::tip
+You'll need this guide if you're creating or modifying theory lessons (text-based lectures that introduce concepts). If you're working on other types of content like workshops, labs, or quizzes, check their respective guides.
+:::
+
+Theory lessons introduce concepts through text, code examples, and interactive editors. Each lesson ends with a set of multiple-choice questions to check the camper's understanding.
+
+Theory lessons use a `challengeType` of `19`.
+
+## Create the Theory Lesson
+
+You can create the theory lesson with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the lesson belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
+
+The metadata for theory lessons require a `blockLabel` property with a value of `lecture`, and a `blockLayout` with a value of `challenge-list`.
+
+Theory lessons have a dashedName starting with `lecture-`.
+
+The following scripts can be used to add, insert, or remove individual lessons within an existing block. Run them from the block's directory.
+
+### create-next-challenge
+
+A one-off script that interactively prompts for the challenge type and title, then creates a new lesson file at the end of the block and updates the block's JSON structure file.
+
+#### How to Run the Script
+
+1. Change to the directory of the block.
+2. Run the following command:
+
+```bash
+pnpm run create-next-challenge
+```
+
+### insert-challenge
+
+A one-off script that interactively prompts for the challenge type and title, then inserts a new lesson at a specified position in the block and updates the block's JSON structure file.
+
+#### How to Run the Script
+
+1. Change to the directory of the block.
+2. Run the following command:
+
+```bash
+pnpm run insert-challenge
+```
+
+### delete-challenge
+
+A one-off script that interactively prompts for which lesson to delete, removes the file, and updates the block's JSON structure file.
+
+#### How to Run the Script
+
+1. Change to the directory of the block.
+2. Run the following command:
+
+```bash
+pnpm run delete-challenge
+```
+
+## Theory Lesson File Template
+
+Each theory lesson is a single Markdown file. The content section uses either `# --interactive--` or `# --description--` depending on whether the lesson includes interactive code editors.
+
+Use `# --interactive--` when the lesson includes `:::interactive_editor` blocks that campers can run directly:
+
+```md
+---
+id: <ObjectId>
+title: <Lesson Title>
+challengeType: 19
+dashedName: lecture-<kebab-case-title>
+---
+
+# --interactive--
+
+<lesson content>
+
+# --questions--
+
+<questions>
+```
+
+Use `# --description--` when the lesson only contains static markdown content:
+
+```md
+---
+id: <ObjectId>
+title: <Lesson Title>
+challengeType: 19
+dashedName: lecture-<kebab-case-title>
+---
+
+# --description--
+
+<lesson content>
+
+# --questions--
+
+<questions>
+```
+
+## Writing Lesson Content
+
+The content section contains the lesson text. Use prose paragraphs to explain concepts, interspersed with code examples and interactive editor blocks where helpful.
+
+Static code examples (display only) use regular fenced code blocks:
+
+````md
+```js
+// display-only example
+console.log('Hello!');
+```
+````
+
+### Interactive Editor
+
+Use `:::interactive_editor` blocks when you want campers to be able to run code directly. A lesson can contain multiple independent `:::interactive_editor` blocks.
+
+For pure JavaScript examples (no DOM manipulation), use a single JS file:
+
+````md
+:::interactive_editor
+
+```js
+console.log('Hello, World!');
+```
+
+:::
+````
+
+When an example involves HTML, include all the relevant files inside the same `:::interactive_editor` block. Files are not linked automatically: the HTML file must explicitly link to any CSS or JavaScript files using a `<link>` or `<script>` tag.
+
+For HTML-only examples:
+
+````md
+:::interactive_editor
+
+```html
+<p>Example content.</p>
+```
+
+:::
+````
+
+For CSS examples, link the CSS file with a `<link>` tag in the HTML:
+
+````md
+:::interactive_editor
+
+```html
+<link rel="stylesheet" href="styles.css" />
+<main>
+  <p>Styled content.</p>
+</main>
+```
+
+```css
+main {
+  background-color: lightblue;
+}
+```
+
+:::
+````
+
+For JavaScript DOM examples, link the JS file with a `<script>` tag in the HTML:
+
+````md
+:::interactive_editor
+
+```html
+<div id="container">
+  <p>Hello!</p>
+</div>
+<script src="index.js"></script>
+```
+
+```js
+const container = document.getElementById('container');
+console.log(container);
+```
+
+:::
+````
+
+For examples with HTML, CSS, and JavaScript, include all three files with both a `<link>` and a `<script>` tag:
+
+````md
+:::interactive_editor
+
+```html
+<link rel="stylesheet" href="styles.css" />
+<div class="highlight">
+  <p>Highlighted content.</p>
+</div>
+<script src="index.js"></script>
+```
+
+```css
+.highlight {
+  background-color: yellow;
+}
+```
+
+```js
+const el = document.querySelector('.highlight');
+console.log(el);
+```
+
+:::
+````
+
+## Writing Questions
+
+The `# --questions--` section contains multiple-choice questions that test the camper's understanding of the lesson. Each lesson typically has three questions.
+
+Each question follows this structure:
+
+```md
+## --text--
+
+Question text goes here.
+
+## --answers--
+
+First answer choice.
+
+### --feedback--
+
+Hint for why this answer is wrong.
+
+---
+
+Second answer choice.
+
+### --feedback--
+
+Hint for why this answer is wrong.
+
+---
+
+Third answer choice (correct — no `--feedback--` block).
+
+---
+
+Fourth answer choice.
+
+### --feedback--
+
+Hint for why this answer is wrong.
+
+## --video-solution--
+
+3
+```
+
+Key rules:
+
+- Incorrect answers must have a `### --feedback--` block with a hint explaining why the answer is wrong.
+- The correct answer has no `### --feedback--` block.
+- `## --video-solution--` contains the 1-indexed number of the correct answer.
+- Answers are separated by `---` horizontal rules.
+- Multiple questions repeat the `## --text--` / `## --answers--` / `## --video-solution--` pattern within the same `# --questions--` section.
+
+## Proposing a Pull Request (PR)
+
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
