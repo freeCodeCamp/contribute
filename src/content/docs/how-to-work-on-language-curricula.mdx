@@ -401,7 +401,7 @@ cd tools/challenge-helper-scripts
 To create a new block, run:
 
 ```bash
-pnpm run create-language-block
+pnpm run create-new-language-block
 ```
 
 The script walks you through a series of prompts:
@@ -431,7 +431,7 @@ Do not include the block label at the end of the name you enter. For example, if
 
 Chapters are selected from a list during the block creation flow. If the chapter you need doesn't exist yet:
 
-- Run `pnpm run create-language-block`
+- Run `pnpm run create-new-language-block`
 - Choose **-- Create new chapter --** when prompted
 
 You will then be asked for:
@@ -447,7 +447,7 @@ The chapter is created and the new block is placed inside it.
 
 Modules are selected from a list scoped to the chosen chapter during the block creation flow. If the module you need doesn't exist yet:
 
-- Run `pnpm run create-language-block`
+- Run `pnpm run create-new-language-block`
 - Choose **-- Create new module --** when prompted
 
 You will be asked for:
@@ -614,6 +614,64 @@ Scene assets (backgrounds, characters, and audio) are stored in the `cdn` reposi
   - Add the new filename or character name to `curriculum/schema/scene-assets.js`
   - Update the snapshot test by running `pnpm --filter @freecodecamp/curriculum exec vitest run schema/challenge-schema.test.mjs -u`
   - The `curriculum/schema/__snapshots__/challenge-schema.test.mjs.snap` file should now be automatically updated with the new asset. Include this change in your PR.
+
+## Adding Audio to Quiz Questions
+
+In quizzes (challenge type 8), a question can have an optional audio clip. Use the following template to add audio to a quiz question:
+
+<details>
+  <summary>Quiz Question with Audio Template</summary>
+
+````md
+### --question--
+
+#### --text--
+
+Question text goes here.
+
+#### --audio--
+
+```json
+{
+  "audio": {
+    "filename": "audio-file.mp3",
+    "startTimestamp": 0,
+    "finishTimestamp": 4.5
+  },
+  "transcript": [
+    {
+      "character": "Character Name",
+      "text": "Transcript text."
+    }
+  ]
+}
+```
+
+#### --distractors--
+
+Distractor option 1
+
+---
+
+Distractor option 2
+
+---
+
+Distractor option 3
+
+#### --answer--
+
+Correct answer
+````
+
+</details>
+
+If the audio file is not available:
+
+- Upload the audio file to the `cdn` repository: https://github.com/freeCodeCamp/cdn/tree/main/build/curriculum/english/animation-assets/sounds
+- Add the filename to `curriculum/schema/scene-assets.js`
+- Update the snapshot test by running `pnpm --filter @freecodecamp/curriculum exec vitest run schema/challenge-schema.test.mjs -u`
+- The `curriculum/schema/__snapshots__/challenge-schema.test.mjs.snap` file should now be automatically updated with the new asset. Include this change in your PR.
 
 ## Publishing New Content
 
