@@ -14,6 +14,8 @@ There are a few terms we use when discussing our curriculum content.
 
 - `certification` : When referring to a certification in this instance, it is talking about the actual certificate that users claim. Which is separate from the name of the superBlock.
 - `superBlock` : A superblock is the top level collection of challenges. Each superblock corresponds to a certification in the curriculum (e.g. Responsive Web Design).
+- `chapter` : A chapter is a grouping of modules within a superblock. Not all superblocks use chapters; legacy superblocks organize blocks in a flat list instead.
+- `module` : A module is a grouping of blocks within a chapter.
 - `block` : A block is a section within a superblock. A block corresponds to a group of challenges in a given certification (e.g. Basic HTML and HTML5)
 - `challenge` : A challenge is a single lesson within the curriculum (e.g. Say Hello to HTML Elements)
 
@@ -110,24 +112,45 @@ More complex superblocks can organize blocks into chapters and modules for bette
 }
 ```
 
+Modules and chapters can have additional properties that affect how they are treated:
+
+- **`moduleType: "cert-project"`**: A module containing a single certification project block.
+- **`moduleType: "review"`**: A module containing a review block.
+- **`comingSoon: true`**: Marks a module as not yet available to campers.
+- **`chapterType: "exam"`**: Marks a chapter as containing the certification exam.
+
 ### blocks/&lt;block&gt;.json
 
 Each block has its own JSON file that contains metadata and the order of challenges:
 
 ```json
 {
-  "name": "Basic HTML and HTML5",
+  "dashedName": "workshop-greeting-bot",
+  "blockLabel": "workshop",
+  "blockLayout": "challenge-grid",
+  "helpCategory": "JavaScript",
   "isUpcomingChange": false,
-  "dashedName": "basic-html-and-html5",
-  "helpCategory": "HTML-CSS",
+  "usesMultifileEditor": true,
+  "hasEditableBoundaries": true,
   "challengeOrder": [
     {
-      "id": "bd7123c8c441eddfaeb5bdef",
-      "title": "Say Hello to HTML Elements"
+      "id": "66ad8294a0ad902f1b31b612",
+      "title": "Step 1"
     }
   ]
 }
 ```
+
+Key fields:
+
+- **`dashedName`**: URL-friendly slug for the block. The display name of the block is defined in [`intro.json`](#the-introjson-file) under the block's `title` field.
+- **`blockLabel`**: The label shown on the block card. Common values are `workshop`, `lab`, `lecture`, `review`, `quiz`, `exam`, `warm-up`, `learn`, and `practice`. Legacy blocks do not have this field.
+- **`blockLayout`**: Controls how the block is displayed. Common values include `challenge-grid`, `challenge-list`, and `legacy-challenge-list`.
+- **`helpCategory`**: Determines which forum subforum is used when a camper requests help via the help button (e.g. `JavaScript`, `HTML-CSS`, `Python`).
+- **`isUpcomingChange`**: When `true`, hides the block from campers until it is ready.
+- **`usesMultifileEditor`**: When `true`, the challenge editor shows multiple files.
+- **`hasEditableBoundaries`**: When `true`, part of the code is highlighted to indicate where changes should be made.
+- **`challengeOrder`**: Ordered list of `{ id, title }` objects defining the sequence of challenges in the block. Challenge files in `curriculum/challenges/english/blocks/<block>/` are named after their `id` (e.g. `66ad8294a0ad902f1b31b612.md`).
 
 ## The Certifications Directory
 
@@ -139,6 +162,42 @@ Each certification YAML file includes the following key properties:
 - **`title`**: Display name of the certification
 - **`certification`**: Internal name used to reference the certification
 - **`tests`**: Array of required projects with their IDs and titles
+
+## The `intro.json` File
+
+The file `client/i18n/locales/english/intro.json` contains the display titles and introductory text shown to campers for each superblock and block. It is organized by superblock, then by block:
+
+```json
+{
+  "javascript-v9": {
+    "title": "JavaScript Certification",
+    "intro": ["..."],
+    "chapters": {
+      "javascript": "JavaScript",
+      "javascript-certification-exam": "JavaScript Certification Exam"
+    },
+    "modules": {
+      "javascript-variables-and-strings": "Variables and Strings"
+    },
+    "module-intros": {
+      "data-structures": {
+        "note": "Coming Spring 2026",
+        "intro": ["..."]
+      }
+    },
+    "blocks": {
+      "workshop-greeting-bot": {
+        "title": "Build a Greeting Bot",
+        "intro": ["..."]
+      }
+    }
+  }
+}
+```
+
+At the superblock level, `title` is the display name of the superblock, and `intro` is the introductory text shown on the superblock page.
+
+`chapters` and `modules` are only present in new-style superblocks. `module-intros` contains introductory text for modules marked as `comingSoon` in the structure file. Legacy superblocks only have `title`, `intro`, and `blocks`.
 
 ## Internationalization Structure
 
@@ -264,16 +323,13 @@ Also, you will likely want to rename the certificate and the `<superBlock>-proje
      "destination": "/learn/new-superblock-name/:block?/:challenge?"
    }
    ```
-5. Rename the superblock folder in `client/src/pages/learn`.
-6. Update the `index.md` file in the renamed superblock folder, changing the `title` and `superBlock` values to the new name.
-7. For each block folder within the above, update the `index.md` to use the correct `superBlock` value.
-8. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock. (Note: Changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.)
-9. Update the `superBlockCertTypeMap` key in `shared/config/certification-settings.js` to the new superBlock name.
-10. Update the path value in `client/src/assets/icons/index.tsx`.
-11. For each language in `client/i18n/locales`, update the `intro.json` file to use the new superBlock `dashedName`. In the English file, also update the `title`.
-12. Check the `shared/config/i18n/all-langs.js` file to see if the superBlock is enabled in i18n builds. Update all the values where it is used.
-13. Update the `superBlockNames` map in `curriculum/build-curriculum.js`. This map links superblock filenames (keys) to certification names (values) - update the key if the superblock filename changed, and update the value if the certification name changed.
-14. Update the main `README.md` file to the new name.
+5. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock. (Note: Changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.)
+6. Update the `superBlockCertTypeMap` key in `shared/config/certification-settings.js` to the new superBlock name.
+7. Update the path value in `client/src/assets/icons/index.tsx`.
+8. For each language in `client/i18n/locales`, update the `intro.json` file to use the new superBlock `dashedName`. In the English file, also update the `title`.
+9. Check the `shared/config/i18n/all-langs.js` file to see if the superBlock is enabled in i18n builds. Update all the values where it is used.
+10. Update the `superBlockNames` map in `curriculum/build-curriculum.js`. This map links superblock filenames (keys) to certification names (values) - update the key if the superblock filename changed, and update the value if the certification name changed.
+11. Update the main `README.md` file to the new name.
 
 </Steps>
 
@@ -285,7 +341,7 @@ When renaming a curriculum block, you need to:
 
 1. Change the name of the block folder in the `curriculum/challenges/english/blocks/<block>` directory.
 2. Rename the block's JSON file in `curriculum/structure/blocks/` from `<old-name>.json` to `<new-name>.json`.
-3. Update the `name` and `dashedName` properties in the renamed block JSON file.
+3. Update the `dashedName` property in the renamed block JSON file.
 4. Update the superblock's JSON file in `curriculum/structure/superblocks/` to reference the new block name in its `blocks` array.
 5. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old block URLs to new ones:
    ```json
@@ -294,10 +350,8 @@ When renaming a curriculum block, you need to:
      "destination": "/learn/superblock-name/new-block-name/:challenge?"
    }
    ```
-6. Update the block folder in `client/src/pages/learn/<superBlock>`.
-7. In the `index.md` file of the above folder, update the `block` value in the frontmatter.
-8. In the `client/i18n/locales/<language>/intro.json` files, update the block name to the new name for all the languages. In the English `intro.json` file, update the `title` as well.
-9. Update the main `README.md` file to the new name.
+6. In the `client/i18n/locales/<language>/intro.json` files, update the block name to the new name for all the languages. In the English `intro.json` file, update the `title` as well.
+7. Update the main `README.md` file to the new name.
 
 </Steps>
 

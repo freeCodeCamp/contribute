@@ -1,8 +1,10 @@
 ---
-title: How to work on lab challenges
+title: How to Work on Lab Challenges
 sidebar:
   label: Work on Lab Challenges
 ---
+
+import HooksShared from './_hooks-shared.mdx';
 
 :::tip
 You'll need this guide if you're creating or modifying lab challenges (project-based learning with user stories). If you're working on other types of challenges like workshops, coding projects, or quizzes, check their respective guides.
@@ -36,7 +38,11 @@ All labs have a solution, but not all labs have a demo project.
 For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
 :::
 
-The labs that have a demo project have a `demoType` property in the frontmatter with a value of `onClick`, the labs that do not have a demo project do not have a `demoType` project.
+Labs that have a visual output (i.e. HTML-based) can have a demo project, in which case the frontmatter includes `demoType: onClick`. It is not mandatory, if the project design does not require it it can be omitted.
+
+## Create the Lab
+
+You can create the lab with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the lab belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
 
 The metadata for labs require a `blockType` property with a value of `lab`, and a `blockLayout` with a value of `link`.
 

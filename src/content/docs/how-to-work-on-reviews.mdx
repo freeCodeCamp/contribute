@@ -1,5 +1,5 @@
 ---
-title: How to work on review pages
+title: How to Work on Review Pages
 sidebar:
   label: Work on Review Pages
 ---
@@ -30,9 +30,13 @@ The topics can be divided in sections using headings, headings should start from
 ### Sub topic (if needed)
 ```
 
-The metadata for reviews require a `blockLabel` property with a value of `review`, and a `blockLayout` with a value of `link`.
-
 Reviews use a `challengeType` of 31.
+
+## Create the Review
+
+You can create the review with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the review belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
+
+The metadata for reviews require a `blockLabel` property with a value of `review`, and a `blockLayout` with a value of `link`.
 
 Reviews have a dashedName with `review-topic`, and titles of the reviews are like `Topic Review`.
 
