@@ -1,0 +1,19 @@
+---
+title: MongoDB Replica Set Setup for Local Development
+description: How to configure MongoDB as a replica set for local freeCodeCamp development.
+---
+
+## Why this is needed
+
+freeCodeCamp uses Prisma with MongoDB, and some database operations require transaction support.
+
+MongoDB transactions require the server to run as a replica set, even in local development.
+
+If MongoDB is started without replica set mode, contributors may encounter transaction-related runtime errors while running the app locally.
+
+## Start MongoDB with replica set enabled
+
+Run MongoDB with:
+
+```bash
+mongod --replSet rs0 --dbpath ~/data/db
