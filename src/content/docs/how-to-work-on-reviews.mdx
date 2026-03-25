@@ -40,12 +40,170 @@ The metadata for reviews require a `blockLabel` property with a value of `review
 
 Reviews have a dashedName with `review-topic`, and titles of the reviews are like `Topic Review`.
 
-## Using the Scripts Manually
+## Review File Template
 
-If you want to work on the challenges manually, in your local IDE, you can run the step management scripts directly.
+Each review is a single Markdown file. The content section uses either `# --interactive--` or `# --description--` depending on whether the review includes interactive code editors.
 
-The `tools/challenge-helper-scripts` folder contains tools to help facilitate the creation and maintenance of the freeCodeCamp project-based curriculum.
+Use `# --interactive--` when the review includes `:::interactive_editor` blocks that campers can run directly.
 
-### Create a New Project
+For JavaScript-only examples:
 
-Run `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+````md
+---
+id: <ObjectId>
+title: [Topic] Review
+challengeType: 31
+dashedName: review-topic-name
+---
+
+# --interactive--
+
+## Section Heading
+
+- **concept**: explanation
+
+```js
+// optional static code example
+```
+
+:::interactive_editor
+
+```js
+// interactive code example campers can run
+```
+
+:::
+
+# --assignment--
+
+Review the [topic] topics and concepts.
+````
+
+The `:::interactive_editor` block takes different forms depending on the file types involved.
+
+For JavaScript-only examples (no DOM manipulation):
+
+````md
+:::interactive_editor
+
+```js
+// interactive code example campers can run
+```
+
+:::
+````
+
+When an example involves HTML, include all the relevant files inside the same `:::interactive_editor` block. Files are not linked automatically: the HTML file must explicitly link to any CSS or JavaScript files using a `<link>` or `<script>` tag.
+
+For HTML-only examples:
+
+````md
+:::interactive_editor
+
+```html
+<p>Example content.</p>
+```
+
+:::
+````
+
+For CSS examples, link the CSS file with a `<link>` tag in the HTML:
+
+````md
+:::interactive_editor
+
+```html
+<link rel="stylesheet" href="styles.css" />
+<!-- HTML content -->
+```
+
+```css
+/* CSS styles */
+```
+
+:::
+````
+
+For JavaScript DOM examples, link the JS file with a `<script>` tag in the HTML:
+
+````md
+:::interactive_editor
+
+```html
+<!-- HTML content -->
+<script src="index.js"></script>
+```
+
+```js
+// JavaScript code
+```
+
+:::
+````
+
+For examples with HTML, CSS, and JavaScript, include all three files:
+
+````md
+:::interactive_editor
+
+```html
+<link rel="stylesheet" href="styles.css" />
+<!-- HTML content -->
+<script src="index.js"></script>
+```
+
+```css
+/* CSS styles */
+```
+
+```js
+// JavaScript code
+```
+
+:::
+````
+
+Use `# --description--` when the review only contains static markdown content:
+
+````md
+---
+id: <ObjectId>
+title: [Topic] Review
+challengeType: 31
+dashedName: review-topic-name
+---
+
+# --description--
+
+## Section Heading
+
+- **concept**: explanation
+
+```bash
+# optional code example
+```
+
+# --assignment--
+
+Review the [topic] topics and concepts.
+````
+
+## Create the Review
+
+You can create the review with `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project.
+
+The script will ask the following questions:
+
+1. **Which certification does this belong to?** — Select the certification the review is associated with.
+2. **What is the dashed name (in kebab-case) for this project?** — The block name in kebab-case (e.g., `review-basic-html`). Must be unique across all blocks.
+3. **Enter a title for this project:** — The display title shown to campers. Defaults to the dashed name if left blank.
+4. **Choose a help category** — Select the most relevant category (e.g., HTML-CSS, JavaScript).
+5. **Choose a block label** — Select `review`. (This question only appears for chapter-based certifications.)
+6. **Choose a block layout** — Select `link`. (This question only appears for chapter-based certifications.)
+7. **What chapter should this project go in?** — Select the chapter within the certification. (Chapter-based certifications only.)
+8. **What module should this project go in?** — Select the module within the chosen chapter. (Chapter-based certifications only.)
+9. **At which position does this appear in the module?** — The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
+
+For non-chapter-based certifications, instead of questions 5–9, you will be asked:
+
+- **Which position does this appear in the certificate?** — The position number in the certificate's project list.

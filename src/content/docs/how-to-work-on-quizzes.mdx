@@ -238,3 +238,20 @@ The `tools/challenge-helper-scripts` folder contains tools to help facilitate th
 ### Create a New Project
 
 Run `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+
+The script will ask the following questions:
+
+1. **Which certification does this belong to?** — Select the certification the quiz is associated with.
+2. **What is the dashed name (in kebab-case) for this project?** — The block name in kebab-case (e.g., `quiz-html-basics`). Must be unique across all blocks.
+3. **Enter a title for this project:** — The display title shown to campers. Defaults to the dashed name if left blank.
+4. **Choose a help category** — Select the most relevant category (e.g., HTML-CSS, JavaScript).
+5. **Choose a block label** — Select `quiz`. (This question only appears for chapter-based certifications.)
+6. **Choose a block layout** — Select `link`. (This question only appears for chapter-based certifications.)
+7. **Choose a question count** — Select 10 or 20 questions for the quiz. (Quiz only.)
+8. **What chapter should this project go in?** — Select the chapter within the certification. (Chapter-based certifications only.)
+9. **What module should this project go in?** — Select the module within the chosen chapter. (Chapter-based certifications only.)
+10. **At which position does this appear in the module?** — The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
+
+For non-chapter-based certifications, instead of questions 5–7 and 8–10, you will be asked:
+
+- **Which position does this appear in the certificate?** — The position number in the certificate's project list.

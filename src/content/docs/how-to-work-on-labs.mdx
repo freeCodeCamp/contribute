@@ -44,14 +44,93 @@ Labs that have a visual output (i.e. HTML-based) can have a demo project, in whi
 
 You can create the lab with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the lab belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
 
-The metadata for labs require a `blockType` property with a value of `lab`, and a `blockLayout` with a value of `link`.
+The metadata for labs require a `blockLabel` property with a value of `lab`, and a `blockLayout` with a value of `link`.
 
-## Using the Scripts Manually
+Labs have a dashedName starting with `lab-`, and titles follow the format "Build / Implement / Design / Debug [Name]".
 
-If you want to work on the challenges manually, in your local IDE, you can run the step management scripts directly.
+## Lab File Template
 
-The `tools/challenge-helper-scripts` folder contains tools to help facilitate the creation and maintenance of the freeCodeCamp project-based curriculum.
+Each lab is a single Markdown file. The `challengeType` and seed language depend on the type of lab:
 
-### Create a New Project
+| `challengeType` | Lab type          | Seed language(s)                          | Solution language(s) |
+| --------------- | ----------------- | ----------------------------------------- | -------------------- |
+| `25`            | HTML/CSS(/JS/JSX) | `html` + `css`, or + `js`, or + `jsx`     | same combination     |
+| `26`            | JavaScript        | `js`                                      | `js`                 |
+| `27`            | Python            | `py`                                      | `py`                 |
+| `13`            | Bash/SQL/etc.     | no seed — runs via a CodeRoad `url` field | none                 |
 
-Run `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+`saveSubmissionToDB: true` is only present in cert-project labs.
+
+Here is the template for a JavaScript lab:
+
+````md
+---
+id: <ObjectId>
+title: Build / Implement / Design / Debug [Name]
+challengeType: X
+dashedName: lab-name
+demoType: onClick
+---
+
+# --description--
+
+**Objective:** Fulfill the user stories below and get all the tests to pass to complete the lab.
+
+**User Stories:**
+
+1. ...
+
+# --hints--
+
+Description of what the test checks.
+
+```js
+// test code
+```
+
+# --seed--
+
+## --seed-contents--
+
+```lang
+
+```
+
+# --solutions--
+
+```lang
+// solution code
+```
+````
+
+## Hooks
+
+Hooks are optional code blocks that run at specific points during test execution. They can be used to set up shared state, install fake timers, or clean up after tests.
+
+Hooks are supported for lab types `25`, `26`, and `27`.
+
+<HooksShared />
+
+## Create the Lab
+
+You can create the lab with `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+
+The script will ask the following questions:
+
+1. **Which certification does this belong to?** — Select the certification (e.g., Responsive Web Design). This determines which superblock the lab is added to.
+2. **What is the dashed name (in kebab-case) for this project?** — The block name in kebab-case (e.g., `lab-building-a-card`). Must be unique across all blocks.
+3. **Enter a title for this project:** — The display title shown to campers. Defaults to the dashed name if left blank.
+4. **Choose a help category** — Select the most relevant category (e.g., HTML-CSS for HTML-based labs, JavaScript for JS labs).
+5. **Choose a block label** — Select `lab`. (This question only appears for chapter-based certifications.)
+6. **Choose a block layout** — Select `link`. (This question only appears for chapter-based certifications.)
+7. **What chapter should this project go in?** — Select the chapter within the certification. (Chapter-based certifications only.)
+8. **What module should this project go in?** — Select the module within the chosen chapter. (Chapter-based certifications only.)
+9. **At which position does this appear in the module?** — The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
+
+For non-chapter-based certifications, instead of questions 5–9, you will be asked:
+
+- **Which position does this appear in the certificate?** — The position number in the certificate's project list.
+
+## Proposing a Pull Request (PR)
+
+After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
