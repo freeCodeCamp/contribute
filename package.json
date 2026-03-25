@@ -27,11 +27,11 @@
     "@astrojs/check": "0.9.8",
     "@astrojs/starlight": "0.37.7",
     "@astrojs/starlight-tailwind": "4.0.2",
-    "@tailwindcss/vite": "4.2.1",
+    "@tailwindcss/vite": "4.2.2",
     "astro": "5.18.1",
     "starlight-links-validator": "0.19.2",
     "starlight-scroll-to-top": "0.4.0",
-    "tailwindcss": "4.2.1",
+    "tailwindcss": "4.2.2",
     "typescript": "5.9.3"
   },
   "devDependencies": {
@@ -53,7 +53,7 @@
     "sharp": "0.34.5",
     "typescript-eslint": "8.57.1",
     "vitest": "4.1.0",
-    "wrangler": "4.74.0"
+    "wrangler": "4.75.0"
   },
   "packageManager": "pnpm@10.32.1"
 }
