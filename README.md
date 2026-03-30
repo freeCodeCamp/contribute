@@ -30,6 +30,17 @@ We appreciate responsible disclosure of vulnerabilities that might impact the in
 > #### [Read our security policy and follow these steps to report a vulnerability](https://contribute.freecodecamp.org/security).
 
 ### Contributing
+### Getting Started for Beginners
+
+If you are new to open source, you can follow these simple steps:
+
+1. Fork this repository
+2. Clone your forked repository
+3. Make your changes in the documentation files
+4. Commit your changes
+5. Create a pull request
+
+This will help you get started with your first contribution easily.
 
 The freeCodeCamp.org community is possible thanks to thousands of kind volunteers like you. We welcome all contributions to the community and are excited to welcome you aboard.
 
