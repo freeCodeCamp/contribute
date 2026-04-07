@@ -44,6 +44,107 @@ You can create the workshop with `pnpm run create-new-project`. The CLI will ask
 
 The metadata for workshops require a `blockLabel` property with a value of `workshop`, and a `blockLayout` with a value of `challenge-grid`.
 
+### Understanding CLI Prompts
+
+When running `pnpm run create-new-project`, the CLI will ask several questions. Here is what each of them means:
+
+#### Certification Selection
+
+You will be asked:
+
+Which certification does this belong to?
+
+Choose the certification that matches the topic of your workshop.
+
+For example:
+
+- JavaScript workshops → `javascript-v9`
+- Responsive Web Design → `responsive-web-design`
+
+This determines the superblock where your workshop will appear in the curriculum.
+
+#### Help Category Selection
+
+You will be asked:
+
+Choose a help category
+
+The help category represents the subject area of your workshop.
+
+In most cases, it should match the certification you selected.
+
+For example:
+
+- JavaScript certification → JavaScript help category
+
+#### Block Label
+
+You may be asked to choose a block label.
+
+For workshops, this should always be `workshop`.
+
+This corresponds to the `blockLabel: workshop` property in the metadata.
+
+#### Chapter Selection
+
+You will be asked:
+
+What chapter should this project go in?
+
+A chapter represents a high-level grouping of content inside a certification.
+
+For example:
+
+- `javascript`
+- `html-css`
+
+Some chapters like `*-certification-exam` are reserved and should not be used for workshops.
+
+#### Module Selection
+
+You will be asked:
+
+What module should this project go in?
+
+Modules are sub-groups within chapters.
+
+For example:
+
+- `javascript-objects`
+- `html-forms`
+
+This determines where your workshop appears inside the chapter.
+
+#### Position Within Module
+
+You will be asked:
+
+At which position does this appear in the module?
+
+This controls the order of the workshop within the module.
+
+- Lower number → appears earlier
+- Higher number → appears later
+
+Check existing projects in the module to decide the correct position.
+
+#### Additional Commands
+
+After creating the project, you may need to run:
+
+`pnpm run clean:client`
+
+This ensures that the client is rebuilt with the new changes.
+
+To view your workshop in the full application, run:
+
+`pnpm run develop`
+
+- Challenge Editor → runs on port `3300`
+- Full freeCodeCamp app → runs on port `8000`
+
+Running both helps you test your workshop properly.
+
 ## Using the Challenge Editor
 
 These instructions will tell you how to use our challenge editor tool to work on the workshops.
