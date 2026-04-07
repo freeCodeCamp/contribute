@@ -96,7 +96,7 @@ await __helpers.retryingTest(callback, numberOfTries);
 
 `retryingTest` consider the test passed if the `callback` returns a truthy value, and failed if it returns a falsy value.
 
-This helper is useful in a situation in which the thing being tested could have a delay happening, like having data from an API written on the page. Then, the `callback` is called up to `numberOfTries` or until it succeds, whatever comes first. If there is never a success, then the test fails.
+This helper is useful in a situation in which the thing being tested could have a delay happening, like having data from an API written on the page. Then, the `callback` is called up to `numberOfTries` or until it succeeds, whatever comes first. If there is never a success, then the test fails.
 
 It needs to be used sparingly, because it causes the tests to take a long time.
 
