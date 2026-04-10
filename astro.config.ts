@@ -32,7 +32,11 @@ const config = defineConfig({
           href: 'https://github.com/freeCodeCamp',
           icon: 'github'
         },
-        { icon: 'x.com', label: 'X', href: 'https://twitter.com/freeCodeCamp' },
+        { 
+          label: 'X', 
+          href: 'https://twitter.com/freeCodeCamp', 
+          icon: 'x.com'
+        },
         {
           label: 'Discord',
           href: 'https://chat.freecodecamp.org',
