@@ -1,0 +1,198 @@
+---
+const label = Astro.locals.t('themeSelect.accessibleLabel');
+---
+
+<starlight-theme-select>
+  <button type='button' class='theme-toggle' aria-label={label} title={label}>
+    <span class='theme-icon theme-icon-light' aria-hidden='true'>
+      <svg
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='1.8'
+      >
+        <circle cx='12' cy='12' r='4.25'></circle>
+        <path
+          d='M12 2.5v2.5M12 19v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2.5 12H5M19 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77'
+        ></path>
+      </svg>
+    </span>
+    <span class='theme-icon theme-icon-dark' aria-hidden='true'>
+      <svg
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='1.8'
+      >
+        <path d='M20 14.2A8.5 8.5 0 1 1 9.8 4 7 7 0 0 0 20 14.2Z'></path>
+      </svg>
+    </span>
+  </button>
+</starlight-theme-select>
+
+<script>
+  type Theme = 'auto' | 'dark' | 'light';
+
+  const storageKey = 'starlight-theme';
+
+  const parseTheme = (theme: unknown): Theme =>
+    theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+
+  const loadTheme = (): Theme =>
+    parseTheme(
+      typeof localStorage !== 'undefined' && localStorage.getItem(storageKey)
+    );
+
+  const getPreferredColorScheme = (): 'dark' | 'light' =>
+    matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+  const resolveTheme = (theme: Theme): 'dark' | 'light' =>
+    theme === 'auto' ? getPreferredColorScheme() : theme;
+
+  const hasStoredPreference = (): boolean =>
+    typeof localStorage !== 'undefined' &&
+    ['dark', 'light'].includes(localStorage.getItem(storageKey) ?? '');
+
+  function storeTheme(theme: 'dark' | 'light'): void {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(storageKey, theme);
+    }
+  }
+
+  function applyTheme(theme: Theme): void {
+    document.documentElement.dataset.theme = resolveTheme(theme);
+  }
+
+  function animateToggle(button: HTMLButtonElement): void {
+    const animatedButton = button as HTMLButtonElement & {
+      __themeSpinAnimation?: Animation;
+    };
+    animatedButton.__themeSpinAnimation?.cancel();
+    animatedButton.__themeSpinAnimation = button.animate(
+      [
+        { transform: 'rotate(0deg) scale(1)' },
+        { transform: 'rotate(180deg) scale(1.03)', offset: 0.55 },
+        { transform: 'rotate(360deg) scale(1)' }
+      ],
+      {
+        duration: 850,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
+      }
+    );
+  }
+
+  class StarlightThemeSelect extends HTMLElement {
+    private mediaQuery = matchMedia('(prefers-color-scheme: light)');
+    private onMediaChange = () => {
+      if (loadTheme() === 'auto') this.sync();
+    };
+
+    private sync(): void {
+      const storedTheme = loadTheme();
+      const resolvedTheme = resolveTheme(storedTheme);
+      const button = this.querySelector<HTMLButtonElement>(
+        'button.theme-toggle'
+      );
+      const isAuto = !hasStoredPreference();
+
+      applyTheme(storedTheme);
+      button?.setAttribute('data-theme', resolvedTheme);
+      button?.setAttribute('data-auto', String(isAuto));
+    }
+
+    connectedCallback(): void {
+      this.sync();
+
+      this.querySelector('button.theme-toggle')?.addEventListener(
+        'click',
+        event => {
+          if (!(event.currentTarget instanceof HTMLButtonElement)) return;
+
+          const nextTheme =
+            resolveTheme(loadTheme()) === 'dark' ? 'light' : 'dark';
+          storeTheme(nextTheme);
+          this.sync();
+          animateToggle(event.currentTarget);
+        }
+      );
+
+      this.mediaQuery.addEventListener('change', this.onMediaChange);
+    }
+
+    disconnectedCallback(): void {
+      this.mediaQuery.removeEventListener('change', this.onMediaChange);
+    }
+  }
+
+  customElements.define('starlight-theme-select', StarlightThemeSelect);
+</script>
+
+<style>
+  @layer starlight.core {
+    starlight-theme-select {
+      display: inline-flex;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid var(--sl-color-gray-5);
+      border-radius: 9999px;
+      background-color: var(--sl-color-gray-7);
+      color: var(--sl-color-white);
+      padding: 0;
+      cursor: pointer;
+      transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+      will-change: transform;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--sl-color-gray-6);
+      border-color: var(--sl-color-gray-4);
+    }
+
+    .theme-toggle:active {
+      transform: scale(0.96);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--sl-color-accent-high);
+      outline-offset: 2px;
+    }
+
+    .theme-icon {
+      display: inline-flex;
+      line-height: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .theme-icon svg {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    .theme-icon-dark,
+    .theme-toggle[data-theme='dark'] .theme-icon-light {
+      display: none;
+    }
+
+    .theme-toggle[data-theme='dark'] .theme-icon-dark {
+      display: inline-flex;
+    }
+
+    .theme-toggle[data-theme='dark'] .theme-icon-light,
+    .theme-toggle[data-theme='light'] .theme-icon-dark {
+      opacity: 0;
+    }
+
+    .theme-toggle[data-auto='true'] {
+      border-style: dashed;
+    }
+  }
+</style>
