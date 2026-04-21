@@ -223,6 +223,10 @@ Follow these steps:
 
 </Steps>
 
+:::caution
+Do not repeatedly merge the `main` branch into your feature branch. Every merge commit triggers another round of CI runs that we have to pay for, and it clutters your pull request history. When you need to update your branch with the latest changes from `upstream/main`, [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing) instead. Also make sure your existing commits are squashed into a small set of meaningful commits before opening (or updating) your pull request.
+:::
+
 ## Proposing a Pull Request (PR)
 
 After you've committed your changes, check here for [how to open a Pull Request](/how-to-open-a-pull-request/).
