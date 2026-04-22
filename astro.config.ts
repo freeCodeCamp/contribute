@@ -43,6 +43,9 @@ const config = defineConfig({
           icon: 'discord'
         }
       ],
+      components: {
+        ThemeSelect: './src/components/ThemeSelect.astro'
+      },
       sidebar: sidebar,
       plugins: [
         ...(process.env.CHECK_LINKS ? [starlightLinksValidator()] : []),
