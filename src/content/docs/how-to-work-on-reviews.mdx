@@ -8,7 +8,7 @@ sidebar:
 You'll need this guide if you're creating or modifying review pages that summarize chapter/module topics. If you're working on other types of content like workshops, labs, or quizzes, check their respective guides.
 :::
 
-The reviews summarise the topics introduced in the corresponding chapter or module, in lectures and workshops (as some workshops introduce new concepts not taught in the lectures). Some modules could have more than one review depending on how they are structured.
+The reviews summarize the topics introduced in the corresponding chapter or module, in lectures and workshops (as some workshops introduce new concepts not taught in the lectures). Some modules could have more than one review depending on how they are structured.
 
 The concepts in a review should follow this pattern.
 
@@ -34,11 +34,23 @@ Reviews use a `challengeType` of 31.
 
 ## Create the Review
 
-You can create the review with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the review belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
+You can create the review with `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project.
 
-The metadata for reviews require a `blockLabel` property with a value of `review`, and a `blockLayout` with a value of `link`.
+The script will ask the following questions:
 
-Reviews have a dashedName with `review-topic`, and titles of the reviews are like `Topic Review`.
+1. **Which certification does this belong to?** — Select the certification the review is associated with.
+2. **What is the dashed name (in kebab-case) for this project?** — The block name in kebab-case (e.g., `review-basic-html`). Must be unique across all blocks.
+3. **Enter a title for this project:** — The display title shown to campers. Defaults to the dashed name if left blank.
+4. **Choose a help category** — Select the most relevant category (e.g., HTML-CSS, JavaScript).
+5. **Choose a block label** — Select `review`. (This question only appears for chapter-based certifications.)
+6. **Choose a block layout** — Select `link`. (This question only appears for chapter-based certifications.)
+7. **What chapter should this project go in?** — Select the chapter within the certification. (Chapter-based certifications only.)
+8. **What module should this project go in?** — Select the module within the chosen chapter. (Chapter-based certifications only.)
+9. **At which position does this appear in the module?** — The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
+
+For non-chapter-based certifications, instead of questions 5–9, you will be asked:
+
+- **Which position does this appear in the certificate?** — The position number in the certificate's project list.
 
 ## Review File Template
 
@@ -187,23 +199,3 @@ dashedName: review-topic-name
 
 Review the [topic] topics and concepts.
 ````
-
-## Create the Review
-
-You can create the review with `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project.
-
-The script will ask the following questions:
-
-1. **Which certification does this belong to?** — Select the certification the review is associated with.
-2. **What is the dashed name (in kebab-case) for this project?** — The block name in kebab-case (e.g., `review-basic-html`). Must be unique across all blocks.
-3. **Enter a title for this project:** — The display title shown to campers. Defaults to the dashed name if left blank.
-4. **Choose a help category** — Select the most relevant category (e.g., HTML-CSS, JavaScript).
-5. **Choose a block label** — Select `review`. (This question only appears for chapter-based certifications.)
-6. **Choose a block layout** — Select `link`. (This question only appears for chapter-based certifications.)
-7. **What chapter should this project go in?** — Select the chapter within the certification. (Chapter-based certifications only.)
-8. **What module should this project go in?** — Select the module within the chosen chapter. (Chapter-based certifications only.)
-9. **At which position does this appear in the module?** — The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
-
-For non-chapter-based certifications, instead of questions 5–9, you will be asked:
-
-- **Which position does this appear in the certificate?** — The position number in the certificate's project list.
