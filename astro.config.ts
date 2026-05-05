@@ -5,6 +5,20 @@ import starlightScrollToTop from 'starlight-scroll-to-top';
 import starlightLinksValidator from 'starlight-links-validator';
 import sidebar from './src/sidebar';
 
+const firstPaintThemeStyle = `
+@layer sl-first-paint {
+  html {
+    background-color: #161724;
+    color-scheme: dark;
+  }
+
+  html[data-theme='light'] {
+    background-color: #ffffff;
+    color-scheme: light;
+  }
+}
+`;
+
 const config = defineConfig({
   // @ts-expect-error - Vite 6/7 plugin type incompatibility: Astro 5 uses Vite 6, @tailwindcss/vite 4.1.14 uses Vite 7
   vite: { plugins: [tailwindcss()] },
@@ -26,6 +40,12 @@ const config = defineConfig({
       editLink: {
         baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
       },
+      head: [
+        {
+          tag: 'style',
+          content: firstPaintThemeStyle
+        }
+      ],
       social: [
         {
           label: 'GitHub',
