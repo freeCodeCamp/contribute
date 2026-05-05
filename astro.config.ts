@@ -12,6 +12,9 @@ const config = defineConfig({
   integrations: [
     starlight({
       title: 'Contribute | freeCodeCamp.org',
+      components: {
+        SiteTitle: './src/components/SiteTitle.astro'
+      },
       description: 'Contribute to freeCodeCamp.org',
       logo: {
         light: './public/icons/secondary_logo.svg',
