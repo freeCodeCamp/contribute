@@ -9,119 +9,120 @@ sidebar:
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 
-### I am new to GitHub and Open Source. Where should I start?
+### I'm new to GitHub and open source. Where should I start?
 
-Check out our [How to Contribute to Open Source Guide](https://github.com/freeCodeCamp/how-to-contribute-to-open-source). It's a great resource for beginners and includes tips on contributing to open-source projects.
+See our [How to Contribute to Open Source Guide](https://github.com/freeCodeCamp/how-to-contribute-to-open-source). It's a beginner-friendly resource with tips for contributing to open-source projects.
 
 ### What do I need to know to contribute to the codebase?
 
-freeCodeCamp is built on a modern JavaScript stack. To contribute, you should be familiar with JavaScript and technologies we use, like Node.js, MongoDB, OAuth 2.0, React, Gatsby, and Webpack.
+freeCodeCamp runs on a modern JavaScript stack. You should be familiar with JavaScript and the technologies we use: Node.js, MongoDB, OAuth 2.0, React, Gatsby, and Webpack.
 
 ### Can I use AI tools to help with my contributions?
 
-Yes, but please spend **at least 10 minutes** reading our contributing guidelines before you ask an AI assistant to modify code on your behalf. Grounding the tool in our conventions — branch naming, commit style, pull request workflow, and testing expectations — saves **you** time on rework and makes your contribution much easier to review.
+Yes, but use them productively.
 
-Pull requests that clearly ignore our guidelines will be closed, regardless of whether they were written by a human or an AI.
+We use tools like GitHub Copilot and Claude every day. Before you ask an AI assistant to modify code on your behalf, spend **at least 10 minutes** reading our contributing guidelines. Grounding the tool in our conventions—branch naming, commit style, pull request workflow, and testing expectations—saves you time on rework and makes your contribution easier to review.
 
-### Can I translate freeCodeCamp's resources?
+**Where AI is OK, and where it isn't:**
 
-Yes! You can help translate our resources into any of the 30+ languages we support.
+- **OK in code**: Use any tool to help you write, refactor, or debug.
+- **Not OK in comments and responses**: We will not engage with contributors who reply through AI-generated content on issues, pull requests, or discussions.
 
-We already have user-contributed translations in several languages and plan to expand to more. For more information, read our [announcement](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/).
+**How we handle low-effort contributions:**
 
-If you're interested in helping, make sure to [read this guide](/how-to-translate-files/) first.
+- We may apply a `deprioritize` label to pull requests that show low-quality or low-effort work. You are expected to address the gaps.
+- We may close pull requests that don't meet our standards without further discussion. This isn't a punishment—it's how we manage limited volunteer time.
 
-### Can I contribute articles to freeCodeCamp News or videos to freeCodeCamp's YouTube channel?
+<Aside type='note' title="TL;DR">
 
-Yes! You can contribute articles or videos.
+Use any tool you want, but put in the effort. We value high-quality contributions and the time of every maintainer reviewing them.
 
-To write articles for freeCodeCamp News, visit our [publication guide](https://www.freecodecamp.org/news/how-to-write-for-freecodecamp/) and check out our [style guide](https://www.freecodecamp.org/news/developer-news-style-guide/) to help you write better content.
-
-For contributing educational videos to our YouTube channel, follow the [YouTube channel guide](https://www.freecodecamp.org/news/how-to-create-a-great-technical-course).
+</Aside>
 
 ### How can I report a new bug?
 
-If you think you've found a bug, first read our [How to Report a Bug](https://www.freecodecamp.org/news/how-to-report-a-bug-to-freecodecamp/) article and follow the instructions.
+If you think you've found a bug, read our [How to Report a Bug](https://www.freecodecamp.org/news/how-to-report-a-bug-to-freecodecamp/) article first and follow the instructions.
 
-If you're sure it's a new bug, create a new GitHub issue with as much information as possible. We have an issue template to help guide you.
+If you're sure it's a new bug, open a GitHub issue with as much detail as possible. Our issue template will guide you.
 
-Please note: GitHub issues are for code-related problems, not for help with learning to code. If you're unsure, [ask for help in the forum](https://forum.freecodecamp.org) before opening an issue.
+Note: GitHub issues are for code-related problems, not coding help. If unsure, [ask in the forum](https://forum.freecodecamp.org) before opening an issue.
 
 ### How can I report a security issue?
 
-Please don't open a GitHub issue for security concerns. Instead, follow our [security policy](https://contribute.freecodecamp.org/#/security).
-
-### I am a student. Can I work on a feature for academic credits?
-
-Yes, but we cannot guarantee timelines or meet specific requirements from your school. We receive many contributions from volunteers, and we want to respect everyone's time.
-
-Please plan ahead and understand that we cannot prioritize school-related pull requests.
-
-### What do the different labels on issues mean?
-
-Our code maintainers [triage](https://en.wikipedia.org/wiki/Software_bug#Bug_management) issues and pull requests based on priority, severity, and other factors. You can find a complete list of label meanings [here](https://github.com/freeCodeCamp/freeCodeCamp/labels).
+Don't open a GitHub issue for security concerns. Follow our [security policy](https://contribute.freecodecamp.org/#/security) instead.
 
 ### Where should I start if I want to work on an issue?
 
-Check out the [**`help wanted`**](https://github.com/freeCodeCamp/freeCodeCamp/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) or [**`first timers only`**](https://github.com/freeCodeCamp/freeCodeCamp/issues?q=is%3Aopen+is%3Aissue+label%3A%22first+timers+only%22) labels for an overview of available issues.
+Browse the [**`help wanted`**](https://github.com/freeCodeCamp/freeCodeCamp/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) and [**`first timers only`**](https://github.com/freeCodeCamp/freeCodeCamp/issues?q=is%3Aopen+is%3Aissue+label%3A%22first+timers+only%22) labels for available issues.
 
-<Aside type='tip' title="Did you know?">
+<Aside type='tip' title="Tip">
 
-- **`help wanted`** issues are open for anyone to work on. You don't need permission.
-- **`first timers only`** issues are specifically for people who haven't contributed to the freeCodeCamp codebase before.
+- **`help wanted`** issues are open to anyone—no permission needed.
+- **`first timers only`** issues are reserved for people who haven't contributed to the freeCodeCamp codebase before.
 
 </Aside>
 
 ### I found a typo. Should I report an issue before making a pull request?
 
-For minor typos or wording changes, you can directly open a pull request without creating an issue first. Just include enough details in the pull request description to help us review your contribution.
+For minor typos or wording changes, open a pull request directly without creating an issue first. Include enough detail in the description to help us review.
 
-For bigger changes, please open an issue first if you want to discuss them.
+For bigger changes, open an issue first to discuss.
 
 ### How can I get an issue assigned to me?
 
-We usually don't assign issues unless you're a long-time contributor. Instead, we follow this policy:
-
-<Steps>
+We don't assign issues unless you're a long-time contributor. We follow this policy:
 
 1. We merge the first pull request that fixes the issue.
-2. If multiple people submit pull requests at the same time, we prioritize the one that best fixes the issue. Some of the factors we consider:
-   - [x] Did you include tests?
-   - [x] Did you cover all use cases?
-   - [x] Did you ensure everything works and all tests pass?
-3. We give priority to pull requests that follow our guidelines:
-   - [x] Did you follow the pull request checklist?
-   - [x] Does your pull request have a meaningful title?
+2. If multiple pull requests arrive at the same time, we prioritize the one that best fixes the issue. We consider: Are tests included? Are all use cases covered? Does everything work and all tests pass?
+3. We give priority to pull requests that follow our guidelines: Is the checklist followed? Is the title meaningful?
 
-</Steps>
+### I'm a student. Can I work on a feature for academic credits?
+
+Yes, but we cannot guarantee timelines or meet specific school requirements. We receive many contributions from volunteers and want to respect everyone's time.
+
+Plan ahead—we cannot prioritize school-related pull requests.
+
+### What do the different labels on issues mean?
+
+Maintainers [triage](https://en.wikipedia.org/wiki/Software_bug#Bug_management) issues and pull requests by priority, severity, and other factors. See the full [list of labels](https://github.com/freeCodeCamp/freeCodeCamp/labels).
+
+### Can I translate freeCodeCamp's resources?
+
+Yes. You can help translate our resources into any of the 30+ languages we support.
+
+We already have user-contributed translations in several languages and plan to add more. For background, see our [announcement](https://www.freecodecamp.org/news/help-translate-freecodecamp-language/).
+
+If you want to help, [read this guide](/how-to-translate-files/) first.
+
+### Can I contribute articles to freeCodeCamp News or videos to freeCodeCamp's YouTube channel?
+
+Yes. Both are open to contributors.
+
+For articles, see our [publication guide](https://www.freecodecamp.org/news/how-to-write-for-freecodecamp/) and [style guide](https://www.freecodecamp.org/news/developer-news-style-guide/).
+
+For educational videos, follow the [YouTube channel guide](https://www.freecodecamp.org/news/how-to-create-a-great-technical-course).
 
 ### I'm interested in becoming a moderator at freeCodeCamp. Where should I start?
 
-Our community moderators are vital to making freeCodeCamp a welcoming space. To become a moderator, first get involved in the community and follow our [code of conduct](https://www.freecodecamp.org/news/code-of-conduct/).
+Community moderators keep freeCodeCamp welcoming. To become one, get involved in the community and follow our [code of conduct](https://www.freecodecamp.org/news/code-of-conduct/).
 
-Here's how you can start:
+Where to start:
 
-- **Discord/Chat moderators**: Be active in the chat, engage positively with others, and learn to manage conflicts.
-- **Forum moderators**: Actively participate in the forum, help others, and provide feedback.
-- **GitHub moderators**: Help review issues and propose solutions.
+- **Discord/Chat moderators**: Be active in chat, engage positively, and learn to manage conflicts.
+- **Forum moderators**: Participate in the forum, help others, and give feedback.
+- **GitHub moderators**: Review issues and propose solutions.
 
-If you do this **consistently** over time, you may be recommended by our moderators, and a staff member will reach out to invite you to the team. Please keep in mind that both moderators and contributors are volunteers, so we focus on **consistent** engagement rather than 24/7 involvement.
+If you do this **consistently** over time, current moderators may recommend you and a staff member will reach out. Moderators and contributors are volunteers, so we value **consistent** engagement over 24/7 availability.
 
-Check out our [Moderator Handbook](/moderator-handbook/) for a more detailed list of responsibilities and expectations.
+See our [Moderator Handbook](/moderator-handbook/) for detailed responsibilities and expectations.
 
-### I'm stuck on something that isn't covered in this documentation.
+### Where can I get help if I'm stuck on something not covered here?
 
-**You can ask for help in:**
+**Ask for help in:**
 
 - The `Contributors` category of [our community forum](https://forum.freecodecamp.org/c/contributors).
 - The `#Contributors` channel on [our chat server](https://discord.gg/PRyKn3Vbay).
 
-We're happy to help you contribute to any project you're interested in. Feel free to ask questions in the relevant issue threads, and we'll clarify. Make sure to search for answers before posting new questions.
+You can also ask questions on the relevant issue threads and we'll clarify. Search for answers before posting new questions.
 
-Thanks for being polite and patient – our community is run mostly by volunteers.
-
-### Additional Assistance
-
-If you have questions about the stack, codebase architecture, translations, or anything else, feel free to reach out to our team [on the forum](https://forum.freecodecamp.org/g/team).
-
-**You can email our developer team at: `dev[at]freecodecamp.org`.**
+Thanks for being polite and patient—our community is run mostly by volunteers.
