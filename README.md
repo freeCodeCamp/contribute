@@ -8,7 +8,7 @@
 
 This code is running live at [contribute.freecodecamp.org](https://contribute.freecodecamp.org).
 
-Our community also has:
+Our community also has the following for each of those points:
 
 - A [forum](https://forum.freecodecamp.org) where you can usually get programming help or project feedback within hours.
 - A [YouTube channel](https://youtube.com/freecodecamp) with free courses on Python, SQL, Android, and a wide variety of other technologies.
@@ -31,7 +31,7 @@ We appreciate responsible disclosure of vulnerabilities that might impact the in
 
 ### Contributing
 
-The freeCodeCamp.org community is possible thanks to thousands of kind volunteers like you. We welcome all contributions to the community and are excited to welcome you aboard.
+The freeCodeCamp.org community is possible thanks to thousands of kind volunteers like you. We welcome all contributions to the community and are excited to welcome aboard.
 
 > #### [Please follow these steps to contribute](https://contribute.freecodecamp.org/how-to-work-on-the-docs-site).
 
