@@ -8,7 +8,7 @@
 
 This code is running live at [contribute.freecodecamp.org](https://contribute.freecodecamp.org).
 
-Our community also has the following for each of those points:
+Our community also has the following for each of those points below:
 
 - A [forum](https://forum.freecodecamp.org) where you can usually get programming help or project feedback within hours.
 - A [YouTube channel](https://youtube.com/freecodecamp) with free courses on Python, SQL, Android, and a wide variety of other technologies.
@@ -25,7 +25,7 @@ If you're confident it's a new bug and have confirmed that someone else is facin
 
 ### Reporting Security Issues and Responsible Disclosure
 
-We appreciate responsible disclosure of vulnerabilities that might impact the integrity of our platforms and users.
+We appreciate responsible disclosure of vulnerabilities that might impact the integrity of our platforms and the users combined.
 
 > #### [Read our security policy and follow these steps to report a vulnerability](https://contribute.freecodecamp.org/security).
 
