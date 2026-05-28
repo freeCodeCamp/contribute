@@ -11,6 +11,7 @@
     "format": "prettier . --write && eslint . --fix",
     "lint": "prettier . --check && eslint .",
     "test": "vitest run",
+    "test:update": "vitest run --update",
     "clean": "pnpm dlx rimraf .astro dist",
     "check:astro": "astro check",
     "check:links": "CHECK_LINKS=true astro build"
