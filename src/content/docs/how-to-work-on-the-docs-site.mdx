@@ -242,47 +242,11 @@ You need a reference from your local clone to the `upstream` repository in addit
 
 ## Install Dependencies
 
-Before installing dependencies, ensure you are using the required Node.js version.
-
-This project requires:
-
-```bash
-Node.js >= 24.12.0
-```
-
-We recommend using a Node.js version manager such as [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions across projects.
-
-### Install Node.js
-
-Using `nvm`:
-
-```bash
-nvm install 24.12.0
-nvm use 24.12.0
-```
-
-Verify your Node.js version:
-
-```bash
-node -v
-```
-
-### Install pnpm
-
-Enable Corepack (recommended for newer Node.js versions):
-
-```bash
-corepack enable
-corepack prepare pnpm@latest --activate
-```
-
-Alternatively, install pnpm globally:
+First, ensure you have pnpm installed globally:
 
 ```bash
 npm install -g pnpm
 ```
-
-### Install Project Dependencies
 
 Then install the project dependencies:
 
