@@ -548,9 +548,8 @@ const match = `function registerUser() {
   }
 }`.match(regEx);
 
-match[1];
-// Ends at the closing } of the first if block.
-// match[1].includes('age.trim') === false
+match[1].includes('throw new Error("Name is required")'); // true — first if block IS captured
+match[1].includes('age.trim'); // false — second if block is NOT captured
 ```
 
 For functions with nested blocks, match directly against `code` or the stringified function instead of relying on `match[1]`.
