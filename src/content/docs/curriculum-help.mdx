@@ -534,6 +534,27 @@ const match =
 match[1]; // "myFunc = arg1 => arg1; console.log();\n // captured, unfortunately"
 ```
 
+NOTE: `capture: true` does not work correctly for regular functions whose body contains nested blocks (`if`, `try`, `for`, etc.). The captured content is truncated at the first `}` inside the body, so everything after the first closing brace of a nested block is silently excluded.
+
+```js
+const regEx = __helpers.functionRegex('registerUser', [], { capture: true });
+
+const match = `function registerUser() {
+  if (name.trim() === "") {
+    throw new Error("Name is required");
+  }
+  if (age.trim() === "") {
+    throw new Error("Age is required");
+  }
+}`.match(regEx);
+
+match[1];
+// Ends at the closing } of the first if block.
+// match[1].includes('age.trim') === false
+```
+
+For functions with nested blocks, match directly against `code` instead of relying on `match[1]`.
+
 #### `.getFunctionParams()`
 
 Available via `__helpers.getFunctionParams(codeString)`, this method extracts parameter information from a function definition string.
