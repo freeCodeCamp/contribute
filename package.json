@@ -28,7 +28,7 @@
     "@astrojs/starlight": "0.39.2",
     "@astrojs/starlight-tailwind": "5.0.0",
     "@tailwindcss/vite": "4.3.0",
-    "astro": "6.4.4",
+    "astro": "6.3.8",
     "starlight-links-validator": "0.24.0",
     "starlight-scroll-to-top": "1.0.1",
     "tailwindcss": "4.3.0",
