@@ -1,7 +1,7 @@
 ---
-title: Contribute to the Codebase
+title: Basic Git Workflow
 sidebar:
-  label: Work on Codebase
+  label: Basic Git Workflow
 ---
 
 import { Steps } from '@astrojs/starlight/components';
@@ -117,9 +117,11 @@ Follow these steps:
 
 5. Once you are happy with the changes you should optionally run freeCodeCamp to preview the changes.
 
-6. Make sure you fix any errors and check the formatting of your changes.
+6. You should run any relevant test commands. For example, if you have edited a challenge; you should run a command to test that challenge.
 
-7. Check and confirm the files you are updating:
+7. Make sure you fix any errors and check the formatting of your changes.
+
+8. Check and confirm the files you are updating:
 
    ```bash
    git status
@@ -142,7 +144,7 @@ Follow these steps:
    ...
    ```
 
-8. Stage the changes and make a commit:
+9. Stage the changes and make a commit:
 
    In this step, you should only mark files that you have edited or added yourself. You can perform a reset and resolve files that you did not intend to change if needed.
 
@@ -207,15 +209,15 @@ Follow these steps:
 
    You can learn more about why you should use conventional commits [here](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits).
 
-9. If you realize that you need to edit a file or update the commit message after making a commit you can do so after editing the files with:
+10. If you realize that you need to edit a file or update the commit message after making a commit you can do so after editing the files with:
 
-   ```bash
-   git commit --amend
-   ```
+    ```bash
+    git commit --amend
+    ```
 
-   This will open up a default text editor like `nano` or `vi` where you can edit the commit message title and add/edit the description.
+    This will open up a default text editor like `nano` or `vi` where you can edit the commit message title and add/edit the description.
 
-10. Next, you can push your changes to your fork:
+11. Next, you can push your changes to your fork:
 
     ```bash
     git push origin branch/name-here
