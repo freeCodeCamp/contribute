@@ -117,7 +117,7 @@ describe('Sidebar Structure', () => {
       const criticalGuides = [
         'how-to-setup-freecodecamp-locally',
         'codebase-best-practices',
-        'how-to-contribute-to-the-codebase',
+        'basic-git-workflow',
         'how-to-work-on-coding-challenges',
         'how-to-add-playwright-tests',
         'how-to-open-a-pull-request'

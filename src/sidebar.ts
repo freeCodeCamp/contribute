@@ -8,7 +8,7 @@ const sidebar = [
     items: [
       'how-to-setup-freecodecamp-locally',
       'codebase-best-practices',
-      'how-to-contribute-to-the-codebase',
+      'basic-git-workflow',
       'how-to-work-on-coding-challenges',
       'how-to-work-on-quizzes',
       'how-to-work-on-reviews',
