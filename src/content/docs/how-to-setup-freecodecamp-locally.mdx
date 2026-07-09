@@ -322,6 +322,12 @@ Keep in mind if you want to use services like Auth0 or Algolia, you'll have to a
 
 Install the dependencies and set up shared configuration for services.
 
+<Aside type='note' title='WSL users'>
+
+If you're setting up the project in WSL on Windows, run `pnpm run playwright:install-build-tools` before `pnpm install`. This may prompt for your `sudo` password while installing the system packages needed by Playwright and Puppeteer.
+
+</Aside>
+
 ```bash
 pnpm install
 ```
