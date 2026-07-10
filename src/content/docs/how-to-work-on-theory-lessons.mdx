@@ -18,7 +18,7 @@ You can create the theory lesson with `pnpm run create-new-project`. The CLI wil
 
 The metadata for theory lessons require a `blockLabel` property with a value of `lecture`, and a `blockLayout` with a value of `challenge-list`.
 
-Theory lessons have a dashedName starting with `lecture-`.
+The theory lesson **block** has a `dashedName` starting with `lecture-`.
 
 The following scripts can be used to add, insert, or remove individual lessons within an existing block. Run them from the block's directory.
 
@@ -63,7 +63,7 @@ pnpm run delete-challenge
 
 ## Theory Lesson File Template
 
-Each theory lesson is a single Markdown file. The content section uses either `# --interactive--` or `# --description--` depending on whether the lesson includes interactive code editors.
+Each theory lesson is a single Markdown file. Its `dashedName` is the kebab-case version of the lesson title. The content section uses either `# --interactive--` or `# --description--` depending on whether the lesson includes interactive code editors.
 
 Use `# --interactive--` when the lesson includes `:::interactive_editor` blocks that campers can run directly:
 
@@ -72,7 +72,7 @@ Use `# --interactive--` when the lesson includes `:::interactive_editor` blocks 
 id: <ObjectId>
 title: <Lesson Title>
 challengeType: 19
-dashedName: lecture-<kebab-case-title>
+dashedName: <kebab-case-title>
 ---
 
 # --interactive--
@@ -91,7 +91,7 @@ Use `# --description--` when the lesson only contains static markdown content:
 id: <ObjectId>
 title: <Lesson Title>
 challengeType: 19
-dashedName: lecture-<kebab-case-title>
+dashedName: <kebab-case-title>
 ---
 
 # --description--
@@ -237,7 +237,7 @@ First answer choice.
 
 ### --feedback--
 
-Hint for why this answer is wrong.
+Hint that points the camper toward the correct answer.
 
 ---
 
@@ -245,7 +245,7 @@ Second answer choice.
 
 ### --feedback--
 
-Hint for why this answer is wrong.
+Hint that points the camper toward the correct answer.
 
 ---
 
@@ -257,7 +257,7 @@ Fourth answer choice.
 
 ### --feedback--
 
-Hint for why this answer is wrong.
+Hint that points the camper toward the correct answer.
 
 ## --video-solution--
 
@@ -266,11 +266,53 @@ Hint for why this answer is wrong.
 
 Key rules:
 
-- Incorrect answers must have a `### --feedback--` block with a hint explaining why the answer is wrong.
+- Incorrect answers must have a `### --feedback--` block with a hint that points the camper toward the correct answer.
 - The correct answer has no `### --feedback--` block.
 - `## --video-solution--` contains the 1-indexed number of the correct answer.
-- Answers are separated by `---` horizontal rules.
-- Multiple questions repeat the `## --text--` / `## --answers--` / `## --video-solution--` pattern within the same `# --questions--` section.
+- Answers within a question are separated by `---` horizontal rules.
+- Multiple questions repeat the `## --text--` / `## --answers--` / `## --video-solution--` pattern within the same `# --questions--` section. Do **not** place a `---` between questions. A new question simply begins with its own `## --text--` heading:
+
+```md
+## --text--
+
+First question text.
+
+## --answers--
+
+Correct answer.
+
+---
+
+Wrong answer.
+
+### --feedback--
+
+Hint that points the camper toward the correct answer.
+
+## --video-solution--
+
+1
+
+## --text--
+
+Second question text.
+
+## --answers--
+
+Correct answer.
+
+---
+
+Wrong answer.
+
+### --feedback--
+
+Hint that points the camper toward the correct answer.
+
+## --video-solution--
+
+1
+```
 
 ## Proposing a Pull Request (PR)
 
