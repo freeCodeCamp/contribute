@@ -687,13 +687,13 @@ explorer.allFunctions; // { foo: Explorer, bar: Explorer }
 
 #### `parameters`
 
-Returns an array of `Explorer` instances representing the parameters of a function or method.
+Returns an array of `Explorer` instances representing the parameters of a function or method. Compare them with `matches`, which works even when a parameter has no type annotation:
 
 ```js
 const explorer = await __helpers.Explorer('function foo(x, y) { return 42; }');
 const parameters = explorer.functions.foo.parameters;
-parameters[0].toString(); // x
-parameters[1].toString(); // y
+parameters[0].matches('x'); // true
+parameters[1].matches('y'); // true
 ```
 
 #### `hasReturn(value: string)`
@@ -782,6 +782,17 @@ const explorer = await __helpers.Explorer('const a: number = 1;');
 const { a } = explorer.variables;
 a.hasAnnotation('number'); // true
 a.hasAnnotation('string'); // false
+```
+
+This also works on a [parameter](#parameters). When a parameter has a type annotation, `matches` compares the full `name: type` and `hasAnnotation` checks the type alone:
+
+```js
+const explorer = await __helpers.Explorer(
+  'function foo(x: number) { return 42; }'
+);
+const [x] = explorer.functions.foo.parameters;
+x.matches('x: number'); // true
+x.hasAnnotation('number'); // true
 ```
 
 #### `hasReturnAnnotation(annotation: string)`
