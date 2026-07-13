@@ -577,15 +577,31 @@ __helpers.escapeRegExp('hello.world'); // "hello\\.world"
 __helpers.escapeRegExp('test[123]'); // "test\\[123\\]"
 ```
 
-### AST-based Helpers
+### The `Explorer` Class
 
-The `Explorer` class provides Abstract Syntax Tree (AST) analysis of the camper's code. It is a chainable class whose methods operate on the result of parsing a string.
+The `Explorer` class is documented under [TypeScript Helpers](#typescript-helpers), where it is used to test TypeScript challenges. Many of its helpers, however, are not about TypeScript-specific features: they inspect language constructs that also exist in vanilla JavaScript, such as variables, functions, and classes. Those helpers can be used to test JavaScript challenges too. They are:
 
-`Explorer` is built on the TypeScript compiler's parser, so the methods documented here inspect language features shared by JavaScript and TypeScript (variables, functions, classes, and so on). Because these features are present in vanilla JavaScript, the methods below can be used to test both JavaScript and TypeScript challenges. The methods that test TypeScript-specific features are documented under [TypeScript Helpers](#typescript-helpers).
+- [`isEmpty()`](#isempty)
+- [`toString()`](#tostring)
+- [`matches()`](#matchesother-string--explorer)
+- [`variables`](#variables)
+- [`value`](#value)
+- [`objectProps`](#objectprops)
+- [`functions` and `allFunctions`](#functions-and-allfunctions)
+- [`parameters`](#parameters)
+- [`hasReturn()`](#hasreturnvalue-string)
+- [`classes`](#classes)
+- [`methods`](#methods-1)
+- [`classConstructor`, `classProps`, and `constructorProps`](#classconstructor-classprops-and-constructorprops)
+- [`doesExtend()`](#doesextendbasestocheck-string--string)
 
-#### Basic Usage
+## TypeScript Helpers
 
-Create an instance of `Explorer` that parses the camper's code:
+These helpers provide Abstract Syntax Tree (AST) analysis capabilities for TypeScript challenges.
+
+### Basic Usage
+
+`Explorer` is a chainable class that allows you to call methods on the result of parsing a string. Here's how to create an instance of `Explorer` that parses the camper's code:
 
 ```js
 const explorer = await __helpers.Explorer(code);
@@ -593,20 +609,24 @@ const explorer = await __helpers.Explorer(code);
 
 To access a specific statement within the code you need to chain method calls until you reach the desired scope. For example, if the camper has written the following code:
 
-```js
+```ts
 class Spam {
-  get42() {
+  get42(): number {
     return 42;
   }
 }
 ```
 
-you can drill down to the method and check its return value:
+To check the return type annotation you would write:
 
 ```js
 const explorer = await __helpers.Explorer(code);
-assert.isTrue(explorer.classes.Spam.methods.get42.hasReturn('42'));
+assert.isTrue(
+  explorer.classes.Spam.methods.get42.hasReturnAnnotation('number')
+);
 ```
+
+### Methods and Properties
 
 #### `isEmpty()`
 
@@ -687,78 +707,16 @@ explorer.allFunctions; // { foo: Explorer, bar: Explorer }
 
 #### `parameters`
 
-Returns an array of `Explorer` instances representing the parameters of a function or method. Compare them with `matches`, which works even when a parameter has no type annotation:
+Returns an array of `Explorer` instances representing the parameters of a function or method.
 
 ```js
-const explorer = await __helpers.Explorer('function foo(x, y) { return 42; }');
+const explorer = await __helpers.Explorer(
+  'function foo(x: number, y: string) { return 42; }'
+);
 const parameters = explorer.functions.foo.parameters;
-parameters[0].matches('x'); // true
-parameters[1].matches('y'); // true
+parameters[0].matches('x: number'); // true
+parameters[1].matches('y: string'); // true
 ```
-
-#### `hasReturn(value: string)`
-
-Checks whether a function, method, or function-valued variable has a matching top-level return expression.
-
-```js
-const explorer = await __helpers.Explorer('function foo() { return 42; }');
-const { foo } = explorer.functions;
-foo.hasReturn('42'); // true
-```
-
-#### `classes`
-
-Returns an object mapping class names to `Explorer` instances for all classes in the current scope.
-
-```js
-const explorer = await __helpers.Explorer('class Foo {} class Bar {}');
-const { classes } = explorer; // { Foo: Explorer, Bar: Explorer }
-classes.Foo.matches('class Foo {}'); // true
-classes.Bar.matches('class Bar {}'); // true
-```
-
-#### `methods`
-
-Returns an object mapping method names to `Explorer` instances for all methods in the current class.
-
-```js
-const explorer = await __helpers.Explorer(
-  'class Foo { method1() {} method2() {} }'
-);
-const { Foo } = explorer.classes;
-const { method1, method2 } = Foo.methods; // { method1: Explorer, method2: Explorer }
-```
-
-#### `classConstructor`, `classProps`, and `constructorProps`
-
-Use these to inspect class constructors and class-related properties.
-
-```js
-const explorer = await __helpers.Explorer(
-  'class Foo { prop1 = 0; constructor(x) { this.y = x; } }'
-);
-const { Foo } = explorer.classes;
-Foo.classConstructor?.matches('constructor(x) { this.y = x; }'); // true
-Foo.classProps; // { prop1: Explorer }
-Foo.constructorProps; // { y: Explorer }
-```
-
-#### `doesExtend(basesToCheck: string | string[])`
-
-Checks if a class or interface extends the specified base class or interface(s). Accepts a single string or an array of strings.
-
-```js
-const explorer = await __helpers.Explorer('class Dog extends Animal {}');
-const { Dog } = explorer.classes;
-Dog.doesExtend('Animal'); // true
-Dog.doesExtend('Cat'); // false
-```
-
-## TypeScript Helpers
-
-These helpers test TypeScript-specific features. They are methods on the same `Explorer` class described under [AST-based Helpers](#ast-based-helpers): create an instance with `await __helpers.Explorer(code)` and chain the methods below alongside the shared methods documented there.
-
-### Methods and Properties
 
 #### `annotation`
 
@@ -784,17 +742,6 @@ a.hasAnnotation('number'); // true
 a.hasAnnotation('string'); // false
 ```
 
-This also works on a [parameter](#parameters). When a parameter has a type annotation, `matches` compares the full `name: type` and `hasAnnotation` checks the type alone:
-
-```js
-const explorer = await __helpers.Explorer(
-  'function foo(x: number) { return 42; }'
-);
-const [x] = explorer.functions.foo.parameters;
-x.matches('x: number'); // true
-x.hasAnnotation('number'); // true
-```
-
 #### `hasReturnAnnotation(annotation: string)`
 
 Returns `true` if the function/method has a return type annotation matching the specified type.
@@ -806,6 +753,16 @@ const explorer = await __helpers.Explorer(
 const { foo } = explorer.functions;
 foo.hasReturnAnnotation('number'); // true
 foo.hasReturnAnnotation('string'); // false
+```
+
+#### `hasReturn(value: string)`
+
+Checks whether a function, method, or function-valued variable has a matching top-level return expression.
+
+```js
+const explorer = await __helpers.Explorer('function foo() { return 42; }');
+const { foo } = explorer.functions;
+foo.hasReturn('42'); // true
 ```
 
 #### `types`
@@ -832,6 +789,45 @@ const explorer = await __helpers.Explorer(
 const { interfaces } = explorer; // { Foo: Explorer, Bar: Explorer }
 interfaces.Foo.matches('interface Foo { x: number; }'); // true
 interfaces.Bar.matches('interface Bar { y: string; }'); // true
+```
+
+#### `classes`
+
+Returns an object mapping class names to `Explorer` instances for all classes in the current scope.
+
+```js
+const explorer = await __helpers.Explorer(
+  'class Foo { x: number; } class Bar { y: string; }'
+);
+const { classes } = explorer; // { Foo: Explorer, Bar: Explorer }
+classes.Foo.matches('class Foo { x: number; }'); // true
+classes.Bar.matches('class Bar { y: string; }'); // true
+```
+
+#### `methods`
+
+Returns an object mapping method names to `Explorer` instances for all methods in the current class.
+
+```js
+const explorer = await __helpers.Explorer(
+  'class Foo { method1() {} method2() {} }'
+);
+const { Foo } = explorer.classes;
+const { method1, method2 } = Foo.methods; // { method1: Explorer, method2: Explorer }
+```
+
+#### `classConstructor`, `classProps`, and `constructorProps`
+
+Use these to inspect class constructors and class-related properties.
+
+```js
+const explorer = await __helpers.Explorer(
+  'class Foo { prop1: number; constructor(x) { this.y = x; } }'
+);
+const { Foo } = explorer.classes;
+Foo.classConstructor?.matches('constructor(x) { this.y = x; }'); // true
+Foo.classProps; // { prop1: Explorer }
+Foo.constructorProps; // { y: Explorer }
 ```
 
 #### `typeProps`
@@ -900,6 +896,17 @@ Checks whether the current expression is a non-null assertion (`!`).
 const explorer = await __helpers.Explorer('const a = maybeValue!;');
 const { a } = explorer.variables;
 a.value.hasNonNullAssertion(); // true
+```
+
+#### `doesExtend(basesToCheck: string | string[])`
+
+Checks if a class or interface extends the specified base class or interface(s). Accepts a single string or an array of strings.
+
+```js
+const explorer = await __helpers.Explorer('class Dog extends Animal {}');
+const { Dog } = explorer.classes;
+Dog.doesExtend('Animal'); // true
+Dog.doesExtend('Cat'); // false
 ```
 
 #### `doesImplement(basesToCheck: string | string[])`
