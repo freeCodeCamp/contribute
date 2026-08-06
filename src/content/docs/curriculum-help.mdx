@@ -667,6 +667,14 @@ const another = await __helpers.Explorer('const a = (1);');
 another.matches('const a = 1'); // false
 ```
 
+String literals are compared by value, so the quote character does not matter. A template literal is a different kind of node, though, and never matches a plain string:
+
+```js
+const explorer = await __helpers.Explorer("const a = 'hello';");
+explorer.matches('const a = "hello"'); // true
+explorer.matches('const a = `hello`'); // false
+```
+
 Because of this, `matches()` is a strict check on one exact way of writing an expression. Whenever a step allows more than one valid form, compare against every form, or drill into the tree and assert on the parts that matter:
 
 ```js
