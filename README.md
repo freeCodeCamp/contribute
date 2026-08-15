@@ -23,7 +23,7 @@ If you think you've found a bug, first read the [how to report a bug](https://fo
 
 If you're confident it's a new bug and have confirmed that someone else is facing the same issue, go ahead and create a new GitHub issue. Be sure to include as much information as possible so we can reproduce the bug.
 
-### Reporting Security Issues and Responsible Disclosure
+### Reporting Security Issues and Responsible Disclosure.
 
 We appreciate responsible disclosure of vulnerabilities that might impact the integrity of our platforms and users.
 
