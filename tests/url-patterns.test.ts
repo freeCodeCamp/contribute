@@ -133,7 +133,7 @@ describe('URL Patterns and Path Validation', () => {
   describe('External Link Patterns', () => {
     const externalLinks = [
       'https://github.com/freecodecamp/freecodecamp',
-      'https://freecodecamp.org/forum/c/contributors',
+      'https://forum.freecodecamp.org/c/site-community',
       'https://discord.gg/PRyKn3Vbay',
       'https://chat.freecodecamp.org'
     ];

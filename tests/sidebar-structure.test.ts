@@ -190,7 +190,7 @@ describe('Sidebar Structure', () => {
       const forumLink = community?.items.find(
         item =>
           typeof item === 'object' &&
-          item.link === 'https://freecodecamp.org/forum/c/contributors'
+          item.link === 'https://forum.freecodecamp.org/c/site-community'
       );
       expect(forumLink).toBeDefined();
       if (typeof forumLink === 'object') {
