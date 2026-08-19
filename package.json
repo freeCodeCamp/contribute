@@ -53,7 +53,7 @@
     "sharp": "0.34.5",
     "typescript-eslint": "8.67.0",
     "vitest": "4.1.10",
-    "wrangler": "4.120.1"
+    "wrangler": "4.121.0"
   },
   "packageManager": "pnpm@10.33.4"
 }
