@@ -62,7 +62,7 @@ const sidebar = [
         }
       },
       {
-        link: 'https://freecodecamp.org/forum/c/contributors',
+        link: 'https://forum.freecodecamp.org/c/site-community',
         label: 'Discourse Forum',
         attrs: {
           target: '_blank'
