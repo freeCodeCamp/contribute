@@ -12,6 +12,26 @@ You'll need this guide if you're creating or modifying lab challenges (project-b
 
 Labs are a type of challenge that presents an empty or almost empty editor to the camper, and a list of user stories to satisfy.
 
+## What Are User Stories?
+
+Unlike traditional user stories ("As a [role], I want [action], so that [benefit]"), user stories in freeCodeCamp labs describe specific, testable behaviors that the camper's code must fulfill — focusing on **what** the solution should do, not **how**.
+
+A good user story should be:
+
+- **Specific:** It describes one clear, testable behavior.
+- **User-focused:** It describes what the camper's code should do, not implementation details.
+- **Unambiguous:** Any reasonable reader should interpret it the same way.
+- **Testable:** There must be a way to verify it with an automated test.
+
+For example:
+
+| Too vague               | Clear and testable                                                   |
+| ----------------------- | -------------------------------------------------------------------- |
+| "Make a navbar"         | "You should have a `nav` element that contains at least three links" |
+| "Style the page nicely" | "Your `body` element should have a `font-family` property set"       |
+
+Keep in mind that everything that is tested must be written in the user stories. If it is not in the user stories, it should not be tested.
+
 Lab descriptions should have this format:
 
 ```md
@@ -21,7 +41,8 @@ Lab descriptions should have this format:
 
 **User Stories:**
 
-[numbered list with all the details needed to pass the lab]
+1. You should have a `<element>` that [does something specific and testable].
+2. Your `<element>` should have a [property/attribute] set to [value].
 
 Note/Hint: (this is optional)
 ```
