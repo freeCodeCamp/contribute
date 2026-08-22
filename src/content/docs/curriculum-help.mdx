@@ -427,6 +427,20 @@ spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefine
 spy.restore();
 ```
 
+Because the spy calls the original method with `.apply(this, args)`, `this` is preserved. This lets you spy on a shared prototype method to detect that an instance method was used without knowing the variable's name. For example, to check that `.push()` was called on an array:
+
+```js
+const spy = __helpers.spyOn(Array.prototype, 'push');
+const arr = [1, 2];
+arr.push(3);
+spy.calls; // [[3]] — arguments to every push call
+spy.returns; // [3] — the new length push returned
+arr; // [1, 2, 3] — the real push still ran, since this === arr is preserved
+spy.restore();
+```
+
+Spying on a prototype allows to capture the arguments the method is called with, but not the specific instance it is called on.
+
 #### spyOnCallbacks
 
 Available via `__helpers.spyOnCallbacks`, this function wraps a method in a spy object that records calls to callbacks passed to that method.
@@ -675,10 +689,13 @@ c.matches('const c = () => {}'); // true
 Returns an `Explorer` instance representing the assigned value of a variable, property, parameter, or property assignment. Returns an empty `Explorer` if there is no initializer.
 
 ```js
-const explorer = await __helpers.Explorer('const a = 1; const b = { x: 10 };');
-const { a, b } = explorer.variables;
+const explorer = await __helpers.Explorer(
+  'const a = 1; const b = { x: 10 }; const c = a + 1;'
+);
+const { a, b, c } = explorer.variables;
 a.value.toString(); // "1"
 b.value.matches('{ x: 10 }'); // true
+c.value.toString(); // "a + 1"
 ```
 
 #### `objectProps`
