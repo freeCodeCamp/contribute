@@ -4,7 +4,7 @@ sidebar:
   label: Troubleshoot Setup Issues
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
 ## Issues with Installing the Recommended Prerequisites
 
@@ -30,23 +30,71 @@ See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/4063
 
 ## Troubleshooting port issues on GitHub Codespaces
 
-Sometimes the service on port `8000` doesn't go live. This is common when you are restarting an inactive workspace.
+Sometimes the service on port `8000` does not go live. This is common when you restart an inactive codespace.
 
-If the service is not coming up on port `8000`, you can troubleshoot using these steps:
+Start the two servers in separate terminals from the project root (`/workspaces/freeCodeCamp`):
 
-- **Start the server**: Run the below command in one terminal window from the root project directory (`/workspace/freeCodeCamp`).
+```bash
+pnpm run develop:api
+```
 
-  ```bash
-  pnpm run develop:server
-  ```
+```bash
+pnpm run develop:client
+```
 
-- **Start the client**: In another terminal window, run the below command from the client directory (`/workspace/freeCodeCamp/client`).
+This makes port `8000` available. Be mindful of [how the URLs and ports work inside a GitHub Codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace).
 
-  ```bash
-  pnpm run develop -- -H '0.0.0.0'
-  ```
+## The Ports panel lists port 8000 but the browser cannot open it
 
-This should make port `8000` available. Be mindful of [how the URLs & Ports work within a GitHub Codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace).
+This happens in a Dev Container on your own machine, where the client can bind IPv6 loopback only. Stop the client, then start it with an explicit host:
+
+```bash
+GATSBY_HOST=0.0.0.0 pnpm run develop
+```
+
+Update your branch from `upstream/main` and rebuild the container to get this by default.
+
+## The client loads but every API request fails
+
+This happens in a codespace when `.env` still points at `localhost`.
+
+A browser tab inside a codespace cannot reach `localhost`. That address points at your own machine, not at the codespace.
+
+<Steps>
+
+1. From the project root (`/workspaces/freeCodeCamp`), check the two values in `.env`:
+
+   ```bash
+   grep -E '^(HOME_LOCATION|API_LOCATION)=' .env
+   ```
+
+   In a codespace both must use your forwarded port URLs, for example `https://CODESPACE_NAME-8000.app.github.dev`.
+
+2. If they still use `localhost`, run the codespace environment script again from the same directory:
+
+   ```bash
+   .devcontainer/codespace-env.sh
+   ```
+
+3. Rebuild the client so that it picks up the new values:
+
+   ```bash
+   pnpm run develop
+   ```
+
+4. Set port `3000` to public. In the **Ports** panel, right click port `3000`, then choose **Port Visibility > Public**.
+
+   The container sets this on every start. Do this yourself only if it reported that it could not.
+
+</Steps>
+
+<Aside type='note' title='Why port 3000 must be public'>
+
+The client calls the API from your browser, across two different forwarded origins. A private port answers that call with a GitHub sign-in redirect, and the browser reports it as a CORS error.
+
+A public port is reachable by anybody who has the URL, and the development sign-in route needs no password. Stop the codespace when you finish working.
+
+</Aside>
 
 ## Issues with Missing UI, Fonts, Language Strings, or Build Errors
 

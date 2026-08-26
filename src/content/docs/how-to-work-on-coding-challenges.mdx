@@ -422,19 +422,25 @@ Did you know you can also build and develop selectively? Use `FCC_CHALLENGE_ID`,
 
 <Steps>
 
-1. To test all challenges run the command below from the root directory
+1. Install the browser that the tests drive. Do this once:
+
+   ```
+   pnpm -F=curriculum install-puppeteer
+   ```
+
+2. To test all challenges run the command below from the root directory
 
    ```
    pnpm run test-curriculum-content
    ```
 
-   2. To test single challenge, you can use it challenge id with following command
+3. To test a single challenge, use its challenge id
 
    ```
    FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test-curriculum-content
    ```
 
-2. You can also test a block or a superblock of challenges with these commands
+4. You can also test a block or a superblock of challenges with these commands
 
    ```
    FCC_BLOCK='basic-html-and-html5' pnpm run test-curriculum-content
