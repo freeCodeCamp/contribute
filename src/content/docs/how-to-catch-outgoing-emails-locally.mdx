@@ -14,23 +14,34 @@ Some email workflows require the back-end API server to send outgoing emails. [M
 
 ## Using Mailpit
 
-Mailpit is automatically included when you run `docker compose -f docker/docker-compose.yml up -d` as part of the local setup. No additional installation is required.
+Mailpit needs no installation. It starts with the rest of the services in every setup.
 
-Once the containers are running, open your browser and navigate to [http://localhost:8025](http://localhost:8025) to access the Mailpit web interface where you can view all emails sent by your local freeCodeCamp instance.
+- **Your own machine**: `docker compose -f docker/docker-compose.yml -f docker/docker-compose.ports.yml up -d` starts it.
+- **Dev Container**: it starts with the container.
+- **GitHub Codespaces**: it starts with the codespace.
+
+Once the containers run, open `http://localhost:8025` to reach the Mailpit web interface. It shows every email that your local freeCodeCamp instance sends.
+
+In a codespace, open port `8025` from the **Ports** panel instead.
 
 ## Troubleshooting
 
 **Emails not appearing?**
 
-1. Check containers are running: `docker ps`
-2. Verify Mailpit is listed and healthy
-3. Check API logs for email sending errors
-4. Restart containers: `docker compose -f docker/docker-compose.yml restart mailpit`
+1. Check the API logs for email errors.
+2. Check that `MAILPIT_HOST` in `.env` is `localhost`. This is correct in every setup.
+3. On your own machine only, check that the containers run with `docker ps`, then restart Mailpit:
+
+   ```bash
+   docker compose -f docker/docker-compose.yml -f docker/docker-compose.ports.yml restart mailpit
+   ```
+
+   The Dev Container and Codespaces images carry no Docker CLI. Rebuild the container instead.
 
 **Can't access the UI?**
 
-- Ensure port 8025 isn't in use by another service
-- Try [http://127.0.0.1:8025](http://127.0.0.1:8025) instead of localhost
+- Make sure that no other service uses port 8025
+- Try `http://127.0.0.1:8025` instead of localhost
 
 ## Useful Links
 

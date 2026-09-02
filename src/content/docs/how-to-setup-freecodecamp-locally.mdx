@@ -6,42 +6,28 @@ sidebar:
 
 import {
   Steps,
-  Icon,
   Aside,
-  Badge,
   Card,
   LinkButton,
   Tabs,
   TabItem
 } from '@astrojs/starlight/components';
 
-<Aside type='danger' title='Warning for Windows Users'>
+This guide sets up a development environment for freeCodeCamp. Work through it once, in order.
 
-<details>
+<Aside type='danger' title='Windows users: read this first'>
 
-<summary>
-  This project only supports development on **macOS** or Linux systems such as
-  **Ubuntu**.
-</summary>
-
-- On Windows, install [Windows Subsystem for Linux \(WSL2\)](/how-to-setup-wsl) to create a Linux environment first and then follow this guide.
-- We recommend using [Windows Terminal](https://github.com/microsoft/terminal) to run your WSL2 environment for the best experience. Avoid using `Command Prompt`, `Git Bash`, or `PowerShell`.
-
-</details>
+This project supports macOS and Linux only. Set up [WSL2](/how-to-setup-wsl) first, then follow this guide inside it. Use [Windows Terminal](https://github.com/microsoft/terminal) — not Command Prompt, Git Bash, or PowerShell.
 
 </Aside>
 
-Follow these guidelines for setting up a development environment for freeCodeCamp. This is highly recommended if you want to contribute regularly.
-
 ## Fork the freeCodeCamp repository on GitHub
 
-You will need to [fork](https://help.github.com/articles/about-forks) the freeCodeCamp repository on GitHub to get your own copy of the codebase. This will allow you to follow a Git-based workflow to contribute to freeCodeCamp.
-
-**Follow these steps to fork the repository:**
+A [fork](https://help.github.com/articles/about-forks) is your own copy of the codebase. You need one to contribute.
 
 <Steps>
 
-1. Click the button below to fork the freeCodeCamp repository on GitHub.
+1. Open the fork page:
 
    <LinkButton
      href='https://github.com/freeCodeCamp/freeCodeCamp/fork'
@@ -53,171 +39,52 @@ You will need to [fork](https://help.github.com/articles/about-forks) the freeCo
      Fork freeCodeCamp
    </LinkButton>
 
-2. On the create new fork page, check the details and click the **Create fork** button.
+2. Check the details, then click **Create fork**.
 
-3. You should automatically be redirected to your fork, the URL should be something like `https://github.com/YOUR_USER_NAME/freeCodeCamp`.
-
-</Steps>
-
-That's it! You have successfully forked the freeCodeCamp repository. You can always delete your fork if you want to start fresh.
-
-<Aside type='tip' title='Did you know?'>
-
-The main repository at `https://github.com/freeCodeCamp/freeCodeCamp` is often referred to as the `upstream` repository. Your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp` is often referred to as the `origin` repository.
-
-</Aside>
-
-## Cloud IDE or your own machine?
-
-Next, you need to choose between setting up a cloud IDE or your own machine.
-
-If you're looking to make a one-time contribution or want the fastest setup, use GitHub Codespaces which provides a ready-to-code environment in your web browser using devcontainers. For long-term contributions where you prefer local development, you can set up freeCodeCamp on your local machine.
-
-| Feature                     | GitHub Codespaces                                      | Your own machine                                 |
-| --------------------------- | ------------------------------------------------------ | ------------------------------------------------ |
-| **Hardware requirements**   | No minimum hardware requirements                       | Powerful minimum hardware requirements           |
-| **Software installation**   | No need to install any software                        | Additional software needed                       |
-| **Repository status**       | Always up-to-date repository                           | Manual updates required                          |
-| **Setup complexity**        | Easy setup with devcontainers, works in any browser    | Larger download and setup time                   |
-| **Internet dependency**     | Requires an internet connection to work                | Minimal internet connection required once set up |
-| **Performance**             | Consistent cloud-based performance                     | Depends on your machine capabilities             |
-| **Usage limits**            | 60 hours free per month for personal accounts          | No usage limits                                  |
-| **Environment consistency** | Identical setup for all contributors via devcontainers | May vary between different machines and OS       |
-
-Once you have decided, follow the relevant tab below to continue with the setup.
-
-<Tabs syncKey="environment">
-<TabItem label="GitHub Codespaces" icon="seti:github">
-
-#### GitHub Codespaces
-
-We have automated the development environment setup using devcontainers. With GitHub Codespaces, you get a consistent, ready-to-code environment that runs in your browser with all dependencies pre-installed.
-
-**Launch a Codespace from your fork:**
-
-<Steps>
-
-1. Go to your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp`
-
-2. Click the green **Code** button
-
-3. Select the **Codespaces** tab
-
-4. Click **Create codespace on main**
-
-   Your codespace will automatically set up the development environment using our devcontainer configuration. This includes:
-   - Installing Node.js, pnpm, and all dependencies
-   - Setting up MongoDB
-   - Configuring VS Code extensions
-   - Preparing the environment variables
-
-5. Wait for the setup to complete (usually 2-3 minutes)
+3. GitHub redirects you to your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp`.
 
 </Steps>
 
-</TabItem>
+In this guide, `origin` means your fork and `upstream` means the main repository. You can delete your fork at any time and start again.
 
-<TabItem label="Local Machine" icon="laptop">
+## Choose where to run freeCodeCamp
 
-Here is a minimum system requirement for running freeCodeCamp locally:
+There are three ways to run the project. All three work. Compare them, pick one, then follow that tab below.
 
-<Card title='System Requirements' icon='laptop'>
+|                              | Local Machine                      | Dev Container                                                                  | GitHub Codespaces                                                  |
+| ---------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| **Where it runs**            | Directly on your machine           | In Docker, on your machine                                                     | On a GitHub server                                                 |
+| **You install**              | Node.js, pnpm, Docker Compose, Git | Docker Desktop, VS Code, Dev Containers extension, Git                         | Nothing                                                            |
+| **You manage tool versions** | Yes                                | No. The image carries them                                                     | No. The image carries them                                         |
+| **Machine needed**           | 4 CPUs, 8 GB of RAM, 10 GB of disk | 4 CPUs and 16 GB of RAM given to Docker, plus your own operating system on top | A 4-core, 16 GB, 32 GB disk machine. The project sets this minimum |
+| **Speed**                    | Fastest                            | Slower file access on macOS and Windows                                        | Depends on your connection                                         |
+| **Works offline**            | Yes, after setup                   | Yes, after the first start                                                     | No                                                                 |
+| **Cost**                     | Free                               | Free                                                                           | A free monthly quota, then paid                                    |
 
-- A fast CPU (4+ cores)
-- At least 8 GB RAM
-- macOS, Linux
-- 8-10 GB of free disk space
-- (Optional) 30-50 Mbps internet connection
+Each option gives you the same running application, so pick the one that fits your machine.
 
-> **Windows users:** You will need more resources like memory and CPU than above, to allow running the project on Linux with WSL.
+## Clone your fork
 
-</Card>
-
-Start by installing the prerequisite software for your operating system.
-
-#### Prerequisites:
-
-| Prerequisite                                                                                  | Version | Notes                                                                                       |
-| --------------------------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
-| [Node.js](http://nodejs.org)                                                                  | `24.x`  | We use the "Active LTS" version, see [LTS Schedule](https://nodejs.org/en/about/releases/). |
-| [pnpm](https://pnpm.io/installation)                                                          | `10.x`  | -                                                                                           |
-| [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/) | `8.0.x` | -                                                                                           |
-| [Docker Compose](https://docs.docker.com/compose/install/)                                    | `2.x`   | -                                                                                           |
-
-<Aside type='caution' title='Did you check the version?'>
-
-If you have a different version of a requisite software, please install the recommended version. See the [troubleshooting section](/troubleshooting-development-issues/) for more details.
-
-</Aside>
-
-**Run the following commands to validate the versions:**
-
-```bash
-node -v
-```
-
-```bash
-pnpm -v
-```
-
-Once you have the prerequisites installed, you need to prepare your development environment. This is common for many development workflows, and you will only need to do this once.
-
-#### Additional Prerequisites:
+Skip this section if you picked GitHub Codespaces — it clones your fork for you. You need [Git](https://git-scm.com/) installed first.
 
 <Steps>
 
-1. Install [Git](https://git-scm.com/) or your favorite Git client, if you haven't already. Update to the latest version; the version that came bundled with your OS may be outdated.
-
-2. (Optional but recommended) [Set up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
-
-3. Install a code editor of your choice. If you aren't sure which one to use, we recommend [Visual Studio Code](https://code.visualstudio.com/) — it's free and open source.
-
-4. Set up linting for your code editor.
-
-   You should have [ESLint running in your editor](http://eslint.org/docs/user-guide/integrations.html), and it will highlight anything that doesn't conform to [freeCodeCamp's JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
-
-   <Aside type='tip' title='Pay Attention to errors'>
-
-   Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
-
-   </Aside>
-
-</Steps>
-
-#### Clone your Fork from GitHub
-
-You should already have a fork of freeCodeCamp on GitHub. If not, [follow these instructions to fork the repository](/how-to-setup-freecodecamp-locally/#fork-the-freecodecamp-repository-on-github). Next, you will need to [clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
-
-**Run these commands on your local machine:**
-
-<Steps>
-
-1. Open a terminal in your projects directory, for example:
-
-   ```
-   /home/username/projects/
-   ```
-
-2. Clone your fork of freeCodeCamp, replacing `YOUR_USER_NAME` with your GitHub Username
+1. Clone your fork, replacing `YOUR_USER_NAME` with your GitHub username:
 
    ```bash
    git clone --depth=1 https://github.com/YOUR_USER_NAME/freeCodeCamp.git
-   ```
-
-   This will download the entire freeCodeCamp repository to your projects directory.
-
-   <Aside type='note'>
-     `--depth=1` creates a shallow clone of your fork, with files from the most
-     recent history/commit.
-   </Aside>
-
-3. **(Optional)** The localized versions of our curriculum are stored in the [i18n-curriculum repo.](https://github.com/freeCodeCamp/i18n-curriculum) If you intend to run a localized version of the curriculum follow the next steps, or skip to the next section.
-
-   **Clone the i18n-curriculum submodule:**
-
-   ```bash
    cd freeCodeCamp
    ```
+
+2. Add a remote that points at the main repository, so you can sync later:
+
+   ```bash
+   git remote add upstream https://github.com/freeCodeCamp/freeCodeCamp.git
+   ```
+
+   Run `git remote -v` to confirm. You should see `origin` on your fork and `upstream` on `freeCodeCamp/freeCodeCamp`.
+
+3. **(Optional)** To work on a localized curriculum, fetch the [i18n-curriculum](https://github.com/freeCodeCamp/i18n-curriculum) submodule:
 
    ```bash
    git submodule update --init
@@ -225,224 +92,193 @@ You should already have a fork of freeCodeCamp on GitHub. If not, [follow these 
 
 </Steps>
 
-#### Set up Syncing from Parent
+## Set up and run freeCodeCamp
 
-Now that you have downloaded a copy of your fork, you will need to set up an `upstream` remote to the parent repository.
-
-[As mentioned earlier](#fork-the-freecodecamp-repository-on-github), the main repository is referred to as the `upstream` repository. Your fork is referred to as the `origin` repository.
-
-You need a reference from your local clone to the `upstream` repository in addition to the `origin` repository. This is so that you can sync changes from the main repository without the requirement of forking and cloning repeatedly.
-
-<Steps>
-
-1. Change the directory to the new freeCodeCamp directory if you aren't already there:
-
-   ```bash
-   cd freeCodeCamp
-   ```
-
-2. Add a remote reference to the main freeCodeCamp repository:
-
-   ```bash
-   git remote add upstream https://github.com/freeCodeCamp/freeCodeCamp.git
-   ```
-
-3. Ensure the configuration looks correct:
-
-   ```bash
-   git remote -v
-   ```
-
-   The output should look something like below (replacing `YOUR_USER_NAME` with your GitHub username):
-
-   ```
-   origin    https://github.com/YOUR_USER_NAME/freeCodeCamp.git (fetch)
-   origin    https://github.com/YOUR_USER_NAME/freeCodeCamp.git (push)
-   upstream    https://github.com/freeCodeCamp/freeCodeCamp.git (fetch)
-   upstream    https://github.com/freeCodeCamp/freeCodeCamp.git (push)
-   ```
-
-</Steps>
-
-</TabItem>
-</Tabs>
-
-## Running freeCodeCamp
-
-Now that you have a copy of freeCodeCamp, you can follow these instructions to run it. This will allow you to:
-
-- Preview edits to pages as they would appear on the learning platform.
-- Work on UI related issues and enhancements.
-- Debug and fix issues with the application servers and client apps.
-
-<Tabs syncKey="environment">
-<TabItem label="GitHub Codespaces" icon="seti:github">
-
-Your Codespace comes pre-configured with all dependencies installed and services like the database already running. You can start developing immediately:
-
-1. In the terminal, run:
-
-   ```bash
-   pnpm run develop
-   ```
-
-   This will start both the API server and the client applications.
-
-2. Wait for the process to complete. It can take a few minutes, you will see a notification for the `8000` port when it's ready.
-
-3. Click on the notification to open the client application in a new browser tab.
-
-<Aside type='tip' title="Congratulations - you're all set!">
-
-You now have a copy of freeCodeCamp's entire learning platform running in your Codespace. Go ahead and start making changes to the codebase.
-
-</Aside>
-
-</TabItem>
-
+<Tabs syncKey="setup-environment">
 <TabItem label="Local Machine" icon="laptop">
 
-### Step 1: Set up the Environment Variable File
+#### Prerequisites
 
-The default API keys and environment variables are stored in the file `sample.env`. This file needs to be copied to a new file named `.env` that is accessed dynamically during the installation step.
+Your machine needs 4 CPU cores, 8 GB of RAM and 10 GB of free disk space, on macOS or Linux.
+
+| Prerequisite                                                                                  | Version | Notes                                                                                    |
+| --------------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| [Git](https://git-scm.com/)                                                                   | latest  | The version bundled with your operating system is often outdated.                        |
+| [Node.js](http://nodejs.org)                                                                  | `24.x`  | The "Active LTS" version. See the [LTS schedule](https://nodejs.org/en/about/releases/). |
+| [pnpm](https://pnpm.io/installation)                                                          | `10.x`  | -                                                                                        |
+| [Docker Compose](https://docs.docker.com/compose/install/)                                    | `2.x`   | Starts MongoDB for you below.                                                            |
+| [MongoDB Community Server](https://docs.mongodb.com/manual/administration/install-community/) | `8.x`   | Optional. Only if you prefer to run MongoDB without Docker.                              |
+
+Check what you have:
 
 ```bash
-cp sample.env .env
+node -v && pnpm -v
 ```
 
-The keys in the `.env` file are _not_ required to be changed to run the app locally. You can leave the default values copied over from `sample.env` as-is.
+<Aside type='caution' title='Versions matter'>
 
-<Aside type='note'>
-
-Keep in mind if you want to use services like Auth0 or Algolia, you'll have to acquire your own API keys for those services and edit the entries accordingly in the `.env` file.
+A version other than the one listed is the most common cause of a failed setup. See [troubleshooting](/troubleshooting-development-issues/).
 
 </Aside>
 
-### Step 2: Install Dependencies & Shared Config
+Recommended, but not required:
 
-Install the dependencies and set up shared configuration for services.
+- [Set up an SSH key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
+- Use a code editor. [Visual Studio Code](https://code.visualstudio.com/) is free and open source.
+- Run [ESLint in your editor](http://eslint.org/docs/user-guide/integrations.html). It flags anything that breaks freeCodeCamp's [JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
 
-<Aside type='note' title='WSL users'>
-
-If you're setting up the project in WSL on Windows, run `pnpm run playwright:install-build-tools` before `pnpm install`. This command installs the system packages required by Playwright and Puppeteer, and may prompt for your `sudo` password.
-
-</Aside>
-
-```bash
-pnpm install
-```
-
-### Step 3: Start MongoDB and Seed the Database
-
-Before you can run the application locally, you will need to start a MongoDB Server as a replica set.
+#### Start the app
 
 <Steps>
 
-1. Stop any existing MongoDB server that uses port 27017 (if you already have a replica set running on that port, you can skip this and the next step)
-
-1. Start the MongoDB server as a replica set:
+1. Create your environment file:
 
    ```bash
-   docker compose -f docker/docker-compose.yml up -d
+   cp sample.env .env
    ```
 
-1. Seed the database and setup a new user:
+   The defaults run the app as it is. Change them only if you want your own Auth0, Algolia or Stripe keys.
 
-   <Aside type='note' title='MongoDB URI'>
+2. Install dependencies:
 
-   The default should be fine for most users. If you are using a custom config, modify the `MONGOHQ_URL` in the `.env` file as needed.
+   ```bash
+   pnpm install
+   ```
 
-   </Aside>
+   WSL users: run `pnpm run playwright:install-build-tools` first. It installs system packages that Playwright and Puppeteer need.
+
+3. Stop any MongoDB server already using port 27017, then start MongoDB as a replica set:
+
+   ```bash
+   docker compose -f docker/docker-compose.yml -f docker/docker-compose.ports.yml up -d
+   ```
+
+   This also starts Mailpit, which catches outgoing email at `http://localhost:8025`.
+
+4. Seed the database:
 
    ```bash
    pnpm run seed
    ```
 
-   This will set up a new user without any completed certifications among other things. This is usually more than enough to get you started.
+   This creates a test user with no completed certifications. For a user with certifications, run `pnpm run seed:certified-user` instead, then clear your browser cookies and sign in again.
 
-1. **(Optional)** Setup a user with completed certifications:
+5. Start the client and the API:
 
    ```bash
-   pnpm run seed:certified-user
+   pnpm run develop
    ```
 
-   This comes handy with advanced debugging or creating tests for the platform.
-
-   <Aside type='caution' title='Clear the cookies'>
-
-   You will have to clear your browser cookies and sign in again after seeding the certified user.
-
-   </Aside>
+   A full curriculum build takes several minutes. Open `http://localhost:8000` when it finishes.
 
 </Steps>
 
-<Card title='Notes on the Database' icon='seti:db'>
-  <Aside type='tip' title='Install MongoDB as a background service'>
-    You can avoid having to start MongoDB every time by installing it as a
-    background service. You can [learn more about it in their documentation for
-    your OS](https://docs.mongodb.com/manual/administration/install-community/).
-  </Aside>
-</Card>
+<Aside type='note' title='Using your own MongoDB'>
 
-### Step 4: Start the Client App and API Server
-
-You can now start up the API server and the client applications.
-
-**If you're working on curriculum content**, we strongly recommend using selective builds to significantly reduce build time. Set one of the following environment variables to build only what you need:
-
-- `FCC_SUPERBLOCK` — build a single superBlock
-- `FCC_BLOCK` — build a single block
-- `FCC_CHALLENGE_ID` — build a single challenge by its ID
-
-For example, to build only the Responsive Web Design superblock:
-
-```bash
-FCC_SUPERBLOCK='responsive-web-design' pnpm run develop
-```
-
-Or to build only the Basic HTML and HTML5 block:
-
-```bash
-FCC_BLOCK='basic-html-and-html5' pnpm run develop
-```
-
-To build the entire curriculum (only recommended for thorough testing):
-
-```bash
-pnpm run develop
-```
-
-Once ready, open a web browser and visit: `http://localhost:8000`
-
-<LinkButton
-  href='http://localhost:8000'
-  icon='external'
-  variant='secondary'
-  target='_blank'
->
-  `http://localhost:8000`
-</LinkButton>
-
-<Aside type='tip' title="Congratulations - you're all set!">
-
-You now have a copy of freeCodeCamp's entire learning platform running on your local machine. Go ahead and start making changes to the codebase.
+If you run MongoDB outside Docker, point `MONGOHQ_URL` in `.env` at it. It must be a replica set.
 
 </Aside>
 
-**Some notes:**
+</TabItem>
 
-- The API server serves endpoints at `http://localhost:3000`.
-- The Gatsby app serves the client application at `http://localhost:8000`.
-- All the APIs are available at `http://localhost:3000/documentation`.
+<TabItem label="Dev Container" icon="seti:config">
 
-<Aside type='note'>
+A dev container runs the same image as GitHub Codespaces, on your own machine. It carries Node.js, pnpm, MongoDB and every dependency, so you only install Docker and VS Code.
 
-If you have issues with the setup, check out the [troubleshooting section](/troubleshooting-development-issues/).
+#### Prerequisites
+
+| Prerequisite                                                                                                       | Notes                                    |
+| ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| [Git](https://git-scm.com/)                                                                                        | -                                        |
+| [Docker Desktop](https://docs.docker.com/get-started/get-docker/)                                                  | Any Docker Engine with Compose v2 works. |
+| [Visual Studio Code](https://code.visualstudio.com/)                                                               | -                                        |
+| [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) | -                                        |
+
+In Docker's resource settings, give it at least 4 CPUs and 16 GB of memory. The client build needs a 7 GB heap, and Docker treats its memory setting as a hard limit.
+
+#### Open and run the project
+
+<Steps>
+
+1. Open the folder in VS Code:
+
+   ```bash
+   code .
+   ```
+
+2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`), then select **Dev Containers: Reopen in Container**.
+
+3. Wait for the setup to finish. The terminal shows `Done. Press any key to close the terminal.` The container installs the dependencies, writes `.env`, starts MongoDB and Mailpit, and seeds the database for you.
+
+4. Open the Command Palette again, type `Run Task`, then select **Start freeCodeCamp**. Or open a terminal and run:
+
+   ```bash
+   pnpm run develop
+   ```
+
+5. Wait for the build. It takes several minutes the first time. Then open `http://localhost:8000`.
+
+</Steps>
+
+<Aside type='note' title='The first start is slow'>
+
+The first start downloads a prebuilt image of several gigabytes. Later starts are fast.
+
+</Aside>
+
+</TabItem>
+
+<TabItem label="GitHub Codespaces" icon="seti:github">
+
+A codespace runs the project on a GitHub server. You install nothing, and you work in your browser or in VS Code.
+
+<Steps>
+
+1. Go to your fork at `https://github.com/YOUR_USER_NAME/freeCodeCamp`.
+
+2. Click the green **Code** button, select the **Codespaces** tab, then click **Create codespace on main**.
+
+   Pick the **4-core, 16 GB RAM** machine, or a larger one. The codespace then installs every dependency, starts MongoDB and Mailpit, seeds a test user, writes `.env`, and installs the ESLint and Prettier extensions.
+
+3. Wait for the setup to finish, then open a terminal and run:
+
+   ```bash
+   pnpm run develop
+   ```
+
+4. Wait for the build. It takes several minutes the first time. VS Code shows a notification for port `8000` when the client is ready — open it to view the client in a new browser tab.
+
+</Steps>
+
+<Aside type='caution' title='Keep port 3000 public'>
+
+The client calls the API across two forwarded origins, so port `3000` must stay public or the browser reports a CORS error. The container sets this on every start, but if it still looks private, open the **Ports** panel, right-click port `3000`, then choose **Port Visibility > Public**. Leave port `8000` private.
+
+A public port is reachable by anybody who has the URL. Stop the codespace when you finish working.
 
 </Aside>
 
 </TabItem>
 </Tabs>
+
+## After it starts
+
+- The API serves endpoints at `http://localhost:3000`, with docs at `/documentation`. In Codespaces, open these from the **Ports** panel.
+- Mailpit catches outgoing email at `http://localhost:8025` (or the **Ports** panel in Codespaces).
+
+**Working on curriculum content?** Build only the part you need. It is far faster:
+
+```bash
+FCC_SUPERBLOCK='responsive-web-design' pnpm run develop
+```
+
+See [Quick Commands Reference](#quick-commands-reference) for `FCC_BLOCK` and `FCC_CHALLENGE_ID`.
+
+<Aside type='tip' title="Congratulations — you're all set!">
+
+freeCodeCamp's learning platform is now running. If anything failed, see [troubleshooting](/troubleshooting-development-issues/).
+
+</Aside>
 
 ## Quick Commands Reference
 
