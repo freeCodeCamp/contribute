@@ -254,7 +254,7 @@ A codespace runs the project on a GitHub server. You install nothing, and you wo
 
 The client calls the API across two forwarded origins, so port `3000` must stay public or the browser reports a CORS error. The container sets this on every start, but if it still looks private, open the **Ports** panel, right-click port `3000`, then choose **Port Visibility > Public**. Leave port `8000` private.
 
-A public port is reachable by anybody who has the URL, and `sample.env` sets `FCC_ENABLE_DEV_LOGIN_MODE=true`, a passwordless sign-in. Stop the codespace when you finish working.
+A public port is reachable by anybody who has the URL. Stop the codespace when you finish working.
 
 </Aside>
 
