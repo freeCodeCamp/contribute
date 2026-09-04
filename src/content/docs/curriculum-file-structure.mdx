@@ -116,7 +116,7 @@ Modules and chapters can have additional properties that affect how they are tre
 
 - **`moduleType: "cert-project"`**: A module containing a single certification project block.
 - **`moduleType: "review"`**: A module containing a review block.
-- **`comingSoon: true`**: Marks a module as not yet available to campers.
+- **`comingSoon: true`**: Marks a chapter or module as not yet available to campers.
 - **`chapterType: "exam"`**: Marks a chapter as containing the certification exam.
 
 ### blocks/&lt;block&gt;.json
@@ -281,21 +281,17 @@ When renaming a certification, you will likely want to rename the associated sup
 1. Rename the `curriculum/challenges/english/certifications/<certification>.yml` file to the new name.
 2. In the YAML file, change the `title` to the new name.
 3. Update the `certifications` array in `curriculum/structure/curriculum.json` to use the new certification name.
-4. Update `client/src/redux/index.ts` to use the correct `title`.
-5. Optionally, update the `certSlug` for the superblock in the same file. (Note: Renaming a `certSlug` will change the URL for certifications and should only be done with careful consideration.)
-6. **If you renamed the `certSlug`**, [add redirects to the `serve.json` file](#setting-up-redirects) to redirect from old certification URLs to new ones:
+4. Update the relevant `Certification` enum member and certification arrays in `packages/shared/src/config/certification-settings.ts` when the certification slug changes.
+5. Update the matching certification entry in `client/config/cert-and-project-map.ts`, including its `title`, `certSlug`, and project `certSlug` values when applicable.
+6. Update any matching certification names and slugs in `client/i18n/locales/<language>/`, `curriculum/src/build-curriculum.ts`, and other references found by searching for the old value.
+7. **If you renamed the certification slug**, [add redirects to the `serve.json` file](#setting-up-redirects) to redirect from old certification URLs to new ones:
    ```json
    {
-     "source": "/certification/old-cert-slug",
-     "destination": "/certification/new-cert-slug"
+     "source": "/certification/:username/old-cert-slug",
+     "destination": "/certification/:username/new-cert-slug"
    }
    ```
-7. Update the `title` in `client/src/resources/cert-and-project-map.ts` to the new value. (Note: Changing the `title` here **will break** the superBlock page for the associated certification. It relies on the superBlock title to match the certification title. You will likely want to rename the superBlock at the same time.)
-8. If you renamed the `certSlug` in step 5, change it here for the cert and all the nested `projects` values.
-9. In `shared/config/certification-settings.js`, update the value of `certTypeTitleMap` to the new name.
-10. If you renamed the `certSlug` in step 5, update the key of `certSlugTypeMap` in the same file.
-11. Update the certificate name in the `legacyCerts` array of the `client/src/client-only-routes/show-project-links.tsx` if needed.
-12. Update the main `README.md` file to the new name.
+8. Update the main `README.md` file to the new name.
 
 </Steps>
 
@@ -315,21 +311,17 @@ Also, you will likely want to rename the certificate and the `<superBlock>-proje
 
 1. Rename the superblock file in `curriculum/structure/superblocks/` from `<old-name>.json` to `<new-name>.json`.
 2. Update the `superblocks` array in `curriculum/structure/curriculum.json` to use the new superblock name.
-3. For each block within that superBlock, update the `superBlock` value in their respective JSON files in `curriculum/structure/blocks/` to the new dashedName.
-4. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old superblock URLs to new ones:
+3. Update the corresponding `SuperBlocks` enum member in `packages/shared/src/config/curriculum.ts` and the key in `superBlockNames` in `curriculum/src/build-curriculum.ts`.
+4. Update the superblock key in every `client/i18n/locales/<language>/intro.json` file. In English, update the `title` when the display name changes.
+5. Update references to the old superblock slug, including certification paths in `client/config/cert-and-project-map.ts`, by searching the repository for the old value.
+6. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old superblock URLs to new ones:
    ```json
    {
      "source": "/learn/old-superblock-name/:block?/:challenge?",
      "destination": "/learn/new-superblock-name/:block?/:challenge?"
    }
    ```
-5. In the `client/src/resources/cert-and-project-map.ts` file, update the path for the cert at the top of the file, and the `title` value for that superBlock. (Note: Changing the `title` here **will break** the ability to view the actual certification for this superBlock. It relies on the superBlock title to match the certification title. You will likely want to rename the certification at the same time.)
-6. Update the `superBlockCertTypeMap` key in `shared/config/certification-settings.js` to the new superBlock name.
-7. Update the path value in `client/src/assets/icons/index.tsx`.
-8. For each language in `client/i18n/locales`, update the `intro.json` file to use the new superBlock `dashedName`. In the English file, also update the `title`.
-9. Check the `shared/config/i18n/all-langs.js` file to see if the superBlock is enabled in i18n builds. Update all the values where it is used.
-10. Update the `superBlockNames` map in `curriculum/build-curriculum.js`. This map links superblock filenames (keys) to certification names (values) - update the key if the superblock filename changed, and update the value if the certification name changed.
-11. Update the main `README.md` file to the new name.
+7. Update the main `README.md` file to the new name.
 
 </Steps>
 
@@ -365,19 +357,18 @@ When renaming a single challenge file, you need to:
 
 <Steps>
 
-1. Change the name of the challenge file in the `curriculum/challenges/english/blocks/<block>/` directory.
-2. Change the name of the `title` and `dashedName` within that file.
-3. Update the challenge title in the relevant block JSON file in `curriculum/structure/blocks/<block>.json`. The challenge names in the `challengeOrder` array are used in the build and provide the order of challenges.
-4. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old challenge URLs to new ones:
+1. Change the challenge's `title` and `dashedName` in its frontmatter.
+2. Update the challenge title in the relevant block JSON file in `curriculum/structure/blocks/<block>.json`.
+3. [**Add redirects** to the `serve.json` file](#setting-up-redirects) to redirect from old challenge URLs to new ones:
    ```json
    {
      "source": "/learn/superblock-name/block-name/old-challenge-name",
      "destination": "/learn/superblock-name/block-name/new-challenge-name"
    }
    ```
-5. If the challenge is a certificate project, update the YAML file in `curriculum/challenges/english/certifications/<certification>.yml` to the new name.
-6. If the challenge is a certificate project, update the `title` and `link` in `client/src/resources/cert-and-project-map.ts`
-7. If the challenge is a certificate project, update the main `README.md` file to the new name.
+4. If the challenge is a certificate project, update the YAML file in `curriculum/challenges/english/certifications/<certification>.yml` to the new name.
+5. If the challenge is a certificate project, update the `title` and `link` in `client/config/cert-and-project-map.ts`
+6. If the challenge is a certificate project, update the main `README.md` file to the new name.
 
 </Steps>
 
@@ -387,4 +378,4 @@ Translated content in the i18n-curriculum submodule will be updated automaticall
 
 ## The `dashedName` Property
 
-The `dashedName` property is used to generate the URL path for the superblock, block, or challenge. These should generally match what the `/utils/slugs.js` helper would output for the file name.
+The `dashedName` property is used to generate the URL path for a superblock, block, or challenge. It must contain only lowercase letters, numbers, and hyphens. Choose a descriptive, stable slug and update every reference when it changes.
