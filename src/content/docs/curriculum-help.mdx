@@ -648,13 +648,46 @@ explorer.toString(); // "const a = 1;"
 
 #### `matches(other: string | Explorer)`
 
-Compares the current tree with another tree or string, ignoring semicolons and irrelevant whitespace differences.
+Compares the current tree with another tree or string, ignoring semicolons, comments, and irrelevant whitespace differences.
 
 ```js
 const explorer = await __helpers.Explorer('const a = 1;');
 explorer.matches('const a =  1'); // true (ignores whitespace and semicolons)
 explorer.matches('const b = 1;'); // false
 ```
+
+Everything else is part of the tree and has to be identical, including parentheses. Redundant parentheses, and the optional parentheses around a single arrow function parameter, are all significant:
+
+```js
+const explorer = await __helpers.Explorer('const f = (x) => x;');
+explorer.matches('const f = (x) => x'); // true
+explorer.matches('const f = x => x'); // false
+
+const another = await __helpers.Explorer('const a = (1);');
+another.matches('const a = 1'); // false
+```
+
+String literals are compared by value, so the quote character does not matter. A template literal is a different kind of node, though, and never matches a plain string:
+
+```js
+const explorer = await __helpers.Explorer("const a = 'hello';");
+explorer.matches('const a = "hello"'); // true
+explorer.matches('const a = `hello`'); // false
+```
+
+Because of this, `matches()` is a strict check on one exact way of writing an expression. Whenever a step allows more than one valid form, compare against every form, or drill into the tree and assert on the parts that matter:
+
+```js
+const validForms = [
+  'items.find((item) => item.id === id)',
+  'items.find(item => item.id === id)',
+  'items.find((item) => { return item.id === id; })',
+  'items.find(item => { return item.id === id; })'
+];
+assert.isTrue(validForms.some(form => found.value.matches(form)));
+```
+
+Note that a list like this still ties campers to the parameter name `item` and to an arrow function, so prefer inspecting the tree when the step does not require either.
 
 #### `variables`
 
