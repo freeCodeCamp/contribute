@@ -55,7 +55,7 @@ For triaging a trivial issue such as a typo fix, it is recommended to apply a "f
 
 - Stale issues or PRs are those that have not seen any activity from the author for 21 days (3 weeks from the last activity), but only after a moderator has requested more information/changes.
 
-- Activity is defined as: Comments requesting an update on the PR and triages like `status: update needed` label, etc.
+- Activity is defined as: Comments requesting an update on the PR and triages like `status: waiting update` label, etc.
 
 - If the contributor asks for additional assistance or even time, the above can be relaxed and revisited after a response is given. In any case, the mods should use their best judgment to resolve the outstanding PR's status.
 
@@ -79,7 +79,7 @@ Pull Requests (PRs) are how contributors submit changes to freeCodeCamp's reposi
 
    You can close invalid pull requests and reply to them with these [reply templates](/reply-templates/#closing-invalid-pull-requests).
 
-   If the changes look good, please ensure to leave an approval with a "LGTM" (Looks Good To Me) comment. Once a pull request gets at least two approvals (including yours) from the moderators or the dev-team, you can go ahead and merge it.
+   If the changes look good, please ensure to leave an approval with a "LGTM" (Looks Good To Me) comment. Once the pull request meets the [merge requirements](#merging-a-valid-pull-request), you can go ahead and merge it.
 
 2. **Challenge code edits**
 
@@ -91,7 +91,7 @@ Pull Requests (PRs) are how contributors submit changes to freeCodeCamp's reposi
 
    You can close invalid pull requests and reply to them with these [reply templates](/reply-templates/#closing-invalid-pull-requests).
 
-   If the changes look good, please ensure to leave an approval with an "LGTM" comment. Once a pull request gets at least two approvals (including yours) from the moderators or the dev-team, you can go ahead and merge it.
+   If the changes look good, please ensure to leave an approval with an "LGTM" comment. Once the pull request meets the [merge requirements](#merging-a-valid-pull-request), you can go ahead and merge it.
 
 3. **Platform changes**
 
@@ -101,7 +101,7 @@ Pull Requests (PRs) are how contributors submit changes to freeCodeCamp's reposi
 
    After you've done so, if the changes look good, don't merge them quite yet. You can comment on the pull request saying "LGTM", then mention **"@freeCodeCamp/dev-team"** so they can take a final look.
 
-4. **Automated PRs (Dependabot)**
+4. **Automated PRs (Renovate)**
 
    Some PRs are automated dependency updates made via an integration. You should not merge or approve these PRs. One of the dev-team members will take care of reviewing and merging such automated PRs.
 
@@ -135,7 +135,9 @@ If you are uncertain, please ask one of the fellow moderators or the dev-team fo
 
 ##### Merging a Valid Pull Request:
 
-If the pull request looks ready to merge (and doesn't require additional approvals - remember we require at least two), you can go ahead and merge it. Be sure to use the default **"Squash and Merge"** option. This will squash all the pull requests commits down into a single commit, making the Git history much easier to read.
+The `freeCodeCamp/freeCodeCamp` repository requires at least one approving review, including approval from the required code owners. All required CI checks must pass, and all review conversations must be resolved before merging. For bigger changes, we recommend getting multiple approvals from moderators or the dev-team.
+
+Once the pull request meets these requirements and GitHub shows no remaining merge blockers, you can go ahead and merge it. Be sure to use the default **"Squash and Merge"** option. This will squash all the pull requests commits down into a single commit, making the Git history much easier to read.
 
 > You should then comment on the pull request, thanking the contributor in your own personal way!
 
@@ -152,7 +154,7 @@ If the pull request author is a "first-time contributor" you should also congrat
 
 If the pull request doesn't look ready to merge, you can politely reply telling the author what they should do to get it ready. Hopefully, they will reply and get their pull request closer to ready.
 
-If you need a second opinion on a pull request, go ahead and leave your comments on the pull request, then add the "discussing" label to the pull request.
+If you need a second opinion on a pull request, go ahead and leave your comments on the pull request, then add the "status: discussing" label to the pull request.
 
 ##### Closing an Invalid Pull Request:
 
@@ -166,7 +168,7 @@ You can close these invalid pull requests and reply to them with these [reply te
 
 To sort Pull Requests for Quality Assurance for quick access to PRs that are ready for review, do not have a merge conflict, are not blocked, and have all status checks in green, use the following link to apply the filters:
 
-[Direct link with filter applied](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22status%3A+merge+conflict%22+status%3Asuccess+draft%3Afalse)
+[Direct link with filter applied](https://github.com/freeCodeCamp/freeCodeCamp/pulls?q=is%3Aopen+is%3Apr+-label%3A%22status%3A+blocked%22+-label%3A%22MERGE+CONFLICT%21%22+status%3Asuccess+draft%3Afalse)
 
 #### Other Guidelines for Moderators on GitHub
 
@@ -175,6 +177,19 @@ Though you will have write access to freeCodeCamp's repository, **you should nev
 Also, you should never accept your own PRs. They must be reviewed by another moderator, just like any other PR.
 
 If you notice anyone breaking the [Code of Conduct](https://code-of-conduct.freecodecamp.org) on GitHub issues, or opening pull requests with malicious content or code, email `support[at]freecodecamp.org` with a link to the offending pull request, and we can consider banning them from freeCodeCamp's GitHub organization entirely.
+
+### Using CamperChan for GitHub Tasks
+
+CamperChan provides Discord commands for managing issues and pull requests in the freeCodeCamp GitHub organization. Each command takes a `repository` name, such as `freeCodeCamp`, and the issue or pull request `number`.
+
+| Command               | Action                                                                                                                                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/github comment`     | Posts the predefined reply selected in `message`.                                                                                                                      |
+| `/github close`       | Posts a closing comment and closes the issue or pull request. The optional `comment` selects a predefined reply; otherwise, the bot uses its standard closing message. |
+| `/github add-labels`  | Adds the comma-separated `labels` while preserving existing labels.                                                                                                    |
+| `/github sync-labels` | Replaces the entire label set with the comma-separated `labels`. Any existing labels omitted from the list are removed.                                                |
+
+For issues, `/github close` accepts a `reason` of `completed`, `not planned`, or `duplicate`. It defaults to `not planned`. When choosing `duplicate`, supply `duplicate-of` with the number of the original issue in the same repository. These two options do not apply to pull requests. For pull requests, the optional `spam` flag adds the `spam` label.
 
 ## Moderating the Forum
 
@@ -211,11 +226,11 @@ Again, if you have any problems or questions, make a post with your actions in t
 
 ### Dealing with Posted Solutions
 
-If a user replies in a help thread for the freeCodeCamp curriculum with a solution, remove it and use the **Solution Instead of Help** canned reply (or a similar response in your own words).
+If a user replies in a help thread for the freeCodeCamp curriculum with a solution, remove it and remind the user to provide hints and tips instead, using a suitable template or your own words.
 
-If the OP (Original Poster) replies within a freeCodeCamp curriculum help thread with their final solution, blur it, and use the **Blurred Spoiler Solution** canned reply.
+If the OP (Original Poster) replies within a freeCodeCamp curriculum help thread with their final solution, blur it and explain why, using a suitable template or your own words.
 
-If a user creates a thread asking for feedback on a solution, move the thread to the feedback subforum and blur the solution, as necessary. If the user is only posting the solution to show it off, then unlist the thread and use the **Solutions Thread** canned reply.
+If a user creates a thread asking for feedback on a solution, move the thread to the feedback subforum and blur the solution, as necessary. If the user is only posting the solution to show it off, then unlist the thread and explain why, using a suitable template or your own words.
 
 ### Underage Users
 
@@ -249,7 +264,7 @@ If a user insists on having their account deleted, ask them to email `support[at
 
 Moderating the forum is possible via a cell phone but you may encounter some usage quirks. This is not an exhaustive list.
 
-- When trying to include a "Canned reply" in a response, if the menu doesn't open (after clicking on the gear), click on the text area first then try it again.
+- When trying to insert a template in a response, if the menu doesn't open (after clicking on the gear), click on the text area first then try it again.
 - The moderator's 'wrench' is at the bottom of the view-port but if you click it and cannot see the "Select Posts" button because it has scrolled out of view, you may need to try to scroll to it, though sometimes that doesn't work in which case moving to a desktop/laptop monitor may be needed.
 - Sometimes clicking on the three-dot menu below a post can hide the reply icon. Reload the page to get it back.
 
@@ -266,7 +281,7 @@ But if it is an egregious offense that can't reasonably be attributed to a cultu
 Here's how moderators deal with violations of our [Code of Conduct](https://code-of-conduct.freecodecamp.org/) on our chat server:
 
 :::note
-Camperbot serves as our moderation bot, and all of the commands use Discord's native slash command interface. You can see a list of all of the commands by typing `/` in any channel.
+CamperChan serves as our moderation bot. Type `/` in a server channel to see its slash commands. It also provides message commands, including `report` and `snippet`, through Discord's message context menu.
 :::
 
 <Steps>
@@ -277,32 +292,34 @@ Camperbot serves as our moderation bot, and all of the commands use Discord's na
 
 2. **If the camper clearly and intentionally violates the [Code of Conduct](https://code-of-conduct.freecodecamp.org), the moderator will proceed as follows:**
 
-   For minor offences, a warning may be issued with the `/warn` command. For more egregious offences, you can remove the member from the server temporarily with the `/kick` command, or permanently with the `/ban` command. In some cases, a member may just need some time to cool off and collect their thoughts - the `/mute` command allows you to prevent them from engaging with our community for a set period of time. A muted member can see the conversation, but cannot post messages or add reactions.
+   For minor offences, a warning may be issued with the `/moderation warn` command. For more egregious offences, you can remove the member from the server temporarily with the `/moderation kick` command, or permanently with the `/moderation ban` command. In some cases, a member may just need some time to cool off and collect their thoughts - the `/moderation mute` command allows you to prevent them from engaging with our community for a set period of time. A muted member can see the conversation, but cannot post messages or add reactions.
 
-   All moderation commands will take a `reason` parameter, which should be a short explanation of why the action was taken. Moderation actions done with the bot will be logged in `#mod-actions`, which allows us all to stay on the same page. As such, we should avoid using Discord's built-in moderation tools, as they will not be logged.
+   `/moderation ban` also deletes the member's messages from the previous day. `/moderation mute` requires a `duration` and a `unit` of minutes, hours, days, or weeks, with a maximum duration of 28 days.
+
+   Moderation commands that take action against a user require a `reason` parameter, which should be a short explanation of why the action was taken. Moderation actions done with the bot will be logged in `#mod-actions`, which allows us all to stay on the same page. As such, we should avoid using Discord's built-in moderation tools, as they will not be logged.
 
    :::caution
-   The reason provided to a moderation command will also be included in the DM notification to the camper. Please remember to be professional here.
+   The reason provided to a moderation command will also be included in the DM notification to the camper. Please remember to be professional here. DM delivery can fail without preventing the moderation action; check the notification status in the action log.
    :::
 
 3. **Creating a private discussion**
 
    There may be situations where you need to address a concern with a camper privately. This should not be done through DMs, which can lead to situations where you claim one thing and the camper claims another. Instead, use the bot's functionality to create a private discussion:
-   - Call the `/private` command, where `target` is the camper you want to open a private channel with.
+   - Call the `/management private` command, where `target` is the camper you want to open a private channel with.
    - The bot will create a new channel, and add the mentioned camper and all moderators with the `Your Friendly Moderator` role. While all moderators are added to the channel for transparency, the moderator who calls this command should be the only one to interact with the camper unless they request assistance.
-   - When the conversation is complete, click the `❌ Close` button _on the first message in the private channel_ to have the bot close and delete that channel.
+   - When the conversation is complete, click the `❌ Close` button _on the first message in the private channel_. The bot sends a text transcript to `#mod-actions` before deleting the channel.
 
 4. **Deleting messages**
 
-   Our moderation bot is configured to log deleted messages automatically in the `#mod-actions` channel. If a message is not in line with our Code of Conduct, or otherwise not appropriate for our community, you are generally safe to delete it.
+   Our moderation bot is configured to log deleted messages automatically in the `#message-logs` channel. CamperChan also logs message edits there, including a diff of the text, and records newly created threads. If a message is not in line with our Code of Conduct, or otherwise not appropriate for our community, you are generally safe to delete it.
 
    :::note
-   If the message contains content that violates Discord's terms of service, you'll want to report it via https://dis.gd/report **prior to** deleting it.
+   If the message contains content that violates Discord's terms of service, right-click the message on desktop or press and hold it on mobile, then select **Report Message** to report it to Discord **prior to** deleting it.
    :::
 
 5. **Don't threaten to take action**
 
-   If a camper breaks the [Code of Conduct](https://code-of-conduct.freecodecamp.org), don't threaten to take moderator action, and never warn them in public. Instead, talk to them privately using the bot's `/private` command, or use the bot's moderation commands.
+   If a camper breaks the [Code of Conduct](https://code-of-conduct.freecodecamp.org), don't threaten to take moderator action, and never warn them in public. Instead, talk to them privately using the bot's `/management private` command, or use the bot's moderation commands.
 
    If a violation was clearly unintended and doesn't warrant moderation action or private conversation, make the offending camper aware of their actions without making it come across as a warning.
 
@@ -342,8 +359,42 @@ Camperbot serves as our moderation bot, and all of the commands use Discord's na
 </Steps>
 
 :::note
-Users who have been banned or muted can appeal their moderation actions. As a moderator, you can use `/unban` and `/unmute` commands when processing approved appeals. You can also use `/history` to review a user's moderation history.
+Users who have been banned or muted can appeal their moderation actions. As a moderator, you can use `/moderation unban` and `/moderation unmute` commands when processing approved appeals. You can also use `/moderation history` to see counts of the user's bans, kicks, mutes, warnings, unmutes, and unbans. For the reasons and dates of individual actions, consult `#mod-actions`. Ban notifications include an appeal form link.
 :::
+
+### Reports to the Moderation Team
+
+Members can report a message to the freeCodeCamp moderation team using CamperChan's `report` message command. It opens a form asking why they are reporting the message. The bot sends the message details, reporter, and submitted reason to the configured report channel.
+
+The report includes a **Message Link** button and an **Acknowledge** button. Selecting **Acknowledge** records your name on the report and removes the buttons. It does not take moderation action against the reported member.
+
+For voice-channel incidents, members can use `/report` with `user` and `reason`. The reporter and the reported member must both be in the same voice channel.
+
+These reports go to our moderation team. Discord's **Report Message** option sends a report to Discord itself.
+
+### Moderation Tickets
+
+Members can select **Open a Ticket** on the ticket post to open a private thread with the moderation team. Tickets are for moderation concerns, Code of Conduct questions, and questions or appeals about moderation actions. They are not for coding help, curriculum bug reports, or general questions.
+
+The bot prevents a member from opening another ticket while they already have an active ticket in that channel. When the discussion is complete, select **Close Ticket**. The bot removes the member, locks the thread, and archives it. The thread remains available to staff as a record of the conversation.
+
+Tickets and `/management private` channels have different closing behavior: tickets are preserved as threads, while private channels are deleted after the bot sends their transcript to `#mod-actions`.
+
+### Automatic Moderation
+
+CamperChan automatically bans members it has permission to ban when it detects any of these triggers:
+
+- A known phishing link.
+- An unapproved Discord invite combined with an `@everyone` or `@here` mention.
+- A message in the honeypot channel, where regular members should not post.
+
+The bot attempts to notify the member, deletes their messages from the previous day, updates their moderation history, and records the trigger and message evidence in `#mod-actions`.
+
+CamperChan also deletes messages containing attachments identified as neither images nor videos and posts an explanation in the channel. Members with **Manage Messages** permission and channels under the configured exempt category are excluded from this attachment restriction.
+
+### Predefined Discord Replies
+
+Use CamperChan's `snippet` message command to choose a predefined response from a dropdown. The bot posts the selected response as a reply to the original message. Available snippets cover situations such as code formatting, large code blocks, duplicate questions, and self-promotion.
 
 ## How to Become a Moderator
 
@@ -377,7 +428,7 @@ As a matter of policy, you should avoid talking privately about these matters. S
 
 As difficult as it sometimes can be, avoid giving any tips or advice and rather point the user in the direction of seeking professional help!
 
-If this happens on our chat server: Create a private channel for the user and the moderator team. This can be done with the bot's `private` command.
+If this happens on our chat server: Create a private channel for the user and the moderator team. This can be done with the bot's `/management private` command.
 
 - The user is guaranteed some privacy.
 - Public chat is no longer disrupted.

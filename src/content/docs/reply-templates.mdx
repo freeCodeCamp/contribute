@@ -4,8 +4,6 @@ sidebar:
   label: Reply Templates
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-
 These are some of the standard reply templates that you may use while reviewing pull requests and triaging issues/pull requests.
 
 > You can make your own saved replies with GitHub's built-in [saved replies](https://github.com/settings/replies/) feature or use the ones below.
@@ -56,14 +54,14 @@ To resolve this error, you will have to sync the latest changes from the `main` 
 Using the command line, you can do this in three easy steps:
 
 ```bash
-git remote add upstream git://github.com/freeCodeCamp/freeCodeCamp.git
+git remote add upstream https://github.com/freeCodeCamp/freeCodeCamp.git
 
 git fetch upstream
 
 git pull upstream main
 ```
 
-If you're using a GUI, you can simply `Add a new remote...` and use the link `git://github.com/freeCodeCamp/freeCodeCamp.git` from above.
+If you're using a GUI, you can simply `Add a new remote...` and use the link `https://github.com/freeCodeCamp/freeCodeCamp.git` from above.
 
 Once you sync your fork and pass the build, we will be able to review your PR and merge it. 😊
 
@@ -129,7 +127,7 @@ Thank you and happy coding.
 ```markdown
 Thank you for your pull request.
 
-We are closing this pull request. Please suggest links and other details to add the challenge's corresponding guide post through [a forum topic](https://forum.freecodecamp.org/new-topic?category=freeCodeCamp%20Community&title=&body=**What%20is%20your%20hint%20or%20solution%20suggestion%3F**%0A%0A%0A%0A%0A**Challenge%3A**%0A%0A%0A**Link%20to%20the%20challenge%3A**) instead.
+We are closing this pull request.
 
 If you think we're wrong in closing this issue, please request for it to be reopened and add further clarification. Thank you and happy coding.
 ```
@@ -162,15 +160,11 @@ If you're unfamiliar with certain aspects, our [contributing guidelines](https:/
 <details>
 <summary>**Friendly Pointers (click to expand)**</summary>
 
-<Steps>
-
 1. **Editing on GitHub:** While it's possible to edit files directly on GitHub, it's typically better not to. This helps avoid inadvertent mistakes like typos that can disrupt tests.
 2. **Pull Request Title:** Please ensure the PR title follows [our convention](https://contribute.freecodecamp.org/how-to-open-a-pull-request/#prepare-a-good-pr-title).
 3. **Linking Issues:** Please ensure you link issues using the designated method. Simply update the `XXXXXX` in the PR description to include the issue number. This keeps our records organized and clear.
 4. **Engaging with the Team:** We know you're eager, but kindly keep mentions and review requests limited. Our maintainers are always on the lookout and will attend to PRs in the order they come in.
 5. **Branch Management:** It's a good practice not to work directly off your `main` branch. Creating separate branches for different changes allows you to smoothly update your PR even as the main repository progresses.
-
-</Steps>
 
 </details>
 
