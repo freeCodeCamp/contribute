@@ -18,7 +18,20 @@ We've built a [challenge editor tool](#using-the-challenge-editor) that helps re
 
 Workshops should alternate steps in which new concepts are introduced piece by piece, and steps where there is freedom of implementation.
 
-Instructions should always be written using second person, and the hints usually use a format like "You should have...", or "This thing should be/have/do/return...".
+### Instructions and hints
+
+Write instructions in the second person, using American English and short, direct sentences. State what campers need to change and where. Name the relevant file, function, variable, or element, and put code identifiers in backticks. Explain new concepts before asking campers to apply them.
+
+Each hint should identify the requirement checked by its test and help campers understand what to fix. Keep the hint consistent with the instructions and assertion. For example:
+
+- Instruction: Inside `greet`, return the string `"Hello"`.
+- Hint: Your `greet` function should return the string `"Hello"`.
+
+Avoid vague hints such as "Your code is incorrect."
+
+Follow the [challenge-description guidelines](/how-to-work-on-coding-challenges/#challenge-descriptionsinstructions), [challenge-text formatting rules](/how-to-work-on-coding-challenges/#formatting-challenge-text), and [Writing Style Guide](/writing-style-guide/) for wording, code references, and punctuation.
+
+### Test assertions
 
 Choose tests based on what the step asks campers to do.
 
@@ -240,6 +253,18 @@ Description of what the test checks.
 ```
 ````
 
+## Formatting seed code
+
+Follow the [seed-code formatting guidelines](/how-to-work-on-coding-challenges/#formatting-seed-code):
+
+- Use two spaces per indentation level for HTML, CSS, and JavaScript, and four for Python.
+- End JavaScript statements with semicolons.
+- Use double quotes where applicable in HTML, CSS, and JavaScript, and single quotes in Python.
+
+Keep formatting consistent between consecutive steps. Preserve indentation, quote style, and blank lines in code that the camper has not been asked to change. Do not introduce unrelated reformatting when preparing the next step's seed.
+
+Use seed comments sparingly and follow the [seed-code comment rules](/how-to-work-on-coding-challenges/#seed-code-comments). Comments must match an entry in the comment dictionary, including its case and spacing.
+
 ## Editable regions and indentation
 
 Place the editable region around the code campers need to change in that step. When campers need to insert code on a blank line, pre-indent that line to match the surrounding code. For example, code inside this JavaScript function needs two leading spaces:
@@ -267,6 +292,7 @@ An earlier step can also need an explicit solution when it intentionally introdu
 
 The next step keeps the completed TypeScript code but omits that compiler setting so campers can see and fix the type error. Using that next step's seed as the previous step's solution would therefore fail type checking. The explicit solution preserves the compiler setting needed to test the previous step:
 
+{/* prettier-ignore */}
 ````md
 # --solutions--
 
@@ -275,7 +301,7 @@ function square(num: number) {
   return num * num;
 }
 
-const result = square('something');
+const result = square("something");
 
 console.log(result);
 ```
