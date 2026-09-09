@@ -18,7 +18,7 @@ Before adding punctuation, check the content inside the backticks.
 **Examples**
 
 - \`Does this work?\` → keep the `?`
-- \`assigning tasks . . .\` → keep the ellipses
+- \`assigning tasks ...\` → keep the ellipses
 - \`assigning tasks\` → leave as-is
 
 ---
@@ -32,16 +32,18 @@ Periods and commas go **outside** the backticks if the backticks do not include 
     **Correct**
     - The file is `index.html`.
     - Run `npm install`, then restart.
-    - She paused at `assigning tasks . . .`, unsure what to say next.
+    - She paused at `assigning tasks ...`, unsure what to say next.
     - `I reviewed the requirements. Next, I shared my thoughts with the team.`
 
     **Incorrect**
     - It's usually the direct answer to the question `¿De dónde eres?`.
     - `I reviewed the requirements. Next, I shared my thoughts with the team.`.
 
-    > [!Exception]
-    > If the dot is not punctuation in the last backticked phrase. Below it is part of the domain syntax so we add an additional period in that case.<br /><br />
-    > Other examples of subdomains include `blog.`, `shop.`, `support.`, and `api.`.
+:::note[Exception]
+If the final dot is part of the code or domain syntax rather than sentence-ending punctuation, add a period outside the backticks.
+
+Other examples of subdomains include `blog.`, `shop.`, `support.`, and `api.`.
+:::
 
 <br />
 
@@ -58,15 +60,15 @@ If the quoted or backticked text includes a comma, do not add a duplicate comma 
 Do not add a duplicate period if an ellipse is quoted or backticked at the end of the line. (Exceptions below in the section for question marks and exclamation marks)
 
     **Correct**
-    - Focus on the sentence that starts with: `One important task is . . .`
-    - `Me llamo . . .` means "My name is . . ."
+    - Focus on the sentence that starts with `One important task is ...`
+    - `Me llamo ...` means "My name is ..."
 
     **Incorrect**
-    - Focus on the sentence that starts with: `One important task is . . .`.
+    - Focus on the sentence that starts with `One important task is ...`.
 
 <br />
 
-Do not add a period to the end of the line if the line ends with a backticked phrase that includes any punctuation mark
+Do not add a period at the end of a sentence if the final quoted or backticked phrase already ends with sentence-ending punctuation, such as a period, question mark, or exclamation mark.
 
     **Correct**
     - This question is equivalent to "How old are you?"
@@ -80,7 +82,7 @@ Periods and commas go **inside** the double quotes when their presence coincides
 
     **Correct**
     - The error says "File not found."
-    - She whispered "I’m not sure . . .," then walked away.
+    - She whispered "I'm not sure ...," then walked away.
 
 ### Oxford Comma
 
@@ -118,8 +120,8 @@ Do not add a space after the last punctuation mark in a standalone paragraph or 
     - She asked, "Does this work?"
     - He shouted, "Let me go!"
 
-    **Incorrect **
-    - What did he mean by `Where are you`?
+    **Incorrect**
+    - She asked, `Does this work?`?
     - He said, "how come"?
 
 ---
@@ -133,8 +135,8 @@ Do not add a space after the last punctuation mark in a standalone paragraph or 
   - What does she mean by "assigning tasks"?
 
   **Examples With Ellipses**
-  - What does she mean by `assigning tasks . . .`?
-  - What does she mean by "assigning tasks . . ."?
+  - What does she mean by `assigning tasks ...`?
+  - What does she mean by "assigning tasks ..."?
 
 ---
 
@@ -150,11 +152,11 @@ Use **only one**, placed **inside**.
 
 #### If the content does _not_ have a question mark
 
-The sentence’s `?` goes **outside**.
+The sentence's `?` goes **outside**.
 
     **Correct**
-    - What does Tom mean when he asks, `Does Maria assign tasks . . .`?
-    - What does Tom mean when he asks, "Does Maria assign tasks . . ."?
+    - What does Tom mean when he asks, `Does Maria assign tasks ...`?
+    - What does Tom mean when he asks, "Does Maria assign tasks ..."?
 
 ---
 
@@ -170,11 +172,11 @@ Follow the same logic as question marks.
 
 ## 5. Ellipses
 
-Ellipses should be treated as a three letter word, with a space before them. The dots should also be separated by en spaces. If they are quoted or back-ticked and come at the end of the sentence, do not add additional periods after them.
+Write ellipses as three consecutive periods (`...`), without spaces between the dots. If they are quoted or back-ticked and come at the end of the sentence, do not add additional periods after them.
 
     **Correct**
-    - What does Tom mean when he asks, `Does Maria assign tasks . . .`?
-    - You should include the paragraph that starts with `A miracle . . .`
+    - What does Tom mean when he asks, `Does Maria assign tasks ...`?
+    - You should include the paragraph that starts with `A miracle ...`
 
 ---
 
@@ -189,7 +191,7 @@ Within your `.image-quote` element, nest an `hr` element, a `p` element and a se
 `The millions of people who are learning to code through freeCodeCamp will have an even better resource to help them learn these fundamentals.`
 ```
 
-Use a comma just before any quoted text that constitutes an utterance (dialog).
+Use a comma after a reporting phrase that introduces dialogue. Omit it when a short quotation fits directly into the sentence, as in `Ask "What's your name?"`.
 
 ```
 **Example**
@@ -210,25 +212,26 @@ In some cases, when quoting or presenting backticked text in a sentence, it is u
 
   - Your `console` statement should output the message: `Here is an example of accessing the second letter in the word [subject].`
 
-  - The output should be: “Success.”
+  - The expected output is the following: "Success."
 
   **Incorrect**
 
-  - To know where someone is from, ask: `¿De dónde eres?`
+  - The question is: `¿De dónde eres?`
 
-  This is incorrect because the colon is not following a complete sentence/thought but a verb 'ask'.
+  The colon separates the verb `is` from its complement; `The question is` is not a complete sentence.
 
   ```
 
-> [!Note]
-> Although in the above example, it would be better if we said: Your console statement should output the _following_ message:
+:::note
+Although in the above example, it would be better if we said: Your console statement should output the _following_ message:
+:::
 
-- Use a colon if introducing the exact text of a quote.
+- Use a colon to introduce a quotation after a complete introductory sentence.
 
   ```
   **Correct**
 
-  - Sebastián is asking Ángela: `¿A qué te dedicas?`
+  - Sebastián asks the following question: `¿A qué te dedicas?`
 
   **Incorrect**
 
@@ -240,6 +243,8 @@ In some cases, when quoting or presenting backticked text in a sentence, it is u
 
   ```
   **Correct**
+
+  - Sebastián is asking Ángela, `¿A qué te dedicas?`
 
   - The correct answer should provide information that directly responds to Bob's question, `What do we have to deal with now?`
 
@@ -258,7 +263,7 @@ In some cases, when quoting or presenting backticked text in a sentence, it is u
   ```
   **Example**
 
-  - Ask “What’s your name?”
+  - Ask "What's your name?"
 
   - Which option means "I'm Chinese. I'm a developer."?
 
