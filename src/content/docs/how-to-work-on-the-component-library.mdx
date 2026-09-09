@@ -27,13 +27,9 @@ Before building or modifying a component, review the existing components in the 
 
 Design the props interface around the component's requirements and the patterns used by the `ui` library. For an existing component, consider how interface changes will affect its consumers. For a new component, use related `ui` components as references and expose the props its consumers need.
 
-:::note
-The library initially modeled components after React Bootstrap to ease migration. The client [removed the React Bootstrap dependency in April 2024](https://github.com/freeCodeCamp/freeCodeCamp/pull/54289) and [replaced the Bootstrap stylesheet with the UI library's base stylesheet in June 2024](https://github.com/freeCodeCamp/freeCodeCamp/pull/55068). Bootstrap implementations can provide historical context, but new components should follow the UI library's own patterns and requirements.
-:::
-
 We prefer smaller pull requests rather than a large one, because they speed up the review time and reduce cognitive overload for the reviewers. For that reason, you should think about how you would break down the implementation and come up with a delivery plan.
 
-We recommend opening a separate GitHub issue for each component and include all the notes in the issue description. It can be used as a place to host all of your working notes, as well as a way to communicate the approach with the reviewers. We will use the issue thread for further discussion if needed. [The original Button implementation issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/45357) is a historical example of documenting component requirements during the migration.
+We recommend opening a separate GitHub issue for each component and include all the notes in the issue description. It can be used as a place to host all of your working notes, as well as a way to communicate the approach with the reviewers. We will use the issue thread for further discussion if needed.
 
 ## Implementing the Component
 
@@ -77,11 +73,6 @@ Color definition can be found in the [`colors.css` file](https://github.com/free
 
 - [Tailwind CSS Configuration](https://v3.tailwindcss.com/docs/configuration)
 - [UI component implementations, stories, and tests](https://github.com/freeCodeCamp/ui/tree/main/src)
-
-The following references describe the Bootstrap versions that informed the original migration:
-
-- [React Bootstrap v0.33 Docs](https://react-bootstrap-v3.netlify.app)
-- [Bootstrap 3.3.7 stylesheet](https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css)
 
 ## Displaying the Use Cases on Storybook
 
