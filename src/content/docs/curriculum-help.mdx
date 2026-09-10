@@ -4,7 +4,7 @@ sidebar:
   label: Use the Curriculum Helpers
 ---
 
-The test runner has access to a few helpers that can assist with testing campers' code.
+The test runner exposes helpers through `__helpers` for testing campers' code.
 
 ## General Helpers
 
@@ -17,9 +17,37 @@ const code = 'function test() {\n  return true;\n}';
 __helpers.removeWhiteSpace(code); // "functiontest(){returntrue;}"
 ```
 
-### `.permutateRegex()`
+This removes whitespace inside string literals too. For example, `'hello world'` becomes `'helloworld'`.
+
+### `retryingTest`
+
+```js
+await __helpers.retryingTest(callback, message, numberOfTries);
+```
+
+The callback must synchronously return a truthy value when the condition is met. Otherwise, the helper schedules another attempt with a 1 ms delay. The optional `numberOfTries` defaults to `20`. After all attempts fail, the returned promise rejects with an error containing `message`.
+
+For example, wait for an element that is added after an asynchronous operation:
+
+```js
+await __helpers.retryingTest(
+  () => document.querySelector('.result'),
+  'The result element was not found.',
+  20
+);
+```
+
+Do not pass an `async` callback: its promise is truthy, so the helper considers the condition met without awaiting its result. Browser scheduling can make the delay longer than 1 ms.
+
+### Regex Utilities
+
+These helpers build text patterns. Prefer the language-specific helpers below when testing code structure.
+
+#### `.permutateRegex()`
 
 Available via `__helpers.permutateRegex(arrayOfRegexOrStrings, options)`, this method creates a regex that matches elements in any order by generating all possible permutations.
+
+Use a small, nonempty input: _n_ elements produce _n!_ permutations, including duplicates when elements repeat. An empty input produces a pattern that matches an empty string. The helper uses each regex's source and discards its flags. Strings are also treated as regex patterns; use [`escapeRegExp`](#escaperegexp) for literal text containing regex metacharacters.
 
 ```javascript
 const source1 = 'a';
@@ -50,7 +78,7 @@ regex.test('a === `b`'); // true
 regex.test(`a === 'b"`); // false
 ```
 
-#### Options
+##### Options
 
 - `capture: boolean` - Whole regex is wrapped in regex group. If `capture` is `true` the group will be capturing, otherwise it will be non-capturing. Defaults to `false`.
 - `elementsSeparator: string` - Separates permuted elements within single permutation. Defaults to `\s*\|\|\s*`.
@@ -76,9 +104,11 @@ __helpers.permutateRegex(['a', /b/, 'c'], { permutationsSeparator: '&' })
   ).source; // true
 ```
 
-### `.concatRegex()`
+#### `.concatRegex()`
 
-Available via `__helpers.concatRegex(...regexOrStrings)`, this method combines and returns a compiled regex when given two or more regexes or strings.
+Available via `__helpers.concatRegex(regexOrString1, regexOrString2, ...)`, this method combines and returns a compiled regex when given two or more regexes or strings.
+
+Input regex flags are not preserved. Strings are treated as regex patterns, not escaped literal text. The combined pattern does not parse code or handle nested structures for you.
 
 For example, if `.concatRegex` is called with `.*` and `b\s` the resulting regex will be equivalent to `.*b\s`.
 
@@ -88,19 +118,16 @@ const regex2 = /b/;
 __helpers.concatRegex(regex1, regex2).source === 'a\\sb'; // true
 ```
 
-### `retryingTest`
+#### `.escapeRegExp()`
+
+Available via `__helpers.escapeRegExp(string)`, this method escapes special regular expression characters in a string.
 
 ```js
-await __helpers.retryingTest(callback, numberOfTries);
+__helpers.escapeRegExp('hello.world'); // "hello\\.world"
+__helpers.escapeRegExp('test[123]'); // "test\\[123\\]"
 ```
 
-`retryingTest` consider the test passed if the `callback` returns a truthy value, and failed if it returns a falsy value.
-
-This helper is useful in a situation in which the thing being tested could have a delay happening, like having data from an API written on the page. Then, the `callback` is called up to `numberOfTries` or until it succeeds, whatever comes first. If there is never a success, then the test fails.
-
-It needs to be used sparingly, because it causes the tests to take a long time.
-
-An example of its use can be found [in this file](https://github.com/freeCodeCamp/freeCodeCamp/blob/1ffd4568c4bda861d3a65ffaf1c39cb435b82648/curriculum/challenges/english/blocks/learn-fetch-and-promises-by-building-an-fcc-authors-page/641da803d9892447d059804e.md);
+Use this for literal text that will be inserted into a regex. It does not parse code or make a pattern capable of matching balanced braces.
 
 ## HTML Helper
 
@@ -113,16 +140,9 @@ const htmlCode = '<div>Hello <!-- this is a comment --> World</div>';
 __helpers.removeHtmlComments(htmlCode); // "<div>Hello  World</div>"
 ```
 
+This is a text replacement, not an HTML parser. It also removes comment-like text inside attribute values. For example, `'<div title="<!-- note -->">'` becomes `'<div title="">'`. Use the DOM to inspect elements and attributes.
+
 ## CSS Helper
-
-### Removing CSS Comments
-
-Use `__helpers.removeCssComments(codeString)` to remove CSS-style comments (`/* */`) from code:
-
-```js
-const cssCode = 'body { color: red; /* this is a comment */ }';
-__helpers.removeCssComments(cssCode); // "body { color: red;  }"
-```
 
 ### CSS Helper Class
 
@@ -134,176 +154,87 @@ const helper = new __helpers.CSSHelp(document);
 
 In that example, the `document` variable refers to the document object of the test runner's iframe.
 
+`CSSHelp` reads authored rules from the stylesheet selected by `getStyleSheet()`, not computed styles or every stylesheet in the document. Selector lookups match the serialized selector text exactly; `getStyle('p')` does not match a rule whose selector is `p, div`. Ordinary style lookups inspect top-level rules only. Use the media-query helpers to inspect rules inside `@media`.
+
 ### Methods
 
 There are a few methods available for parsing and testing CSS.
 
 #### `.getStyle()`
 
-The `.getStyle()` method takes a CSS selector and returns a CSS style declaration object.
+The `.getStyle()` method takes a CSS selector and returns the first matching CSS style declaration object, or `null` if no rule matches.
 
 For example, if the camper has written the following CSS:
 
 ```css
 body {
-  background: linear-gradient(45deg, rgb(118, 201, 255), rgb(247, 255, 222));
-  margin: 0;
-  padding: 0;
+  background-color: rgb(118, 201, 255);
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-```
-
-If you call the `getStyle` method with `body` as an argument, you would get an object that looks like this:
-
-```js
-{
-    0: "background-image",
-    1: "background-position-x",
-    2: "background-position-y",
-    3: "background-size",
-    4: "background-repeat-x",
-    5: "background-repeat-y",
-    6: "background-attachment",
-    7: "background-origin",
-    8: "background-clip",
-    9: "background-color",
-    10: "margin-top",
-    11: "margin-right",
-    12: "margin-bottom",
-    13: "margin-left",
-    14: "padding-top",
-    15: "padding-right",
-    16: "padding-bottom",
-    17: "padding-left",
-    18: "width",
-    19: "height",
-    20: "overflow-x",
-    21: "overflow-y",
-    "accentColor": "",
-    "additiveSymbols": "",
-    "alignContent": "",
-    "alignItems": "",
-    ...
 }
 ```
 
 There are three ways to retrieve CSS values from the returned object:
 
-| Method                       | Example                                       | Returns  |
-| ---------------------------- | --------------------------------------------- | -------- |
-| Direct property access       | `getStyle('body')?.width`                     | `'100%'` |
-| Native `.getPropertyValue()` | `getStyle('body')?.getPropertyValue('width')` | `'100%'` |
-| Helper `.getPropVal()`       | `getStyle('body')?.getPropVal('width')`       | `'100%'` |
+| Method                       | Example                                              | Returns  |
+| ---------------------------- | ---------------------------------------------------- | -------- |
+| Direct property access       | `helper.getStyle('body')?.width`                     | `'100%'` |
+| Native `.getPropertyValue()` | `helper.getStyle('body')?.getPropertyValue('width')` | `'100%'` |
+| Helper `.getPropVal()`       | `helper.getStyle('body')?.getPropVal('width')`       | `'100%'` |
 
-`.getPropertyValue()` is a native CSS style declaration object method for reading CSS properties by their kebab-case name (for example, 'background-color'). See [MDN: CSSStyleDeclaration.getPropertyValue()](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
+`.getPropertyValue()` is a native CSS style declaration object method for reading CSS properties by their kebab-case name, such as `background-color`. See [MDN: CSSStyleDeclaration.getPropertyValue()](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue).
 
-The `.getStyle()` helper attaches the `.getPropVal()` method to the style declaration object. It wraps the native `getPropertyValue()` method and optionally strips whitespace. It accepts an optional second parameter that, when `true`, removes all whitespace from the returned value.
-
-`getPropVal()` default behavior (preserves whitespace):
+The `.getStyle()` helper attaches `.getPropVal()` to the declaration. It wraps `getPropertyValue()` and accepts an optional second argument that removes all whitespace when set to `true`:
 
 ```js
+const style = helper.getStyle('body');
+assert.exists(style);
+assert.strictEqual(style.getPropVal('background-color'), 'rgb(118, 201, 255)');
 assert.strictEqual(
-  helper.getStyle('body').getPropVal('background-color'),
-  'rgb(118, 201, 255)'
-);
-```
-
-`getPropVal()` with whitespace stripping (true removes all whitespace):
-
-```js
-assert.strictEqual(
-  helper.getStyle('body').getPropVal('background-color', true),
+  style.getPropVal('background-color', true),
   'rgb(118,201,255)'
 );
 ```
 
+Whitespace stripping also changes quoted values. A property that is not set in the declaration returns an empty string; inherited or computed values are not supplied. Gradient colors belong to `background-image`, not `background-color`.
+
 #### `.getStyleAny()`
 
-The `.getStyleAny()` method takes multiple CSS possible selectors and returns the first matching CSS style declaration object.
+The `.getStyleAny()` method takes one array of selectors and returns the first matching style declaration in that array's order, or `null` if none match. It does not merge declarations or choose the rule that wins in the cascade.
 
 For example, if the camper has written the following CSS:
 
 ```css
 .sky {
-  background: radial-gradient(
-    closest-corner circle at 15% 15%,
-    #ffcf33,
-    #ffcf33 20%,
-    #ffff66 21%,
-    #bbeeff 100%
-  );
-}
-```
-
-If you call the `getStyleAny()` method with `.earth` and `.sky` as arguments, you would get an object that looks like this:
-
-```js
-{
-    0: "background-image",
-    1: "background-position-x",
-    2: "background-position-y",
-    3: "background-size",
-    4: "background-repeat-x",
-    5: "background-repeat-y",
-    6: "background-attachment",
-    7: "background-origin",
-    8: "background-clip",
-    9: "background-color",
-    10: "margin-top",
-    11: "margin-right",
-    12: "margin-bottom",
-    13: "margin-left",
-    14: "padding-top",
-    15: "padding-right",
-    16: "padding-bottom",
-    17: "padding-left",
-    18: "width",
-    19: "height",
-    20: "overflow-x",
-    21: "overflow-y",
-    "accentColor": "",
-    "additiveSymbols": "",
-    "alignContent": "",
-    "alignItems": "",
-    ...
+  background-color: #ffcf33;
+  width: 100%;
 }
 ```
 
 There are three ways to retrieve CSS values from the returned object:
 
-| Method                       | Example                                                      | Returns  |
-| ---------------------------- | ------------------------------------------------------------ | -------- |
-| Direct property access       | `getStyleAny(['.earth', '.sky'])?.width`                     | `'100%'` |
-| Native `.getPropertyValue()` | `getStyleAny(['.earth', '.sky'])?.getPropertyValue('width')` | `'100%'` |
-| Helper `.getPropVal()`       | `getStyleAny(['.earth', '.sky'])?.getPropVal('width')`       | `'100%'` |
+| Method                       | Example                                                             | Returns  |
+| ---------------------------- | ------------------------------------------------------------------- | -------- |
+| Direct property access       | `helper.getStyleAny(['.earth', '.sky'])?.width`                     | `'100%'` |
+| Native `.getPropertyValue()` | `helper.getStyleAny(['.earth', '.sky'])?.getPropertyValue('width')` | `'100%'` |
+| Helper `.getPropVal()`       | `helper.getStyleAny(['.earth', '.sky'])?.getPropVal('width')`       | `'100%'` |
 
-Like the CSS style declaration objects returned by `.getStyle()`, the object returned by `.getStyleAny()` also includes the `.getPropVal()` method (see the `.getStyle()` section). It provides the same property access and whitespace stripping feature.
-
-`getPropVal()` default behavior (preserves whitespace):
+The returned declaration includes the same `.getPropVal()` method as `.getStyle()`:
 
 ```js
+const style = helper.getStyleAny(['.earth', '.sky']);
+assert.exists(style);
+assert.strictEqual(style.getPropVal('background-color'), 'rgb(255, 207, 51)');
 assert.strictEqual(
-  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color'),
-  'rgb(255, 207, 51)'
-);
-```
-
-`getPropVal()` with whitespace stripping (true removes all whitespace):
-
-```js
-assert.strictEqual(
-  helper.getStyleAny(['.earth', '.sky']).getPropVal('background-color', true),
+  style.getPropVal('background-color', true),
   'rgb(255,207,51)'
 );
 ```
 
 #### `.getCSSRules()`
 
-The `.getCSSRules()` takes an at-rule type from the union `media | fontface | import | keyframes`, and returns an array of CSS rules matching that at-rule.
+The `.getCSSRules()` method takes an at-rule type from `media`, `fontface`, `import`, or `keyframes`, and returns an array of matching top-level CSS rules. With no argument, it returns all top-level rules. It returns an empty array when there are no matching rules.
 
-For example, if the camper has written the following code:
+For example, if the camper has written the following CSS:
 
 ```css
 @media (max-width: 100px) {
@@ -313,38 +244,25 @@ For example, if the camper has written the following code:
 }
 ```
 
-Then the returned value of `helper.getCSSRules('media')` would be this array:
+Find the media rule by its condition, then inspect its nested rules:
 
 ```js
-[
-    {
-        conditionText: "(max-width: 100px)",
-        cssRules: [
-            selectorText: 'body',
-            style: CSSStyleDeclaration,
-            styleMap: StylePropertyMap,
-            cssRules: CSSRuleList,
-            type: 1,
-            ...
-        ],
-        cssText: "@media (max-width: 100px) {\n  body { background-color: green; }\n}",
-        ...
-    }
-]
-```
-
-You can then test that the camper has written the correct media query:
-
-```js
-const hasCorrectHeight = helper
+const mediaRule = helper
   .getCSSRules('media')
-  .some(x => x.style.height === '3px');
-assert.isTrue(hasCorrectHeight);
+  .find(rule => rule.conditionText === '(max-width: 100px)');
+assert.exists(mediaRule);
+const bodyRule = Array.from(mediaRule.cssRules).find(
+  rule => rule.selectorText === 'body'
+);
+assert.exists(bodyRule);
+assert.strictEqual(bodyRule.style.backgroundColor, 'green');
 ```
+
+A media rule has a `cssRules` collection, not a `style` property. The helper does not recursively search nested at-rules.
 
 #### `.getRuleListsWithinMedia()`
 
-The `.getRuleListsWithinMedia()` method takes a media text (e.g. `("max-width: 200")`) and returns the CSS rules within that media query.
+The `.getRuleListsWithinMedia()` method takes exact serialized media text, such as `'(max-width: 200px)'`, and returns an array of rules from the first matching top-level media query. It returns an empty array if none match.
 
 The return result is the equivalent of that media rule's `cssRules` property from the return value of `.getCSSRules("media")`.
 
@@ -354,38 +272,59 @@ These methods are not as commonly used, but are available if needed.
 
 #### `.getStyleDeclarations()`
 
-The `.getStyleDeclarations()` method takes a CSS selector and returns an array of CSS style declaration objects (from the `.getStyle()` method).
+The `.getStyleDeclarations()` method takes a CSS selector and returns an array of all matching top-level CSS style declarations, or an empty array if none match. Unlike `.getStyle()`, it does not attach `.getPropVal()` to the declarations; use the native `.getPropertyValue()` method.
 
 #### `.isPropertyUsed()`
 
-The `.isPropertyUsed()` method takes a CSS **property** and checks if it has been set/used anywhere in the camper's CSS.
+The `.isPropertyUsed()` method takes a CSS property and checks whether it has a nonempty value in any top-level style rule in the selected stylesheet. It does not inspect declarations inside media queries or other nested rules.
 
 #### `.getStyleRule()`
 
-The `.getStyleRule()` method takes a CSS selector and returns the CSS Style Declaration, much like `.getStyle()`. However, the declaration returned from this method includes an additional `.isDeclaredAfter()` method which takes a selector and returns whether this rule is declared after the selector passed in.
+The `.getStyleRule()` method takes a CSS selector and returns an extended rule object with an `.isDeclaredAfter()` method, or `null` if no rule matches. It is not the style declaration returned by `.getStyle()`. `.isDeclaredAfter(selector)` compares the positions of the first matching top-level rules in the stylesheet. It returns `false` if the other selector is absent and does not compare specificity or computed styles.
 
 #### `.getStyleSheet()`
 
-The `.getStyleSheet()` method returns the camper's CSS, parsed into a CSS Style Sheet object.
+The `.getStyleSheet()` method returns the selected `CSSStyleSheet`, or `null` if none is found. It checks a linked stylesheet whose URL contains `styles` and has rules, then `style.fcc-injected-styles`, then a `style` element without `class` or `media` attributes. It does not combine multiple stylesheets.
 
 #### `.selectorsFromSelector()`
 
-The `.selectorsFromSelector` method returns all equivalent selectors from a given selector based on what's nearby
-the given element.
+The `.selectorsFromSelector()` method generates tag-based selectors from matching elements and their ancestors. It returns an empty array when no elements match. It does not enumerate every equivalent selector or use element IDs and classes, so do not treat the result as a complete list of valid selectors.
 
 For example if `a` is passed in a selector, it will return an array filled with several alternate selectors based
 on what's nearby. The selectors could include `a`, `label > a` , `label a` , `form label a` and `body form label a`.
 
-## JS Helper
+### Removing CSS Comments
 
-### Removing JavaScript Comments
-
-Use `__helpers.removeJSComments(codeString)` to remove JavaScript comments (`//` and `/* */`) from code:
+Use `__helpers.removeCssComments(codeString)` to remove CSS-style comments (`/* */`) from code:
 
 ```js
-const jsCode = 'console.log("hello"); // this is a comment';
-__helpers.removeJSComments(jsCode); // "console.log('hello'); "
+const cssCode = 'body { color: red; /* this is a comment */ }';
+__helpers.removeCssComments(cssCode); // "body { color: red;  }"
 ```
+
+This is a regex replacement, not a CSS parser. For example, it changes `content: "/* text */"` to `content: ""`. Empty comments such as `/**/` are not removed. Prefer `CSSHelp` when checking declarations.
+
+## JS Helper
+
+### The `Explorer` Class
+
+Prefer `Explorer` when testing JavaScript code structure. It parses nested blocks, strings, and template literals instead of trying to identify them with regex.
+
+The `Explorer` class is documented under [TypeScript Helpers](#typescript-helpers), where it is used to test TypeScript challenges. Many of its helpers, however, are not about TypeScript-specific features: they inspect language constructs that also exist in vanilla JavaScript, such as variables, functions, and classes. Those helpers can be used to test JavaScript challenges too. They are:
+
+- [`isEmpty()`](#isempty)
+- [`toString()`](#tostring)
+- [`matches()`](#matchesother-string--explorer)
+- [`variables`](#variables)
+- [`value`](#value)
+- [`objectProps`](#objectprops)
+- [`functions` and `allFunctions`](#functions-and-allfunctions)
+- [`parameters`](#parameters)
+- [`hasReturn()`](#hasreturnvalue-string)
+- [`classes`](#classes)
+- [`methods`](#methods-1)
+- [`classConstructor`, `classProps`, and `constructorProps`](#classconstructor-classprops-and-constructorprops)
+- [`doesExtend()`](#doesextendbasestocheck-string--string)
 
 ### Mockers
 
@@ -393,18 +332,22 @@ These mock methods that can prove to be unpredictable for testing purposes.
 
 #### RandomMocker
 
-Available via `__helpers.RandomMocker`, this class mocks `Math.random` for testing purposes. Each time `mock()` is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. `restore()` restores the native `Math.random` function.
+Available via `__helpers.RandomMocker`, this class mocks `Math.random` for testing purposes. Each time `mock()` is called the pseudo-random number generator is reset to its initial state, so that the same sequence of random numbers is generated each time. `restore()` restores the `Math.random` function saved when the mocker was constructed.
 
 ```js
 const randomMocker = new __helpers.RandomMocker();
 randomMocker.mock();
-Math.random(); // first call is always 0.2523451747838408
-Math.random(); // second call is always 0.08812504541128874
-randomMocker.mock();
-Math.random(); // generator is reset, so we get 0.2523451747838408 again
-randomMocker.restore();
-Math.random(); // back to native Math.random
+try {
+  Math.random(); // first call is always 0.2523451747838408
+  Math.random(); // second call is always 0.08812504541128874
+  randomMocker.mock();
+  Math.random(); // generator is reset, so we get 0.2523451747838408 again
+} finally {
+  randomMocker.restore();
+}
 ```
+
+The replacement affects every `Math.random()` call in the test environment while active. It does not affect a reference to the original function saved before `mock()` was called.
 
 #### spyOn
 
@@ -414,32 +357,52 @@ The spy's `calls` property is an array of arrays, each containing the arguments 
 
 The spy's `returns` property is an array of the return values of the method.
 
-To restore the original method, call `restore()` on the spy object.
+Call `restore()` on the spy object to restore the original method.
 
 ```js
 const obj = { method: (arg1, arg2) => `called by: ${arg1} + ${arg2}` };
 const spy = __helpers.spyOn(obj, 'method');
-obj.method('arg', 'another arg');
-obj.method('2nd call');
-spy.calls; // [["arg", "another arg"], ["2nd call"]]
-spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefined"]
-// to turn it off
-spy.restore();
+try {
+  obj.method('arg', 'another arg');
+  obj.method('2nd call');
+  spy.calls; // [["arg", "another arg"], ["2nd call"]]
+  spy.returns; // ["called by: arg + another arg", "called by: 2nd call + undefined"]
+} finally {
+  spy.restore();
+}
 ```
 
-Because the spy calls the original method with `.apply(this, args)`, `this` is preserved. This lets you spy on a shared prototype method to detect that an instance method was used without knowing the variable's name. For example, to check that `.push()` was called on an array:
+Because the spy calls the original method with `.apply(this, args)`, `this` is preserved. This lets you spy on a shared prototype method to detect that an instance method was used without knowing the variable's name. For example, to check that `.map()` was called on an array:
 
 ```js
-const spy = __helpers.spyOn(Array.prototype, 'push');
-const arr = [1, 2];
-arr.push(3);
-spy.calls; // [[3]] — arguments to every push call
-spy.returns; // [3] — the new length push returned
-arr; // [1, 2, 3] — the real push still ran, since this === arr is preserved
-spy.restore();
+const spy = __helpers.spyOn(Array.prototype, 'map');
+try {
+  const double = value => value * 2;
+  const result = [1, 2].map(double);
+  assert.strictEqual(spy.calls[0][0], double);
+  assert.deepEqual(spy.returns[0], [2, 4]);
+  assert.deepEqual(result, [2, 4]);
+} finally {
+  spy.restore();
+}
 ```
 
-Spying on a prototype allows to capture the arguments the method is called with, but not the specific instance it is called on.
+Do not use `spyOn(Array.prototype, 'push')`. The spy records calls using `calls.push(args)`, so replacing the prototype's `push` causes infinite recursion and a stack overflow. Spying on one known array's `push` works because the spy's internal arrays retain their original method:
+
+```js
+const arr = [1, 2];
+const spy = __helpers.spyOn(arr, 'push');
+try {
+  arr.push(3);
+  assert.deepEqual(spy.calls, [[3]]);
+  assert.deepEqual(spy.returns, [3]);
+  assert.deepEqual(arr, [1, 2, 3]);
+} finally {
+  spy.restore();
+}
+```
+
+The spy records calls made through the replaced property while it is active. It does not intercept previously saved references to the original method, record the receiving instance, or identify which source variable was used. A prototype spy can also observe unrelated calls from other arrays in the same environment. Return values are recorded as returned; promises are not awaited, and thrown errors are not added to `returns`.
 
 #### spyOnCallbacks
 
@@ -466,44 +429,63 @@ const obj = {
 };
 
 const spy = __helpers.spyOnCallbacks(obj, 'method');
-const cb = (arg1, arg2) => {
-  return `callback called with: ${arg1} + ${arg2}`;
-};
-const func = obj.method(cb, 'test');
-func('one');
-func('two');
+try {
+  const cb = (arg1, arg2) => {
+    return `callback called with: ${arg1} + ${arg2}`;
+  };
+  const func = obj.method(cb, 'test');
+  func('one');
+  func('two');
 
-obj.method(cb, 'test2')('another one');
+  obj.method(cb, 'test2')('another one');
 
-spy.callbackSpies[0][0].calls; // [["one", "test"], ["two", "test"]]
-spy.callbackSpies[0][0].returns; // ["callback called with: one + test", "callback called with: two + test"]
-spy.callbackSpies[1][0].calls; // [["another one", "test2"]]
-spy.callbackSpies[1][0].returns; // ["callback called with: another one + test2"]
+  spy.callbackSpies[0][0].calls; // [["one", "test"], ["two", "test"]]
+  spy.callbackSpies[0][0].returns; // ["callback called with: one + test", "callback called with: two + test"]
+  spy.callbackSpies[1][0].calls; // [["another one", "test2"]]
+  spy.callbackSpies[1][0].returns; // ["callback called with: another one + test2"]
+} finally {
+  spy.restore();
+}
 ```
 
-Finally, the spy's `restore` method restores the original method.
+Unlike `spyOn`, `spyOnCallbacks` does not preserve the receiver when calling the original method or its callbacks. Do not use it when either depends on `this`. Callback return values are recorded without awaiting promises. Restoring the method does not undo callback wrappers that the method has already retained.
 
-### Static Methods
+### Regex-based Helpers
 
-There are a few methods on the `__helpers` object to retrieve data from JavaScript methods.
+These helpers match text rather than parse JavaScript structure. For AST-based alternatives, see [the `Explorer` class](#the-explorer-class).
 
-These do NOT need to be instantiated; they are static methods.
+#### Removing JavaScript Comments
+
+Use `__helpers.removeJSComments(codeString)` to remove JavaScript comments (`//` and `/* */`) from code:
+
+```js
+const jsCode = 'console.log("hello"); // this is a comment';
+__helpers.removeJSComments(jsCode); // 'console.log("hello"); '
+```
+
+This removes comments without normalizing string quotes or providing an AST. If the comment parser throws, the helper returns the original string, so do not use it as a guarantee that every comment was removed. Prefer `Explorer` for structural checks.
 
 #### `.isCalledWithNoArgs()`
 
-Available via `__helpers.isCalledWithNoArgs(functionName, codeString)`, this method checks the current code string to see if a function is called with any arguments.
+Available via `__helpers.isCalledWithNoArgs(functionName, codeString)`, this method looks for a call with no arguments after removing JavaScript comments.
 
-If the function is called without arguments, `true` is returned. Otherwise it returns `false`. Additionally, if the function call is commented out, `false` is returned.
+It only matches calls at the start of a line, allowing leading whitespace, with no whitespace between the name and `(`. It is not a general search for calls inside expressions or blocks.
 
 ```js
 const code = 'console.log(); alert("test");';
 __helpers.isCalledWithNoArgs('console.log', code); // true
 __helpers.isCalledWithNoArgs('alert', code); // false
+__helpers.isCalledWithNoArgs('console.log', 'const x = 1; console.log();'); // false
+__helpers.isCalledWithNoArgs('console.log', 'console.log ();'); // false
 ```
+
+Use a spy when the requirement is that a method is called during execution. This helper only checks source text and cannot prove that a matching call executes.
 
 #### `.functionRegex()`
 
 Available via `__helpers.functionRegex(functionName, parameterArray, options)`, this method returns a regex that can be used to match function declarations in a code block given a function name and, optionally, a list of parameters.
+
+Prefer [`Explorer.functions` or `Explorer.allFunctions`](#functions-and-allfunctions) to inspect functions. This regex helper does not parse nested blocks, string literals, or template literals.
 
 ```js
 const regex = __helpers.functionRegex('foo', ['bar', 'baz']);
@@ -519,10 +501,10 @@ Options:
 
 ```js
 const regEx = __helpers.functionRegex('foo', ['bar', 'baz'], { capture: true });
-const combinedRegEx = __helpers.concatRegex(/var x = "y"; /, regEx);
+const combinedRegEx = __helpers.concatRegex(/var x = "y";\s*/, regEx);
 
 const match = `var x = "y";
-function foo(bar, baz){}`.match(regex);
+function foo(bar, baz){}`.match(combinedRegEx);
 match[1]; // "function foo(bar, baz){}"
 // i.e. only the function definition is captured
 ```
@@ -532,11 +514,11 @@ const regEx = __helpers.functionRegex('foo', ['bar', 'baz'], {
   includeBody: false
 });
 
-const match = `function foo(bar, baz){console.log('ignored')}`.match(regex);
-match[1]; // "function foo(bar, baz){"
+const match = `function foo(bar, baz){console.log('ignored')}`.match(regEx);
+match[0]; // "function foo(bar, baz){"
 ```
 
-NOTE: capture does not work properly with arrow functions. It will capture text after the function body, too.
+For an arrow function with an expression body, the match can continue into statements after the function:
 
 ```js
 const regEx = __helpers.functionRegex('myFunc', ['arg1'], { capture: true });
@@ -548,7 +530,7 @@ const match =
 match[1]; // "myFunc = arg1 => arg1; console.log();\n // captured, unfortunately"
 ```
 
-NOTE: `capture: true` does not work correctly for regular functions whose body contains nested blocks (`if`, `try`, `for`, etc.). The captured content is truncated at the first `}` inside the body, so everything after the first closing brace of a nested block is silently excluded.
+With `includeBody: true`, all supported function forms stop at the first `}` in the body. That brace can belong to a nested block, an object literal, a string, or template interpolation such as `${value}`. Setting `capture: true` exposes the truncated match; it does not make the body extraction complete.
 
 ```js
 const regEx = __helpers.functionRegex('registerUser', [], { capture: true });
@@ -562,11 +544,27 @@ const match = `function registerUser() {
   }
 }`.match(regEx);
 
-match[1].includes('throw new Error("Name is required")'); // true — first if block IS captured
-match[1].includes('age.trim'); // false — second if block is NOT captured
+match[1].includes('throw new Error("Name is required")'); // true
+match[1].includes('age.trim'); // false
 ```
 
-For functions with nested blocks, match directly against `code` or the stringified function instead of relying on `match[1]`.
+Use `Explorer` to find the function and inspect its structure instead. This example checks a return containing template interpolation after a nested block:
+
+```js
+const explorer = await __helpers.Explorer(`
+function describe(value) {
+  if (value) {
+    console.log(value);
+  }
+  return \`Value: \${value}\`;
+}
+`);
+const fn = explorer.functions.describe;
+assert.exists(fn);
+assert.isTrue(fn.hasReturn('`Value: ${value}`'));
+```
+
+`includeBody: false` avoids body extraction, but still uses regex to identify the function header. It does not handle every parameter syntax or distinguish code from text inside comments and strings.
 
 #### `.getFunctionParams()`
 
@@ -582,36 +580,11 @@ const params = __helpers.getFunctionParams(funcString);
 // ]
 ```
 
-#### `.escapeRegExp()`
-
-Available via `__helpers.escapeRegExp(string)`, this method escapes special regular expression characters in a string.
-
-```js
-__helpers.escapeRegExp('hello.world'); // "hello\\.world"
-__helpers.escapeRegExp('test[123]'); // "test\\[123\\]"
-```
-
-### The `Explorer` Class
-
-The `Explorer` class is documented under [TypeScript Helpers](#typescript-helpers), where it is used to test TypeScript challenges. Many of its helpers, however, are not about TypeScript-specific features: they inspect language constructs that also exist in vanilla JavaScript, such as variables, functions, and classes. Those helpers can be used to test JavaScript challenges too. They are:
-
-- [`isEmpty()`](#isempty)
-- [`toString()`](#tostring)
-- [`matches()`](#matchesother-string--explorer)
-- [`variables`](#variables)
-- [`value`](#value)
-- [`objectProps`](#objectprops)
-- [`functions` and `allFunctions`](#functions-and-allfunctions)
-- [`parameters`](#parameters)
-- [`hasReturn()`](#hasreturnvalue-string)
-- [`classes`](#classes)
-- [`methods`](#methods-1)
-- [`classConstructor`, `classProps`, and `constructorProps`](#classconstructor-classprops-and-constructorprops)
-- [`doesExtend()`](#doesextendbasestocheck-string--string)
+This helper splits parameter text on commas and `=` characters, strips destructuring brackets and braces, and removes quote characters from default values. It does not parse nested defaults, destructuring, or strings containing those separators. For example, a default value of `"a,b"` is split as though it were two parameters. Prefer [`Explorer.parameters`](#parameters) and inspect each parameter's `value` when checking defaults.
 
 ## TypeScript Helpers
 
-These helpers provide Abstract Syntax Tree (AST) analysis capabilities for TypeScript challenges.
+`Explorer` provides Abstract Syntax Tree (AST) analysis for TypeScript and JavaScript. The shared methods and TypeScript-specific methods are documented together below.
 
 ### Basic Usage
 
@@ -635,10 +608,12 @@ To check the return type annotation you would write:
 
 ```js
 const explorer = await __helpers.Explorer(code);
-assert.isTrue(
-  explorer.classes.Spam.methods.get42.hasReturnAnnotation('number')
-);
+const method = explorer.classes.Spam?.methods.get42;
+assert.exists(method);
+assert.isTrue(method.hasReturnAnnotation('number'));
 ```
+
+Named lookups such as `classes.Spam` can return `undefined`, while other operations return an empty `Explorer` or `null` when no node is available. Searches inspect the current scope; drill into functions or classes to inspect their members. `Explorer` does not execute source code or evaluate expressions.
 
 ### Methods and Properties
 
@@ -705,7 +680,7 @@ Note that a list like this still ties campers to the parameter name `item` and t
 
 #### `variables`
 
-Returns an object mapping variable names to `Explorer` instances for all variables in the current scope.
+Returns an object mapping variable names to `Explorer` instances for variable statements in the current scope. It is not a recursive search of nested scopes.
 
 ```js
 const explorer = await __helpers.Explorer(
@@ -808,6 +783,8 @@ foo.hasReturnAnnotation('string'); // false
 #### `hasReturn(value: string)`
 
 Checks whether a function, method, or function-valued variable has a matching top-level return expression.
+
+It does not search returns inside nested `if` statements or loops, and it does not prove that the return executes.
 
 ```js
 const explorer = await __helpers.Explorer('function foo() { return 42; }');
@@ -919,8 +896,8 @@ const explorer = await __helpers.Explorer(
   'const a: number | string | boolean;'
 );
 const { a } = explorer.variables;
-a.annotation.isUnionOf(['number', 'string', 'boolean']); // true
-a.annotation.isUnionOf(['number', 'string']); // false
+a.isUnionOf(['number', 'string', 'boolean']); // true
+a.isUnionOf(['number', 'string']); // false
 ```
 
 #### `hasCast(expectedType?: string)`
@@ -1005,25 +982,11 @@ x.isReadOnly(); // true
 
 ## Python Helper
 
-The `__helpers` object includes comprehensive Python code analysis tools through the `python` property.
-
-### Removing Python Comments
-
-Use `__helpers.python.removeComments(code)` to remove Python comments from code strings:
-
-```js
-const codeWithComments = `
-def test():  # This is a comment
-    return True  # Another comment
-`;
-
-const cleaned = __helpers.python.removeComments(codeWithComments);
-// Returns: "\ndef test():  \n    return True  \n"
-```
+Use the Python AST-based helpers to inspect code structure. JavaScript utilities under `__helpers.python` are documented later for cases that need text processing.
 
 ### Python AST-based Helpers
 
-These helpers provide powerful Abstract Syntax Tree (AST) analysis capabilities for Python challenges.
+These helpers parse Python source into an AST without executing it.
 
 #### Basic Usage Pattern
 
@@ -1096,6 +1059,8 @@ print(
 )
 ```
 
+The standalone Python examples below assume `from ast_helpers import Node`. In challenge tests, use the provided `_Node` and `_code` names. The helpers require parseable Python; invalid syntax raises `SyntaxError`.
+
 ### Methods
 
 #### Formatting output
@@ -1109,20 +1074,21 @@ def foo():
   x = 1
 
 """
-output_str = """
-def foo():
+output_str = """def foo():
     x = 1"""
 str(Node(function_str)) == output_str # True
 ```
 
 The output and source string compile to the same AST, but the output is indented with 4 spaces. Comments and trailing whitespace are removed.
 
-##### Finding nodes
+#### Finding nodes
 
-`find_` functions search the current scope and return one of the following:
+Most `find_` functions search the current scope rather than recursively searching nested functions or blocks. Drill into the relevant node before continuing. They return one of the following:
 
 - A single Node object if there can be only one match. E.g. `find_function`
 - A list of Node objects if there can be multiple matches. E.g.: `find_ifs`
+
+When no match exists, a single-node lookup returns an empty `Node`, while a list lookup returns an empty list. `find_function` returns the first matching synchronous function; use `find_async_function` for an async function or `find_functions` for all matching definitions.
 
 #### `find_function()`
 
@@ -1241,7 +1207,7 @@ Node(code_str).find_function("foo").find_ifs()[0].find_return().is_equivalent("r
 #### `find_calls()`
 
 ```python
- code_str = """
+code_str = """
 print(1)
 print(2)
 foo("spam")
@@ -1917,7 +1883,7 @@ Returns a boolean indicating if the function has the specified return annotation
 
 ```python
 Node("def foo() -> int:\n  return 0").find_function("foo").has_returns("int") # True
-Node("def foo() -> 'spam':\n  pass").find_function("foo").has_returns("spam") # True
+Node("def foo() -> 'spam':\n  pass").find_function("foo").has_returns("'spam'") # True
 ```
 
 #### `has_decorators()`
@@ -1937,6 +1903,8 @@ Node(code_str).find_class("A").find_function("foo").has_decorators("staticmethod
 
 #### `has_call()`
 
+Checks for a matching standalone expression in the current scope. The arguments must match too. It does not recursively search nested statements or find calls inside assignments and return expressions.
+
 ```python
 code_str = """
 print(math.sqrt(25))
@@ -1951,7 +1919,7 @@ explorer.find_ifs()[0].find_bodies()[0].has_call("spam()")
 
 #### `block_has_call()`
 
-Checks if a function/method call exists within a specific function or the entire code.
+Searches for a loaded name or attribute within the entire AST, or within the first top-level function selected by `function`. It can find names used in nested expressions, but it does not check that they are the target of a call. For example, `Node('saved = print').block_has_call('print')` returns `True` even though `print` is not called. Aliases are not resolved.
 
 ```python
 code_str = """
@@ -1977,15 +1945,16 @@ node.block_has_call("get") # True
 node.block_has_call("split") # False
 ```
 
-### Asserting absence of a function call
+#### Asserting absence of a function call
 
 Sometimes a challenge requires learners to remove a specific statement, such as a `print()` call.
 
-To assert that a function call does not exist in the learner’s code, simply negate the helper result:
+Negating `has_call` only excludes the exact standalone expression in the current scope. Negating `block_has_call` also rejects references that are not calls. These checks are not interchangeable:
 
 ```python
-assert not Node(code).has_call("print()")
-assert not Node(code).block_has_call("print")
+Node("print(123)").has_call("print()") # False
+Node("print(123)").block_has_call("print") # True
+Node("saved = print").block_has_call("print") # True
 ```
 
 #### `has_import()`
@@ -2012,11 +1981,11 @@ class spam:
 Node(code_str).has_class("spam")
 ```
 
-#### Misc
+### Misc
 
 #### `is_equivalent()`
 
-This is a somewhat loose check. The AST of the target string and the AST of the node do not have to be identical, but the code must be equivalent.
+Compares normalized source produced by parsing and unparsing the node and the target string. This ignores comments and formatting differences, but does not establish that two programs behave the same. For example, `x = 1 + 1` does not match `x = 2`. The target must be parseable on its own, so standalone `except` and `case` clauses cannot be used as target strings.
 
 ```python
 Node("x = 1").is_equivalent("x = 1") # True
@@ -2100,9 +2069,25 @@ x = 1
 Node(stmts)[1].is_equivalent("x = 1") # True
 ```
 
-### Python Helper Functions
+### Regex-based Helpers
 
-The Python helpers also include some standalone utility functions for extracting specific information from Python code.
+Prefer the [Python AST-based helpers](#python-ast-based-helpers) for code structure. The following JavaScript utilities process Python source as text.
+
+#### Removing Python Comments
+
+Use `__helpers.python.removeComments(code)` to remove Python comments from code strings:
+
+```js
+const codeWithComments = `
+def test():  # This is a comment
+    return True  # Another comment
+`;
+
+const cleaned = __helpers.python.removeComments(codeWithComments);
+// Returns: "\ndef test():  \n    return True  \n"
+```
+
+This regex-based utility is not a Python tokenizer. It also removes JavaScript-style `//` and `/* */` text, so it can corrupt valid Python: `value = 10 // 2` becomes `value = 10 `, and a `#` inside a string starts removal too. Prefer AST helpers for structural checks; they ignore comments while preserving strings and operators.
 
 #### `getDef(code, functionName)`
 
@@ -2118,16 +2103,18 @@ def calculate_area(length, width):
 // Via __helpers.python.getDef
 const funcInfo = __helpers.python.getDef(pythonCode, 'calculate_area');
 // Returns: {
-//   def: "def calculate_area(length, width):\n    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
+//   def: "def calculate_area(length, width):\n    \"\"\"Calculate rectangle area\"\"\"\n    return length * width\n",
 //   function_parameters: "length, width",
-//   function_body: "    \"\"\"Calculate rectangle area\"\"\"\n    return length * width",
+//   function_body: "    \"\"\"Calculate rectangle area\"\"\"\n    return length * width\n",
 //   function_indentation: 0
 // }
 ```
 
+This returns the first regex match, or `null` when no match exists. The regex does not parse Python function syntax: return annotations and parentheses inside default values can prevent a match. Whitespace, including the trailing newline in this example, is retained. Prefer `find_function`, `find_async_function`, and `find_body` when inspecting a definition.
+
 #### `getBlock(code, blockPattern)`
 
-Available via `__helpers.python.getBlock(code, blockPattern)`, this function extracts code blocks matching specific patterns (if, for, while, etc.):
+Available via `__helpers.python.getBlock(code, blockPattern)`, this function extracts an indented block by matching text immediately before its colon against a string or regex. Strings are escaped and matched literally; regex inputs contribute their source pattern. Include the keyword and condition or loop expression to match the intended header. For example:
 
 ```js
 const pythonCode = `
@@ -2141,13 +2128,23 @@ for i in range(5):
 `;
 
 // Extract if block
-const ifBlock = __helpers.python.getBlock(pythonCode, 'if');
-// Returns the if statement block
+const ifBlock = __helpers.python.getBlock(pythonCode, 'if x > 0');
+// {
+//   block_body: '    print("positive")',
+//   block_condition: 'if x > 0',
+//   block_indentation: 0
+// }
 
 // Extract for block
-const forBlock = __helpers.python.getBlock(pythonCode, 'for');
-// Returns the for loop block
+const forBlock = __helpers.python.getBlock(pythonCode, 'for i in range(5)');
+// {
+//   block_body: '    print(i)\n',
+//   block_condition: 'for i in range(5)',
+//   block_indentation: 0
+// }
 ```
+
+Passing only `'if'` or `'for'` returns `null` for this example because the condition or loop expression is missing from the pattern. The helper returns only the matched block body, not adjacent `elif` or `else` branches. It relies on spaces for indentation and does not parse Python structure. Regex flags from `blockPattern` are discarded; matching uses the helper's `s` and `m` flags. Prefer `find_if`, `find_for`, `find_while`, and their body helpers for structural checks.
 
 ### Notes on Python
 
