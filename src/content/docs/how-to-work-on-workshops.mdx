@@ -7,7 +7,7 @@ sidebar:
 import HooksShared from './_hooks-shared.mdx';
 
 :::tip
-You'll need this guide if you're creating or modifying workshop-style curriculum (step-based learning). If you're working on other types of projects like lectures, labs, or quizzes, check their respective guides.
+You'll need this guide if you're creating or modifying workshops that use the freeCodeCamp code editor. For CodeRoad tutorials, see [How to Work on Tutorials That Use CodeRoad](/how-to-work-on-tutorials-that-use-coderoad/). If you're working on other types of projects like lectures, labs, or quizzes, check their respective guides.
 :::
 
 Our workshops use a step-based approach to teach concepts to campers. A workshop will consist of multiple files, which we refer to as **"steps"**. These files are named by the challenge ID, to avoid issues with the translation flow. Unfortunately, this makes it difficult to find the file associated with a specific step.
@@ -18,19 +18,30 @@ We've built a [challenge editor tool](#using-the-challenge-editor) that helps re
 
 Workshops should alternate steps in which new concepts are introduced piece by piece, and steps where there is freedom of implementation.
 
-Instructions should always be written using second person, and the hints usually use a format like "You should have...", or "This thing should be/have/do/return...".
+### Instructions and hints
 
-If it's possible to test the effects of the code instead of what's being written exactly, that is preferred.
+Write instructions in the second person, using American English and short, direct sentences. State what campers need to change and where. Name the relevant file, function, variable, or element, and put code identifiers in backticks. Explain new concepts before asking campers to apply them.
 
-For example, you could ask in a step to create a variable inside a function, and that would need to be tested with regex. Ideally you would ask to instead log a specific value with `console.log`, or another side effect that can be tested.
+Each hint should identify the requirement checked by its test and help campers understand what to fix. Keep the hint consistent with the instructions and assertion. For example:
 
-We can test the existence and the value of a variable in the global scope, so that's less of an issue.
+- Instruction: Inside `greet`, return the string `"Hello"`.
+- Hint: Your `greet` function should return the string `"Hello"`.
 
-For the tests, the [chai asserts](https://www.chaijs.com/api/assert/) are available for use. It is preferred to use specific methods instead of the generic `assert()`.
+Avoid vague hints such as "Your code is incorrect."
 
-For example, you can test if the variable `a` has a value of `2` with `assert(a === 2)`, but it is preferred the usage of `assert.strictEqual(a, 2)` (specifically `strictEqual` as the `equal` method is equivalent to using `==` and we don't want to have a success if the variable has a value of the string `"2"`).
+Follow the [challenge-description guidelines](/how-to-work-on-coding-challenges/#challenge-descriptionsinstructions), [challenge-text formatting rules](/how-to-work-on-coding-challenges/#formatting-challenge-text), and [Writing Style Guide](/writing-style-guide/) for wording, code references, and punctuation.
 
-Consult the [curriculum helpers](/curriculum-help/) to know what's available to help you test the code written by the camper.
+### Test assertions
+
+Choose tests based on what the step asks campers to do.
+
+When the requirement is about behavior, run the code and assert the result. For example, call a function and check its return value, capture its console output, or check the state it changes. A test can also read a globally accessible variable to check its value.
+
+When the requirement is about code structure, use the [curriculum helpers](/curriculum-help/) to inspect that structure. For example, the JavaScript [`Explorer` helpers](/curriculum-help/#the-explorer-class) can check whether a variable is declared inside a particular function. AST checks inspect the parsed code; they do not execute it or verify its behavior. A declaration can pass a structural check while the function still returns the wrong result.
+
+Some steps need both kinds of checks. If a step asks campers to implement a function using a particular construct, test the function's behavior and check the required construct separately. Only enforce syntax or implementation details that the instructions require, and allow alternative solutions that meet those requirements.
+
+The [Chai assertions](https://www.chaijs.com/api/assert/) are available in tests. Prefer specific assertion methods over the generic `assert()`. For example, use `assert.strictEqual(a, 2)` to check that `a` is the number `2`. Avoid `assert.equal(a, 2)` for this check because it uses loose equality and also accepts the string `"2"`.
 
 ## Create the workshop
 
@@ -38,7 +49,7 @@ Workshops will have a dashedName of the kind `workshop-cat-photo-app`, that is t
 
 Workshop titles start with "Build a" or "Design a", followed by the name of the app.
 
-Some workshops, which are debugging workshop, will be called `Debugging a ...` and have prefix `workshop-debugging` in the `dashedName`.
+Debugging workshops have titles that start with "Debug a" and use the prefix `workshop-debug-` in the `dashedName`.
 
 You can create the workshop with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the workshop belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
 
@@ -114,7 +125,7 @@ If you want to create new steps, the following tools simplify that process.
 
 ### create-next-step
 
-A one-off script that will automatically add the next step based on the last step in the workshop. The challenge seed code will use the previous step's challenge seed code.
+A one-off script that will automatically add the next step based on the last step in the workshop. The challenge seed code will use the previous step's challenge seed code, including its editable-region markers. Update the new seed to include the changes campers were asked to make in the previous step, and move the markers to the region needed for the new step.
 
 #### How to Run the Script
 
@@ -127,11 +138,7 @@ pnpm run create-next-step
 
 ### create-empty-steps
 
-A one-off script that automatically adds a specified number of steps. The challenge seed code for all steps created will be empty.
-
-:::note
-This script also runs [update-step-titles](#update-step-titles).
-:::
+A one-off script that automatically adds a specified number of steps and updates the block's `challengeOrder`. The generated files have no seed code and use `challengeType: placeholder`. Set the correct challenge type and add instructions, tests, seed code, and editable-region markers before using them.
 
 #### How to Run the Script
 
@@ -144,7 +151,7 @@ pnpm run create-empty-steps X # where X is the number of steps to create.
 
 ### insert-step
 
-A one-off script that automatically adds a new step at a specified position, incrementing all subsequent steps (both their titles and in the block's JSON structure file). The challenge seed code will use the previous step's challenge seed code with the editable region markers (ERMs) removed.
+A one-off script that automatically adds a new step at a specified position, incrementing all subsequent steps (both their titles and in the block's JSON structure file). The challenge seed code will use the previous step's challenge seed code including its editable-region markers. Review the seed and reposition the markers for the inserted step. When inserting the first step, there is no previous seed to copy.
 
 :::note
 This script also runs [update-step-titles](#update-step-titles).
@@ -189,56 +196,31 @@ A one-off script that automatically updates the frontmatter in a workshop's mark
 pnpm run update-step-titles
 ```
 
-### repair-meta
-
-One-off script to parse the step names from the workshop and update the block's JSON structure file order to reflect those steps. Useful if you've accidentally lost the changes to the block structure file when adding/removing steps.
-
-#### How to Run the Script
-
-1. Change to the directory of the workshop.
-2. Run the following command:
-
-```bash
-pnpm run repair-meta
-```
-
-### rename-challenges
-
-The script is to be used if the step-based workshop has files that have challenge ids and filenames that do not match.
-
-#### How to Run the Script
-
-1. Be in the root directory
-2. Run the following command:
-
-```bash
-pnpm run rename-challenges
-```
-
 ## Step File Template
 
 Each step in a workshop is a Markdown file named after its challenge `id`. The `challengeType` and seed language depend on the type of workshop:
 
-| `challengeType` | Workshop type | Seed language(s)                                               |
-| --------------- | ------------- | -------------------------------------------------------------- |
-| `0`             | HTML/CSS      | `html` only, or `html` + `css`, or `html` + `css` + `js`/`jsx` |
-| `1`             | JavaScript    | `js`                                                           |
-| `20`            | Python        | `py`                                                           |
-| `12`            | Bash/SQL/etc. | no seed — the workshop runs via a CodeRoad `url` field         |
+| `challengeType` | Workshop type         | Seed language(s)                                                          |
+| --------------- | --------------------- | ------------------------------------------------------------------------- |
+| `0`             | HTML/CSS              | `html` only, or `html` + `css`, or `html` + `css` + `js`/`jsx`/`ts`/`tsx` |
+| `1`             | JavaScript/TypeScript | `js` or `ts`                                                              |
+| `20`            | Python                | `py`                                                                      |
 
-All step files use exactly two `--fcc-editable-region--` markers in the seed to highlight where campers should make changes. Only the last step requires a `# --solutions--` section.
+Each step uses exactly two `--fcc-editable-region--` markers across all its seed files to highlight where campers should make changes.
+
+The last step requires a `# --solutions--` section. Earlier steps normally use the next step's seed as their solution, but can include an explicit solution when needed. See [Seed continuity and solutions](#seed-continuity-and-solutions).
 
 The `demoType: onLoad` field is only present in the first step, and only for workshops that have a visual output (i.e. HTML-based). It is not mandatory, if the workshop design does not require it, it can be omitted.
 
 Here is the template for a JavaScript workshop step:
 
+{/* prettier-ignore */}
 ````md
 ---
 id: <ObjectId>
 title: Step N
-challengeType: X
+challengeType: 1
 dashedName: step-n
-demoType: onLoad
 ---
 
 # --description--
@@ -257,7 +239,7 @@ Description of what the test checks.
 
 ## --seed-contents--
 
-```lang
+```js
 // seed code
 --fcc-editable-region--
 
@@ -266,10 +248,74 @@ Description of what the test checks.
 
 # --solutions--
 
-```lang
-// solution code (only required for the last step)
+```js
+// solution code (required for the last step, optional for earlier steps)
 ```
 ````
+
+## Formatting seed code
+
+Follow the [seed-code formatting guidelines](/how-to-work-on-coding-challenges/#formatting-seed-code):
+
+- Use two spaces per indentation level for HTML, CSS, and JavaScript, and four for Python.
+- End JavaScript statements with semicolons.
+- Use double quotes where applicable in HTML, CSS, and JavaScript, and single quotes in Python.
+
+Keep formatting consistent between consecutive steps. Preserve indentation, quote style, and blank lines in code that the camper has not been asked to change. Do not introduce unrelated reformatting when preparing the next step's seed.
+
+Use seed comments sparingly and follow the [seed-code comment rules](/how-to-work-on-coding-challenges/#seed-code-comments). Comments must match an entry in the comment dictionary, including its case and spacing.
+
+## Editable regions and indentation
+
+Place the editable region around the code campers need to change in that step. When campers need to insert code on a blank line, pre-indent that line to match the surrounding code. For example, code inside this JavaScript function needs two leading spaces:
+
+{/* prettier-ignore */}
+```md
+function greet() {
+--fcc-editable-region--
+  
+--fcc-editable-region--
+}
+```
+
+The blank line between the markers contains two spaces. Keep those spaces when saving the file; indenting the marker lines does not indent the camper's code. Use the indentation required by the language and nesting level, such as four spaces for a Python function body.
+
+Review the editable-region placement and indentation after adding or inserting steps. Copied markers can still point to the previous step's editing area.
+
+## Seed continuity and solutions
+
+Each step's seed should include the completed changes from the previous step. The step-generation tools copy seed code; they do not solve the previous step for you. For steps without an explicit `# --solutions--` section, curriculum tests use the next step's seed as the solution to the current step.
+
+For example, if Step 2 asks campers to add `return "Hello";` inside a function, Step 3's seed should already contain that statement. The final step needs an explicit solution because there is no next step to supply one.
+
+An earlier step can also need an explicit solution when it intentionally introduces a TypeScript error. For example, [Step 4 of the Type-Safe Math Toolkit workshop](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/blocks/workshop-type-safe-math-toolkit/699f3cb8d057f29954205d7d.md) asks campers to add a `number` annotation to a function parameter while its call still passes a string. The step's seed and explicit solution include `"noCheck": true` so its AST test can run without type checking rejecting the code.
+
+The next step keeps the completed TypeScript code but omits that compiler setting so campers can see and fix the type error. Using that next step's seed as the previous step's solution would therefore fail type checking. The explicit solution preserves the compiler setting needed to test the previous step:
+
+{/* prettier-ignore */}
+````md
+# --solutions--
+
+```ts
+function square(num: number) {
+  return num * num;
+}
+
+const result = square("something");
+
+console.log(result);
+```
+
+```json
+{
+  "compilerOptions": {
+    "noCheck": true
+  }
+}
+```
+````
+
+Do not include editable-region markers in solutions. An explicit solution supplies the code and configuration used to validate that step's tests.
 
 ## Hooks
 
