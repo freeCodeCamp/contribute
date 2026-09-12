@@ -49,7 +49,7 @@ Workshops will have a dashedName of the kind `workshop-cat-photo-app`, that is t
 
 Workshop titles start with "Build a" or "Design a", followed by the name of the app.
 
-Some workshops, which are debugging workshop, will be called `Debugging a ...` and have prefix `workshop-debugging` in the `dashedName`.
+Debugging workshops have titles that start with "Debug a" and use the prefix `workshop-debug-` in the `dashedName`.
 
 You can create the workshop with `pnpm run create-new-project`. The CLI will ask you which certification, chapter, module, and position the workshop belongs to. If you are unsure about these concepts, refer to the [curriculum file structure](/curriculum-file-structure/) page.
 
@@ -200,11 +200,11 @@ pnpm run update-step-titles
 
 Each step in a workshop is a Markdown file named after its challenge `id`. The `challengeType` and seed language depend on the type of workshop:
 
-| `challengeType` | Workshop type | Seed language(s)                                               |
-| --------------- | ------------- | -------------------------------------------------------------- |
-| `0`             | HTML/CSS      | `html` only, or `html` + `css`, or `html` + `css` + `js`/`jsx` |
-| `1`             | JavaScript    | `js`                                                           |
-| `20`            | Python        | `py`                                                           |
+| `challengeType` | Workshop type         | Seed language(s)                                                          |
+| --------------- | --------------------- | ------------------------------------------------------------------------- |
+| `0`             | HTML/CSS              | `html` only, or `html` + `css`, or `html` + `css` + `js`/`jsx`/`ts`/`tsx` |
+| `1`             | JavaScript/TypeScript | `js` or `ts`                                                              |
+| `20`            | Python                | `py`                                                                      |
 
 Each step uses exactly two `--fcc-editable-region--` markers across all its seed files to highlight where campers should make changes.
 
