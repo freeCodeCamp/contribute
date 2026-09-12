@@ -1824,9 +1824,13 @@ node.find_matches()[0].find_match_cases()[2].find_case_guard().is_empty() # True
 
 #### `get_variable()`
 
+Returns the value stored in a variable's `ast.Constant` initializer, such as a number, string, boolean, or `None`. It returns `None` if the variable is not found.
+
 ```python
 Node("x = 1").get_variable("x") # 1
 ```
+
+The helper reads the initializer's `.value` attribute; it does not evaluate the assignment. Expressions and collections such as `x = 1 + 1`, `x = [1, 2]`, and `x = {"a": 1}` raise `AttributeError` because their AST nodes do not have that attribute. Even `x = -1` raises `AttributeError`: Python represents the minus sign as a unary operation around the constant `1`.
 
 ### Checking for existence
 
