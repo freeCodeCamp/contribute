@@ -54,7 +54,7 @@ exist.
 9. Add the translation string for the superblock.
    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json)
 
-10. Add the intro title and summary.
+10. In `intro.json`, add the superblock's `title`, `summary` and `intro`. Under its `blocks` key, add a `title` and `intro` for every block. Copy these entries under the new superblock key even when reusing existing blocks.
     [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/intro.json)
 
 11. Add an entry to `catalog` with the superblock, level, estimated hours and topic. If the topic is new, add it to the `Topic` enum.
@@ -141,7 +141,7 @@ Here are some examples:
 - Ensuring Correctness of Merge Sort - Introduction to Algorithms and Data Structures
 ```
 
-All videos need be unlisted and have monetization turned off.
+All videos need to be unlisted and have monetization turned off.
 
 <Aside type='caution'>
   Check all videos before uploading them to YouTube. Editors cannot delete
