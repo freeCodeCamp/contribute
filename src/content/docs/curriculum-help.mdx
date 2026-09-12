@@ -682,6 +682,8 @@ Note that a list like this still ties campers to the parameter name `item` and t
 
 Returns an object mapping variable names to `Explorer` instances for variable statements in the current scope. It is not a recursive search of nested scopes.
 
+Only the first declaration in each statement is exposed. For example, `const a = 1, b = 2;` produces an entry for `a`, but not `b`. Destructuring declarations are not supported: `const { x, y } = obj;` produces an entry keyed by `"undefined"`, rather than entries for `x` and `y`.
+
 ```js
 const explorer = await __helpers.Explorer(
   'var a = 1; let b = 2; const c = () => {}'
@@ -708,7 +710,7 @@ c.value.toString(); // "a + 1"
 
 #### `objectProps`
 
-Returns an object mapping property names to `Explorer` instances for all properties in an object literal.
+Returns an object mapping property names to `Explorer` instances for explicit property assignments with identifier names in an object literal. Shorthand properties, quoted or computed keys, methods, and spreads are not included. For example, `{ x, "y": 2, z: 3 }` produces only an entry for `z`.
 
 ```js
 const explorer = await __helpers.Explorer(
@@ -1089,6 +1091,8 @@ Most `find_` functions search the current scope rather than recursively searchin
 - A list of Node objects if there can be multiple matches. E.g.: `find_ifs`
 
 When no match exists, a single-node lookup returns an empty `Node`, while a list lookup returns an empty list. `find_function` returns the first matching synchronous function; use `find_async_function` for an async function or `find_functions` for all matching definitions.
+
+Continuing a lookup chain on a nonexistent node can raise an error. For example, `Node('x = 1').find_function('missing').find_ifs()` raises `AttributeError`.
 
 #### `find_function()`
 
