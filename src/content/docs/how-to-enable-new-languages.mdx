@@ -7,80 +7,36 @@ next: false
 
 To enable a new language on `/learn` (curriculum), you need to complete the following steps:
 
-- Complete translating and approving the first 3 certifications on Crowdin. (New Responsive Web Design, JavaScript Algorithms and Data Structures, and Front End Development Libraries)
-- Complete translating and approving all strings in Learn UI project on Crowdin.
-- Update Crowdin settings to add a custom language code for the new language.
-- Open the 1st PR to configure GitHub Actions. You need to update 2 files:
-  - `crowdin-download.client-ui.yml` (in the main repository)
-  - `download-curriculum.yml` (in the i18n-curriculum repository)
-- Open the 2nd PR to add other configurations. You need to update/add the following files:
-  - Update `i18n.ts`
-  - Update `superblocks.ts`
-  - Update `algolia-locale-setup.ts`
-  - Add `links.json`
-  - Add `meta-tags.json`
-  - Add `motivation.json`
-- Ask infrastructure team to spin up the VM for the new language.
-- Once the VM is ready, open the 3rd PR to show the new language in the navigation menu.
+- Coordinate translation syncing with the i18n team so the new language's curriculum and client translations are available in the i18n-curriculum repository.
+- Open a PR to add the build configuration:
+  - Update `packages/shared/src/config/i18n.ts`.
+  - Update `packages/shared/src/config/curriculum.ts`.
+  - Update `client/src/utils/algolia-locale-setup.ts`.
+  - Add the language to the test matrix in `.github/workflows/curriculum-i18n-submodule.yml`.
+  - Add `client/i18n/locales/<language>/links.json`.
+- Open a PR to add `build/universal/trending/<language>.yaml` in the CDN repository if the file does not exist.
+- Coordinate the hosting setup with the infrastructure team and add the language to `.github/workflows/deploy-client.yml`.
+- Once the VM is ready, open a separate PR to show the new language in the navigation menu.
 
 We will explain each step in the following sections.
 
-## Updating Crowdin Settings
+## Preparing Translations and CI
 
-Before you can release a new language, you will need to allow the languages to download from Crowdin. To configure that, you need to add a custom language code for your language.
+Coordinate with the i18n team to make the new language's translations available in the [i18n-curriculum repository](https://github.com/freeCodeCamp/i18n-curriculum). Curriculum challenges belong in `curriculum/challenges/<language>/blocks/`, and client translations belong in `client/<language>/` within that repository. For example, [the Arabic translations PR](https://github.com/freeCodeCamp/i18n-curriculum/pull/332) added curriculum content and client translations.
 
-In the `Curriculum` and `Learn UI` projects on Crowdin, you will need to select `Settings` > `Languages` from the sidebar. Then scroll down to `Language Mapping`, where you will see an option to add custom language codes. Add a new entry for the language you are releasing, selecting `language` as the `Placeholder` value, and entering a URL-friendly lower-case spelling of your language's name for the `Custom code`. If you aren't sure what to use, or you don't have an admin role and can't see the settings, reach out in our contributor chat and we will assist you.
+Ensure the main repository's `curriculum/i18n-curriculum` submodule points to a commit containing the new language's files before enabling its build.
 
-## Updating Workflows for GitHub Actions
-
-Then you need to configure the syncing between Crowdin and GitHub.
-
-You will need to add a step to the [`crowdin-download.client-ui.yml`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/.github/workflows/crowdin-download.client-ui.yml) in the main repository. For curriculum content, you will need to add a step to the [`download-curriculum.yml`](https://github.com/freeCodeCamp/i18n-curriculum/blob/main/.github/workflows/download-curriculum.yml) workflow in the [i18n-curriculum repository](https://github.com/freeCodeCamp/i18n-curriculum). The step for both workflows will be similar. For example, if you want to enable Dothraki downloads:
-
-```yml
-##### Download Dothraki #####
-- name: Crowdin Download Dothraki Translations
-  uses: crowdin/github-action@master
-  # options: https://github.com/crowdin/github-action/blob/master/action.yml
-  with:
-    # uploads
-    upload_sources: false
-    upload_translations: false
-    auto_approve_imported: false
-    import_eq_suggestions: false
-
-    # downloads
-    download_translations: true
-    download_language: mis
-    skip_untranslated_files: false
-    export_only_approved: true
-
-    push_translations: false
-
-    # pull-request
-    create_pull_request: false
-
-    # global options
-    config: './crowdin-config.yml'
-    base_url: ${{ secrets.CROWDIN_BASE_URL_FCC }}
-
-    # Uncomment below to debug
-    # dryrun_action: true
-```
-
-:::note
-The `download_language` key needs to be set to the language code displayed on Crowdin.
-:::
+Add the language to `jobs.test-curriculum.strategy.matrix.locale` in [`.github/workflows/curriculum-i18n-submodule.yml`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/.github/workflows/curriculum-i18n-submodule.yml), unless it is already tested in the full CI suite. This workflow builds the localized client and tests its curriculum when the submodule update branch changes. [The Arabic configuration PR](https://github.com/freeCodeCamp/freeCodeCamp/pull/68603) added this matrix entry alongside the language configuration, search configuration, and `links.json`.
 
 ## Enabling a Language
 
 :::note
-The above section with updating the workflows should be completed before proceeding - these need to be done in separate steps or the builds will fail.
+Make the translation files available before enabling the language in the build configuration. Setup fails when the required client translation files are missing from the submodule.
 :::
 
 There are a few steps to take in order to allow the codebase to build in your desired language.
 
-First, visit the [`shared/config/i18n.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/i18n.ts) file to add the language to the list of available languages and configure the values. There are several objects here.
+First, visit the [`packages/shared/src/config/i18n.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/i18n.ts) file to add the language to the list of available languages and configure the values. There are several objects here.
 
 - `Languages`: Add the new language to `Languages` enum, similar to the others. The string value here will be used in the `.env` file to set a build language later.
 - `availableLangs`: Add the new property from the `Languages` enum to both the `client` and `curriculum` arrays.
@@ -92,7 +48,7 @@ First, visit the [`shared/config/i18n.ts`](https://github.com/freeCodeCamp/freeC
 
 As an example, if you wanted to enable Dothraki as a language, your `i18n.ts` objects should look like this:
 
-```js
+```ts
 export enum Languages {
   English = 'english',
   Espanol = 'espanol',
@@ -126,7 +82,7 @@ export const i18nextCodes = {
   [Languages.Dothraki]: 'mis'
 };
 
-export enum LangNames = {
+export const LangNames: { [key: string]: string } = {
   [Languages.English]: 'English',
   [Languages.Espanol]: 'Español',
   [Languages.Chinese]: '中文（简体字）',
@@ -134,7 +90,7 @@ export enum LangNames = {
   [Languages.Dothraki]: 'Dothraki'
 };
 
-export enum LangCodes = {
+export const LangCodes = {
   [Languages.English]: 'en-US',
   [Languages.Espanol]: 'es-419',
   [Languages.Chinese]: 'zh',
@@ -142,7 +98,7 @@ export enum LangCodes = {
   [Languages.Dothraki]: 'mis'
 };
 
-export const hiddenLangs = ['dothraki'];
+export const hiddenLangs: Languages[] = [Languages.Dothraki];
 
 export const rtlLangs = [''];
 ```
@@ -153,7 +109,7 @@ When a language has been set up in the deployment pipeline AND has a public `/le
 
 ### Set Translated SuperBlocks
 
-In the [shared/config/curriculum.ts](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/curriculum.ts) file, add the new language to the `notAuditedSuperBlocks` object. This lists all the superblocks which are not fully translated. Add an array of superblocks that have not been fully translated to it. For example:
+In the [packages/shared/src/config/curriculum.ts](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts) file, add the new language to the `notAuditedSuperBlocks` object. This lists all the superblocks which are not fully translated. Add an array of superblocks that have not been fully translated to it. For example:
 
 ```js
 export const notAuditedSuperBlocks: NotAuditedSuperBlocks = {
@@ -205,11 +161,11 @@ const algoliaIndices = {
   },
   chinese: {
     name: 'news-zh',
-    searchPage: 'https://chinese.freecodecamp.org/news/search/'
+    searchPage: 'https://www.freecodecamp.org/chinese/news/search/'
   },
   'chinese-traditional': {
     name: 'news-zh',
-    searchPage: 'https://chinese.freecodecamp.org/news/search'
+    searchPage: 'https://www.freecodecamp.org/chinese/news/search/'
   },
   dothraki: {
     name: 'news',
@@ -226,17 +182,11 @@ const algoliaIndices = {
 
 ### Client UI
 
-You will need to take an additional step to handle the client UI translations.
+Copy the English `links.json` from [`client/i18n/locales/english`](https://github.com/freeCodeCamp/freeCodeCamp/tree/main/client/i18n/locales/english) to `client/i18n/locales/<language>/links.json` and update URLs where localized resources exist.
 
-The Crowdin workflows will automatically pull down _some_ of the UI translations, but there are a couple of files that need to be moved manually.
+See [the localized client guide's file structure](/how-to-work-on-localized-client-webapp/#file-structure) for file ownership and translation details.
 
-You will want to copy the following files from [`/client/i18n/locales/english`](https://github.com/freeCodeCamp/freeCodeCamp/tree/main/client/i18n/locales/english) to `/client/i18n/locales/<your-language>`, and apply translations as needed:
-
-- `links.json`
-- `meta-tags.json`
-- `motivation.json`
-
-You don't have to have everything in these 3 files translated at first. It's possible to translate only the relevant parts and make adjustments later.
+Production builds also require a `build/universal/trending/<language>.yaml` file in the [CDN repository](https://github.com/freeCodeCamp/cdn/tree/main/build/universal/trending). If one does not exist, copy [the English trending file](https://github.com/freeCodeCamp/cdn/blob/main/build/universal/trending/english.yaml) as a starting point.
 
 #### `links.json`
 
@@ -244,38 +194,29 @@ You can replace any URLs that you have corresponding pages ready in your languag
 
 For example, if you have a publication in your language, you can replace the URL for `"news"`.
 
-#### `meta-tags.json`
-
-This file contains metadata for the web page of `/learn` in your language. You can translate the values for `"title"`, `"description"`, and `"social-description"`. The value for `"youre-unsubscribed"` is used when someone unsubscribes from Quincy's weekly email.
-
-Also, you can translate or add relevant keywords in your language to the `"keywords"` array.
-
-#### `motivation.json`
-
-This file contains the compliments that will be displayed to campers when they complete a challenge, and motivational quotes that are displayed on the top page of `/learn`.
-
-You can translate them, or even replace them with relevant compliments/quotes of your choice in your language.
-
 ### Enabling Localized Videos
 
 This section is applicable only if you have localized videos in the challenges. Otherwise, you can skip this section.
 
-For the video challenges, you need to change a few things. First, add the new locale to the GraphQL query in the [`client/src/templates/Challenges/video/Show.tsx`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/templates/Challenges/video/show.tsx) file. For example, adding Dothraki to the query:
+For the video challenges, you need to change a few things. First, add the new locale to the GraphQL query in the [`client/src/templates/Challenges/generic/show.tsx`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/templates/Challenges/generic/show.tsx) file. For example, adding Dothraki to the query:
 
 ```tsx
-  query VideoChallenge($slug: String!) {
-    challengeNode(fields: { slug: { eq: $slug } }) {
-      videoId
-      videoLocaleIds {
-        espanol
-        italian
-        portuguese
-        dothraki
+  query GenericChallenge($id: String!) {
+    challengeNode(id: { eq: $id }) {
+      challenge {
+        videoId
+        videoLocaleIds {
+          espanol
+          italian
+          portuguese
+          dothraki
+        }
       }
-      ...
+    }
+  }
 ```
 
-Then add an id for the new language to any video challenge in an audited block. For example, if `auditedCerts` in `i18n.ts` includes `scientific-computing-with-python` for `dothraki`, then you must add a `dothraki` entry in `videoLocaleIds`. The frontmatter should then look like this:
+For each challenge with a localized video, add its video ID under the new language in `videoLocaleIds`. For example:
 
 ```yml
 videoLocaleIds:
@@ -287,7 +228,7 @@ dashedName: introduction-why-program
 ---
 ```
 
-Update the `VideoLocaleIds` interface in `client/src/redux/prop-types` to include the new language.
+Update the `VideoLocaleIds` interface in `client/src/redux/prop-types.ts` to include the new language.
 
 ```ts
 export interface VideoLocaleIds {
@@ -298,7 +239,18 @@ export interface VideoLocaleIds {
 }
 ```
 
-And finally, update the challenge schema in `curriculum/schema/challenge-schema.js`.
+Update the `ChallengeNodeChallengeVideoLocaleIds` type in [`client/schema.gql`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/schema.gql) to include the new language. Gatsby loads this schema snapshot with inference disabled for `ChallengeNode`, so the new query field must be declared here.
+
+```graphql
+type ChallengeNodeChallengeVideoLocaleIds {
+  espanol: String
+  italian: String
+  portuguese: String
+  dothraki: String
+}
+```
+
+Finally, update the challenge schema in `curriculum/schema/challenge-schema.js`.
 
 ```js
 videoLocaleIds: Joi.when('challengeType', {
@@ -314,173 +266,33 @@ videoLocaleIds: Joi.when('challengeType', {
 
 ## Testing Translations Locally
 
-If you would like to test translations locally, before adding them to our main repository - skip the Crowdin workflow changes. Follow the steps for enabling a language, then download the translations from Crowdin and load them into your local code.
+Follow [Testing a New Language in the localized client guide](/how-to-work-on-localized-client-webapp/#testing-a-new-language) to prepare unpublished client translations and run the app locally. You can test the client UI with `CURRICULUM_LOCALE=english` before enabling a translated curriculum.
 
-Because the language has not been approved for production, our scripts are not automatically downloading the translations yet. Only staff have access to directly download the translations - you are welcome to reach out to us in our [contributors chat room](https://discord.gg/PRyKn3Vbay), or you can translate the English markdown files locally for testing purposes.
+For curriculum testing, translated challenges belong in `curriculum/i18n-curriculum/curriculum/challenges/<language>/blocks/`. See [the curriculum file structure](/curriculum-file-structure/#internationalization-structure). Set `CURRICULUM_LOCALE` to the configured language and run `pnpm run clean-and-develop` after preparing the translation files.
 
-Once you have the files, you will need to place them in the correct directory. For the curriculum challenges, you should place the block folders (individual learning modules) within the `curriculum/challenges/english/blocks/` directory for English content. For translated content, the structure is handled automatically by the i18n-curriculum submodule - translated markdown files are stored in the submodule and synchronized automatically. The client translation `.json` files will go in the `client/i18n/locales/{lang}` directory.
-
-Update your `.env` file to use your new language for `CLIENT_LOCALE` and `CURRICULUM_LOCALE`.
-
-Once these are in place, you should be able to run `pnpm run develop` to view your translated version of freeCodeCamp.
+For help obtaining translations that are not yet available in the submodule, contact the translation team.
 
 :::tip
 If you build the client in one language and then want to build it in a different language, you will need to use the command `pnpm run clean-and-develop` after changing the `.env` file, as Gatsby will cache the first language.
 :::
 
-:::danger
-While you may perform translations locally for the purpose of testing, we remind everyone that translations should _not_ be submitted through GitHub and should only be done through Crowdin. Be sure to reset your local codebase after you are done testing.
-:::
+## Configure Deployment
+
+Coordinate with the infrastructure team to prepare the hosts for the new language. In [`.github/workflows/deploy-client.yml`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/.github/workflows/deploy-client.yml), add the language to both:
+
+- The `target_language` workflow input's `options` list.
+- The `languageMap` object in the `setup-matrix` job, using the short code agreed with the infrastructure team. The workflow uses this code to identify the deployment hosts.
+
+[The Arabic deployment PR](https://github.com/freeCodeCamp/freeCodeCamp/pull/69829) added `arabic` to the options and mapped it to `ara`. The deployment workflow is started manually and supports deploying a single language.
 
 ## Show the language in the navigation menu
 
 When your prior PR is merged and the VM for your language is ready, make another PR to show your language in the navigation menu.
 
-In [`shared/config/i18n.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/i18n.ts) file, you have included your language in `hiddenLangs` array in the prior PR. Remove it from the array now.
+In [`packages/shared/src/config/i18n.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/i18n.ts) file, you have included your language in `hiddenLangs` array in the prior PR. Remove it from the array now.
 
-```js
-export const hiddenLangs = []; // Remove your language from the array
+```ts
+export const hiddenLangs: Languages[] = []; // Remove your language from the array
 ```
 
 When this PR is merged and deployed, the curriculum in your language will be live.
-
-# Deploying New Languages on `/news`
-
-To deploy News for a new language, you'll need to create two PRs. One PR will be to the [CDN repo](https://github.com/freeCodeCamp/cdn), and the other will be to the [News repo](https://github.com/freeCodeCamp/news).
-
-## Prep the CDN Repo for the New Language
-
-News sources trending links and article titles from our CDN during the build and adds them to the footer. News also fetches Day.js files from the CDN during the build to localize dates and times for each language.
-
-### Add a YAML File for Trending Articles
-
-Clone the [CDN repo](https://github.com/freeCodeCamp/cdn) and create a new branch.
-
-In the [`build/universal/trending`](https://github.com/freeCodeCamp/cdn/tree/main/build/universal/trending) directory, create a new file and name it `language.yaml`. For example, if you are launching Dothraki News, name the file `dothraki.yaml`.
-
-Then copy the contents of the [`english.yaml`](https://github.com/freeCodeCamp/cdn/blob/main/build/universal/trending/english.yaml) trending file and paste it into the new YAML file you just created.
-
-The contents will look something like this:
-
-```yaml
-article0title: 'Learn JavaScript'
-article0link: 'https://www.freecodecamp.org/news/learn-javascript-free-js-courses-for-beginners/'
-article1title: 'Linux ln Example'
-article1link: 'https://www.freecodecamp.org/news/linux-ln-how-to-create-a-symbolic-link-in-linux-example-bash-command'
-article2title: 'JS document.ready()'
-article2link: 'https://www.freecodecamp.org/news/javascript-document-ready-jquery-example/'
-article3title: ...
-article3link: ...
-  ...
-```
-
-### Add a Day.js Locale File for the New Language
-
-By default, Day.js only includes English as a locale. To enable it to work with other languages, you need to add a new Day.js locale file to the CDN.
-
-In the [`build/news-assets/dayjs/<version>/locale`](https://github.com/freeCodeCamp/cdn/tree/main/build/news-assets/dayjs/1.10.4/locale) directory, create a new file and name it `isocode.min.js`. For example, if you are launching Dothraki News, name the file `mis.min.js`.
-
-:::note
-The version number will change as the dependencies are updated.
-:::
-
-Then, visit [this page on cdnjs](https://cdnjs.com/libraries/dayjs/1.10.4) with all available Day.js files for the version we're using, find the `https://cdnjs.cloudflare.com/ajax/libs/dayjs/<version>/locale/isocode.min.js` link for the new language, and open it in a new tab.
-
-:::note
-You only need to add the .../dayjs/\<version\>/_locale_/isocode.min.js locale file. You do not need to add any other Day.js files.
-:::
-
-Copy the Day.js locale code from the new tab into the new file you created. For example, here is an un-minified version of the English locale code for Day.js:
-
-```js
-!(function (e, n) {
-  'object' == typeof exports && 'undefined' != typeof module
-    ? (module.exports = n())
-    : 'function' == typeof define && define.amd
-      ? define(n)
-      : (e.dayjs_locale_en = n());
-})(this, function () {
-  'use strict';
-  return {
-    name: 'en',
-    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
-      '_'
-    ),
-    months:
-      'January_February_March_April_May_June_July_August_September_October_November_December'.split(
-        '_'
-      )
-  };
-});
-```
-
-Then open a PR to the CDN repo to add both the YAML and Day.js files for review.
-
-## Prep the News Repo for the New Language
-
-The [News repo](https://github.com/freeCodeCamp/news) pulls data from a Ghost instance, the files you added to the CDN, builds News, and deploys it.
-
-> [!WARN]
-> Pull requests to the News repo _must_ come from the same repo. You should not work off of a fork for this step.
-
-### Modify the Main Config File
-
-Clone the News repo and create a new branch.
-
-Open the `config/index.js` file to add the new language and configure the necessary values. There are a few objects and arrays to modify:
-
-- `locales`: This array contains the active and upcoming News languages. These are the values that are used in the `.env` file to choose the Ghost instance and UI to use for each build. Add the text name of the new language in lowercase to this array.
-- `localeCodes`: This object is a map of ISO codes for each language, and is used to configure i18next before building the UI. To add a new language, use the lowercase language name as the _key_ and the ISO 639-1 language code as the _value_.
-- `algoliaIndices`: This object is a map of Algolia indices for each language. To add a new language, use the lowercase language name as the _key_, and `news-` followed by the lowercase ISO 639-1 language code as the _value_.
-
-:::note
-If you are unsure about the string to use while setting `algoliaIndices`, send a message to Kris (@scissorsneedfoodtoo), or someone else with access to Algolia, and ask them to check.
-:::
-
-For example, if you are launching Dothraki News, here are what the objects / arrays above should look like:
-
-```js
-const locales = ['arabic', 'bengali', 'chinese', 'english', 'dothraki'];
-
-const localeCodes = {
-  arabic: 'ar',
-  bengali: 'bn',
-  chinese: 'zh',
-  english: 'en',
-  dothraki: 'mis'
-};
-
-const algoliaIndices = {
-  arabic: 'news-ar',
-  bengali: 'news-bn',
-  chinese: 'news-zh',
-  english: 'news',
-  dothraki: 'news-mis'
-};
-```
-
-### Add the i18next JSON Files for the New Language
-
-Next, go to the `shared/config/i18n/locales` directory, create a new folder, and give it the name of the new language you're adding. For example, if you're launching Dothraki News, create a new folder named `dothraki`.
-
-Then copy the JSON files from the `english` directory to your new folder.
-
-In your new folder, open the `redirects.json` file and replace its contents with an empty array:
-
-```json
-[]
-```
-
-Then commit and push your branch directly to the News repo.
-
-:::note
-You need to be on one of the teams with access to the News repo to push branches directly to News. Currently, only the dev, i18n, and staff teams are allowed to do this.
-:::
-
-Finally, open a PR for review.
-
-Once both your PRs to the CDN and News repo have been approved, they can be merged.
-
-:::note
-Deployment will be handled subsequently by the staff. Here is a sample PR: [freeCodeCamp/news#485](https://github.com/freeCodeCamp/news/pull/485) of how they do it and more details are available in the [staff-wiki](https://staff-wiki.freecodecamp.org/docs/flight-manuals/news-instances#jamstack---news--assets).
-:::
