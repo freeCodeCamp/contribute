@@ -54,7 +54,7 @@ exist.
 9. Add the translation string for the superblock.
    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json)
 
-10. In `intro.json`, add the superblock's `title`, `summary` and `intro`. Under its `blocks` key, add a `title` and `intro` for every block. Copy these entries under the new superblock key even when reusing existing blocks.
+10. Add the superblock's entry to `intro.json`, following the [documented format](/curriculum-file-structure/#the-introjson-file). Include a `summary` for the catalog and entries for every block, even when reusing existing blocks. If the superblock uses chapters and modules, include their titles and any coming-soon module introductions.
     [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/intro.json)
 
 11. Add an entry to `catalog` with the superblock, level, estimated hours and topic. If the topic is new, add it to the `Topic` enum.
