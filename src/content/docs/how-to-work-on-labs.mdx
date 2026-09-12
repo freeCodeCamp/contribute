@@ -10,16 +10,16 @@ import HooksShared from './_hooks-shared.mdx';
 You'll need this guide if you're creating or modifying lab challenges (project-based learning with user stories). If you're working on other types of challenges like workshops, coding projects, or quizzes, check their respective guides. For CodeRoad projects, see [How to Work on CodeRoad](/how-to-work-on-tutorials-that-use-coderoad/).
 :::
 
-Labs are a type of challenge that presents an empty or almost empty editor to the camper, and a list of user stories to satisfy.
+Labs ask campers to solve problems independently by satisfying a list of user stories. Campers may start with an empty or almost empty editor, or with existing code to debug or extend.
 
 ## What Are User Stories?
 
-Unlike traditional user stories ("As a [role], I want [action], so that [benefit]"), user stories in freeCodeCamp labs describe specific, testable behaviors that the camper's code must fulfill — focusing on **what** the solution should do, not **how**.
+Unlike traditional user stories ("As a [role], I want [action], so that [benefit]"), user stories in freeCodeCamp labs describe specific, testable requirements for the camper's code. They describe the expected result without giving step-by-step instructions for reaching it. Requirements may specify elements, properties, methods, or other implementation details when those are the concepts being practiced.
 
 A good user story should be:
 
 - **Specific:** It describes one clear, testable behavior.
-- **User-focused:** It describes what the camper's code should do, not implementation details.
+- **User-focused:** It states what the camper needs to achieve, including any required implementation constraints, without walking through the solution.
 - **Unambiguous:** Any reasonable reader should interpret it the same way.
 - **Testable:** There must be a way to verify it with an automated test.
 
@@ -30,7 +30,7 @@ For example:
 | "Make a navbar"         | "You should have a `nav` element that contains at least three links" |
 | "Style the page nicely" | "Your `body` element should have a `font-family` property set"       |
 
-Keep in mind that everything that is tested must be written in the user stories. If it is not in the user stories, it should not be tested.
+Every tested requirement must appear in the user stories. Some requirements may remain untested because of testing limitations.
 
 Lab descriptions should have this format:
 
@@ -47,11 +47,11 @@ Lab descriptions should have this format:
 Note/Hint: (this is optional)
 ```
 
-These challenges are used to allow for practice and reinforce concepts and practice problem solving.
+Labs reinforce previously learned concepts through independent problem solving.
 
-It can be that in the user stories there is written something that is not tested (for various reasons, including test limitations), but everything tested must be written in the user stories.
+## Solutions and Demo Projects
 
-The demo projects (the code under the solution header in the markdown file) can be more involved, it should be a good example of what could be created going above and beyond the user stories. For the beginning labs, the demo projects are usually simpler, to avoid overwhelming the campers.
+Demo projects use the code under the `--solutions--` heading in the Markdown file. They can go beyond the user stories to show what campers could create. Keep demos for introductory labs simpler to avoid overwhelming campers.
 
 :::note
 Labs with `challengeType` `25`, `26`, or `27` must include a solution, but do not all have a demo project.
