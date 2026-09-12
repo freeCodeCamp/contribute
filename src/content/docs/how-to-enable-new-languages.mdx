@@ -239,7 +239,18 @@ export interface VideoLocaleIds {
 }
 ```
 
-And finally, update the challenge schema in `curriculum/schema/challenge-schema.js`.
+Update the `ChallengeNodeChallengeVideoLocaleIds` type in [`client/schema.gql`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/schema.gql) to include the new language. Gatsby loads this schema snapshot with inference disabled for `ChallengeNode`, so the new query field must be declared here.
+
+```graphql
+type ChallengeNodeChallengeVideoLocaleIds {
+  espanol: String
+  italian: String
+  portuguese: String
+  dothraki: String
+}
+```
+
+Finally, update the challenge schema in `curriculum/schema/challenge-schema.js`.
 
 ```js
 videoLocaleIds: Joi.when('challengeType', {
