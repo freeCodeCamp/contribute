@@ -203,14 +203,17 @@ For the video challenges, you need to change a few things. First, add the new lo
 ```tsx
   query GenericChallenge($id: String!) {
     challengeNode(id: { eq: $id }) {
-      videoId
-      videoLocaleIds {
-        espanol
-        italian
-        portuguese
-        dothraki
+      challenge {
+        videoId
+        videoLocaleIds {
+          espanol
+          italian
+          portuguese
+          dothraki
+        }
       }
-      ...
+    }
+  }
 ```
 
 For each challenge with a localized video, add its video ID under the new language in `videoLocaleIds`. For example:
