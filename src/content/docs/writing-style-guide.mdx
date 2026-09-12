@@ -18,7 +18,7 @@ Before adding punctuation, check the content inside the backticks.
 **Examples**
 
 - \`Does this work?\` → keep the `?`
-- \`assigning tasks . . .\` → keep the ellipses
+- \`assigning tasks ...\` → keep the ellipses
 - \`assigning tasks\` → leave as-is
 
 ---
@@ -27,25 +27,27 @@ Before adding punctuation, check the content inside the backticks.
 
 ### Backticks
 
-Periods and commas go **outside** the backticks if the backticks do not include them.
+Periods and commas go **outside** the backticks unless the backticked content already ends with the punctuation needed by the surrounding sentence. Punctuation elsewhere inside the backticks does not replace punctuation outside them.
 
     **Correct**
     - The file is `index.html`.
     - Run `npm install`, then restart.
-    - She paused at `assigning tasks . . .`, unsure what to say next.
+    - She paused at `assigning tasks ...`, unsure what to say next.
     - `I reviewed the requirements. Next, I shared my thoughts with the team.`
 
     **Incorrect**
     - It's usually the direct answer to the question `¿De dónde eres?`.
     - `I reviewed the requirements. Next, I shared my thoughts with the team.`.
 
-    > [!Exception]
-    > If the dot is not punctuation in the last backticked phrase. Below it is part of the domain syntax so we add an additional period in that case.<br /><br />
-    > Other examples of subdomains include `blog.`, `shop.`, `support.`, and `api.`.
+:::note[Exception]
+If the final dot is part of the code or domain syntax rather than sentence-ending punctuation, add a period outside the backticks.
+
+Other examples of subdomains include `blog.`, `shop.`, `support.`, and `api.`.
+:::
 
 <br />
 
-If the quoted or backticked text includes a comma, do not add a duplicate comma immediately after.
+If the quoted or backticked text ends with a comma, do not add a duplicate comma immediately after.
 
     **Incorrect**
     - If the sentence starts with "She said,", or "He said,", expect it to be classified as hearsay.
@@ -55,18 +57,18 @@ If the quoted or backticked text includes a comma, do not add a duplicate comma 
 
 <br />
 
-Do not add a duplicate period if an ellipse is quoted or backticked at the end of the line. (Exceptions below in the section for question marks and exclamation marks)
+Do not add a duplicate period if an ellipsis is quoted or backticked at the end of the sentence. (Exceptions below in the section for question marks and exclamation marks)
 
     **Correct**
-    - Focus on the sentence that starts with: `One important task is . . .`
-    - `Me llamo . . .` means "My name is . . ."
+    - Focus on the sentence that starts with `One important task is ...`
+    - `Me llamo ...` means "My name is ..."
 
     **Incorrect**
-    - Focus on the sentence that starts with: `One important task is . . .`.
+    - Focus on the sentence that starts with `One important task is ...`.
 
 <br />
 
-Do not add a period to the end of the line if the line ends with a backticked phrase that includes any punctuation mark
+Do not add a period at the end of a sentence if the final quoted or backticked phrase already ends with sentence-ending punctuation, such as a period, question mark, or exclamation mark.
 
     **Correct**
     - This question is equivalent to "How old are you?"
@@ -80,16 +82,16 @@ Periods and commas go **inside** the double quotes when their presence coincides
 
     **Correct**
     - The error says "File not found."
-    - She whispered "I’m not sure . . .," then walked away.
+    - She whispered, "I'm not sure ...," then walked away.
 
 ### Oxford Comma
 
 Use a comma before the conjunction in a list of three or more items.
 
     **Correct**
-    - Save your file on your computer, on google drive, or to a Gist.
+    - Save your file on your computer, on Google Drive, or to a Gist.
 
-<br />
+### Commas Before Dialogue
 
 Use a comma before a direct quotation (or backticked quotation) of only a few words following an introductory phrase.
 
@@ -97,7 +99,7 @@ Use a comma before a direct quotation (or backticked quotation) of only a few wo
     - She's using a simple and very common phrase to say, "Hi, good morning!"
     - Sebastián is asking Ángela, `¿A qué te dedicas?`
 
-<br />
+### Trailing Whitespace
 
 Do not add a space after the last punctuation mark in a standalone paragraph or sentence.
 (A diff will show the additional space and should be removed)
@@ -118,8 +120,8 @@ Do not add a space after the last punctuation mark in a standalone paragraph or 
     - She asked, "Does this work?"
     - He shouted, "Let me go!"
 
-    **Incorrect **
-    - What did he mean by `Where are you`?
+    **Incorrect**
+    - She asked, `Does this work?`?
     - He said, "how come"?
 
 ---
@@ -133,8 +135,8 @@ Do not add a space after the last punctuation mark in a standalone paragraph or 
   - What does she mean by "assigning tasks"?
 
   **Examples With Ellipses**
-  - What does she mean by `assigning tasks . . .`?
-  - What does she mean by "assigning tasks . . ."?
+  - What does she mean by `assigning tasks ...`?
+  - What does she mean by "assigning tasks ..."?
 
 ---
 
@@ -150,11 +152,11 @@ Use **only one**, placed **inside**.
 
 #### If the content does _not_ have a question mark
 
-The sentence’s `?` goes **outside**.
+The sentence's `?` goes **outside**.
 
     **Correct**
-    - What does Tom mean when he asks, `Does Maria assign tasks . . .`?
-    - What does Tom mean when he asks, "Does Maria assign tasks . . ."?
+    - What does Tom mean when he asks, `Does Maria assign tasks ...`?
+    - What does Tom mean when he asks, "Does Maria assign tasks ..."?
 
 ---
 
@@ -170,26 +172,27 @@ Follow the same logic as question marks.
 
 ## 5. Ellipses
 
-Ellipses should be treated as a three letter word, with a space before them. The dots should also be separated by en spaces. If they are quoted or back-ticked and come at the end of the sentence, do not add additional periods after them.
+Write ellipses as three consecutive periods (`...`), without spaces between the dots. If they are quoted or back-ticked and come at the end of the sentence, do not add additional periods after them.
 
     **Correct**
-    - What does Tom mean when he asks, `Does Maria assign tasks . . .`?
-    - You should include the paragraph that starts with `A miracle . . .`
+    - What does Tom mean when he asks, `Does Maria assign tasks ...`?
+    - You should include the paragraph that starts with `A miracle ...`
 
 ---
 
 ## 6. Quoted Text and Backticked Text
 
-Long quotes should be separated from a paragraph by a new line. This keeps the quoted or backticked text visually discernable and helps the learner easily copy it for pasting into the editor.
+Separate long quotes from the preceding paragraph with a blank line. This keeps the quoted or backticked text visually discernable and helps the learner easily copy it for pasting into the editor.
 
 ```
 **Example**
 
-Within your `.image-quote` element, nest an `hr` element, a `p` element and a second `hr` element. Give the `p` element a class set to `quote` and the text:
+Within your `.image-quote` element, nest an `hr` element, a `p` element, and a second `hr` element. Give the `p` element a class set to `quote` and the text:
+
 `The millions of people who are learning to code through freeCodeCamp will have an even better resource to help them learn these fundamentals.`
 ```
 
-Use a comma just before any quoted text that constitutes an utterance (dialog).
+Use a comma after a reporting phrase that introduces dialogue. Omit it when a short quotation fits directly into the sentence, as in `Ask "What's your name?"`.
 
 ```
 **Example**
@@ -210,29 +213,32 @@ In some cases, when quoting or presenting backticked text in a sentence, it is u
 
   - Your `console` statement should output the message: `Here is an example of accessing the second letter in the word [subject].`
 
-  - The output should be: “Success.”
+  - The expected output is the following: "Success."
 
   **Incorrect**
 
-  - To know where someone is from, ask: `¿De dónde eres?`
+  - The question is: `¿De dónde eres?`
 
-  This is incorrect because the colon is not following a complete sentence/thought but a verb 'ask'.
+  The colon separates the verb `is` from its complement; `The question is` is not a complete sentence.
 
   ```
 
-> [!Note]
-> Although in the above example, it would be better if we said: Your console statement should output the _following_ message:
+:::note
+Although in the above example, it would be better if we said: Your console statement should output the _following_ message:
+:::
 
-- Use a colon if introducing the exact text of a quote.
+- Use a colon to introduce a quotation after a complete introductory sentence.
 
   ```
   **Correct**
 
-  - Sebastián is asking Ángela: `¿A qué te dedicas?`
+  - Sebastián asks the following question: `¿A qué te dedicas?`
 
   **Incorrect**
 
-  - It's usually the direct answer to the question: `¿De dónde eres?`
+  - Sebastián's question is: `¿A qué te dedicas?`
+
+  The colon separates the verb `is` from its complement.
 
   ```
 
@@ -241,9 +247,7 @@ In some cases, when quoting or presenting backticked text in a sentence, it is u
   ```
   **Correct**
 
-  - The correct answer should provide information that directly responds to Bob's question, `What do we have to deal with now?`
-
-  - Which sentence best follows Brian's statement, `We touch on it, but perhaps not in enough detail.`?
+  - Sebastián is asking Ángela, `¿A qué te dedicas?`
 
   - To figure out if the app is working now, look at the last part of James' explanation where he says, `I fixed...`
 
@@ -253,12 +257,23 @@ In some cases, when quoting or presenting backticked text in a sentence, it is u
 
   ```
 
+- Use a comma before a quotation that adds nonessential detail identifying a previously mentioned question or statement.
+
+  ```
+  **Correct**
+
+  - The correct answer should provide information that directly responds to Bob's question, `What do we have to deal with now?`
+
+  - Which sentence best follows Brian's statement, `We touch on it, but perhaps not in enough detail.`?
+
+  ```
+
 - Use nothing if the sentence preceding and the quoted text are both short and/or if the quote flows from the sentence.
 
   ```
   **Example**
 
-  - Ask “What’s your name?”
+  - Ask "What's your name?"
 
   - Which option means "I'm Chinese. I'm a developer."?
 
