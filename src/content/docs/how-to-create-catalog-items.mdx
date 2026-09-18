@@ -30,56 +30,44 @@ exist.
 1. Add a superblock JSON file that includes the superblock's contents.  
    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/superblocks/learn-python-for-beginners.json)
 
-2. List the new superblock in the `superBlocks` list.  
+2. List the new superblock in the `superblocks` array in the curriculum config.  
    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json)
 
-3. Add the superblock to the `superBlocks` shared config.  
+3. Add the superblock to the `SuperBlocks` enum in shared config. If its structure uses chapters and modules, also add it to `chapterBasedSuperBlocks`.  
    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts)
 
-4. List the new superblock in the curriculum config.  
-   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/curriculum.json)
-
-5. Add the superblock enum value in shared config.  
-   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts)
-
-6. Register the superblock name mapping in the curriculum build.  
+4. Register the superblock in `superBlockNames` in the curriculum build.  
    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/src/build-curriculum.ts)
 
-7. Include the superblock name in the certification settings.  
-   [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/packages/shared/src/config/certification-settings.ts)
+5. Add the superblock to `superBlockToCertMap` in the certification settings. Use `null` if the superblock does not award a certification.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/certification-settings.ts)
 
-8. Add the superblock name in the curriculum schema.  
-   [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/curriculum/schema/curriculum-schema.js)
+6. Add the superblock name in the curriculum schema.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/schema/curriculum-schema.js)
 
-9. Add block configuration files.  
-   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/blocks/learn-python-setup-first-steps.json)
+7. Add block configuration files.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/structure/blocks/python-setup-first-steps.json)
 
-10. Add challenge files in the block.  
-    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/blocks/learn-python-setup-first-steps/learn-python-intro-video.md)
+8. Add challenge files in the block.  
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/blocks/python-setup-first-steps/introduction-video.md)
 
-11. Add the translation string for the superblock.
-    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json)
+9. Add the translation string for the superblock.
+   [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json)
 
-12. Add the intro title and summary.
+10. Add the superblock's entry to `intro.json`, following the [documented format](/curriculum-file-structure/#the-introjson-file). Include a `summary` for the catalog and entries for every block, even when reusing existing blocks. If the superblock uses chapters and modules, include their titles and any coming-soon module introductions.
     [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/intro.json)
 
-13. Add the catalog entry and a topic if the topic is new.
+11. Add an entry to `catalog` with the superblock, level, estimated hours and topic. If the topic is new, add it to the `Topic` enum.
     [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.ts)
 
-14. Add the superblock to the catalog stage list.
+12. Add the superblock to `superBlockStages[SuperBlockStage.Catalog]`.
     [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts)
 
-15. Add the superblock icon.
-    [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/assets/superblock-icon.tsx)
+13. Add the superblock icon.
+    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/assets/superblock-icon.tsx)
 
-16. Add label styling for new topics.
-    [Example](https://github.com/ahmaxed/freeCodeCamp/blob/main/client/src/templates/Introduction/intro.css)
-
-17. Keep the catalog test in sync.
-    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.test.ts)
-
-18. Ensure the catalog page imports catalog config.
-    [Example](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/pages/catalog.tsx)
+14. For a new topic, add its display name under `curriculum.catalog.topic` in the English translation file and add a `.block-label-<topic>` rule for its styling.
+    [Translations](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/i18n/locales/english/translations.json) and [label styles](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/client/src/templates/Introduction/intro.css)
 
 </Steps>
 
@@ -95,19 +83,22 @@ All of the videos will be coming from the main [freeCodeCamp YouTube Channel](ht
 
 freeCodeCamp does not keep any of the original full video files. This means you will need to download the original video. There are many tools to do this but the recommended one is `yt-dlp`. This is a free and open source command line tool used for downloading videos.
 
-Copy the video URL of the course and add it to this command here:
+You need to have [yt-dlp installed](https://github.com/yt-dlp/yt-dlp#installation) to download the video.
+
+You also need [FFmpeg](https://ffmpeg.org/download.html) installed to merge the separate video and audio streams selected by the command below. Depending on how you installed yt-dlp, you may need additional setup for YouTube support. Follow the [yt-dlp JavaScript setup guide](https://github.com/yt-dlp/yt-dlp/wiki/EJS) to check whether you need to install a JavaScript runtime or the challenge solver scripts.
+
+Copy the video URL of the course and replace `video-url-goes-here` in this command. The command reads cookies from Chrome; replace `chrome` with your browser if needed:
 
 ```bash
 yt-dlp \
- --extractor-args "youtube:player_js_variant=tv" \
  -f "bestvideo[vcodec^=avc1]+bestaudio[acodec^=mp4a]/best[ext=mp4]" \
  --merge-output-format mp4 \
  --cookies-from-browser chrome \
  -o "%(title)s [%(id)s].%(ext)s" \
- video-url-goes-here
+ "video-url-goes-here"
 ```
 
-It should only take a minute or two for the download to complete. Please make sure to double check the video quality to ensure the download was successful.
+Download time depends on the video size and your connection. Check the video and audio after the download finishes.
 
 <Aside type='tip'>
   It is recommended to create folders for these downloaded videos in a backup
@@ -135,7 +126,7 @@ Once the video is ready, please review it to make sure the export was successful
 
 ### Adding Video Chapters to the freeCodeCamp Concepts YouTube Channel
 
-All of these videos will be on the [freeCodeCamp Concepts YouTube Channel](https://www.youtube.com/@freecodecampconcepts). You will need to be added as a manager of the account in order to upload the video. If you need access, please reach out to Beau.
+All of these videos will be on the [freeCodeCamp Concepts YouTube Channel](https://www.youtube.com/@freecodecampconcepts). You will need channel access with permission to upload videos, such as the Editor or Manager role. If you need access, please reach out to Beau.
 
 Once you have access, you can start adding the videos. The video title should follow this naming convention:
 
@@ -150,13 +141,13 @@ Here are some examples:
 - Ensuring Correctness of Merge Sort - Introduction to Algorithms and Data Structures
 ```
 
-All videos need be unlisted and have monetization turned off.
+All videos need to be unlisted and have monetization turned off.
 
 <Aside type='caution'>
-  It is really important to check all videos before uploading them to YouTube.
-  Once you upload a video, you will not have permissions to remove it. If there
-  is an issue with the video and it needs to be removed, you will need to change
-  the title to `Delete video` and ask Beau to remove it from the channel.
+  Check all videos before uploading them to YouTube. Editors cannot delete
+  published videos; Managers can. If a video needs to be removed and your role
+  does not allow it, change the title to `Delete video` and ask Beau to remove
+  it from the channel.
 </Aside>
 
 ### Creating Comprehension Check Questions
