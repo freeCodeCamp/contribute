@@ -7,19 +7,19 @@ sidebar:
 import HooksShared from './_hooks-shared.mdx';
 
 :::tip
-You'll need this guide if you're creating or modifying lab challenges (project-based learning with user stories). If you're working on other types of challenges like workshops, coding projects, or quizzes, check their respective guides.
+You'll need this guide if you're creating or modifying lab challenges (project-based learning with user stories). If you're working on other types of challenges like workshops, coding projects, or quizzes, check their respective guides. For CodeRoad projects, see [How to Work on CodeRoad](/how-to-work-on-tutorials-that-use-coderoad/).
 :::
 
-Labs are a type of challenge that presents an empty or almost empty editor to the camper, and a list of user stories to satisfy.
+Labs ask campers to solve problems independently by satisfying a list of user stories. Campers may start with an empty or almost empty editor, or with existing code to debug or extend.
 
 ## What Are User Stories?
 
-Unlike traditional user stories ("As a [role], I want [action], so that [benefit]"), user stories in freeCodeCamp labs describe specific, testable behaviors that the camper's code must fulfill — focusing on **what** the solution should do, not **how**.
+Unlike traditional user stories ("As a [role], I want [action], so that [benefit]"), user stories in freeCodeCamp labs describe specific, testable requirements for the camper's code. They describe the expected result without giving step-by-step instructions for reaching it. Requirements may specify elements, properties, methods, or other implementation details when those are the concepts being practiced.
 
 A good user story should be:
 
 - **Specific:** It describes one clear, testable behavior.
-- **User-focused:** It describes what the camper's code should do, not implementation details.
+- **User-focused:** It states what the camper needs to achieve, including any required implementation constraints, without walking through the solution.
 - **Unambiguous:** Any reasonable reader should interpret it the same way.
 - **Testable:** There must be a way to verify it with an automated test.
 
@@ -30,7 +30,7 @@ For example:
 | "Make a navbar"         | "You should have a `nav` element that contains at least three links" |
 | "Style the page nicely" | "Your `body` element should have a `font-family` property set"       |
 
-Keep in mind that everything that is tested must be written in the user stories. If it is not in the user stories, it should not be tested.
+Every tested requirement must appear in the user stories. Some requirements may remain untested because of testing limitations.
 
 Lab descriptions should have this format:
 
@@ -47,14 +47,14 @@ Lab descriptions should have this format:
 Note/Hint: (this is optional)
 ```
 
-These challenges are used to allow for practice and reinforce concepts and practice problem solving.
+Labs reinforce previously learned concepts through independent problem solving.
 
-It can be that in the user stories there is written something that is not tested (for various reasons, including test limitations), but everything tested must be written in the user stories.
+## Solutions and Demo Projects
 
-The demo projects (the code under the solution header in the markdown file) can be more involved, it should be a good example of what could be created going above and beyond the user stories. For the beginning labs, the demo projects are usually simpler, to avoid overwhelming the campers.
+Demo projects use the code under the `--solutions--` heading in the Markdown file. They can go beyond the user stories to show what campers could create. Keep demos for introductory labs simpler to avoid overwhelming campers.
 
 :::note
-All labs have a solution, but not all labs have a demo project.
+Labs with `challengeType` `25`, `26`, or `27` must include a solution, but do not all have a demo project.
 
 For the labs that do not have a demo project, the solution can be the minimum necessary to make sure the tests are working correctly.
 :::
@@ -63,36 +63,40 @@ Labs that have a visual output (i.e. HTML-based) can have a demo project, in whi
 
 ## Create the Lab
 
-You can create the lab with `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. Once that has finished, there should be a new challenge in the English curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+You can create the lab with `pnpm run create-new-project`. This opens up a command line UI that guides you through the process. For chapter-based certifications, selecting the `lab` block label creates a lab template with the challenge type and seed files determined by your chosen content type. For example, a lab called `lab-building-a-card` would be created in `curriculum/challenges/english/blocks/lab-building-a-card`. The generator supports HTML-based, JavaScript, TypeScript, and Python labs.
 
 The script will ask the following questions:
 
-1. **Which certification does this belong to?** — Select the certification (e.g., Responsive Web Design). This determines which superblock the lab is added to.
-2. **What is the dashed name (in kebab-case) for this project?** — The block name in kebab-case (e.g., `lab-building-a-card`). Must be unique across all blocks.
-3. **Enter a title for this project:** — The display title shown to campers. Defaults to the dashed name if left blank.
-4. **Choose a help category** — Select the most relevant category (e.g., HTML-CSS for HTML-based labs, JavaScript for JS labs).
-5. **Choose a block label** — Select `lab`. (This question only appears for chapter-based certifications.)
-6. **Choose a block layout** — Select `link`. (This question only appears for chapter-based certifications.)
-7. **What chapter should this project go in?** — Select the chapter within the certification. (Chapter-based certifications only.)
-8. **What module should this project go in?** — Select the module within the chosen chapter. (Chapter-based certifications only.)
-9. **At which position does this appear in the module?** — The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
+1. **Which certification does this belong to?** - Select the certification (e.g., Responsive Web Design). This determines which superblock the lab is added to.
+2. **What is the dashed name (in kebab-case) for this project?** - The block name in kebab-case (e.g., `lab-building-a-card`). Must be unique across all blocks.
+3. **Enter a title for this project:** - The display title shown to campers. Defaults to the dashed name if left blank.
+4. **Choose a help category** - Select the most relevant category (e.g., HTML-CSS for HTML-based labs, JavaScript for JS labs).
+5. **Choose a block label** - Select `lab`. (This question only appears for chapter-based certifications.)
+6. **Choose a block layout** - Select `link`. (This question only appears for chapter-based certifications.)
+7. **Choose a project content type** - Select the language or file combination for the lab (e.g., HTML/CSS, JavaScript, TypeScript, or Python). This determines the `challengeType` and seed files. (Chapter-based certifications only.)
+8. **What chapter should this project go in?** - Select the chapter within the certification. (Chapter-based certifications only.)
+9. **What module should this project go in?** - Select the module within the chosen chapter. (Chapter-based certifications only.)
+10. **At which position does this appear in the module?** - The position number within the module (e.g., 1 for first project). (Chapter-based certifications only.)
 
-For non-chapter-based certifications, instead of questions 5–9, you will be asked:
+For non-chapter-based certifications, instead of questions 5–10, you will be asked:
 
-- **Which position does this appear in the certificate?** — The position number in the certificate's project list.
+- **Which position does this appear in the certificate?** - The position number in the certificate's project list.
+
+For these certifications, the script creates a generic HTML starter step, which must be adapted manually to create a lab.
 
 ## Lab File Template
 
 Each lab is a single Markdown file. The `challengeType` and seed language depend on the type of lab:
 
-| `challengeType` | Lab type          | Seed language(s)                          | Solution language(s) |
-| --------------- | ----------------- | ----------------------------------------- | -------------------- |
-| `25`            | HTML/CSS(/JS/JSX) | `html` + `css`, or + `js`, or + `jsx`     | same combination     |
-| `26`            | JavaScript        | `js`                                      | `js`                 |
-| `27`            | Python            | `py`                                      | `py`                 |
-| `13`            | Bash/SQL/etc.     | no seed — runs via a CodeRoad `url` field | none                 |
+| `challengeType` | Lab type                 | Seed language(s)                                                       | Solution language(s) |
+| --------------- | ------------------------ | ---------------------------------------------------------------------- | -------------------- |
+| `25`            | HTML-based               | `html` alone, or with `css` and optionally `js`, `jsx`, `ts`, or `tsx` | same combination     |
+| `26`            | JavaScript or TypeScript | `js` or `ts`                                                           | same language        |
+| `27`            | Python                   | `py`                                                                   | `py`                 |
 
-`saveSubmissionToDB: true` is only present in cert-project labs.
+HTML-based, JavaScript/TypeScript, and Python labs use types `25`, `26`, and `27` for both ordinary labs and certification projects.
+
+`saveSubmissionToDB: true` is used for certification projects. A project can appear as an ordinary lab in one certification while serving as a certification project in another, so it does not have to belong to a `cert-project` module in every superblock where it appears.
 
 Here is the template for a JavaScript lab:
 
@@ -100,9 +104,8 @@ Here is the template for a JavaScript lab:
 ---
 id: <ObjectId>
 title: Build / Implement / Design / Debug [Name]
-challengeType: X
+challengeType: 26
 dashedName: lab-name
-demoType: onClick
 ---
 
 # --description--
@@ -125,13 +128,13 @@ Description of what the test checks.
 
 ## --seed-contents--
 
-```lang
+```js
 
 ```
 
 # --solutions--
 
-```lang
+```js
 // solution code
 ```
 ````
