@@ -18,10 +18,10 @@ For challenges that have an HTML file, `--before-all--` is injected as a `<scrip
 
 3. (for each test): --before-each-- → test → --after-each--
 
-4.--after-all--
+4. --after-all--
 ```
 
-For challenges that do not have an HTML file, `--before-all--` runs once before any test. However, because user code is re-evaluated as part of each individual test (concatenated with `--before-each--` and the test in a single `eval`), variables declared in `--before-all--` will not be in scope during tests. To share state across tests, assign to the global object directly (e.g. `globalThis.x = 1` instead of `let x = 1`):
+For JavaScript and TypeScript challenges without an HTML file, `--before-all--` runs once before any test. Each test evaluates `--before-each--`, the compiled user code, and the test together:
 
 ```
 1. --before-all--
@@ -31,9 +31,39 @@ For challenges that do not have an HTML file, `--before-all--` runs once before 
 3. --after-all--
 ```
 
+For Python challenges, hooks are JavaScript code. Each test gets fresh Python globals. The evaluator first evaluates `--before-each--` and the JavaScript test wrapper. If the wrapper returns an object with a `test` function, the evaluator then runs the user's Python code with `runPython` and calls that function:
+
+```
+1. --before-all--
+
+2. (for each test): --before-each-- → evaluate test wrapper → user code → test() → --after-each--
+
+3. --after-all--
+```
+
+Plain JavaScript assertions without a `test` function run while the wrapper is evaluated and do not automatically execute the user's Python code.
+
+For both kinds of challenges without HTML, variables declared with `let` or `const` in `--before-all--` are not available in tests or `--after-all--`, because these run in separate evaluations. To share JavaScript state, assign it to `globalThis` and remove it during cleanup. For example:
+
+````md
+# --before-all--
+
+```js
+globalThis.testState = { count: 0 };
+```
+
+# --after-all--
+
+```js
+delete globalThis.testState;
+```
+````
+
 **Syntax:**
 
 Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
+
+The following fake-timer example is for HTML-based challenges only. `__FakeTimers` is not available in the JavaScript or Python workers.
 
 ````md
 # --description--
