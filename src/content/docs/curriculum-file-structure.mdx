@@ -164,6 +164,12 @@ To find a superblock's category, look up its slug in `SuperBlocks`, then find th
 
 Use `superBlockStages` to find category membership, the files in `curriculum/structure/superblocks/` to find chapters, modules, and blocks, and [`intro.json`](#the-introjson-file) to find display titles and introductory text.
 
+### Catalog Topics and Difficulty
+
+Catalog metadata is defined in [`packages/shared/src/config/catalog.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.ts). The `Topic` enum defines the available topics, and the `Levels` enum defines the difficulty levels: `Beginner`, `Intermediate`, and `Advanced`.
+
+The `catalog` array assigns each listed superblock a `topic`, a difficulty `level`, and a duration in `hours`. To find a course's metadata, look for its `SuperBlocks` enum member in an entry's `superBlock` field. For example, the entry for `SuperBlocks.BasicHtml` has `topic: Topic.Html` and `level: Levels.Beginner`.
+
 ## The Certifications Directory
 
 The `challenges/english/certifications/` directory contains YAML files that define the certification requirements and project information for each certification.
