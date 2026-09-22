@@ -13,7 +13,7 @@ Our core instructional content is located within the conveniently named `curricu
 There are a few terms we use when discussing our curriculum content.
 
 - `certification` : When referring to a certification in this instance, it is talking about the actual certificate that users claim. Which is separate from the name of the superBlock.
-- `superBlock` : A superblock is the top level collection of challenges. Each superblock corresponds to a certification in the curriculum (e.g. Responsive Web Design).
+- `superBlock` : A superblock is a top level collection of challenges. Some superblocks correspond to certifications (e.g. Responsive Web Design), while others contain courses or additional practice.
 - `chapter` : A chapter is a grouping of modules within a superblock. Not all superblocks use chapters; legacy superblocks organize blocks in a flat list instead.
 - `module` : A module is a grouping of blocks within a chapter.
 - `block` : A block is a section within a superblock. A block corresponds to a group of challenges in a given certification (e.g. Basic HTML and HTML5)
@@ -151,6 +151,26 @@ Key fields:
 - **`usesMultifileEditor`**: When `true`, the challenge editor shows multiple files.
 - **`hasEditableBoundaries`**: When `true`, part of the code is highlighted to indicate where changes should be made.
 - **`challengeOrder`**: Ordered list of `{ id, title }` objects defining the sequence of challenges in the block. Challenge files in `curriculum/challenges/english/blocks/<block>/` are named after their `id` (e.g. `66ad8294a0ad902f1b31b612.md`).
+
+## Superblock Classification
+
+Superblocks are classified in [`packages/shared/src/config/curriculum.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/curriculum.ts):
+
+- `SuperBlocks` maps superblock enum members to their URL slugs.
+- `SuperBlockStage` defines the categories: `Core`, `English`, `Spanish`, `Chinese`, `Professional`, `Extra`, `Legacy`, `Upcoming`, `Next`, and `Catalog`.
+- `superBlockStages` lists the superblocks assigned to each category.
+
+These categories map to the groupings on the [Learn page](https://www.freecodecamp.org/learn). `Legacy` superblocks appear on the [Archive page](https://www.freecodecamp.org/learn/archive), and `Catalog` superblocks appear in the [Catalog](https://www.freecodecamp.org/catalog). `Upcoming` superblocks are hidden.
+
+To find a superblock's category, look up its slug in `SuperBlocks`, then find the corresponding enum member in `superBlockStages`. For example, `javascript-v9` maps to `SuperBlocks.JsV9`, which appears in `superBlockStages[SuperBlockStage.Core]`.
+
+Use `superBlockStages` to find category membership, the files in `curriculum/structure/superblocks/` to find chapters, modules, and blocks, and [`intro.json`](#the-introjson-file) to find display titles and introductory text.
+
+### Catalog Topics and Difficulty
+
+Catalog metadata is defined in [`packages/shared/src/config/catalog.ts`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/catalog.ts). The `Topic` enum defines the available topics, and the `Levels` enum defines the difficulty levels: `Beginner`, `Intermediate`, and `Advanced`.
+
+The `catalog` array assigns each listed superblock a `topic`, a difficulty `level`, and a duration in `hours`. To find a course's metadata, look for its `SuperBlocks` enum member in an entry's `superBlock` field. For example, the entry for `SuperBlocks.BasicHtml` has `topic: Topic.Html` and `level: Levels.Beginner`.
 
 ## The Certifications Directory
 
