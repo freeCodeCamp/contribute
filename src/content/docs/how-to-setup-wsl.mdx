@@ -23,8 +23,9 @@ Before you follow these instructions make sure your system meets the requirement
   - At least 12+ GB RAM
   - 20+ GB of free disk space
   - (Optional) 30-50 Mbps internet connection
-- **Operating System**: Windows 10 64-bit (Version 2004, Build 19041 or higher).
-- **Docker Desktop for Windows**: See [the requirements](https://docs.docker.com/docker-for-windows/install/#system-requirements) for Windows.
+- **Operating System**: A supported 64-bit version of Windows that meets the [Docker Desktop system requirements](https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements). The minimum Windows version for installing WSL alone is not sufficient for Docker Desktop.
+- **WSL**: Version 2.1.5 or later, with your Linux distribution running in WSL 2 mode.
+- **Docker Desktop for Windows**: See [the installation instructions](https://docs.docker.com/desktop/setup/install/windows-install/).
 
 </Card>
 
@@ -36,9 +37,9 @@ Follow the instructions on the [official documentation](https://docs.microsoft.c
 
 <Steps>
 
-1. We recommend using Ubuntu-22.04 or above with WSL2.
+1. We recommend using an Ubuntu LTS release supported by [Playwright](https://playwright.dev/docs/intro#system-requirements), such as Ubuntu 24.04, with WSL2.
 
-   As of November 2023, Ubuntu and Debian are the only Linux distributions [officially supported by Playwright](https://playwright.dev/docs/intro#system-requirements), the end-to-end testing library used by freeCodeCamp.
+   Playwright, the end-to-end testing library used by freeCodeCamp, supports specific Ubuntu and Debian releases. Check its system requirements before choosing a release.
 
    You may use other non-Debian-based distributions, they all come with their own 'gotchas' that are beyond the scope of this guide.
 
@@ -58,21 +59,23 @@ Follow the instructions on the [official documentation](https://docs.microsoft.c
 
 ## Set up Git
 
-Git comes pre-installed with Ubuntu 22.04, verify your Git version with `git --version`.
+Check that Git is installed in your Ubuntu distribution:
 
-```txt
-~
-❯ git --version
-git version 2.25.1
+```bash
+git --version
 ```
+
+If Git is not installed, run `sudo apt install git`.
 
 (Optional but recommended) You can now proceed to [setting up your ssh keys](https://help.github.com/articles/generating-an-ssh-key) with GitHub.
 
 ## Installing a Code Editor
 
-We recommend installing [Visual Studio Code](https://code.visualstudio.com). It has great support for WSL and automatically installs all the necessary extensions on your WSL distribution.
+Install [Visual Studio Code](https://code.visualstudio.com) on Windows and install its [WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl). Open your project folder from an Ubuntu terminal with `code .`, or use **WSL: Connect to WSL** from the VS Code Command Palette.
 
-**Essentially, you will edit and store your code on Ubuntu-22.04 with VS Code installed on Windows.**
+VS Code installs its server in WSL when you first connect. Other extensions may need to be installed in WSL separately; see the [VS Code instructions for managing extensions](https://code.visualstudio.com/docs/remote/wsl#_managing-extensions).
+
+**You will edit and store your code in your Ubuntu distribution, with VS Code installed on Windows.**
 
 ## Installing Docker Desktop
 
@@ -82,9 +85,9 @@ Follow the instructions on the [official documentation](https://docs.docker.com/
 
 ## Configure Docker Desktop for WSL
 
-Once Docker Desktop is installed, [follow these instructions](https://docs.docker.com/docker-for-windows/wsl) and configure it to use the Ubuntu-22.04 installation as a backend.
+Once Docker Desktop is installed, [enable its WSL 2 backend](https://docs.docker.com/desktop/features/wsl/). In **Settings > Resources > WSL Integration**, enable integration for your Ubuntu distribution and apply the changes.
 
-This makes it so that the containers run on the WSL side instead of running on Windows. You will be able to access the services over `http://localhost` on both Windows and Ubuntu.
+Docker Desktop runs in its own `docker-desktop` WSL distribution. Integration lets you use Docker commands from your Ubuntu terminal. Services with published ports can be accessed through `localhost` on Windows and Ubuntu.
 
 ## Installing Node.js and pnpm
 
@@ -108,7 +111,7 @@ Now that you have installed the pre-requisites, follow [our local setup guide](/
 
 ## Optimize memory allocation
 
-The default settings for your WSL installtion can vary, we recommend tuning the memory allocated to WSL by Windows by following these steps.
+The default settings for your WSL installation can vary, we recommend tuning the memory allocated to WSL by Windows by following these steps.
 
 Create a `.wslconfig` file in your `%UserProfile%` directory, typically at `C:\Users\<UserName>\.wslconfig`. Replace `x` with values that suit your own needs:
 
@@ -121,6 +124,14 @@ memory=xGB
 swap=xGB
 ```
 
+Save your work and stop running workloads before applying these settings. Run the following command from PowerShell to shut down all WSL distributions:
+
+```powershell
+wsl --shutdown
+```
+
+Restart your Ubuntu distribution and Docker Desktop for the new settings to take effect.
+
 You can read more about the config in the [official guide here](https://learn.microsoft.com/en-us/windows/wsl/wsl-config).
 
 ## Troubleshooting
@@ -128,7 +139,7 @@ You can read more about the config in the [official guide here](https://learn.mi
 Here are some useful links:
 
 - Official FAQ for [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/faq).
-- Official FAQ for [Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/faqs).
+- Official FAQ for [Docker Desktop for Windows](https://docs.docker.com/desktop/faqs/).
 - Getting help from [our community](/troubleshooting-development-issues/#getting-help).
 
 <Aside type='note' title='More Help'>
