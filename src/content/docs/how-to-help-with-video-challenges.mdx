@@ -8,40 +8,20 @@ A video challenge is a small section of a full-length video course on a particul
 
 The video challenge pages are created by members of the freeCodeCamp team. YouTube videos are also uploaded by members of the freeCodeCamp team.
 
-## Numbering Challenges
+## Creating a Video Challenge
 
-:::note
-This section only applies to the catalog items which don't use the existing scripts for generating files with MongoDB ids.
-:::
-
-Every challenge needs an `id`. If you don't specify one, then MongoDB will create a new random one when it saves the data; however, we don't want it to do that, since we want the challenge ids to be consistent across different environments (staging, production, lots of different developers, etc.).
-
-To generate a new one in a shell (assuming MongoDB is running separately):
-
-1. Run `mongo` command.
-2. Run `ObjectId()` command.
-
-For example:
+To add a video challenge to an existing block, change to the block's directory and run:
 
 ```bash
-$ mongo
-MongoDB shell version v3.6.1
-connecting to: mongodb://127.0.0.1:27017
-MongoDB server version: 3.4.10
-...
-$ ObjectId()
-ObjectId("5a474d78df58bafeb3535d34")
+cd curriculum/challenges/english/blocks/<block>
+pnpm run create-next-challenge
 ```
 
-The result is a new id, for example, `5a474d78df58bafeb3535d34` above.
+Select `video` when prompted for the challenge type, then enter the challenge's dashed name and title.
 
-Once you have your id, put it into the markdown file as the `id` field at the top, e.g.
+The script generates an id, creates the challenge file with `challengeType: 11`, and appends it to `challengeOrder` in `curriculum/structure/blocks/<block>.json`.
 
-```yml
----
-id: 5a474d78df58bafeb3535d34
-title: Challenge Title
-```
+In the generated file, replace the `videoId` placeholder with the YouTube video id and fill in the description, question, answers, and solution number.
 
 ## Challenge Template
 
@@ -51,8 +31,6 @@ Below is a template of what the challenge markdown files look like.
 ---
 id: Unique identifier (alphanumerical, MongoDB_id)
 title: Challenge Title
-sidebar:
-  label: Work on Video Challenges
 challengeType: 11
 videoId: 'YouTube videoId for video challenge'
 ---
@@ -104,8 +82,6 @@ For example, in the following code from the header of a video challenge markdown
 ---
 id: 5e9a093a74c4063ca6f7c14d
 title: Data Analysis Example A
-sidebar:
-  label: "Work on Video Challenges"
 challengeType: 11
 videoId: nVAaxZ34khk
 ---
