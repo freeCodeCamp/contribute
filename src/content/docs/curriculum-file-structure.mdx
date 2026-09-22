@@ -160,6 +160,8 @@ Superblocks are classified in [`packages/shared/src/config/curriculum.ts`](https
 - `SuperBlockStage` defines the categories: `Core`, `English`, `Spanish`, `Chinese`, `Professional`, `Extra`, `Legacy`, `Upcoming`, `Next`, and `Catalog`.
 - `superBlockStages` lists the superblocks assigned to each category.
 
+These categories map to the groupings on the [Learn page](https://www.freecodecamp.org/learn). `Legacy` superblocks appear on the [Archive page](https://www.freecodecamp.org/learn/archive), and `Catalog` superblocks appear in the [Catalog](https://www.freecodecamp.org/catalog). `Upcoming` superblocks are hidden unless upcoming changes are enabled with `SHOW_UPCOMING_CHANGES=true`.
+
 To find a superblock's category, look up its slug in `SuperBlocks`, then find the corresponding enum member in `superBlockStages`. For example, `javascript-v9` maps to `SuperBlocks.JsV9`, which appears in `superBlockStages[SuperBlockStage.Core]`.
 
 Use `superBlockStages` to find category membership, the files in `curriculum/structure/superblocks/` to find chapters, modules, and blocks, and [`intro.json`](#the-introjson-file) to find display titles and introductory text.
