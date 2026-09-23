@@ -8,7 +8,7 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 
 ## Issues with Installing the Recommended Prerequisites
 
-We regularly develop on the latest or most popular operating systems like macOS 10.15 or later, Ubuntu 20.04 or later, and Windows 10 or later (with WSL2).
+Your operating system must support Node.js 24. On Windows, use WSL2.
 
 It is recommended to research your specific issue on resources such as Google, Stack Overflow, and Stack Exchange. There is a good chance that someone has faced the same issue and there is already an answer to your specific query.
 
@@ -26,7 +26,7 @@ If you are working on a WSL2 Linux Distro, you might get performance and stabili
 
 Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
 
-See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
+See [Microsoft's guidance for working across Windows and Linux file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems) for more information.
 
 ## Troubleshooting port issues on GitHub Codespaces
 
@@ -68,7 +68,7 @@ A browser tab inside a codespace cannot reach `localhost`. That address points a
    grep -E '^(HOME_LOCATION|API_LOCATION)=' .env
    ```
 
-   In a codespace both must use your forwarded port URLs, for example `https://CODESPACE_NAME-8000.app.github.dev`.
+   In a codespace, `HOME_LOCATION` must use the forwarded client URL, such as `https://CODESPACE_NAME-8000.app.github.dev`. `API_LOCATION` must use the forwarded API URL, such as `https://CODESPACE_NAME-3000.app.github.dev`.
 
 2. If they still use `localhost`, run the codespace environment script again from the same directory:
 
@@ -76,7 +76,7 @@ A browser tab inside a codespace cannot reach `localhost`. That address points a
    .devcontainer/codespace-env.sh
    ```
 
-3. Rebuild the client so that it picks up the new values:
+3. Stop the process that is running the client, then restart it with the same command. If you started the application with `pnpm run develop`, run:
 
    ```bash
    pnpm run develop
@@ -116,13 +116,13 @@ pnpm run seed
 pnpm run develop
 ```
 
-OR
-
-Use the shorter handy command that does the above steps:
+Or use the shorter command, which runs the clean, install, and develop steps:
 
 ```bash
 pnpm run clean-and-develop
 ```
+
+This command does not seed the database. Run `pnpm run seed` separately if you need to recreate the development users and data.
 
 If you continue to face issues with the build, cleaning up the workspace is recommended.
 
@@ -169,7 +169,7 @@ If you get errors while installing the dependencies, please make sure that you a
 
 <Aside type='caution' title='Slow downloads'>
 
-The first time setup can take a while depending on your network bandwidth. Be patient, and if you are still stuck we recommend using GitHub Codespaces instead of an offline setup. We recommend 30-50 mbps connections for the best experience.
+The initial setup downloads several large dependencies and container images, so completion time depends on your connection. GitHub Codespaces is an alternative when local setup is impractical.
 
 </Aside>
 
