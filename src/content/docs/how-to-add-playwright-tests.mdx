@@ -12,7 +12,7 @@ You'll need this guide if you're adding or modifying end-to-end tests, or if you
 
 ## Installation
 
-To install Playwright run:
+Playwright is installed with the repository dependencies, but its browser binaries must be installed separately. Run this command before your first local test run and after Playwright is upgraded. On Linux, it also installs the required system dependencies:
 
 ```bash
 pnpm run playwright:install-build-tools
@@ -24,7 +24,7 @@ To learn how to write Playwright tests, or 'specs', please see Playwright's offi
 
 - Playwright tests are in the `./e2e` directory.
 
-- Playwright test files are always with a `.spec.ts` extension.
+- Standard Playwright test specs use the `.spec.ts` extension.
 
 ## Best Practices for writing E2E tests
 
@@ -32,12 +32,20 @@ This section will explain in detail about best practices for writing and documen
 
 ### Imports
 
-Always start with necessary imports at the beginning of the file.
+Import `test` and `expect` from `@playwright/test` for tests that do not change user data:
 
 For example:
 
 ```ts
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+```
+
+Tests that change user data should use the isolated-user fixture. It creates a separate user for the test and deletes that user afterward. Import `test` and `expect` from the fixture, then select a user preset if the test needs one:
+
+```ts
+import { test, expect } from './fixtures/isolated-user';
+
+test.use({ userPreset: 'certified' });
 ```
 
 ### Identifying a DOM element
@@ -45,6 +53,9 @@ import { test, expect, type Page } from '@playwright/test';
 Playwright comes with [multiple built-in locators](https://playwright.dev/docs/locators#quick-guide), but we recommend prioritizing the following locators:
 
 - `getByRole` for querying semantic elements, whose role is important and allows assistive technology to perceive the page correctly.
+- `getByLabel` for querying form controls by their associated label.
+- `getByPlaceholder` for querying form controls when no label is available.
+- `getByAltText` for querying images and other elements by their alternative text.
 - `getByText` for querying non-semantic elements such as `div`, `span`, or `p`.
 
 For example:
@@ -54,7 +65,7 @@ await expect(page.getByRole('heading', { name: 'Sign up' })).toBeVisible();
 await expect(page.getByText('Hello World')).toBeVisible();
 ```
 
-In cases where the elements cannot be queried using the above-mentioned locators, you can use the `data-playwright-test-label` attribute as the last resort. This attribute should be used only in Playwright tests, and not for styling or any other purposes.
+If an element cannot be queried with an appropriate user-facing locator, you can use the `data-playwright-test-label` attribute as a last resort. This attribute should be used only in Playwright tests, and not for styling or any other purposes.
 
 For example:
 
@@ -114,6 +125,9 @@ Make sure that the tests are not repeating the same code over and over again. If
 For example:
 
 ```ts
+const expectedLogoCount = 3;
+await expect(logos).toHaveCount(expectedLogoCount);
+
 for (const logo of await logos.all()) {
   await expect(logo).toBeVisible();
 }
@@ -127,28 +141,27 @@ For example:
 
 ```ts
 test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
+  page,
   isMobile
 }) => {
-  const landingPageImage = page.getByRole('img', {
-    name: 'landing-page-figure'
-  });
+  const landingPageFigure = page.getByTestId('landing-page-figure');
 
   if (isMobile) {
-    await expect(landingPageImage).toBeHidden();
+    await expect(landingPageFigure).toBeHidden();
   } else {
-    await expect(landingPageImage).toBeVisible();
+    await expect(landingPageFigure).toBeVisible();
   }
 });
 ```
 
 ### Group related tests
 
-Group related tests together using describe blocks. This makes it easier to understand what the tests are doing and what they're testing.
+Group related tests together using `test.describe` blocks. This makes it easier to understand what the tests are doing and what they're testing.
 
 For example:
 
 ```ts
-describe('The campers landing page', () => {
+test.describe('The campers landing page', () => {
   test('The campers landing page figure is visible on desktop and hidden on mobile view', async ({
     isMobile
   }) => {
@@ -165,54 +178,56 @@ describe('The campers landing page', () => {
 
 ### Ensure that MongoDB and Client Applications are Running
 
-- [Start MongoDB and seed the database](/how-to-setup-freecodecamp-locally/#start-the-app). In order for Playwright tests to work, be sure that you use the `pnpm run seed:certified-user` command.
+- [Start MongoDB and seed the database](/how-to-setup-freecodecamp-locally/#start-the-app).
 
 - [Start the freeCodeCamp client application and API server](/how-to-setup-freecodecamp-locally/#start-the-app)
+
+Playwright's setup project creates the shared certified and development users before the tests run. Tests that import the isolated-user fixture create and remove their own users.
 
 ### Run the Playwright Tests
 
 To run tests with Playwright, check the following commands:
 
-- To run tests in UI helper mode:
+- To run tests in UI mode:
 
   ```bash
-  npx playwright test --ui
+  pnpm playwright:watch
   ```
 
 - To run a single test:
 
   ```bash
-  npx playwright test <filename>
+  pnpm playwright:run -- <filename>
   ```
 
   For example:
 
   ```bash
-  npx playwright test landing.spec.ts
+  pnpm playwright:run -- landing.spec.ts
   ```
 
-- Run a set of test files in respective folders:
+- To run a set of test files:
 
   ```bash
-  npx playwright test <pathToFolder1> <pathToFolder2>
+  pnpm playwright:run -- <filename1> <filename2>
   ```
 
   For example:
 
   ```bash
-  npx playwright test tests/todo-page/ tests/landing-page/
+  pnpm playwright:run -- action-row.spec.ts landing.spec.ts
   ```
 
 - Run the test with the title:
 
   ```bash
-  npx playwright test -g <title>
+  pnpm playwright:run -- -g <title>
   ```
 
   For example:
 
   ```bash
-  npx playwright test -g "add a todo item"
+  pnpm playwright:run -- -g "add a todo item"
   ```
 
 ### Debugging Tests
@@ -222,13 +237,13 @@ Since Playwright runs in Node.js, you can debug it with your debugger of choice 
 - Debugging all tests:
 
   ```bash
-  npx playwright test --debug
+  pnpm playwright:run -- --debug
   ```
 
 - Debugging one test file:
 
   ```bash
-  npx playwright test example.spec.ts --debug
+  pnpm playwright:run -- example.spec.ts --debug
   ```
 
 ### Generate Test Reports
@@ -236,77 +251,43 @@ Since Playwright runs in Node.js, you can debug it with your debugger of choice 
 The HTML Reporter shows you a full report of your tests allowing you to filter the report by browsers, passed tests, failed tests, skipped tests and flaky tests.
 
 ```bash
-npx playwright show-report
+pnpm --dir e2e exec playwright show-report playwright/reporter
 ```
 
 ### Troubleshooting
 
-- A common error seen in playwright is as follows:
+- Playwright reports a connection error when the client is not available at its configured base URL. The default URL is `http://127.0.0.1:8000`.
 
   ```bash
     Error: page.goto: Could not connect: Connection refused
     =========================== logs ===========================
-    navigating to "https://127.0.0.1:8000/", waiting until "load"
+    navigating to "http://127.0.0.1:8000/", waiting until "load"
     ============================================================
   ```
 
-  You can fix the above error with the following steps:
+  Check these items before running the test again:
 
 <Steps>
 
-1. **Check the URL:** Ensure that the URL you're trying to navigate to is correct and properly formatted. Make sure there are no typos in the URL.
-2. **Server Status:** Check whether the server at the URL is running and accessible. You might encounter this error if the server is not running or is not accessible.
-3. **Port Availability:** Verify that the port mentioned in the URL (8000 in this case) is the correct port and is available for use. Make sure no other process is already using that port.
-4. **Firewall or Security Software:** Sometimes, firewall or security software can block connections to specific ports. Check your firewall settings to ensure that the port is allowed.
-5. **Network Connectivity:** Ensure that your system has a working network connection and can access external resources.
+1. Confirm that the client and API are running.
+2. Open `http://127.0.0.1:8000` in your browser.
+3. If you changed `HOME_LOCATION`, confirm that it points to the running client.
 
 </Steps>
 
-- Another common error seen in playwright is as follows:
-
-  ```bash
-    Protocol error (Network.getResponseBody): Request content was evicted from inspector cache
-  ```
-
-<Steps>
-
-1. The network request was made using a method that does not include a
-   response body, such as HEAD or CONNECT.
-2. The network request was made over a
-   secure (HTTPS) connection, and the response body is not available for security
-   reasons.
-3. The network request was made by a third-party resource (such as an
-   advertisement or a tracking pixel) that is not controlled by the script.
-4. The network request was made by a script that has been paused or stopped
-   before the response was received.
-
-</Steps>
-
-**For more insights on issues visit the official documentation.**
+For other errors, see Playwright's [test debugging guide](https://playwright.dev/docs/debug).
 
 ## Set up for Playwright on GitHub Codespaces
 
 ### Ensure Development Environment is Running
 
-- Follow the [MongoDB installation guide](https://www.mongodb.com/basics/get-started).
+Follow the [GitHub Codespaces setup instructions](/how-to-setup-freecodecamp-locally/#choose-where-to-run-freecodecamp). The codespace creates `.env`, starts MongoDB and Mailpit, and seeds the database. Playwright creates its test users when the tests run.
 
-- Create the .env
+Start the client and API if they are not already running:
 
-  ```bash
-  cp sample.env .env
-  ```
-
-- Seed the database
-
-  ```bash
-  pnpm run seed:certified-user
-  ```
-
-- Develop the server and client
-
-  ```bash
-  pnpm run develop
-  ```
+```bash
+pnpm run develop
+```
 
 ### Install Playwright Build Tools
 
@@ -321,5 +302,5 @@ pnpm run playwright:install-build-tools
 To run all Playwright tests, run the following command:
 
 ```bash
-npx playwright test
+pnpm playwright:run
 ```
