@@ -7,7 +7,7 @@ sidebar:
 import { Steps } from '@astrojs/starlight/components';
 
 :::tip
-You will need this guide if you are working on any parts of the curriculum development which includes the workshops and labs.
+Use this guide when working on curriculum content.
 :::
 
 Our goal is to develop a fun and clear interactive learning experience.
@@ -16,7 +16,7 @@ Designing interactive coding challenges is difficult. It would be much easier to
 
 We want campers to achieve a flow state. We want them to build momentum and blast through our curriculum with as few snags as possible. We want them to go into the projects with confidence and gain wide exposure to programming concepts.
 
-We are currently in version 9 of the curriculum which includes theory lessons, workshops, labs, review pages and quizzes.
+We are currently in version 9 of the curriculum, which includes theory lessons, workshops, labs, review pages and quizzes.
 
 The content for each challenge is stored in its markdown file. This markdown file is later converted to HTML using our tools to create interactive web pages.
 
@@ -32,27 +32,33 @@ The core curriculum teaches full stack development and is broken down into the f
 - Python Certification
 - Relational Databases Certification
 - Back-End Development and APIs Certification
+- Certified Full-Stack Developer
 
-Each certification is broken down into modules like Bash Fundamentals, Semantic HTML and Functional Programming.
+Version 9 certifications are organized into chapters, modules, blocks and challenges. Chapters contain modules, modules contain blocks, and blocks contain individual challenge files. See the [curriculum file structure](/curriculum-file-structure/) for details.
 
-Each module contains dozens of theory lessons, workshops, labs, review pages and quizzes.
+Each module contains blocks. A block contains one or more challenge files and is labeled according to its content, such as `lecture`, `workshop`, `lab`, `review` or `quiz`.
 
 Theory lessons are short text based lectures with interactive examples that teach the theory behind concepts including common data structures, CSS Grid and SQL.
 
-Workshops are step based projects where campers get to practice what they learned in the theory lessons.
+Workshops are guided, step-based projects that introduce or reinforce concepts.
 
 Labs are campers' opportunity to test their problem-solving skills and build out projects reviewing the concepts learned in the theory lessons and workshops.
 
-Review pages have a complete list of concepts covered in the module.
+Review pages summarize concepts covered in the module.
 
-Quizzes will test the campers understanding of the material before moving onto the next module.
+Quizzes test campers' knowledge of the module material.
 
-Each of these components has its own tooling and style guides. If you are interested in contributing, refer to these specialized guides:
+Each core curriculum component has its own tooling and style guide. Refer to the guide for the content you are working on:
 
+- [How to Work on Theory Lessons](/how-to-work-on-theory-lessons/)
 - [How to Work on Workshops](/how-to-work-on-workshops/)
 - [How to Work on Labs](/how-to-work-on-labs)
-- [How to work on Review Pages](/how-to-work-on-reviews)
+- [How to Work on Review Pages](/how-to-work-on-reviews)
 - [How to Work on Quizzes](/how-to-work-on-quizzes)
+
+## Language Curricula
+
+Language curricula are separate from the core curriculum and have their own content structure and challenge formats. Refer to [How to Work on Language Curricula](/how-to-work-on-language-curricula) for specific guidance.
 
 ## Set up the tooling for the Curriculum
 
@@ -62,191 +68,6 @@ Before you work on the curriculum, you would need to set up some tooling to help
 - Use GitHub Codespaces, a free online dev environment. Clicking the button below will start a ready-to-code dev environment for freeCodeCamp in your browser. It only takes a few minutes.
 
   [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/freeCodeCamp/freeCodeCamp)
-
-## Challenge Template
-
-:::note
-
-The four hooks, `--before-each--`, `--before-all--`, `--after-each--` and `--after-all--` are only evaluated when running tests.
-
-Due to differences in the testing environments, global variables are not handled the same way across hooks.
-
-- In DOM challenges, any variables declared in either `--before-all--` or `--before-each--` hooks are available in the tests.
-
-- In the other challenges, `--before-each--` is the same, but `--before-all--` is different. You have to explicitly add variables to `globalThis` for them to be available in tests.
-
-:::
-
-:::danger
-
-Since `globalThis` persists until the page is reloaded, it's very important to undo any changes to it in an after hook.
-
-:::
-
-````md
----
-id: Unique identifier (alphanumerical, MongoDB_id)
-title: Challenge Title
-challengeType: Integer, defined in `client/utils/challenge-types.js`
-demoType: onClick(labs) or onLoad(workshops)
----
-
-# --description--
-
-Challenge description text, in markdown
-
-```html
-<div>example code</div>
-```
-
-# --before-all--
-
-```js
-// This code will run before the learner's code and tests.
-let clock = __FakeTimers.install();
-globalThis.x = 1;
-// It is necessary for DOM challenges when something needs to be
-// mocked before the learner's code is evaluated. For example,
-// fake timers need to be set up ahead of time if the learner's code
-// will call setTimeout.
-```
-
-# --before-each--
-
-```js
-// Precisely when this is evaluated depends on the type of
-// challenge. HTML challenges run it after the learner's code,
-// but before each test. In all other challenges the order is
-// --before-each--, learner's code and then test code.
-const _testFixture = 'provides data for the tests';
-const clock = __FakeTimers.install();
-```
-
-# --after-each--
-
-```js
-// Undo any lasting changes caused by --before-each-- e.g.
-clock.uninstall();
-```
-
-# --after-all--
-
-```js
-// Undo any lasting changes caused by --before-all-- e.g.
-clock.uninstall();
-delete globalThis.x;
-```
-
-# --hints--
-
-Tests to run against user code, in pairs of markdown text and code block test code.
-
-```js
-Code for test one
-```
-
-If you want dynamic output based on the user's code, --fcc-expected-- and --fcc-actual-- will be replaced with the expected and actual values of the test's assertion. Take care if you have multiple assertions since the first failing assertion will determine the values of --fcc-expected-- and --fcc-actual--.
-
-```js
-assert.equal(
-  'this will replace --fcc-actual--',
-  'this will replace --fcc-expected--'
-);
-```
-
-# --seed--
-
-## --seed-contents--
-
-Boilerplate code to render to the editor. This section should only contain code inside backticks, like the following:
-
-```html
-<body>
-  <p class="main-text">Hello world!</p>
-</body>
-```
-
-```css
-body {
-  margin: 0;
-  background-color: #3a3240;
-}
-
-.main-text {
-  color: #aea8d3;
-}
-```
-
-```js
-console.log('freeCodeCamp is awesome!');
-```
-
-# --solutions--
-
-Solutions are used for the CI tests to ensure that changes to the hints will still pass as intended
-
-```js
-// first solution - the language(s) should match the seed.
-```
-
----
-
-```js
-// second solution - so if the seed is written in HTML...
-```
-
----
-
-```js
-// third solution etc. - Your solutions should be in HTML.
-```
-
-# --assignments--
-
-This will show a checkbox that campers have to check before completing a challenge
-
----
-
-This will show another checkbox that campers have to check before completing a challenge
-
-# --question--
-
-These fields are currently used for the multiple-choice Python challenges.
-
-## --text--
-
-The question text goes here.
-
-## --answers--
-
-Answer 1
-
-### --feedback--
-
-This will be shown as feedback when campers guess this answer
-
----
-
-Answer 2
-
----
-
-More answers
-
-## --video-solution--
-
-The number for the correct answer goes here.
-````
-
-:::note
-
-1. In the above sections, examples of `lang` are:
-
-- `html` - HTML/CSS
-- `js` - JavaScript
-- `jsx` - JSX
-
-:::
 
 ## Challenge descriptions/instructions
 
@@ -258,7 +79,7 @@ Use American English, e.g., use `labeled` instead of `labelled`.
 
 Challenge text should use the second person ("you") to help to give it a conversational tone. This way the text and instructions seem to speak directly to the camper working through the challenge. Try to avoid using the first person ("I", "we", "let's", and "us").
 
-Don't use outbound links. These interrupt the flow. Campers should never have to google anything during these challenges. If there are resources you think campers would benefit from, add them to the challenge's Guide-related article.
+Don't use outbound links in challenge instructions. Include the information campers need in the challenge text or teach it in a preceding lesson.
 
 You can add diagrams if necessary.
 
@@ -270,26 +91,26 @@ Proper nouns should use correct capitalization when possible. Below is a list of
 - Node.js
 - When referring to front-end, back-end, or full-stack, use the hyphenated form.
 
-### The 2-minute rule
+### The 2-minute rule for short challenges
 
-Each challenge should be solvable within 120 seconds by a native English speaker who has completed the challenges leading up to it. This includes the amount of time it takes to read the directions/instructions, understand the seeded code, write their code and get all the tests to pass.
+Each workshop step or other short coding exercise should be solvable within 120 seconds by a native English speaker who has completed the preceding challenges. This includes the time needed to read the instructions, understand the seed code, write the solution and pass the tests. This rule does not apply to an entire lab or certification project.
 
 If it takes longer than two minutes to complete the challenge, you have two options:
 
 - Simplify the challenge, or
 - Split the challenge into two challenges.
 
-The 2-minute rule forces you, the challenge designer, to make your directions concise, your seed code clear, and your tests straightforward.
+The 2-minute rule keeps instructions concise, seed code clear and tests straightforward.
 
-We track how long it takes for campers to solve challenges and use this information to identify challenges that need to be simplified or split.
+We track how long it takes for campers to solve short challenges and use this information to identify challenges that need to be simplified or split.
 
 ### Modularity
 
-Each challenge should teach exactly one concept, and that concept should be apparent from the challenge's name.
+Each short instructional challenge or workshop step should teach one concept. For challenges with descriptive titles, the concept should be apparent from the title.
 
-We can reinforce previously covered concepts through repetition and variations - for example, introducing h1 elements in one challenge, then h3 elements a few challenges later.
+We can reinforce previously covered concepts through repetition and variations, for example, introducing `<h1>` elements in one challenge, then `<h3>` elements a few challenges later.
 
-Our goal is to have thousands of 2-minute challenges. These can flow together and reiterate previously-covered concepts.
+Short challenges can flow together and reinforce previously covered concepts.
 
 ### Formatting challenge text
 
@@ -314,27 +135,19 @@ The following is an example of code:
 
 ````md
 ```{language}
-
 [YOUR CODE HERE]
-
 ```
 ````
 
 - Additional information in the form of a note should be surrounded by blank lines, and formatted: `**Note:** Rest of note text...`
 - If multiple notes are needed, then list all of the notes in separate sentences using the format: `**Notes:** First note text. Second note text.`
-- Use single quotes where applicable
-
-:::note
-The equivalent _Markdown_ should be used in place of _HTML_ tags.
-:::
+- Use Markdown instead of HTML tags when Markdown provides equivalent formatting.
 
 ## Writing tests
 
-Challenges should have the minimum number of tests necessary to verify that a camper understands a concept.
+Tests should cover the stated requirements without enforcing unrelated implementation details. Use the minimum number needed to verify those requirements.
 
-Our goal is to communicate the single point that the challenge is trying to teach, and test that they have understood that point.
-
-Challenge tests can make use of the Node.js and Chai.js assertion libraries. Also, if needed, user-generated code can be accessed in the `code` variable. In addition, the `__helpers` object exposes several functions that simplify the process of writing tests. The available functions are defined in the [curriculum-helpers](https://github.com/freeCodeCamp/curriculum-helpers/blob/main/packages/helpers/lib/index.ts) repo.
+Challenge tests can use the [Node.js `assert` API](https://nodejs.org/api/assert.html) and the [Chai `assert` API](https://www.chaijs.com/api/assert/). If needed, user-generated code can be accessed through the `code` variable. The `__helpers` object also exposes functions for inspecting code. These functions are defined in the [curriculum-helpers](https://github.com/freeCodeCamp/curriculum-helpers/blob/main/packages/helpers/lib/index.ts) repository.
 
 ### Guidelines for assertions
 
@@ -349,7 +162,7 @@ assert(Array.isArray([]), 'empty arrays are arrays');
 Example two
 
 ```js
-assert.isArray([], 'empty arrays are arrays');
+assert.isArray([]);
 ```
 
 In the first example, what the test means isn't immediately clear. The main thing
@@ -357,7 +170,7 @@ that explains the test is the assertion message.
 
 Meanwhile in example two, the test spells out its purpose; to determine if something is an array.
 
-Overall, we prefer the internal testing library implementation.
+Prefer the specific assertion method.
 
 ## Formatting Seed Code
 
@@ -371,9 +184,13 @@ Here are specific formatting guidelines for the challenge seed code:
 
 ### Seed Code Comments
 
-We have a [comment dictionary](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments.json) that contains the only comments that can be used within the seed code. The exact case and spacing of the dictionary comment must be used. The comment dictionary should not be expanded without prior discussion with the dev-team.
+The curriculum has two English dictionaries for seed-code comments. The [`comments.json`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments.json) file contains comments that are translated for localized curricula. The [`comments-to-not-translate.json`](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments-to-not-translate.json) file is used for seed-code comments that must remain unchanged in every language.
 
-Comments used should have a space between the comment characters and the comment themselves. In general, comments should be used sparingly. Always consider rewriting a challenge's description or instructions if it could avoid using a seed code comment.
+Every comment in curriculum seed code must match an entry in one of these files, including its case and spacing. Do not add entries without prior discussion with the development team.
+
+Comments should have a space between the comment marker and the comment text. In general, comments should be used sparingly. Always consider rewriting a challenge's description or instructions if it could avoid using a seed code comment.
+
+Workshop steps use [`--fcc-editable-region--` markers](/how-to-work-on-workshops/#editable-regions-and-indentation) to show campers where to change code. Do not use seed comments as a substitute for those markers.
 
 Example of a valid single-line JavaScript comment:
 
@@ -387,7 +204,7 @@ Example of a valid CSS comment:
 /* Only change code above this line */
 ```
 
-If a challenge only has a single place where code changes are needed, please use the comments in the following example to instruct the user where changes should be made.
+A dictionary comment can also be part of the seed code that a camper needs to change:
 
 ```js
 // TODO: use a different type of loop
@@ -398,9 +215,7 @@ for (let i = 1; i <= count; i++) {
 
 ### Translation of Seed Code Comments
 
-There are separate comment dictionaries for each language. The [English version of the comment dictionary](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments.json) is the basis for the translations found in the corresponding non-English versions of the files. The non-English versions of the comment dictionaries are located in the i18n-curriculum git submodule at `/curriculum/dictionaries/{language}/comments.json` (for example, `/curriculum/dictionaries/chinese/comments.json` for Chinese). Each dictionary consists of an array of objects with a unique `id` property and a `text` property. Only the `text` should be modified to encompass the translation of the corresponding English comment.
-
-Additionally, there is a [comments-to-not-translate.json](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/dictionaries/english/comments-to-not-translate.json) file that contains rules for comments that should remain in English and not be translated. This is usually used for comments added by the camper in workshops and tested by the tests of the steps.
+There are separate translated comment dictionaries for each language. The English `comments.json` file is their source. The translated dictionaries are located in the i18n-curriculum submodule at `curriculum/dictionaries/{language}/comments.json` (for example, `curriculum/dictionaries/chinese/comments.json`). Each dictionary is a JSON object whose keys are comment IDs and whose values are the comment text.
 
 Some comments may contain a word/phrase that should not be translated. For example, variable names or proper library names like "React" should not be translated. See the comment below as an example. The word `myGlobal` should not be translated.
 
@@ -408,54 +223,48 @@ Some comments may contain a word/phrase that should not be translated. For examp
 Declare the myGlobal variable below this line
 ```
 
-:::note
-We are working on an integration to make it possible to work on i18n for the comment dictionary.
-:::
+The i18n-curriculum submodule is synchronized through the translation workflow. Do not edit its files directly.
 
 ## Testing Challenges
 
 Before you [create a pull request](/how-to-open-a-pull-request/) for your changes, you need to validate that the changes you have made do not inadvertently cause problems with the challenge.
 
 :::tip
-Did you know you can also build and develop selectively? Use `FCC_CHALLENGE_ID`, `FCC_BLOCK`, or `FCC_SUPERBLOCK` to test and develop only the specific challenges you're working on. This is much faster than building the full curriculum!
+Use `FCC_CHALLENGE_ID`, `FCC_BLOCK`, or `FCC_SUPERBLOCK` to test only the curriculum content you are working on. This is much faster than building the full curriculum!
+
+Set `SHOW_UPCOMING_CHANGES` to `true` in `.env` to include Upcoming blocks and challenges marked as upcoming. When this variable is `false`, both are omitted from the curriculum build and are therefore not visible to `test-curriculum-content`.
 :::
+
+Run the following commands from the root of the freeCodeCamp repository.
 
 <Steps>
 
 1. Install the browser that the tests drive. Do this once:
 
-   ```
-   pnpm -F=curriculum install-puppeteer
-   ```
-
-2. To test all challenges run the command below from the root directory
-
-   ```
-   pnpm run test-curriculum-content
+   ```bash
+   pnpm -F=@freecodecamp/curriculum install-puppeteer
    ```
 
-3. To test a single challenge, use its challenge id
+2. To test a single challenge, use its challenge id:
 
-   ```
-   FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run test-curriculum-content
+   ```bash
+   FCC_CHALLENGE_ID=6823ac607bfdbc46331b2559 pnpm run test-curriculum-content
    ```
 
-4. You can also test a block or a superblock of challenges with these commands
+3. You can also test a block or a superblock of challenges with these commands:
 
-   ```
-   FCC_BLOCK='basic-html-and-html5' pnpm run test-curriculum-content
+   ```bash
+   FCC_BLOCK='workshop-curriculum-outline' pnpm run test-curriculum-content
    ```
 
    Use the block's `dashedName` (the folder's name) for the `FCC_BLOCK` value.
 
-   ```
-   FCC_SUPERBLOCK='responsive-web-design' pnpm run test-curriculum-content
+   ```bash
+   FCC_SUPERBLOCK='responsive-web-design-v9' pnpm run test-curriculum-content
    ```
 
    :::tip
-   You can set the environment variable `LOCALE` in the `.env` to the language of the challenge(s) you need to test.
-
-   The currently accepted values are `english` and `chinese`, with `english` being set by default.
+   Set `CURRICULUM_LOCALE` in `.env` to the enabled curriculum language you need to test. The default is `english`.
    :::
 
 </Steps>
@@ -466,24 +275,24 @@ After you've committed your changes, check here for [how to open a Pull Request]
 
 ## Useful Links
 
-- [Challenge types](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/shared/config/challenge-types.ts#L1-#L28) - what the numeric challenge type values mean (enum).
+- [Challenge types](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/packages/shared/src/config/challenge-types.ts) - what the numeric challenge type values mean.
 
 ## Helper Scripts
-
-:::note
-If you are working with the step-based challenges, refer to the [Work on Workshops](/how-to-work-on-workshops/) section.
-:::
 
 ### Creating a New Project
 
 To create a new lecture block, workshop, lab, review page or quiz, you can run `pnpm run create-new-project` in the root directory. This opens up a command line UI that guides you through the process.
 
-Once that has finished, there should be a new challenge in the curriculum that you can use for the first step of the project. For example, if you created a project called `test-project` in the Responsive Web Design certification, it would be in `curriculum/challenges/english/blocks/test-project`.
+The script creates the block directory and its initial challenge file. For example, a block named `test-project` in the Responsive Web Design certification would be created at `curriculum/challenges/english/blocks/test-project`.
+
+:::note
+The remaining challenge-management scripts are for non-step blocks that contain multiple challenges, such as theory lesson blocks. For workshops, labs, reviews and quizzes, use the tools described in their specialized guides.
+:::
 
 There are a few other helper scripts that can be used to manage the challenges in a block. Note that these commands should all be run in the block directory. For example:
 
 ```bash
-cd curriculum/challenges/english/blocks/basic-algorithm-scripting
+cd curriculum/challenges/english/blocks/lecture-understanding-html-attributes
 ```
 
 ### Add New Challenge
