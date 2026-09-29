@@ -17,7 +17,7 @@ The colors, fonts, and base styles are defined in the external [`@freecodecamp/u
 - Tailwind CSS utilities and base styles
 - Reusable UI components
 
-You can import components from `@freecodecamp/ui` in your React code, and the CSS is automatically included via the `base.css` file.
+You can import components from `@freecodecamp/ui` in your React code. The default client layout imports the package styles from `@freecodecamp/ui/dist/base.css`.
 
 We are strongly opinionated about adding new variables/tokens to the colors. After careful research, the colors have been chosen to respect the freeCodeCamp brand identity, developer experience, and accessibility.
 
@@ -45,23 +45,21 @@ It is encouraged to use functional components over class-based components.
 
 #### Retaining Git File History
 
-Sometimes changing the file from `<filename>.js` to `<filename>.ts` (or `.tsx`) causes the original file to be deleted, and a new one created, and other times the filename just changes - in terms of Git. Ideally, we want the file history to be preserved.
-
-The best bet at achieving this is to:
+Git does not record renames explicitly. It detects them by comparing file contents. Commit the rename before changing the contents so that Git can identify the renamed file when displaying its history.
 
 <Steps>
 
-1. Rename the file
-2. Commit with the flag `--no-verify` to prevent Husky from
-   complaining about the lint errors
-3. Refactor to TypeScript for migration, in a separate commit
+1. Rename the file with `git mv`.
+2. Commit the rename without changing the file's contents.
+3. Refactor the renamed file to valid TypeScript.
+4. Commit the TypeScript migration separately.
 
 </Steps>
 
+Try the rename commit normally. If the pre-commit hook fails because the renamed file is not yet valid TypeScript, create the rename-only commit with `git commit --no-verify`. After refactoring the file, run `pnpm format` and `pnpm lint` before committing the TypeScript migration.
+
 :::note
-Editors like VSCode are still likely to show you the file has been deleted
-and a new one created. If you use the CLI to `git add .`, then VSCode will show the
-file as renamed in the staging area.
+Editors such as VS Code may show the original file as deleted and the renamed file as new until you stage both paths. Use `git status` to check how Git classifies the change.
 :::
 
 ### Naming Conventions
@@ -99,12 +97,12 @@ const myObject: MyObject = {};
 ### Action Definitions
 
 ```typescript
-enum AppActionTypes = {
+enum AppActionTypes {
   actionFunction = 'actionFunction'
 }
 
 export const actionFunction = (
-  arg: Arg
+  arg: AppState['property']
 ): ReducerPayload<AppActionTypes.actionFunction> => ({
   type: AppActionTypes.actionFunction,
   payload: arg
@@ -146,16 +144,20 @@ Within a component, import the actions and selectors needed.
 // Add type definition
 interface MyComponentProps {
   actionFunction: typeof actionFunction;
+  value: AppState['property'];
 }
 // Connect to Redux store
 const mapDispatchToProps = {
   actionFunction
 };
 // Example React Component connected to store
-const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {
+const MyComponent = ({
+  actionFunction,
+  value
+}: MyComponentProps): JSX.Element => {
   const handleClick = () => {
     // Dispatch function
-    actionFunction();
+    actionFunction(value);
   };
   return <button onClick={handleClick}>freeCodeCamp is awesome!</button>;
 };
@@ -163,27 +165,15 @@ const MyComponent = ({ actionFunction }: MyComponentProps): JSX.Element => {
 export default connect(null, mapDispatchToProps)(MyComponent);
 ```
 
-//-- ### Redux Types File -->
-//-- The types associated with the Redux store state are located in `client/src/redux/types.ts`... -->
-
 ## API
 
 ### Testing
 
-The `api/` tests are split into two parts:
-
-<Steps>
-
-1. Unit tests
-2. Integration tests
-
-</Steps>
+The API uses Vitest. Test files use the `.test.ts` extension and are stored next to the source they cover. For example, tests for `api/src/utils/normalize.ts` belong in `api/src/utils/normalize.test.ts`.
 
 #### Unit Tests
 
-Unit tests isolate a single function or component. The tests do not need mocking, but will require fixtures.
-
-The unit tests are located in a new file adjacent to the file exporting that is being tested:
+Unit tests isolate a function or module. Use fixtures or mocks when the behavior under test requires them.
 
 ```text
 api/
@@ -194,14 +184,15 @@ api/
 
 #### Integration Tests
 
-Integration tests test the API as a whole. The tests will require mocking and should not require fixtures beyond the database seeding data and a method for authentication.
-
-Typically, each integration test file will be directly related to a route. The integration tests are located in the `api/tests/` directory:
+Integration tests exercise routes through the Fastify test server. Store each route test next to its route and use the request helpers from `api/vitest.utils.ts`.
 
 ```text
 api/
-├── tests/
-│   ├── settings.ts
+├── src/
+│   ├── routes/
+│   │   ├── protected/
+│   │   │   ├── settings.ts
+│   │   │   ├── settings.test.ts
 ```
 
 ## Further Literature
