@@ -8,12 +8,18 @@ User tokens are used to identify users to third parties so challenges completed 
 
 ## How they are Created
 
-At the moment, the tokens are only used to submit the Relational Database challenges. A token gets created when a signed-in user clicks the "Click here to start the course" or "Click here to start the project" buttons to start one of the Relational Database courses or projects.
+User tokens are used to submit challenges completed through CodeRoad and freeCodeCamp OS, including Relational Database and Back End Development and APIs courses and projects.
+
+A token gets created when a signed-in user clicks "Generate User Token" in a challenge's setup instructions. The user then clicks "Copy User Token" and follows the instructions to add it to their course environment. Starting a course or project does not generate a token.
 
 ## When they Get Deleted
 
-A user token will be deleted when a user signs out of freeCodeCamp, resets their progress, deletes their account, or manually deletes the token using the widget on the settings page.
+A user token will be deleted when a user resets all their progress, deletes their account, or manually deletes the token using the widget on the settings page. Generating a new token also deletes any existing tokens for that user. Signing out of freeCodeCamp does not delete the token.
 
 ## How they Work
 
-Tokens are stored in a `UserToken` collection in the database. Each record has a unique `_id`, which is the token, and a `user_id` that links to the user's account from the `user` collection. The token is encoded using JWT and sent to the client when it's created. That encoded token is then given to third-party services that need it and sent to our API by them when a challenge is completed. When our API gets it, it is decoded so we can identify the user submitting a challenge and save the completed challenge to their `completedChallenges`.
+Tokens are stored in a `UserToken` collection in the database. Each record has a unique `_id`, exposed as `id` in Prisma, and a `userId` that links to the user's account in the `user` collection. The API signs the token ID in a JWT and sends it to the client when it's created.
+
+The course environment sends that JWT to the `/coderoad-challenge-completed` endpoint in the `coderoad-user-token` header when a challenge is completed. The API verifies the JWT and looks up the token record to identify the user.
+
+Practice challenges are saved to the user's `completedChallenges`. For certification projects that are not already completed, the API first saves the project to `partiallyCompletedChallenges`. The user must then submit their public repository URL on the challenge page to complete the project.
