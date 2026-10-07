@@ -9,10 +9,8 @@
 -->
 <script>
   import { getRedirectedPath } from '../modules/redirect';
-  document.addEventListener('DOMContentLoaded', () => {
-    const hash = getRedirectedPath(window.location.hash);
-    window.location.replace(hash);
-  });
+  const hash = getRedirectedPath(window.location.hash);
+  window.location.replace(hash);
 </script>
 <style>
   .loader {
