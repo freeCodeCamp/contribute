@@ -1,4 +1,4 @@
-import { afterEach, vi, beforeAll } from 'vitest';
+import { afterEach, vi } from 'vitest';
 
 // Track unhandled errors for better debugging
 const originalConsoleError = console.error;
@@ -28,20 +28,17 @@ process.on('uncaughtException', error => {
 });
 
 // Mock Astro content collections before any imports
-beforeAll(() => {
-  // Mock astro:content module
-  vi.mock('astro:content', () => ({
-    getEntry: vi.fn().mockResolvedValue({
-      data: {
-        'nav.home': 'Home',
-        'nav.docs': 'Docs',
-        'getting-started': 'Getting Started',
-        FAQ: 'FAQ'
-      }
-    }),
-    getCollection: vi.fn().mockResolvedValue([])
-  }));
-});
+vi.mock('astro:content', () => ({
+  getEntry: vi.fn().mockResolvedValue({
+    data: {
+      'nav.home': 'Home',
+      'nav.docs': 'Docs',
+      'getting-started': 'Getting Started',
+      FAQ: 'FAQ'
+    }
+  }),
+  getCollection: vi.fn().mockResolvedValue([])
+}));
 
 // Global cleanup after each test
 afterEach(() => {
