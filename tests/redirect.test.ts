@@ -27,8 +27,23 @@ describe('getRedirectedPath', () => {
     expect(result).toBe('/path/');
   });
 
+  it('should redirect "#/path/" with trailing slash to /path/ without duplicate slashes', () => {
+    const result = getRedirectedPath('#/path/');
+    expect(result).toBe('/path/');
+  });
+
   it('should redirect "#/path?id=hash" to /path/#hash', () => {
     const result = getRedirectedPath('#/path?id=hash');
     expect(result).toBe('/path/#hash');
+  });
+
+  it('should redirect "#/path/?id=hash" with trailing slash to /path/#hash', () => {
+    const result = getRedirectedPath('#/path/?id=hash');
+    expect(result).toBe('/path/#hash');
+  });
+
+  it('should redirect "#///" to /intro/', () => {
+    const result = getRedirectedPath('#///');
+    expect(result).toBe('/intro/');
   });
 });
