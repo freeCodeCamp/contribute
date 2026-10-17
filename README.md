@@ -1,4 +1,4 @@
-[![freeCodeCamp](https://img.shields.io/badge/freeCodeCamp-1b1b32?style=for-the-badge&logo=freecodecamp&logoColor=white)](https://www.freecodecamp.org/)
+[![freeCodeCamp](https://raw.githubusercontent.com/freeCodeCamp/freeCodeCamp/main/docs/images/landing-page/hero-image.png)](https://www.freecodecamp.org/)
 [![Discord](https://img.shields.io/discord/692816967895220344?logo=discord&label=Discord&color=5865F2)](https://discord.gg/PRyKn3Vbay)
 
 # Contribute
