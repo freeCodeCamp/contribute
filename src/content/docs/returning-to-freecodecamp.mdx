@@ -1,0 +1,88 @@
+---
+title: Returning to freeCodeCamp
+---
+
+# Returning to freeCodeCamp
+
+Welcome back to freeCodeCamp! If you have been away from contributing for some time, your fork and local repository may be out of date.
+
+This guide explains how to update your fork, synchronize your local repository, resolve merge conflicts, refresh dependencies, and verify that your development environment is ready for contributions.
+
+## 1. Check Your Fork Status
+
+Before making changes, check whether your fork is up to date with the original freeCodeCamp repository.
+
+1. Open your fork on GitHub.
+2. Select the branch you want to update, usually `main`.
+3. Check whether your branch is behind the original repository.
+4. If updates are available, synchronize your fork before starting new work.
+
+## 2. Update Your Fork
+
+You can update your fork directly through GitHub.
+
+1. Open your fork on GitHub.
+2. Make sure you are viewing the `main` branch.
+3. Select **Sync fork**.
+4. Review the available changes.
+5. Select **Update branch** to synchronize your fork with the original repository.
+
+If GitHub reports that your branch has conflicts, review the conflict details before proceeding.
+
+## 3. Update Your Local Repository
+
+After updating your fork, synchronize your local copy.
+
+Open a terminal in your local freeCodeCamp repository and run:
+
+```bash
+git checkout main
+git pull origin main
+
+
+## 4. Handle Merge Conflicts
+
+Merge conflicts can occur when changes in your branch overlap with changes from the original repository.
+
+To resolve conflicts:
+
+1. Run `git status` to identify files with conflicts.
+2. Open the affected files in your code editor.
+3. Review the conflicting changes.
+4. Decide which changes to keep or combine.
+5. Remove the conflict markers after resolving the differences.
+6. Stage the resolved files and complete the merge or rebase.
+
+For additional help, refer to the existing freeCodeCamp guide on fixing merge conflicts.
+
+## 5. Refresh Dependencies
+
+Project dependencies may have changed while you were away.
+
+1. Check the repository instructions for the required Node.js version.
+2. Review the package manager and lockfile used by the project.
+3. Follow the current local setup instructions.
+4. Install dependencies using the commands recommended in the repository documentation.
+
+Avoid updating packages unnecessarily.
+
+## 6. Verify Your Setup
+
+Before starting a new contribution:
+
+1. Confirm that your local repository is synchronized.
+2. Ensure that the required dependencies are installed.
+3. Run the relevant tests and linters.
+4. Follow the local setup guide to check that the application starts successfully.
+5. Review the contribution guidelines before making changes.
+
+Once these checks are complete, you are ready to continue contributing to freeCodeCamp!
+
+## Related Guides
+
+For additional information, refer to the existing freeCodeCamp documentation on:
+
+- Setting up freeCodeCamp locally.
+- Basic Git workflow.
+- Fixing merge conflicts.
+- Opening a pull request.
