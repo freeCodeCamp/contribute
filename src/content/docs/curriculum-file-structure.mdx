@@ -4,8 +4,6 @@ sidebar:
   label: The curriculum file structure
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-
 Our core instructional content is located within the conveniently named `curriculum` directory. This page will break down how these files are organized.
 
 ## Terminology
@@ -228,7 +226,7 @@ The curriculum content is internationalized using a git submodule located at `cu
 
 The structure within each language directory mirrors the English structure exactly, with the same block folders and challenge files. However, only the Markdown challenge files (`.md`) are translated and stored in the i18n-curriculum submodule. Configuration files such as YAML certification files and JSON structure files remain in English only.
 
-:::important
+:::caution
 The i18n-curriculum submodule is updated automatically. Manual changes to translated content should not be made directly in the submodule.
 :::
 
@@ -288,7 +286,7 @@ For individual challenge renaming:
 }
 ```
 
-:::important
+:::caution
 **The redirect setup must be done in a PR that gets merged AT THE SAME TIME as the PR that actually renames the curriculum items.** This ensures the redirects go live simultaneously with the URL changes, preventing any broken links.
 :::
 

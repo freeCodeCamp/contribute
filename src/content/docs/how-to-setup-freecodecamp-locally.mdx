@@ -4,15 +4,6 @@ sidebar:
   label: Set up freeCodeCamp
 ---
 
-import {
-  Steps,
-  Aside,
-  Card,
-  LinkButton,
-  Tabs,
-  TabItem
-} from '@astrojs/starlight/components';
-
 This guide sets up a development environment for freeCodeCamp. Work through it once, in order.
 
 <Aside type='danger' title='Windows users: read this first'>
@@ -31,8 +22,6 @@ A [fork](https://help.github.com/articles/about-forks) is your own copy of the c
 
    <LinkButton
      href='https://github.com/freeCodeCamp/freeCodeCamp/fork'
-     icon='seti:github'
-     iconPlacement='start'
      variant='secondary'
      target='_blank'
    >
@@ -95,7 +84,7 @@ Skip this section if you picked GitHub Codespaces — it clones your fork for yo
 ## Set up and run freeCodeCamp
 
 <Tabs syncKey="setup-environment">
-<TabItem label="Local Machine" icon="laptop">
+<TabItem label="Local Machine">
 
 #### Prerequisites
 
@@ -181,7 +170,7 @@ If you run MongoDB outside Docker, point `MONGOHQ_URL` in `.env` at it. It must 
 
 </TabItem>
 
-<TabItem label="Dev Container" icon="seti:config">
+<TabItem label="Dev Container">
 
 A dev container runs the same image as GitHub Codespaces, on your own machine. The image includes Node.js, pnpm and dependency caches. Container setup installs the project dependencies and starts MongoDB and Mailpit as separate services.
 
@@ -228,7 +217,7 @@ The first start downloads a prebuilt image of several gigabytes. Later starts ar
 
 </TabItem>
 
-<TabItem label="GitHub Codespaces" icon="seti:github">
+<TabItem label="GitHub Codespaces">
 
 A codespace runs the project on a GitHub server. You install nothing, and you work in your browser or in VS Code.
 
@@ -282,7 +271,7 @@ freeCodeCamp's learning platform is now running. If anything failed, see [troubl
 
 ## Quick Commands Reference
 
-<Card title='Handy Scripts to use locally' icon='open-book'>
+<Card title='Handy Scripts to use locally' icon='ph:book-open'>
 
 | Command                                                      | Description                                                                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |

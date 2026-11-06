@@ -1,78 +1,44 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import starlight from '@astrojs/starlight';
-import starlightScrollToTop from 'starlight-scroll-to-top';
-import starlightLinksValidator from 'starlight-links-validator';
+import nimbus, {
+  defineConfig as defineNimbusConfig
+} from '@cloudflare/nimbus-docs';
+import { tableScroll } from '@cloudflare/nimbus-docs/markdown';
 import sidebar from './src/sidebar';
 
-const firstPaintThemeStyle = `
-@layer sl-first-paint {
-  html {
-    background-color: #161724;
-    color-scheme: dark;
-  }
-
-  html[data-theme='light'] {
-    background-color: #ffffff;
-    color-scheme: light;
-  }
-}
-`;
-
-const config = defineConfig({
-  vite: { plugins: [tailwindcss()] },
+const nimbusConfig = defineNimbusConfig({
   site: 'https://contribute.freecodecamp.org',
+  title: 'Contribute | freeCodeCamp.org',
+  description: 'Contribute to freeCodeCamp.org',
+  locale: 'en',
+  github: null,
+  editPattern: 'https://github.com/freeCodeCamp/contribute/edit/main/{path}',
+  sidebar: { items: sidebar },
+  socialImageAlt: 'Contribute to freeCodeCamp'
+});
+
+export default defineConfig({
+  output: 'static',
+  trailingSlash: 'always',
+  vite: {
+    plugins: [tailwindcss()]
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  },
   integrations: [
-    starlight({
-      title: 'Contribute | freeCodeCamp.org',
-      components: {
-        SiteTitle: './src/components/SiteTitle.astro'
+    nimbus(nimbusConfig, {
+      rules: {
+        'nimbus/frontmatter-shape': 'error',
+        'nimbus/internal-link': [
+          'error',
+          { components: [{ name: 'LinkCard', attr: 'href' }] }
+        ]
       },
-      description: 'Contribute to freeCodeCamp.org',
-      logo: {
-        light: './public/icons/secondary_logo.svg',
-        dark: './public/icons/primary_logo.svg',
-        replacesTitle: true
-      },
-      favicon: 'favicon.ico',
-      tableOfContents: {
-        minHeadingLevel: 1,
-        maxHeadingLevel: 2
-      },
-      editLink: {
-        baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
-      },
-      head: [
-        {
-          tag: 'style',
-          content: firstPaintThemeStyle
-        }
-      ],
-      social: [
-        {
-          label: 'GitHub',
-          href: 'https://github.com/freeCodeCamp',
-          icon: 'github'
-        },
-        {
-          label: 'X',
-          href: 'https://twitter.com/freeCodeCamp',
-          icon: 'x.com'
-        },
-        {
-          label: 'Discord',
-          href: 'https://chat.freecodecamp.org',
-          icon: 'discord'
-        }
-      ],
-      sidebar: sidebar,
-      plugins: [
-        ...(process.env.CHECK_LINKS ? [starlightLinksValidator()] : []),
-        starlightScrollToTop()
-      ],
-      customCss: ['./src/styles/global.css']
+      markdown: {
+        hastPlugins: [tableScroll()]
+      }
     })
   ]
 });
-
-export default config;
