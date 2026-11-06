@@ -1,14 +1,11 @@
-interface TableNode {
-  properties?: { className?: unknown[] };
-  children?: unknown[];
-}
+import type { tableScroll } from '@cloudflare/nimbus-docs/markdown';
 
-export const keyboardTableScroll = () => ({
+export const keyboardTableScroll = (): ReturnType<typeof tableScroll> => ({
   name: 'contribute:table-scroll',
   element: {
     filter: ['table'],
-    visit({ properties, children }: TableNode) {
-      if (properties?.className?.length) return;
+    visit({ properties, children }) {
+      if (properties.className) return;
       return {
         type: 'element',
         tagName: 'div',
@@ -23,7 +20,7 @@ export const keyboardTableScroll = () => ({
             type: 'element',
             tagName: 'table',
             properties: { ...properties },
-            children: children ?? []
+            children
           }
         ]
       };

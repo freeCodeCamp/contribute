@@ -4,6 +4,24 @@
 
 Astro-based docs. The `nimbus-docs` package handles content schemas, sidebar/TOC, MDX→markdown, build hooks, and the `nimbus-docs` CLI. Install dependencies first, then run it as `npx @cloudflare/nimbus-docs <command>`: npx uses the project's installed version. Before an install, npx fetches the latest release instead, which may differ from the site's version and give different results. The scoped name keeps npx from fetching the unrelated `nimbus-docs` package. Everything in `src/` is yours to edit.
 
+## Project facts
+
+- This site is the freeCodeCamp contributor documentation at <https://contribute.freecodecamp.org>. It deploys as static files to Cloudflare Workers Static Assets.
+- Use `pnpm`. The `minimumReleaseAge` rule in `pnpm-workspace.yaml` applies to every install. Do not turn it off.
+- `@cloudflare/nimbus-docs` has an exact version in `package.json`. Update it only after the release passes the `minimumReleaseAge` wait.
+- `/` is the landing page. `/intro` and `/intro/` redirect to `/` (`public/_redirects`).
+- Keep the URL of every page. `tests/e2e/usability.spec.ts` lists the URLs.
+
+Run these checks before you finish a change:
+
+| Check                                                          | Command                              |
+| -------------------------------------------------------------- | ------------------------------------ |
+| Lint and format                                                | `pnpm lint`                          |
+| Astro diagnostics                                              | `pnpm check:astro`                   |
+| Unit tests                                                     | `pnpm test`                          |
+| Nimbus preflight                                               | `pnpm exec nimbus-docs check --json` |
+| Build, then accessibility, links and agent routes in a browser | `pnpm test:usability`                |
+
 ## File layout
 
 ```
@@ -11,13 +29,14 @@ astro.config.ts              # imports nimbus + defineNimbusConfig
 nimbus.json                  # records the last reviewed Nimbus package version
 src/
 ├── components.ts            # MDX globals — components every .mdx can use without an import
-├── components/              # AgentDirective, Header, Logo (drawn from logo.ts), Render + ui/<slug>/
+├── components/              # AgentDirective, Header, LandingHero, LandingSection, Logo, Render, SidebarRestore, SocialLinks + ui/<slug>/
 ├── content/
 │   ├── docs/*.mdx
 │   └── partials/*.mdx       # referenced via <Render file="..." />
 ├── content.config.ts        # registers docsCollection() + partialsCollection()
 ├── layouts/                 # BaseLayout (NimbusHead), DocsLayout (sidebar/TOC/breadcrumbs)
 ├── lib/cn.ts                # Tailwind className merger
+├── lib/table-scroll.ts      # gives wide tables a keyboard focus stop
 ├── pages/
 │   ├── [...slug].astro
 │   ├── [...slug]/index.md.ts   # Markdown version of every page, all collections
@@ -70,7 +89,7 @@ Rules:
 | Feature recipe               | `npx @cloudflare/nimbus-docs add <feature-slug> --print`. Prints the recipe for you to follow; it changes no files itself.                                                                                                                                                                                                                                                                 |
 | Check it builds              | `npx @cloudflare/nimbus-docs check` — build-free preflight (env + structure + authoring + types). `--json` for an agent loop, `--fix` to repair what's safe.                                                                                                                                                                                                                               |
 | Custom page route            | Add a file under `src/pages/`.                                                                                                                                                                                                                                                                                                                                                             |
-| Custom OG style              | Edit `src/pages/og/_card.ts`. The card draws the logo from `src/components/logo.ts`, the same drawing as the header.                                                                                                                                                                                                                                                                       |
+| Custom OG style              | Edit `src/pages/og/_card.ts`. The card uses the logo at `public/icons/primary_logo.svg`, the same file as the header.                                                                                                                                                                                                                                                                      |
 | Check for updates            | `npx @cloudflare/nimbus-docs outdated` — starter files behind their tag + registry components behind.                                                                                                                                                                                                                                                                                      |
 | Upgrade Nimbus               | Update the package, then run `npx @cloudflare/nimbus-docs migrate --dry-run --diff`. Review every change and required manual step before applying.                                                                                                                                                                                                                                         |
 | Upgrade a starter file       | `npx @cloudflare/nimbus-docs diff <file>` to review, `diff --apply <file>` to pull a clean upstream change.                                                                                                                                                                                                                                                                                |

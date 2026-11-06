@@ -32,3 +32,8 @@ jobs:
         run: pnpm lint
         env:
           CI: true
+
+      - name: Run Nimbus checks
+        run: pnpm exec nimbus-docs check --json
+        env:
+          CI: true

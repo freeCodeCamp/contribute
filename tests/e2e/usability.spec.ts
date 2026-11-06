@@ -144,6 +144,54 @@ test('/intro redirects to /', async ({ request }) => {
   }
 });
 
+test('every agent route answers with its content type', async ({ request }) => {
+  const agentRoutes = {
+    '/llms.txt': 'text/plain',
+    '/llms-full.txt': 'text/plain',
+    '/robots.txt': 'text/plain',
+    '/index.md': 'text/markdown',
+    '/index.mdx': 'text/mdx',
+    '/faq/index.md': 'text/markdown',
+    '/faq/index.mdx': 'text/mdx',
+    '/.well-known/ard.json': 'application/json',
+    '/.well-known/ai-catalog.json': 'application/json',
+    '/nimbus-api/coordinates.json': 'application/json',
+    '/sitemap-index.xml': 'application/xml',
+    '/og.png': 'image/png',
+    '/og/faq.png': 'image/png'
+  };
+  for (const [path, type] of Object.entries(agentRoutes)) {
+    const response = await request.get(path);
+    expect(response.status(), path).toBe(200);
+    expect(response.headers()['content-type'], path).toContain(type);
+  }
+});
+
+test('only Markdown versions of pages ask not to be indexed', async ({
+  request
+}) => {
+  for (const path of [
+    '/index.md',
+    '/index.mdx',
+    '/faq/index.md',
+    '/faq/index.mdx'
+  ]) {
+    const response = await request.head(path);
+    expect(response.headers()['x-robots-tag'], path).toBe('noindex');
+  }
+  for (const path of ['/', '/faq/']) {
+    const response = await request.head(path);
+    expect(response.headers()['x-robots-tag'], path).toBeUndefined();
+  }
+});
+
+test('robots.txt states the content signals', async ({ request }) => {
+  const body = await (await request.get('/robots.txt')).text();
+  expect(body).toContain(
+    'Content-Signal: ai-train=yes, search=yes, ai-input=yes'
+  );
+});
+
 test('every internal link and fragment resolves', async ({ request }) => {
   test.setTimeout(240_000);
   const htmlByRoute = new Map<string, string>();
