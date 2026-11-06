@@ -34,14 +34,13 @@ const LEFT = 80;
 const COLUMN = WIDTH - LEFT - 200;
 
 const TITLE: CardTypography = {
-  fontFamily: 'Inter',
-  fontWeight: 500,
-  letterSpacing: '-0.025em',
+  fontFamily: 'Lato',
+  fontWeight: 700,
   lineHeight: 1.1,
   color: FOREGROUND
 };
 const SECTION: CardTypography = {
-  fontFamily: 'Inter',
+  fontFamily: 'Lato',
   fontWeight: 400,
   lineHeight: 1.2,
   color: MUTED
@@ -54,8 +53,8 @@ const renderer = await createCardRenderer({
   width: WIDTH,
   height: HEIGHT,
   fonts: [
-    { name: 'Inter', source: font('Inter-Regular.ttf'), weight: 400 },
-    { name: 'Inter', source: font('Inter-Medium.ttf'), weight: 500 }
+    { name: 'Lato', source: font('lato-latin-400-normal.woff'), weight: 400 },
+    { name: 'Lato', source: font('lato-latin-700-normal.woff'), weight: 700 }
   ],
   emoji: 'strip'
 });
