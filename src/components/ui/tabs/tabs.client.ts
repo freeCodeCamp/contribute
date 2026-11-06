@@ -138,10 +138,17 @@ function initTabContainer(container: HTMLElement): () => void {
     }
   }
 
+  const hashTarget = () => {
+    try {
+      return document.getElementById(
+        decodeURIComponent(location.hash.slice(1))
+      );
+    } catch {
+      return null;
+    }
+  };
   const openTabForHash = () => {
-    const target = document.getElementById(
-      decodeURIComponent(location.hash.slice(1))
-    );
+    const target = hashTarget();
     if (!target) return;
     const panel = panels.find(candidate => candidate.contains(target));
     if (!panel) return;

@@ -30,7 +30,7 @@ jobs:
   build:
     name: Build
     if: github.event_name == 'pull_request' || github.event_name == 'push'
-    needs: [lint, test]
+    needs: [lint, test, usability]
     uses: ./.github/workflows/re-build.yml
     with:
       upload-artifacts: true

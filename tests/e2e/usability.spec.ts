@@ -155,7 +155,6 @@ test('every agent route answers with its content type', async ({ request }) => {
     '/faq/index.mdx': 'text/mdx',
     '/.well-known/ard.json': 'application/json',
     '/.well-known/ai-catalog.json': 'application/json',
-    '/nimbus-api/coordinates.json': 'application/json',
     '/sitemap-index.xml': 'application/xml',
     '/og.png': 'image/png',
     '/og/faq.png': 'image/png'
@@ -241,6 +240,7 @@ test('a link to a heading inside a tab opens that tab', async ({ page }) => {
       ].map(({ id }) => id)
     );
     for (const id of ids) {
+      await page.goto('about:blank');
       await page.goto(`${route}#${id}`);
       await expect(
         page.locator(`[id="${id}"]`),
@@ -248,6 +248,45 @@ test('a link to a heading inside a tab opens that tab', async ({ page }) => {
       ).toBeVisible();
     }
   }
+});
+
+test('a page opened with a malformed hash throws no error', async ({
+  page
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', ({ message }) => errors.push(message));
+  await page.goto('/how-to-setup-freecodecamp-locally/#%E0%A4%A');
+  await page.waitForLoadState('networkidle');
+  expect(errors).toEqual([]);
+});
+
+test('every early focus stop can be seen', async ({ page }) => {
+  await page.goto('/faq/');
+  for (let stop = 0; stop < 8; stop += 1) {
+    await page.keyboard.press('Tab');
+    const clipped = await page.evaluate(() => {
+      const focused = document.activeElement;
+      for (let node = focused; node; node = node.parentElement) {
+        const { width, height } = node.getBoundingClientRect();
+        const laidOut = getComputedStyle(node).display !== 'contents';
+        if (laidOut && (width <= 1 || height <= 1)) return focused?.textContent;
+      }
+      return null;
+    });
+    expect(clipped).toBeNull();
+  }
+});
+
+test('social links can be reached on a phone', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto('/');
+  await expect(page.locator('a[aria-label="GitHub"]:visible')).toHaveCount(1);
+  await page.goto('/faq/');
+  await page
+    .getByRole('button', { name: /menu|navigation/i })
+    .first()
+    .click();
+  await expect(page.locator('a[aria-label="GitHub"]:visible')).toHaveCount(1);
 });
 
 test('the sidebar navigation has a name', async ({ page }) => {
@@ -261,10 +300,16 @@ test('the sidebar navigation has a name', async ({ page }) => {
 test('a wide table can be reached and scrolled by keyboard', async ({
   page
 }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/basic-git-workflow/');
   const region = page.locator('.nb-table-scroll').first();
-  await expect(region).toHaveAttribute('tabindex', '0');
   await expect(region).toHaveAttribute('aria-label', /.+/);
+  await region.focus();
+  await expect(region).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect
+    .poll(() => region.evaluate(({ scrollLeft }) => scrollLeft))
+    .toBeGreaterThan(0);
 });
 
 test('the search button name holds its visible text', async ({ page }) => {

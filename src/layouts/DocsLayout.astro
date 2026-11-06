@@ -19,6 +19,7 @@ import { Pagination } from '@/components/ui/pagination';
 import { ImageZoom } from '@/components/ui/image-zoom';
 import { PageActions } from '@/components/ui/page-actions';
 import { Badge } from '@/components/ui/badge';
+import SocialLinks from '@/components/SocialLinks.astro';
 import type { DocsPageProps } from '@cloudflare/nimbus-docs/types';
 import {
   getVersionStatus,
@@ -180,7 +181,7 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
                     </nav>
                   )}
                 </div>
-                <div class='pointer-events-none sticky bottom-0 h-8 bg-gradient-to-t from-base to-transparent' />
+                <div class='pointer-events-none sticky bottom-0 h-8 bg-gradient-to-t from-background to-transparent' />
               </aside>
             )}
 
@@ -362,6 +363,9 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
             data-nb-sidebar-drawer-slot
             class='flex min-h-0 flex-1 flex-col [&>[data-nb-sidebar-tree]]:min-h-0 [&>[data-nb-sidebar-tree]]:flex-1 [&>[data-nb-sidebar-tree]]:overflow-y-auto [&>[data-nb-sidebar-tree]]:overscroll-contain'
           />
+          <div class='flex shrink-0 gap-2 border-t border-border px-4 py-3'>
+            <SocialLinks />
+          </div>
         </div>
       </dialog>
     )

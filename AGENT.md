@@ -22,6 +22,8 @@ Run these checks before you finish a change:
 | Nimbus preflight                                               | `pnpm exec nimbus-docs check --json` |
 | Build, then accessibility, links and agent routes in a browser | `pnpm test:usability`                |
 
+To run the browser checks against a preview URL, set `USABILITY_BASE_URL=<url>` and run `pnpm exec playwright test` after a local build.
+
 ## File layout
 
 ```
@@ -45,7 +47,6 @@ src/
 │   ├── 404.astro
 │   ├── llms.txt.ts
 │   ├── llms-full.txt.ts
-│   ├── nimbus-api/coordinates.json.ts  # API citation manifest
 │   ├── og.png.ts                # site-level OG card
 │   ├── og/
 │   │   ├── _card.ts             # the card's look, shared by both routes (underscore = not a route)

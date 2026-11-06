@@ -90,7 +90,9 @@ const resolveSectionHref = (href: string): string =>
       <div class='md:hidden'>
         {config.search !== false && <SearchTrigger />}
       </div>
-      <SocialLinks />
+      <div class='hidden md:contents'>
+        <SocialLinks />
+      </div>
       <ThemeToggle />
       {
         showSidebar && (

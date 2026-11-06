@@ -25,13 +25,13 @@ const socials = [
   socials.map(({ label, href, icon }) => (
     <LinkButton
       href={href}
-      variant='minimal'
+      variant='ghost'
       shape='square'
       size='sm'
       aria-label={label}
       target='_blank'
       rel='noopener me'
-      class='hidden md:inline-flex text-muted-foreground'
+      class='text-muted-foreground'
     >
       <Icon name={icon} class='w-4 h-4' />
     </LinkButton>

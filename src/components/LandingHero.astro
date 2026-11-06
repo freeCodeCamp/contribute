@@ -1,4 +1,6 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+
 interface Props {
   title: string;
   image: string;
@@ -25,6 +27,9 @@ const { title, image } = Astro.props;
     class='mt-5 flex flex-wrap justify-center gap-4 text-muted-foreground text-pretty [&>p]:mb-4 [&>p]:w-full [&>p]:text-[length:var(--nb-prose-size)] md:[&>p]:text-xl'
   >
     <slot />
+  </div>
+  <div class='mt-6 flex justify-center gap-2 md:hidden'>
+    <SocialLinks />
   </div>
 </section>
 
