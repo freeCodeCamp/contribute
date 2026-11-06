@@ -339,7 +339,8 @@
 /* Inline highlight — harmonized with ::selection instead of the
    browser's fluorescent yellow. `box-decoration-break` keeps the tint
    coherent when the highlight wraps across lines. */
-.docs-content :where(mark:not([class])) {
+.docs-content :where(mark:not([class])),
+[data-search-results] mark {
   background: color-mix(in oklch, var(--nb-primary) 10%, transparent);
   color: var(--nb-foreground);
   line-height: 1;

@@ -578,6 +578,92 @@ test('search announces how many results it found', async ({ page }) => {
   ).toHaveText(/\d+ results?/);
 });
 
+test('a search result link shows the design ring', async ({ page }) => {
+  await page.goto('/faq/');
+  await page.keyboard.press('Control+k');
+  await page.locator('[data-search-input]').first().fill('git');
+  const link = page.locator('[data-search-results] a').first();
+  await link.focus();
+  const ring = await link.evaluate(element => {
+    const { outlineColor, outlineStyle, outlineWidth } =
+      getComputedStyle(element);
+    return { outlineColor, outlineStyle, outlineWidth };
+  });
+  expect(ring).toEqual({
+    outlineColor: 'rgb(25, 142, 238)',
+    outlineStyle: 'solid',
+    outlineWidth: '3px'
+  });
+});
+
+test('a search highlight uses the site tint, not browser yellow', async ({
+  page
+}) => {
+  await page.goto('/faq/');
+  await page.keyboard.press('Control+k');
+  await page.locator('[data-search-input]').first().fill('git');
+  const background = await page
+    .locator('[data-search-results] mark')
+    .first()
+    .evaluate(element => getComputedStyle(element).backgroundColor);
+  expect(background).not.toBe('rgb(255, 255, 0)');
+});
+
+const countTransitions = (page: Page) =>
+  page.evaluate(() => {
+    const root = document.documentElement;
+    root.dataset.transitions = '0';
+    document.addEventListener('transitionrun', () => {
+      root.dataset.transitions = String(Number(root.dataset.transitions) + 1);
+    });
+  });
+
+const expectStillSwitch = async (page: Page, mode: string) => {
+  const root = page.locator('html');
+  await expect(root).toHaveAttribute('data-mode', mode);
+  await page.evaluate(
+    () => new Promise(done => requestAnimationFrame(() => setTimeout(done, 50)))
+  );
+  await expect(root).toHaveAttribute('data-transitions', '0');
+};
+
+test('the theme button runs no colour transitions', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/faq/');
+  await countTransitions(page);
+  await page.evaluate(() => {
+    const toggle = document.querySelector('[data-nb-theme-toggle]');
+    (toggle as HTMLElement).click();
+  });
+  await expectStillSwitch(page, 'dark');
+});
+
+test('an OS theme change runs no colour transitions', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/faq/');
+  await countTransitions(page);
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await expectStillSwitch(page, 'dark');
+});
+
+test('a theme change in another tab runs no colour transitions', async ({
+  context,
+  page
+}) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/faq/');
+  await countTransitions(page);
+  const other = await context.newPage();
+  await other.goto('/faq/');
+  await other.evaluate(() => localStorage.setItem('ui-mode', 'dark'));
+  await expectStillSwitch(page, 'dark');
+});
+
+test('a docs page shows when it last changed', async ({ page }) => {
+  await page.goto('/faq/');
+  await expect(page.locator('main time[datetime]').first()).toBeVisible();
+});
+
 test('the mobile page menu shows focus in forced colours', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 800 });
   await page.emulateMedia({ forcedColors: 'active' });

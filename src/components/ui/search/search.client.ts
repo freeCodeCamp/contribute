@@ -84,7 +84,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
     const link = resultLink(
       result.title,
       result.url,
-      'block truncate text-base font-semibold text-foreground no-underline focus-visible:outline-none'
+      'block truncate text-base font-semibold text-foreground no-underline'
     );
     option.appendChild(link);
 

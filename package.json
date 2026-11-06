@@ -12,7 +12,7 @@
     "format": "prettier . --write && eslint . --fix",
     "lint": "prettier . --check && eslint .",
     "test": "vitest run",
-    "test:usability": "astro build && playwright test",
+    "test:usability": "pnpm build && playwright test",
     "clean": "pnpm dlx rimraf .astro dist",
     "check:astro": "astro check"
   },
