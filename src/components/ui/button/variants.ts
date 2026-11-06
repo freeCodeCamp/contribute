@@ -59,13 +59,7 @@ export const buttonIconSize: Record<ButtonSize, string> = {
   lg: 'h-[1.125rem] w-[1.125rem]'
 };
 
-export interface ButtonVariantsOptions {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  shape?: ButtonShape;
-}
-
-const button = variants({
+export const buttonVariants = variants({
   base: buttonBase,
   variants: {
     variant: buttonVariantClasses,
@@ -83,8 +77,3 @@ const button = variants({
     }))
   )
 });
-
-/** Compose the base + variant + size/shape classes for a button-shaped element. */
-export function buttonVariants(options: ButtonVariantsOptions = {}): string {
-  return button(options);
-}
