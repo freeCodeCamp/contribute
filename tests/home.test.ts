@@ -11,12 +11,17 @@ describe('home page', () => {
     expect(existsSync(fromRoot('src/pages/index.astro'))).toBe(false);
   });
 
-  it('keeps only the redirects from /intro to /', () => {
+  it('keeps only the agreed redirects', () => {
     const rules = readFileSync(fromRoot('public/_redirects'), 'utf8')
       .split('\n')
       .filter(Boolean);
 
-    expect(rules).toEqual(['/intro / 301', '/intro/ / 301']);
+    expect(rules).toEqual([
+      '/intro / 301',
+      '/intro/ / 301',
+      '/FAQ /faq/ 302',
+      '/how-to-work-on-the-docs-theme /how-to-work-on-the-docs-site/ 302'
+    ]);
   });
 
   it('has no script for old hash links', () => {

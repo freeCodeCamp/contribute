@@ -343,6 +343,20 @@ test('/intro redirects to /', async ({ request }) => {
   }
 });
 
+test('two old page URLs still redirect', async ({ request }) => {
+  const redirects = {
+    '/FAQ': '/faq/',
+    '/how-to-work-on-the-docs-theme': '/how-to-work-on-the-docs-site/'
+  };
+  for (const [path, target] of Object.entries(redirects)) {
+    const response = await request.get(path, { maxRedirects: 0 });
+    expect(response.status(), path).toBe(302);
+    expect(new URL(response.headers().location, 'http://x').pathname).toBe(
+      target
+    );
+  }
+});
+
 test('every agent route answers with its content type', async ({ request }) => {
   const agentRoutes = {
     '/llms.txt': 'text/plain',
