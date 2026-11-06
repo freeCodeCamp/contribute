@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  image: string;
+}
+
+const { title, image } = Astro.props;
+---
+
+<section
+  aria-labelledby='landing-title'
+  class='mx-auto flex max-w-2xl flex-col items-center px-6 pt-12 pb-16 text-center'
+>
+  <img
+    src={image}
+    alt=''
+    width='500'
+    height='500'
+    class='mb-8 h-auto w-48 rounded-full md:w-80'
+  />
+  <h1
+    id='landing-title'
+    class='text-foreground leading-tight text-balance'
+    style='font-size: var(--nb-h1-size); font-weight: var(--nb-h1-weight); letter-spacing: var(--nb-h1-tracking);'
+  >
+    {title}
+  </h1>
+  <div
+    class='mt-5 flex flex-wrap justify-center gap-4 text-[1.125rem] text-muted-foreground text-pretty [&>p]:mb-4 [&>p]:w-full'
+  >
+    <slot />
+  </div>
+</section>

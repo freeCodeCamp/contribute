@@ -37,7 +37,14 @@ export default defineConfig({
         ]
       },
       markdown: {
-        hastPlugins: [tableScroll()]
+        hastPlugins: [tableScroll()],
+        componentMap: {
+          LinkButton: {
+            revision: '1',
+            render: ({ attrs, children }) =>
+              `[${children.trim()}](${String(attrs.href)})`
+          }
+        }
       }
     })
   ]

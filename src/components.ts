@@ -3,6 +3,8 @@ import Render from './components/Render.astro';
 import { Card } from './components/ui/card';
 import { CardGrid } from './components/ui/card-grid';
 import { FileTree } from './components/ui/file-tree';
+import LandingHero from './components/LandingHero.astro';
+import LandingSection from './components/LandingSection.astro';
 import { LinkButton } from './components/ui/link-button';
 import { LinkCard } from './components/ui/link-card';
 import { Step, Steps } from './components/ui/steps';
@@ -13,6 +15,8 @@ export const components = {
   Card,
   CardGrid,
   FileTree,
+  LandingHero,
+  LandingSection,
   LinkButton,
   LinkCard,
   Render,
