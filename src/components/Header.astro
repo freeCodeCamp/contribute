@@ -1,9 +1,8 @@
 ---
 import Logo from './Logo.astro';
 import type { SidebarSection } from '@cloudflare/nimbus-docs/types';
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import SocialLinks from './SocialLinks.astro';
 import { Button } from './ui/button';
-import { LinkButton } from './ui/link-button';
 import { ThemeToggle } from './ui/theme-toggle';
 import SearchTrigger from './ui/search/SearchTrigger.astro';
 import { config } from 'virtual:nimbus/config';
@@ -84,25 +83,14 @@ const resolveSectionHref = (href: string): string =>
 ---
 
 <header
-  class='sticky top-0 z-30 border-b border-border bg-card/80 backdrop-blur-lg'
+  data-mode='dark'
+  class='sticky top-0 z-30 border-b border-border bg-background text-foreground'
 >
   <div
-    class='mx-auto flex items-center justify-between gap-3 h-14 px-4 lg:px-6'
+    class='mx-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 h-14 px-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-6'
   >
-    <div class='flex items-center gap-3 min-w-0'>
-      <slot name='brand'>
-        {
-          /* The mark alone; the site title stays as the link's accessible name. */
-        }
-        <a
-          href={homeHref}
-          class='flex shrink-0 items-center text-foreground transition-opacity hover:opacity-70'
-        >
-          <Logo class='h-5 w-8 shrink-0' />
-          <span class='sr-only'>{config.title}</span>
-        </a>
-      </slot>
-
+    <div class='hidden md:flex items-center gap-3 min-w-0'>
+      {config.search !== false && <SearchTrigger />}
       {
         showSections && (
           <nav
@@ -128,25 +116,20 @@ const resolveSectionHref = (href: string): string =>
       }
     </div>
 
-    <div class='flex items-center gap-2 shrink-0'>
+    <div class='min-w-0'>
+      <slot name='brand'>
+        <a href={homeHref} class='block w-[210px] max-w-full'>
+          <Logo alt={config.title} />
+        </a>
+      </slot>
+    </div>
+
+    <div class='flex items-center justify-self-end gap-2 shrink-0'>
       <slot name='actions' />
-      {config.search !== false && <SearchTrigger />}
-      {
-        config.github && (
-          <LinkButton
-            href={config.github}
-            variant='minimal'
-            shape='square'
-            size='sm'
-            aria-label='GitHub'
-            target='_blank'
-            rel='noopener'
-            class='text-muted-foreground'
-          >
-            <Icon name='ph:github-logo' class='w-4 h-4' />
-          </LinkButton>
-        )
-      }
+      <div class='md:hidden'>
+        {config.search !== false && <SearchTrigger />}
+      </div>
+      <SocialLinks />
       <ThemeToggle />
       {
         showSidebar && (

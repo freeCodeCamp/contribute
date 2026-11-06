@@ -24,58 +24,93 @@
 :root {
   color-scheme: light;
 
-  /* Surfaces (paired with foregrounds for contrast) */
-  --nb-background: oklch(0.99 0 0);
-  --nb-foreground: oklch(0.21 0 0);
+  --nb-brand-navy: #0a0a23;
+  --nb-brand-gold: #ffbf00;
+  --nb-brand-gold-hover: #f1be32;
+  --nb-brand-gold-dark: #4d3800;
+  --nb-brand-blue-light: #99c9ff;
+  --nb-brand-blue-dark: #002ead;
+  --nb-brand-green-light: #acd157;
+  --nb-brand-green-dark: #00471b;
+  --nb-brand-red-light: #ffadad;
+  --nb-brand-red-dark: #850000;
 
-  --nb-card: oklch(1 0 0);
+  /* Surfaces (paired with foregrounds for contrast) */
+  --nb-background: #ffffff;
+  --nb-foreground: var(--nb-brand-navy);
+
+  --nb-card: #ffffff;
   --nb-card-foreground: var(--nb-foreground);
 
-  --nb-muted: oklch(0.98 0 0);
+  --nb-muted: #f5f6f7;
   /* 4.5:1 or better on every light surface, inline code included. */
-  --nb-muted-foreground: oklch(0.52 0 0);
+  --nb-muted-foreground: #5a5a68;
 
-  --nb-accent: oklch(0.967 0 0);
+  --nb-accent: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 22%,
+    var(--nb-background)
+  );
   --nb-accent-foreground: var(--nb-foreground);
 
   /* Primary action / brand */
-  --nb-primary: oklch(0.145 0 0);
-  --nb-primary-foreground: oklch(0.97 0 0);
-  --nb-primary-hover: oklch(0.371 0 0);
+  --nb-primary: var(--nb-brand-gold);
+  --nb-primary-foreground: var(--nb-brand-navy);
+  --nb-primary-hover: var(--nb-brand-gold-hover);
 
-  /* Brand — Nimbus steel, the accent of the Chrome palette: a grey with a
-	   trace of blue, so it reads apart from the pure-neutral ink. Used only
-	   for wayfinding: where you are (current page, section, tab) and what you
-	   can act on (focus, link hover). */
-  --nb-brand: oklch(0.373 0.034 260.2);
+  --nb-link: var(--nb-brand-blue-dark);
+  --nb-brand: var(--nb-brand-blue-dark);
   /* The current page's fill: a light wash of the brand. */
-  --nb-brand-wash: color-mix(in oklch, var(--nb-brand) 7%, transparent);
+  --nb-brand-wash: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 38%,
+    var(--nb-background)
+  );
 
   /* Borders / focus */
-  --nb-border: oklch(0.935 0 0);
-  --nb-border-strong: oklch(0.87 0 0);
-  --nb-selected: oklch(0.92 0 0);
+  --nb-border: #d0d0d5;
+  --nb-border-strong: #858591;
+  --nb-selected: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 38%,
+    var(--nb-background)
+  );
   /* Inline code's tint. */
   --nb-code-tint: color-mix(in oklch, var(--nb-foreground) 4.5%, transparent);
-  --nb-ring: oklch(0.373 0.034 260.2 / 0.4);
+  --nb-ring: var(--nb-brand-blue-dark);
 
   /* Status colors — paired (saturated for text/border + muted for bg) */
-  --nb-info: oklch(0.424 0.199 265.638);
-  --nb-info-foreground: oklch(0.424 0.199 265.638);
-  --nb-info-muted: oklch(0.932 0.032 255.6 / 0.45);
+  --nb-info: var(--nb-brand-blue-dark);
+  --nb-info-foreground: var(--nb-info);
+  --nb-info-muted: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 35%,
+    var(--nb-background)
+  );
 
-  --nb-success: oklch(0.432 0.095 166.913);
-  --nb-success-foreground: oklch(0.432 0.095 166.913);
-  --nb-success-muted: oklch(0.962 0.043 156.7 / 0.57);
+  --nb-success: var(--nb-brand-green-dark);
+  --nb-success-foreground: var(--nb-success);
+  --nb-success-muted: color-mix(
+    in srgb,
+    var(--nb-brand-green-light) 28%,
+    var(--nb-background)
+  );
 
-  --nb-warning: oklch(0.597 0.144 57.5);
-  /* Darker than the line colour so text on the warning tint reads at 4.5:1. */
-  --nb-warning-foreground: oklch(0.55 0.144 57.5);
-  --nb-warning-muted: oklch(0.931 0.107 94.6 / 0.2);
+  --nb-warning: var(--nb-brand-gold-dark);
+  --nb-warning-foreground: var(--nb-warning);
+  --nb-warning-muted: color-mix(
+    in srgb,
+    var(--nb-brand-gold) 24%,
+    var(--nb-background)
+  );
 
-  --nb-danger: oklch(0.505 0.213 27.518);
-  --nb-danger-foreground: oklch(0.505 0.213 27.518);
-  --nb-danger-muted: oklch(0.936 0.032 17.7 / 0.42);
+  --nb-danger: var(--nb-brand-red-dark);
+  --nb-danger-foreground: var(--nb-danger);
+  --nb-danger-muted: color-mix(
+    in srgb,
+    var(--nb-brand-red-light) 28%,
+    var(--nb-background)
+  );
 
   /* API method palette — shared source of truth for the method chip across the
 	   sidebar, endpoint card, and code rail (api-sidebar / api-layout /
@@ -108,31 +143,26 @@
   /* Used only by the API reference (registry: api-layout); harmless elsewhere. */
   --nb-code-rail-width: 34rem;
 
-  /* Typography — self-hosted via @fontsource-variable in BaseLayout.astro */
-  --nb-font-sans:
-    'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
-    sans-serif;
-  --nb-font-mono:
-    'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code',
-    'Source Code Pro', Menlo, Consolas, monospace;
-  /* Type scale: one ratio, √1.5, stepping up from the 16px body. Two steps
-	   make 1.5, so body → h2 → h1 is the same interval twice and lands on
-	   whole pixels: 16 → 24 → 36, with h3 at the half step (19.6 → 20).
-	   Line heights sit on the 4px grid. Weight falls as size rises, since a
-	   larger glyph needs less stroke to carry the same visual weight. */
-  --nb-h1-size: 2.25rem;
-  --nb-h1-leading: 2.75rem;
-  --nb-h1-weight: 500;
-  --nb-h1-tracking: -0.025em;
-  --nb-h2-size: 1.5rem;
-  --nb-h2-leading: 2rem;
-  --nb-h2-weight: 550;
-  --nb-h2-tracking: -0.018em;
-  --nb-h3-size: 1.25rem;
-  --nb-h3-leading: 1.75rem;
-  --nb-h3-weight: 600;
-  --nb-h3-tracking: -0.012em;
-  --nb-h4-weight: 600;
+  --nb-font-sans: var(--font-lato), var(--font-lato-ext);
+  --nb-font-mono: var(--font-hack-zeroslash);
+  --nb-prose-size: 1.125rem;
+  --nb-prose-leading: 1.6;
+  --nb-display-size: clamp(2.25rem, 4vw, 3.5rem);
+  --nb-display-leading: 1.2;
+  --nb-h1-size: clamp(2rem, 4vw, 2.625rem);
+  --nb-h1-leading: 1.3;
+  --nb-h1-weight: 700;
+  --nb-h1-tracking: -0.01em;
+  --nb-h2-size: clamp(1.75rem, 3vw, 2rem);
+  --nb-h2-leading: 1.33;
+  --nb-h2-weight: 700;
+  --nb-h2-tracking: -0.005em;
+  --nb-h3-size: 1.5rem;
+  --nb-h3-leading: 1.33;
+  --nb-h3-weight: 700;
+  --nb-h3-tracking: 0;
+  --nb-h4-size: 1.25rem;
+  --nb-h4-weight: 700;
 
   /* Corners: surfaces (cards, callouts, code blocks, buttons, sidebar rows)
 	   share one radius; small marks inside them (inline code, badges in a
@@ -149,7 +179,7 @@
 /* Wider content area on large displays (e.g. MacBook Pro 16″) */
 @media (min-width: 1536px) {
   :root {
-    --nb-content-max: 52rem;
+    --nb-content-max: 48rem;
   }
 }
 
@@ -157,46 +187,71 @@
 [data-mode='dark'] {
   color-scheme: dark;
 
-  --nb-background: oklch(0.085 0 0);
-  --nb-foreground: oklch(0.97 0 0);
+  --nb-background: var(--nb-brand-navy);
+  --nb-foreground: #ffffff;
 
-  --nb-card: #0f0f0f;
+  --nb-card: #1b1b32;
   --nb-card-foreground: var(--nb-foreground);
 
-  --nb-muted: #060606;
-  --nb-muted-foreground: oklch(0.708 0 0);
+  --nb-muted: #1b1b32;
+  --nb-muted-foreground: #d0d0d5;
 
-  --nb-accent: oklch(0.269 0 0);
+  --nb-accent: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 10%,
+    var(--nb-background)
+  );
   --nb-accent-foreground: var(--nb-foreground);
 
-  --nb-primary: oklch(0.9 0 0);
-  --nb-primary-foreground: oklch(0.085 0 0);
-  --nb-primary-hover: oklch(0.7 0 0);
+  --nb-link: var(--nb-brand-blue-light);
+  --nb-brand: var(--nb-brand-blue-light);
+  --nb-brand-wash: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 18%,
+    var(--nb-background)
+  );
 
-  --nb-brand: oklch(0.837 0.018 261.3);
-  --nb-brand-wash: color-mix(in oklch, var(--nb-brand) 10%, transparent);
-
-  --nb-border: oklch(0.269 0 0);
-  --nb-border-strong: oklch(0.371 0 0);
-  --nb-selected: oklch(0.371 0 0);
+  --nb-border: #3b3b4f;
+  --nb-border-strong: #858591;
+  --nb-selected: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 18%,
+    var(--nb-background)
+  );
   --nb-code-tint: color-mix(in oklch, var(--nb-foreground) 6%, transparent);
-  --nb-ring: oklch(0.837 0.018 261.3 / 0.45);
+  --nb-ring: var(--nb-brand-blue-light);
 
-  --nb-info: oklch(0.707 0.165 254.624);
-  --nb-info-foreground: oklch(0.707 0.165 254.624);
-  --nb-info-muted: oklch(0.38 0.145 265.5 / 0.22);
+  --nb-info: var(--nb-brand-blue-light);
+  --nb-info-foreground: var(--nb-info);
+  --nb-info-muted: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 12%,
+    var(--nb-background)
+  );
 
-  --nb-success: oklch(0.905 0.093 164.15);
-  --nb-success-foreground: oklch(0.905 0.093 164.15);
-  --nb-success-muted: oklch(0.393 0.096 152.3 / 0.2);
+  --nb-success: var(--nb-brand-green-light);
+  --nb-success-foreground: var(--nb-success);
+  --nb-success-muted: color-mix(
+    in srgb,
+    var(--nb-brand-green-light) 12%,
+    var(--nb-background)
+  );
 
-  --nb-warning: oklch(0.75 0.183 55.934);
-  --nb-warning-foreground: oklch(0.75 0.183 55.934);
-  --nb-warning-muted: oklch(0.353 0.079 65 / 0.37);
+  --nb-warning: var(--nb-brand-gold);
+  --nb-warning-foreground: var(--nb-warning);
+  --nb-warning-muted: color-mix(
+    in srgb,
+    var(--nb-brand-gold) 12%,
+    var(--nb-background)
+  );
 
-  --nb-danger: oklch(0.704 0.191 22.216);
-  --nb-danger-foreground: oklch(0.704 0.191 22.216);
-  --nb-danger-muted: oklch(0.429 0.176 28.7 / 0.17);
+  --nb-danger: var(--nb-brand-red-light);
+  --nb-danger-foreground: var(--nb-danger);
+  --nb-danger-muted: color-mix(
+    in srgb,
+    var(--nb-brand-red-light) 12%,
+    var(--nb-background)
+  );
 
   /* API method palette — dark lines; text and tint follow the status tokens. */
   --nb-m-get-line: oklch(0.765 0.177 163.223 / 0.25);
@@ -213,7 +268,7 @@
  * These generate Tailwind utility classes:
  *   bg-card, text-foreground, border-border, ring-ring, etc.
  */
-@theme {
+@theme inline {
   --color-background: var(--nb-background);
   --color-foreground: var(--nb-foreground);
 
@@ -255,6 +310,8 @@
 
   --font-sans: var(--nb-font-sans);
   --font-mono: var(--nb-font-mono);
+  --font-weight-medium: 400;
+  --font-weight-semibold: 700;
 
   --radius-lg: var(--nb-radius);
   --radius-sm: var(--nb-radius-sm);
@@ -267,7 +324,6 @@
 /* ---- Minimal overrides the plugin doesn't cover ---- */
 html {
   font-family: var(--nb-font-sans);
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
 body {
@@ -799,53 +855,6 @@ pre.astro-code .highlighted-word {
 /* Hide hamburger on pages without a sidebar dialog. */
 body:not(:has([data-mobile-sidebar])) [data-menu-btn] {
   display: none;
-}
-
-/* ---- View transitions ---- */
-
-/* Scoped to <main transition:name="nb-content"> only — chrome snap-swaps
-   via the root rule below so the visual field doesn't shift on nav. */
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(nb-content) {
-    animation: nb-content-out 100ms cubic-bezier(0.32, 0.72, 0, 1) both;
-  }
-  ::view-transition-new(nb-content) {
-    animation: nb-content-in 100ms cubic-bezier(0.32, 0.72, 0, 1) both;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-
-  @keyframes nb-content-out {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes nb-content-in {
-    from {
-      opacity: 0;
-      transform: translateY(4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(nb-content),
-  ::view-transition-new(nb-content),
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
 }
 
 /* Phones: the section tabs sit on a second header row. */

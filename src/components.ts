@@ -1,6 +1,7 @@
 import { Aside } from './components/ui/aside';
 import Render from './components/Render.astro';
 import { Card } from './components/ui/card';
+import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
 import { CardGrid } from './components/ui/card-grid';
 import { FileTree } from './components/ui/file-tree';
 import LandingHero from './components/LandingHero.astro';
@@ -15,6 +16,7 @@ export const components = {
   Card,
   CardGrid,
   FileTree,
+  Icon,
   LandingHero,
   LandingSection,
   LinkButton,

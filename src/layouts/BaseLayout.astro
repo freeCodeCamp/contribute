@@ -1,7 +1,7 @@
 ---
 import '../styles/globals.css';
 import '../styles/prose.css';
-import { ClientRouter } from 'astro:transitions';
+import { Font } from 'astro:assets';
 import { config } from 'virtual:nimbus/config';
 import {
   getCollectionLlmsUrl,
@@ -66,6 +66,15 @@ const resolvedMarkdownUrl =
   <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <Font
+      cssVariable='--font-lato'
+      preload={[
+        { weight: 400, style: 'normal' },
+        { weight: 700, style: 'normal' }
+      ]}
+    />
+    <Font cssVariable='--font-lato-ext' />
+    <Font cssVariable='--font-hack-zeroslash' />
     <WebMCP />
 
     <script is:inline>
@@ -101,7 +110,6 @@ const resolvedMarkdownUrl =
         };
 
         applyTheme();
-        document.addEventListener('astro:after-swap', applyTheme);
         media.addEventListener('change', () => {
           if (!readPref()) applyTheme();
         });
@@ -131,7 +139,6 @@ const resolvedMarkdownUrl =
       apiVersion={apiVersion}
       coordinate={coordinate}
     />
-    <ClientRouter />
   </head>
   <body class='min-h-screen bg-background text-foreground antialiased'>
     <a

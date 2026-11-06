@@ -1,10 +1,8 @@
-/* Docs markdown styling scoped to docs content containers only.
-   Every size and line height is a whole pixel on a 4px grid: body 16/28,
-   small text 14/24, headings from the --nb-h* tokens in globals.css. */
+/* Docs markdown styling scoped to docs content containers only. */
 
 .docs-content {
-  font-size: 1rem;
-  line-height: 1.75rem;
+  font-size: var(--nb-prose-size);
+  line-height: var(--nb-prose-leading);
   color: var(--nb-foreground);
   /* Break a long unbroken token (URL, hash, no-space string) so it wraps within
      the content column instead of leaking past the page width. Inherited, so it
@@ -19,7 +17,7 @@
    Components can override with their own margin utilities (my-4, mt-6, etc.)
    because :where() keeps specificity at (0,1,0) and utilities come later. */
 .docs-content > :where(:not(:first-child)) {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .docs-content :where(ul:not([class])) {
@@ -100,6 +98,8 @@
 }
 
 .docs-content :where(h4:not([class]), h5:not([class]), h6:not([class])) {
+  font-size: var(--nb-h4-size);
+  line-height: var(--nb-h3-leading);
   font-weight: var(--nb-h4-weight);
   margin-top: 1.75rem;
 }
@@ -274,12 +274,12 @@
 }
 
 .docs-content :where(a:not([class])) {
-  color: var(--nb-foreground);
+  color: var(--nb-link);
   text-decoration-line: underline;
   text-decoration-color: var(--nb-border-strong);
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
-  font-weight: 500;
+  font-weight: 400;
   transition: text-decoration-color 0.15s;
 }
 

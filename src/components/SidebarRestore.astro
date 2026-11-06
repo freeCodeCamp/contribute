@@ -66,9 +66,5 @@
     }
 
     restore();
-    if (!window.__nbSidebarRestoreBound) {
-      window.__nbSidebarRestoreBound = true;
-      document.addEventListener('astro:after-swap', restore);
-    }
   })();
 </script>

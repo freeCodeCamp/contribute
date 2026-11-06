@@ -1,0 +1,39 @@
+---
+import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { LinkButton } from './ui/link-button';
+
+const socials = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/freeCodeCamp',
+    icon: 'ph:github-logo-fill'
+  },
+  {
+    label: 'X',
+    href: 'https://twitter.com/freeCodeCamp',
+    icon: 'ph:x-logo-fill'
+  },
+  {
+    label: 'Discord',
+    href: 'https://chat.freecodecamp.org',
+    icon: 'ph:discord-logo-fill'
+  }
+];
+---
+
+{
+  socials.map(({ label, href, icon }) => (
+    <LinkButton
+      href={href}
+      variant='minimal'
+      shape='square'
+      size='sm'
+      aria-label={label}
+      target='_blank'
+      rel='noopener me'
+      class='hidden md:inline-flex text-muted-foreground'
+    >
+      <Icon name={icon} class='w-4 h-4' />
+    </LinkButton>
+  ))
+}

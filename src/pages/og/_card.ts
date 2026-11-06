@@ -15,15 +15,18 @@ import {
   type CardNode,
   type CardTypography
 } from '@cloudflare/nimbus-docs/og';
+import { readFileSync } from 'node:fs';
 import { root } from 'astro:config/server';
 
-import { logo } from '@/components/logo';
+const FOREGROUND = '#ffffff';
+const MUTED = '#d0d0d5';
+const BORDER = '#3b3b4f';
+const BACKGROUND = '#0a0a23';
 
-// The starter's light theme (src/styles/globals.css), in hex for Satori.
-const FOREGROUND = '#171717';
-const MUTED = '#696969';
-const BORDER = '#eaeaea';
-const BACKGROUND = '#ffffff';
+const LOGO_RATIO = 2100 / 240;
+const logoSource = `data:image/svg+xml;base64,${readFileSync(
+  new URL('public/icons/primary_logo.svg', root)
+).toString('base64')}`;
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -68,15 +71,11 @@ const el = (
 });
 
 const Logo = (height: number): CardNode => ({
-  type: 'svg',
+  type: 'img',
   props: {
-    width: Math.round((height * logo.width) / logo.height),
-    height,
-    viewBox: `0 0 ${logo.width} ${logo.height}`,
-    children: logo.paths.map(d => ({
-      type: 'path',
-      props: { d, fill: FOREGROUND }
-    }))
+    src: logoSource,
+    width: Math.round(height * LOGO_RATIO),
+    height
   }
 });
 
