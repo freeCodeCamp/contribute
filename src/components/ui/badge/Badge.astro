@@ -22,7 +22,7 @@ const { text, variant, size, class: className, ...attrs } = Astro.props;
 
 // note→info, tip→success, caution→warning: variant aliases
 const badge = variants({
-  base: 'inline-flex items-center rounded-full font-medium whitespace-nowrap',
+  base: 'inline-flex items-center whitespace-nowrap',
   variants: {
     variant: {
       default: 'bg-accent text-muted-foreground',
@@ -36,10 +36,10 @@ const badge = variants({
       outline: 'bg-card text-foreground ring ring-border ring-inset'
     },
     size: {
-      // Whole-pixel heights: 20, 24 and 28.
-      small: 'px-2 py-0.5 text-xs leading-4',
-      medium: 'px-2.5 py-0.5 text-[0.8125rem] leading-5',
-      large: 'px-3 py-1 text-sm leading-5'
+      // Whole-pixel heights: 24, 28 and 36.
+      small: 'px-2 py-0.5 text-xs',
+      medium: 'px-2.5 py-0.5 text-sm',
+      large: 'px-3 py-1 text-base leading-7'
     }
   },
   defaults: { variant: 'default', size: 'small' }

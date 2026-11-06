@@ -3,7 +3,7 @@
 import { mount, initTabs } from '@cloudflare/nimbus-docs/client';
 
 const TRIGGER_CLASS =
-  'shrink-0 cursor-pointer px-4 py-2 text-sm font-medium leading-6 whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground aria-selected:text-foreground focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px]';
+  'shrink-0 cursor-pointer px-3.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground aria-selected:bg-foreground aria-selected:text-background focus-visible:outline-3 focus-visible:outline-ring focus-visible:-outline-offset-3';
 
 let counter = 0;
 
@@ -13,8 +13,6 @@ function initTabContainer(container: HTMLElement): () => void {
   const tablist = container.querySelector<HTMLElement>(
     ':scope > [role=tablist]'
   );
-  const indicator =
-    tablist?.querySelector<HTMLElement>('[data-nb-tabs-indicator]') ?? null;
 
   // Scope to this container so a nested <Tabs>'s triggers don't flip the
   // parent into manual mode (or vice-versa), independent of mount order.
@@ -60,11 +58,7 @@ function initTabContainer(container: HTMLElement): () => void {
       panel.id = panelId;
       panel.setAttribute('aria-labelledby', tabId);
 
-      if (indicator) {
-        tablist.insertBefore(btn, indicator);
-      } else {
-        tablist.appendChild(btn);
-      }
+      tablist.appendChild(btn);
     });
   }
 
@@ -73,7 +67,6 @@ function initTabContainer(container: HTMLElement): () => void {
     tabSelector: '[data-nb-tabs-trigger]',
     panelSelector: '[data-nb-tabs-content]',
     boundarySelector: '[data-nb-tabs]',
-    indicator,
     sync: syncKey ? { key: `ui-synced-tabs__${syncKey}` } : undefined,
     // Keep the active tab within the horizontally-scrollable (scrollbar-hidden)
     // strip's visible range. Fires on every activate() — including the initial

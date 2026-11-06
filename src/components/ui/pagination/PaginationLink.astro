@@ -26,8 +26,8 @@ const caption = label ?? (isNext ? 'Next' : 'Previous');
   data-nb-pagination-key={isNext ? ']' : '['}
   data-slot='pagination-link'
   class={cn(
-    'nb-pagination-link relative flex min-w-0 flex-1 items-center gap-3 rounded-full py-1 no-underline',
-    'focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring',
+    'nb-pagination-link relative flex min-w-0 flex-1 items-center gap-3 py-1 no-underline',
+    'focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-ring',
     isNext ? 'justify-end pe-2.5 ps-5 text-end' : 'pe-5 ps-2.5',
     className
   )}
@@ -37,13 +37,11 @@ const caption = label ?? (isNext ? 'Next' : 'Previous');
   <span class='min-w-0'>
     <span
       data-slot='pagination-label'
-      class='block text-[0.6875rem] leading-4 text-muted-foreground'
-      >{caption}</span
+      class='block text-xs text-muted-foreground'>{caption}</span
     >
     <span
       data-slot='pagination-title'
-      class='nb-pagination-title block text-sm leading-5 font-medium text-foreground'
-      ><slot /></span
+      class='nb-pagination-title block text-sm text-foreground'><slot /></span
     >
   </span>
   {isNext && <PaginationKey>]</PaginationKey>}

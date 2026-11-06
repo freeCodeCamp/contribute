@@ -114,6 +114,205 @@ for (const route of routes) {
   });
 }
 
+test('a docs page keeps the agreed type sizes', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const sizes = await page.evaluate(() => {
+    const size = (selector: string) => {
+      const element = document.querySelector(selector);
+      return element ? getComputedStyle(element).fontSize : null;
+    };
+    return {
+      h1: size('h1'),
+      h2: size('.docs-content h2'),
+      h3: size('.docs-content h3'),
+      body: size('.docs-content > p'),
+      item: size('.docs-content li'),
+      cell: size('.docs-content td'),
+      aside: size('[data-slot="aside-content"]'),
+      inlineCode: size('.docs-content > p code'),
+      block: size('pre.astro-code'),
+      sidebarGroup: size(
+        '[data-nb-sidebar] .top-level > li > details > summary'
+      ),
+      sidebarLink: size('[data-nb-sidebar] li > a'),
+      breadcrumb: size('nav[aria-label*="breadcrumb" i] a'),
+      toc: size('[data-nb-toc] a')
+    };
+  });
+  expect(sizes).toEqual({
+    h1: '42px',
+    h2: '35px',
+    h3: '29px',
+    body: '18px',
+    item: '18px',
+    cell: '18px',
+    aside: '18px',
+    inlineCode: '16px',
+    block: '14px',
+    sidebarGroup: '16px',
+    sidebarLink: '16px',
+    breadcrumb: '16px',
+    toc: '16px'
+  });
+});
+
+test('content inside a tab keeps the page rhythm', async ({ page }) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const gap = await page
+    .locator('[data-nb-tabs-content] .nb-table-scroll')
+    .first()
+    .evaluate(element => getComputedStyle(element).marginTop);
+  expect(gap).toBe('24px');
+});
+
+test('a card title keeps the design size', async ({ page }) => {
+  await page.goto('/');
+  const size = await page
+    .locator('[data-slot="card-title"]')
+    .first()
+    .evaluate(element => getComputedStyle(element).fontSize);
+  expect(size).toBe('24px');
+});
+
+test('the landing title keeps its display size', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const size = await page
+    .locator('h1')
+    .evaluate(element => getComputedStyle(element).fontSize);
+  expect(size).toBe('64px');
+});
+
+test('text uses only the weights Lato ships', async ({ page }) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const weights = await page.evaluate(() => {
+    const seen = new Set<string>();
+    for (const element of document.querySelectorAll('body *')) {
+      const { fontFamily, fontWeight } = getComputedStyle(element);
+      if (!fontFamily.includes('Hack')) seen.add(fontWeight);
+    }
+    return [...seen].sort();
+  });
+  expect(weights).toEqual(['400', '700']);
+});
+
+test('focus shows the 3 px design ring on each kind of control', async ({
+  page
+}) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  await page.keyboard.press('Tab');
+  for (const selector of [
+    'a[href="#main-content"], a[href^="#"]',
+    'header button',
+    '[data-nb-sidebar] li > a',
+    '[role="tab"]',
+    '.docs-content a',
+    '.nb-code-figure pre'
+  ]) {
+    const target = page.locator(selector).first();
+    await target.focus();
+    await expect(target, selector).toBeFocused();
+    const ring = await target.evaluate(element => {
+      const { outlineColor, outlineStyle, outlineWidth } =
+        getComputedStyle(element);
+      return { outlineColor, outlineStyle, outlineWidth };
+    });
+    expect(ring, selector).toEqual({
+      outlineColor: 'rgb(25, 142, 238)',
+      outlineStyle: 'solid',
+      outlineWidth: '3px'
+    });
+  }
+});
+
+test('the ring on a code block sits inside its clipped frame', async ({
+  page
+}) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  await page.keyboard.press('Tab');
+  const block = page.locator('.nb-code-figure pre').first();
+  await block.focus();
+  const offset = await block.evaluate(
+    element => getComputedStyle(element).outlineOffset
+  );
+  expect(offset).toBe('-3px');
+});
+
+test('the search box shows focus', async ({ page }) => {
+  await page.goto('/faq/');
+  await page.keyboard.press('Control+k');
+  const style = await page
+    .locator('[data-search-input]')
+    .first()
+    .evaluate(element => getComputedStyle(element).outlineStyle);
+  expect(style).toBe('solid');
+});
+
+test('the sidebar starts under the header', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/faq/');
+  const gap = await page.evaluate(() => {
+    const header = document.querySelector('header') as Element;
+    const rail = document
+      .querySelector('[data-nb-sidebar]')
+      ?.closest('.sticky');
+    return (
+      (rail as Element).getBoundingClientRect().top -
+      header.getBoundingClientRect().bottom
+    );
+  });
+  expect(gap).toBeLessThanOrEqual(0);
+});
+
+test('surfaces have square corners', async ({ page }) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const radii = await page.evaluate(() =>
+    [
+      '[data-slot="aside"]',
+      '.nb-code-figure',
+      '.docs-content table',
+      '[data-nb-sidebar] li > a',
+      'header button'
+    ].map(selector => {
+      const element = document.querySelector(selector) as Element;
+      return getComputedStyle(element).borderTopLeftRadius;
+    })
+  );
+  expect(new Set(radii)).toEqual(new Set(['0px']));
+});
+
+test('no surface casts a drop shadow', async ({ page }) => {
+  await page.goto('/faq/');
+  await page.keyboard.press('Control+k');
+  const shadow = await page
+    .locator('[data-search-dialog] [data-slot="dialog-content"]')
+    .first()
+    .evaluate(element => getComputedStyle(element).boxShadow);
+  expect(shadow).not.toMatch(/\d+px \d+px [1-9]/);
+});
+
+test('Lato has one family with a matched fallback', () => {
+  const html = readFileSync('dist/index.html', 'utf8');
+  expect(html).not.toContain('--font-lato-ext');
+  expect(html).toMatch(
+    /font-family:"Lato-\w+ fallback: Arial"[^}]*size-adjust/
+  );
+  const preloads = html.match(
+    /<link[^>]+rel="?preload"?[^>]+as="?font"?[^>]*>/g
+  );
+  expect(preloads).toHaveLength(2);
+});
+
+test('the landing image is a modern format and loads first', async ({
+  page
+}) => {
+  await page.goto('/');
+  const image = page.locator('main img').first();
+  await expect(image).toHaveAttribute('fetchpriority', 'high');
+  await expect(image).toHaveAttribute('src', /\.(avif|webp)/);
+});
+
 test('fonts come from the cache on the next page', async ({ page }) => {
   await page.goto('/faq/');
   await page.evaluate(() => document.fonts.ready);

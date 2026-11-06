@@ -16,9 +16,9 @@ const { class: className, ...attrs } = Astro.props;
   class={cn(
     // Scroll horizontally when the triggers exceed the column instead of
     // leaking past the page. Scrollbar hidden so it doesn't collide with the
-    // underline/indicator on classic-scrollbar platforms; the strip stays
+    // bottom rule on classic-scrollbar platforms; the strip stays
     // scrollable via wheel/touch and the tabs remain keyboard-navigable.
-    'relative flex overflow-x-auto overscroll-x-contain border-b border-border',
+    'flex overflow-x-auto overscroll-x-contain border-b border-border',
     '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
     className
   )}
@@ -26,11 +26,6 @@ const { class: className, ...attrs } = Astro.props;
   data-slot='tabs-list'
   {...attrs}
 >
-  <span
-    class='pointer-events-none absolute bottom-0 h-0.5 rounded-t-sm bg-brand transition-[left,width] duration-200 ease-out'
-    data-nb-tabs-indicator
-    data-slot='tabs-indicator'
-    aria-hidden='true'></span>
   <slot />
 </div>
 

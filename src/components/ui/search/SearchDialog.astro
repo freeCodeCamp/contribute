@@ -8,7 +8,7 @@ import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
   aria-label='Search documentation'
   data-search-dialog
 >
-  <DialogContent class='max-w-xl bg-muted shadow-xl ring-border'>
+  <DialogContent class='max-w-xl bg-muted ring-border'>
     <div
       class='flex flex-col overflow-hidden rounded-t-lg bg-card border-b border-border'
     >
@@ -26,14 +26,14 @@ import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
           aria-controls='search-listbox'
           type='text'
           placeholder='Search documentation…'
-          class='min-w-0 flex-1 border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none'
+          class='min-w-0 flex-1 border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground'
           autocomplete='off'
           spellcheck='false'
           autocorrect='off'
           autocapitalize='none'
         />
         <DialogClose
-          class='rounded border border-border bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'
+          class='rounded-sm border border-border bg-muted px-1.5 py-0.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'
         >
           Esc
         </DialogClose>
@@ -61,7 +61,7 @@ import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
     </div>
 
     <div
-      class='flex items-center gap-4 px-4 py-2.5 text-xs text-muted-foreground'
+      class='flex items-center gap-4 px-4 py-2.5 text-sm text-muted-foreground'
     >
       <span>↑↓ navigate</span>
       <span>↵ select</span>

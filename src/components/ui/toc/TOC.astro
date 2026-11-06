@@ -24,7 +24,7 @@ const headings = allHeadings.filter(({ slug }) => slug);
       class={cn('toc-container', className)}
       {...attrs}
     >
-      <h2 class='mb-2 text-sm font-semibold text-foreground'>On this page</h2>
+      <h2 class='mb-2 text-base font-semibold text-foreground'>On this page</h2>
       <nav aria-label='Table of contents' class='relative'>
         <svg
           data-nb-toc-rail
@@ -73,7 +73,7 @@ const headings = allHeadings.filter(({ slug }) => slug);
                   href={`#${h.slug}`}
                   data-nb-toc-link
                   data-nb-slug={h.slug}
-                  class='grid grid-cols-1 border-s-2 border-border ps-5 py-1.5 text-[0.8125rem] leading-5 text-muted-foreground no-underline transition-colors duration-150 hover:border-foreground/20 hover:text-foreground aria-[current=true]:font-medium aria-[current=true]:text-foreground'
+                  class='grid grid-cols-1 border-s-2 border-border ps-5 py-1 text-sm text-muted-foreground no-underline transition-colors duration-150 hover:border-foreground/20 hover:text-foreground aria-[current=true]:font-medium aria-[current=true]:text-foreground'
                   style={`margin-inline-start: calc(${indent}rem - 0.125rem);`}
                 >
                   <span class='col-start-1 row-start-1 [overflow-wrap:anywhere]'>

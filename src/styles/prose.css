@@ -16,7 +16,8 @@
 /* Vertical rhythm — every direct child gets spacing by default.
    Components can override with their own margin utilities (my-4, mt-6, etc.)
    because :where() keeps specificity at (0,1,0) and utilities come later. */
-.docs-content > :where(:not(:first-child)) {
+.docs-content > :where(:not(:first-child)),
+.docs-content :where([data-nb-tabs-content] > :not(:first-child)) {
   margin-top: 1.5rem;
 }
 
@@ -73,38 +74,59 @@
 
 /* Markdown heading typography is token-driven from globals.css. Space above
    a heading is larger than below it, so each heading groups with its section. */
+.docs-content
+  :where(
+    h1:not([class]),
+    h2:not([class]),
+    h3:not([class]),
+    h4:not([class]),
+    h5:not([class]),
+    h6:not([class])
+  ) {
+  line-height: var(--nb-heading-leading);
+  font-weight: 700;
+}
+
 .docs-content :where(h1:not([class])) {
   font-size: var(--nb-h1-size);
-  line-height: var(--nb-h1-leading);
-  font-weight: var(--nb-h1-weight);
   letter-spacing: var(--nb-h1-tracking);
   margin-top: 0;
 }
 
 .docs-content :where(h2:not([class])) {
   font-size: var(--nb-h2-size);
-  line-height: var(--nb-h2-leading);
-  font-weight: var(--nb-h2-weight);
   letter-spacing: var(--nb-h2-tracking);
   margin-top: 3rem;
 }
 
 .docs-content :where(h3:not([class])) {
   font-size: var(--nb-h3-size);
-  line-height: var(--nb-h3-leading);
-  font-weight: var(--nb-h3-weight);
-  letter-spacing: var(--nb-h3-tracking);
   margin-top: 2.25rem;
 }
 
 .docs-content :where(h4:not([class]), h5:not([class]), h6:not([class])) {
-  font-size: var(--nb-h4-size);
-  line-height: var(--nb-h3-leading);
-  font-weight: var(--nb-h4-weight);
   margin-top: 1.75rem;
 }
 
-.docs-content > :where(h2:not([class]), h3:not([class]), h4:not([class])) + * {
+.docs-content :where(h4:not([class])) {
+  font-size: var(--nb-h4-size);
+}
+
+.docs-content :where(h5:not([class])) {
+  font-size: var(--nb-h5-size);
+}
+
+.docs-content :where(h6:not([class])) {
+  font-size: var(--nb-h6-size);
+}
+
+.docs-content > :where(h2:not([class]), h3:not([class]), h4:not([class])) + *,
+.docs-content
+  :where(
+    [data-nb-tabs-content]
+      > :is(h2:not([class]), h3:not([class]), h4:not([class]))
+      + *
+  ) {
   margin-top: 0.5rem;
 }
 
@@ -158,20 +180,20 @@
   color: var(--nb-foreground);
 }
 
-/* Inline code: a quiet tint, no outline. 14px on a 16px line, so a run of
-   code reads as part of the sentence rather than a row of buttons. */
+/* Inline code: 16 px in 18 px prose, on a tint with a hairline, as the design
+   guide sets it. */
 .docs-content :where(code:not([class])):not(:where(pre *)) {
   font-family: var(--nb-font-mono);
   direction: ltr;
   unicode-bidi: isolate;
   background: var(--nb-code-tint);
+  border: 1px solid var(--nb-code-border);
   border-radius: var(--nb-radius-sm);
-  padding: 0.125rem 0.3125rem;
-  font-size: 0.875em;
+  padding: 1px 4px;
+  font-size: calc(8em / 9);
   /* A smaller font on its own line height would grow the line box by half a
-     pixel; 1 keeps every line of text exactly 28px. */
+     pixel; 1 keeps every line of text the same height. */
   line-height: 1;
-  font-weight: 450;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -184,6 +206,7 @@
 /* Links that are code keep the link's underline, not a tint. */
 .docs-content :where(a:not([class])) :where(code:not([class])) {
   background: none;
+  border: 0;
   padding: 0;
 }
 
@@ -220,8 +243,8 @@
   border-radius: 0;
 }
 
-/* Tables: 14/20 cells on a 41px row, an unfilled header in secondary text,
-   and lines only between rows. Fills its column; scroll is owned by the
+/* Tables: cells at the prose size, a bold header, and lines only between
+   rows. Fills its column; scroll is owned by the
    `.nb-table-scroll` wrapper (injected by the tableScroll() hast plugin),
    since `overflow` is ignored on a table. */
 .docs-content :where(table:not([class])) {
@@ -234,8 +257,6 @@
   border-radius: var(--nb-radius);
   border: 1px solid var(--nb-border);
   table-layout: auto;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 /* Wide tables scroll within this box at all widths instead of overflowing the
@@ -257,8 +278,7 @@
 }
 
 .docs-content :where(th:not([class])) {
-  font-weight: 500;
-  color: var(--nb-muted-foreground);
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -276,19 +296,17 @@
 .docs-content :where(a:not([class])) {
   color: var(--nb-link);
   text-decoration-line: underline;
-  text-decoration-color: var(--nb-border-strong);
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-  font-weight: 400;
-  transition: text-decoration-color 0.15s;
+  text-underline-position: under;
+  text-underline-offset: 0.1em;
+  transition: color 120ms;
 }
 
 .docs-content :where(a:not([class]):hover) {
-  text-decoration-color: var(--nb-brand);
+  color: var(--nb-foreground);
 }
 
 .docs-content :where(strong:not([class])) {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ---- Long-tail prose vocabulary ----
@@ -296,23 +314,22 @@
    render with raw browser defaults. Same component boundary as the rest
    of the file: `:not([class])` leaves component-owned markup alone. */
 
-/* Keycaps: a 20px cap with a 1px pressed edge drawn by the shadow, so the
+/* Keycaps: a 24px cap with a 1px pressed edge drawn by the shadow, so the
    key sits on the text baseline without changing the line height. */
 .docs-content :where(kbd:not([class])) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 1.25rem;
-  height: 1.25rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
   padding: 0 0.3125rem;
-  font-family: var(--nb-font-sans);
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-family: var(--nb-font-mono);
+  font-size: 0.875rem;
   line-height: 1;
   white-space: nowrap;
   color: var(--nb-foreground);
   background: var(--nb-card);
-  border-radius: 0.3125rem;
+  border-radius: var(--nb-radius-sm);
   box-shadow:
     0 0 0 1px var(--nb-border-strong),
     0 1px 0 1px var(--nb-border-strong);
@@ -347,7 +364,7 @@
   justify-content: space-between;
   gap: 0.75rem;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 700;
   list-style: none;
   user-select: none;
 }
@@ -388,7 +405,7 @@
 
 /* Definition lists — a term, then its description in secondary text. */
 .docs-content :where(dt:not([class])) {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .docs-content :where(dt:not([class]):not(:first-child)) {
@@ -404,13 +421,12 @@
   margin-top: 3rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--nb-border);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.5rem;
   color: var(--nb-muted-foreground);
 }
 
 .docs-content :where([data-footnote-ref]) {
-  font-weight: 500;
   text-decoration: none;
   margin-inline-start: 0.0625rem;
 }

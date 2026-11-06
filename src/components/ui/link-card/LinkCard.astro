@@ -26,7 +26,7 @@ const hasDescription = Boolean(description) || Astro.slots.has('description');
   data-slot='link-card'
   href={href}
   class={cn(
-    'group flex items-center justify-between gap-3 rounded-lg bg-card p-5 shadow-sm ring ring-border no-underline text-inherit transition-all hover:shadow-default hover:ring-border-strong',
+    'group flex items-center justify-between gap-3 rounded-lg bg-card p-6 ring ring-border-strong no-underline text-inherit transition-colors hover:bg-accent',
     className
   )}
   {...attrs}
@@ -34,7 +34,7 @@ const hasDescription = Boolean(description) || Astro.slots.has('description');
   <div data-slot='link-card-body' class='min-w-0 [overflow-wrap:anywhere]'>
     <h3
       data-slot='link-card-title'
-      class='m-0 text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-primary'
+      class='m-0 text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-brand'
     >
       <slot name='title'>{title}</slot>
     </h3>

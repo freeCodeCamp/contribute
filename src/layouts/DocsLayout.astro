@@ -163,7 +163,7 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
                 id='desktop-sidebar'
                 aria-label='Sidebar'
                 data-nb-desktop-sidebar
-                class='hidden md:flex w-60 lg:w-(--nb-sidebar-width) shrink-0 border-e border-border bg-background sticky top-14 h-[calc(100vh-3.5rem)] flex-col relative'
+                class='hidden md:flex w-60 lg:w-(--nb-sidebar-width) shrink-0 border-e border-border bg-background sticky top-(--nb-header-height) h-[calc(100vh-var(--nb-header-height))] flex-col relative'
               >
                 {/* One tree per page: this node moves into the mobile drawer
                   while it is open and comes back on close. It owns the
@@ -228,7 +228,7 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
                         <div class='flex items-center gap-3 flex-wrap'>
                           <h1
                             class='text-foreground mb-0 [overflow-wrap:anywhere] [text-wrap:balance]'
-                            style={`font-size:var(--nb-h1-size);line-height:var(--nb-h1-leading);font-weight:var(--nb-h1-weight);letter-spacing:var(--nb-h1-tracking)`}
+                            style={`font-size:var(--nb-h1-size);line-height:var(--nb-heading-leading);font-weight:700;letter-spacing:var(--nb-h1-tracking)`}
                           >
                             {title}
                           </h1>
@@ -289,7 +289,7 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
                     <slot name='content-footer' />
                   ) : (
                     editUrl && (
-                      <div class='mt-8 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground'>
+                      <div class='mt-8 mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground'>
                         <a
                           href={editUrl}
                           class='inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors no-underline'
@@ -315,7 +315,7 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
               <aside
                 aria-label='On this page'
                 data-nb-toc-scroll-host
-                class='hidden xl:block w-(--nb-toc-width) shrink-0 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto'
+                class='hidden xl:block w-(--nb-toc-width) shrink-0 sticky top-(--nb-header-height) h-[calc(100vh-var(--nb-header-height))] overflow-y-auto'
               >
                 <div class='pt-6 pb-8 ps-8 pe-6'>
                   {hasToc ? <slot name='toc' /> : <TOC headings={headings} />}

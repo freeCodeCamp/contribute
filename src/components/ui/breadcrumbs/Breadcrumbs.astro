@@ -45,7 +45,7 @@ const tailItems = shouldCollapse ? items.slice(items.length - tailCount) : [];
     <nav
       aria-label='Breadcrumb'
       data-slot='breadcrumbs'
-      class={cn('text-xs font-medium', className)}
+      class={cn('text-sm', className)}
       {...attrs}
     >
       <ol
@@ -99,7 +99,7 @@ const tailItems = shouldCollapse ? items.slice(items.length - tailCount) : [];
             </span>
             <details class='relative group'>
               <summary
-                class="list-none cursor-pointer select-none rounded px-1 py-0.5 transition-colors hover:bg-accent hover:text-foreground [&::-webkit-details-marker]:hidden group-open:before:fixed group-open:before:inset-0 group-open:before:z-[39] group-open:before:cursor-default group-open:before:content-['']"
+                class="list-none cursor-pointer select-none px-1 py-0.5 transition-colors hover:bg-accent hover:text-foreground [&::-webkit-details-marker]:hidden group-open:before:fixed group-open:before:inset-0 group-open:before:z-[39] group-open:before:cursor-default group-open:before:content-['']"
                 aria-label={`Show ${collapsedItems.length} more path segments`}
               >
                 <span class='tracking-widest'>&hellip;</span>
@@ -109,12 +109,12 @@ const tailItems = shouldCollapse ? items.slice(items.length - tailCount) : [];
                   crumb.href ? (
                     <a
                       href={resolveHref(crumb.href)}
-                      class='block truncate rounded-md px-2.5 py-1.5 text-xs text-muted-foreground hover:bg-accent hover:text-foreground transition-colors'
+                      class='block truncate rounded-md px-2.5 py-1.5 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors'
                     >
                       {crumb.label}
                     </a>
                   ) : (
-                    <span class='block truncate rounded-md px-2.5 py-1.5 text-xs text-muted-foreground'>
+                    <span class='block truncate rounded-md px-2.5 py-1.5 text-sm text-muted-foreground'>
                       {crumb.label}
                     </span>
                   )

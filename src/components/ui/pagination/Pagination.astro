@@ -52,13 +52,13 @@ const next = composed ? undefined : prevNext?.next;
         data-nb-pagination
         data-slot='pagination-bar'
         data-keys={keys ? undefined : 'false'}
-        class='nb-pagination-bar group/pager relative flex min-h-14 items-stretch rounded-full border border-border bg-card p-1 shadow-sm'
+        class='nb-pagination-bar group/pager relative flex min-h-14 items-stretch border border-border bg-card p-1'
       >
         <span
           data-slot='pagination-highlight'
           data-state='hidden'
           aria-hidden='true'
-          class='nb-pagination-highlight pointer-events-none absolute top-1 bottom-1 rounded-full bg-accent'
+          class='nb-pagination-highlight pointer-events-none absolute top-1 bottom-1 bg-accent'
         />
         {composed ? (
           <slot />

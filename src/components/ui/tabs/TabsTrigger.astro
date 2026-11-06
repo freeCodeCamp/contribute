@@ -21,9 +21,9 @@ const { value, class: className, ...attrs } = Astro.props;
   data-slot='tabs-trigger'
   data-nb-value={value}
   class={cn(
-    'shrink-0 cursor-pointer px-4 py-2 text-sm font-medium leading-6 whitespace-nowrap text-muted-foreground transition-colors',
-    'hover:text-foreground aria-selected:text-foreground',
-    'focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-[-2px]',
+    'shrink-0 cursor-pointer px-3.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors',
+    'hover:bg-accent hover:text-foreground aria-selected:bg-foreground aria-selected:text-background',
+    'focus-visible:outline-3 focus-visible:outline-ring focus-visible:-outline-offset-3',
     className
   )}
   {...attrs}

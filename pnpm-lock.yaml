@@ -233,6 +233,9 @@ importers:
       prettier-plugin-astro:
         specifier: 0.14.1
         version: 0.14.1
+      sharp:
+        specifier: 0.35.5
+        version: 0.35.5(@types/node@24.19.2)
       typescript-eslint:
         specifier: 8.72.1
         version: 8.72.1(eslint@10.13.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)

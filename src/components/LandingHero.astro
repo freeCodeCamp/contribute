@@ -1,23 +1,26 @@
 ---
+import { Image } from 'astro:assets';
+import banner from '@/assets/branding/banner.png';
 import SocialLinks from './SocialLinks.astro';
 
 interface Props {
   title: string;
-  image: string;
 }
 
-const { title, image } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <section
   aria-labelledby='landing-title'
   class='mx-auto flex max-w-3xl flex-col items-center px-6 pt-12 pb-16 text-center'
 >
-  <img
-    src={image}
+  <Image
+    src={banner}
     alt=''
-    width='500'
-    height='500'
+    format='webp'
+    widths={[192, 320, 500]}
+    sizes='(min-width: 48rem) 20rem, 12rem'
+    priority
     class='mb-8 h-auto w-48 rounded-full md:w-80'
   />
   <h1 id='landing-title' class='landing-title text-foreground text-balance'>
@@ -36,8 +39,8 @@ const { title, image } = Astro.props;
 <style is:global>
   .landing-title {
     font-size: var(--nb-display-size);
-    font-weight: var(--nb-h1-weight);
-    line-height: var(--nb-display-leading);
+    font-weight: 700;
+    line-height: var(--nb-heading-leading);
     letter-spacing: var(--nb-h1-tracking);
   }
 

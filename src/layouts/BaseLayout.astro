@@ -69,11 +69,10 @@ const resolvedMarkdownUrl =
     <Font
       cssVariable='--font-lato'
       preload={[
-        { weight: 400, style: 'normal' },
-        { weight: 700, style: 'normal' }
+        { subset: 'latin', weight: 400, style: 'normal' },
+        { subset: 'latin', weight: 700, style: 'normal' }
       ]}
     />
-    <Font cssVariable='--font-lato-ext' />
     <Font cssVariable='--font-hack-zeroslash' />
     <WebMCP />
 
@@ -143,7 +142,7 @@ const resolvedMarkdownUrl =
   <body class='min-h-screen bg-background text-foreground antialiased'>
     <a
       href='#main-content'
-      class='sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:no-underline focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2'
+      class='sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-100 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:no-underline focus-visible:outline-3 focus-visible:outline-ring'
     >
       Skip to content
     </a>

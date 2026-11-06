@@ -84,14 +84,13 @@ export function initSearch(config: SearchConfig): SearchInstance {
     const link = resultLink(
       result.title,
       result.url,
-      'block truncate text-sm font-medium text-foreground no-underline focus-visible:outline-none'
+      'block truncate text-base font-semibold text-foreground no-underline focus-visible:outline-none'
     );
     option.appendChild(link);
 
     if (result.snippet) {
       const snippet = document.createElement('p');
-      snippet.className =
-        'mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground';
+      snippet.className = 'mt-1 line-clamp-2 text-sm text-muted-foreground';
       snippet.innerHTML = result.snippet;
       option.appendChild(snippet);
     }
@@ -104,7 +103,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
           resultLink(
             sub.title,
             sub.url,
-            'block truncate py-0.5 text-xs text-muted-foreground no-underline hover:text-foreground'
+            'block truncate py-0.5 text-sm text-muted-foreground no-underline hover:text-foreground'
           )
         );
       }

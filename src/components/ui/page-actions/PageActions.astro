@@ -15,7 +15,7 @@ const resolvedMarkdownUrl = markdownUrl
   : undefined;
 
 const baseBtn =
-  'inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-transparent px-2 py-1 text-muted-foreground no-underline transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2';
+  'inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-transparent px-2 py-1 text-muted-foreground no-underline transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-3 focus-visible:outline-ring';
 
 // Extra actions (the layout passes Connect MCP) render after the built-in
 // ones. Rendered here so an action that renders nothing adds no separator.
@@ -40,7 +40,7 @@ const formattedDate = lastUpdated
       data-pagefind-ignore
       data-md-url={resolvedMarkdownUrl}
       class={cn(
-        'not-prose -ms-2 flex flex-wrap items-center gap-y-1 text-[0.8125rem] leading-5',
+        'not-prose -ms-2 flex flex-wrap items-center gap-y-1 text-sm',
         className
       )}
       {...attrs}
