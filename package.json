@@ -11,6 +11,7 @@
     "format": "prettier . --write && eslint . --fix",
     "lint": "prettier . --check && eslint .",
     "test": "vitest run",
+    "test:usability": "astro build && playwright test",
     "clean": "pnpm dlx rimraf .astro dist",
     "check:astro": "astro check",
     "check:links": "CHECK_LINKS=true astro build"
@@ -37,8 +38,10 @@
     "typescript": "6.0.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@eslint/eslintrc": "3.3.7",
     "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
     "@types/jsdom": "28.0.3",
     "@types/node": "24.19.2",
     "eslint": "10.13.0",

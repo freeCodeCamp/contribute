@@ -21,6 +21,12 @@ jobs:
     uses: ./.github/workflows/re-test.yml
     secrets: inherit
 
+  usability:
+    name: Usability
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    uses: ./.github/workflows/re-usability.yml
+    secrets: inherit
+
   build:
     name: Build
     if: github.event_name == 'pull_request' || github.event_name == 'push'
