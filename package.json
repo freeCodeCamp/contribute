@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "is-ci || husky",
     "develop": "astro dev",
+    "prebuild": "node scripts/unshallow.mjs",
     "build": "astro build",
     "preview": "pnpm build && wrangler dev",
     "format": "prettier . --write && eslint . --fix",
