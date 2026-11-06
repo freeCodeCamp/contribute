@@ -13,8 +13,7 @@
     "test": "vitest run",
     "test:usability": "astro build && playwright test",
     "clean": "pnpm dlx rimraf .astro dist",
-    "check:astro": "astro check",
-    "check:links": "CHECK_LINKS=true astro build"
+    "check:astro": "astro check"
   },
   "lint-staged": {
     "**/*.{astro,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
@@ -39,24 +38,16 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
-    "@eslint/eslintrc": "3.3.7",
-    "@eslint/js": "10.0.1",
     "@playwright/test": "1.64.1",
-    "@types/jsdom": "28.0.3",
     "@types/node": "24.19.2",
     "eslint": "10.13.0",
-    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "1.7.0",
-    "eslint-plugin-prettier": "5.5.7",
-    "globals": "17.13.0",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
-    "jsdom": "29.1.1",
     "lint-staged": "17.6.0",
     "pagefind": "1.5.2",
     "prettier": "3.9.10",
     "prettier-plugin-astro": "0.14.1",
-    "sharp": "0.34.5",
     "typescript-eslint": "8.72.1",
     "vitest": "4.1.12",
     "wrangler": "4.156.0"

@@ -112,27 +112,6 @@
     var(--nb-background)
   );
 
-  /* API method palette — shared source of truth for the method chip across the
-	   sidebar, endpoint card, and code rail (api-sidebar / api-layout /
-	   api-code-rail). Each method maps onto a status token for text and tint.
-	   The line is 25% of the status's solid colour, which has no token. */
-  --nb-m-get: var(--nb-success);
-  --nb-m-get-tint: var(--nb-success-muted);
-  --nb-m-get-line: oklch(0.596 0.145 163.225 / 0.25);
-  --nb-m-post: var(--nb-info);
-  --nb-m-post-tint: var(--nb-info-muted);
-  --nb-m-post-line: oklch(0.685 0.169 237.323 / 0.25);
-  /* A step darker than the warning colour: 4.5:1 on its own tint. */
-  --nb-m-put: oklch(0.5 0.13 55);
-  --nb-m-put-tint: var(--nb-warning-muted);
-  --nb-m-put-line: oklch(0.739 0.177 58.2 / 0.25);
-  --nb-m-delete: var(--nb-danger);
-  --nb-m-delete-tint: var(--nb-danger-muted);
-  --nb-m-delete-line: oklch(0.637 0.237 25.331 / 0.25);
-  --nb-m-other: var(--nb-muted-foreground);
-  --nb-m-other-tint: var(--nb-accent);
-  --nb-m-other-line: var(--nb-border);
-
   /* Layout */
   --nb-sidebar-width: 18.75rem;
   --nb-toc-width: 18rem;
@@ -140,8 +119,6 @@
   /* The sticky header's height: taller on phones when the section tabs take
 	   a row of their own (set below). Sticky bars and scroll margins read it. */
   --nb-header-height: 3.5rem;
-  /* Used only by the API reference (registry: api-layout); harmless elsewhere. */
-  --nb-code-rail-width: 34rem;
 
   --nb-font-sans: var(--font-lato), var(--font-lato-ext);
   --nb-font-mono: var(--font-hack-zeroslash);
@@ -252,12 +229,6 @@
     var(--nb-brand-red-light) 12%,
     var(--nb-background)
   );
-
-  /* API method palette — dark lines; text and tint follow the status tokens. */
-  --nb-m-get-line: oklch(0.765 0.177 163.223 / 0.25);
-  --nb-m-put: var(--nb-warning);
-  --nb-m-put-line: oklch(0.645 0.168 50 / 0.25);
-  --nb-m-delete-line: oklch(0.577 0.245 27.325 / 0.25);
 
   --nb-shadow-sm: 0 1px 2px oklch(0 0 0 / 0.2);
   --nb-shadow: 0 1px 3px oklch(0 0 0 / 0.3), 0 1px 2px oklch(0 0 0 / 0.2);
@@ -494,9 +465,6 @@ pre.astro-code span {
    title bar, copy button, badge and tabs in LTR order on an RTL page. A
    diagram's flow is drawn left to right too. */
 .nb-code-figure,
-[data-slot='code-group'],
-[data-slot='package-managers'],
-[data-nb-api-coderail],
 .diagram-stage {
   direction: ltr;
 }
@@ -694,14 +662,8 @@ pre.astro-code .highlighted-word {
    a row placed elsewhere. In the components layer so Tailwind utilities on a
    row (a `line-through`) still win. */
 @layer components {
-  :is(
-    .nb-sidebar-link,
-    :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results]) li > a
-  ),
-  :is(
-    .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-  ) {
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a),
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary) {
     display: flex;
     min-height: 2rem;
     align-items: center;
@@ -713,71 +675,40 @@ pre.astro-code .highlighted-word {
     color: var(--nb-muted-foreground);
     overflow-wrap: break-word;
   }
-  :is(
-    .nb-sidebar-link,
-    :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results]) li > a
-  ) {
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a) {
     text-decoration: none;
   }
-  /* Operation rows: the method chip sits closer to the edge. */
-  :is([data-nb-api-nav], [data-nb-nav-results]) li > a:has(> i[data-m]) {
-    padding-inline: 0.25rem;
-  }
-  :is(
-    .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-  ) {
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary) {
     cursor: pointer;
     user-select: none;
     list-style: none;
   }
   :is(
     .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
+    [data-nb-sidebar] details > summary
   )::-webkit-details-marker {
     display: none;
   }
-  :is(
-    .nb-sidebar-link,
-    :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results]) li > a
-  ):hover,
-  :is(
-    .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-  ):hover {
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a):hover,
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):hover {
     background-color: var(--nb-accent);
     color: var(--nb-foreground);
   }
   /* You are here: the one place the sidebar uses the brand. */
-  :is(
-    .nb-sidebar-link,
-    :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results]) li > a
-  )[aria-current='page'] {
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a)[aria-current='page'] {
     background-color: var(--nb-brand-wash);
     color: var(--nb-brand);
   }
-  :is(
-    .nb-sidebar-link,
-    :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results]) li > a
-  ):focus-visible,
-  :is(
-    .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-  ):focus-visible {
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a):focus-visible,
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):focus-visible {
     outline-offset: -2px;
   }
   /* The group holds the current page. */
-  :is(
-    .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-  )[data-nb-active] {
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary)[data-nb-active] {
     color: var(--nb-foreground);
   }
   /* The caret, drawn once as a mask instead of an inline SVG per group. */
-  :is(
-    .nb-sidebar-row,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-  )::after {
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary)::after {
     content: '';
     flex-shrink: 0;
     width: 1rem;
@@ -788,29 +719,20 @@ pre.astro-code .highlighted-word {
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M96 48l80 80-80 80' fill='none' stroke='black' stroke-width='24' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
       no-repeat center / contain;
   }
-  :is(
-      .nb-sidebar-row,
-      :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-    ):hover::after {
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):hover::after {
     opacity: 1;
   }
   details[open] > :is(.nb-sidebar-row, summary)::after {
     rotate: 90deg;
   }
   /* Right to left, the closed caret points the other way and opens downward. */
-  :is(
-      .nb-sidebar-row,
-      :is([data-nb-sidebar], [data-nb-api-nav]) details > summary
-    ):dir(rtl)::after {
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):dir(rtl)::after {
     rotate: 180deg;
   }
   details[open] > :is(.nb-sidebar-row, summary):dir(rtl)::after {
     rotate: 90deg;
   }
-  :is(
-    .nb-sidebar-list,
-    :is([data-nb-sidebar], [data-nb-api-nav]) details > ul
-  ) {
+  :is(.nb-sidebar-list, [data-nb-sidebar] details > ul) {
     display: flex;
     flex-direction: column;
     gap: 1px;
@@ -822,21 +744,15 @@ pre.astro-code .highlighted-word {
     list-style: none;
   }
   /* Safari still lays out closed <details> content in large trees. */
-  :is([data-nb-sidebar], [data-nb-api-nav]) details:not([open]) > ul {
+  [data-nb-sidebar] details:not([open]) > ul {
     display: none;
   }
-  /* 14px rows to sit with the 16px body, in the docs and API sidebars alike,
-	   so rows land on the same pixels on both. An on-demand API sidebar and its
-	   filter results have no data-nb-sidebar wrapper, so they're named too. */
-  :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results])
-    :is(li > a, details > summary) {
+  [data-nb-sidebar] :is(li > a, details > summary) {
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 450;
   }
-  :is([data-nb-sidebar], [data-nb-api-nav], [data-nb-nav-results])
-    li
-    > a[aria-current='page'] {
+  [data-nb-sidebar] li > a[aria-current='page'] {
     font-weight: 500;
   }
   /* A top-level group reads as a section heading, set apart from the loose

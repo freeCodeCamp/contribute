@@ -6,7 +6,7 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
-      "matchPackageNames": ["@astrojs/check", "sharp"],
+      "matchPackageNames": ["@astrojs/check"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"

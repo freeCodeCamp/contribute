@@ -359,7 +359,7 @@
   display: none;
 }
 
-/* Trailing chevron — label left, indicator right, matching Collapsible. */
+/* Trailing chevron — label left, indicator right. */
 .docs-content :where(details:not([class]):not(.file-tree *) > summary)::after {
   content: '';
   flex-shrink: 0;

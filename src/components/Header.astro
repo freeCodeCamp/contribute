@@ -7,7 +7,6 @@ import { ThemeToggle } from './ui/theme-toggle';
 import SearchTrigger from './ui/search/SearchTrigger.astro';
 import { config } from 'virtual:nimbus/config';
 import {
-  getCollectionUrl,
   getSidebarSections,
   stripBase,
   withBase
@@ -36,46 +35,8 @@ const { collection, showSidebar = true, sections: sectionsProp } = Astro.props;
 const currentSlug =
   stripBase(Astro.url.pathname, import.meta.env.BASE_URL).replace(/\/$/, '') ||
   '/';
-const sidebarSections =
-  sectionsProp ?? (await getSidebarSections(currentSlug, { collection }));
-// An API reference beside the docs isn't in the docs sidebar, so the docs and
-// each reference become the tabs. A reference served at the root is the site.
-const apiHrefs = (
-  await Promise.all(
-    (config.api ?? []).map(async entry => ({
-      entry,
-      href: await getCollectionUrl(entry.collection)
-    }))
-  )
-).filter(({ href }) => href !== '/');
-// The reference the page is in: the longest mount that is the path or a folder of it.
-const mountOf = (href: string) => href.replace(/\/$/, '');
-const activeApi = apiHrefs
-  .filter(
-    ({ href }) =>
-      currentSlug === mountOf(href) ||
-      currentSlug.startsWith(`${mountOf(href)}/`)
-  )
-  .sort((a, b) => b.href.length - a.href.length)[0];
 const sections =
-  sidebarSections.length >= 2 || sectionsProp || apiHrefs.length === 0
-    ? sidebarSections
-    : [
-        // A page outside every collection (the 404) is in neither tab.
-        {
-          label: 'Docs',
-          href: '/',
-          isActive: activeApi === undefined && collection !== undefined
-        },
-        ...apiHrefs.map(api => ({
-          label:
-            apiHrefs.length === 1
-              ? 'API reference'
-              : (api.entry.label ?? api.entry.collection),
-          href: api.href,
-          isActive: api === activeApi
-        }))
-      ];
+  sectionsProp ?? (await getSidebarSections(currentSlug, { collection }));
 const showSections = sections.length >= 2;
 const homeHref = withBase('/', import.meta.env.BASE_URL);
 const resolveSectionHref = (href: string): string =>

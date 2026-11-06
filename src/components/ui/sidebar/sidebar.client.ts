@@ -101,10 +101,7 @@ function applyFilter(root: HTMLElement, query: string): void {
   groups.forEach(group => group.setAttribute('data-nb-sidebar-hidden', ''));
 
   links.forEach(link => {
-    // A method chip's `data-m` adds the full verb its label may abbreviate.
-    const method =
-      link.querySelector<HTMLElement>('i[data-m]')?.dataset.m ?? '';
-    const text = `${link.textContent ?? ''} ${method}`.toLowerCase();
+    const text = (link.textContent ?? '').toLowerCase();
     if (!text.includes(query)) return;
     link.removeAttribute('data-nb-sidebar-hidden');
     revealAncestors(link, root);
