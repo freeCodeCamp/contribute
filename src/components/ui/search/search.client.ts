@@ -138,7 +138,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
     activeController = new AbortController();
     const signal = activeController.signal;
 
-    emptyState.style.display = '';
+    emptyState.classList.remove('sr-only');
     emptyState.textContent = 'Searching…';
     clearResults();
 
@@ -152,12 +152,14 @@ export function initSearch(config: SearchConfig): SearchInstance {
       activeIndex = -1;
 
       if (results.length === 0) {
-        emptyState.style.display = '';
+        emptyState.classList.remove('sr-only');
         emptyState.textContent = 'No results found.';
         return;
       }
 
-      emptyState.style.display = 'none';
+      emptyState.classList.add('sr-only');
+      emptyState.textContent =
+        results.length === 1 ? '1 result' : `${results.length} results`;
       input.setAttribute('aria-expanded', 'true');
       for (const result of results)
         resultsContainer.appendChild(buildResult(result));
@@ -165,7 +167,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
     } catch {
       if (signal.aborted) return;
       clearResults();
-      emptyState.style.display = '';
+      emptyState.classList.remove('sr-only');
       emptyState.textContent = 'Search is temporarily unavailable.';
     }
   }
@@ -177,7 +179,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
       const query = input.value.trim();
       if (!query) {
         clearResults();
-        emptyState.style.display = '';
+        emptyState.classList.remove('sr-only');
         emptyState.textContent = 'Type to search…';
         return;
       }
@@ -216,7 +218,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
       input.focus();
       activeIndex = -1;
       clearResults();
-      emptyState.style.display = '';
+      emptyState.classList.remove('sr-only');
       emptyState.textContent = 'Type to search…';
       await ensureInitialized();
     },

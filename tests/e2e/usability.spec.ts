@@ -85,6 +85,24 @@ for (const route of routes) {
     });
   }
 
+  test(`${route} keeps its heading and table structure`, async ({ page }) => {
+    await page.goto(route);
+    await openEverything(page);
+    const { violations } = await new AxeBuilder({ page })
+      .withRules([
+        'heading-order',
+        'empty-table-header',
+        'label-content-name-mismatch'
+      ])
+      .analyze();
+    expect(
+      violations.map(({ id, nodes }) => ({
+        id,
+        targets: nodes.slice(0, 3).map(({ target }) => target.join(' '))
+      }))
+    ).toEqual([]);
+  });
+
   test(`${route} does not scroll sideways at 320 px`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 700 });
     await page.goto(route);

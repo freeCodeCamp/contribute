@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import nimbus, {
   defineConfig as defineNimbusConfig
 } from '@cloudflare/nimbus-docs';
-import { tableScroll } from '@cloudflare/nimbus-docs/markdown';
+import { keyboardTableScroll } from './src/lib/table-scroll';
 import sidebar from './src/sidebar';
 
 const fontFaces = [
@@ -102,6 +102,12 @@ const nimbusConfig = defineNimbusConfig({
 export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
+  markdown: {
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark-high-contrast' },
+      defaultColor: false
+    }
+  },
   fonts: [
     latoFamily('--font-lato', 'latin', latoLatin, []),
     latoFamily('--font-lato-ext', 'latin-ext', latoLatinExt, ['sans-serif']),
@@ -135,7 +141,7 @@ export default defineConfig({
         ]
       },
       markdown: {
-        hastPlugins: [tableScroll()],
+        hastPlugins: [keyboardTableScroll()],
         componentMap: {
           LinkButton: {
             revision: '1',

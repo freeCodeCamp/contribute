@@ -138,7 +138,23 @@ function initTabContainer(container: HTMLElement): () => void {
     }
   }
 
+  const openTabForHash = () => {
+    const target = document.getElementById(
+      decodeURIComponent(location.hash.slice(1))
+    );
+    if (!target) return;
+    const panel = panels.find(candidate => candidate.contains(target));
+    if (!panel) return;
+    container
+      .querySelector<HTMLElement>(`[aria-controls="${panel.id}"]`)
+      ?.click();
+    target.scrollIntoView();
+  };
+  openTabForHash();
+  window.addEventListener('hashchange', openTabForHash);
+
   return () => {
+    window.removeEventListener('hashchange', openTabForHash);
     resize?.disconnect();
     tablist?.removeEventListener('scroll', markOverflow);
     instance.destroy();

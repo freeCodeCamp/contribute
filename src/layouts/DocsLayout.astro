@@ -176,7 +176,7 @@ const showToc = headings !== false && (hasToc || headings.length > 0);
                   {hasSidebar ? (
                     <slot name='sidebar' />
                   ) : (
-                    <nav class='px-4 pb-12 pt-5'>
+                    <nav aria-label='Documentation' class='px-4 pb-12 pt-5'>
                       {showFilter && <SidebarFilter />}
                       <Sidebar items={sidebar} persist />
                     </nav>

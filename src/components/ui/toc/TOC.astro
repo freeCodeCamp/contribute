@@ -12,7 +12,8 @@ interface Props extends HTMLAttributes<'div'> {
   headings: TOCItem[];
 }
 
-const { headings, class: className, ...attrs } = Astro.props;
+const { headings: allHeadings, class: className, ...attrs } = Astro.props;
+const headings = allHeadings.filter(({ slug }) => slug);
 ---
 
 {
