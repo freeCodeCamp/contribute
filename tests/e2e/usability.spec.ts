@@ -175,6 +175,43 @@ test('a card title keeps the design size', async ({ page }) => {
   expect(size).toBe('24px');
 });
 
+for (const [viewport, least] of [
+  [1280, 652],
+  [1440, 720],
+  [1920, 720]
+] as const) {
+  test(`the docs column is no narrower than main at ${viewport} px`, async ({
+    page
+  }) => {
+    await page.setViewportSize({ width: viewport, height: 900 });
+    await page.goto('/how-to-setup-freecodecamp-locally/');
+    const { width } = (await page.locator('.docs-content').boundingBox()) as {
+      width: number;
+    };
+    expect(width).toBeGreaterThanOrEqual(least);
+  });
+}
+
+test('a landing card is no narrower than main at 1280 px', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const { width } = (await page
+    .locator('[data-slot="card"]')
+    .first()
+    .boundingBox()) as { width: number };
+  expect(width).toBeGreaterThanOrEqual(528);
+});
+
+test('the landing title stays on one line at 1280 px', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const lines = await page.locator('h1').evaluate(element => {
+    const { lineHeight } = getComputedStyle(element);
+    return element.getBoundingClientRect().height / parseFloat(lineHeight);
+  });
+  expect(Math.round(lines)).toBe(1);
+});
+
 test('the landing title keeps its display size', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/');
