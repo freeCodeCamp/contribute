@@ -8,7 +8,7 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   reporter: process.env.CI ? 'github' : 'line',
   timeout: 60_000,
-  use: { baseURL, ...devices['Desktop Chrome'] },
+  use: { baseURL, ...devices['Desktop Chrome'], trace: 'retain-on-failure' },
   webServer: process.env.USABILITY_BASE_URL
     ? undefined
     : {

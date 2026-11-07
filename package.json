@@ -17,11 +17,12 @@
     "check:astro": "astro check"
   },
   "lint-staged": {
-    "**/*.{astro,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
-      "pnpm format"
+    "**/*.{astro,mjs,cjs,js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
     ],
-    "**/*.{mdx,md}": [
-      "pnpm exec prettier . --write"
+    "**/*.{yaml,yml,md,mdx}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
