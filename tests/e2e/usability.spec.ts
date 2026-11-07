@@ -657,7 +657,7 @@ test('hashed fonts are cached for a year', async ({ page, request }) => {
 
 test('a page stays still while fonts load', async ({ page }) => {
   await page.addInitScript(() => {
-    const state = window as Window & {
+    const state = window as unknown as {
       layoutShiftTotal: number;
       layoutShiftObserver: PerformanceObserver;
     };
@@ -678,7 +678,7 @@ test('a page stays still while fonts load', async ({ page }) => {
     const total = await page.evaluate(async () => {
       await document.fonts.ready;
       await new Promise(resolve => setTimeout(resolve, 500));
-      const state = window as Window & {
+      const state = window as unknown as {
         layoutShiftTotal: number;
         layoutShiftObserver: PerformanceObserver;
       };
