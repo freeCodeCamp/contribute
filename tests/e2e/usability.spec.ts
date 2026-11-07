@@ -549,6 +549,153 @@ test('a docs page shows when it last changed', async ({ page }) => {
   await expect(page.locator('main time[datetime]').first()).toBeVisible();
 });
 
+test('every page has its own title, canonical URL and social card', async ({
+  request
+}) => {
+  const titles: string[] = [];
+  for (const route of routes) {
+    const response = await request.get(route);
+    expect(response.status(), route).toBe(200);
+    const html = await response.text();
+    const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1].trim();
+    expect(title, route).toBeTruthy();
+    titles.push(title ?? '');
+    const tags = [...html.matchAll(/<(link|meta)\b[^>]*>/gi)].map(
+      ([tag, name]) => ({
+        name: name.toLowerCase(),
+        attributes: Object.fromEntries(
+          [
+            ...tag.matchAll(
+              /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/g
+            )
+          ].map(([, key, doubleQuoted, singleQuoted, unquoted]) => [
+            key.toLowerCase(),
+            doubleQuoted ?? singleQuoted ?? unquoted
+          ])
+        )
+      })
+    );
+    expect(
+      tags
+        .filter(
+          ({ name, attributes }) =>
+            name === 'link' && attributes.rel === 'canonical'
+        )
+        .map(({ attributes }) => attributes.href),
+      route
+    ).toEqual([`https://contribute.freecodecamp.org${route}`]);
+    const images = tags
+      .filter(
+        ({ name, attributes }) =>
+          name === 'meta' && attributes.property === 'og:image'
+      )
+      .map(({ attributes }) => attributes.content);
+    expect(images, route).toHaveLength(1);
+    expect(images[0], route).toBeTruthy();
+    const imageURL = new URL(
+      images[0],
+      `https://contribute.freecodecamp.org${route}`
+    );
+    const image = await request.get(`${imageURL.pathname}${imageURL.search}`);
+    expect(image.status(), route).toBe(200);
+    expect(image.headers()['content-type'], route).toContain('image/png');
+  }
+  expect(new Set(titles).size).toBe(routes.length);
+});
+
+test('llms.txt lists the Markdown version of every page', async ({
+  request
+}) => {
+  const response = await request.get('/llms.txt');
+  expect(response.status()).toBe(200);
+  const body = await response.text();
+  const targets = [...body.matchAll(/\[[^\]\r\n]*\]\(([^\s)]+)\)/g)].map(
+    ([, target]) => target
+  );
+  expect(targets.sort()).toEqual(
+    routes
+      .map(route => `https://contribute.freecodecamp.org${route}index.md`)
+      .sort()
+  );
+});
+
+test('a Markdown page starts with its title', async ({ request }) => {
+  const response = await request.get('/faq/index.md');
+  expect(response.status()).toBe(200);
+  const body = await response.text();
+  expect(body).toMatch(/^---/);
+  expect(body).toContain('title: "Frequently Asked Questions"');
+});
+
+test('the sitemap dates every page', () => {
+  const sitemap = readFileSync('dist/sitemap-0.xml', 'utf8');
+  expect([...sitemap.matchAll(/<lastmod>[^<]+<\/lastmod>/g)]).toHaveLength(
+    routes.length
+  );
+});
+
+test('hashed fonts are cached for a year', async ({ page, request }) => {
+  await page.goto('/faq/');
+  await page.evaluate(() => document.fonts.ready);
+  const font = await page.evaluate(() =>
+    performance
+      .getEntriesByType('resource')
+      .map(({ name }) => name)
+      .find(name => {
+        const path = new URL(name).pathname;
+        return /^\/_astro\/(?:[^/]+\/)*(?:[a-f0-9]{8,}|[^/]+\.[\w-]+)\.woff2$/.test(
+          path
+        );
+      })
+  );
+  expect(font).toBeTruthy();
+  const response = await request.get(font!);
+  expect(response.status()).toBe(200);
+  expect(response.headers()['cache-control']).toContain('max-age=31536000');
+  expect(response.headers()['cache-control']).toContain('immutable');
+});
+
+test('a page stays still while fonts load', async ({ page }) => {
+  await page.addInitScript(() => {
+    const state = window as Window & {
+      layoutShiftTotal: number;
+      layoutShiftObserver: PerformanceObserver;
+    };
+    state.layoutShiftTotal = 0;
+    state.layoutShiftObserver = new PerformanceObserver(list => {
+      for (const entry of list.getEntries()) {
+        const shift = entry as PerformanceEntry & {
+          hadRecentInput: boolean;
+          value: number;
+        };
+        if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
+      }
+    });
+    state.layoutShiftObserver.observe({ type: 'layout-shift', buffered: true });
+  });
+  for (const route of ['/', '/faq/', '/how-to-setup-freecodecamp-locally/']) {
+    await page.goto(route);
+    const total = await page.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const state = window as Window & {
+        layoutShiftTotal: number;
+        layoutShiftObserver: PerformanceObserver;
+      };
+      for (const entry of state.layoutShiftObserver.takeRecords()) {
+        const shift = entry as PerformanceEntry & {
+          hadRecentInput: boolean;
+          value: number;
+        };
+        if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
+      }
+      state.layoutShiftObserver.disconnect();
+      return state.layoutShiftTotal;
+    });
+    expect(total, route).toBeLessThanOrEqual(0.05);
+  }
+});
+
 test('the mobile page menu shows focus in forced colours', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 800 });
   await page.emulateMedia({ forcedColors: 'active' });
