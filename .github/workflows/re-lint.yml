@@ -6,6 +6,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     strategy:
       matrix:
@@ -14,6 +15,8 @@ jobs:
     steps:
       - name: Checkout source files
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js and pnpm
         uses: ./.github/actions/setup-node-pnpm
@@ -30,5 +33,10 @@ jobs:
 
       - name: Run lint checks
         run: pnpm lint
+        env:
+          CI: true
+
+      - name: Run Nimbus checks
+        run: pnpm exec nimbus-docs check --json
         env:
           CI: true

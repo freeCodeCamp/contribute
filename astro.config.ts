@@ -1,78 +1,111 @@
-import { defineConfig } from 'astro/config';
+import { readFile } from 'node:fs/promises';
+import type { AstroIntegration } from 'astro';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import starlight from '@astrojs/starlight';
-import starlightScrollToTop from 'starlight-scroll-to-top';
-import starlightLinksValidator from 'starlight-links-validator';
+import nimbus, {
+  defineConfig as defineNimbusConfig
+} from '@cloudflare/nimbus-docs';
+import { keyboardTableScroll } from './src/lib/table-scroll';
 import sidebar from './src/sidebar';
 
-const firstPaintThemeStyle = `
-@layer sl-first-paint {
-  html {
-    background-color: #161724;
-    color-scheme: dark;
-  }
+const fontFaces = [
+  { weight: 400, style: 'normal', hack: 'Regular' },
+  { weight: 400, style: 'italic', hack: 'Italic' },
+  { weight: 700, style: 'normal', hack: 'Bold' },
+  { weight: 700, style: 'italic', hack: 'BoldItalic' }
+] as const;
 
-  html[data-theme='light'] {
-    background-color: #ffffff;
-    color-scheme: light;
-  }
-}
-`;
+const hackVariants = fontFaces.map(({ weight, style, hack }) => ({
+  src: [`./src/assets/fonts/hack-zeroslash/Hack-ZeroSlash-${hack}.woff2`] as [
+    string
+  ],
+  weight,
+  style
+}));
 
-const config = defineConfig({
-  vite: { plugins: [tailwindcss()] },
+const requireLato: AstroIntegration = {
+  name: 'require-lato',
+  hooks: {
+    'astro:build:done': async ({ dir }) => {
+      const html = await readFile(new URL('index.html', dir), 'utf8');
+      if (!/@font-face\{font-family:Lato-/.test(html)) {
+        throw new Error('Lato did not resolve from Fontsource.');
+      }
+    }
+  }
+};
+
+const nimbusConfig = defineNimbusConfig({
   site: 'https://contribute.freecodecamp.org',
+  title: 'Contribute | freeCodeCamp.org',
+  description: 'Contribute to freeCodeCamp.org',
+  locale: 'en',
+  github: null,
+  editPattern: 'https://github.com/freeCodeCamp/contribute/edit/main/{path}',
+  sidebar: { items: sidebar },
+  socialImageAlt: 'Contribute to freeCodeCamp'
+});
+
+export default defineConfig({
+  output: 'static',
+  trailingSlash: 'always',
+  markdown: {
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark-high-contrast' },
+      defaultColor: false
+    }
+  },
+  fonts: [
+    {
+      name: 'Lato',
+      cssVariable: '--font-lato',
+      provider: fontProviders.fontsource(),
+      weights: [400, 700],
+      styles: ['normal', 'italic'],
+      subsets: ['latin', 'latin-ext'],
+      formats: ['woff2'],
+      fallbacks: ['sans-serif']
+    },
+    {
+      name: 'Hack-ZeroSlash',
+      cssVariable: '--font-hack-zeroslash',
+      provider: fontProviders.local(),
+      fallbacks: ['monospace'],
+      options: {
+        variants: hackVariants as [
+          (typeof hackVariants)[number],
+          ...typeof hackVariants
+        ]
+      }
+    }
+  ],
+  vite: {
+    plugins: [tailwindcss()]
+  },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  },
   integrations: [
-    starlight({
-      title: 'Contribute | freeCodeCamp.org',
-      components: {
-        SiteTitle: './src/components/SiteTitle.astro'
+    requireLato,
+    nimbus(nimbusConfig, {
+      rules: {
+        'nimbus/frontmatter-shape': 'error',
+        'nimbus/internal-link': [
+          'error',
+          { components: [{ name: 'LinkCard', attr: 'href' }] }
+        ]
       },
-      description: 'Contribute to freeCodeCamp.org',
-      logo: {
-        light: './public/icons/secondary_logo.svg',
-        dark: './public/icons/primary_logo.svg',
-        replacesTitle: true
-      },
-      favicon: 'favicon.ico',
-      tableOfContents: {
-        minHeadingLevel: 1,
-        maxHeadingLevel: 2
-      },
-      editLink: {
-        baseUrl: 'https://github.com/freeCodeCamp/contribute/edit/main/'
-      },
-      head: [
-        {
-          tag: 'style',
-          content: firstPaintThemeStyle
+      markdown: {
+        hastPlugins: [keyboardTableScroll()],
+        componentMap: {
+          LinkButton: {
+            revision: '1',
+            render: ({ attrs, children }) =>
+              `[${children.trim()}](${String(attrs.href)})`
+          }
         }
-      ],
-      social: [
-        {
-          label: 'GitHub',
-          href: 'https://github.com/freeCodeCamp',
-          icon: 'github'
-        },
-        {
-          label: 'X',
-          href: 'https://twitter.com/freeCodeCamp',
-          icon: 'x.com'
-        },
-        {
-          label: 'Discord',
-          href: 'https://chat.freecodecamp.org',
-          icon: 'discord'
-        }
-      ],
-      sidebar: sidebar,
-      plugins: [
-        ...(process.env.CHECK_LINKS ? [starlightLinksValidator()] : []),
-        starlightScrollToTop()
-      ],
-      customCss: ['./src/styles/global.css']
+      }
     })
   ]
 });
-
-export default config;
