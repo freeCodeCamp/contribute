@@ -10,14 +10,16 @@ test('clicking a tab shows its panel and hides the others', async ({
 }) => {
   await page.goto('/how-to-setup-freecodecamp-locally/');
   const tab = page.getByRole('tab', { name: 'Dev Container', exact: true });
+  const firstPanel = page.locator(
+    '[data-nb-tabs-content][data-nb-tab-label="Local Machine"]'
+  );
+  await expect(firstPanel).toBeVisible();
   await tab.click();
   await expect(tab).toHaveAttribute('aria-selected', 'true');
   await expect(
     page.locator('[data-nb-tabs-content][data-nb-tab-label="Dev Container"]')
   ).toBeVisible();
-  await expect(
-    page.locator('[data-nb-tabs-content][data-nb-tab-label="Local Machine"]')
-  ).toBeHidden();
+  await expect(firstPanel).toBeHidden();
 });
 
 test('arrow keys move between tabs', async ({ page }) => {

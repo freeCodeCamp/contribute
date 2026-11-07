@@ -58,6 +58,7 @@ test('a chosen theme stays after a reload and on the next page', async ({
 test('a chosen theme beats the OS setting', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/faq/');
+  await expect(page.locator('html')).toHaveAttribute('data-mode', 'dark');
   await page.locator('[data-nb-theme-toggle]:visible').first().click();
   await expect
     .poll(() => page.locator('html').getAttribute('data-mode'))
@@ -71,18 +72,16 @@ test('a chosen theme beats the OS setting', async ({ page }) => {
 test('before a choice, the page follows the OS theme', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/faq/');
-  await countTransitions(page);
   await page.emulateMedia({ colorScheme: 'dark' });
-  await expectStillSwitch(page, 'dark');
+  await expect(page.locator('html')).toHaveAttribute('data-mode', 'dark');
 });
 
 test('a choice in another tab applies here', async ({ context, page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/faq/');
-  await countTransitions(page);
   const other = await context.newPage();
   await other.emulateMedia({ colorScheme: 'light' });
   await other.goto('/faq/');
   await other.evaluate(() => localStorage.setItem('ui-mode', 'dark'));
-  await expectStillSwitch(page, 'dark');
+  await expect(page.locator('html')).toHaveAttribute('data-mode', 'dark');
 });

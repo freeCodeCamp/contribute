@@ -2,8 +2,6 @@ import { readFileSync } from 'node:fs';
 import { AxeBuilder } from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-test.use({ viewport: { width: 1280, height: 900 } });
-
 const WCAG_TAGS = [
   'wcag2a',
   'wcag2aa',
@@ -655,25 +653,33 @@ test('hashed fonts are cached for a year', async ({ page, request }) => {
   expect(response.headers()['cache-control']).toContain('immutable');
 });
 
-test('a page stays still while fonts load', async ({ page }) => {
-  await page.addInitScript(() => {
-    const state = window as unknown as {
-      layoutShiftTotal: number;
-      layoutShiftObserver: PerformanceObserver;
-    };
-    state.layoutShiftTotal = 0;
-    state.layoutShiftObserver = new PerformanceObserver(list => {
-      for (const entry of list.getEntries()) {
-        const shift = entry as PerformanceEntry & {
-          hadRecentInput: boolean;
-          value: number;
-        };
-        if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
-      }
-    });
-    state.layoutShiftObserver.observe({ type: 'layout-shift', buffered: true });
-  });
+test('a page stays still while fonts load', async ({ browser, baseURL }) => {
   for (const route of ['/', '/faq/', '/how-to-setup-freecodecamp-locally/']) {
+    const context = await browser.newContext({
+      baseURL,
+      viewport: { width: 1280, height: 900 }
+    });
+    const page = await context.newPage();
+    await page.addInitScript(() => {
+      const state = window as unknown as {
+        layoutShiftTotal: number;
+        layoutShiftObserver: PerformanceObserver;
+      };
+      state.layoutShiftTotal = 0;
+      state.layoutShiftObserver = new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) {
+          const shift = entry as PerformanceEntry & {
+            hadRecentInput: boolean;
+            value: number;
+          };
+          if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
+        }
+      });
+      state.layoutShiftObserver.observe({
+        type: 'layout-shift',
+        buffered: true
+      });
+    });
     await page.goto(route);
     const total = await page.evaluate(async () => {
       await document.fonts.ready;
@@ -692,6 +698,7 @@ test('a page stays still while fonts load', async ({ page }) => {
       state.layoutShiftObserver.disconnect();
       return state.layoutShiftTotal;
     });
+    await context.close();
     expect(total, route).toBeLessThanOrEqual(0.05);
   }
 });

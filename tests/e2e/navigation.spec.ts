@@ -156,15 +156,16 @@ test('the page contents link moves to its heading', async ({ page }) => {
   await expect(link).toHaveAttribute('aria-current', 'true');
   await expect
     .poll(() =>
-      page.evaluate(
-        () =>
+      page.evaluate(() => {
+        const gap =
           document
             .getElementById('choose-where-to-run-freecodecamp')!
             .getBoundingClientRect().top -
-          document.querySelector('header')!.getBoundingClientRect().bottom
-      )
+          document.querySelector('header')!.getBoundingClientRect().bottom;
+        return gap >= 0 && gap <= 100;
+      })
     )
-    .toBeGreaterThanOrEqual(0);
+    .toBe(true);
 });
 
 test('the phone page menu jumps to a heading', async ({ page }) => {
