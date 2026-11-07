@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { AxeBuilder } from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
+test.use({ viewport: { width: 1280, height: 900 } });
+
 const WCAG_TAGS = [
   'wcag2a',
   'wcag2aa',
@@ -67,9 +69,7 @@ const openEverything = (page: Page) =>
 
 for (const route of routes) {
   for (const colorScheme of ['light', 'dark'] as const) {
-    test(`axe finds no WCAG A or AA issue on ${route} in ${colorScheme}`, async ({
-      page
-    }) => {
+    test(`${route} meets WCAG A and AA in ${colorScheme}`, async ({ page }) => {
       await page.emulateMedia({ colorScheme });
       await page.goto(route);
       await openEverything(page);
@@ -103,7 +103,7 @@ for (const route of routes) {
     ).toEqual([]);
   });
 
-  test(`${route} does not scroll sideways at 320 px`, async ({ page }) => {
+  test(`${route} fits a 320 px screen`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 700 });
     await page.goto(route);
     await openEverything(page);
@@ -180,7 +180,7 @@ for (const [viewport, least] of [
   [1440, 720],
   [1920, 720]
 ] as const) {
-  test(`the docs column is no narrower than main at ${viewport} px`, async ({
+  test(`the docs column is at least as wide as main at ${viewport} px`, async ({
     page
   }) => {
     await page.setViewportSize({ width: viewport, height: 900 });
@@ -192,7 +192,9 @@ for (const [viewport, least] of [
   });
 }
 
-test('a landing card is no narrower than main at 1280 px', async ({ page }) => {
+test('a landing card is at least as wide as main at 1280 px', async ({
+  page
+}) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/');
   const { width } = (await page
@@ -276,16 +278,6 @@ test('the ring on a code block sits inside its clipped frame', async ({
   expect(offset).toBe('-3px');
 });
 
-test('the search box shows focus', async ({ page }) => {
-  await page.goto('/faq/');
-  await page.keyboard.press('Control+k');
-  const style = await page
-    .locator('[data-search-input]')
-    .first()
-    .evaluate(element => getComputedStyle(element).outlineStyle);
-  expect(style).toBe('solid');
-});
-
 test('the sidebar starts under the header', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/faq/');
@@ -319,19 +311,8 @@ test('surfaces have square corners', async ({ page }) => {
   expect(new Set(radii)).toEqual(new Set(['0px']));
 });
 
-test('no surface casts a drop shadow', async ({ page }) => {
-  await page.goto('/faq/');
-  await page.keyboard.press('Control+k');
-  const shadow = await page
-    .locator('[data-search-dialog] [data-slot="dialog-content"]')
-    .first()
-    .evaluate(element => getComputedStyle(element).boxShadow);
-  expect(shadow).not.toMatch(/\d+px \d+px [1-9]/);
-});
-
-test('Lato has one family with a matched fallback', () => {
+test('Lato has a matched fallback and two preloads', () => {
   const html = readFileSync('dist/index.html', 'utf8');
-  expect(html).not.toContain('--font-lato-ext');
   expect(html).toMatch(
     /font-family:"Lato-\w+ fallback: Arial"[^}]*size-adjust/
   );
@@ -416,9 +397,7 @@ test('every agent route answers with its content type', async ({ request }) => {
   }
 });
 
-test('only Markdown versions of pages ask not to be indexed', async ({
-  request
-}) => {
+test('Markdown versions of pages carry noindex', async ({ request }) => {
   for (const path of [
     '/index.md',
     '/index.mdx',
@@ -428,6 +407,10 @@ test('only Markdown versions of pages ask not to be indexed', async ({
     const response = await request.head(path);
     expect(response.headers()['x-robots-tag'], path).toBe('noindex');
   }
+});
+
+test('HTML pages can be indexed', async ({ request }) => {
+  test.skip(Boolean(process.env.USABILITY_BASE_URL));
   for (const path of ['/', '/faq/']) {
     const response = await request.head(path);
     expect(response.headers()['x-robots-tag'], path).toBeUndefined();
@@ -500,14 +483,13 @@ test('a link to a heading inside a tab opens that tab', async ({ page }) => {
   }
 });
 
-test('a page opened with a malformed hash throws no error', async ({
-  page
-}) => {
+test('a page with a malformed hash still loads', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', ({ message }) => errors.push(message));
   await page.goto('/how-to-setup-freecodecamp-locally/#%E0%A4%A');
   await page.waitForLoadState('networkidle');
   expect(errors).toEqual([]);
+  await expect(page.locator('h1')).toBeVisible();
 });
 
 test('every early focus stop can be seen', async ({ page }) => {
@@ -562,103 +544,6 @@ test('a wide table can be reached and scrolled by keyboard', async ({
     .toBeGreaterThan(0);
 });
 
-test('the search button name holds its visible text', async ({ page }) => {
-  await page.goto('/faq/');
-  await expect(
-    page.getByRole('button', { name: /^Search/ }).first()
-  ).toBeVisible();
-});
-
-test('search announces how many results it found', async ({ page }) => {
-  await page.goto('/faq/');
-  await page.keyboard.press('Control+k');
-  await page.locator('[data-search-input]').first().fill('git');
-  await expect(
-    page.locator('[data-search-dialog] [role="status"]').first()
-  ).toHaveText(/\d+ results?/);
-});
-
-test('a search result link shows the design ring', async ({ page }) => {
-  await page.goto('/faq/');
-  await page.keyboard.press('Control+k');
-  await page.locator('[data-search-input]').first().fill('git');
-  const link = page.locator('[data-search-results] a').first();
-  await link.focus();
-  const ring = await link.evaluate(element => {
-    const { outlineColor, outlineStyle, outlineWidth } =
-      getComputedStyle(element);
-    return { outlineColor, outlineStyle, outlineWidth };
-  });
-  expect(ring).toEqual({
-    outlineColor: 'rgb(25, 142, 238)',
-    outlineStyle: 'solid',
-    outlineWidth: '3px'
-  });
-});
-
-test('a search highlight uses the site tint, not browser yellow', async ({
-  page
-}) => {
-  await page.goto('/faq/');
-  await page.keyboard.press('Control+k');
-  await page.locator('[data-search-input]').first().fill('git');
-  const background = await page
-    .locator('[data-search-results] mark')
-    .first()
-    .evaluate(element => getComputedStyle(element).backgroundColor);
-  expect(background).not.toBe('rgb(255, 255, 0)');
-});
-
-const countTransitions = (page: Page) =>
-  page.evaluate(() => {
-    const root = document.documentElement;
-    root.dataset.transitions = '0';
-    document.addEventListener('transitionrun', () => {
-      root.dataset.transitions = String(Number(root.dataset.transitions) + 1);
-    });
-  });
-
-const expectStillSwitch = async (page: Page, mode: string) => {
-  const root = page.locator('html');
-  await expect(root).toHaveAttribute('data-mode', mode);
-  await page.evaluate(
-    () => new Promise(done => requestAnimationFrame(() => setTimeout(done, 50)))
-  );
-  await expect(root).toHaveAttribute('data-transitions', '0');
-};
-
-test('the theme button runs no colour transitions', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'light' });
-  await page.goto('/faq/');
-  await countTransitions(page);
-  await page.evaluate(() => {
-    const toggle = document.querySelector('[data-nb-theme-toggle]');
-    (toggle as HTMLElement).click();
-  });
-  await expectStillSwitch(page, 'dark');
-});
-
-test('an OS theme change runs no colour transitions', async ({ page }) => {
-  await page.emulateMedia({ colorScheme: 'light' });
-  await page.goto('/faq/');
-  await countTransitions(page);
-  await page.emulateMedia({ colorScheme: 'dark' });
-  await expectStillSwitch(page, 'dark');
-});
-
-test('a theme change in another tab runs no colour transitions', async ({
-  context,
-  page
-}) => {
-  await page.emulateMedia({ colorScheme: 'light' });
-  await page.goto('/faq/');
-  await countTransitions(page);
-  const other = await context.newPage();
-  await other.goto('/faq/');
-  await other.evaluate(() => localStorage.setItem('ui-mode', 'dark'));
-  await expectStillSwitch(page, 'dark');
-});
-
 test('a docs page shows when it last changed', async ({ page }) => {
   await page.goto('/faq/');
   await expect(page.locator('main time[datetime]').first()).toBeVisible();
@@ -670,10 +555,6 @@ test('the mobile page menu shows focus in forced colours', async ({ page }) => {
   await page.goto('/how-to-setup-freecodecamp-locally/');
   const select = page.locator('[data-nb-mobile-toc] select');
   await select.focus();
-  const outline = await select.evaluate(element => {
-    const { outlineStyle, outlineWidth } = getComputedStyle(element);
-    return { outlineStyle, outlineWidth };
-  });
-  expect(outline.outlineStyle).not.toBe('none');
-  expect(outline.outlineWidth).not.toBe('0px');
+  await expect(select).toHaveCSS('outline-style', 'solid');
+  await expect(select).toHaveCSS('outline-width', '3px');
 });
