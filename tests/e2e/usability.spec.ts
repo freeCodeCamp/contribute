@@ -633,6 +633,7 @@ test('the sitemap dates every page', () => {
 });
 
 test('hashed fonts are cached for a year', async ({ page, request }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/faq/');
   await page.evaluate(() => document.fonts.ready);
   const font = await page.evaluate(() =>
@@ -659,46 +660,50 @@ test('a page stays still while fonts load', async ({ browser, baseURL }) => {
       baseURL,
       viewport: { width: 1280, height: 900 }
     });
-    const page = await context.newPage();
-    await page.addInitScript(() => {
-      const state = window as unknown as {
-        layoutShiftTotal: number;
-        layoutShiftObserver: PerformanceObserver;
-      };
-      state.layoutShiftTotal = 0;
-      state.layoutShiftObserver = new PerformanceObserver(list => {
-        for (const entry of list.getEntries()) {
+    let total: number;
+    try {
+      const page = await context.newPage();
+      await page.addInitScript(() => {
+        const state = window as unknown as {
+          layoutShiftTotal: number;
+          layoutShiftObserver: PerformanceObserver;
+        };
+        state.layoutShiftTotal = 0;
+        state.layoutShiftObserver = new PerformanceObserver(list => {
+          for (const entry of list.getEntries()) {
+            const shift = entry as PerformanceEntry & {
+              hadRecentInput: boolean;
+              value: number;
+            };
+            if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
+          }
+        });
+        state.layoutShiftObserver.observe({
+          type: 'layout-shift',
+          buffered: true
+        });
+      });
+      await page.goto(route);
+      total = await page.evaluate(async () => {
+        await document.fonts.ready;
+        await new Promise(resolve => setTimeout(resolve, 500));
+        const state = window as unknown as {
+          layoutShiftTotal: number;
+          layoutShiftObserver: PerformanceObserver;
+        };
+        for (const entry of state.layoutShiftObserver.takeRecords()) {
           const shift = entry as PerformanceEntry & {
             hadRecentInput: boolean;
             value: number;
           };
           if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
         }
+        state.layoutShiftObserver.disconnect();
+        return state.layoutShiftTotal;
       });
-      state.layoutShiftObserver.observe({
-        type: 'layout-shift',
-        buffered: true
-      });
-    });
-    await page.goto(route);
-    const total = await page.evaluate(async () => {
-      await document.fonts.ready;
-      await new Promise(resolve => setTimeout(resolve, 500));
-      const state = window as unknown as {
-        layoutShiftTotal: number;
-        layoutShiftObserver: PerformanceObserver;
-      };
-      for (const entry of state.layoutShiftObserver.takeRecords()) {
-        const shift = entry as PerformanceEntry & {
-          hadRecentInput: boolean;
-          value: number;
-        };
-        if (!shift.hadRecentInput) state.layoutShiftTotal += shift.value;
-      }
-      state.layoutShiftObserver.disconnect();
-      return state.layoutShiftTotal;
-    });
-    await context.close();
+    } finally {
+      await context.close();
+    }
     expect(total, route).toBeLessThanOrEqual(0.05);
   }
 });

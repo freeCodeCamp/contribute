@@ -145,6 +145,7 @@ test('the first and last pages have one pager link', async ({ page }) => {
 });
 
 test('the page contents link moves to its heading', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/how-to-setup-freecodecamp-locally/');
   const link = page.locator(
     '[data-nb-toc] a[href="#choose-where-to-run-freecodecamp"]'
@@ -170,6 +171,7 @@ test('the page contents link moves to its heading', async ({ page }) => {
 
 test('the phone page menu jumps to a heading', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/how-to-setup-freecodecamp-locally/');
   await page
     .locator('[data-nb-mobile-toc] select')
