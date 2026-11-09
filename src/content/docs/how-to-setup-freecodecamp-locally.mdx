@@ -1,17 +1,8 @@
 ---
-title: Setup a dev environment for freeCodeCamp
+title: Set up a dev environment for freeCodeCamp
 sidebar:
   label: Set up freeCodeCamp
 ---
-
-import {
-  Steps,
-  Aside,
-  Card,
-  LinkButton,
-  Tabs,
-  TabItem
-} from '@astrojs/starlight/components';
 
 This guide sets up a development environment for freeCodeCamp. Work through it once, in order.
 
@@ -31,8 +22,6 @@ A [fork](https://help.github.com/articles/about-forks) is your own copy of the c
 
    <LinkButton
      href='https://github.com/freeCodeCamp/freeCodeCamp/fork'
-     icon='seti:github'
-     iconPlacement='start'
      variant='secondary'
      target='_blank'
    >
@@ -51,7 +40,7 @@ In this guide, `origin` means your fork and `upstream` means the main repository
 
 There are three ways to run the project. All three work. Compare them, pick one, then follow that tab below.
 
-|                              | Local Machine                      | Dev Container                                                                  | GitHub Codespaces                                                  |
+| Feature                      | Local Machine                      | Dev Container                                                                  | GitHub Codespaces                                                  |
 | ---------------------------- | ---------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | **Where it runs**            | Directly on your machine           | In Docker, on your machine                                                     | On a GitHub server                                                 |
 | **You install**              | Node.js, pnpm, Docker Compose, Git | Docker Desktop, VS Code, Dev Containers extension, Git                         | Nothing                                                            |
@@ -95,9 +84,9 @@ Skip this section if you picked GitHub Codespaces — it clones your fork for yo
 ## Set up and run freeCodeCamp
 
 <Tabs syncKey="setup-environment">
-<TabItem label="Local Machine" icon="laptop">
+<TabItem label="Local Machine">
 
-#### Prerequisites
+### Local machine prerequisites
 
 Your machine needs 4 CPU cores, 8 GB of RAM and 10 GB of free disk space, on macOS or Linux.
 
@@ -127,7 +116,7 @@ Recommended, but not required:
 - Use a code editor. [Visual Studio Code](https://code.visualstudio.com/) is free and open source.
 - Run [ESLint in your editor](http://eslint.org/docs/user-guide/integrations.html). It flags anything that breaks freeCodeCamp's [JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
 
-#### Start the app
+### Start the app
 
 <Steps>
 
@@ -181,11 +170,11 @@ If you run MongoDB outside Docker, point `MONGOHQ_URL` in `.env` at it. It must 
 
 </TabItem>
 
-<TabItem label="Dev Container" icon="seti:config">
+<TabItem label="Dev Container">
 
 A dev container runs the same image as GitHub Codespaces, on your own machine. The image includes Node.js, pnpm and dependency caches. Container setup installs the project dependencies and starts MongoDB and Mailpit as separate services.
 
-#### Prerequisites
+### Dev container prerequisites
 
 | Prerequisite                                                                                                       | Notes                                    |
 | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
@@ -196,7 +185,7 @@ A dev container runs the same image as GitHub Codespaces, on your own machine. T
 
 In Docker's resource settings, give it at least 4 CPUs and 16 GB of memory. The client build needs a 7 GB heap, and Docker treats its memory setting as a hard limit.
 
-#### Open and run the project
+### Open and run the project
 
 <Steps>
 
@@ -228,7 +217,7 @@ The first start downloads a prebuilt image of several gigabytes. Later starts ar
 
 </TabItem>
 
-<TabItem label="GitHub Codespaces" icon="seti:github">
+<TabItem label="GitHub Codespaces">
 
 A codespace runs the project on a GitHub server. You install nothing, and you work in your browser or in VS Code.
 
@@ -282,8 +271,6 @@ freeCodeCamp's learning platform is now running. If anything failed, see [troubl
 
 ## Quick Commands Reference
 
-<Card title='Handy Scripts to use locally' icon='open-book'>
-
 | Command                                                      | Description                                                                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | `pnpm install`                                               | Installs / re-installs all dependencies.                                                                      |
@@ -296,5 +283,3 @@ freeCodeCamp's learning platform is now running. If anything failed, see [troubl
 | `FCC_CHALLENGE_ID=646cf6cbca98e258da65c979 pnpm run develop` | Starts the API Server and Client, building only the specified Challenge (recommended for curriculum work).    |
 | `pnpm run develop`                                           | Starts the freeCodeCamp API Server and Client Applications with full curriculum build (for thorough testing). |
 | `pnpm run clean`                                             | Uninstalls all dependencies and cleans up caches.                                                             |
-
-</Card>

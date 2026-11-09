@@ -4,15 +4,6 @@ sidebar:
   label: Work on Documentation
 ---
 
-import {
-  Steps,
-  Aside,
-  LinkButton,
-  Card,
-  Tabs,
-  TabItem
-} from '@astrojs/starlight/components';
-
 :::tip
 You'll need this guide if you're contributing to or improving the freeCodeCamp contributing documentation itself. If you're working on curriculum, codebase, or other areas, you can skip this guide.
 :::
@@ -29,8 +20,6 @@ A [fork](https://help.github.com/articles/about-forks) is your own copy of the c
 
    <LinkButton
      href='https://github.com/freeCodeCamp/contribute/fork'
-     icon='seti:github'
-     iconPlacement='start'
      variant='secondary'
      target='_blank'
    >
@@ -49,7 +38,7 @@ In this guide, `origin` means your fork and `upstream` means the main repository
 
 There are two ways to run the site. Both work.
 
-|                    | Local Machine                 | GitHub Codespaces               |
+| Feature            | Local Machine                 | GitHub Codespaces               |
 | ------------------ | ----------------------------- | ------------------------------- |
 | **Where it runs**  | Directly on your machine      | On a GitHub server              |
 | **You install**    | Node.js, pnpm, Git            | Nothing                         |
@@ -58,9 +47,9 @@ There are two ways to run the site. Both work.
 | **Cost**           | Free                          | A free monthly quota, then paid |
 
 <Tabs>
-<TabItem label="Local Machine" icon="laptop">
+<TabItem label="Local Machine">
 
-#### Prerequisites
+### Prerequisites
 
 | Prerequisite                         | Version | Notes                                                             |
 | ------------------------------------ | ------- | ----------------------------------------------------------------- |
@@ -80,7 +69,7 @@ Recommended, but not required:
 - Use a code editor. [Visual Studio Code](https://code.visualstudio.com/) is free and open source.
 - Run [ESLint in your editor](http://eslint.org/docs/user-guide/integrations.html). Do not ignore its errors.
 
-#### Clone your fork and start the site
+### Clone your fork and start the site
 
 <Steps>
 
@@ -125,7 +114,7 @@ The documentation site now runs on your machine. See the [Quick Commands Referen
 
 </TabItem>
 
-<TabItem label="GitHub Codespaces" icon="seti:github">
+<TabItem label="GitHub Codespaces">
 
 A codespace runs the site on a GitHub server. You install nothing, and you work in your browser or in VS Code.
 
@@ -205,22 +194,16 @@ This is necessary to make these links work for the translated version of the doc
 
 The site is generated using Astro and served using Cloudflare Workers. Here's how it works:
 
-<Card title='Key Architecture' icon='seti:config'>
-
 - All documentation content is stored in `src/content/docs/` as MDX files
 - The sidebar navigation is configured in `src/sidebar.ts`
 - Site configuration is managed in `astro.config.ts`
 - The site is automatically built and deployed via Cloudflare Workers
-
-</Card>
 
 ## Deployment
 
 The site is deployed on Cloudflare Workers. Please check the wrangler config for deployment details.
 
 ## Quick Commands Reference
-
-<Card title='Handy Scripts for Local Development' icon='open-book'>
 
 | Command                                 | Description                                         |
 | --------------------------------------- | --------------------------------------------------- |
@@ -232,10 +215,8 @@ The site is deployed on Cloudflare Workers. Please check the wrangler config for
 | `pnpm lint`                             | Check formatting and linting                        |
 | `pnpm format`                           | Auto-fix formatting and linting issues              |
 | `pnpm check:astro`                      | Run Astro type checking                             |
-| `pnpm check:links`                      | Validate internal and external links                |
+| `pnpm test:usability`                   | Check accessibility and internal links in a browser |
 | `npx vitest run tests/filename.test.ts` | Run a specific test file                            |
-
-</Card>
 
 ## Proposing a Pull Request (PR)
 

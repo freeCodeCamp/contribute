@@ -1,0 +1,709 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+
+/* ============================================================
+ * Nimbus Theme — THE file you edit to customize your site.
+ *
+ * Architecture:
+ *   1. CSS custom properties (--nb-*) define the design tokens
+ *   2. `@theme` block exposes them to Tailwind so utilities like
+ *      `bg-card`, `text-foreground`, `border-border` work
+ *   3. Dark mode uses the `[data-mode="dark"]` attribute
+ *   4. All colors use oklch for perceptual uniformity
+ *
+ * Naming convention:
+ *   - Surfaces paired with foregrounds: `card` / `card-foreground`
+ *   - Functional names: `primary` (action), `accent` (hover surface),
+ *     `muted` (de-emphasized), not visual relationships
+ *   - Reserved Tailwind keywords avoided (no `text-base`, `font-sans`,
+ *     `shadow-lg`, etc. as color names — they collide with built-ins)
+ * ============================================================ */
+
+/* ---- Light mode (default) ---- */
+:root {
+  color-scheme: light;
+
+  --nb-brand-navy: #0a0a23;
+  --nb-brand-gold: #ffbf00;
+  --nb-brand-gold-hover: #f1be32;
+  --nb-brand-gold-dark: #4d3800;
+  --nb-brand-blue-light: #99c9ff;
+  --nb-brand-blue-dark: #002ead;
+  --nb-brand-green-light: #acd157;
+  --nb-brand-green-dark: #00471b;
+  --nb-brand-red-light: #ffadad;
+  --nb-brand-red-dark: #850000;
+
+  /* Surfaces (paired with foregrounds for contrast) */
+  --nb-background: #ffffff;
+  --nb-foreground: var(--nb-brand-navy);
+
+  --nb-card: #ffffff;
+  --nb-card-foreground: var(--nb-foreground);
+
+  --nb-muted: #f5f6f7;
+  /* 4.5:1 or better on every light surface, inline code included. */
+  --nb-muted-foreground: #5a5a68;
+
+  --nb-accent: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 22%,
+    var(--nb-background)
+  );
+  --nb-accent-foreground: var(--nb-foreground);
+
+  /* Primary action / brand */
+  --nb-primary: var(--nb-brand-gold);
+  --nb-primary-foreground: var(--nb-brand-navy);
+  --nb-primary-hover: var(--nb-brand-gold-hover);
+
+  --nb-link: var(--nb-brand-blue-dark);
+  --nb-brand: var(--nb-brand-blue-dark);
+  /* The current page's fill: a light wash of the brand. */
+  --nb-brand-wash: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 38%,
+    var(--nb-background)
+  );
+
+  /* Borders / focus */
+  --nb-border: #d0d0d5;
+  --nb-border-strong: #858591;
+  --nb-selected: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 38%,
+    var(--nb-background)
+  );
+  --nb-code-tint: #f5f6f7;
+  /* The guide's focus blue: 3:1 or better on both themes. */
+  --nb-ring: #198eee;
+
+  /* Status colors — paired (saturated for text/border + muted for bg) */
+  --nb-info: var(--nb-brand-blue-dark);
+  --nb-info-foreground: var(--nb-info);
+  --nb-info-muted: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 35%,
+    var(--nb-background)
+  );
+
+  --nb-success: var(--nb-brand-green-dark);
+  --nb-success-foreground: var(--nb-success);
+  --nb-success-muted: color-mix(
+    in srgb,
+    var(--nb-brand-green-light) 28%,
+    var(--nb-background)
+  );
+
+  --nb-warning: var(--nb-brand-gold-dark);
+  --nb-warning-foreground: var(--nb-warning);
+  --nb-warning-muted: color-mix(
+    in srgb,
+    var(--nb-brand-gold) 24%,
+    var(--nb-background)
+  );
+
+  --nb-danger: var(--nb-brand-red-dark);
+  --nb-danger-foreground: var(--nb-danger);
+  --nb-danger-muted: color-mix(
+    in srgb,
+    var(--nb-brand-red-light) 28%,
+    var(--nb-background)
+  );
+
+  /* Layout */
+  --nb-sidebar-width: 18rem;
+  --nb-toc-width: 17.5rem;
+  --nb-content-max: 52rem;
+  /* The sticky header's height: taller on phones when the section tabs take
+	   a row of their own (set below). Sticky bars and scroll margins read it. */
+  --nb-header-height: 3rem;
+
+  --nb-font-sans: var(--font-lato);
+  --nb-font-mono: var(--font-hack-zeroslash);
+  /* Prose follows the design guide's 18 px Lato. Heading sizes follow the
+	   sizes the site has always used. Lato ships 400 and 700 only. */
+  --nb-prose-size: 1.125rem;
+  --nb-prose-leading: 1.6;
+  --nb-heading-leading: 1.2;
+  --nb-display-size: clamp(2.5rem, 5vw, 4rem);
+  --nb-h1-size: clamp(2.1875rem, 4vw, 2.625rem);
+  --nb-h1-tracking: -0.01em;
+  --nb-h2-size: clamp(1.8125rem, 3vw, 2.1875rem);
+  --nb-h2-tracking: -0.005em;
+  --nb-h3-size: clamp(1.5rem, 2.5vw, 1.8125rem);
+  --nb-h4-size: clamp(1.25rem, 2vw, 1.5rem);
+  --nb-h5-size: 1.125rem;
+  --nb-h6-size: 1rem;
+
+  /* The design guide asks for square corners and visible borders. Inline code
+	   takes the guide's one small radius. */
+  --nb-radius: 0;
+  --nb-radius-sm: 2px;
+
+  /* No drop shadows. `0 0 #0000` and not `none`: Tailwind joins this value
+	   into a list with its ring shadows, where `none` would drop the ring. */
+  --nb-shadow-sm: 0 0 #0000;
+  --nb-shadow-lg: 0 0 #0000;
+}
+
+/* ---- Dark mode ---- */
+[data-mode='dark'] {
+  color-scheme: dark;
+
+  --nb-background: var(--nb-brand-navy);
+  --nb-foreground: #ffffff;
+
+  --nb-card: #1b1b32;
+  --nb-card-foreground: var(--nb-foreground);
+
+  --nb-muted: #1b1b32;
+  --nb-muted-foreground: #d0d0d5;
+
+  --nb-accent: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 10%,
+    var(--nb-background)
+  );
+  --nb-accent-foreground: var(--nb-foreground);
+
+  --nb-link: var(--nb-brand-blue-light);
+  --nb-brand: var(--nb-brand-blue-light);
+  --nb-brand-wash: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 18%,
+    var(--nb-background)
+  );
+
+  --nb-border: #3b3b4f;
+  --nb-border-strong: #858591;
+  --nb-selected: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 18%,
+    var(--nb-background)
+  );
+  --nb-code-tint: #33334f;
+
+  --nb-info: var(--nb-brand-blue-light);
+  --nb-info-foreground: var(--nb-info);
+  --nb-info-muted: color-mix(
+    in srgb,
+    var(--nb-brand-blue-light) 12%,
+    var(--nb-background)
+  );
+
+  --nb-success: var(--nb-brand-green-light);
+  --nb-success-foreground: var(--nb-success);
+  --nb-success-muted: color-mix(
+    in srgb,
+    var(--nb-brand-green-light) 12%,
+    var(--nb-background)
+  );
+
+  --nb-warning: var(--nb-brand-gold);
+  --nb-warning-foreground: var(--nb-warning);
+  --nb-warning-muted: color-mix(
+    in srgb,
+    var(--nb-brand-gold) 12%,
+    var(--nb-background)
+  );
+
+  --nb-danger: var(--nb-brand-red-light);
+  --nb-danger-foreground: var(--nb-danger);
+  --nb-danger-muted: color-mix(
+    in srgb,
+    var(--nb-brand-red-light) 12%,
+    var(--nb-background)
+  );
+}
+
+/* ---- Tailwind theme mapping ----
+ * These generate Tailwind utility classes:
+ *   bg-card, text-foreground, border-border, ring-ring, etc.
+ */
+@theme inline {
+  --color-background: var(--nb-background);
+  --color-foreground: var(--nb-foreground);
+
+  --color-card: var(--nb-card);
+  --color-card-foreground: var(--nb-card-foreground);
+
+  --color-muted: var(--nb-muted);
+  --color-muted-foreground: var(--nb-muted-foreground);
+
+  --color-accent: var(--nb-accent);
+  --color-accent-foreground: var(--nb-accent-foreground);
+
+  --color-brand: var(--nb-brand);
+
+  --color-primary: var(--nb-primary);
+  --color-primary-foreground: var(--nb-primary-foreground);
+  --color-primary-hover: var(--nb-primary-hover);
+
+  --color-border: var(--nb-border);
+  --color-border-strong: var(--nb-border-strong);
+  --color-selected: var(--nb-selected);
+  --color-ring: var(--nb-ring);
+
+  --color-info: var(--nb-info);
+  --color-info-foreground: var(--nb-info-foreground);
+  --color-info-muted: var(--nb-info-muted);
+
+  --color-success: var(--nb-success);
+  --color-success-foreground: var(--nb-success-foreground);
+  --color-success-muted: var(--nb-success-muted);
+
+  --color-warning: var(--nb-warning);
+  --color-warning-foreground: var(--nb-warning-foreground);
+  --color-warning-muted: var(--nb-warning-muted);
+
+  --color-danger: var(--nb-danger);
+  --color-danger-foreground: var(--nb-danger-foreground);
+  --color-danger-muted: var(--nb-danger-muted);
+
+  --font-sans: var(--nb-font-sans);
+  --font-mono: var(--nb-font-mono);
+  --font-weight-medium: 400;
+  --font-weight-semibold: 700;
+
+  /* One small step, one interface step and the prose step. `text-xs` is for
+	   key caps, code labels and other marks. */
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: var(--nb-prose-size);
+  --text-base--line-height: var(--nb-prose-leading);
+
+  --radius-xl: var(--nb-radius);
+  --radius-lg: var(--nb-radius);
+  --radius-md: var(--nb-radius);
+  --radius-sm: var(--nb-radius-sm);
+
+  --shadow-sm: var(--nb-shadow-sm);
+  --shadow-lg: var(--nb-shadow-lg);
+}
+
+/* ---- Minimal overrides the plugin doesn't cover ---- */
+html {
+  font-family: var(--nb-font-sans);
+}
+
+body {
+  opacity: 1;
+  font-size: var(--nb-prose-size);
+  line-height: var(--nb-prose-leading);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+::selection {
+  background: color-mix(in oklch, var(--nb-primary) 10%, transparent);
+  color: var(--nb-foreground);
+}
+
+/* ---- Focus indicators ---- */
+@layer base {
+  /* Default the outline to the focus ring's resting values so turning the
+	   ring on (outline-style: none → solid) changes nothing a transition can
+	   animate — no color/width/offset flash under transition-colors/-all. */
+  *,
+  ::before,
+  ::after {
+    outline-color: var(--nb-ring);
+    outline-width: 3px;
+    outline-offset: 0;
+  }
+  :focus-visible {
+    outline: 3px solid var(--nb-ring);
+    outline-offset: 0;
+  }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Scroll lock (used by native <dialog> overlays) ---- */
+[data-scroll-locked] {
+  overflow: hidden;
+}
+
+/* ---- Scrollbar ----
+   Thin and quiet everywhere, coloured from the theme. Chrome and Firefox use
+   the standard properties; Safari uses the WebKit pseudo-elements below. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--nb-foreground) 20%, transparent)
+    transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--nb-foreground) 20%, transparent);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nb-muted-foreground);
+}
+
+/* ---- Shiki code-block styling + copy button ---- */
+
+pre.astro-code {
+  position: relative;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--nb-radius);
+  border: 1px solid var(--nb-border);
+  background-color: var(--nb-card);
+  overflow-x: auto;
+  font-family: var(--nb-font-mono);
+  font-size: 0.875rem;
+  /* 14/24: a whole-pixel line, so a block of n lines is always 24n + 24px. */
+  line-height: 1.5rem;
+}
+pre.astro-code > code {
+  background: transparent;
+}
+
+/* Classed Shiki tokens set --shiki-light/--shiki-dark once in _nimbus/shiki.css. */
+pre.astro-code span {
+  color: var(--shiki-light, inherit);
+}
+[data-mode='dark'] pre.astro-code span {
+  color: var(--shiki-dark, inherit);
+}
+
+/* Copy button injected by initCodeCopy. */
+.nb-code-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--nb-border);
+  border-radius: var(--nb-radius);
+  background: var(--nb-card);
+  color: var(--nb-muted-foreground);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
+  z-index: 2;
+}
+.nb-code-copy:hover {
+  color: var(--nb-foreground);
+  background: var(--nb-muted);
+}
+.nb-code-copy svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+.nb-code-copy[data-state='copied'] {
+  color: var(--nb-success);
+}
+/* In a titled block the copy button lives in the title bar, centred in its
+   36px. */
+.nb-code-figure-titled .nb-code-copy {
+  top: 0.25rem;
+  right: 0.375rem;
+  border-color: transparent;
+  background: transparent;
+}
+.nb-code-figure-titled .nb-code-copy:hover {
+  background: var(--nb-accent);
+}
+
+/* ---- Premium code chrome ---- */
+
+/* Code reads left to right in every language, so a code surface keeps its
+   title bar, copy button and tabs in LTR order on an RTL page. A
+   diagram's flow is drawn left to right too. */
+.nb-code-figure,
+.diagram-stage {
+  direction: ltr;
+}
+
+/* Every Shiki block is wrapped in a .nb-code-figure (titled or not).
+   Chrome lives on the figure so the copy button can sit
+   on a non-scrolling ancestor — iOS Safari slides absolutely-positioned
+   children of overflow:auto containers. */
+.nb-code-figure {
+  position: relative;
+  margin: 1rem 0;
+  border: 1px solid var(--nb-border);
+  border-radius: var(--nb-radius);
+  background-color: var(--nb-card);
+  overflow: hidden;
+}
+.nb-code-figure > pre.astro-code {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+/* The figure clips its overflow, so the ring sits inside it. */
+.nb-code-figure > pre.astro-code:focus-visible {
+  outline-offset: -3px;
+}
+/* Title bar: the filename, and the copy button at the right end (positioned
+   below). The filename's extension already names the language, so the
+   language chip stays hidden here. 8 + 20 + 8 + 1px rule = 37px. */
+.nb-code-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 2.75rem 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--nb-border);
+  background: color-mix(in oklch, var(--nb-muted) 50%, transparent);
+  font-family: var(--nb-font-mono);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.nb-code-title-name {
+  flex: 1;
+  min-width: 0;
+  color: var(--nb-foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nb-code-title-lang {
+  display: none;
+  flex-shrink: 0;
+  padding: 0.0625rem 0.375rem;
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-muted);
+  color: var(--nb-muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Keep a short line clear of the copy button. */
+.nb-code-figure:not(.nb-code-figure-titled) > pre.astro-code {
+  padding-right: 3.5rem;
+}
+
+/* Block-level lines so tints + gutters paint across the full row. */
+pre.astro-code code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+}
+pre.astro-code .line {
+  display: inline-block;
+  width: 100%;
+  padding-inline: 1rem;
+  margin-inline: -1rem;
+  box-sizing: content-box;
+}
+
+/* Highlighted lines (`{1,3-5}` meta or `// [!code highlight]`). */
+pre.astro-code .line.highlighted {
+  background: color-mix(in oklch, var(--nb-info) 12%, transparent);
+  box-shadow: inset 2px 0 0 var(--nb-info);
+}
+
+/* Diff lines (`// [!code ++]` / `// [!code --]`). */
+pre.astro-code .line.diff {
+  position: relative;
+}
+pre.astro-code .line.diff.add {
+  background: color-mix(in oklch, var(--nb-success) 10%, transparent);
+  box-shadow: inset 2px 0 0 var(--nb-success);
+}
+pre.astro-code .line.diff.remove {
+  background: color-mix(in oklch, var(--nb-danger) 10%, transparent);
+  box-shadow: inset 2px 0 0 var(--nb-danger);
+}
+pre.astro-code .line.diff.add::before,
+pre.astro-code .line.diff.remove::before {
+  position: absolute;
+  left: 0.25rem;
+  color: var(--nb-muted-foreground);
+  font-weight: 700;
+}
+pre.astro-code .line.diff.add::before {
+  content: '+';
+  color: var(--nb-success);
+}
+pre.astro-code .line.diff.remove::before {
+  content: '−';
+  color: var(--nb-danger);
+}
+
+/* Focus mode — dim non-focused lines; clears on hover. */
+pre.astro-code.has-focused .line:not(.focused) {
+  opacity: 0.45;
+  filter: blur(0.25px);
+  transition:
+    opacity 0.2s ease,
+    filter 0.2s ease;
+}
+pre.astro-code.has-focused:hover .line:not(.focused) {
+  opacity: 1;
+  filter: none;
+}
+
+/* Error / warning lines — use muted tokens for theme-tuned tints. */
+pre.astro-code .line.highlighted.error {
+  background: var(--nb-danger-muted);
+  box-shadow: inset 2px 0 0 var(--nb-danger);
+}
+pre.astro-code .line.highlighted.warning {
+  background: var(--nb-warning-muted);
+  box-shadow: inset 2px 0 0 var(--nb-warning);
+}
+
+/* Word highlight (`// [!code word:foo]` and meta `/foo/`). */
+pre.astro-code .highlighted-word {
+  padding: 0.0625rem 0.25rem;
+  margin: -0.0625rem -0.125rem;
+  border-radius: var(--nb-radius-sm);
+  background: color-mix(in oklch, var(--nb-info) 18%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--nb-info) 30%, transparent);
+}
+
+/* ---- Sidebar rows ---- */
+
+/* Rows are styled by position, not by class: a large sidebar repeats a row
+   thousands of times, so rows carry no class or data attribute. A link row is
+   any `li > a` in a sidebar, a group row its `details > summary`, and a
+   group's list its `details > ul`. The `.nb-sidebar-*` classes still work for
+   a row placed elsewhere. In the components layer so Tailwind utilities on a
+   row (a `line-through`) still win. */
+@layer components {
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a),
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary) {
+    display: flex;
+    min-height: 2rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--nb-radius);
+    padding: 0.25rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--nb-muted-foreground);
+    overflow-wrap: break-word;
+  }
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a) {
+    text-decoration: none;
+  }
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary) {
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+  :is(
+    .nb-sidebar-row,
+    [data-nb-sidebar] details > summary
+  )::-webkit-details-marker {
+    display: none;
+  }
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a):hover,
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):hover {
+    background-color: var(--nb-accent);
+    color: var(--nb-foreground);
+  }
+  /* You are here: the one place the sidebar uses the brand. */
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a)[aria-current='page'] {
+    background-color: var(--nb-brand-wash);
+    color: var(--nb-brand);
+    font-weight: 700;
+  }
+  :is(.nb-sidebar-link, [data-nb-sidebar] li > a):focus-visible,
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):focus-visible {
+    outline-offset: -3px;
+  }
+  /* The group holds the current page. */
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary)[data-nb-active] {
+    color: var(--nb-foreground);
+  }
+  /* The caret, drawn once as a mask instead of an inline SVG per group. */
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary)::after {
+    content: '';
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-inline: auto -1px;
+    background-color: currentColor;
+    opacity: 0.4;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M96 48l80 80-80 80' fill='none' stroke='black' stroke-width='24' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      no-repeat center / contain;
+  }
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):hover::after {
+    opacity: 1;
+  }
+  details[open] > :is(.nb-sidebar-row, summary)::after {
+    rotate: 90deg;
+  }
+  /* Right to left, the closed caret points the other way and opens downward. */
+  :is(.nb-sidebar-row, [data-nb-sidebar] details > summary):dir(rtl)::after {
+    rotate: 180deg;
+  }
+  details[open] > :is(.nb-sidebar-row, summary):dir(rtl)::after {
+    rotate: 90deg;
+  }
+  :is(.nb-sidebar-list, [data-nb-sidebar] details > ul) {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0.125rem 0 0;
+    margin-inline-start: 0.75rem;
+    border-inline-start: 1px solid var(--nb-border);
+    padding: 0;
+    padding-inline-start: 0.5rem;
+    list-style: none;
+  }
+  /* Safari still lays out closed <details> content in large trees. */
+  [data-nb-sidebar] details:not([open]) > ul {
+    display: none;
+  }
+  /* A top-level group reads as a section heading, set apart from the loose
+	   pages above it; consecutive groups keep the row spacing. */
+  [data-nb-sidebar] .top-level > li:not(:has(> details)) + li:has(> details) {
+    margin-top: 0.75rem;
+  }
+  [data-nb-sidebar] .top-level > li > details > summary {
+    color: var(--nb-foreground);
+    font-weight: 700;
+  }
+}
+
+/* ---- Mobile sidebar toggle ---- */
+
+/* Hide hamburger on pages without a sidebar dialog. */
+body:not(:has([data-mobile-sidebar])) [data-menu-btn] {
+  display: none;
+}
+
+/* Phones: the section tabs sit on a second header row. */
+@media (max-width: 47.999rem) {
+  :root:has([data-nb-header-tabs]) {
+    --nb-header-height: 5.5rem;
+  }
+}

@@ -6,51 +6,51 @@
   "scripts": {
     "prepare": "is-ci || husky",
     "develop": "astro dev",
+    "prebuild": "node scripts/unshallow.mjs",
     "build": "astro build",
     "preview": "pnpm build && wrangler dev",
     "format": "prettier . --write && eslint . --fix",
     "lint": "prettier . --check && eslint .",
     "test": "vitest run",
+    "test:usability": "pnpm build && playwright test",
     "clean": "pnpm dlx rimraf .astro dist",
-    "check:astro": "astro check",
-    "check:links": "CHECK_LINKS=true astro build"
+    "check:astro": "astro check"
   },
   "lint-staged": {
-    "**/*.{astro,mjs,cjs,js,jsx,ts,tsx,yaml,yml}": [
-      "pnpm format"
+    "**/*.{astro,mjs,cjs,js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
     ],
-    "**/*.{mdx,md}": [
-      "pnpm exec prettier . --write"
+    "**/*.{yaml,yml,md,mdx}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
     "@astrojs/check": "0.9.10",
-    "@astrojs/starlight": "0.40.0",
-    "@astrojs/starlight-tailwind": "5.0.0",
+    "@cloudflare/nimbus-docs": "0.19.1",
+    "@iconify-json/ph": "1.2.2",
+    "@resvg/resvg-js": "2.6.2",
     "@tailwindcss/vite": "4.3.4",
-    "astro": "6.4.8",
-    "starlight-links-validator": "0.24.0",
-    "starlight-scroll-to-top": "1.0.1",
+    "astro": "7.3.3",
+    "clsx": "2.1.1",
+    "satori": "0.26.0",
+    "tailwind-merge": "3.7.0",
     "tailwindcss": "4.3.4",
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.7",
-    "@eslint/js": "10.0.1",
-    "@types/jsdom": "28.0.3",
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
     "@types/node": "24.19.2",
     "eslint": "10.14.0",
-    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "1.7.0",
-    "eslint-plugin-prettier": "5.5.7",
-    "globals": "17.14.0",
     "husky": "9.1.7",
     "is-ci": "4.1.0",
-    "jsdom": "29.1.1",
     "lint-staged": "17.6.0",
+    "pagefind": "1.5.2",
     "prettier": "3.9.10",
     "prettier-plugin-astro": "0.14.1",
-    "sharp": "0.34.5",
+    "sharp": "0.35.5",
     "typescript-eslint": "8.72.1",
     "vitest": "4.1.12",
     "wrangler": "4.156.2"

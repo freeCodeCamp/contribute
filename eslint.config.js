@@ -9,6 +9,28 @@ export default defineConfig([
   }, // TypeScript ESLint does not support .astro files
   { languageOptions: { parserOptions: { projectService: true } } },
   {
+    files: ['src/components/**/*.client.ts'],
+    rules: {
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        { checksVoidReturn: { arguments: false, properties: false } }
+      ]
+    }
+  },
+  {
+    files: ['src/components.ts'],
+    rules: { '@typescript-eslint/no-unsafe-assignment': 'off' }
+  },
+  {
+    files: ['src/lib/variants.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { ignoreRestSiblings: true }
+      ]
+    }
+  },
+  {
     ignores: [
       '**/node_modules',
       '**/dist',
