@@ -1,7 +1,7 @@
 import { Aside } from './components/ui/aside';
 import Render from './components/Render.astro';
 import { Card } from './components/ui/card';
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import { CardGrid } from './components/ui/card-grid';
 import { FileTree } from './components/ui/file-tree';
 import LandingHero from './components/LandingHero.astro';

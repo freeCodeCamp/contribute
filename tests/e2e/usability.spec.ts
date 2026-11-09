@@ -604,13 +604,17 @@ test('every early focus stop can be seen', async ({ page }) => {
 test('social links can be reached on a phone', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 800 });
   await page.goto('/');
-  await expect(page.locator('a[aria-label="GitHub"]:visible')).toHaveCount(1);
+  await expect(
+    page.locator('a[rel~="me"][aria-label^="GitHub"]:visible')
+  ).toHaveCount(1);
   await page.goto('/faq/');
   await page
     .getByRole('button', { name: /menu|navigation/i })
     .first()
     .click();
-  await expect(page.locator('a[aria-label="GitHub"]:visible')).toHaveCount(1);
+  await expect(
+    page.locator('a[rel~="me"][aria-label^="GitHub"]:visible')
+  ).toHaveCount(1);
 });
 
 test('the sidebar navigation has a name', async ({ page }) => {
@@ -810,4 +814,192 @@ test('the mobile page menu shows focus in forced colours', async ({ page }) => {
   await select.focus();
   await expect(select).toHaveCSS('outline-style', 'solid');
   await expect(select).toHaveCSS('outline-width', '3px');
+});
+
+for (const [width, height] of [
+  [375, 812],
+  [1024, 768],
+  [1440, 900]
+]) {
+  test(`Shift+Tab never hides focus under the sticky bars at ${width} px`, async ({
+    page
+  }) => {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/how-to-setup-freecodecamp-locally/');
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.locator('main a:visible').last().focus();
+    const hidden: string[] = [];
+    for (let stop = 0; stop < 40; stop++) {
+      await page.keyboard.press('Shift+Tab');
+      const covered = await page.evaluate(() => {
+        const element = document.activeElement as HTMLElement | null;
+        if (!element || element === document.body) return null;
+        const box = element.getBoundingClientRect();
+        const bars = [...document.querySelectorAll<HTMLElement>('body *')]
+          .filter(bar => {
+            const { position } = getComputedStyle(bar);
+            if (position !== 'sticky' && position !== 'fixed') return false;
+            if (bar.contains(element) || !bar.checkVisibility()) return false;
+            const edge = bar.getBoundingClientRect();
+            return (
+              edge.top < window.innerHeight * 0.3 &&
+              edge.height < window.innerHeight * 0.4 &&
+              edge.left < box.right &&
+              edge.right > box.left
+            );
+          })
+          .map(bar => bar.getBoundingClientRect().bottom);
+        const barBottom = Math.max(0, ...bars);
+        return box.bottom <= barBottom && box.height > 0
+          ? element.textContent?.trim().slice(0, 40) || element.tagName
+          : null;
+      });
+      if (covered) hidden.push(covered);
+    }
+    expect(hidden).toEqual([]);
+  });
+}
+
+for (const width of [375, 1280]) {
+  test(`a heading link lands just under the sticky bars at ${width} px`, async ({
+    page
+  }) => {
+    await page.setViewportSize({ width, height: 800 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/how-to-work-on-the-docs-site/');
+    const id = await page
+      .locator('.docs-content h2[id]')
+      .nth(2)
+      .getAttribute('id');
+    await page.goto(`/how-to-work-on-the-docs-site/#${id}`);
+    const gap = await page.evaluate(target => {
+      const heading = document.getElementById(target)!;
+      const barBottom = Math.max(
+        ...[...document.querySelectorAll<HTMLElement>('body *')]
+          .filter(bar => {
+            const { position } = getComputedStyle(bar);
+            const edge = bar.getBoundingClientRect();
+            return (
+              (position === 'sticky' || position === 'fixed') &&
+              bar.checkVisibility() &&
+              edge.top < window.innerHeight * 0.3 &&
+              edge.height < window.innerHeight * 0.4
+            );
+          })
+          .map(bar => bar.getBoundingClientRect().bottom)
+      );
+      return heading.getBoundingClientRect().top - barBottom;
+    }, id!);
+    expect(gap).toBeGreaterThanOrEqual(0);
+    expect(gap).toBeLessThanOrEqual(48);
+  });
+}
+
+test('search results hold no links inside an option', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/faq/');
+  await page.keyboard.press('Control+k');
+  await page.locator('[data-search-input]').first().fill('git');
+  await expect(page.locator('[role="option"]').first()).toBeVisible();
+  await expect(
+    page.locator('[data-search-results] [role="option"] :is(a, button)')
+  ).toHaveCount(0);
+  const results = await new AxeBuilder({ page })
+    .include('[data-search-dialog][open]')
+    .withTags(WCAG_TAGS)
+    .analyze();
+  expect(results.violations.map(violation => violation.id)).toEqual([]);
+});
+
+test('the highlighted search result has an outline, not only a colour', async ({
+  page
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/faq/');
+  await page.keyboard.press('Control+k');
+  const input = page.locator('[data-search-input]').first();
+  await input.fill('git');
+  await expect(page.locator('[role="option"]').first()).toBeVisible();
+  await input.press('ArrowDown');
+  const highlighted = page.locator('[role="option"][data-highlighted]');
+  await expect(highlighted).toHaveCount(1);
+  await expect(highlighted).toHaveCSS('outline-style', 'solid');
+  await expect(highlighted).toHaveCSS('outline-width', '2px');
+});
+
+for (const route of [
+  '/',
+  '/getting-started/',
+  '/how-to-work-on-localized-client-webapp/',
+  '/how-to-setup-freecodecamp-locally/'
+]) {
+  test(`${route} exposes no unnamed image`, async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(route);
+    await openEverything(page);
+    const tree = await page.locator('body').ariaSnapshot();
+    expect(tree).not.toMatch(/- img\s*$/m);
+  });
+}
+
+test('an aside with its own title still says its type', async ({ page }) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  await expect(
+    page.getByRole('note', { name: 'Danger: Windows users: read this first' })
+  ).toHaveCount(1);
+  await expect(
+    page.getByRole('note', { name: 'Caution: Versions matter' })
+  ).toHaveCount(1);
+});
+
+test('a scrolling table is named by its column headers', async ({ page }) => {
+  await page.goto('/how-to-work-on-the-docs-site/');
+  const regions = page.locator('.nb-table-scroll[role="region"]');
+  await expect(regions.first()).toBeVisible();
+  for (const region of await regions.all()) {
+    await expect(region).toHaveAttribute('aria-label', /^Table: \S/);
+  }
+});
+
+test('jumping to a heading inside a closed tab opens that tab', async ({
+  page
+}) => {
+  await page.setViewportSize({ width: 390, height: 800 });
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const slug = await page.evaluate(() => {
+    const options = document.querySelectorAll<HTMLOptionElement>(
+      '[data-nb-mobile-toc-select] option'
+    );
+    for (const option of options) {
+      const heading = document.getElementById(option.value);
+      if (heading?.closest('[role="tabpanel"]') && !heading.checkVisibility())
+        return option.value;
+    }
+    return null;
+  });
+  if (!slug) throw new Error('no heading inside a closed tab');
+  await page.locator('[data-nb-mobile-toc-select]').selectOption(slug);
+  await expect(page.locator(`[id="${slug}"]`)).toBeInViewport();
+});
+
+test('links that open a new tab say so', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  for (const route of ['/faq/', '/how-to-setup-freecodecamp-locally/']) {
+    await page.goto(route);
+    const links = page.locator('a[target="_blank"]:visible');
+    await expect(links.first()).toBeVisible();
+    for (const link of await links.all()) {
+      await expect(link, route).toHaveAccessibleName(/opens in a new tab/);
+    }
+  }
+});
+
+test('cards keep a border in forced colours', async ({ page }) => {
+  await page.emulateMedia({ forcedColors: 'active' });
+  await page.goto('/getting-started/');
+  const card = page.locator('[data-slot="link-card"]').first();
+  await expect(card).toBeVisible();
+  await expect(card).toHaveCSS('border-top-style', 'solid');
+  await expect(card).toHaveCSS('border-top-width', '1px');
 });

@@ -71,7 +71,17 @@ function initMobileToc(root: HTMLElement): () => void {
         window.scrollTo({ top: 0, behavior });
         return;
       }
-      document.getElementById(slug)?.scrollIntoView({ behavior });
+      const target = document.getElementById(slug);
+      if (!target) return;
+      const panel = target.closest<HTMLElement>('[role="tabpanel"]');
+      if (panel && !target.checkVisibility()) {
+        document
+          .querySelector<HTMLElement>(
+            `[aria-controls="${CSS.escape(panel.id)}"]`
+          )
+          ?.click();
+      }
+      target.scrollIntoView({ behavior });
     },
     { signal: controller.signal }
   );

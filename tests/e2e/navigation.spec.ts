@@ -46,11 +46,13 @@ test('the sidebar filter narrows the list and Escape restores it', async ({
   await expect(input).toHaveValue('');
 });
 
-test('pressing slash focuses the sidebar filter', async ({ page }) => {
+test('a bare slash key does not move focus', async ({ page }) => {
   await page.goto('/faq/');
   await page.locator('h1').click();
   await page.keyboard.press('/');
-  await expect(page.locator('[data-nb-sidebar-filter-input]')).toBeFocused();
+  await expect(
+    page.locator('[data-nb-sidebar-filter-input]')
+  ).not.toBeFocused();
 });
 
 test('community links open in a new tab', async ({ page }) => {

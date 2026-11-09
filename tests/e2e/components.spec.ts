@@ -66,9 +66,10 @@ test('View as Markdown opens the Markdown version', async ({
   request
 }) => {
   await page.goto('/faq/');
-  const link = page
-    .locator('[data-nb-page-actions]')
-    .getByRole('link', { name: 'View as Markdown', exact: true });
+  const link = page.locator('[data-nb-page-actions]').getByRole('link', {
+    name: 'View as Markdown (opens in a new tab)',
+    exact: true
+  });
   await expect(link).toHaveAttribute('href', '/faq/index.md');
   const href = await link.getAttribute('href');
   const response = await request.get(href!);

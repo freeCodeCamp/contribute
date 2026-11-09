@@ -1,5 +1,5 @@
 ---
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import { LinkButton } from './ui/link-button';
 
 const socials = [
@@ -28,7 +28,7 @@ const socials = [
       variant='ghost'
       shape='square'
       size='sm'
-      aria-label={label}
+      aria-label={`${label} (opens in a new tab)`}
       target='_blank'
       rel='noopener me'
       class='text-muted-foreground'

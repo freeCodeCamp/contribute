@@ -1,0 +1,14 @@
+---
+import NimbusIcon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof NimbusIcon>;
+
+const { title, ...props } = Astro.props;
+---
+
+<NimbusIcon
+  aria-hidden={title || props['aria-label'] ? undefined : 'true'}
+  title={title}
+  {...props}
+/>

@@ -8,7 +8,7 @@
  *
  * For a rich title or description, use the `title` and `description` slots.
  */
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/cn';
 import type { HTMLAttributes } from 'astro/types';
 
@@ -26,7 +26,7 @@ const hasDescription = Boolean(description) || Astro.slots.has('description');
   data-slot='link-card'
   href={href}
   class={cn(
-    'group flex items-center justify-between gap-3 rounded-lg bg-card p-5 ring ring-border no-underline text-inherit transition-colors hover:bg-accent',
+    'group flex items-center justify-between gap-3 rounded-lg bg-card p-5 ring ring-border forced-colors:border no-underline text-inherit transition-colors hover:bg-accent',
     className
   )}
   {...attrs}

@@ -8,7 +8,7 @@
  * Each type's colour comes from CSS keyed on `data-type`, so a site can add
  * its own type with a rule and an icon.
  */
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import { cn } from '@/lib/cn';
 import type { HTMLAttributes } from 'astro/types';
 
@@ -32,11 +32,13 @@ const defaults: Record<string, { label: string; icon: string }> = {
 const d = defaults[type] ?? defaults.note;
 const hasTitleSlot = Astro.slots.has('title');
 const displayTitle = title ?? d.label;
+const typedTitle =
+  displayTitle === d.label ? d.label : `${d.label}: ${displayTitle}`;
 ---
 
 <aside
   role='note'
-  aria-label={hasTitleSlot ? undefined : displayTitle}
+  aria-label={hasTitleSlot ? undefined : typedTitle}
   data-slot='aside'
   data-type={type}
   class={cn(
@@ -54,6 +56,7 @@ const displayTitle = title ?? d.label;
   </span>
   <div class='flex min-w-0 flex-1 flex-col'>
     <p data-slot='aside-title' class='aside-card-title m-0 font-semibold'>
+      {hasTitleSlot && <span class='sr-only'>{d.label}: </span>}
       <slot name='title'>{displayTitle}</slot>
     </p>
     <div data-slot='aside-content' class='aside-card-body'>

@@ -61,61 +61,43 @@ export function initSearch(config: SearchConfig): SearchInstance {
     input.removeAttribute('aria-activedescendant');
   }
 
-  function resultLink(
-    title: string,
-    href: string,
-    className: string
-  ): HTMLAnchorElement {
-    const link = document.createElement('a');
-    link.href = href;
-    link.className = className;
-    link.textContent = title;
-    link.addEventListener('click', () => onNavigate?.());
-    return link;
-  }
-
-  function buildResult(result: SearchResult): HTMLElement {
-    const option = document.createElement('div');
+  function resultOption(href: string, className: string): HTMLAnchorElement {
+    const option = document.createElement('a');
     option.id = `search-result-${resultIdCounter++}`;
     option.setAttribute('role', 'option');
-    option.className =
-      'rounded-lg px-2 py-2 transition-colors cursor-pointer hover:bg-accent focus-within:bg-accent data-[highlighted]:bg-accent';
+    option.tabIndex = -1;
+    option.href = href;
+    option.className = `block no-underline transition-colors hover:bg-accent data-[highlighted]:bg-accent data-[highlighted]:outline-2 data-[highlighted]:-outline-offset-2 data-[highlighted]:outline-ring ${className}`;
+    option.addEventListener('click', () => onNavigate?.());
+    return option;
+  }
 
-    const link = resultLink(
-      result.title,
-      result.url,
-      'block truncate text-base font-semibold text-foreground no-underline'
-    );
-    option.appendChild(link);
+  function buildResult(result: SearchResult): HTMLElement[] {
+    const page = resultOption(result.url, 'rounded-lg px-2 py-2');
+    const title = document.createElement('span');
+    title.className = 'block truncate text-base font-semibold text-foreground';
+    title.textContent = result.title;
+    page.appendChild(title);
 
     if (result.snippet) {
-      const snippet = document.createElement('p');
-      snippet.className = 'mt-1 line-clamp-2 text-sm text-muted-foreground';
+      const snippet = document.createElement('span');
+      snippet.className =
+        'mt-1 block line-clamp-2 text-sm text-muted-foreground';
       snippet.innerHTML = result.snippet;
-      option.appendChild(snippet);
+      page.appendChild(snippet);
     }
 
-    if (result.subResults?.length) {
-      const subList = document.createElement('div');
-      subList.className = 'mt-2 border-s border-border ps-3';
-      for (const sub of result.subResults.slice(0, 3)) {
-        subList.appendChild(
-          resultLink(
-            sub.title,
-            sub.url,
-            'block truncate py-0.5 text-sm text-muted-foreground no-underline hover:text-foreground'
-          )
-        );
-      }
-      option.appendChild(subList);
-    }
-
-    option.addEventListener('click', event => {
-      if ((event.target as Element | null)?.closest('a')) return;
-      link.click();
+    const sections = (result.subResults ?? []).slice(0, 3).map(sub => {
+      const section = resultOption(
+        sub.url,
+        'ms-5 truncate border-s border-border py-1 ps-3 text-sm text-muted-foreground hover:text-foreground'
+      );
+      section.textContent = sub.title;
+      section.setAttribute('aria-label', `${sub.title}, in ${result.title}`);
+      return section;
     });
 
-    return option;
+    return [page, ...sections];
   }
 
   async function ensureInitialized(): Promise<boolean> {
@@ -161,7 +143,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
         results.length === 1 ? '1 result' : `${results.length} results`;
       input.setAttribute('aria-expanded', 'true');
       for (const result of results)
-        resultsContainer.appendChild(buildResult(result));
+        resultsContainer.append(...buildResult(result));
       resultsContainer.hidden = false;
     } catch {
       if (signal.aborted) return;
@@ -202,7 +184,7 @@ export function initSearch(config: SearchConfig): SearchInstance {
       updateActive(options.length - 1);
     } else if (event.key === 'Enter' && activeIndex >= 0) {
       event.preventDefault();
-      options[activeIndex]?.querySelector<HTMLAnchorElement>('a')?.click();
+      options[activeIndex]?.click();
     }
   }
 

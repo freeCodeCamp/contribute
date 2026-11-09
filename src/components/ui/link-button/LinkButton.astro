@@ -12,7 +12,7 @@
  * Button stay visually identical.
  */
 import { cn } from '@/lib/cn';
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import type { HTMLAttributes } from 'astro/types';
 import {
   buttonVariants,
@@ -51,6 +51,11 @@ const {
   {...attrs}
 >
   <slot />
+  {
+    attrs.target === '_blank' && (
+      <span class='sr-only'> (opens in a new tab)</span>
+    )
+  }
   {
     icon && (
       <Icon

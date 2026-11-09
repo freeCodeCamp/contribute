@@ -1,5 +1,5 @@
 ---
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import { withBase } from '@cloudflare/nimbus-docs/runtime';
 import { cn } from '@/lib/cn';
 import type { HTMLAttributes } from 'astro/types';
@@ -94,7 +94,7 @@ const formattedDate = lastUpdated
             href={resolvedMarkdownUrl}
             target='_blank'
             rel='noopener noreferrer'
-            aria-label='View as Markdown'
+            aria-label='View as Markdown (opens in a new tab)'
             class={baseBtn}
           >
             <Icon name='ph:markdown-logo' class='w-3.5 h-3.5' />

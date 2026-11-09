@@ -240,37 +240,4 @@ function initPersistence(root: HTMLElement): (() => void) | null {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Global `/` shortcut — bound once at module load
-// ---------------------------------------------------------------------------
-
-(function bindFilterShortcut() {
-  if (document.documentElement.hasAttribute('data-nb-sidebar-shortcut-bound'))
-    return;
-  document.documentElement.setAttribute('data-nb-sidebar-shortcut-bound', '');
-
-  document.addEventListener('keydown', e => {
-    if (e.key !== '/') return;
-    const active = document.activeElement as HTMLElement | null;
-    if (
-      active &&
-      (active.tagName === 'INPUT' ||
-        active.tagName === 'TEXTAREA' ||
-        active.isContentEditable)
-    ) {
-      return;
-    }
-    // One tree per page now: the filter input travels with it between the
-    // rail and the drawer, so take the first visible input.
-    const input = Array.from(
-      document.querySelectorAll<HTMLInputElement>(
-        '[data-nb-sidebar-filter-input]'
-      )
-    ).find(candidate => candidate.offsetParent !== null);
-    if (!input) return;
-    e.preventDefault();
-    input.focus();
-  });
-})();
-
 mount('[data-nb-sidebar]', initSidebar);

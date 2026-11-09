@@ -130,21 +130,6 @@
   margin-top: 0.5rem;
 }
 
-/* Clear the sticky header, plus the On this page bar below xl. */
-.docs-content
-  :where(h1:not([class]), h2:not([class]), h3:not([class]), h4:not([class])),
-.docs-content :where([data-footnote-ref][id], [data-footnotes] li[id]) {
-  scroll-margin-top: calc(var(--nb-header-height) + 4.5rem);
-}
-
-@media (min-width: 80rem) {
-  .docs-content
-    :where(h1:not([class]), h2:not([class]), h3:not([class]), h4:not([class])),
-  .docs-content :where([data-footnote-ref][id], [data-footnotes] li[id]) {
-    scroll-margin-top: calc(var(--nb-header-height) + 1.5rem);
-  }
-}
-
 /* Typographic wrapping — balance multi-line headings (no orphan words),
    pretty-wrap body copy (no single-word last lines). Progressive
    enhancement; unsupported browsers ignore both. */

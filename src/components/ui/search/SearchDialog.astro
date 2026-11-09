@@ -1,5 +1,5 @@
 ---
-import Icon from '@cloudflare/nimbus-docs/components/Icon.astro';
+import { Icon } from '@/components/ui/icon';
 import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
 ---
 
@@ -20,6 +20,7 @@ import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog';
         <input
           data-search-input
           role='combobox'
+          aria-label='Search documentation'
           aria-expanded='false'
           aria-haspopup='listbox'
           aria-autocomplete='list'

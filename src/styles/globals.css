@@ -296,6 +296,16 @@ body {
   line-height: var(--nb-prose-leading);
 }
 
+html {
+  scroll-padding-top: calc(var(--nb-header-height) + 4.5rem);
+}
+
+@media (min-width: 80rem) {
+  html {
+    scroll-padding-top: calc(var(--nb-header-height) + 1.5rem);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html:focus-within {
     scroll-behavior: smooth;
