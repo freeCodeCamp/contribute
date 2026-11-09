@@ -4,8 +4,7 @@ description: 'Sets up Node.js, pnpm, and configures caching for pnpm store'
 inputs:
   node-version:
     description: 'Node.js version to use'
-    required: false
-    default: '22.x'
+    required: true
 
 runs:
   using: 'composite'
