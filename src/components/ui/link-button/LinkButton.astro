@@ -52,7 +52,7 @@ const {
 >
   <slot />
   {
-    attrs.target === '_blank' && (
+    attrs.target === '_blank' && !attrs['aria-label'] && (
       <span class='sr-only'> (opens in a new tab)</span>
     )
   }

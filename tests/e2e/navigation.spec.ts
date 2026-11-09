@@ -48,18 +48,29 @@ test('the sidebar filter narrows the list and Escape restores it', async ({
 
 test('a bare slash key does not move focus', async ({ page }) => {
   await page.goto('/faq/');
-  await page.locator('h1').click();
+  const link = page.locator('main a[href]').first();
+  await link.focus();
   await page.keyboard.press('/');
-  await expect(
-    page.locator('[data-nb-sidebar-filter-input]')
-  ).not.toBeFocused();
+  await expect(link).toBeFocused();
+});
+
+test('the sidebar filter ignores text only screen readers hear', async ({
+  page
+}) => {
+  await page.goto('/faq/');
+  await page.locator('[data-nb-sidebar-filter-input]').fill('new tab');
+  await expect(page.locator('[data-nb-sidebar] a:visible')).toHaveCount(0);
 });
 
 test('community links open in a new tab', async ({ page }) => {
   await page.goto('/faq/');
   const links = page.locator('[data-nb-sidebar] a[href^="http"]');
   await expect(links).toHaveCount(3);
-  await expect(links).toHaveText(['GitHub', 'Discourse Forum', 'Chat Server']);
+  await expect(links).toHaveText([
+    /^GitHub\b/,
+    /^Discourse Forum\b/,
+    /^Chat Server\b/
+  ]);
   for (const link of await links.all()) {
     await expect(link).toHaveAttribute('target', '_blank');
     await expect(link).toHaveAttribute('rel', 'noopener');

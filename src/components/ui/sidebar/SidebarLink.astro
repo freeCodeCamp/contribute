@@ -33,9 +33,6 @@ const plain = !hasLeading && !badge;
 <a
   href={resolvedHref}
   aria-current={isCurrent ? 'page' : undefined}
-  aria-label={attrs.target === '_blank'
-    ? `${label} (opens in a new tab)`
-    : undefined}
   class={className}
   {...attrs}
 >
@@ -53,6 +50,11 @@ const plain = !hasLeading && !badge;
             <Badge text={badge.text} variant={badge.variant} />
           ))}
       </Fragment>
+    )
+  }
+  {
+    attrs.target === '_blank' && (
+      <span class='sr-only'> (opens in a new tab)</span>
     )
   }
 </a>

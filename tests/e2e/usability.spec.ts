@@ -983,6 +983,23 @@ test('jumping to a heading inside a closed tab opens that tab', async ({
   await expect(page.locator(`[id="${slug}"]`)).toBeInViewport();
 });
 
+test('the page outline is one named nav with nested lists', async ({
+  page
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/getting-started/');
+  await expect(
+    page.getByRole('complementary', { name: 'On this page' })
+  ).toHaveCount(0);
+  const nav = page.getByRole('navigation', { name: 'On this page' });
+  await expect(nav).toBeVisible();
+  const nested = nav.getByRole('list').getByRole('list');
+  await expect(nested.first()).toBeVisible();
+  const linkCount = await nav.getByRole('link').count();
+  const topLevel = await nav.locator(':scope > ul > li > a').count();
+  expect(topLevel).toBeLessThan(linkCount);
+});
+
 test('links that open a new tab say so', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   for (const route of ['/faq/', '/how-to-setup-freecodecamp-locally/']) {
@@ -991,6 +1008,11 @@ test('links that open a new tab say so', async ({ page }) => {
     await expect(links.first()).toBeVisible();
     for (const link of await links.all()) {
       await expect(link, route).toHaveAccessibleName(/opens in a new tab/);
+      const visible = (await link.innerText()).trim().replace(/\s+/g, ' ');
+      if (visible)
+        await expect(link, route).toHaveAccessibleName(
+          new RegExp(visible.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+        );
     }
   }
 });
@@ -998,8 +1020,10 @@ test('links that open a new tab say so', async ({ page }) => {
 test('cards keep a border in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' });
   await page.goto('/getting-started/');
-  const card = page.locator('[data-slot="link-card"]').first();
-  await expect(card).toBeVisible();
-  await expect(card).toHaveCSS('border-top-style', 'solid');
-  await expect(card).toHaveCSS('border-top-width', '1px');
+  for (const slot of ['link-card', 'card']) {
+    const card = page.locator(`[data-slot="${slot}"]`).first();
+    await expect(card).toBeVisible();
+    await expect(card).toHaveCSS('border-top-style', 'solid');
+    await expect(card).toHaveCSS('border-top-width', '1px');
+  }
 });

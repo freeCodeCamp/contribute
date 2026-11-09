@@ -1,0 +1,85 @@
+---
+import type { TOCItem } from '@cloudflare/nimbus-docs/types';
+
+export interface TOCNode {
+  heading: TOCItem;
+  prevDepth: number;
+  nextDepth: number;
+  children: TOCNode[];
+}
+
+interface Props {
+  nodes: TOCNode[];
+}
+
+const { nodes } = Astro.props;
+---
+
+<ul class='flex list-none flex-col m-0 p-0'>
+  {
+    nodes.map(({ heading: h, prevDepth, nextDepth, children }) => {
+      const indent = h.depth - 2;
+      const goingDeeper = h.depth > prevDepth;
+      const goingShallower = nextDepth < h.depth;
+
+      return (
+        <li>
+          {goingDeeper && (
+            <svg
+              aria-hidden='true'
+              class='block h-2 text-border rtl:-scale-x-100'
+              style={`margin-inline-start: calc(${prevDepth - 2}rem - 0.0625rem); width: ${h.depth - prevDepth}rem;`}
+              viewBox='0 0 1 1'
+              preserveAspectRatio='none'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              overflow='visible'
+            >
+              <path
+                d='M 0 0 C 0 0.5, 1 0.5, 1 1'
+                vector-effect='non-scaling-stroke'
+              />
+            </svg>
+          )}
+          <a
+            href={`#${h.slug}`}
+            data-nb-toc-link
+            data-nb-slug={h.slug}
+            class='grid grid-cols-1 border-s-2 border-border ps-5 py-1 text-sm text-muted-foreground no-underline transition-colors duration-150 hover:border-foreground/20 hover:text-foreground aria-[current=true]:font-medium aria-[current=true]:text-foreground'
+            style={`margin-inline-start: calc(${indent}rem - 0.125rem);`}
+          >
+            <span class='col-start-1 row-start-1 [overflow-wrap:anywhere]'>
+              {h.text}
+            </span>
+            <span
+              aria-hidden='true'
+              class='col-start-1 row-start-1 invisible font-medium [overflow-wrap:anywhere]'
+            >
+              {h.text}
+            </span>
+          </a>
+          {goingShallower && (
+            <svg
+              aria-hidden='true'
+              class='block h-2 text-border rtl:-scale-x-100'
+              style={`margin-inline-start: calc(${nextDepth - 2}rem - 0.0625rem); width: ${h.depth - nextDepth}rem;`}
+              viewBox='0 0 1 1'
+              preserveAspectRatio='none'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              overflow='visible'
+            >
+              <path
+                d='M 1 0 C 1 0.5, 0 0.5, 0 1'
+                vector-effect='non-scaling-stroke'
+              />
+            </svg>
+          )}
+          {children.length > 0 && <Astro.self nodes={children} />}
+        </li>
+      );
+    })
+  }
+</ul>

@@ -1,11 +1,3 @@
-/** Sidebar runtime: filter, persistence, "/" shortcut.
- *
- * Groups are native `<details>`: open state is the element's own `open`
- * property, and changes arrive as `toggle` events (captured on the root —
- * `toggle` doesn't bubble). No click simulation. Rows carry no class or data
- * attribute, so a link row is any `li > a` and a group any `details`.
- */
-
 import { mount } from '@cloudflare/nimbus-docs/client';
 
 const STORAGE_KEY = 'sidebar-state';
@@ -101,7 +93,13 @@ function applyFilter(root: HTMLElement, query: string): void {
   groups.forEach(group => group.setAttribute('data-nb-sidebar-hidden', ''));
 
   links.forEach(link => {
-    const text = (link.textContent ?? '').toLowerCase();
+    const text = Array.from(link.childNodes)
+      .filter(
+        node => !(node instanceof Element && node.classList.contains('sr-only'))
+      )
+      .map(({ textContent }) => textContent ?? '')
+      .join('')
+      .toLowerCase();
     if (!text.includes(query)) return;
     link.removeAttribute('data-nb-sidebar-hidden');
     revealAncestors(link, root);

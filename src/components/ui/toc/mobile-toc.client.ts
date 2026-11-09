@@ -73,8 +73,16 @@ function initMobileToc(root: HTMLElement): () => void {
       }
       const target = document.getElementById(slug);
       if (!target) return;
-      const panel = target.closest<HTMLElement>('[role="tabpanel"]');
-      if (panel && !target.checkVisibility()) {
+      const panels: HTMLElement[] = [];
+      for (
+        let panel = target.closest<HTMLElement>('[role="tabpanel"]');
+        panel;
+        panel =
+          panel.parentElement?.closest<HTMLElement>('[role="tabpanel"]') ?? null
+      )
+        panels.unshift(panel);
+      for (const panel of panels) {
+        if (panel.checkVisibility()) continue;
         document
           .querySelector<HTMLElement>(
             `[aria-controls="${CSS.escape(panel.id)}"]`

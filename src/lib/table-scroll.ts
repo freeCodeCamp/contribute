@@ -18,7 +18,11 @@ const findAll = (node: Node, tagName: string): Node[] =>
   );
 
 const tableLabel = (children: Node[]): string => {
-  const headers = findAll({ type: 'root', children }, 'th')
+  const root = { type: 'root', children };
+  const caption = children.find(({ tagName }) => tagName === 'caption');
+  const captionText = caption ? textOf(caption).trim() : '';
+  if (captionText) return captionText;
+  const headers = findAll(root, 'th')
     .map(cell => textOf(cell).trim())
     .filter(Boolean);
   return headers.length ? `Table: ${headers.join(', ')}` : 'Table';
