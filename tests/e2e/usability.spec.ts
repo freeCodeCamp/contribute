@@ -1027,3 +1027,55 @@ test('cards keep a border in forced colours', async ({ page }) => {
     await expect(card).toHaveCSS('border-top-width', '1px');
   }
 });
+
+test('a pressed button darkens while held', async ({ page }) => {
+  await page.goto('/faq/');
+  const button = page.locator('[data-nb-theme-toggle]:visible').first();
+  await expect(button).toHaveCSS('background-image', 'none');
+  const box = await button.boundingBox();
+  if (!box) throw new Error('no theme toggle');
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await expect(button).toHaveCSS('background-image', /linear-gradient/);
+  await page.mouse.move(0, 0);
+  await page.mouse.up();
+});
+
+test('a pressed tab and a pressed dark-mode button', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const tab = page.getByRole('tab', { name: 'Dev Container', exact: true });
+  await tab.focus();
+  await page.keyboard.down('Space');
+  await expect(tab).toHaveCSS('background-image', 'none');
+  await page.keyboard.up('Space');
+  const button = page.locator('[data-nb-theme-toggle]:visible').first();
+  await button.focus();
+  await page.keyboard.down('Space');
+  await expect(button).toHaveCSS(
+    'background-image',
+    /rgba\(133, 133, 145, 0\.35\)/
+  );
+  await page.evaluate(() => (document.activeElement as HTMLElement).blur());
+  await page.keyboard.up('Space');
+});
+
+test('a link in page text drops its underline for a fill on hover', async ({
+  page
+}) => {
+  await page.goto('/faq/');
+  const link = page.locator('.docs-content a:not([class])').first();
+  await expect(link).toHaveCSS('text-decoration-line', 'underline');
+  await link.hover();
+  await expect(link).toHaveCSS('text-decoration-line', 'none');
+  await expect(link).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+});
+
+test('a tab keeps its width when it becomes bold', async ({ page }) => {
+  await page.goto('/how-to-setup-freecodecamp-locally/');
+  const tab = page.getByRole('tab', { name: 'Dev Container', exact: true });
+  const before = (await tab.boundingBox())?.width;
+  await tab.click();
+  await expect(tab).toHaveCSS('font-weight', '700');
+  expect((await tab.boundingBox())?.width).toBe(before);
+});

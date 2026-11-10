@@ -46,11 +46,7 @@
   /* 4.5:1 or better on every light surface, inline code included. */
   --nb-muted-foreground: #5a5a68;
 
-  --nb-accent: color-mix(
-    in srgb,
-    var(--nb-brand-blue-light) 22%,
-    var(--nb-background)
-  );
+  --nb-accent: #dfdfe2;
   --nb-accent-foreground: var(--nb-foreground);
 
   /* Primary action / brand */
@@ -58,23 +54,17 @@
   --nb-primary-foreground: var(--nb-brand-navy);
   --nb-primary-hover: var(--nb-brand-gold-hover);
 
-  --nb-link: var(--nb-brand-blue-dark);
+  --nb-link: var(--nb-foreground);
   --nb-brand: var(--nb-brand-blue-dark);
-  /* The current page's fill: a light wash of the brand. */
-  --nb-brand-wash: color-mix(
-    in srgb,
-    var(--nb-brand-blue-light) 38%,
-    var(--nb-background)
-  );
+  --nb-selection: rgb(0 46 173 / 0.3);
 
   /* Borders / focus */
   --nb-border: #d0d0d5;
   --nb-border-strong: #858591;
-  --nb-selected: color-mix(
-    in srgb,
-    var(--nb-brand-blue-light) 38%,
-    var(--nb-background)
-  );
+  --nb-selected: #d0d0d5;
+  --nb-tab-selected: #3b3b4f;
+  --nb-tab-selected-foreground: #f5f6f7;
+  --nb-pressed: rgb(10 10 35 / 0.2);
   --nb-code-tint: #f5f6f7;
   /* The guide's focus blue: 3:1 or better on both themes. */
   --nb-ring: #198eee;
@@ -161,28 +151,19 @@
   --nb-muted: #1b1b32;
   --nb-muted-foreground: #d0d0d5;
 
-  --nb-accent: color-mix(
-    in srgb,
-    var(--nb-brand-blue-light) 10%,
-    var(--nb-background)
-  );
+  --nb-accent: #2a2a40;
   --nb-accent-foreground: var(--nb-foreground);
 
-  --nb-link: var(--nb-brand-blue-light);
+  --nb-link: var(--nb-foreground);
   --nb-brand: var(--nb-brand-blue-light);
-  --nb-brand-wash: color-mix(
-    in srgb,
-    var(--nb-brand-blue-light) 18%,
-    var(--nb-background)
-  );
+  --nb-selection: rgb(153 201 255 / 0.3);
 
   --nb-border: #3b3b4f;
   --nb-border-strong: #858591;
-  --nb-selected: color-mix(
-    in srgb,
-    var(--nb-brand-blue-light) 18%,
-    var(--nb-background)
-  );
+  --nb-selected: #3b3b4f;
+  --nb-tab-selected: #d0d0d5;
+  --nb-tab-selected-foreground: #1b1b32;
+  --nb-pressed: rgb(133 133 145 / 0.35);
   --nb-code-tint: #33334f;
 
   --nb-info: var(--nb-brand-blue-light);
@@ -244,6 +225,8 @@
   --color-border: var(--nb-border);
   --color-border-strong: var(--nb-border-strong);
   --color-selected: var(--nb-selected);
+  --color-tab-selected: var(--nb-tab-selected);
+  --color-tab-selected-foreground: var(--nb-tab-selected-foreground);
   --color-ring: var(--nb-ring);
 
   --color-info: var(--nb-info);
@@ -313,7 +296,7 @@ html {
 }
 
 ::selection {
-  background: color-mix(in oklch, var(--nb-primary) 10%, transparent);
+  background: var(--nb-selection);
   color: var(--nb-foreground);
 }
 
@@ -639,10 +622,9 @@ pre.astro-code .highlighted-word {
     background-color: var(--nb-accent);
     color: var(--nb-foreground);
   }
-  /* You are here: the one place the sidebar uses the brand. */
   :is(.nb-sidebar-link, [data-nb-sidebar] li > a)[aria-current='page'] {
-    background-color: var(--nb-brand-wash);
-    color: var(--nb-brand);
+    background-color: var(--nb-selected);
+    color: var(--nb-foreground);
     font-weight: 700;
   }
   :is(.nb-sidebar-link, [data-nb-sidebar] li > a):focus-visible,
@@ -716,4 +698,20 @@ body:not(:has([data-mobile-sidebar])) [data-menu-btn] {
   :root:has([data-nb-header-tabs]) {
     --nb-header-height: 5.5rem;
   }
+}
+
+:is(button, [data-slot='button']):not(
+    :disabled,
+    [aria-disabled='true'],
+    [role='tab']
+  ):active {
+  background-image: linear-gradient(var(--nb-pressed), var(--nb-pressed));
+}
+
+[data-nb-tabs-trigger]::after {
+  content: attr(data-label) / '';
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: 700;
 }

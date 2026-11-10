@@ -280,11 +280,12 @@
   text-decoration-line: underline;
   text-underline-position: under;
   text-underline-offset: 0.1em;
-  transition: color 120ms;
+  transition: background-color 120ms;
 }
 
 .docs-content :where(a:not([class]):hover) {
-  color: var(--nb-foreground);
+  text-decoration-line: none;
+  background-color: var(--nb-accent);
 }
 
 .docs-content :where(strong:not([class])) {
@@ -323,7 +324,7 @@
    coherent when the highlight wraps across lines. */
 .docs-content :where(mark:not([class])),
 [data-search-results] mark {
-  background: color-mix(in oklch, var(--nb-primary) 10%, transparent);
+  background: var(--nb-selection);
   color: var(--nb-foreground);
   line-height: 1;
   border-radius: var(--nb-radius-sm);

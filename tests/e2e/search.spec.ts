@@ -101,7 +101,7 @@ test('a search highlight matches a docs highlight', async ({ page }) => {
     mark.remove();
     return background;
   });
-  expect(background).toBe('oklch(0.840291 0.172463 84.0628 / 0.1)');
+  expect(background).toBe('rgba(0, 46, 173, 0.3)');
   await page.keyboard.press('Control+k');
   await page.locator('[data-search-input]').first().fill('git');
   await expect(page.locator('[data-search-results] mark').first()).toHaveCSS(

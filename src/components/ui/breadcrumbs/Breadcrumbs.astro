@@ -99,7 +99,7 @@ const tailItems = shouldCollapse ? items.slice(items.length - tailCount) : [];
             </span>
             <details class='relative group'>
               <summary
-                class="list-none cursor-pointer select-none px-1 py-0.5 transition-colors hover:bg-accent hover:text-foreground [&::-webkit-details-marker]:hidden group-open:before:fixed group-open:before:inset-0 group-open:before:z-[39] group-open:before:cursor-default group-open:before:content-['']"
+                class="list-none cursor-pointer select-none px-1 py-0.5 transition-colors hover:bg-accent hover:text-foreground group-open:bg-accent group-open:text-foreground [&::-webkit-details-marker]:hidden group-open:before:fixed group-open:before:inset-0 group-open:before:z-[39] group-open:before:cursor-default group-open:before:content-['']"
                 aria-label={`Show ${collapsedItems.length} more path segments`}
               >
                 <span class='tracking-widest'>&hellip;</span>

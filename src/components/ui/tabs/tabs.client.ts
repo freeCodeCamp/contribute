@@ -3,7 +3,7 @@
 import { mount, initTabs } from '@cloudflare/nimbus-docs/client';
 
 const TRIGGER_CLASS =
-  'shrink-0 cursor-pointer px-3.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground aria-selected:bg-foreground aria-selected:text-background focus-visible:outline-3 focus-visible:outline-ring focus-visible:-outline-offset-3';
+  'inline-flex shrink-0 cursor-pointer flex-col items-center px-3.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors hover:bg-accent hover:text-foreground aria-selected:bg-tab-selected aria-selected:font-bold aria-selected:text-tab-selected-foreground focus-visible:outline-3 focus-visible:outline-ring focus-visible:-outline-offset-3';
 
 let counter = 0;
 
@@ -48,6 +48,7 @@ function initTabContainer(container: HTMLElement): () => void {
       btn.type = 'button';
       btn.className = TRIGGER_CLASS;
       btn.textContent = label;
+      btn.dataset.label = label;
       btn.setAttribute('data-nb-tabs-trigger', '');
       btn.dataset.slot = 'tabs-trigger';
 

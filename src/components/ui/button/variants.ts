@@ -22,18 +22,21 @@ export type ButtonShape = 'base' | 'square' | 'circle';
 // `rounded-lg` is the default radius for every button; `circle` overrides
 // it to `rounded-full` (see `buttonVariants`), `square` keeps it.
 export const buttonBase =
-  'group inline-flex max-w-full shrink-0 items-center justify-center rounded-lg text-center font-medium no-underline [text-wrap:balance] transition-all cursor-pointer select-none focus-visible:outline-3 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50';
+  'group inline-flex max-w-full shrink-0 items-center justify-center rounded-lg text-center font-medium no-underline [text-wrap:balance] transition-all cursor-pointer select-none focus-visible:outline-3 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-80 disabled:ring-3 disabled:ring-inset disabled:ring-border-strong';
 
 export const buttonVariantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-primary-foreground hover:bg-primary-hover',
+  primary:
+    'bg-primary text-primary-foreground not-disabled:hover:bg-primary-hover aria-expanded:bg-primary-hover',
   secondary:
-    'bg-card text-foreground ring-3 ring-inset ring-foreground hover:bg-foreground hover:text-background',
-  ghost: 'bg-transparent text-foreground shadow-none hover:bg-accent',
-  destructive: 'bg-danger text-white shadow-sm hover:bg-danger/90',
+    'bg-card text-foreground ring-3 ring-inset ring-foreground not-disabled:hover:bg-foreground not-disabled:hover:text-background aria-expanded:bg-foreground aria-expanded:text-background',
+  ghost:
+    'bg-transparent text-foreground shadow-none not-disabled:hover:bg-accent aria-expanded:bg-accent',
+  destructive:
+    'bg-danger text-white shadow-sm not-disabled:hover:bg-danger/90 aria-expanded:bg-danger/90',
   'secondary-destructive':
-    'bg-card text-danger ring ring-border shadow-sm hover:bg-accent hover:ring-danger/40',
+    'bg-card text-danger ring ring-border shadow-sm not-disabled:hover:bg-accent not-disabled:hover:ring-danger/40 aria-expanded:bg-accent',
   outline:
-    'bg-transparent text-foreground ring ring-border hover:ring-border-strong'
+    'bg-transparent text-foreground ring ring-border not-disabled:hover:ring-border-strong aria-expanded:ring-border-strong'
 };
 
 // Rectangular sizing (shape="base"). Radius comes from `buttonBase`.
