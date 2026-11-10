@@ -7,7 +7,7 @@ Astro-based docs. The `nimbus-docs` package handles content schemas, sidebar/TOC
 ## Project facts
 
 - This site is the freeCodeCamp contributor documentation at <https://contribute.freecodecamp.org>. It deploys as static files to Cloudflare Workers Static Assets.
-- Use the Node version in `.nvmrc` and the pnpm version in `package.json`. Oxfmt owns formatting; Oxlint runs before ESLint. Retain ESLint for Astro template and type-aware rules. `pnpm lint` generates Astro types first.
+- Use the Node version in `.nvmrc` and the pnpm version in `package.json`. Oxfmt owns formatting. Oxlint owns JavaScript and TypeScript linting, including type-aware rules. ESLint checks Astro templates only; its TypeScript parser reads Astro frontmatter. `pnpm lint` generates Astro types first.
 - Use `pnpm`. The `minimumReleaseAge` rule in `pnpm-workspace.yaml` applies to every install. Do not turn it off.
 - `@cloudflare/nimbus-docs` has an exact version in `package.json`. Update it only after the release passes the `minimumReleaseAge` wait.
 - `/` is the landing page. `/intro` and `/intro/` redirect to `/` (`public/_redirects`).

@@ -67,7 +67,7 @@ Recommended, but not required:
 
 - [Set up an SSH key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
 - Use a code editor. [Visual Studio Code](https://code.visualstudio.com/) is free and open source.
-- Install the recommended workspace extensions: Astro, Oxc and ESLint. Oxfmt formats files. Oxlint checks code, and ESLint retains Astro template and type-aware checks.
+- Install the recommended workspace extensions: Astro, Oxc and ESLint. Oxfmt formats files. Oxlint checks JavaScript and TypeScript, including type-aware rules. ESLint checks Astro templates only.
 
 ### Clone your fork and start the site
 
@@ -210,7 +210,9 @@ The site uses Cloudflare Workers Static Assets. `cloudflare.config.ts` defines t
 
 The pinned Cloudflare CLI detects Astro directly when you run bare `cf build` or `cf dev`. Use the repository scripts to keep the prebuild Git-history step, static asset packaging and production-like preview.
 
-Maintainers deploy the packaged output with `pnpm exec cf deploy --prebuilt` after a successful build. Use `pnpm exec cf deploy --prebuilt --dry-run` to validate it without uploading. Deployment requires Cloudflare access; local development and tests do not.
+Cloudflare Workers Builds runs `pnpm run build`. The production deploy command is `pnpm exec cf deploy --prebuilt`; the non-production command is `pnpm exec cf workers versions create --prebuilt`. These commands are saved in Workers Builds settings, not in `cloudflare.config.ts`. Non-production builds upload a version without deploying it to production traffic.
+
+Use `pnpm exec cf deploy --prebuilt --dry-run` after a local build to validate the package without uploading. Deployment requires Cloudflare access; local development and tests do not.
 
 ## Quick Commands Reference
 

@@ -18,9 +18,13 @@
     "preview:built": "cf-wrangler dev --local"
   },
   "lint-staged": {
-    "**/*.{astro,mjs,cjs,js,jsx,ts,tsx}": [
+    "**/*.astro": [
       "oxlint --fix --deny-warnings",
       "eslint --fix",
+      "oxfmt --write --no-error-on-unmatched-pattern"
+    ],
+    "**/*.{mjs,cjs,js,jsx,ts,tsx,mts,cts}": [
+      "oxlint --fix --deny-warnings",
       "oxfmt --write --no-error-on-unmatched-pattern"
     ],
     "**/*.{json,jsonc,yaml,yml,md,mdx,css,html,svg}": [
@@ -45,6 +49,7 @@
     "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.64.1",
     "@types/node": "26.6.6",
+    "@typescript-eslint/parser": "8.72.1",
     "cf": "1.0.0-beta.27",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
@@ -53,9 +58,9 @@
     "lint-staged": "17.6.0",
     "oxfmt": "0.76.0",
     "oxlint": "1.90.0",
+    "oxlint-tsgolint": "7.0.2005",
     "pagefind": "1.6.0",
     "sharp": "0.35.5",
-    "typescript-eslint": "8.72.1",
     "vitest": "5.1.0",
     "wrangler": "4.157.0"
   },
