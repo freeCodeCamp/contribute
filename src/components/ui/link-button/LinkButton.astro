@@ -51,20 +51,16 @@ const {
   {...attrs}
 >
   <slot />
-  {
-    attrs.target === '_blank' && !attrs['aria-label'] && (
-      <span class='sr-only'> (opens in a new tab)</span>
-    )
-  }
-  {
-    icon && (
-      <Icon
-        name='ph:caret-right'
-        class={cn(
-          'transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5',
-          buttonIconSize[size]
-        )}
-      />
-    )
-  }
+  {attrs.target === '_blank' && !attrs['aria-label'] && (
+    <span class='sr-only'> (opens in a new tab)</span>
+  )}
+  {icon && (
+    <Icon
+      name='ph:caret-right'
+      class={cn(
+        'transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5',
+        buttonIconSize[size]
+      )}
+    />
+  )}
 </a>

@@ -32,40 +32,38 @@ headings.forEach((heading, i) => {
 });
 ---
 
-{
-  headings.length > 0 && (
-    <div
-      data-slot='toc'
-      data-nb-toc
-      class={cn('toc-container', className)}
-      {...attrs}
-    >
-      <nav aria-labelledby='nb-toc-title' class='relative'>
-        <h2
-          id='nb-toc-title'
-          class='mb-2 text-base font-semibold text-foreground'
-        >
-          On this page
-        </h2>
-        <svg
-          data-nb-toc-rail
-          aria-hidden='true'
-          class='pointer-events-none absolute inset-0 h-full w-full overflow-visible'
-          fill='none'
-        >
-          <path
-            data-nb-toc-rail-active
-            class='stroke-brand opacity-0 transition-[stroke-dasharray,stroke-dashoffset,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] data-[ready=true]:opacity-100 data-[initial=true]:transition-opacity motion-reduce:transition-opacity'
-            stroke-width='2'
-            stroke-linecap='round'
-          />
-        </svg>
+{headings.length > 0 && (
+  <div
+    data-slot='toc'
+    data-nb-toc
+    class={cn('toc-container', className)}
+    {...attrs}
+  >
+    <nav aria-labelledby='nb-toc-title' class='relative'>
+      <h2
+        id='nb-toc-title'
+        class='mb-2 text-base font-semibold text-foreground'
+      >
+        On this page
+      </h2>
+      <svg
+        data-nb-toc-rail
+        aria-hidden='true'
+        class='pointer-events-none absolute inset-0 h-full w-full overflow-visible'
+        fill='none'
+      >
+        <path
+          data-nb-toc-rail-active
+          class='stroke-brand opacity-0 transition-[stroke-dasharray,stroke-dashoffset,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] data-[ready=true]:opacity-100 data-[initial=true]:transition-opacity motion-reduce:transition-opacity'
+          stroke-width='2'
+          stroke-linecap='round'
+        />
+      </svg>
 
-        <TOCList nodes={tree} />
-      </nav>
-    </div>
-  )
-}
+      <TOCList nodes={tree} />
+    </nav>
+  </div>
+)}
 
 <script>
   import './toc.client';

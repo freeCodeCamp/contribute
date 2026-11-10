@@ -38,16 +38,14 @@ const hasDescription = Boolean(description) || Astro.slots.has('description');
     >
       <slot name='title'>{title}</slot>
     </h3>
-    {
-      hasDescription && (
-        <span
-          data-slot='link-card-description'
-          class='mt-1 block text-sm leading-normal text-muted-foreground'
-        >
-          <slot name='description'>{description}</slot>
-        </span>
-      )
-    }
+    {hasDescription && (
+      <span
+        data-slot='link-card-description'
+        class='mt-1 block text-sm leading-normal text-muted-foreground'
+      >
+        <slot name='description'>{description}</slot>
+      </span>
+    )}
   </div>
   <Icon
     data-slot='link-card-icon'

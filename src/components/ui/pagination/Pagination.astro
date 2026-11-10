@@ -40,54 +40,52 @@ const prev = composed ? undefined : prevNext?.prev;
 const next = composed ? undefined : prevNext?.next;
 ---
 
-{
-  (composed || prev || next) && (
-    <nav
-      aria-label='Pagination'
-      data-slot='pagination'
-      class={cn('mt-12', className)}
-      {...attrs}
+{(composed || prev || next) && (
+  <nav
+    aria-label='Pagination'
+    data-slot='pagination'
+    class={cn('mt-12', className)}
+    {...attrs}
+  >
+    <div
+      data-nb-pagination
+      data-slot='pagination-bar'
+      data-keys={keys ? undefined : 'false'}
+      class='nb-pagination-bar group/pager relative flex min-h-14 items-stretch border border-border bg-card p-1'
     >
-      <div
-        data-nb-pagination
-        data-slot='pagination-bar'
-        data-keys={keys ? undefined : 'false'}
-        class='nb-pagination-bar group/pager relative flex min-h-14 items-stretch border border-border bg-card p-1'
-      >
-        <span
-          data-slot='pagination-highlight'
-          data-state='hidden'
-          aria-hidden='true'
-          class='nb-pagination-highlight pointer-events-none absolute top-1 bottom-1 bg-accent'
-        />
-        {composed ? (
-          <slot />
-        ) : (
-          <>
-            {prev && (
-              <PaginationLink
-                rel='prev'
-                href={withBase(prev.href, import.meta.env.BASE_URL)}
-                label={prevLabel}
-              >
-                {prev.label}
-              </PaginationLink>
-            )}
-            {next && (
-              <PaginationLink
-                rel='next'
-                href={withBase(next.href, import.meta.env.BASE_URL)}
-                label={nextLabel}
-              >
-                {next.label}
-              </PaginationLink>
-            )}
-          </>
-        )}
-      </div>
-    </nav>
-  )
-}
+      <span
+        data-slot='pagination-highlight'
+        data-state='hidden'
+        aria-hidden='true'
+        class='nb-pagination-highlight pointer-events-none absolute top-1 bottom-1 bg-accent'
+      />
+      {composed ? (
+        <slot />
+      ) : (
+        <>
+          {prev && (
+            <PaginationLink
+              rel='prev'
+              href={withBase(prev.href, import.meta.env.BASE_URL)}
+              label={prevLabel}
+            >
+              {prev.label}
+            </PaginationLink>
+          )}
+          {next && (
+            <PaginationLink
+              rel='next'
+              href={withBase(next.href, import.meta.env.BASE_URL)}
+              label={nextLabel}
+            >
+              {next.label}
+            </PaginationLink>
+          )}
+        </>
+      )}
+    </div>
+  </nav>
+)}
 
 <style>
   /* With one neighbour, the bar is that half alone, on its own side. */

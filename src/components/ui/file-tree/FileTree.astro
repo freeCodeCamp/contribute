@@ -32,13 +32,15 @@ const { class: className, ...attrs } = Astro.props;
   data-slot='file-tree'
   {...attrs}
 >
-  <template data-ft-icon-chev
-    ><Icon name='ph:caret-right' class='ft-chev' /></template
-  >
-  <template data-ft-icon-folder
-    ><Icon name='ph:folder' class='ft-icon' /></template
-  >
-  <template data-ft-icon-file><Icon name='ph:file' class='ft-icon' /></template>
+  <template data-ft-icon-chev>
+    <Icon name='ph:caret-right' class='ft-chev' />
+  </template>
+  <template data-ft-icon-folder>
+    <Icon name='ph:folder' class='ft-icon' />
+  </template>
+  <template data-ft-icon-file>
+    <Icon name='ph:file' class='ft-icon' />
+  </template>
   <slot />
 </div>
 

@@ -34,18 +34,16 @@ const manual = list !== -1 && (item === -1 || list < item);
   class={cn(className)}
   {...attrs}
 >
-  {
-    manual ? (
-      <Fragment set:html={content} />
-    ) : (
-      <Fragment>
-        <TabsList />
-        <div class='mt-3'>
-          <Fragment set:html={content} />
-        </div>
-      </Fragment>
-    )
-  }
+  {manual ? (
+    <Fragment set:html={content} />
+  ) : (
+    <Fragment>
+      <TabsList />
+      <div class='mt-3'>
+        <Fragment set:html={content} />
+      </div>
+    </Fragment>
+  )}
 </div>
 
 <script>

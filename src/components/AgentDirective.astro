@@ -12,29 +12,27 @@ const { markdownUrl, llmsUrl } = Astro.props;
 ---
 
 <aside class='sr-only' aria-label='For AI agents' data-ai-agent-directive>
-  {
-    markdownUrl ? (
-      <Fragment>
-        This page is available in Markdown format. Markdown is recommended for
-        AI consumption. See{' '}
-        <a href={markdownUrl} tabindex='-1'>
-          {markdownUrl}
-        </a>{' '}
-        for this page, or
-        <a href={llmsUrl} tabindex='-1'>
-          {llmsUrl}
-        </a>{' '}
-        for the full documentation index.
-      </Fragment>
-    ) : (
-      <Fragment>
-        See{' '}
-        <a href={llmsUrl} tabindex='-1'>
-          {llmsUrl}
-        </a>{' '}
-        for the full documentation index. Markdown is recommended for AI
-        consumption.
-      </Fragment>
-    )
-  }
+  {markdownUrl ? (
+    <Fragment>
+      This page is available in Markdown format. Markdown is recommended for AI
+      consumption. See{' '}
+      <a href={markdownUrl} tabindex='-1'>
+        {markdownUrl}
+      </a>{' '}
+      for this page, or
+      <a href={llmsUrl} tabindex='-1'>
+        {llmsUrl}
+      </a>{' '}
+      for the full documentation index.
+    </Fragment>
+  ) : (
+    <Fragment>
+      See{' '}
+      <a href={llmsUrl} tabindex='-1'>
+        {llmsUrl}
+      </a>{' '}
+      for the full documentation index. Markdown is recommended for AI
+      consumption.
+    </Fragment>
+  )}
 </aside>

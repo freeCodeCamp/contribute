@@ -17,8 +17,10 @@ const { class: className, ...attrs } = Astro.props;
   data-slot='pagination-key'
   data-nb-pagination-cap
   class={cn('nb-pagination-key pointer-coarse:hidden', className)}
-  {...attrs}><slot /></kbd
+  {...attrs}
 >
+  <slot />
+</kbd>
 
 <style>
   /* A 20px cap with a 1px pressed edge drawn by the shadow; it presses on

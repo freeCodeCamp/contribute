@@ -32,13 +32,11 @@ const steps = stepMode ? content.slice(firstStep) : content;
   {...attrs}
 >
   {lead.trim() && <div data-slot='steps-intro' class='mb-4' set:html={lead} />}
-  {
-    stepMode ? (
-      <ol role='list' data-slot='steps-list' set:html={steps} />
-    ) : (
-      <Fragment set:html={steps} />
-    )
-  }
+  {stepMode ? (
+    <ol role='list' data-slot='steps-list' set:html={steps} />
+  ) : (
+    <Fragment set:html={steps} />
+  )}
 </div>
 
 <script>

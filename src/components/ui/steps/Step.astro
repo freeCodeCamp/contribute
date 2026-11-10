@@ -19,13 +19,11 @@ const { title, class: className, ...attrs } = Astro.props;
 ---
 
 <li data-step data-slot='step' class={cn(className)} {...attrs}>
-  {
-    (title || Astro.slots.has('title')) && (
-      <p data-slot='step-title' class='m-0 font-semibold text-foreground'>
-        <slot name='title'>{title}</slot>
-      </p>
-    )
-  }
+  {(title || Astro.slots.has('title')) && (
+    <p data-slot='step-title' class='m-0 font-semibold text-foreground'>
+      <slot name='title'>{title}</slot>
+    </p>
+  )}
   <div
     data-slot='step-content'
     class='mt-1 text-foreground [&_p:first-child]:mt-0 [&_p:last-child]:mb-0'

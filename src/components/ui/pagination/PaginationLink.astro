@@ -37,12 +37,16 @@ const caption = label ?? (isNext ? 'Next' : 'Previous');
   <span class='min-w-0'>
     <span
       data-slot='pagination-label'
-      class='block text-xs text-muted-foreground'>{caption}</span
+      class='block text-xs text-muted-foreground'
     >
+      {caption}
+    </span>
     <span
       data-slot='pagination-title'
-      class='nb-pagination-title block text-sm text-foreground'><slot /></span
+      class='nb-pagination-title block text-sm text-foreground'
     >
+      <slot />
+    </span>
   </span>
   {isNext && <PaginationKey>]</PaginationKey>}
 </a>

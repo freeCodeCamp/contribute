@@ -1,10 +1,8 @@
-{
-  /* Sidebar state restore — sets open groups and scroll before
+{/* Sidebar state restore — sets open groups and scroll before
     the sidebar module loads so state survives navigation.
     The `aria-hidden` attribute keeps Astro from bundling this as a
     deferred module: it MUST stay inline to run before the disclosure
-    mounts, else the first click sees stale state. */
-}
+    mounts, else the first click sees stale state. */}
 <script is:inline aria-hidden='true'>
   (function () {
     function centerActive(sidebar, active) {

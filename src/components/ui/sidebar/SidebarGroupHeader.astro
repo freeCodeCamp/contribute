@@ -32,12 +32,10 @@ const { label, hasActive, badge, icon, deprecated } = Astro.props;
 <summary data-nb-active={hasActive ? '' : undefined}>
   {icon && <Icon name={icon} class='h-4 w-4 shrink-0 text-muted-foreground' />}
   {deprecated ? <span class='line-through'>{label}</span> : label}
-  {
-    badge &&
-      (typeof badge === 'string' ? (
-        <Badge text={badge} />
-      ) : (
-        <Badge text={badge.text} variant={badge.variant} />
-      ))
-  }
+  {badge &&
+    (typeof badge === 'string' ? (
+      <Badge text={badge} />
+    ) : (
+      <Badge text={badge.text} variant={badge.variant} />
+    ))}
 </summary>

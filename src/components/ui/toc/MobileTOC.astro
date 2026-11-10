@@ -25,37 +25,35 @@ const { headings, class: className, ...attrs } = Astro.props;
 const hasHeadings = headings.length > 0;
 ---
 
-{
-  hasHeadings && (
-    <nav
-      data-slot='mobile-toc'
-      data-nb-mobile-toc
-      aria-label='On this page'
-      class={cn('relative', className)}
-      {...attrs}
+{hasHeadings && (
+  <nav
+    data-slot='mobile-toc'
+    data-nb-mobile-toc
+    aria-label='On this page'
+    class={cn('relative', className)}
+    {...attrs}
+  >
+    <select
+      data-nb-mobile-toc-select
+      aria-label='Jump to section'
+      class='w-full appearance-none rounded-md border border-border bg-background py-2.5 ps-3 pe-9 text-sm font-medium text-foreground transition-colors hover:border-foreground/20'
     >
-      <select
-        data-nb-mobile-toc-select
-        aria-label='Jump to section'
-        class='w-full appearance-none rounded-md border border-border bg-background py-2.5 ps-3 pe-9 text-sm font-medium text-foreground transition-colors hover:border-foreground/20'
-      >
-        <option value='_top'>Overview</option>
-        {headings
-          .filter(heading => heading.slug)
-          .map(heading => (
-            <option value={heading.slug}>
-              {`${' '.repeat(Math.max(0, heading.depth - 2))}${heading.text}`}
-            </option>
-          ))}
-      </select>
-      <Icon
-        name='ph:caret-down'
-        aria-hidden='true'
-        class='pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground'
-      />
-    </nav>
-  )
-}
+      <option value='_top'>Overview</option>
+      {headings
+        .filter(heading => heading.slug)
+        .map(heading => (
+          <option value={heading.slug}>
+            {`${' '.repeat(Math.max(0, heading.depth - 2))}${heading.text}`}
+          </option>
+        ))}
+    </select>
+    <Icon
+      name='ph:caret-down'
+      aria-hidden='true'
+      class='pointer-events-none absolute end-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground'
+    />
+  </nav>
+)}
 
 <script>
   import './mobile-toc.client';

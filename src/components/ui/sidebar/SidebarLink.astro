@@ -36,25 +36,21 @@ const plain = !hasLeading && !badge;
   class={className}
   {...attrs}
 >
-  {
-    plain ? (
-      label
-    ) : (
-      <Fragment>
-        <slot name='leading' />
-        {badge ? <span>{label}</span> : label}
-        {badge &&
-          (typeof badge === 'string' ? (
-            <Badge text={badge} />
-          ) : (
-            <Badge text={badge.text} variant={badge.variant} />
-          ))}
-      </Fragment>
-    )
-  }
-  {
-    attrs.target === '_blank' && (
-      <span class='sr-only'> (opens in a new tab)</span>
-    )
-  }
+  {plain ? (
+    label
+  ) : (
+    <Fragment>
+      <slot name='leading' />
+      {badge ? <span>{label}</span> : label}
+      {badge &&
+        (typeof badge === 'string' ? (
+          <Badge text={badge} />
+        ) : (
+          <Badge text={badge.text} variant={badge.variant} />
+        ))}
+    </Fragment>
+  )}
+  {attrs.target === '_blank' && (
+    <span class='sr-only'> (opens in a new tab)</span>
+  )}
 </a>

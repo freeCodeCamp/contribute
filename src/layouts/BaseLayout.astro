@@ -153,14 +153,12 @@ const resolvedMarkdownUrl =
       Skip to content
     </a>
     <slot />
-    {
-      !isHiddenVersion && (
-        <AgentDirective
-          markdownUrl={resolvedMarkdownUrl ?? null}
-          llmsUrl={llmsUrl}
-        />
-      )
-    }
+    {!isHiddenVersion && (
+      <AgentDirective
+        markdownUrl={resolvedMarkdownUrl ?? null}
+        llmsUrl={llmsUrl}
+      />
+    )}
     {config.search !== false && <SearchDialog />}
 
     <script>

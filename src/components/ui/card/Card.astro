@@ -40,28 +40,24 @@ const Title = href ? 'p' : 'h3';
   )}
   {...attrs}
 >
-  {
-    hasIcon && (
-      <div data-slot='card-icon' class='mb-2.5 text-brand'>
-        <slot name='icon'>
-          {icon && <Icon name={icon} class='block size-6' />}
-        </slot>
-      </div>
-    )
-  }
-  {
-    hasTitle && (
-      <Title
-        data-slot='card-title'
-        class={cn(
-          'm-0 text-base font-semibold leading-snug text-foreground',
-          href && 'transition-colors group-hover:text-brand'
-        )}
-      >
-        <slot name='title'>{title}</slot>
-      </Title>
-    )
-  }
+  {hasIcon && (
+    <div data-slot='card-icon' class='mb-2.5 text-brand'>
+      <slot name='icon'>
+        {icon && <Icon name={icon} class='block size-6' />}
+      </slot>
+    </div>
+  )}
+  {hasTitle && (
+    <Title
+      data-slot='card-title'
+      class={cn(
+        'm-0 text-base font-semibold leading-snug text-foreground',
+        href && 'transition-colors group-hover:text-brand'
+      )}
+    >
+      <slot name='title'>{title}</slot>
+    </Title>
+  )}
   <div
     data-slot='card-content'
     class:list={[
