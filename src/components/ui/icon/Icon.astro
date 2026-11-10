@@ -8,7 +8,9 @@ const { title, ...props } = Astro.props;
 ---
 
 <NimbusIcon
-  aria-hidden={title || props['aria-label'] ? undefined : 'true'}
+  aria-hidden={title || props['aria-label'] || props['aria-labelledby']
+    ? undefined
+    : 'true'}
   title={title}
   {...props}
 />

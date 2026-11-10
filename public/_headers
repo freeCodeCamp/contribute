@@ -1,3 +1,8 @@
+/*
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: frame-ancestors 'none'
+  Referrer-Policy: strict-origin-when-cross-origin
+
 # Hashed build files never change, so browsers keep them for a year without
 # asking again. Hosts that don't read _headers ignore this file.
 /_astro/*

@@ -456,7 +456,9 @@ test('/intro redirects to /', async ({ request }) => {
 test('two old page URLs still redirect', async ({ request }) => {
   const redirects = {
     '/FAQ': '/faq/',
-    '/how-to-work-on-the-docs-theme': '/how-to-work-on-the-docs-site/'
+    '/FAQ/': '/faq/',
+    '/how-to-work-on-the-docs-theme': '/how-to-work-on-the-docs-site/',
+    '/how-to-work-on-the-docs-theme/': '/how-to-work-on-the-docs-site/'
   };
   for (const [path, target] of Object.entries(redirects)) {
     const response = await request.get(path, { maxRedirects: 0 });
@@ -506,6 +508,34 @@ test('HTML pages can be indexed', async ({ request }) => {
   for (const path of ['/', '/faq/']) {
     const response = await request.head(path);
     expect(response.headers()['x-robots-tag'], path).toBeUndefined();
+  }
+});
+
+test('pages, sources, assets and the 404 page carry the hardening headers', async ({
+  request
+}) => {
+  const html = await (await request.get('/')).text();
+  const asset = html.match(/\/_astro\/[^"'\s)]+\.css/)?.[0];
+  expect(asset).toBeDefined();
+  const assetHeaders = (await request.head(asset!)).headers();
+  expect(assetHeaders['cache-control']).toBe(
+    'public, max-age=31536000, immutable'
+  );
+  for (const path of [
+    '/',
+    '/faq/',
+    '/faq/index.mdx',
+    '/no-such-page/',
+    asset!
+  ]) {
+    const headers = (await request.head(path)).headers();
+    expect(headers['x-content-type-options'], path).toBe('nosniff');
+    expect(headers['content-security-policy'], path).toBe(
+      "frame-ancestors 'none'"
+    );
+    expect(headers['referrer-policy'], path).toBe(
+      'strict-origin-when-cross-origin'
+    );
   }
 });
 

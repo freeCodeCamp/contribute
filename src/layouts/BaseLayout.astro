@@ -152,6 +152,7 @@ const resolvedMarkdownUrl =
     >
       Skip to content
     </a>
+    <slot />
     {
       !isHiddenVersion && (
         <AgentDirective
@@ -160,7 +161,6 @@ const resolvedMarkdownUrl =
         />
       )
     }
-    <slot />
     {config.search !== false && <SearchDialog />}
 
     <script>

@@ -117,6 +117,23 @@ test('the skip link comes first and moves to the content', async ({ page }) => {
   await expect(page).toHaveURL(url => url.hash === '#main-content');
 });
 
+test('the note for AI agents comes after the page content', async ({
+  page
+}) => {
+  await page.goto('/faq/');
+  const follows = await page.evaluate(() => {
+    const main = document.querySelector('main');
+    const note = document.querySelector('[data-ai-agent-directive]');
+    return Boolean(
+      main &&
+      note &&
+      !main.contains(note) &&
+      main.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING
+    );
+  });
+  expect(follows).toBe(true);
+});
+
 test('a breadcrumb leads home', async ({ page }) => {
   await page.goto('/how-to-work-on-labs/');
   const home = page.locator('nav[aria-label*="breadcrumb" i] a').first();

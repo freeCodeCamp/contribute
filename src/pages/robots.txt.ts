@@ -1,8 +1,6 @@
 import { withBase } from '@cloudflare/nimbus-docs/runtime';
 import { config } from 'virtual:nimbus/config';
 
-export const prerender = true;
-
 export function GET() {
   const body = [
     'User-agent: *',
