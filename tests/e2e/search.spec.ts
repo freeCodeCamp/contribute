@@ -38,6 +38,16 @@ test('Escape closes search and returns focus to the search button', async ({
   await expect(button).toBeFocused();
 });
 
+test('Escape returns focus to the search button when a click did not focus it', async ({
+  page
+}) => {
+  const button = page.getByRole('button', { name: /^Search/ }).first();
+  await button.dispatchEvent('click');
+  await expect(page.locator('[data-search-input]').first()).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(button).toBeFocused();
+});
+
 test('a query lists results and announces the count', async ({ page }) => {
   await page.keyboard.press('Control+k');
   await page.locator('[data-search-input]').first().fill('git');

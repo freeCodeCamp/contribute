@@ -235,10 +235,11 @@ function bindGlobals() {
   globalsBound = true;
 
   document.addEventListener('click', event => {
-    const trigger = (event.target as Element | null)?.closest(
+    const trigger = (event.target as Element | null)?.closest<HTMLElement>(
       '[data-search-trigger]'
     );
     if (!trigger) return;
+    trigger.focus();
     primaryDialog()?.__openSearchDialog?.();
   });
 
