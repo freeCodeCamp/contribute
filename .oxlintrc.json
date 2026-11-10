@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "oxc"],
+  "categories": { "correctness": "error" },
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      { "args": "none", "ignoreRestSiblings": true, "caughtErrors": "all" }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/layouts/BaseLayout.astro"],
+      "rules": { "no-unused-expressions": "off" }
+    }
+  ],
+  "ignorePatterns": [
+    ".astro/",
+    ".nimbus/",
+    "dist/",
+    ".cloudflare/",
+    ".wrangler/",
+    "test-results/",
+    "playwright-report/",
+    "blob-report/"
+  ]
+}

@@ -24,10 +24,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build project
         run: pnpm build
+        env:
+          CI: true
+
+      - name: Validate Cloudflare Build Output without uploading
+        run: pnpm exec cf deploy --prebuilt --dry-run
+        env:
+          CI: true
+
+      - name: Run postbuild Nimbus checks
+        run: pnpm exec nimbus-docs check --json
         env:
           CI: true
 
@@ -35,7 +45,9 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dist-${{ matrix.node-version }}
-          path: dist/
+          path: |
+            dist/
+            .cloudflare/output/v0/
           retention-days: 1
           if-no-files-found: error
           include-hidden-files: true

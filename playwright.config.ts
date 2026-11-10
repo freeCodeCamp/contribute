@@ -12,7 +12,7 @@ export default defineConfig({
   webServer: process.env.USABILITY_BASE_URL
     ? undefined
     : {
-        command: 'pnpm exec wrangler dev --port 8788 --local',
+        command: 'pnpm preview:built --port 8788',
         url: baseURL,
         reuseExistingServer: !process.env.CI
       }

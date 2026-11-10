@@ -55,7 +55,7 @@ There are two ways to run the site. Both work.
 | ------------------------------------ | ------- | ----------------------------------------------------------------- |
 | [Git](https://git-scm.com/)          | latest  | The version bundled with your operating system is often outdated. |
 | [Node.js](http://nodejs.org)         | `26.x`  | The "Active LTS" version.                                         |
-| [pnpm](https://pnpm.io/installation) | `10.x`  | -                                                                 |
+| [pnpm](https://pnpm.io/installation) | `12.x`  | -                                                                 |
 
 Check what you have:
 
@@ -67,7 +67,7 @@ Recommended, but not required:
 
 - [Set up an SSH key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
 - Use a code editor. [Visual Studio Code](https://code.visualstudio.com/) is free and open source.
-- Run [ESLint in your editor](http://eslint.org/docs/user-guide/integrations.html). Do not ignore its errors.
+- Install the recommended workspace extensions: Astro, Oxc and ESLint. Oxfmt formats files. Oxlint checks code, and ESLint retains Astro template and type-aware checks.
 
 ### Clone your fork and start the site
 
@@ -90,11 +90,14 @@ Recommended, but not required:
 
    Run `git remote -v` to confirm. You should see `origin` on your fork and `upstream` on `freeCodeCamp/contribute`.
 
-3. Install the dependencies. This also sets up the Git hooks:
+3. Install the pnpm version pinned by this repository, then install the dependencies. This also sets up the Git hooks:
 
    ```bash
-   pnpm install
+   npm install --global pnpm@12.17.0
+   pnpm install --frozen-lockfile
    ```
+
+   Use the Node.js version in `.nvmrc`. The seven-day dependency release cooldown applies to installs and updates.
 
 4. Start the development server:
 
@@ -201,22 +204,28 @@ The site is generated using Astro and served using Cloudflare Workers. Here's ho
 
 ## Deployment
 
-The site is deployed on Cloudflare Workers. Please check the wrangler config for deployment details.
+The site uses Cloudflare Workers Static Assets. `cloudflare.config.ts` defines the Worker, domain and runtime settings. `wrangler.config.ts` points the Cloudflare build backend at `dist/`.
+
+`pnpm build` runs Astro and packages Cloudflare Build Output in `.cloudflare/output/v0/`. `pnpm preview` builds and serves the static site locally, including `_headers` and `_redirects`. `pnpm preview:built` serves an existing build without rebuilding it.
+
+The pinned Cloudflare CLI detects Astro directly when you run bare `cf build` or `cf dev`. Use the repository scripts to keep the prebuild Git-history step, static asset packaging and production-like preview.
+
+Maintainers deploy the packaged output with `pnpm exec cf deploy --prebuilt` after a successful build. Use `pnpm exec cf deploy --prebuilt --dry-run` to validate it without uploading. Deployment requires Cloudflare access; local development and tests do not.
 
 ## Quick Commands Reference
 
-| Command                                 | Description                                         |
-| --------------------------------------- | --------------------------------------------------- |
-| `pnpm install`                          | Install all dependencies                            |
-| `pnpm develop`                          | Start the Astro development server (localhost:4321) |
-| `pnpm build`                            | Build the site for production                       |
-| `pnpm preview`                          | Build and preview locally using Cloudflare Workers  |
-| `pnpm test`                             | Run all tests                                       |
-| `pnpm lint`                             | Check formatting and linting                        |
-| `pnpm format`                           | Auto-fix formatting and linting issues              |
-| `pnpm check:astro`                      | Run Astro type checking                             |
-| `pnpm test:usability`                   | Check accessibility and internal links in a browser |
-| `npx vitest run tests/filename.test.ts` | Run a specific test file                            |
+| Command                                       | Description                                         |
+| --------------------------------------------- | --------------------------------------------------- |
+| `pnpm install`                                | Install all dependencies                            |
+| `pnpm develop`                                | Start the Astro development server (localhost:4321) |
+| `pnpm build`                                  | Build the site for production                       |
+| `pnpm preview`                                | Build and preview locally using Cloudflare Workers  |
+| `pnpm test`                                   | Run unit tests                                      |
+| `pnpm lint`                                   | Check formatting and linting                        |
+| `pnpm format`                                 | Auto-fix formatting and linting issues              |
+| `pnpm check:astro`                            | Run Astro type checking                             |
+| `pnpm test:usability`                         | Check accessibility and internal links in a browser |
+| `pnpm exec vitest run tests/filename.test.ts` | Run a specific test file                            |
 
 ## Proposing a Pull Request (PR)
 

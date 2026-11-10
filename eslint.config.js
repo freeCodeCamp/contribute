@@ -7,7 +7,10 @@ export default defineConfig([
     ignores: ['**/*.astro'],
     extends: [tseslint.configs.recommendedTypeChecked]
   }, // TypeScript ESLint does not support .astro files
-  { languageOptions: { parserOptions: { projectService: true } } },
+  {
+    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
+    languageOptions: { parserOptions: { projectService: true } }
+  },
   {
     files: ['src/components/**/*.client.ts'],
     rules: {
@@ -44,7 +47,9 @@ export default defineConfig([
       'playwright-report/',
       'blob-report/',
       'playwright/.cache/',
-      '**/.wrangler/'
+      '**/.wrangler/',
+      '**/.cloudflare/',
+      '**/.nimbus/'
     ]
   }
 ]);

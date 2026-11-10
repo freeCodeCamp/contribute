@@ -12,8 +12,17 @@
   "containerEnv": {
     "ASTRO_TELEMETRY_DISABLED": "1"
   },
-  "updateContentCommand": "pnpm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "oxc.oxc-vscode",
+        "astro-build.astro-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  "updateContentCommand": "bash -ic 'nvm install && nvm use && nvm alias default $(nvm current) && npm install --global pnpm@12.17.0 && pnpm install --frozen-lockfile'",
   "postAttachCommand": {
-    "Develop": "bash -c 'pnpm develop'"
+    "Develop": "bash -ic 'nvm use && pnpm develop'"
   }
 }

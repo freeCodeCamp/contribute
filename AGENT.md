@@ -7,6 +7,7 @@ Astro-based docs. The `nimbus-docs` package handles content schemas, sidebar/TOC
 ## Project facts
 
 - This site is the freeCodeCamp contributor documentation at <https://contribute.freecodecamp.org>. It deploys as static files to Cloudflare Workers Static Assets.
+- Use the Node version in `.nvmrc` and the pnpm version in `package.json`. Oxfmt owns formatting; Oxlint runs before ESLint. Retain ESLint for Astro template and type-aware rules. `pnpm lint` generates Astro types first.
 - Use `pnpm`. The `minimumReleaseAge` rule in `pnpm-workspace.yaml` applies to every install. Do not turn it off.
 - `@cloudflare/nimbus-docs` has an exact version in `package.json`. Update it only after the release passes the `minimumReleaseAge` wait.
 - `/` is the landing page. `/intro` and `/intro/` redirect to `/` (`public/_redirects`).
@@ -56,7 +57,7 @@ src/
 └── styles/                  # globals.css, prose.css
 ```
 
-Cloudflare deploys also have `wrangler.jsonc` at the project root.
+Cloudflare settings are in `cloudflare.config.ts`. `wrangler.config.ts` selects `./dist` for the Wrangler build backend. `pnpm build` runs Astro and writes Cloudflare Build Output to `.cloudflare/output/v0/`. Use `pnpm preview:built` for a local Workers preview without rebuilding. Bare `cf build` and `cf dev` detect Astro directly and bypass this packaging path. After building, `pnpm exec cf deploy --prebuilt --dry-run` validates deployment without uploading.
 
 ## Writing docs
 
@@ -96,8 +97,7 @@ Rules:
 | Upgrade a starter file       | `npx @cloudflare/nimbus-docs diff <file>` to review, `diff --apply <file>` to pull a clean upstream change.                                                                                                                                                                                                                                                                                |
 | Upgrade a registry component | `npx @cloudflare/nimbus-docs add <slug> --overwrite`, then review with `git diff`. Components you edited are kept and listed. To compare one with upstream, commit, run the `--overwrite --yes` command it prints, and read `git diff`; unless the user decided to discard their edits, undo the whole run with `git checkout -- . && git clean -fd`, since it also rewrote `nimbus.json`. |
 
-Sätteri is Nimbus's default Markdown and MDX processor. Extend it using `markdown.mdastPlugins` for Markdown AST transformations or `markdown.hastPlugins` for HTML AST transformations.
-If the site replaces Sätteri with another processor, set `admonitions: false` and keep that processor's existing callout implementation.
+Sätteri is Nimbus's default Markdown and MDX processor. Extend it using `markdown.mdastPlugins` for Markdown AST transformations or `markdown.hastPlugins` for HTML AST transformations. If the site replaces Sätteri with another processor, set `admonitions: false` and keep that processor's existing callout implementation.
 
 List installable items: `npx @cloudflare/nimbus-docs list`.
 
@@ -129,12 +129,12 @@ Read the release-matched guide at [`node_modules/@cloudflare/nimbus-docs/dist/do
 Keep `nimbus.json` committed. Its `lastReviewedNimbusVersion` is the baseline Nimbus uses to select the versioned reviews crossed by a package upgrade; state-detected migrations come from the current project files. It is not a package pin and should not be edited by hand.
 
 1. Update `@cloudflare/nimbus-docs` with the project's package manager.
-2. Preview the complete plan with `npx @cloudflare/nimbus-docs migrate --dry-run --diff`. If no baseline exists yet, add `--from <previous-version>`.
-3. Review every versioned entry and resolve each blocked/manual item.
-4. Apply safe edits only with explicit consent: `npx @cloudflare/nimbus-docs migrate --yes`. Review the resulting diff, then rerun the preview.
-5. When no migration remains, run `npx @cloudflare/nimbus-docs migrate --yes` again to record the completed review in `nimbus.json`.
-6. Pull in starter fixes: `npx @cloudflare/nimbus-docs outdated` lists starter files that changed upstream. For each one, review it with `npx @cloudflare/nimbus-docs diff <file>`, and take a clean update with `diff --apply <file>`. Merge files you've edited by hand. `migrate` doesn't cover these.
-7. Run the project's typecheck and production build, then run `npx @cloudflare/nimbus-docs check` again for post-build coverage.
+1. Preview the complete plan with `npx @cloudflare/nimbus-docs migrate --dry-run --diff`. If no baseline exists yet, add `--from <previous-version>`.
+1. Review every versioned entry and resolve each blocked/manual item.
+1. Apply safe edits only with explicit consent: `npx @cloudflare/nimbus-docs migrate --yes`. Review the resulting diff, then rerun the preview.
+1. When no migration remains, run `npx @cloudflare/nimbus-docs migrate --yes` again to record the completed review in `nimbus.json`.
+1. Pull in starter fixes: `npx @cloudflare/nimbus-docs outdated` lists starter files that changed upstream. For each one, review it with `npx @cloudflare/nimbus-docs diff <file>`, and take a clean update with `diff --apply <file>`. Merge files you've edited by hand. `migrate` doesn't cover these.
+1. Run the project's typecheck and production build, then run `npx @cloudflare/nimbus-docs check` again for post-build coverage.
 
 Except for task-printing mode (`--print`), `migrate` exits nonzero while work or review remains; that is a pending-upgrade signal, not necessarily a command failure. Never skip versions by changing `nimbus.json` directly.
 
@@ -166,7 +166,7 @@ End with `Summary: N errors, N warnings.`
 - **Registry hygiene** — every `src/components/ui/<slug>/` is either MDX-registered or imported in `src/`; transitive deps (`lib/cn.ts`, etc.) exist.
 - **AI surface** — `<AgentDirective />` renders in `BaseLayout.astro`; doc `<head>` has `<link rel="alternate" type="text/markdown" ...>`.
 - **Search** — `data-pagefind-body` is on the docs main wrapper; after a production build, `dist/pagefind/` exists with ≥1 indexed page.
-- **Cloudflare** (if applicable) — `wrangler.jsonc` has `name` and `compatibility_date`. Static output: `assets.directory = "./dist"` and `assets.not_found_handling = "404-page"`. Server output (`@astrojs/cloudflare`): no `assets.directory` or `main`; the adapter writes the deploy config to `dist/server/wrangler.json` at build time, so check that file after a build.
+- **Cloudflare** — this site stays static. Check `worker.name`, `worker.compatibilityDate`, `worker.domains` and `worker.assets.notFoundHandling = "404-page"` in `cloudflare.config.ts`; `assetsDirectory = "./dist"` in `wrangler.config.ts`. After `pnpm build`, check `.cloudflare/output/v0/workers/default/worker.config.json` and its `assets/` directory. Keep `_headers`, `_redirects` and `404.html` in the packaged assets.
 
 ## Don't
 

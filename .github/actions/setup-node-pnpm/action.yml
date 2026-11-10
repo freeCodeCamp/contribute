@@ -9,29 +9,16 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Use Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+    - name: Setup Node.js and pnpm
+      uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
       with:
-        node-version: ${{ inputs.node-version }}
-        package-manager-cache: false
+        runtime: node@${{ inputs.node-version }}
+        install: false
+        cache: true
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
-      id: pnpm-install
-      with:
-        run_install: false
-
-    - name: Get pnpm store directory
-      id: pnpm-cache
+    - name: Print runtime and store details
       shell: bash
       run: |
-        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-    - name: Cache pnpm store
-      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-      with:
-        path: |
-          ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-
+        node --version
+        pnpm --version
+        pnpm store path
