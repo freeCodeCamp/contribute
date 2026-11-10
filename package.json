@@ -52,7 +52,7 @@
     "prettier-plugin-astro": "1.1.2",
     "sharp": "0.35.5",
     "typescript-eslint": "8.72.1",
-    "vitest": "4.1.12",
+    "vitest": "5.1.0",
     "wrangler": "4.156.2"
   },
   "packageManager": "pnpm@12.17.0"
