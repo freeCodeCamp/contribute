@@ -1,0 +1,56 @@
+---
+import { variants } from '@/lib/variants';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'span'> {
+  /** Badge text. When omitted, slotted children render instead. */
+  text?: string;
+  variant?:
+    | 'default'
+    | 'info'
+    | 'note'
+    | 'success'
+    | 'tip'
+    | 'warning'
+    | 'caution'
+    | 'danger'
+    | 'outline';
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { text, variant, size, class: className, ...attrs } = Astro.props;
+
+// note→info, tip→success, caution→warning: variant aliases
+const badge = variants({
+  base: 'inline-flex items-center whitespace-nowrap',
+  variants: {
+    variant: {
+      default: 'bg-accent text-muted-foreground',
+      info: 'bg-info-muted text-info-foreground',
+      note: 'bg-info-muted text-info-foreground',
+      success: 'bg-success-muted text-success-foreground',
+      tip: 'bg-success-muted text-success-foreground',
+      warning: 'bg-warning-muted text-warning-foreground',
+      caution: 'bg-warning-muted text-warning-foreground',
+      danger: 'bg-danger-muted text-danger-foreground',
+      outline: 'bg-card text-foreground ring ring-border ring-inset'
+    },
+    size: {
+      // Whole-pixel heights: 24, 28 and 36.
+      small: 'px-2 py-0.5 text-xs',
+      medium: 'px-2.5 py-0.5 text-sm',
+      large: 'px-3 py-1 text-base leading-7'
+    }
+  },
+  defaults: { variant: 'default', size: 'small' }
+});
+---
+
+<span
+  data-slot='badge'
+  data-variant={variant ?? 'default'}
+  class={badge({ variant, size }, className)}
+  {...attrs}
+>
+  {text ?? <slot />}
+</span>

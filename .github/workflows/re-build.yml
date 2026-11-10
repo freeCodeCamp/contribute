@@ -1,26 +1,22 @@
 name: Build
 
-on:
-  workflow_call:
-    inputs:
-      upload-artifacts:
-        description: 'Whether to upload build artifacts'
-        required: false
-        type: boolean
-        default: false
+on: [workflow_call]
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     strategy:
       matrix:
-        node-version: [24.x]
+        node-version: [26.x]
 
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js and pnpm
         uses: ./.github/actions/setup-node-pnpm
@@ -35,10 +31,11 @@ jobs:
         env:
           CI: true
 
-      - name: Upload build artifacts
-        if: ${{ inputs.upload-artifacts }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - name: Upload the built site
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: build-output-node-${{ matrix.node-version }}
+          name: dist-${{ matrix.node-version }}
           path: dist/
           retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: true

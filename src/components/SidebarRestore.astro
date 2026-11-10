@@ -1,0 +1,58 @@
+{/* Sidebar state restore — sets open groups and scroll before
+    the sidebar module loads so state survives navigation.
+    The `aria-hidden` attribute keeps Astro from bundling this as a
+    deferred module: it MUST stay inline to run before the disclosure
+    mounts, else the first click sees stale state. */}
+<script is:inline aria-hidden='true'>
+  (function () {
+    function centerActive(sidebar, active) {
+      const sr = sidebar.getBoundingClientRect();
+      const ar = active.getBoundingClientRect();
+      sidebar.scrollTop += ar.top - sr.top - sr.height / 2 + ar.height / 2;
+    }
+
+    try {
+      const sidebar = document.querySelector('[data-nb-sidebar-tree]');
+      if (!sidebar) return;
+      const content = sidebar.querySelector('[data-nb-sidebar]');
+      if (!content) return;
+
+      // State saved for a different sidebar is ignored entirely.
+      const raw = JSON.parse(sessionStorage.getItem('sidebar-state') || 'null');
+      const state =
+        raw && content.dataset.nbSidebarHash === raw.hash ? raw : null;
+      if (state) {
+        const groups = content.querySelectorAll('details');
+        for (let i = 0; i < groups.length; i++) {
+          if (typeof state.open[i] === 'boolean') {
+            groups[i].open = state.open[i];
+          }
+        }
+      }
+
+      const active = sidebar.querySelector("[aria-current='page']");
+      if (active) {
+        let d = active.closest('details');
+        while (d) {
+          d.open = true;
+          d = d.parentElement && d.parentElement.closest('details');
+        }
+      }
+
+      // Scroll only applies while the tree is visible (the rail
+      // on desktop); the drawer restores it again when it opens.
+      if (sidebar.clientHeight === 0) return;
+      if (state && typeof state.scroll === 'number') {
+        sidebar.scrollTop = state.scroll;
+        if (active) {
+          const sr = sidebar.getBoundingClientRect();
+          const ar = active.getBoundingClientRect();
+          if (ar.top < sr.top || ar.bottom > sr.bottom)
+            centerActive(sidebar, active);
+        }
+      } else if (active) {
+        centerActive(sidebar, active);
+      }
+    } catch (_) {}
+  })();
+</script>

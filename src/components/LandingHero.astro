@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+import banner from '@/assets/branding/banner.png';
+import SocialLinks from './SocialLinks.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section
+  aria-labelledby='landing-title'
+  class='mx-auto flex max-w-[70.5rem] flex-col items-center px-6 pt-12 pb-16 text-center'
+>
+  <Image
+    src={banner}
+    alt=''
+    format='webp'
+    widths={[192, 320, 500]}
+    sizes='(min-width: 48rem) 20rem, 12rem'
+    priority
+    class='mb-8 h-auto w-48 rounded-full md:w-80'
+  />
+  <h1 id='landing-title' class='landing-title text-foreground text-balance'>
+    {title}
+  </h1>
+  <div class='mt-5 flex flex-wrap justify-center gap-4 text-muted-foreground text-pretty [&>p]:mb-4 [&>p]:w-full [&>p]:text-[length:var(--nb-prose-size)] md:[&>p]:text-xl'>
+    <slot />
+  </div>
+  <div class='mt-6 flex justify-center gap-2 md:hidden'>
+    <SocialLinks />
+  </div>
+</section>
+
+<style is:global>
+  .landing-title {
+    font-size: var(--nb-display-size);
+    font-weight: 700;
+    line-height: var(--nb-heading-leading);
+    letter-spacing: var(--nb-h1-tracking);
+  }
+
+  .landing-pill {
+    gap: 0.75rem;
+    min-block-size: 3.25rem;
+    max-inline-size: 100%;
+    padding: 0.5rem 1.5rem;
+    border-radius: 999px;
+    font-size: var(--nb-prose-size);
+    font-weight: 400;
+  }
+
+  .landing-pill > p {
+    display: contents;
+  }
+
+  .landing-start {
+    border: 3px solid #feac32;
+    background-color: #feac32;
+    background-image: linear-gradient(#fecc4c, #ffac33);
+    color: #0a0a23;
+  }
+
+  .landing-donate {
+    border: 3px solid #c0c0c0;
+    background-color: transparent;
+    color: var(--nb-foreground);
+  }
+
+  .landing-start:focus-visible {
+    border-color: #f1a02a;
+    background-color: #fecc4c;
+    background-image: none;
+  }
+
+  .landing-donate:focus-visible {
+    border-color: #b0b0b0;
+    background-color: #d0d0d0;
+    color: #161724;
+  }
+
+  @media (hover: hover) {
+    .landing-start:hover {
+      border-color: #f1a02a;
+      background-color: #fecc4c;
+      background-image: none;
+    }
+
+    .landing-donate:hover {
+      border-color: #b0b0b0;
+      background-color: #d0d0d0;
+      color: #161724;
+    }
+  }
+</style>
