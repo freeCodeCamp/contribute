@@ -10,6 +10,11 @@
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
+    },
+    {
+      "description": "Docker updates wait for a person: no required check builds them.",
+      "matchManagers": ["dockerfile", "docker-compose", "devcontainer"],
+      "automerge": false
     }
   ]
 }
