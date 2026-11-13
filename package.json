@@ -62,7 +62,7 @@
     "pagefind": "1.6.0",
     "sharp": "0.35.5",
     "vitest": "5.1.0",
-    "wrangler": "4.157.0"
+    "wrangler": "4.158.0"
   },
   "packageManager": "pnpm@12.18.0",
   "engines": {
