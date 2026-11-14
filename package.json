@@ -36,12 +36,12 @@
     "@cloudflare/nimbus-docs": "0.19.2",
     "@iconify-json/ph": "1.2.2",
     "@resvg/resvg-js": "2.6.2",
-    "@tailwindcss/vite": "4.3.4",
+    "@tailwindcss/vite": "4.3.5",
     "astro": "7.4.7",
     "clsx": "2.1.1",
     "satori": "0.26.0",
     "tailwind-merge": "3.7.0",
-    "tailwindcss": "4.3.4",
+    "tailwindcss": "4.3.5",
     "typescript": "6.0.3"
   },
   "devDependencies": {
