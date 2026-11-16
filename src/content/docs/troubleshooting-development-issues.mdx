@@ -4,11 +4,9 @@ sidebar:
   label: Troubleshoot Setup Issues
 ---
 
-import { Aside } from '@astrojs/starlight/components';
-
 ## Issues with Installing the Recommended Prerequisites
 
-We regularly develop on the latest or most popular operating systems like macOS 10.15 or later, Ubuntu 20.04 or later, and Windows 10 or later (with WSL2).
+Your operating system must support Node.js 24. On Windows, use WSL2.
 
 It is recommended to research your specific issue on resources such as Google, Stack Overflow, and Stack Exchange. There is a good chance that someone has faced the same issue and there is already an answer to your specific query.
 
@@ -26,27 +24,75 @@ If you are working on a WSL2 Linux Distro, you might get performance and stabili
 
 Therefore we recommend to clone this repo into a folder which is mainly used by your WSL2 Linux Distro and not directly shared with Windows (e.g. `~/PROJECTS/`).
 
-See [this GitHub Issue](https://github.com/freeCodeCamp/freeCodeCamp/issues/40632) for further information about this problem.
+See [Microsoft's guidance for working across Windows and Linux file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems) for more information.
 
 ## Troubleshooting port issues on GitHub Codespaces
 
-Sometimes the service on port `8000` doesn't go live. This is common when you are restarting an inactive workspace.
+Sometimes the service on port `8000` does not go live. This is common when you restart an inactive codespace.
 
-If the service is not coming up on port `8000`, you can troubleshoot using these steps:
+Start the two servers in separate terminals from the project root (`/workspaces/freeCodeCamp`):
 
-- **Start the server**: Run the below command in one terminal window from the root project directory (`/workspace/freeCodeCamp`).
+```bash
+pnpm run develop:api
+```
 
-  ```bash
-  pnpm run develop:server
-  ```
+```bash
+pnpm run develop:client
+```
 
-- **Start the client**: In another terminal window, run the below command from the client directory (`/workspace/freeCodeCamp/client`).
+This makes port `8000` available. Be mindful of [how the URLs and ports work inside a GitHub Codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace).
 
-  ```bash
-  pnpm run develop -- -H '0.0.0.0'
-  ```
+## The Ports panel lists port 8000 but the browser cannot open it
 
-This should make port `8000` available. Be mindful of [how the URLs & Ports work within a GitHub Codespace](https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace).
+This happens in a Dev Container on your own machine, where the client can bind IPv6 loopback only. Stop the client, then start it with an explicit host:
+
+```bash
+GATSBY_HOST=0.0.0.0 pnpm run develop
+```
+
+Update your branch from `upstream/main` and rebuild the container to get this by default.
+
+## The client loads but every API request fails
+
+This happens in a codespace when `.env` still points at `localhost`.
+
+A browser tab inside a codespace cannot reach `localhost`. That address points at your own machine, not at the codespace.
+
+<Steps>
+
+1. From the project root (`/workspaces/freeCodeCamp`), check the two values in `.env`:
+
+   ```bash
+   grep -E '^(HOME_LOCATION|API_LOCATION)=' .env
+   ```
+
+   In a codespace, `HOME_LOCATION` must use the forwarded client URL, such as `https://CODESPACE_NAME-8000.app.github.dev`. `API_LOCATION` must use the forwarded API URL, such as `https://CODESPACE_NAME-3000.app.github.dev`.
+
+2. If they still use `localhost`, run the codespace environment script again from the same directory:
+
+   ```bash
+   .devcontainer/codespace-env.sh
+   ```
+
+3. Stop the process that is running the client, then restart it with the same command. If you started the application with `pnpm run develop`, run:
+
+   ```bash
+   pnpm run develop
+   ```
+
+4. Set port `3000` to public. In the **Ports** panel, right click port `3000`, then choose **Port Visibility > Public**.
+
+   The container sets this on every start. Do this yourself only if it reported that it could not.
+
+</Steps>
+
+<Aside type='note' title='Why port 3000 must be public'>
+
+The client calls the API from your browser, across two different forwarded origins. A private port answers that call with a GitHub sign-in redirect, and the browser reports it as a CORS error.
+
+A public port is reachable by anybody who has the URL, and the development sign-in route needs no password. Stop the codespace when you finish working.
+
+</Aside>
 
 ## Issues with Missing UI, Fonts, Language Strings, or Build Errors
 
@@ -68,13 +114,13 @@ pnpm run seed
 pnpm run develop
 ```
 
-OR
-
-Use the shorter handy command that does the above steps:
+Or use the shorter command, which runs the clean, install, and develop steps:
 
 ```bash
 pnpm run clean-and-develop
 ```
+
+This command does not seed the database. Run `pnpm run seed` separately if you need to recreate the development users and data.
 
 If you continue to face issues with the build, cleaning up the workspace is recommended.
 
@@ -97,7 +143,7 @@ git clean -ifdX
 
 If you can't sign in, and instead you see a banner with an error message saying that the error will be reported to freeCodeCamp, please double-check that your local port `3000` is not in use by a different program.
 
-#### **From Terminal:**
+### **From Terminal:**
 
 ```bash
 netstat -a | grep "3000"
@@ -121,7 +167,7 @@ If you get errors while installing the dependencies, please make sure that you a
 
 <Aside type='caution' title='Slow downloads'>
 
-The first time setup can take a while depending on your network bandwidth. Be patient, and if you are still stuck we recommend using GitHub Codespaces instead of an offline setup. We recommend 30-50 mbps connections for the best experience.
+The initial setup downloads several large dependencies and container images, so completion time depends on your connection. GitHub Codespaces is an alternative when local setup is impractical.
 
 </Aside>
 
@@ -131,6 +177,6 @@ To see how the client renders in another language go to [How to Work on Localize
 
 ## Getting Help
 
-If you are stuck and need help, feel free to ask questions in the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
+If you are stuck and need help, feel free to ask questions in the ['freeCodeCamp Community' category on our forum](https://forum.freecodecamp.org/c/site-community) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
 
 There might be an error in the console of your browser or in Bash / Terminal / Command Line that will help identify the problem. Provide this error message in your problem description so others can more easily identify the issue and help you find a resolution.

@@ -4,8 +4,6 @@ sidebar:
   label: Open a pull request
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-
 A pull request (PR), enables you to send changes from your fork on GitHub to freeCodeCamp.org's main repository. Once you are done making changes to the code, you can follow these guidelines to open a PR.
 
 We expect our contributors to be aware of the process specific to this project. Following the guidelines carefully earns you the respect of fellow maintainers and saves everyone time.
@@ -20,7 +18,7 @@ Some examples of this are:
 4. Use the correct way to link issues in the description of the PR by updating the `XXXXXX`. Do not just add issue numbers everywhere and anywhere you feel like.
 5. Do not "@mention" maintainers or reviewers on your pull request. It can come across as rude, and they are likely busy with many other requests.
 
-   If you need help or have a question, use the support links provided in this contributing guide — the [`Contributors` category on our community forum](https://forum.freecodecamp.org/c/contributors) or the `#Contributors` channel on [our chat server](https://discord.gg/PRyKn3Vbay). We understand you are excited about contributing, but please be patient — someone will get to you sooner or later.
+   If you need help or have a question, use the support links provided in this contributing guide — the [`freeCodeCamp Community` category on our community forum](https://forum.freecodecamp.org/c/site-community) or the `#freecodecamp-contributors` channel on [our chat server](https://discord.gg/PRyKn3Vbay). We understand you are excited about contributing, but please be patient — someone will get to you sooner or later.
 
 6. Do not work directly off your `main` branch - create a new branch for the changes you are working on.
 
@@ -64,7 +62,7 @@ Whenever you open a Pull Request (PR), you can use the below to determine the ty
 
 **Description:**
 
-Keep it short (less than 30 characters) and simple; you can add more information in the PR description box and comments.
+Keep it short and simple; you can add more information in the PR description box and comments.
 
 Some examples of good PR titles would be:
 
@@ -77,7 +75,7 @@ Some examples of good PR titles would be:
 
 <Steps>
 
-1.  Once the edits have been committed, you will be prompted to create a pull request on your fork's GitHub Page.
+1.  Once you have committed your edits, push your working branch to your fork. On GitHub, click **Compare & pull request** for that branch. If the prompt does not appear, open the **Pull requests** tab and click **New pull request**.
 
           <details>
 
@@ -87,9 +85,9 @@ Some examples of good PR titles would be:
 
           </details>
 
-2.  By default, all pull requests should be against the freeCodeCamp main repo, `main` branch.
+2.  Set the base repository to the upstream repository for the project you are contributing to, and select its `main` branch.
 
-    Make sure that your Base Fork is set to freeCodeCamp/freeCodeCamp when raising a Pull Request.
+    For example, use `freeCodeCamp/freeCodeCamp` for curriculum or platform changes and `freeCodeCamp/contribute` for changes to this documentation site. Select your fork as the head repository and your working branch as the compare branch.
 
           <details>
 
@@ -99,7 +97,7 @@ Some examples of good PR titles would be:
 
           </details>
 
-3.  Submit the pull request from your branch to freeCodeCamp's `main` branch.
+3.  Submit the pull request from your working branch to the upstream repository's `main` branch.
 
 4.  Include a more detailed summary of the changes you made and how your changes are helpful in the body of your PR.
     - You will be presented with a pull request template. This is a checklist that you should have followed before opening the pull request.
@@ -124,7 +122,7 @@ Some examples of good PR titles would be:
 
 Our moderators will now take a look and leave you feedback. Please be patient with the fellow moderators and respect their time. All pull requests are reviewed in due course.
 
-And as always, feel free to ask questions on the ['Contributors' category on our forum](https://forum.freecodecamp.org/c/contributors) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
+And as always, feel free to ask questions on the ['freeCodeCamp Community' category on our forum](https://forum.freecodecamp.org/c/site-community) or [the contributors chat room](https://discord.gg/PRyKn3Vbay).
 
 :::tip
 If you are to be contributing more pull requests, we recommend you read the [making changes and syncing](/basic-git-workflow/#contributing-to-the-codebase) guidelines to avoid having to delete your fork.

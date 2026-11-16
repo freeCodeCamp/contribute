@@ -1,0 +1,37 @@
+---
+import { Icon } from '@/components/ui/icon';
+import { LinkButton } from './ui/link-button';
+
+const socials = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/freeCodeCamp',
+    icon: 'ph:github-logo-fill'
+  },
+  {
+    label: 'X',
+    href: 'https://twitter.com/freeCodeCamp',
+    icon: 'ph:x-logo-fill'
+  },
+  {
+    label: 'Discord',
+    href: 'https://chat.freecodecamp.org',
+    icon: 'ph:discord-logo-fill'
+  }
+];
+---
+
+{socials.map(({ label, href, icon }) => (
+  <LinkButton
+    href={href}
+    variant='ghost'
+    shape='square'
+    size='sm'
+    aria-label={`${label} (opens in a new tab)`}
+    target='_blank'
+    rel='noopener me'
+    class='text-muted-foreground'
+  >
+    <Icon name={icon} class='w-4 h-4' />
+  </LinkButton>
+))}

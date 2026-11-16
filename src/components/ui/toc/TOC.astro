@@ -1,0 +1,70 @@
+---
+/**
+ * TOC — on-this-page nav with scroll-spy. Static rail rendered inline
+ * (border-s + S-curve SVGs at indent changes); animated active indicator
+ * lives in toc.client.ts.
+ */
+import { cn } from '@/lib/cn';
+import type { HTMLAttributes } from 'astro/types';
+import type { TOCItem } from '@cloudflare/nimbus-docs/types';
+import TOCList, { type TOCNode } from './TOCList.astro';
+
+interface Props extends HTMLAttributes<'div'> {
+  headings: TOCItem[];
+}
+
+const { headings: allHeadings, class: className, ...attrs } = Astro.props;
+const headings = allHeadings.filter(({ slug }) => slug);
+
+const tree: TOCNode[] = [];
+const open: TOCNode[] = [];
+headings.forEach((heading, i) => {
+  const node: TOCNode = {
+    heading,
+    prevDepth: headings[i - 1]?.depth ?? heading.depth,
+    nextDepth: headings[i + 1]?.depth ?? heading.depth,
+    children: []
+  };
+  while (open.length && open[open.length - 1].heading.depth >= heading.depth)
+    open.pop();
+  (open[open.length - 1]?.children ?? tree).push(node);
+  open.push(node);
+});
+---
+
+{headings.length > 0 && (
+  <div
+    data-slot='toc'
+    data-nb-toc
+    class={cn('toc-container', className)}
+    {...attrs}
+  >
+    <nav aria-labelledby='nb-toc-title' class='relative'>
+      <h2
+        id='nb-toc-title'
+        class='mb-2 text-base font-semibold text-foreground'
+      >
+        On this page
+      </h2>
+      <svg
+        data-nb-toc-rail
+        aria-hidden='true'
+        class='pointer-events-none absolute inset-0 h-full w-full overflow-visible'
+        fill='none'
+      >
+        <path
+          data-nb-toc-rail-active
+          class='stroke-brand opacity-0 transition-[stroke-dasharray,stroke-dashoffset,opacity] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] data-[ready=true]:opacity-100 data-[initial=true]:transition-opacity motion-reduce:transition-opacity'
+          stroke-width='2'
+          stroke-linecap='round'
+        />
+      </svg>
+
+      <TOCList nodes={tree} />
+    </nav>
+  </div>
+)}
+
+<script>
+  import './toc.client';
+</script>

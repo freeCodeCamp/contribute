@@ -43,7 +43,6 @@ const sidebar = [
     items: [
       'moderator-handbook',
       'reply-templates',
-      'language-lead-handbook',
       'courses-vscode-extension',
       'how-to-enable-new-languages',
       'authors-analytics-manual',
@@ -62,7 +61,7 @@ const sidebar = [
         }
       },
       {
-        link: 'https://freecodecamp.org/forum/c/contributors',
+        link: 'https://forum.freecodecamp.org/c/site-community',
         label: 'Discourse Forum',
         attrs: {
           target: '_blank'

@@ -1,9 +1,8 @@
 minimumReleaseAge: 10080 # 7 days, in minutes (supply-chain release cooldown)
 engineStrict: true
 enablePrePostScripts: true
-packageManagerStrict: false
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - esbuild
-  - sharp
-  - workerd
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  sharp: true
+  workerd: true

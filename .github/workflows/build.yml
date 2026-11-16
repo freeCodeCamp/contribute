@@ -8,24 +8,28 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   lint:
     name: Lint
-    if: github.event_name == 'pull_request' || github.event_name == 'push'
     uses: ./.github/workflows/re-lint.yml
-    secrets: inherit
 
   test:
     name: Test
-    if: github.event_name == 'pull_request' || github.event_name == 'push'
     uses: ./.github/workflows/re-test.yml
-    secrets: inherit
 
   build:
     name: Build
-    if: github.event_name == 'pull_request' || github.event_name == 'push'
     needs: [lint, test]
     uses: ./.github/workflows/re-build.yml
-    with:
-      upload-artifacts: true
-    secrets: inherit
+
+  usability:
+    name: Usability
+    needs: [build]
+    uses: ./.github/workflows/re-usability.yml

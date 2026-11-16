@@ -1,10 +1,16 @@
 image: gitpod/workspace-node-lts
 
 tasks:
-  - init: pnpm install
+  - before: |
+      source "$NVM_DIR/nvm.sh"
+      nvm install
+      nvm use
+      npm install --global pnpm@12.17.0
+    init: pnpm install --frozen-lockfile
     command: pnpm run develop
 
 vscode:
   extensions:
     - dbaeumer.vscode-eslint
-    - esbenp.prettier-vscode
+    - oxc.oxc-vscode
+    - astro-build.astro-vscode

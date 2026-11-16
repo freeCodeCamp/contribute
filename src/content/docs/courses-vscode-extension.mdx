@@ -4,8 +4,6 @@ sidebar:
   label: Courses VSCode Extension
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-
 This details the maintenance guidelines for the [freeCodeCamp/courses-vscode-extension](https://github.com/freeCodeCamp/courses-vscode-extension) repository which contains the source code for the [freeCodeCamp - Courses](https://marketplace.visualstudio.com/items?itemName=freeCodeCamp.freecodecamp-courses) extension.
 
 ## Publishing the Extension
@@ -17,10 +15,12 @@ A GitHub Action automagically publishes the extension to the Visual Studio Marke
 1.  Package a new version of the extension:
 
     ```bash
-    npm run pack -- <tag_type>
+    npm run pack -- --no-git-tag-version <tag_type>
     ```
 
     Where `<tag_type>` is one of: `major`, `minor`, `patch`.
+
+    The `--no-git-tag-version` flag updates the package version without creating a Git commit or tag. These are created in the following steps.
 
 2.  Push the new version to `main`:
 

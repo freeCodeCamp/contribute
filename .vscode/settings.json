@@ -1,0 +1,5 @@
+{
+  "[astro][javascript][javascriptreact][typescript][typescriptreact][json][jsonc][css][html][markdown][mdx][yaml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  }
+}

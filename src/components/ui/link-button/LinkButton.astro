@@ -1,0 +1,66 @@
+---
+/**
+ * LinkButton — an anchor styled as a button.
+ *
+ *   <LinkButton href="/start" variant="primary">Get started</LinkButton>
+ *   <LinkButton href="/docs" variant="secondary">Read the docs</LinkButton>
+ *   <LinkButton href="/x" shape="square" aria-label="Open"> … </LinkButton>
+ *
+ * The `icon` prop appends a right-caret that nudges on hover.
+ *
+ * Styling is delegated to the shared `ui/button/variants`, so LinkButton and
+ * Button stay visually identical.
+ */
+import { cn } from '@/lib/cn';
+import { Icon } from '@/components/ui/icon';
+import type { HTMLAttributes } from 'astro/types';
+import {
+  buttonVariants,
+  buttonIconSize,
+  type ButtonVariant,
+  type ButtonSize,
+  type ButtonShape
+} from '../button/variants';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  /** `base` (default) · `square` · `circle` (icon-only — pass `aria-label`). */
+  shape?: ButtonShape;
+  /** Append a caret-right that nudges on hover. */
+  icon?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'base',
+  shape = 'base',
+  icon = false,
+  class: className,
+  ...attrs
+} = Astro.props;
+---
+
+<a
+  data-slot='button'
+  data-variant={variant}
+  href={href}
+  class={cn(buttonVariants({ variant, size, shape }), className)}
+  {...attrs}
+>
+  <slot />
+  {attrs.target === '_blank' && !attrs['aria-label'] && (
+    <span class='sr-only'> (opens in a new tab)</span>
+  )}
+  {icon && (
+    <Icon
+      name='ph:caret-right'
+      class={cn(
+        'transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5',
+        buttonIconSize[size]
+      )}
+    />
+  )}
+</a>

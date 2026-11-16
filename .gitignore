@@ -2,6 +2,7 @@
 dist/
 # generated types
 .astro/
+.nimbus/
 
 # dependencies
 node_modules/
@@ -28,4 +29,5 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 .wrangler/
+.cloudflare/
 .playwright-mcp/

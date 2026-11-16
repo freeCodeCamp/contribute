@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "endOfLine": "lf",
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "arrowParens": "avoid",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "astro": true,
+  "associations": [{ "files": ["**/*.svg"], "language": "html" }],
+  "ignorePatterns": [
+    "**/node_modules",
+    "**/dist",
+    "**/.astro",
+    "**/__coverage__",
+    ".changeset",
+    "pnpm-lock.yaml",
+    "pre-commit"
+  ]
+}

@@ -1,0 +1,15 @@
+---
+interface Props {
+  alt: string;
+}
+
+const { alt } = Astro.props;
+---
+
+<img
+  src='/icons/primary_logo.svg'
+  alt={alt}
+  width='2100'
+  height='240'
+  class='h-auto w-full'
+/>

@@ -1,28 +1,20 @@
 import eslintPluginAstro from 'eslint-plugin-astro';
 import { defineConfig } from 'eslint/config';
-import tseslint from 'typescript-eslint';
+
 export default defineConfig([
-  ...eslintPluginAstro.configs.recommended,
-  {
-    ignores: ['**/*.astro'],
-    extends: [tseslint.configs.recommendedTypeChecked]
-  }, // TypeScript ESLint does not support .astro files
-  { languageOptions: { parserOptions: { projectService: true } } },
   {
     ignores: [
-      '**/node_modules',
-      '**/dist',
-      '**/.astro',
-      '**/__coverage__',
-      '**/.changeset',
-      '**/pnpm-*.yaml',
-      '**/pre-commit',
-      '**/.prettierignore',
+      '**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}',
+      '**/node_modules/',
+      '**/dist/',
+      '**/.astro/',
+      '**/.cloudflare/',
+      '**/.wrangler/',
+      '**/.nimbus/',
       'test-results/',
       'playwright-report/',
-      'blob-report/',
-      'playwright/.cache/',
-      '**/.wrangler/'
+      'blob-report/'
     ]
-  }
+  },
+  ...eslintPluginAstro.configs.recommended
 ]);

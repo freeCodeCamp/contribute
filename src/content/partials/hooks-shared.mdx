@@ -1,0 +1,102 @@
+Four hooks are available:
+
+| Hook              | When it runs                                                                                |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| `--before-all--`  | Once, before any test runs                                                                  |
+| `--before-each--` | Before each individual test                                                                 |
+| `--after-each--`  | After each individual test (in a `finally` block, so it always runs even if the test fails) |
+| `--after-all--`   | Once, after all tests have finished                                                         |
+
+**Execution order:**
+
+For challenges that have an HTML file, `--before-all--` is injected as a `<script>` tag into the sandboxed iframe _before_ the user's HTML is parsed, so it runs before user code. It has full access to DOM APIs and global test helpers like `__FakeTimers` and `$` (jQuery). The user's code then renders into the page, and each test runs against the live DOM:
+
+```
+1. --before-all--
+
+2. user code (evaluated once)
+
+3. (for each test): --before-each-- → test → --after-each--
+
+4. --after-all--
+```
+
+For JavaScript and TypeScript challenges without an HTML file, `--before-all--` runs once before any test. Each test evaluates `--before-each--`, the compiled user code, and the test together:
+
+```
+1. --before-all--
+
+2. (for each test): --before-each-- → user code → test → --after-each--
+
+3. --after-all--
+```
+
+For Python challenges, hooks are JavaScript code. Each test gets fresh Python globals. The evaluator first evaluates `--before-each--` and the JavaScript test wrapper. If the wrapper returns an object with a `test` function, the evaluator then runs the user's Python code with `runPython` and calls that function:
+
+```
+1. --before-all--
+
+2. (for each test): --before-each-- → evaluate test wrapper → user code → test() → --after-each--
+
+3. --after-all--
+```
+
+Plain JavaScript assertions without a `test` function run while the wrapper is evaluated and do not automatically execute the user's Python code.
+
+For both kinds of challenges without HTML, variables declared with `let` or `const` in `--before-all--` are not available in tests or `--after-all--`, because these run in separate evaluations. To share JavaScript state, assign it to `globalThis` and remove it during cleanup. For example:
+
+````md
+# --before-all--
+
+```js
+globalThis.testState = { count: 0 };
+```
+
+# --after-all--
+
+```js
+delete globalThis.testState;
+```
+````
+
+**Syntax:**
+
+Hooks use the same `# --hook-name--` heading syntax as other sections. Each hook must contain exactly one code block. Hooks are placed after `--description--` and before `--hints--`:
+
+The following fake-timer example is for HTML-based challenges only. `__FakeTimers` is not available in the JavaScript or Python workers.
+
+````md
+# --description--
+
+...
+
+# --before-all--
+
+```js
+// Runs once before any test. Set up shared state here.
+let clock = __FakeTimers.install();
+```
+
+# --before-each--
+
+```js
+// Runs before each test.
+```
+
+# --after-each--
+
+```js
+// Runs after each test, even if it fails.
+```
+
+# --after-all--
+
+```js
+// Runs once after all tests. Clean up here.
+clock.uninstall();
+```
+
+# --hints--
+
+...
+````

@@ -1,0 +1,47 @@
+---
+/**
+ * TabsTrigger — individual tab button within a TabsList.
+ * Use `value` to match with a TabsContent of the same value.
+ */
+import { cn } from '@/lib/cn';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'button'> {
+  /** Value matching a TabsContent. */
+  value: string;
+}
+
+const { value, class: className, ...attrs } = Astro.props;
+const html = await Astro.slots.render('default');
+const entities: Record<string, string> = {
+  '&amp;': '&',
+  '&lt;': '<',
+  '&gt;': '>',
+  '&quot;': '"',
+  '&#39;': "'"
+};
+const label = html
+  .replace(/<[^>]*>/g, '')
+  .replace(/&(amp|lt|gt|quot|#39);/g, entity => entities[entity])
+  .trim();
+---
+
+<button
+  role='tab'
+  type='button'
+  data-nb-tabs-trigger
+  data-slot='tabs-trigger'
+  data-nb-value={value}
+  data-label={label}
+  class={cn(
+    'inline-flex shrink-0 cursor-pointer flex-col items-center px-3.5 py-2 text-sm whitespace-nowrap text-muted-foreground transition-colors',
+    'hover:bg-accent hover:text-foreground aria-selected:bg-tab-selected aria-selected:font-bold aria-selected:text-tab-selected-foreground',
+    'focus-visible:outline-3 focus-visible:outline-ring focus-visible:-outline-offset-3',
+    className
+  )}
+  {...attrs}
+>
+  <span class='inline-flex items-center gap-1.5'>
+    <Fragment set:html={html} />
+  </span>
+</button>

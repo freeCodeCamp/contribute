@@ -4,286 +4,144 @@ sidebar:
   label: Work on Documentation
 ---
 
-import {
-  Steps,
-  Aside,
-  LinkButton,
-  Card,
-  Badge,
-  Tabs,
-  TabItem
-} from '@astrojs/starlight/components';
-
 :::tip
 You'll need this guide if you're contributing to or improving the freeCodeCamp contributing documentation itself. If you're working on curriculum, codebase, or other areas, you can skip this guide.
 :::
 
-Follow these guidelines for setting up a development environment for the freeCodeCamp documentation site. This is highly recommended if you want to contribute regularly to our contributing guidelines.
+This guide sets up a development environment for the freeCodeCamp documentation site. Work through it once, in order.
 
 ## Fork the contribute repository on GitHub
 
-You will need to [fork](https://help.github.com/articles/about-forks) the contribute repository on GitHub to get your own copy of the codebase. This will allow you to follow a Git-based workflow to contribute to freeCodeCamp's documentation.
-
-**Follow these steps to fork the repository:**
+A [fork](https://help.github.com/articles/about-forks) is your own copy of the codebase. You need one to contribute.
 
 <Steps>
 
-1. Click the button below to fork the contribute repository on GitHub.
+1. Open the fork page:
 
    <LinkButton
      href='https://github.com/freeCodeCamp/contribute/fork'
-     icon='seti:github'
-     iconPlacement='start'
      variant='secondary'
      target='_blank'
    >
      Fork "freeCodeCamp/contribute"
    </LinkButton>
 
-2. On the create new fork page, check the details and click the **Create fork** button.
+2. Check the details, then click **Create fork**.
 
-3. You should automatically be redirected to your fork, the URL should be something like `https://github.com/YOUR_USER_NAME/contribute`.
-
-</Steps>
-
-That's it! You have successfully forked the contribute repository.
-
-<Aside type='tip' title='Did you know?'>
-
-The main repository at `https://github.com/freeCodeCamp/contribute` is often referred to as the `upstream` repository. Your fork at `https://github.com/YOUR_USER_NAME/contribute` is often referred to as the `origin` repository.
-
-</Aside>
-
-## Cloud IDE or your own machine?
-
-Next, you need to choose between setting up a cloud IDE or your own machine.
-
-If you're looking to make a one-time contribution or want the fastest setup, use GitHub Codespaces which provides a ready-to-code environment in your web browser using devcontainers. For long-term contributions where you prefer local development, you can set up the documentation site on your local machine.
-
-| Feature                     | GitHub Codespaces <Badge text="Recommended" variant="tip" size="small" /> | Your own machine                                 |
-| --------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------ |
-| **Hardware requirements**   | No minimum hardware requirements                                          | Minimum hardware requirements (Node.js, pnpm)    |
-| **Software installation**   | No need to install any software                                           | Additional software needed                       |
-| **Repository status**       | Always up-to-date repository                                              | Manual updates required                          |
-| **Setup complexity**        | Easy setup with devcontainers, works in any browser                       | Larger download and setup time                   |
-| **Internet dependency**     | Requires an internet connection to work                                   | Minimal internet connection required once set up |
-| **Performance**             | Consistent cloud-based performance                                        | Depends on your machine capabilities             |
-| **Usage limits**            | 60 hours free per month for personal accounts                             | No usage limits                                  |
-| **Environment consistency** | Identical setup for all contributors via devcontainers                    | May vary between different machines and OS       |
-
-Once you have decided, follow the relevant tab below to continue with the setup.
-
-<Tabs syncKey="environment">
-<TabItem label="GitHub Codespaces" icon="seti:github">
-
-#### GitHub Codespaces
-
-We have automated the development environment setup using devcontainers. With GitHub Codespaces, you get a consistent, ready-to-code environment that runs in your browser with all dependencies pre-installed.
-
-**Launch a Codespace from your fork:**
-
-<Steps>
-
-1. Go to your fork at `https://github.com/YOUR_USER_NAME/contribute`
-
-2. Click the green **Code** button
-
-3. Select the **Codespaces** tab
-
-4. Click **Create codespace on main**
-
-   Your codespace will automatically set up the development environment using our devcontainer configuration. This includes:
-   - Installing Node.js, pnpm, and all dependencies
-   - Configuring VS Code extensions
-   - Preparing the environment
-
-5. Wait for the setup to complete (usually 1-2 minutes)
+3. GitHub redirects you to your fork at `https://github.com/YOUR_USER_NAME/contribute`.
 
 </Steps>
 
-**Start the development server:**
+In this guide, `origin` means your fork and `upstream` means the main repository.
 
-Once your Codespace is ready, the development server should start automatically. If not, you can start it manually:
+## Choose where to run the docs site
 
-```bash
-pnpm develop
-```
+There are two ways to run the site. Both work.
 
-Once ready, you will see a notification to open the site. Click on the notification to open the client application in a new browser tab.
+| Feature            | Local Machine                 | GitHub Codespaces               |
+| ------------------ | ----------------------------- | ------------------------------- |
+| **Where it runs**  | Directly on your machine      | On a GitHub server              |
+| **You install**    | Node.js, pnpm, Git            | Nothing                         |
+| **Machine needed** | Any machine that runs Node.js | The default machine is enough   |
+| **Works offline**  | Yes, after setup              | No                              |
+| **Cost**           | Free                          | A free monthly quota, then paid |
 
-<Aside type='tip' title="Congratulations - you're all set!">
+<Tabs>
+<TabItem label="Local Machine">
 
-You now have a copy of freeCodeCamp's documentation site running in your Codespace. Go ahead and start making changes to the documentation.
+### Prerequisites
 
-</Aside>
+| Prerequisite                         | Version | Notes                                                             |
+| ------------------------------------ | ------- | ----------------------------------------------------------------- |
+| [Git](https://git-scm.com/)          | latest  | The version bundled with your operating system is often outdated. |
+| [Node.js](http://nodejs.org)         | `26.x`  | The "Active LTS" version.                                         |
+| [pnpm](https://pnpm.io/installation) | `12.x`  | -                                                                 |
 
-</TabItem>
-
-<TabItem label="Local Machine" icon="laptop">
-
-## Prerequisites
-
-<Card title='System Requirements' icon='laptop'>
-
-| Prerequisite                         | Version | Notes                           |
-| ------------------------------------ | ------- | ------------------------------- |
-| [Node.js](http://nodejs.org)         | `24.x`  | We use the "Active LTS" version |
-| [pnpm](https://pnpm.io/installation) | `10.x`  |                                 |
-
-</Card>
-
-<Aside type='caution' title='Did you check the version?'>
-
-If you have a different version installed, please install the recommended version. You can check your versions by running `node -v` and `pnpm -v` in your terminal.
-
-</Aside>
-
-**Run the following commands to validate the versions:**
+Check what you have:
 
 ```bash
-node -v
+node -v && pnpm -v
 ```
 
-```bash
-pnpm -v
-```
+Recommended, but not required:
 
-Once you have the prerequisites installed, you need to prepare your development environment. This is common for many development workflows, and you will only need to do this once.
+- [Set up an SSH key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
+- Use a code editor. [Visual Studio Code](https://code.visualstudio.com/) is free and open source.
+- Install the recommended workspace extensions: Astro, Oxc and ESLint. Oxfmt formats files. Oxlint checks JavaScript and TypeScript, including type-aware rules. ESLint checks Astro templates only.
 
-## Additional Prerequisites
+### Clone your fork and start the site
 
 <Steps>
 
-1. Install [Git](https://git-scm.com/) or your favorite Git client, if you haven't already. Update to the latest version; the version that came bundled with your OS may be outdated.
-
-2. (Optional but recommended) [Set up an SSH Key](https://help.github.com/articles/generating-an-ssh-key/) for GitHub.
-
-3. Install a code editor of your choice. If you aren't sure which one to use, we recommend [Visual Studio Code](https://code.visualstudio.com/) — it's free and open source.
-
-4. Set up linting for your code editor.
-
-   You should have [ESLint running in your editor](http://eslint.org/docs/user-guide/integrations.html), and it will highlight anything that doesn't conform to [freeCodeCamp's JavaScript Style Guide](http://forum.freecodecamp.org/t/free-code-camp-javascript-style-guide/19121).
-
-   <Aside type='tip' title='Pay Attention to errors'>
-
-   Please do not ignore any linting errors. They are meant to **help** you and to ensure a clean and simple codebase.
-
-   </Aside>
-
-</Steps>
-
-## Clone your Fork from GitHub
-
-Next, you will need to [clone](https://help.github.com/articles/cloning-a-repository/) your fork to your local machine.
-
-**Run these commands on your local machine:**
-
-<Steps>
-
-1. Open a terminal in your projects directory, for example:
-
-   ```
-   /home/username/projects/
-   ```
-
-2. Clone your fork of the contribute repository, replacing `YOUR_USER_NAME` with your GitHub Username
+1. Clone your fork, replacing `YOUR_USER_NAME` with your GitHub username:
 
    ```bash
    git clone --depth=1 https://github.com/YOUR_USER_NAME/contribute.git
-   ```
-
-   This will download the entire contribute repository to your projects directory.
-
-   <Aside type='note'>
-     `--depth=1` creates a shallow clone of your fork, with files from the most
-     recent history/commit.
-   </Aside>
-
-</Steps>
-
-## Set up Syncing from Parent
-
-Now that you have downloaded a copy of your fork, you will need to set up an `upstream` remote to the parent repository.
-
-[As mentioned earlier](#fork-the-contribute-repository-on-github), the main repository is referred to as the `upstream` repository. Your fork is referred to as the `origin` repository.
-
-You need a reference from your local clone to the `upstream` repository in addition to the `origin` repository. This is so that you can sync changes from the main repository without the requirement of forking and cloning repeatedly.
-
-<Steps>
-
-1. Change the directory to the new contribute directory:
-
-   ```bash
    cd contribute
    ```
 
-2. Add a remote reference to the main contribute repository:
+   `--depth=1` fetches only the most recent commit, which keeps the download small.
+
+2. Add a remote that points at the main repository, so that you can sync later:
 
    ```bash
    git remote add upstream https://github.com/freeCodeCamp/contribute.git
    ```
 
-3. Ensure the configuration looks correct:
+   Run `git remote -v` to confirm. You should see `origin` on your fork and `upstream` on `freeCodeCamp/contribute`.
+
+3. Install the pnpm version pinned by this repository, then install the dependencies. This also sets up the Git hooks:
 
    ```bash
-   git remote -v
+   npm install --global pnpm@12.17.0
+   pnpm install --frozen-lockfile
    ```
 
-   The output should look something like below (replacing `YOUR_USER_NAME` with your GitHub username):
+   Use the Node.js version in `.nvmrc`. The seven-day dependency release cooldown applies to installs and updates.
 
+4. Start the development server:
+
+   ```bash
+   pnpm develop
    ```
-   origin    https://github.com/YOUR_USER_NAME/contribute.git (fetch)
-   origin    https://github.com/YOUR_USER_NAME/contribute.git (push)
-   upstream    https://github.com/freeCodeCamp/contribute.git (fetch)
-   upstream    https://github.com/freeCodeCamp/contribute.git (push)
+
+5. Open `http://localhost:4321`.
+
+</Steps>
+
+<Aside type='tip' title="Congratulations - you're all set!">
+
+The documentation site now runs on your machine. See the [Quick Commands Reference](#quick-commands-reference) for linting, testing and building.
+
+</Aside>
+
+</TabItem>
+
+<TabItem label="GitHub Codespaces">
+
+A codespace runs the site on a GitHub server. You install nothing, and you work in your browser or in VS Code.
+
+<Steps>
+
+1. Go to your fork at `https://github.com/YOUR_USER_NAME/contribute`.
+
+2. Click the green **Code** button, select the **Codespaces** tab, then click **Create codespace on main**.
+
+   The codespace installs Node.js, pnpm and the dependencies, then starts the development server for you.
+
+3. Wait for the setup to finish. Your browser opens the site on port `4321` automatically.
+
+   If it does not, start the server yourself:
+
+   ```bash
+   pnpm develop
    ```
 
 </Steps>
 
-## Install Dependencies
-
-First, ensure you have pnpm installed globally:
-
-```bash
-npm install -g pnpm
-```
-
-Then install the project dependencies:
-
-```bash
-pnpm install
-```
-
-This will install all required dependencies and set up Git hooks automatically.
-
-## Start the Development Server
-
-You can now start up the development server:
-
-```bash
-pnpm develop
-```
-
-Once ready, open a web browser and visit `http://localhost:4321`:
-
-<LinkButton
-  href='http://localhost:4321'
-  icon='external'
-  variant='secondary'
-  target='_blank'
->
-  `http://localhost:4321`
-</LinkButton>
-
 <Aside type='tip' title="Congratulations - you're all set!">
 
-You now have a copy of freeCodeCamp's documentation site running on your local machine. Go ahead and start making changes to the documentation.
-
-</Aside>
-
-<Aside type='note'>
-
-If you have issues with the setup or need to run other commands like linting, testing, or building for production, check the [Quick Commands Reference](#quick-commands-reference) at the end of this guide.
+The documentation site now runs in your codespace. See the [Quick Commands Reference](#quick-commands-reference) for linting, testing and building.
 
 </Aside>
 
@@ -339,37 +197,37 @@ This is necessary to make these links work for the translated version of the doc
 
 The site is generated using Astro and served using Cloudflare Workers. Here's how it works:
 
-<Card title='Key Architecture' icon='seti:config'>
-
 - All documentation content is stored in `src/content/docs/` as MDX files
 - The sidebar navigation is configured in `src/sidebar.ts`
 - Site configuration is managed in `astro.config.ts`
 - The site is automatically built and deployed via Cloudflare Workers
 
-</Card>
-
 ## Deployment
 
-The site is deployed on Cloudflare Workers. Please check the wrangler config for deployment details.
+The site uses Cloudflare Workers Static Assets. `cloudflare.config.ts` defines the Worker, domain and runtime settings. `wrangler.config.ts` points the Cloudflare build backend at `dist/`.
+
+`pnpm build` runs Astro and packages Cloudflare Build Output in `.cloudflare/output/v0/`. `pnpm preview` builds and serves the static site locally, including `_headers` and `_redirects`. `pnpm preview:built` serves an existing build without rebuilding it.
+
+The pinned Cloudflare CLI detects Astro directly when you run bare `cf build` or `cf dev`. Use the repository scripts to keep the prebuild Git-history step, static asset packaging and production-like preview.
+
+Cloudflare Workers Builds runs `pnpm run build`. The production deploy command is `pnpm exec cf deploy --prebuilt`; the non-production command is `pnpm exec cf workers versions create --prebuilt`. These commands are saved in Workers Builds settings, not in `cloudflare.config.ts`. Non-production builds upload a version without deploying it to production traffic.
+
+Use `pnpm exec cf deploy --prebuilt --dry-run` after a local build to validate the package without uploading. Deployment requires Cloudflare access; local development and tests do not.
 
 ## Quick Commands Reference
 
-<Card title='Handy Scripts for Local Development' icon='open-book'>
-
-| Command                                 | Description                                         |
-| --------------------------------------- | --------------------------------------------------- |
-| `pnpm install`                          | Install all dependencies                            |
-| `pnpm develop`                          | Start the Astro development server (localhost:4321) |
-| `pnpm build`                            | Build the site for production                       |
-| `pnpm preview`                          | Build and preview locally using Cloudflare Workers  |
-| `pnpm test`                             | Run all tests                                       |
-| `pnpm lint`                             | Check formatting and linting                        |
-| `pnpm format`                           | Auto-fix formatting and linting issues              |
-| `pnpm check:astro`                      | Run Astro type checking                             |
-| `pnpm check:links`                      | Validate internal and external links                |
-| `npx vitest run tests/filename.test.ts` | Run a specific test file                            |
-
-</Card>
+| Command                                       | Description                                         |
+| --------------------------------------------- | --------------------------------------------------- |
+| `pnpm install`                                | Install all dependencies                            |
+| `pnpm develop`                                | Start the Astro development server (localhost:4321) |
+| `pnpm build`                                  | Build the site for production                       |
+| `pnpm preview`                                | Build and preview locally using Cloudflare Workers  |
+| `pnpm test`                                   | Run unit tests                                      |
+| `pnpm lint`                                   | Check formatting and linting                        |
+| `pnpm format`                                 | Auto-fix formatting and linting issues              |
+| `pnpm check:astro`                            | Run Astro type checking                             |
+| `pnpm test:usability`                         | Check accessibility and internal links in a browser |
+| `pnpm exec vitest run tests/filename.test.ts` | Run a specific test file                            |
 
 ## Proposing a Pull Request (PR)
 
