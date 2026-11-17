@@ -49,7 +49,7 @@
     "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.65.0",
     "@types/node": "26.6.6",
-    "@typescript-eslint/parser": "8.72.1",
+    "@typescript-eslint/parser": "8.72.2",
     "cf": "1.0.0-beta.28",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
