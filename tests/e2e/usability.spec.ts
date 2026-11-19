@@ -55,7 +55,7 @@ const routes = [
   ...readFileSync('dist/sitemap-0.xml', 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)
 ].map(([, loc]) => new URL(loc).pathname);
 
-const openEverything = (page: Page) =>
+const openEverythingAndSettle = (page: Page) =>
   page.evaluate(() => {
     document.querySelectorAll('details').forEach(details => {
       details.open = true;
@@ -63,52 +63,56 @@ const openEverything = (page: Page) =>
     document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
       panel.removeAttribute('hidden');
     });
+    return Promise.allSettled(
+      document
+        .getAnimations()
+        .filter(animation => animation instanceof CSSTransition)
+        .map(animation => animation.finished)
+    );
   });
+
+const violationsOf = async (axe: AxeBuilder) =>
+  (await axe.analyze()).violations.map(({ id, nodes }) => ({
+    id,
+    targets: nodes.slice(0, 3).map(({ target }) => target.join(' '))
+  }));
 
 for (const route of routes) {
-  for (const colorScheme of ['light', 'dark'] as const) {
-    test(`${route} meets WCAG A and AA in ${colorScheme}`, async ({ page }) => {
+  test(`${route} passes the per-page checks`, async ({ page }) => {
+    for (const colorScheme of ['light', 'dark'] as const) {
       await page.emulateMedia({ colorScheme });
       await page.goto(route);
-      await openEverything(page);
-      const { violations } = await new AxeBuilder({ page })
-        .withTags(WCAG_TAGS)
-        .analyze();
-      expect(
-        violations.map(({ id, nodes }) => ({
-          id,
-          targets: nodes.slice(0, 3).map(({ target }) => target.join(' '))
-        }))
-      ).toEqual([]);
-    });
-  }
+      await openEverythingAndSettle(page);
+      expect
+        .soft(
+          await violationsOf(new AxeBuilder({ page }).withTags(WCAG_TAGS)),
+          `meets WCAG A and AA in ${colorScheme}`
+        )
+        .toEqual([]);
+      if (colorScheme === 'light') {
+        expect
+          .soft(
+            await violationsOf(
+              new AxeBuilder({ page }).withRules([
+                'heading-order',
+                'empty-table-header',
+                'label-content-name-mismatch'
+              ])
+            ),
+            'keeps its heading and table structure'
+          )
+          .toEqual([]);
+      }
+    }
 
-  test(`${route} keeps its heading and table structure`, async ({ page }) => {
-    await page.goto(route);
-    await openEverything(page);
-    const { violations } = await new AxeBuilder({ page })
-      .withRules([
-        'heading-order',
-        'empty-table-header',
-        'label-content-name-mismatch'
-      ])
-      .analyze();
-    expect(
-      violations.map(({ id, nodes }) => ({
-        id,
-        targets: nodes.slice(0, 3).map(({ target }) => target.join(' '))
-      }))
-    ).toEqual([]);
-  });
-
-  test(`${route} fits a 320 px screen`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'light' });
     await page.setViewportSize({ width: 320, height: 700 });
     await page.goto(route);
-    await openEverything(page);
+    await openEverythingAndSettle(page);
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth
     );
-    expect(overflow).toBeLessThanOrEqual(0);
+    expect.soft(overflow, 'fits a 320 px screen').toBeLessThanOrEqual(0);
   });
 }
 
@@ -504,7 +508,7 @@ test('Markdown versions of pages carry noindex', async ({ request }) => {
 });
 
 test('HTML pages can be indexed', async ({ request }) => {
-  test.skip(Boolean(process.env.USABILITY_BASE_URL));
+  test.skip(Boolean(process.env.E2E_BASE_URL));
   for (const path of ['/', '/faq/']) {
     const response = await request.head(path);
     expect(response.headers()['x-robots-tag'], path).toBeUndefined();
@@ -967,7 +971,7 @@ for (const route of [
   test(`${route} exposes no unnamed image`, async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto(route);
-    await openEverything(page);
+    await openEverythingAndSettle(page);
     const tree = await page.locator('body').ariaSnapshot();
     expect(tree).not.toMatch(/- img\s*$/m);
   });
