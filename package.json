@@ -35,12 +35,14 @@
     "@playwright/test": "1.65.0",
     "@types/node": "26.6.6",
     "@typescript-eslint/parser": "8.72.2",
-    "cf": "1.0.0-beta.29",
+    "cf": "1.0.0-beta.30",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
     "pagefind": "1.6.0",
+    "sharp": "0.35.5",
     "vite-plus": "catalog:",
-    "wrangler": "4.160.0"
+    "vitest": "5.1.0",
+    "wrangler": "4.160.1"
   },
   "packageManager": "pnpm@12.19.0",
   "engines": {
