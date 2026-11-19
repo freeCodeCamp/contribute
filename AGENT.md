@@ -15,15 +15,15 @@ Astro-based docs. The `nimbus-docs` package handles content schemas, sidebar/TOC
 
 Run these checks before you finish a change:
 
-| Check                                                          | Command                              |
-| -------------------------------------------------------------- | ------------------------------------ |
-| Lint and format                                                | `pnpm lint`                          |
-| Astro diagnostics                                              | `pnpm check:astro`                   |
-| Unit tests                                                     | `pnpm test`                          |
-| Nimbus preflight                                               | `pnpm exec nimbus-docs check --json` |
-| Build, then accessibility, links and agent routes in a browser | `pnpm test:usability`                |
+| Check                                     | Command                              |
+| ----------------------------------------- | ------------------------------------ |
+| Lint and format                           | `pnpm lint`                          |
+| Astro diagnostics                         | `pnpm check:astro`                   |
+| Unit tests                                | `pnpm test`                          |
+| Nimbus preflight                          | `pnpm exec nimbus-docs check --json` |
+| Build, then end-to-end tests in a browser | `pnpm test:e2e`                      |
 
-To run the browser checks against a preview URL, set `USABILITY_BASE_URL=<url>` and run `pnpm exec playwright test` after a local build.
+To run the end-to-end tests against a preview URL, set `E2E_BASE_URL=<url>` and run `pnpm exec playwright test` after a local build.
 
 ## File layout
 

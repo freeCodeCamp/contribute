@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const baseURL = process.env.USABILITY_BASE_URL ?? 'http://localhost:8788';
+const baseURL = process.env.E2E_BASE_URL ?? 'http://localhost:8788';
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: process.env.CI ? 'github' : 'line',
   timeout: 60_000,
   use: { baseURL, ...devices['Desktop Chrome'], trace: 'retain-on-failure' },
-  webServer: process.env.USABILITY_BASE_URL
+  webServer: process.env.E2E_BASE_URL
     ? undefined
     : {
         command: 'pnpm preview:built --port 8788',

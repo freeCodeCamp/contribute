@@ -1,0 +1,35 @@
+name: E2E
+
+on: [workflow_call]
+
+jobs:
+  e2e:
+    name: E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js and pnpm, and install dependencies
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
+        with:
+          cache: true
+          require-lockfile: true
+
+      - name: Install the Chromium headless shell
+        run: pnpm exec playwright install --only-shell chromium
+
+      - name: Build the site and run the end-to-end tests
+        run: pnpm test:e2e
+
+      - name: Upload the end-to-end test results
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: e2e-results
+          path: test-results/
+          retention-days: 7
