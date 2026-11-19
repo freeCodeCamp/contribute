@@ -8,42 +8,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
-    strategy:
-      matrix:
-        node-version: [26.x]
-
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
 
-      - name: Setup Node.js and pnpm
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Set up Node.js and pnpm, and install dependencies
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
-          node-version: ${{ matrix.node-version }}
+          cache: true
+          require-lockfile: true
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Install the Chromium headless shell
+        run: pnpm exec playwright install --only-shell chromium
 
-      - name: Download the built site
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          name: dist-${{ matrix.node-version }}
-          path: ./
-
-      - name: Install Chromium
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Run the usability check
-        run: pnpm exec playwright test
-        env:
-          CI: true
+      - name: Build the site and run the usability check
+        run: pnpm test:usability
 
       - name: Upload usability results
         if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: usability-results-${{ matrix.node-version }}
+          name: usability-results
           path: test-results/
           retention-days: 7

@@ -8,46 +8,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-    strategy:
-      matrix:
-        node-version: [26.x]
-
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
 
-      - name: Setup Node.js and pnpm
-        uses: ./.github/actions/setup-node-pnpm
+      - name: Set up Node.js and pnpm, and install dependencies
+        uses: pnpm/setup@fa36a5ef7dcdefc3a7cb25655c122e00cf6e636e # v3.1.2
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          cache: true
+          require-lockfile: true
 
       - name: Build project
         run: pnpm build
-        env:
-          CI: true
 
       - name: Validate Cloudflare Build Output without uploading
         run: pnpm exec cf deploy --prebuilt --dry-run
-        env:
-          CI: true
 
       - name: Run postbuild Nimbus checks
         run: pnpm exec nimbus-docs check --json
-        env:
-          CI: true
-
-      - name: Upload the built site
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: dist-${{ matrix.node-version }}
-          path: |
-            dist/
-            .cloudflare/output/v0/
-          retention-days: 1
-          if-no-files-found: error
-          include-hidden-files: true

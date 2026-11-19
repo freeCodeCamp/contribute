@@ -26,10 +26,8 @@ jobs:
 
   build:
     name: Build
-    needs: [lint, test]
     uses: ./.github/workflows/re-build.yml
 
   usability:
     name: Usability
-    needs: [build]
     uses: ./.github/workflows/re-usability.yml
