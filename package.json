@@ -39,9 +39,7 @@
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
     "pagefind": "1.6.0",
-    "sharp": "0.35.5",
     "vite-plus": "catalog:",
-    "vitest": "5.1.0",
     "wrangler": "4.160.1"
   },
   "packageManager": "pnpm@12.20.0",
