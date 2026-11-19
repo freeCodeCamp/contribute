@@ -1,0 +1,143 @@
+---
+title: Returning to freeCodeCamp
+sidebar:
+  label: Returning to freeCodeCamp
+---
+
+If you have not contributed to freeCodeCamp recently, your fork and local clone
+may be behind the main repository. Use this guide to refresh them before
+starting new work.
+
+:::caution
+Do not run these commands while you have uncommitted changes or pull requests
+based on your fork's `main` branch. Move unfinished work to a separate branch
+first, or save it elsewhere.
+:::
+
+## Check your fork
+
+Open your fork on GitHub and compare its `main` branch with
+[`freeCodeCamp/freeCodeCamp:main`](https://github.com/freeCodeCamp/freeCodeCamp/tree/main).
+If GitHub says your fork is behind, use the **Sync fork** button and choose
+**Update branch**.
+
+If your fork has commits that are not in the main repository, do not delete
+them without checking your open pull requests first. A pull request based on
+your fork's `main` branch can be affected when you replace that branch.
+
+## Update your local `main` branch
+
+Change to the freeCodeCamp clone you want to refresh and confirm that the
+working tree is clean:
+
+```bash
+cd freeCodeCamp
+git status
+```
+
+If you do not already have an `upstream` remote, add it:
+
+```bash
+git remote add upstream https://github.com/freeCodeCamp/freeCodeCamp.git
+```
+
+Confirm that `origin` points to your fork and `upstream` points to the
+freeCodeCamp repository:
+
+```bash
+git remote -v
+```
+
+Fetch the latest upstream changes and switch to your local `main` branch:
+
+```bash
+git fetch upstream
+git switch main
+```
+
+Before replacing your fork's `main` branch, create a local backup:
+
+```bash
+git branch backup-before-updating-main
+```
+
+Reset your local `main` branch to the latest upstream `main`:
+
+```bash
+git reset --hard upstream/main
+```
+
+Push the refreshed branch to your fork:
+
+```bash
+git push origin main --force-with-lease
+```
+
+`--force-with-lease` is safer than `--force` because Git refuses to overwrite
+changes pushed to your fork since your last fetch.
+
+## Update a local work branch
+
+Create a new branch from the refreshed `main` branch for your next contribution:
+
+```bash
+git switch -c docs/my-new-change
+```
+
+If you already have a work branch, update it only after checking that it does
+not contain changes you need to keep:
+
+```bash
+git switch my-work-branch
+git rebase main
+```
+
+If Git reports conflicts, resolve the marked files, then continue:
+
+```bash
+git add path/to/resolved-file
+git rebase --continue
+```
+
+To cancel the rebase and return to its previous state:
+
+```bash
+git rebase --abort
+```
+
+## Refresh dependencies
+
+After updating the codebase, use the versions required by the repository. Check
+the current versions before installing:
+
+```bash
+node -v
+pnpm -v
+```
+
+Install dependencies from the lockfile:
+
+```bash
+pnpm install --frozen-lockfile
+```
+
+If the project has changed its required Node.js version, switch to the version
+in `.nvmrc` before running the install.
+
+## Verify the refreshed clone
+
+Confirm that your local `main` matches the upstream branch:
+
+```bash
+git diff upstream/main
+```
+
+The command should produce no output. Run the relevant checks before starting
+your next change:
+
+```bash
+pnpm lint
+pnpm test
+```
+
+You are now ready to create a fresh feature branch and work on a new issue.
