@@ -28,6 +28,6 @@ jobs:
     name: Build
     uses: ./.github/workflows/re-build.yml
 
-  usability:
-    name: Usability
-    uses: ./.github/workflows/re-usability.yml
+  e2e:
+    name: E2E
+    uses: ./.github/workflows/re-e2e.yml

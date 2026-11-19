@@ -12,7 +12,7 @@
     "format": "astro sync && vp lint --fix --deny-warnings . && eslint . --fix && vp fmt --write .",
     "lint": "astro sync && vp check --deny-warnings && eslint .",
     "test": "vp test run",
-    "test:usability": "pnpm build && playwright test",
+    "test:e2e": "pnpm build && playwright test",
     "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; for (const path of ['.astro', '.nimbus', 'dist', '.cloudflare/output']) rmSync(path, { recursive: true, force: true });\"",
     "check:astro": "astro check",
     "preview:built": "cf-wrangler dev --local"
