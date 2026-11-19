@@ -9,9 +9,9 @@
     "prebuild": "node scripts/unshallow.mjs",
     "build": "astro build && cf-wrangler build",
     "preview": "pnpm build && pnpm preview:built",
-    "format": "astro sync && oxlint --fix --deny-warnings . && eslint . --fix && oxfmt --write .",
-    "lint": "astro sync && oxfmt --check . && oxlint --deny-warnings . && eslint .",
-    "test": "vitest run",
+    "format": "astro sync && vp lint --fix --deny-warnings . && eslint . --fix && vp fmt --write .",
+    "lint": "astro sync && vp check --deny-warnings && eslint .",
+    "test": "vp test run",
     "test:usability": "pnpm build && playwright test",
     "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; for (const path of ['.astro', '.nimbus', 'dist', '.cloudflare/output']) rmSync(path, { recursive: true, force: true });\"",
     "check:astro": "astro check",
@@ -19,16 +19,16 @@
   },
   "lint-staged": {
     "**/*.astro": [
-      "oxlint --fix --deny-warnings",
+      "vp lint --fix --deny-warnings",
       "eslint --fix",
-      "oxfmt --write --no-error-on-unmatched-pattern"
+      "vp fmt --write --no-error-on-unmatched-pattern"
     ],
     "**/*.{mjs,cjs,js,jsx,ts,tsx,mts,cts}": [
-      "oxlint --fix --deny-warnings",
-      "oxfmt --write --no-error-on-unmatched-pattern"
+      "vp lint --fix --deny-warnings",
+      "vp fmt --write --no-error-on-unmatched-pattern"
     ],
     "**/*.{json,jsonc,yaml,yml,md,mdx,css,html,svg}": [
-      "oxfmt --write --no-error-on-unmatched-pattern"
+      "vp fmt --write --no-error-on-unmatched-pattern"
     ]
   },
   "dependencies": {
@@ -56,12 +56,10 @@
     "husky": "9.1.7",
     "is-ci": "4.1.0",
     "lint-staged": "17.6.0",
-    "oxfmt": "0.76.0",
-    "oxlint": "1.93.0",
-    "oxlint-tsgolint": "7.0.2006",
     "pagefind": "1.6.0",
     "sharp": "0.35.5",
-    "vitest": "5.1.0",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:",
     "wrangler": "4.160.0"
   },
   "packageManager": "pnpm@12.19.0",
