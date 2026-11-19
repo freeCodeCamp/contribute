@@ -31,3 +31,4 @@ pnpm-debug.log*
 .wrangler/
 .cloudflare/
 .playwright-mcp/
+.vitest/

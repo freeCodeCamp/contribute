@@ -3,12 +3,10 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { ESLint } from 'eslint';
+import { expect, test } from 'vite-plus/test';
 
 const require = createRequire(import.meta.url);
-const oxlint = join(
-  dirname(require.resolve('oxlint/package.json')),
-  'bin/oxlint'
-);
+const vp = join(dirname(require.resolve('vite-plus/package.json')), 'bin/vp');
 
 const lintTypeScript = (source: string) => {
   const directory = mkdtempSync(resolve('tests/.lint-'));
@@ -17,7 +15,7 @@ const lintTypeScript = (source: string) => {
     writeFileSync(file, source);
     const result = spawnSync(
       process.execPath,
-      [oxlint, '--deny-warnings', file],
+      [vp, 'lint', '--deny-warnings', file],
       {
         encoding: 'utf8'
       }

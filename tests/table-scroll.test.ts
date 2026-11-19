@@ -1,3 +1,4 @@
+import { expect, it } from 'vite-plus/test';
 import { keyboardTableScroll } from '../src/lib/table-scroll';
 
 const text = (value: string) => ({ type: 'text', value });

@@ -1,1 +1,0 @@
-pnpm exec astro sync && pnpm lint-staged

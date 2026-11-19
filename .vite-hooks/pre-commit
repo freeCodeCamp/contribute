@@ -1,0 +1,1 @@
+pnpm exec astro sync && pnpm exec vp staged

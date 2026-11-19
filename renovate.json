@@ -15,6 +15,16 @@
       "description": "Docker updates wait for a person: no required check builds them.",
       "matchManagers": ["dockerfile", "docker-compose", "devcontainer"],
       "automerge": false
+    },
+    {
+      "description": "Vite+ pins its Vite core alias and Vitest. Update them in one PR and run `vp migrate` on its branch before merging.",
+      "groupName": "Vite+",
+      "matchPackageNames": [
+        "vite-plus",
+        "@voidzero-dev/vite-plus-core",
+        "vitest"
+      ],
+      "automerge": false
     }
   ]
 }
