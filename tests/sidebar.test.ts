@@ -1,5 +1,6 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { relative } from 'node:path';
+import { expect, it } from 'vite-plus/test';
 import sidebar from '../src/sidebar';
 
 const pages = sidebar.flatMap(section =>

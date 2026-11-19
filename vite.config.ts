@@ -3,9 +3,21 @@ import { configDefaults, defineConfig } from 'vite-plus';
 
 export default defineConfig({
   test: {
-    globals: true,
     include: ['./tests/**/*.{test,spec}.ts'],
     exclude: [...configDefaults.exclude, '**/e2e/**']
+  },
+  staged: {
+    '**/*.astro': [
+      'vp lint --fix --deny-warnings',
+      'eslint --fix',
+      'vp fmt --write --no-error-on-unmatched-pattern'
+    ],
+    '**/*.{mjs,cjs,js,jsx,ts,tsx,mts,cts}': [
+      'vp lint --fix --deny-warnings',
+      'vp fmt --write --no-error-on-unmatched-pattern'
+    ],
+    '**/*.{json,jsonc,yaml,yml,md,mdx,css,html,svg}':
+      'vp fmt --write --no-error-on-unmatched-pattern'
   },
   fmt: {
     endOfLine: 'lf',

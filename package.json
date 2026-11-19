@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prepare": "is-ci || husky",
+    "prepare": "node --input-type=module -e \"import { execFileSync as git } from 'node:child_process'; try { if (git('git', ['config', '--get', 'core.hooksPath'], { encoding: 'utf8' }).trim() === '.husky/_') git('git', ['config', '--unset', 'core.hooksPath']); } catch {}\" && vp config --no-agent",
     "develop": "astro dev",
     "prebuild": "node scripts/unshallow.mjs",
     "build": "astro build && cf-wrangler build",
@@ -16,20 +16,6 @@
     "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; for (const path of ['.astro', '.nimbus', 'dist', '.cloudflare/output']) rmSync(path, { recursive: true, force: true });\"",
     "check:astro": "astro check",
     "preview:built": "cf-wrangler dev --local"
-  },
-  "lint-staged": {
-    "**/*.astro": [
-      "vp lint --fix --deny-warnings",
-      "eslint --fix",
-      "vp fmt --write --no-error-on-unmatched-pattern"
-    ],
-    "**/*.{mjs,cjs,js,jsx,ts,tsx,mts,cts}": [
-      "vp lint --fix --deny-warnings",
-      "vp fmt --write --no-error-on-unmatched-pattern"
-    ],
-    "**/*.{json,jsonc,yaml,yml,md,mdx,css,html,svg}": [
-      "vp fmt --write --no-error-on-unmatched-pattern"
-    ]
   },
   "dependencies": {
     "@astrojs/check": "0.9.12",
@@ -45,7 +31,6 @@
     "typescript": "6.0.3"
   },
   "devDependencies": {
-    "@astrojs/compiler-rs": "0.5.2",
     "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.65.0",
     "@types/node": "26.6.6",
@@ -53,13 +38,8 @@
     "cf": "1.0.0-beta.29",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
-    "husky": "9.1.7",
-    "is-ci": "4.1.0",
-    "lint-staged": "17.6.0",
     "pagefind": "1.6.0",
-    "sharp": "0.35.5",
     "vite-plus": "catalog:",
-    "vitest": "catalog:",
     "wrangler": "4.160.0"
   },
   "packageManager": "pnpm@12.19.0",
