@@ -40,7 +40,7 @@
     "eslint-plugin-astro": "3.2.1",
     "pagefind": "1.6.0",
     "vite-plus": "catalog:",
-    "wrangler": "4.160.1"
+    "wrangler": "4.161.0"
   },
   "packageManager": "pnpm@12.20.0",
   "engines": {
