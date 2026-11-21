@@ -36,7 +36,7 @@
     "@types/node": "26.6.6",
     "@typescript-eslint/parser": "8.72.2",
     "cf": "1.0.0-beta.32",
-    "eslint": "10.14.0",
+    "eslint": "10.15.0",
     "eslint-plugin-astro": "3.2.1",
     "pagefind": "1.6.0",
     "vite-plus": "catalog:",
