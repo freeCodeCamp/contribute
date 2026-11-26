@@ -42,7 +42,7 @@ test('the sidebar filter narrows the list and Escape restores it', async ({
   await expect(links).toHaveCount(1);
   await expect(links).toHaveText('Work on Lab Challenges');
   await input.press('Escape');
-  await expect(links).toHaveCount(38);
+  await expect(links).toHaveCount(39);
   await expect(input).toHaveValue('');
 });
 
@@ -91,7 +91,7 @@ test('the phone menu opens, moves focus and closes with Escape', async ({
   await expect(
     page.getByRole('button', { name: 'Close sidebar', exact: true })
   ).toBeFocused();
-  await expect(page.locator('[data-nb-sidebar] a:visible')).toHaveCount(38);
+  await expect(page.locator('[data-nb-sidebar] a:visible')).toHaveCount(39);
   await page.keyboard.press('Escape');
   await expect(page.locator('[data-nb-sidebar] a:visible')).toHaveCount(0);
   await expect(open).toBeFocused();

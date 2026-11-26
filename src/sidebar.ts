@@ -7,6 +7,7 @@ const sidebar = [
     label: 'Code Contributions',
     items: [
       'how-to-setup-freecodecamp-locally',
+      'returning-to-freecodecamp',
       'codebase-best-practices',
       'basic-git-workflow',
       'how-to-work-on-coding-challenges',
